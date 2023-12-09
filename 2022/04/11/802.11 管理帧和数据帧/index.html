@@ -22,27 +22,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+    <meta name="description" content="该文章暂无概述">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://z9m8r8.github.io/2023/12/08/hello-world/index.html">
+<meta property="og:title" content="802.11管理帧和数据帧">
+<meta property="og:url" content="https://z9m8r8.github.io/2022/04/11/802.11%20%E7%AE%A1%E7%90%86%E5%B8%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E5%B8%A7/index.html">
 <meta property="og:site_name" content="Ghost&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-08T08:47:06.243Z">
-<meta property="article:modified_time" content="2023-12-08T17:32:56.110Z">
+<meta property="article:published_time" content="2022-04-11T03:50:00.000Z">
+<meta property="article:modified_time" content="2023-12-09T11:42:09.105Z">
 <meta property="article:author" content="Ghost">
+<meta property="article:tag" content="tags10245">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://z9m8r8.github.io/2023/12/08/hello-world/">
+<link rel="canonical" href="https://z9m8r8.github.io/2022/04/11/802.11%20%E7%AE%A1%E7%90%86%E5%B8%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E5%B8%A7/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2023/12/08/hello-world/","path":"2023/12/08/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/04/11/802.11%20%E7%AE%A1%E7%90%86%E5%B8%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E5%B8%A7/","path":"2022/04/11/802.11 管理帧和数据帧/","title":"802.11管理帧和数据帧"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | Ghost's Blog</title>
+<title>802.11管理帧和数据帧 | Ghost's Blog</title>
   
 
 
@@ -142,7 +143,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-start"><span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-a-new-post"><span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-server"><span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-static-files"><span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy-to-remote-sites"><span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80management-frame%E7%AE%A1%E7%90%86%E5%B8%A7"><span class="nav-text">一、MANAGEMENT FRAME(管理帧)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Cbeacon-frames"><span class="nav-text">二、BEACON FRAMES</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A7%E7%BB%93%E6%9E%84"><span class="nav-text">1、帧结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%93%E5%8C%85%E5%88%86%E6%9E%90%E5%AD%97%E6%AE%B5%E9%83%A8%E5%88%86"><span class="nav-text">2、抓包分析字段（部分）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89probe-frames"><span class="nav-text">三、PROBE FRAMES</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#probe-request-frames"><span class="nav-text">1、PROBE REQUEST FRAMES</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#probe-response-frames"><span class="nav-text">2、PROBE RESPONSE FRAMES</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9Bauthentication-frames"><span class="nav-text">四、AUTHENTICATION FRAMES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94associationreassociation-frames"><span class="nav-text">五、ASSOCIATION&#x2F;REASSOCIATION
+FRAMES</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#association-request-frames"><span class="nav-text">1、ASSOCIATION REQUEST FRAMES</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reassociation-request-frame"><span class="nav-text">2、REASSOCIATION REQUEST FRAME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#association-response"><span class="nav-text">3、ASSOCIATION RESPONSE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disassociationdeauthentication"><span class="nav-text">4、DISASSOCIATION&#x2F;DEAUTHENTICATION</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%ADatim-frames"><span class="nav-text">六、ATIM FRAMES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E6%95%B0%E6%8D%AE%E5%B8%A7"><span class="nav-text">七、数据帧</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,9 +159,19 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">71</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -196,7 +208,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2023/12/08/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2022/04/11/802.11%20%E7%AE%A1%E7%90%86%E5%B8%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E5%B8%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -209,12 +221,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hello World | Ghost's Blog">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="802.11管理帧和数据帧 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          802.11管理帧和数据帧
         </h1>
 
         <div class="post-meta-container">
@@ -225,14 +237,23 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-12-08 16:47:06" itemprop="dateCreated datePublished" datetime="2023-12-08T16:47:06+08:00">2023-12-08</time>
+      <time title="创建时间：2022-04-11 11:50:00" itemprop="dateCreated datePublished" datetime="2022-04-11T11:50:00+08:00">2022-04-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 01:32:56" itemprop="dateModified" datetime="2023-12-09T01:32:56+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-09 19:42:09" itemprop="dateModified" datetime="2023-12-09T19:42:09+08:00">2023-12-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/categories10245/" itemprop="url" rel="index"><span itemprop="name">categories10245</span></a>
+        </span>
     </span>
 
   
@@ -242,55 +263,119 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>150</span>
+      <span>456</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
+            <div class="post-description">该文章暂无概述</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">ActiveModel::Conversion</span></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">ActiveModel::Validations</span></span><br><span class="line"></span><br><span class="line">  validates_presence_of <span class="symbol">:name</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">attr_accessor</span> <span class="symbol">:name</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">attributes = &#123;&#125;</span>)</span><br><span class="line">    <span class="variable">@name</span> = attributes[<span class="symbol">:name</span>]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">persist</span></span><br><span class="line">    <span class="variable">@persisted</span> = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">persisted?</span></span><br><span class="line">    <span class="variable">@persisted</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">person1 = <span class="title class_">Person</span>.new(<span class="symbol">:name</span> =&gt; <span class="string">&quot;matz&quot;</span>)</span><br><span class="line">p person1.valid?</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[\begin{equation} \label{eq2}
-\begin{aligned}
-a &amp;= b + c \\
-  &amp;= d + e + f + g \\
-  &amp;= h + i
-\end{aligned}
-\end{equation}\]</span></p>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <div class="post-body" itemprop="articleBody"><h2 id="一management-frame管理帧">一、MANAGEMENT FRAME(管理帧)</h2>
+<p><strong>用于控制和协商STA和AP的关系</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220410194219272-654899335.png" /></p>
+<h2 id="二beacon-frames">二、BEACON FRAMES</h2>
+<p><strong>AP发送的广播帧，通告无线网络的存在(BSSID)</strong></p>
+<p>发包频率</p>
+<ul>
+<li>102.4ms(可变)</li>
+<li>时间单位1024 microseconds (60秒)，可自己设置</li>
+</ul>
+<p>SSID网络名</p>
+<p><strong>隐藏AP不发SSID广播（路由可设置不广播，使用时可手动输入网络名和密码进行连接）</strong></p>
+<h3 id="帧结构">1、帧结构</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220410194741686-1789370470.png" /></p>
+<h3 id="抓包分析字段部分">2、抓包分析字段（部分）</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220410203310831-1147502381.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220410205423438-847450555.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220410203841589-470421031.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220410204249703-1154891456.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220410204602432-229340054.png" /></p>
+<h2 id="三probe-frames">三、PROBE FRAMES</h2>
+<h3 id="probe-request-frames">1、PROBE REQUEST FRAMES</h3>
+<p><strong>用于STA扫描现有AP</strong></p>
+<ul>
+<li>发现连接过的AP</li>
+<li>发现未连连接的AP</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220410210056649-844319384.png" /></p>
+<p><strong>注意</strong> ，数据字段长度可变</p>
+<p><strong>抓包</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220410211742688-1458580856.png" /></p>
+<h3 id="probe-response-frames">2、PROBE RESPONSE FRAMES</h3>
+<p>发现连接过的AP时，速率和ESSID相同的AP响应</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220411090921372-550320158.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220411105338160-1796278643.png" /></p>
+<h2 id="四authentication-frames">四、AUTHENTICATION FRAMES</h2>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220411090946733-118600943.png" /></p>
+<p><strong>Authentication Algorithm身份认证类型</strong></p>
+<ul>
+<li>0:开放系统身份验证</li>
+<li>1:共享密钥身份验证</li>
+</ul>
+<p>身份认证有多个帧交换过程组成</p>
+<p><strong>Authentication Seq</strong></p>
+<ul>
+<li>每次身份验证过程Seq唯一</li>
+<li>1-65535</li>
+</ul>
+<p>Challenge text</p>
+<ul>
+<li>只有共享密钥方式才有此字段</li>
+</ul>
+<p><strong>Status Code：成功/失败</strong></p>
+<h2 id="五associationreassociation-frames">五、ASSOCIATION/REASSOCIATION
+FRAMES</h2>
+<p><strong>身份验证成功后，STA执行关联操作，加入无线网络</strong></p>
+<p><strong>Association Request</strong></p>
+<p><strong>Reassociation Request</strong></p>
+<p><strong>Association Response</strong></p>
+<h3 id="association-request-frames">1、ASSOCIATION REQUEST FRAMES</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220411091402411-336650571.png" /></p>
+<h3 id="reassociation-request-frame">2、REASSOCIATION REQUEST FRAME</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220411091526026-501606248.png" /></p>
+<h3 id="association-response">3、ASSOCIATION RESPONSE</h3>
+<p>AP对STA的关联请求的响应</p>
+<p>状态码:关联成功/失败</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220411091609054-1722093294.png" /></p>
+<h3
+id="disassociationdeauthentication">4、DISASSOCIATION/DEAUTHENTICATION</h3>
+<p>由AP发出，2个字节</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220411091710340-1945389500.png" /></p>
+<p><strong>可能的原因（部分）：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220411091731886-476254154.png" /></p>
+<h2 id="六atim-frames">六、ATIM FRAMES</h2>
+<p>只在ad-hoc网络下使用，充当AP功能的STA使用此帧通知接收者其有缓存的数据要发送</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220411091823515-33464501.png" /></p>
+<p><strong>备注：</strong>
+写博客时后面几个帧没抓到相应包，想了解实例包的可参见这篇文章：<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/random_run/article/details/115223124">Wireshark抓包分析WLAN连接过程</a></p>
+<h2 id="七数据帧"><strong>七、数据帧</strong></h2>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220416150554294-685265653.png" /></p>
+<p><strong>传输用户数据</strong></p>
+<ul>
+<li><strong>DATA Frame</strong></li>
+</ul>
+<p><strong>实例：</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220416171716500-645063485.png" /></strong></p>
+<p><strong>空数据帧</strong></p>
+<ul>
+<li><strong>Null data frame</strong></li>
+<li><strong>只包含MAC头和FCS</strong></li>
+<li><strong>STA用于声明自己将要进入省电模式</strong></li>
+</ul>
+<p><strong>实例：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220416151801508-1301026222.png" /></p>
 
     </div>
 
@@ -308,7 +393,7 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://z9m8r8.github.io/2023/12/08/hello-world/" title="Hello World">https://z9m8r8.github.io/2023/12/08/hello-world/</a>
+      <a href="https://z9m8r8.github.io/2022/04/11/802.11%20%E7%AE%A1%E7%90%86%E5%B8%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E5%B8%A7/" title="802.11管理帧和数据帧">https://z9m8r8.github.io/2022/04/11/802.11 管理帧和数据帧/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -316,15 +401,21 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
 </ul>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/tags10245/" rel="tag"># tags10245</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2022/04/03/802.11%20%E6%8E%A7%E5%88%B6%E5%B8%A7/" rel="prev" title="802.11控制帧">
+                  <i class="fa fa-angle-left"></i> 802.11控制帧
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/12/09/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/" rel="next" title="RSA 常见攻击">
-                  RSA 常见攻击 <i class="fa fa-angle-right"></i>
+                <a href="/2022/04/16/%E6%97%A0%E7%BA%BF%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B/" rel="next" title="无线通信过程">
+                  无线通信过程 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -356,13 +447,13 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">6k</span>
+    <span title="站点总字数">117k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">22 分钟</span>
+    <span title="站点阅读时长">7:04</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
@@ -417,7 +508,7 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2023/12/08/hello-world/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2022/04/11/802.11%20%E7%AE%A1%E7%90%86%E5%B8%A7%E5%92%8C%E6%95%B0%E6%8D%AE%E5%B8%A7/"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 
 </body>

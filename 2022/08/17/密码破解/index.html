@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-17T07:16:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T11:42:09.105Z">
+<meta property="article:modified_time" content="2023-12-09T13:08:22.734Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="tags10245">
 <meta name="twitter:card" content="summary">
@@ -252,7 +252,7 @@ HASH获取工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-l
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 19:42:09" itemprop="dateModified" datetime="2023-12-09T19:42:09+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-09 21:08:22" itemprop="dateModified" datetime="2023-12-09T21:08:22+08:00">2023-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -443,67 +443,7 @@ $[a-z]$[~!@#$%^ &amp;*()\- =+]</code></pre>
 <ul>
 <li><strong>Help</strong></li>
 </ul>
-<p><img data-src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" /><img data-src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" /></p>
-<pre><code>Hydra v9.3 (c) 2022 by van Hauser/THC &amp; David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
-
-Syntax: hydra [[[-l LOGIN|-L FILE] [-p PASS|-P FILE]] | [-C FILE]] [-e nsr] [-o FILE] [-t TASKS] [-M FILE [-T TASKS]] [-w TIME] [-W TIME] [-f] [-s PORT] [-x MIN:MAX:CHARSET] [-c TIME] [-ISOuvVd46] [-m MODULE_OPT] [service://server[:PORT][/OPT]]
-
-Options:
-  -R        restore a previous aborted/crashed session
-  -I        ignore an existing restore file (don&#39;t wait 10 seconds)
-  -S        perform an SSL connect
-  -s PORT   if the service is on a different default port, define it here
-  -l LOGIN or -L FILE  login with LOGIN name, or load several logins from FILE
-  -p PASS  or -P FILE  try password PASS, or load several passwords from FILE
-  -x MIN:MAX:CHARSET  password bruteforce generation, type &quot;-x -h&quot; to get help
-  -y        disable use of symbols in bruteforce, see above
-  -r        use a non-random shuffling method for option -x
-  -e nsr    try &quot;n&quot; null password, &quot;s&quot; login as pass and/or &quot;r&quot; reversed login
-  -u        loop around users, not passwords (effective! implied with -x)
-  -C FILE   colon separated &quot;login:pass&quot; format, instead of -L/-P options
-  -M FILE   list of servers to attack, one entry per line, &#39;:&#39; to specify port
-  -o FILE   write found login/password pairs to FILE instead of stdout
-  -b FORMAT specify the format for the -o FILE: text(default), json, jsonv1
-  -f / -F   exit when a login/pass pair is found (-M: -f per host, -F global)
-  -t TASKS  run TASKS number of connects in parallel per target (default: 16)
-  -T TASKS  run TASKS connects in parallel overall (for -M, default: 64)
-  -w / -W TIME  wait time for a response (32) / between connects per thread (0)
-  -c TIME   wait time per login attempt over all threads (enforces -t 1)
-  -4 / -6   use IPv4 (default) / IPv6 addresses (put always in [] also in -M)
-  -v / -V / -d  verbose mode / show login+pass for each attempt / debug mode 
-  -O        use old SSL v2 and v3
-  -K        do not redo failed attempts (good for -M mass scanning)
-  -q        do not print messages about connection errors
-  -U        service module usage details
-  -m OPT    options specific for a module, see -U output for information
-  -h        more command line options (COMPLETE HELP)
-  server    the target: DNS, IP or 192.168.0.0/24 (this OR the -M option)
-  service   the service to crack (see below for supported protocols)
-  OPT       some service modules support additional input (-U for module help)
-
-Supported services: adam6500 asterisk cisco cisco-enable cobaltstrike cvs firebird ftp[s] http[s]-&#123;head|get|post&#125; http[s]-&#123;get|post&#125;-form http-proxy http-proxy-urlenum icq imap[s] irc ldap2[s] ldap3[-&#123;cram|digest&#125;md5][s] memcached mongodb mssql mysql nntp oracle-listener oracle-sid pcanywhere pcnfs pop3[s] postgres radmin2 rdp redis rexec rlogin rpcap rsh rtsp s7-300 sip smb smtp[s] smtp-enum snmp socks5 ssh sshkey svn teamspeak telnet[s] vmauthd vnc xmpp
-
-Hydra is a tool to guess/crack valid login/password pairs.
-Licensed under AGPL v3.0. The newest version is always available at;
-https://github.com/vanhauser-thc/thc-hydra
-Please don&#39;t use in military or secret service organizations, or for illegal
-purposes. (This is a wish and non-binding - most such people do not care about
-laws and ethics anyway - and tell themselves they are one of the good ones.)
-These services were not compiled in: afp ncp oracle sapr3 smb2.
-
-Use HYDRA_PROXY_HTTP or HYDRA_PROXY environment variables for a proxy setup.
-E.g. % export HYDRA_PROXY=socks5://l:p@127.0.0.1:9150 (or: socks4:// connect://)
-     % export HYDRA_PROXY=connect_and_socks_proxylist.txt  (up to 64 entries)
-     % export HYDRA_PROXY_HTTP=http://login:pass@proxy:8080
-     % export HYDRA_PROXY_HTTP=proxylist.txt  (up to 64 entries)
-
-Examples:
-  hydra -l user -P passlist.txt ftp://192.168.0.1
-  hydra -L userlist.txt -p defaultpw imap://192.168.0.1/PLAIN
-  hydra -C defaults.txt -6 pop3s://[2001:db8::1]:143/TLS:DIGEST-MD5
-  hydra -l admin -p password ftp://[192.168.0.0/24]/
-  hydra -L logins.txt -P pws.txt -M targets.txt ssh</code></pre>
-<p>View Code</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Hydra v9.3 (c) 2022 by van Hauser/THC &amp; David Maciejak - Please <span class="keyword">do</span> not use <span class="keyword">in</span> military or secret service organizations, or <span class="keyword">for</span> illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).</span><br><span class="line"></span><br><span class="line">Syntax: hydra [[[-l LOGIN|-L FILE] [-p PASS|-P FILE]] | [-C FILE]] [-e nsr] [-o FILE] [-t TASKS] [-M FILE [-T TASKS]] [-w TIME] [-W TIME] [-f] [-s PORT] [-x MIN:MAX:CHARSET] [-c TIME] [-ISOuvVd46] [-m MODULE_OPT] [service://server[:PORT][/OPT]]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -R        restore a previous aborted/crashed session</span><br><span class="line">  -I        ignore an existing restore file (don<span class="string">&#x27;t wait 10 seconds)</span></span><br><span class="line"><span class="string">  -S        perform an SSL connect</span></span><br><span class="line"><span class="string">  -s PORT   if the service is on a different default port, define it here</span></span><br><span class="line"><span class="string">  -l LOGIN or -L FILE  login with LOGIN name, or load several logins from FILE</span></span><br><span class="line"><span class="string">  -p PASS  or -P FILE  try password PASS, or load several passwords from FILE</span></span><br><span class="line"><span class="string">  -x MIN:MAX:CHARSET  password bruteforce generation, type &quot;-x -h&quot; to get help</span></span><br><span class="line"><span class="string">  -y        disable use of symbols in bruteforce, see above</span></span><br><span class="line"><span class="string">  -r        use a non-random shuffling method for option -x</span></span><br><span class="line"><span class="string">  -e nsr    try &quot;n&quot; null password, &quot;s&quot; login as pass and/or &quot;r&quot; reversed login</span></span><br><span class="line"><span class="string">  -u        loop around users, not passwords (effective! implied with -x)</span></span><br><span class="line"><span class="string">  -C FILE   colon separated &quot;login:pass&quot; format, instead of -L/-P options</span></span><br><span class="line"><span class="string">  -M FILE   list of servers to attack, one entry per line, &#x27;</span>:<span class="string">&#x27; to specify port</span></span><br><span class="line"><span class="string">  -o FILE   write found login/password pairs to FILE instead of stdout</span></span><br><span class="line"><span class="string">  -b FORMAT specify the format for the -o FILE: text(default), json, jsonv1</span></span><br><span class="line"><span class="string">  -f / -F   exit when a login/pass pair is found (-M: -f per host, -F global)</span></span><br><span class="line"><span class="string">  -t TASKS  run TASKS number of connects in parallel per target (default: 16)</span></span><br><span class="line"><span class="string">  -T TASKS  run TASKS connects in parallel overall (for -M, default: 64)</span></span><br><span class="line"><span class="string">  -w / -W TIME  wait time for a response (32) / between connects per thread (0)</span></span><br><span class="line"><span class="string">  -c TIME   wait time per login attempt over all threads (enforces -t 1)</span></span><br><span class="line"><span class="string">  -4 / -6   use IPv4 (default) / IPv6 addresses (put always in [] also in -M)</span></span><br><span class="line"><span class="string">  -v / -V / -d  verbose mode / show login+pass for each attempt / debug mode </span></span><br><span class="line"><span class="string">  -O        use old SSL v2 and v3</span></span><br><span class="line"><span class="string">  -K        do not redo failed attempts (good for -M mass scanning)</span></span><br><span class="line"><span class="string">  -q        do not print messages about connection errors</span></span><br><span class="line"><span class="string">  -U        service module usage details</span></span><br><span class="line"><span class="string">  -m OPT    options specific for a module, see -U output for information</span></span><br><span class="line"><span class="string">  -h        more command line options (COMPLETE HELP)</span></span><br><span class="line"><span class="string">  server    the target: DNS, IP or 192.168.0.0/24 (this OR the -M option)</span></span><br><span class="line"><span class="string">  service   the service to crack (see below for supported protocols)</span></span><br><span class="line"><span class="string">  OPT       some service modules support additional input (-U for module help)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Supported services: adam6500 asterisk cisco cisco-enable cobaltstrike cvs firebird ftp[s] http[s]-&#123;head|get|post&#125; http[s]-&#123;get|post&#125;-form http-proxy http-proxy-urlenum icq imap[s] irc ldap2[s] ldap3[-&#123;cram|digest&#125;md5][s] memcached mongodb mssql mysql nntp oracle-listener oracle-sid pcanywhere pcnfs pop3[s] postgres radmin2 rdp redis rexec rlogin rpcap rsh rtsp s7-300 sip smb smtp[s] smtp-enum snmp socks5 ssh sshkey svn teamspeak telnet[s] vmauthd vnc xmpp</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Hydra is a tool to guess/crack valid login/password pairs.</span></span><br><span class="line"><span class="string">Licensed under AGPL v3.0. The newest version is always available at;</span></span><br><span class="line"><span class="string">https://github.com/vanhauser-thc/thc-hydra</span></span><br><span class="line"><span class="string">Please don&#x27;</span>t use <span class="keyword">in</span> military or secret service organizations, or <span class="keyword">for</span> illegal</span><br><span class="line">purposes. (This is a wish and non-binding - most such people <span class="keyword">do</span> not care about</span><br><span class="line">laws and ethics anyway - and tell themselves they are one of the good ones.)</span><br><span class="line">These services were not compiled <span class="keyword">in</span>: afp ncp oracle sapr3 smb2.</span><br><span class="line"></span><br><span class="line">Use HYDRA_PROXY_HTTP or HYDRA_PROXY environment variables <span class="keyword">for</span> a proxy setup.</span><br><span class="line">E.g. % <span class="built_in">export</span> HYDRA_PROXY=socks5://l:p@127.0.0.1:9150 (or: socks4:// connect://)</span><br><span class="line">     % <span class="built_in">export</span> HYDRA_PROXY=connect_and_socks_proxylist.txt  (up to 64 entries)</span><br><span class="line">     % <span class="built_in">export</span> HYDRA_PROXY_HTTP=http://login:pass@proxy:8080</span><br><span class="line">     % <span class="built_in">export</span> HYDRA_PROXY_HTTP=proxylist.txt  (up to 64 entries)</span><br><span class="line"></span><br><span class="line">Examples:</span><br><span class="line">  hydra -l user -P passlist.txt ftp://192.168.0.1</span><br><span class="line">  hydra -L userlist.txt -p defaultpw imap://192.168.0.1/PLAIN</span><br><span class="line">  hydra -C defaults.txt -6 pop3s://[2001:db8::1]:143/TLS:DIGEST-MD5</span><br><span class="line">  hydra -l admin -p password ftp://[192.168.0.0/24]/</span><br><span class="line">  hydra -L logins.txt -P pws.txt -M targets.txt ssh</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h4 id="windowswin2003为例-密码破解">（1）windows【win2003为例】
 密码破解</h4>
 <ul>
@@ -639,58 +579,16 @@ Medusa v2.2 [http://www.foofus.net] (C) JoMo-Kun / Foofus Networks &lt;jmk@foofu
     + wrapper.mod : Generic Wrapper Module : version 2.0</code></pre>
 <h4 id="基本用法">（3）基本用法</h4>
 <ul>
-<li><strong>help</strong></li>
-</ul>
-<p><img data-src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" /><img data-src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" /></p>
-<pre><code>┌──(root㉿kali)-[~]
-└─# medusa -help
-Medusa v2.2 [http://www.foofus.net] (C) JoMo-Kun / Foofus Networks &lt;jmk@foofus.net&gt;
-
-ALERT: User logon information must be supplied.
-
-Syntax: Medusa [-h host|-H file] [-u username|-U file] [-p password|-P file] [-C file] -M module [OPT]
-  -h [TEXT]    : Target hostname or IP address
-  -H [FILE]    : File containing target hostnames or IP addresses
-  -u [TEXT]    : Username to test
-  -U [FILE]    : File containing usernames to test
-  -p [TEXT]    : Password to test
-  -P [FILE]    : File containing passwords to test
-  -C [FILE]    : File containing combo entries. See README for more information.
-  -O [FILE]    : File to append log information to
-  -e [n/s/ns]  : Additional password checks ([n] No Password, [s] Password = Username)
-  -M [TEXT]    : Name of the module to execute (without the .mod extension)
-  -m [TEXT]    : Parameter to pass to the module. This can be passed multiple times with a
-                 different parameter each time and they will all be sent to the module (i.e.
-                 -m Param1 -m Param2, etc.)
-  -d           : Dump all known modules
-  -n [NUM]     : Use for non-default TCP port number
-  -s           : Enable SSL
-  -g [NUM]     : Give up after trying to connect for NUM seconds (default 3)
-  -r [NUM]     : Sleep NUM seconds between retry attempts (default 3)
-  -R [NUM]     : Attempt NUM retries before giving up. The total number of attempts will be NUM + 1.
-  -c [NUM]     : Time to wait in usec to verify socket is available (default 500 usec).
-  -t [NUM]     : Total number of logins to be tested concurrently
-  -T [NUM]     : Total number of hosts to be tested concurrently
-  -L           : Parallelize logins using one username per thread. The default is to process 
-                 the entire username before proceeding.
-  -f           : Stop scanning host after first valid username/password found.
-  -F           : Stop audit after first valid username/password found on any host.
-  -b           : Suppress startup banner
-  -q           : Display module&#39;s usage information
-  -v [NUM]     : Verbose level [0 - 6 (more)]
-  -w [NUM]     : Error debug level [0 - 10 (more)]
-  -V           : Display version
-  -Z [TEXT]    : Resume scan based on map of previous scan</code></pre>
-<p>View Code</p>
-<ul>
-<li><strong>常用参数</strong></li>
-<li><strong>-e：同hydra</strong></li>
-<li><strong>-F： </strong>破解到第一个就停止****</li>
-<li><strong>-n：非默认端口</strong></li>
-<li><strong>-S：使用SSL连接</strong></li>
-<li><strong>-T：并发主机数</strong></li>
-<li><strong>medusa -M xxx
--q：查看xxx模块所需具体参数，并用-m指定</strong></li>
+<li><p><strong>help</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─<span class="comment"># medusa -help</span></span><br><span class="line">Medusa v2.2 [http://www.foofus.net] (C) JoMo-Kun / Foofus Networks &lt;jmk@foofus.net&gt;</span><br><span class="line"></span><br><span class="line">ALERT: User logon information must be supplied.</span><br><span class="line"></span><br><span class="line">Syntax: Medusa [-h host|-H file] [-u username|-U file] [-p password|-P file] [-C file] -M module [OPT]</span><br><span class="line">  -h [TEXT]    : Target hostname or IP address</span><br><span class="line">  -H [FILE]    : File containing target hostnames or IP addresses</span><br><span class="line">  -u [TEXT]    : Username to <span class="built_in">test</span></span><br><span class="line">  -U [FILE]    : File containing usernames to <span class="built_in">test</span></span><br><span class="line">  -p [TEXT]    : Password to <span class="built_in">test</span></span><br><span class="line">  -P [FILE]    : File containing passwords to <span class="built_in">test</span></span><br><span class="line">  -C [FILE]    : File containing combo entries. See README <span class="keyword">for</span> more information.</span><br><span class="line">  -O [FILE]    : File to append <span class="built_in">log</span> information to</span><br><span class="line">  -e [n/s/ns]  : Additional password checks ([n] No Password, [s] Password = Username)</span><br><span class="line">  -M [TEXT]    : Name of the module to execute (without the .mod extension)</span><br><span class="line">  -m [TEXT]    : Parameter to pass to the module. This can be passed multiple <span class="built_in">times</span> with a</span><br><span class="line">                 different parameter each time and they will all be sent to the module (i.e.</span><br><span class="line">                 -m Param1 -m Param2, etc.)</span><br><span class="line">  -d           : Dump all known modules</span><br><span class="line">  -n [NUM]     : Use <span class="keyword">for</span> non-default TCP port number</span><br><span class="line">  -s           : Enable SSL</span><br><span class="line">  -g [NUM]     : Give up after trying to connect <span class="keyword">for</span> NUM seconds (default 3)</span><br><span class="line">  -r [NUM]     : Sleep NUM seconds between retry attempts (default 3)</span><br><span class="line">  -R [NUM]     : Attempt NUM retries before giving up. The total number of attempts will be NUM + 1.</span><br><span class="line">  -c [NUM]     : Time to <span class="built_in">wait</span> <span class="keyword">in</span> usec to verify socket is available (default 500 usec).</span><br><span class="line">  -t [NUM]     : Total number of logins to be tested concurrently</span><br><span class="line">  -T [NUM]     : Total number of hosts to be tested concurrently</span><br><span class="line">  -L           : Parallelize logins using one username per thread. The default is to process </span><br><span class="line">                 the entire username before proceeding.</span><br><span class="line">  -f           : Stop scanning host after first valid username/password found.</span><br><span class="line">  -F           : Stop audit after first valid username/password found on any host.</span><br><span class="line">  -b           : Suppress startup banner</span><br><span class="line">  -q           : Display module<span class="string">&#x27;s usage information</span></span><br><span class="line"><span class="string">  -v [NUM]     : Verbose level [0 - 6 (more)]</span></span><br><span class="line"><span class="string">  -w [NUM]     : Error debug level [0 - 10 (more)]</span></span><br><span class="line"><span class="string">  -V           : Display version</span></span><br><span class="line"><span class="string">  -Z [TEXT]    : Resume scan based on map of previous scan</span></span><br><span class="line"><span class="string">  </span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>常用参数</strong></p></li>
+<li><p><strong>-e：同hydra</strong></p></li>
+<li><p><strong>-F： </strong>破解到第一个就停止****</p></li>
+<li><p><strong>-n：非默认端口</strong></p></li>
+<li><p><strong>-S：使用SSL连接</strong></p></li>
+<li><p><strong>-T：并发主机数</strong></p></li>
+<li><p><strong>medusa -M xxx
+-q：查看xxx模块所需具体参数，并用-m指定</strong></p></li>
 </ul>
 <h4 id="windows-密码破解文件共享为例">（4）Windows
 密码破解【文件共享为例】</h4>

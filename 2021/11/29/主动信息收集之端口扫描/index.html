@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-29T08:19:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:43:42.227Z">
+<meta property="article:modified_time" content="2023-12-12T13:28:19.109Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="端口扫描">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">一、端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Cudp%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">二、UDP端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scapy-udp-scan"><span class="nav-text">1、Scapy UDP Scan</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy"><span class="nav-text">（1）Scapy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy%E8%84%9A%E6%9C%AC"><span class="nav-text">（2）Scapy脚本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap"><span class="nav-text">2、Nmap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89tcp%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">三、TCP端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E8%94%BD%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1、隐蔽端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy-1"><span class="nav-text">（1）Scapy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy%E8%84%9A%E6%9C%AC-1"><span class="nav-text">（2）Scapy脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap-1"><span class="nav-text">（3）nmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hping3"><span class="nav-text">（4）hping3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">2、全连接端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy-2"><span class="nav-text">（1）Scapy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy%E8%84%9A%E6%9C%AC-2"><span class="nav-text">（2）Scapy脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap-2"><span class="nav-text">（3）nmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dmitry"><span class="nav-text">（4）dmitry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nc"><span class="nav-text">（5）nc</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%83%B5%E5%B0%B8%E6%89%AB%E6%8F%8F"><span class="nav-text">3、僵尸扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy-3"><span class="nav-text">（1）Scapy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0%E6%89%AB%E6%8F%8F"><span class="nav-text">（2）python脚本实现扫描：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap-3"><span class="nav-text">（3）nmap</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1. 端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#udp%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">2. UDP端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scapy-udp-scan"><span class="nav-text">1、Scapy UDP Scan</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy"><span class="nav-text">（1）Scapy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy%E8%84%9A%E6%9C%AC"><span class="nav-text">（2）Scapy脚本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap"><span class="nav-text">2、Nmap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">3. TCP端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E8%94%BD%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1、隐蔽端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy-1"><span class="nav-text">（1）Scapy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy%E8%84%9A%E6%9C%AC-1"><span class="nav-text">（2）Scapy脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap-1"><span class="nav-text">（3）nmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hping3"><span class="nav-text">（4）hping3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">2、全连接端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy-2"><span class="nav-text">（1）Scapy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy%E8%84%9A%E6%9C%AC-2"><span class="nav-text">（2）Scapy脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap-2"><span class="nav-text">（3）nmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dmitry"><span class="nav-text">（4）dmitry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nc"><span class="nav-text">（5）nc</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%83%B5%E5%B0%B8%E6%89%AB%E6%8F%8F"><span class="nav-text">3、僵尸扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scapy-3"><span class="nav-text">（1）Scapy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0%E6%89%AB%E6%8F%8F"><span class="nav-text">（2）python脚本实现扫描：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap-3"><span class="nav-text">（3）nmap</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:43:42" itemprop="dateModified" datetime="2023-12-09T23:43:42+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 21:28:19" itemprop="dateModified" datetime="2023-12-12T21:28:19+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -284,13 +284,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一端口扫描">一、端口扫描</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="端口扫描">1. 端口扫描</h2>
 <p><strong>端口对应网络服务及应用端程序</strong></p>
 <p><strong>服务端程序的漏洞通过端口攻入</strong></p>
 <p><strong>发现开放的端口</strong></p>
 <p><strong>更具体的攻击面</strong></p>
 <p><strong>注意</strong> ，该阶段是针对存在的IP扫描的</p>
-<h2 id="二udp端口扫描">二、UDP端口扫描</h2>
+<h2 id="udp端口扫描">2. UDP端口扫描</h2>
 <ul>
 <li><strong>假设ICMP port-unreachable响应代表端口关闭</strong></li>
 <li>目标系统不响应ICMP port-unreachable时，可能产生误判</li>
@@ -306,131 +306,9 @@
 <p>误判</p>
 <h4 id="scapy">（1）Scapy</h4>
 <p><strong>命令基本格式</strong></p>
-<pre><code>sr1 (IP(dst=&quot;1.1.1.1&quot;)/UDP(dport= 53),timeout=1 ,verbose=1)</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sr1 (IP(dst=<span class="string">&quot;1.1.1.1&quot;</span>)/UDP(dport= 53),<span class="built_in">timeout</span>=1 ,verbose=1)</span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# scapy**
-INFO: Can&#39;t import PyX. Won&#39;t be able to use psdump() or pdfdump().
-                                      
-                     aSPY//YASa       
-             apyyyyCY//////////YCa       |
-            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy
- ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4
- AYAsAYYYYYYYY///Ps              cY//S   |
-         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy
-         SPPPP///a          pP///AC//Y   |
-              A//A            cyP////C   | Have fun!
-              p///Ac            sC///a   |
-              P////YCpc           A//A   | We are in France, we say Skappee.
-       scccccp///pSP///p          p//Y   | OK? Merci.
-      sY/////////y  caa           S//P   |             -- Sebastien Chabal
-       cayCyayP//Ya              pY/Ya   |
-        sY/PsY////YCc          aC//Yp 
-         sc  sccaCY//PCypaapyCP//YSs  
-                  spCPY//////YPSps    
-                       ccaacs         
-                                       using IPython 7.22.0
-**&gt; &gt;&gt; i=IP()
-&gt;&gt;&gt; u=UDP()
-&gt;&gt;&gt; iu=(i/u)
-&gt;&gt;&gt; iu.display()
-**###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= udp
-  chksum= None
-  src= 127.0.0.1
-  dst= 127.0.0.1
-  \options\
-###[ UDP ]### 
-     sport= domain
-     dport= domain　　　　　　　　#默认53
-     len= None
-     chksum= None
-
-**&gt; &gt;&gt; iu[IP].dst=&quot;10.10.10.129&quot;　　　#目标机
-&gt;&gt;&gt; iu[UDP].dport=53　　　　　　　　 #指定想要测试的端口（个人目标机53未开放）
-&gt;&gt;&gt; iu.display()
-**###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= udp
-  chksum= None
-  src= 10.10.10.135
-  dst= 10.10.10.129
-  \options\
-###[ UDP ]### 
-     sport= domain
-     dport= domain
-     len= None
-     chksum= None
-
-**&gt; &gt;&gt; a=** **sr1(iu)**　　　　　　　　　　#发包，注意一般是要加上timeout的，因为我的目标机上的53未开放，所以偷个懒没加
-Begin emission:
-Finished sending 1 packets.
-.*
-Received 2 packets, got 1 answers, remaining 0 packets
-&gt;&gt;&gt; a.display()
-###[ IP ]### 
-  version= 4
-  ihl= 5
-  tos= 0xc0
-  len= 56
-  id= 3785
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= icmp
-  chksum= 0x4221
-  src= 10.10.10.129
-  dst= 10.10.10.135
-  \options\
-###[ ICMP ]### 
-     type= dest-unreach
-     **code** **= port-** **unreachable　　　　　　#端口未开**
-     chksum= 0x2632
-     reserved= 0
-     length= 0
-     nexthopmtu= 0
-###[ IP in ICMP ]### 
-        version= 4
-        ihl= 5
-        tos= 0x0
-        len= 28
-        id= 1
-        flags= 
-        frag= 0
-        ttl= 64
-        proto= udp
-        chksum= 0x51b5
-        src= 10.10.10.135
-        dst= 10.10.10.129
-        \options\
-###[ UDP in ICMP ]### 
-           sport= domain
-           dport= domain
-           len= 8
-           chksum= 0xd658
-
-**&gt; &gt;&gt; iu[UDP].dport=137　　　　　　　　#测试开放开放端口137
-&gt;&gt;&gt; a2=sr1(iu,timeout=1,verbose=1** **)**
-Begin emission:
-Finished sending 1 packets.
-
-Received 1 packets, **got 0 answers,** remaining 1 packets　　　　　　#注意这种情况，仅能得出目标端口&quot; **可能** &quot;是开放的
-&gt;&gt;&gt; </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># scapy</span></span><br><span class="line">INFO: Can<span class="string">&#x27;t import PyX. Won&#x27;</span>t be able to use psdump() or pdfdump().</span><br><span class="line">                                      </span><br><span class="line">                     aSPY//YASa       </span><br><span class="line">             apyyyyCY//////////YCa       |</span><br><span class="line">            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy</span><br><span class="line"> ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4</span><br><span class="line"> AYAsAYYYYYYYY///Ps              cY//S   |</span><br><span class="line">         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy</span><br><span class="line">         SPPPP///a          pP///AC//Y   |</span><br><span class="line">              A//A            cyP////C   | Have fun!</span><br><span class="line">              p///Ac            sC///a   |</span><br><span class="line">              P////YCpc           A//A   | We are <span class="keyword">in</span> France, we say Skappee.</span><br><span class="line">       scccccp///pSP///p          p//Y   | OK? Merci.</span><br><span class="line">      sY/////////y  caa           S//P   |             -- Sebastien Chabal</span><br><span class="line">       cayCyayP//Ya              pY/Ya   |</span><br><span class="line">        sY/PsY////YCc          aC//Yp </span><br><span class="line">         sc  sccaCY//PCypaapyCP//YSs  </span><br><span class="line">                  spCPY//////YPSps    </span><br><span class="line">                       ccaacs         </span><br><span class="line">                                       using IPython 7.22.0</span><br><span class="line">&gt; &gt;&gt; i=IP()</span><br><span class="line">&gt;&gt;&gt; u=UDP()</span><br><span class="line">&gt;&gt;&gt; iu=(i/u)</span><br><span class="line">&gt;&gt;&gt; iu.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= udp</span><br><span class="line">  chksum= None</span><br><span class="line">  src= 127.0.0.1</span><br><span class="line">  dst= 127.0.0.1</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ UDP ]### </span></span><br><span class="line">     sport= domain</span><br><span class="line">     dport= domain　　　　　　　　<span class="comment">#默认53</span></span><br><span class="line">     len= None</span><br><span class="line">     chksum= None</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; iu[IP].dst=<span class="string">&quot;10.10.10.129&quot;</span>　　　<span class="comment">#目标机</span></span><br><span class="line">&gt;&gt;&gt; iu[UDP].dport=53　　　　　　　　 <span class="comment">#指定想要测试的端口（个人目标机53未开放）</span></span><br><span class="line">&gt;&gt;&gt; iu.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= udp</span><br><span class="line">  chksum= None</span><br><span class="line">  src= 10.10.10.135</span><br><span class="line">  dst= 10.10.10.129</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ UDP ]### </span></span><br><span class="line">     sport= domain</span><br><span class="line">     dport= domain</span><br><span class="line">     len= None</span><br><span class="line">     chksum= None</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; a=sr1(iu)　　　　　　　　　　<span class="comment">#发包，注意一般是要加上timeout的，因为我的目标机上的53未开放，所以偷个懒没加</span></span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">.*</span><br><span class="line">Received 2 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt;&gt;&gt; a.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= 5</span><br><span class="line">  tos= 0xc0</span><br><span class="line">  len= 56</span><br><span class="line">  <span class="built_in">id</span>= 3785</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= icmp</span><br><span class="line">  chksum= 0x4221</span><br><span class="line">  src= 10.10.10.129</span><br><span class="line">  dst= 10.10.10.135</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ ICMP ]### </span></span><br><span class="line">     <span class="built_in">type</span>= dest-unreach</span><br><span class="line">     code= port-unreachable　　　　　　<span class="comment">#端口未开</span></span><br><span class="line">     chksum= 0x2632</span><br><span class="line">     reserved= 0</span><br><span class="line">     length= 0</span><br><span class="line">     nexthopmtu= 0</span><br><span class="line"><span class="comment">###[ IP in ICMP ]### </span></span><br><span class="line">        version= 4</span><br><span class="line">        ihl= 5</span><br><span class="line">        tos= 0x0</span><br><span class="line">        len= 28</span><br><span class="line">        <span class="built_in">id</span>= 1</span><br><span class="line">        flags= </span><br><span class="line">        frag= 0</span><br><span class="line">        ttl= 64</span><br><span class="line">        proto= udp</span><br><span class="line">        chksum= 0x51b5</span><br><span class="line">        src= 10.10.10.135</span><br><span class="line">        dst= 10.10.10.129</span><br><span class="line">        \options\</span><br><span class="line"><span class="comment">###[ UDP in ICMP ]### </span></span><br><span class="line">           sport= domain</span><br><span class="line">           dport= domain</span><br><span class="line">           len= 8</span><br><span class="line">           chksum= 0xd658</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; iu[UDP].dport=137　　　　　　　　<span class="comment">#测试开放开放端口137</span></span><br><span class="line">&gt;&gt;&gt; a2=sr1(iu,<span class="built_in">timeout</span>=1,verbose=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received 1 packets, got 0 answers, remaining 1 packets　　　　　　<span class="comment">#注意这种情况，仅能得出目标端口&quot; 可能 &quot;是开放的</span></span><br><span class="line">&gt;&gt;&gt; </span><br></pre></td></tr></table></figure>
 <p><strong>抓包截图</strong></p>
 <ul>
 <li><strong>53端口测试</strong></li>
@@ -441,66 +319,18 @@ Received 1 packets, **got 0 answers,** remaining 1 packets　　　　　　#注
 </ul>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129093211720-328362449.png" /></p>
 <h4 id="scapy脚本">（2）Scapy脚本</h4>
-<pre><code>./udp_ scan.py 1.1.1.1 1 100</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./udp_ scan.py 1.1.1.1 1 100</span><br></pre></td></tr></table></figure>
 <p>脚本待补……</p>
 <h3 id="nmap">2、Nmap</h3>
 <p><strong>命令基本格式</strong></p>
-<pre><code>nmap -sU 1.1.1.1 -p 起始端口号  终止端口号
-
-
-nmap -iL iplist.txt -sU -p 1-200</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sU 1.1.1.1 -p 起始端口号  终止端口号</span><br><span class="line">nmap -iL iplist.txt -sU -p 1-200</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>默认的1000个参数</strong></li>
 <li><strong>ICMP host-unreachable</strong></li>
 </ul>
 <p><strong>示例：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# nmap -sU 10.10.10.129 -p 53**
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 20:41 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00044s latency).
-
-PORT   STATE         SERVICE
-53/udp open|filtered domain
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 0.41 seconds  
-
-**┌──(root💀kali)** **-[/home/ kali]
-└─# nmap -sU  10.10.10.129  -p 0-200**
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 20:40 EST
-Stats: 0:03:11 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 90.93% done; ETC: 20:43 (0:00:19 remaining)
-Stats: 0:03:11 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 91.43% done; ETC: 20:43 (0:00:18 remaining)
-Stats: 0:03:30 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 99.67% done; ETC: 20:43 (0:00:01 remaining)
-Stats: 0:03:32 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 99.99% done; ETC: 20:43 (0:00:00 remaining)
-Stats: 0:03:32 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 99.99% done; ETC: 20:43 (0:00:00 remaining)
-Stats: 0:03:33 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 99.99% done; ETC: 20:43 (0:00:00 remaining)
-Stats: 0:03:34 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 99.99% done; ETC: 20:43 (0:00:00 remaining)
-Stats: 0:03:43 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 99.99% done; ETC: 20:44 (0:00:00 remaining)
-Stats: 0:03:44 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 99.99% done; ETC: 20:44 (0:00:00 remaining)
-Stats: 0:03:44 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 99.99% done; ETC: 20:44 (0:00:00 remaining)
-Stats: 0:03:45 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
-UDP Scan Timing: About 99.99% done; ETC: 20:44 (0:00:00 remaining)
-Nmap scan report for 10.10.10.129
-Host is up (0.00058s latency).
-Not shown: 199 closed ports
-PORT    STATE         SERVICE
-137/udp open|filtered netbios-ns
-138/udp open|filtered netbios-dgm
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 228.15 seconds</code></pre>
-<h2 id="三tcp端口扫描">三、TCP端口扫描</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nmap -sU 10.10.10.129 -p 53</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 20:41 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00044s latency).</span><br><span class="line"></span><br><span class="line">PORT   STATE     SERVICE</span><br><span class="line">53/udp open|filtered domain</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 0.41 seconds  </span><br><span class="line"></span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nmap -sU  10.10.10.129  -p 0-200</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 20:40 EST</span><br><span class="line">Stats: 0:03:11 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 90.93% <span class="keyword">done</span>; ETC: 20:43 (0:00:19 remaining)</span><br><span class="line">Stats: 0:03:11 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 91.43% <span class="keyword">done</span>; ETC: 20:43 (0:00:18 remaining)</span><br><span class="line">Stats: 0:03:30 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 99.67% <span class="keyword">done</span>; ETC: 20:43 (0:00:01 remaining)</span><br><span class="line">Stats: 0:03:32 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 99.99% <span class="keyword">done</span>; ETC: 20:43 (0:00:00 remaining)</span><br><span class="line">Stats: 0:03:32 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 99.99% <span class="keyword">done</span>; ETC: 20:43 (0:00:00 remaining)</span><br><span class="line">Stats: 0:03:33 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 99.99% <span class="keyword">done</span>; ETC: 20:43 (0:00:00 remaining)</span><br><span class="line">Stats: 0:03:34 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 99.99% <span class="keyword">done</span>; ETC: 20:43 (0:00:00 remaining)</span><br><span class="line">Stats: 0:03:43 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 99.99% <span class="keyword">done</span>; ETC: 20:44 (0:00:00 remaining)</span><br><span class="line">Stats: 0:03:44 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 99.99% <span class="keyword">done</span>; ETC: 20:44 (0:00:00 remaining)</span><br><span class="line">Stats: 0:03:44 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 99.99% <span class="keyword">done</span>; ETC: 20:44 (0:00:00 remaining)</span><br><span class="line">Stats: 0:03:45 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan</span><br><span class="line">UDP Scan Timing: About 99.99% <span class="keyword">done</span>; ETC: 20:44 (0:00:00 remaining)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00058s latency).</span><br><span class="line">Not shown: 199 closed ports</span><br><span class="line">PORT    STATE         SERVICE</span><br><span class="line">137/udp open|filtered netbios-ns</span><br><span class="line">138/udp open|filtered netbios-dgm</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 228.15 seconds</span><br></pre></td></tr></table></figure>
+<h2 id="tcp端口扫描">3. TCP端口扫描</h2>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128173457501-1862031704.png" /></p>
 <ul>
 <li><strong>基于连接的协议</strong></li>
@@ -530,292 +360,35 @@ Nmap done: 1 IP address (1 host up) scanned in 228.15 seconds</code></pre>
 <h3 id="隐蔽端口扫描">1、隐蔽端口扫描</h3>
 <h4 id="scapy-1">（1）Scapy</h4>
 <p><strong>示例（端口开放的情况）：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# scapy**
-INFO: Can&#39;t import PyX. Won&#39;t be able to use psdump() or pdfdump().
-                                      
-                     aSPY//YASa       
-             apyyyyCY//////////YCa       |
-            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy
- ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4
- AYAsAYYYYYYYY///Ps              cY//S   |
-         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy
-         SPPPP///a          pP///AC//Y   |
-              A//A            cyP////C   | Have fun!
-              p///Ac            sC///a   |
-              P////YCpc           A//A   | To craft a packet, you have to be a
-       scccccp///pSP///p          p//Y   | packet, and learn how to swim in
-      sY/////////y  caa           S//P   | the wires and in the waves.
-       cayCyayP//Ya              pY/Ya   |        -- Jean-Claude Van Damme
-        sY/PsY////YCc          aC//Yp    |
-         sc  sccaCY//PCypaapyCP//YSs  
-                  spCPY//////YPSps    
-                       ccaacs         
-                                       using IPython 7.22.0
-**&gt; &gt;&gt; i=IP()
-&gt;&gt;&gt; t=TCP()
-&gt;&gt;&gt; it=(i/t)
-&gt;&gt;&gt; it.display()
-**###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= tcp
-  chksum= None
-  src= 127.0.0.1
-  dst= 127.0.0.1
-  \options\
-###[ TCP ]### 
-     sport= ftp_data
-     dport= http
-     seq= 0
-     ack= 0
-     dataofs= None
-     reserved= 0
-     **flags** **=** **S　　　　　　　　#发的SYN包**
-     window= 8192
-     chksum= None
-     urgptr= 0
-     options= []
-
-**&gt; &gt;&gt; it[IP].dst=&quot;10.10.10.129&quot;
-&gt;&gt;&gt; a=** **sr1(it)**
-Begin emission:
-Finished sending 1 packets.
-.*
-Received 2 packets, got 1 answers, remaining 0 packets
-**&gt; &gt;&gt;** **a.display()**　　　　　　　　#查看回包数据
-###[ IP ]### 
-  version= 4
-  ihl= 5
-  tos= 0x0
-  len= 44
-  id= 0
-  flags= DF
-  frag= 0
-  ttl= 64
-  proto= tcp
-  chksum= 0x11b1
-  src= 10.10.10.129
-  dst= 10.10.10.135
-  \options\
-###[ TCP ]### 
-     sport= http
-     dport= ftp_data
-     seq= 793215637
-     ack= 1
-     dataofs= 6
-     reserved= 0
-     **flags** **=** **SA　　　　　　#目标机回了个SYN+ACK数据包 = &gt;端口是开着的**
-     window= 5840
-     chksum= 0xa5e9
-     urgptr= 0
-     options= [(&#39;MSS&#39;, 1460)]
-###[ Padding ]### 
-        load= &#39;\x00\x00&#39;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># scapy</span></span><br><span class="line">INFO: Can<span class="string">&#x27;t import PyX. Won&#x27;</span>t be able to use psdump() or pdfdump().</span><br><span class="line">                                          </span><br><span class="line">                         aSPY//YASa       </span><br><span class="line">                 apyyyyCY//////////YCa       |</span><br><span class="line">                sY//////YSpcs  scpCY//Pp     | Welcome to Scapy</span><br><span class="line">     ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4</span><br><span class="line">     AYAsAYYYYYYYY///Ps              cY//S   |</span><br><span class="line">             pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy</span><br><span class="line">             SPPPP///a          pP///AC//Y   |</span><br><span class="line">                  A//A            cyP////C   | Have fun!</span><br><span class="line">                  p///Ac            sC///a   |</span><br><span class="line">                  P////YCpc           A//A   | To craft a packet, you have to be a</span><br><span class="line">           scccccp///pSP///p          p//Y   | packet, and learn how to swim <span class="keyword">in</span></span><br><span class="line">          sY/////////y  caa           S//P   | the wires and <span class="keyword">in</span> the waves.</span><br><span class="line">           cayCyayP//Ya              pY/Ya   |        -- Jean-Claude Van Damme</span><br><span class="line">            sY/PsY////YCc          aC//Yp    |</span><br><span class="line">             sc  sccaCY//PCypaapyCP//YSs  </span><br><span class="line">                      spCPY//////YPSps    </span><br><span class="line">                           ccaacs         </span><br><span class="line">                                           using IPython 7.22.0</span><br><span class="line">&gt; &gt;&gt; i=IP()</span><br><span class="line">&gt;&gt;&gt; t=TCP()</span><br><span class="line">&gt;&gt;&gt; it=(i/t)</span><br><span class="line">&gt;&gt;&gt; it.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= None</span><br><span class="line">  src= 127.0.0.1</span><br><span class="line">  dst= 127.0.0.1</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= ftp_data</span><br><span class="line">     dport= http</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 0</span><br><span class="line">     dataofs= None</span><br><span class="line">     reserved= 0</span><br><span class="line">     flags=S　　　　　　　　<span class="comment">#发的SYN包</span></span><br><span class="line">     window= 8192</span><br><span class="line">     chksum= None</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line">    </span><br><span class="line">&gt; &gt;&gt; it[IP].dst=<span class="string">&quot;10.10.10.129&quot;</span></span><br><span class="line">&gt;&gt;&gt; a=sr1(it)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">.*</span><br><span class="line">Received 2 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt; &gt;&gt;a.display()　　　　　　　　<span class="comment">#查看回包数据</span></span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= 5</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= 44</span><br><span class="line">  <span class="built_in">id</span>= 0</span><br><span class="line">  flags= DF</span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= 0x11b1</span><br><span class="line">  src= 10.10.10.129</span><br><span class="line">  dst= 10.10.10.135</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= http</span><br><span class="line">     dport= ftp_data</span><br><span class="line">     <span class="built_in">seq</span>= 793215637</span><br><span class="line">     ack= 1</span><br><span class="line">     dataofs= 6</span><br><span class="line">     reserved= 0</span><br><span class="line">     flags=SA　　　　　　<span class="comment">#目标机回了个SYN+ACK数据包 = &gt;端口是开着的</span></span><br><span class="line">     window= 5840</span><br><span class="line">     chksum= 0xa5e9</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= [(<span class="string">&#x27;MSS&#x27;</span>, 1460)]</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">        load= <span class="string">&#x27;\x00\x00&#x27;</span></span><br></pre></td></tr></table></figure>
 <p><strong>wireshark抓包分析</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129100226205-1902340186.png" /></p>
 <p><strong>备注：SYN包是 scapy
 发的，对于操作系统而言它并不知道，为此突然收到SYN+ACK包时，内核认为该包是个非法包，会直接回个RST包中断连接</strong></p>
 <p><strong>示例（端口关闭的情况）：</strong></p>
-<pre><code>**&gt; &gt;&gt; it[TCP].dport=88
-&gt;&gt;&gt; a=** **sr1(it)**
-Begin emission:
-Finished sending 1 packets.
-.*
-Received 2 packets, got 1 answers, remaining 0 packets
-&gt;&gt;&gt; a.display()
-###[ IP ]### 
-  version= 4
-  ihl= 5
-  tos= 0x0
-  len= 40
-  id= 0
-  flags= DF
-  frag= 0
-  ttl= 64
-  proto= tcp
-  chksum= 0x11b5
-  src= 10.10.10.129
-  dst= 10.10.10.135
-  \options\
-###[ TCP ]### 
-     sport= kerberos
-     dport= ftp_data
-     seq= 0
-     ack= 1
-     dataofs= 5
-     reserved= 0
-     **flags** **=** **RA　　　　　　　　　　#RST+ACK= &gt;端口是关闭的**
-     window= 0
-     chksum= 0x8648
-     urgptr= 0
-     options= []
-###[ Padding ]### 
-        load= &#39;\x00\x00\x00\x00\x00\x00&#39;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&gt; &gt;&gt; it[TCP].dport=88</span><br><span class="line">&gt;&gt;&gt; a=sr1(it)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">.*</span><br><span class="line">Received 2 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt;&gt;&gt; a.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= 5</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= 40</span><br><span class="line">  <span class="built_in">id</span>= 0</span><br><span class="line">  flags= DF</span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= 0x11b5</span><br><span class="line">  src= 10.10.10.129</span><br><span class="line">  dst= 10.10.10.135</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= kerberos</span><br><span class="line">     dport= ftp_data</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 1</span><br><span class="line">     dataofs= 5</span><br><span class="line">     reserved= 0</span><br><span class="line">     flags=RA　　　　　　　　　　<span class="comment">#RST+ACK= &gt;端口是关闭的</span></span><br><span class="line">     window= 0</span><br><span class="line">     chksum= 0x8648</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">        load= <span class="string">&#x27;\x00\x00\x00\x00\x00\x00&#x27;</span></span><br></pre></td></tr></table></figure>
 <p><strong>wireshark抓包</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129101459625-35890127.png" /></p>
 <h4 id="scapy脚本-1">（2）Scapy脚本</h4>
 <ul>
-<li><p>** tcp_scan.py**</p>
-<p>import logging
-logging.getLogger("scapy.runtime").setLevel(logging.ERROR) from
-scapy.all import * import sys</p>
-<p>if len(sys.argv)!=4: print("Usage - ./scapy.py [Target-IP] [First
-Port] [Last Port]") print("Example - ./scapy.py 10.10.10.1 1 100")
-print("Example will TCP SYN scan ports 1 through 100 on 10.10.10.1")
-sys.exit()</p>
-<p>ip=sys.argv[1] start=int(sys.argv[2]) end=int(sys.argv[3])</p>
-<p>for port in range(start,end):
-a=sr1(IP(dst=ip)/TCP(dport=port),timeout=1,verbose=0) if a==None: pass
-else: if
-int(a[TCP].flags==18):　　　　　　#为什么=18，自己抓个回包，查看下flags（转为10进制）字段就明白了
-print(port) else : pass</p></li>
+<li>** tcp_scan.py**</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">&quot;scapy.runtime&quot;</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sys.argv)!=<span class="number">4</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Usage - ./scapy.py  [Target-IP]  [First Port]  [Last Port]&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Example - ./scapy.py  10.10.10.1  1  100&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Example will TCP SYN scan ports 1 through 100 on 10.10.10.1&quot;</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line"></span><br><span class="line">ip=sys.argv[<span class="number">1</span>]</span><br><span class="line">start=<span class="built_in">int</span>(sys.argv[<span class="number">2</span>])</span><br><span class="line">end=<span class="built_in">int</span>(sys.argv[<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> <span class="built_in">range</span>(start,end):</span><br><span class="line">    a=sr1(IP(dst=ip)/TCP(dport=port),timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> a==<span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(a[TCP].flags==<span class="number">18</span>):　　　　　　<span class="comment">#为什么=18，自己抓个回包，查看下flags（转为10进制）字段就明白了</span></span><br><span class="line">            <span class="built_in">print</span>(port)</span><br><span class="line">        <span class="keyword">else</span> :</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# python3 ./syn_scapy.py 10.10.10.129 1 100
-21
-22
-80</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># python3 ./syn_scapy.py 10.10.10.129 1 100</span></span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">80</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129103230135-2082979127.png" /></p>
 <p><strong>注意，有时会被防火墙屏蔽掉</strong></p>
 <h4 id="nmap-1">（3）nmap</h4>
 <p>** 示例：**</p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─#** **nmap -sS  10.10.10.129  -p 21,22,25,80,143** 
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 21:35 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00035s latency).
-
-PORT    STATE  SERVICE
-21/tcp  open   ftp
-22/tcp  open   ssh
-25/tcp  closed smtp
-80/tcp  open   http
-143/tcp open   imap
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 13.41 seconds
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─#** **nmap -sS  10.10.10.129  -p 1-100**       
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 21:37 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00017s latency).
-Not shown: 97 closed ports
-PORT   STATE SERVICE
-21/tcp open  ftp
-22/tcp open  ssh
-80/tcp open  http
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 13.27 seconds
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─#** **nmap -sS  10.10.10.129  -p 22**            
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 21:40 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.0033s latency).
-
-PORT   STATE SERVICE
-22/tcp open  ssh
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 13.36 seconds
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─#** **nmap -sS -iL ./iplist.txt -p 80,21,22,25** 
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 21:43 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00038s latency).
-
-PORT   STATE  SERVICE
-21/tcp open   ftp
-22/tcp open   ssh
-25/tcp closed smtp
-80/tcp open   http
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 2 IP addresses (1 host up) scanned in 14.57 seconds</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment">#nmap -sS  10.10.10.129  -p 21,22,25,80,143 </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 21:35 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00035s latency).</span><br><span class="line"></span><br><span class="line">PORT    STATE  SERVICE</span><br><span class="line">21/tcp  open   ftp</span><br><span class="line">22/tcp  open   ssh</span><br><span class="line">25/tcp  closed smtp</span><br><span class="line">80/tcp  open   http</span><br><span class="line">143/tcp open   imap</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 13.41 seconds</span><br><span class="line">                                                                                               </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment">#nmap -sS  10.10.10.129  -p 1-100   </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 21:37 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00017s latency).</span><br><span class="line">Not shown: 97 closed ports</span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">21/tcp open  ftp</span><br><span class="line">22/tcp open  ssh</span><br><span class="line">80/tcp open  http</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 13.27 seconds</span><br><span class="line">                                                                                               </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment">#nmap -sS  10.10.10.129  -p 22</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 21:40 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.0033s latency).</span><br><span class="line"></span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">22/tcp open  ssh</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 13.36 seconds</span><br><span class="line">                                                                                               </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment">#nmap -sS -iL ./iplist.txt -p 80,21,22,25 </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-28 21:43 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00038s latency).</span><br><span class="line"></span><br><span class="line">PORT   STATE  SERVICE</span><br><span class="line">21/tcp open   ftp</span><br><span class="line">22/tcp open   ssh</span><br><span class="line">25/tcp closed smtp</span><br><span class="line">80/tcp open   http</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 2 IP addresses (1 host up) scanned <span class="keyword">in</span> 14.57 seconds</span><br></pre></td></tr></table></figure>
 <h4 id="hping3">（4）hping3</h4>
-<p><strong>注意：hping3不做逆地址解析 </strong></p>
+<p><strong>注意：hping3不做逆地址解析</strong></p>
 <p><strong>示例（基本用法）：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# hping3 10.10.10.129 --scan 80 -** **S**
-Scanning 10.10.10.129 (10.10.10.129), port 80
-1 ports to scan, use -V to see all the replies
-+----+-----------+---------+---+-----+-----+-----+
-|port| serv name |  flags  |ttl| id  | win | len |
-+----+-----------+---------+---+-----+-----+-----+
-   80 http       : .S..A...  64     0  5840    46
-All replies received. Done.
-Not responding ports: 
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─# hping3 10.10.10.129 --scan 80,21,22,25,443 -** **S**
-Scanning 10.10.10.129 (10.10.10.129), port 80,21,22,25,443
-5 ports to scan, use -V to see all the replies
-+----+-----------+---------+---+-----+-----+-----+
-|port| serv name |  flags  |ttl| id  | win | len |
-+----+-----------+---------+---+-----+-----+-----+
-   21 ftp        : .S..A...  64     0  5840    46
-   22 ssh        : .S..A...  64     0  5840    46
-   80 http       : .S..A...  64     0  5840    46
-All replies received. Done.
-Not responding ports: 
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─# hping3 10.10.10.129 --scan 100-200 -** **S**        
-Scanning 10.10.10.129 (10.10.10.129), port 100-200
-101 ports to scan, use -V to see all the replies
-+----+-----------+---------+---+-----+-----+-----+
-|port| serv name |  flags  |ttl| id  | win | len |
-+----+-----------+---------+---+-----+-----+-----+
-  139 netbios-ssn: .S..A...  64     0  5840    46
-  143 imap2      : .S..A...  64     0  5840    46
-All replies received. Done.
-Not responding ports: </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># hping3 10.10.10.129 --scan 80 -S</span></span><br><span class="line">Scanning 10.10.10.129 (10.10.10.129), port 80</span><br><span class="line">1 ports to scan, use -V to see all the replies</span><br><span class="line">+----+-----------+---------+---+-----+-----+-----+</span><br><span class="line">|port| serv name |  flags  |ttl| <span class="built_in">id</span>  | win | len |</span><br><span class="line">+----+-----------+---------+---+-----+-----+-----+</span><br><span class="line">   80 http       : .S..A...  64     0  5840    46</span><br><span class="line">All replies received. Done.</span><br><span class="line">Not responding ports: </span><br><span class="line">                                                                                               </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># hping3 10.10.10.129 --scan 80,21,22,25,443 -S</span></span><br><span class="line">Scanning 10.10.10.129 (10.10.10.129), port 80,21,22,25,443</span><br><span class="line">5 ports to scan, use -V to see all the replies</span><br><span class="line">+----+-----------+---------+---+-----+-----+-----+</span><br><span class="line">|port| serv name |  flags  |ttl| <span class="built_in">id</span>  | win | len |</span><br><span class="line">+----+-----------+---------+---+-----+-----+-----+</span><br><span class="line">   21 ftp        : .S..A...  64     0  5840    46</span><br><span class="line">   22 ssh        : .S..A...  64     0  5840    46</span><br><span class="line">   80 http       : .S..A...  64     0  5840    46</span><br><span class="line">All replies received. Done.</span><br><span class="line">Not responding ports: </span><br><span class="line">   </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># hping3 10.10.10.129 --scan 100-200 -S</span></span><br><span class="line">Scanning 10.10.10.129 (10.10.10.129), port 100-200</span><br><span class="line">101 ports to scan, use -V to see all the replies</span><br><span class="line">+----+-----------+---------+---+-----+-----+-----+</span><br><span class="line">|port| serv name |  flags  |ttl| <span class="built_in">id</span>  | win | len |</span><br><span class="line">+----+-----------+---------+---+-----+-----+-----+</span><br><span class="line">  139 netbios-ssn: .S..A...  64     0  5840    46</span><br><span class="line">  143 imap2      : .S..A...  64     0  5840    46</span><br><span class="line">All replies received. Done.</span><br><span class="line">Not responding ports: </span><br></pre></td></tr></table></figure>
 <p><strong>示例（高级）：</strong></p>
-<p>** 扫描10.10.10.129的1-25端口，并欺骗 10.10.10.129
-自己（10.10.10.135）是 10.10.10.140 **</p>
-<pre><code>┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# hping3 -c 25 -S --spoof 10.10.10.140 -p ++1  10.10.10.129      #-c：指定发包数 -S：指定包类型 --spoof ip1：欺骗对方放自己是ip1(即伪造自己的地址) -p ++1：端口号每次加 1
-HPING 10.10.10.129 (eth0 10.10.10.129): S set, 40 headers + 0 data bytes
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=1 flags=RA seq=0 win=0 rtt=11.4 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=2 flags=RA seq=1 win=0 rtt=3.2 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=3 flags=RA seq=2 win=0 rtt=4.0 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=4 flags=RA seq=3 win=0 rtt=5.8 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=5 flags=RA seq=4 win=0 rtt=7.5 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=6 flags=RA seq=5 win=0 rtt=3.4 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=7 flags=RA seq=6 win=0 rtt=9.4 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=8 flags=RA seq=7 win=0 rtt=6.0 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=9 flags=RA seq=8 win=0 rtt=9.5 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=10 flags=RA seq=9 win=0 rtt=3.3 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=11 flags=RA seq=10 win=0 rtt=5.9 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=12 flags=RA seq=11 win=0 rtt=3.0 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=13 flags=RA seq=12 win=0 rtt=5.5 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=14 flags=RA seq=13 win=0 rtt=5.4 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=15 flags=RA seq=14 win=0 rtt=5.5 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=16 flags=RA seq=15 win=0 rtt=5.7 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=17 flags=RA seq=16 win=0 rtt=6.0 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=18 flags=RA seq=17 win=0 rtt=6.1 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=19 flags=RA seq=18 win=0 rtt=2.9 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=20 flags=RA seq=19 win=0 rtt=3.0 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=21 flags=SA seq=20 win=5840 rtt=4.0 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=22 flags=SA seq=21 win=5840 rtt=5.9 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=23 flags=RA seq=22 win=0 rtt=2.4 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=24 flags=RA seq=23 win=0 rtt=3.0 ms
-len=46 ip=10.10.10.129 ttl=64 DF id=0 sport=25 flags=RA seq=24 win=0 rtt=2.2 ms
-
---- 10.10.10.129 hping statistic ---
-25 packets transmitted, 25 packets received, 0% packet loss
-round-trip min/avg/max = 2.2/5.2/11.4 ms</code></pre>
+<p><strong>扫描10.10.10.129的1-25端口，并欺骗 10.10.10.129
+自己（10.10.10.135）是 10.10.10.140</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># hping3 -c 25 -S --spoof 10.10.10.140 -p ++1  10.10.10.129  #-c：指定发包数 -S：指定包类型 --spoof ip1：欺骗对方放自己是ip1(即伪造自己的地址) -p ++1：端口号每次加 1</span></span><br><span class="line">HPING 10.10.10.129 (eth0 10.10.10.129): S <span class="built_in">set</span>, 40 headers + 0 data bytes</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=1 flags=RA <span class="built_in">seq</span>=0 win=0 rtt=11.4 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=2 flags=RA <span class="built_in">seq</span>=1 win=0 rtt=3.2 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=3 flags=RA <span class="built_in">seq</span>=2 win=0 rtt=4.0 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=4 flags=RA <span class="built_in">seq</span>=3 win=0 rtt=5.8 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=5 flags=RA <span class="built_in">seq</span>=4 win=0 rtt=7.5 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=6 flags=RA <span class="built_in">seq</span>=5 win=0 rtt=3.4 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=7 flags=RA <span class="built_in">seq</span>=6 win=0 rtt=9.4 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=8 flags=RA <span class="built_in">seq</span>=7 win=0 rtt=6.0 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=9 flags=RA <span class="built_in">seq</span>=8 win=0 rtt=9.5 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=10 flags=RA <span class="built_in">seq</span>=9 win=0 rtt=3.3 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=11 flags=RA <span class="built_in">seq</span>=10 win=0 rtt=5.9 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=12 flags=RA <span class="built_in">seq</span>=11 win=0 rtt=3.0 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=13 flags=RA <span class="built_in">seq</span>=12 win=0 rtt=5.5 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=14 flags=RA <span class="built_in">seq</span>=13 win=0 rtt=5.4 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=15 flags=RA <span class="built_in">seq</span>=14 win=0 rtt=5.5 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=16 flags=RA <span class="built_in">seq</span>=15 win=0 rtt=5.7 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=17 flags=RA <span class="built_in">seq</span>=16 win=0 rtt=6.0 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=18 flags=RA <span class="built_in">seq</span>=17 win=0 rtt=6.1 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=19 flags=RA <span class="built_in">seq</span>=18 win=0 rtt=2.9 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=20 flags=RA <span class="built_in">seq</span>=19 win=0 rtt=3.0 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=21 flags=SA <span class="built_in">seq</span>=20 win=5840 rtt=4.0 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=22 flags=SA <span class="built_in">seq</span>=21 win=5840 rtt=5.9 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=23 flags=RA <span class="built_in">seq</span>=22 win=0 rtt=2.4 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=24 flags=RA <span class="built_in">seq</span>=23 win=0 rtt=3.0 ms</span><br><span class="line">len=46 ip=10.10.10.129 ttl=64 DF <span class="built_in">id</span>=0 sport=25 flags=RA <span class="built_in">seq</span>=24 win=0 rtt=2.2 ms</span><br><span class="line"></span><br><span class="line">--- 10.10.10.129 hping statistic ---</span><br><span class="line">25 packets transmitted, 25 packets received, 0% packet loss</span><br><span class="line">round-trip min/avg/max = 2.2/5.2/11.4 ms</span><br></pre></td></tr></table></figure>
 <p><strong>wireshark抓包分析</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129111017857-41287467.png" /></p>
 <p><strong>注意，欺骗完后在kali主机无法查扫描结果，只能登陆伪造的IP对应的主机查看或做端口镜像。</strong></p>
@@ -834,361 +407,20 @@ round-trip min/avg/max = 2.2/5.2/11.4 ms</code></pre>
 <p><strong>直接在scapy的操作与脚本的操作类似，此处不再单独演示，详见Scapy脚本处的分析：</strong></p>
 <h4 id="scapy脚本-2">（2）Scapy脚本</h4>
 <p><strong>tcp_scan2.py</strong></p>
-<pre><code>#!/usr/bin/python
-import logging
-logging.getLogger(&quot;scapy.runtime&quot;).setLevel(logging.ERROR)
-from scapy.all import *
-
-SYN=IP(dst=&quot;10.10.10.129&quot;)/TCP(dport=80,flags=&#39;S&#39;)
-
-print(&quot;-- SENT --&quot;)
-SYN.display()
-
-print(&quot;\n\n-- RECEIVED --&quot;)
-response=sr1(SYN,timeout=1,verbose=0)
-response.display()
-
-if int(response[TCP].flags==18):
-    print(&quot;\n\n-- SENT --&quot;)
-    A=IP(dst=&quot;10.10.10.129&quot;)/TCP(dport=80,flags=&#39;A&#39;,ack=(response[TCP].seq+1))
-    A.display()
-    print(&quot;\n\n-- RECEIVED --&quot;)
-    response2=sr1(A,timeout=1,verbose=0)
-    response2.display()
-else:
-    print(&quot;SYN-ACK not returned!&quot;)</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">&quot;scapy.runtime&quot;</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">SYN=IP(dst=<span class="string">&quot;10.10.10.129&quot;</span>)/TCP(dport=<span class="number">80</span>,flags=<span class="string">&#x27;S&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;-- SENT --&quot;</span>)</span><br><span class="line">SYN.display()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n\n-- RECEIVED --&quot;</span>)</span><br><span class="line">response=sr1(SYN,timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">response.display()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">int</span>(response[TCP].flags==<span class="number">18</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n\n-- SENT --&quot;</span>)</span><br><span class="line">    A=IP(dst=<span class="string">&quot;10.10.10.129&quot;</span>)/TCP(dport=<span class="number">80</span>,flags=<span class="string">&#x27;A&#x27;</span>,ack=(response[TCP].seq+<span class="number">1</span>))</span><br><span class="line">    A.display()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n\n-- RECEIVED --&quot;</span>)</span><br><span class="line">    response2=sr1(A,timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    response2.display()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;SYN-ACK not returned!&quot;</span>)</span><br></pre></td></tr></table></figure>
 <p><strong>防火墙设置之前的测试（分析见注释）：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# python3 ./** **tcp_scan2.py**                   
-**-- SENT --　　　　　　　　　　　　　#发包**
-###[ IP ]### 
-  version   = 4
-  ihl       = None
-  tos       = 0x0
-  len       = None
-  id        = 1
-  flags     = 
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = None
-  src       = 10.10.10.135
-  dst       = 10.10.10.129
-  \options   \
-###[ TCP ]### 
-     sport     = ftp_data
-     dport     = http
-     seq       = 0
-     ack       = 0
-     dataofs   = None
-     reserved  = 0 **flags =** **S　　　　　　　　#第一次握手包类型（SYN）**
-     window    = 8192
-     chksum    = None
-     urgptr    = 0
-     options   = []
-
-
-
--- RECEIVED --　　　　　　　　　　　#收包
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 44
-  id        = 0
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x11b1
-  src       = 10.10.10.129
-  dst       = 10.10.10.135
-  \options   \
-###[ TCP ]### 
-     sport     = http
-     dport     = ftp_data
-     seq       = 418625511
-     ack       = 1
-     dataofs   = 6
-     reserved  = 0 **flags =** **SA　　　　　　　　　　#第二次握手包类型（SYN+ACK）**
-     window    = 5840
-     chksum    = 0x86eb
-     urgptr    = 0
-     options   = [(&#39;MSS&#39;, 1460)]
-###[ Padding ]### 
-        load      = &#39;\x00\x00&#39;
-
-
-
-**-- SENT --　　　　　　　　　　#注意，该包是理论上的第三次握手包，实际上在第二次握手结束，发该包之前操作系统内核已经发了一个RST包给目标机中断连接，会导致src发完该包后会收到RST包（参见后面）**
-###[ IP ]### 
-  version   = 4
-  ihl       = None
-  tos       = 0x0
-  len       = None
-  id        = 1
-  flags     = 
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = None
-  src       = 10.10.10.135
-  dst       = 10.10.10.129
-  \options   \
-###[ TCP ]### 
-     sport     = ftp_data
-     dport     = http
-     seq       = 0
-     ack       = 418625512
-     dataofs   = None
-     reserved  = 0 **flags =** **A　　　　　　　　　　　　#第三次握手包类型（ACK）**
-     window    = 8192
-     chksum    = None
-     urgptr    = 0
-     options   = []
-
-
-
--- RECEIVED --　　　　　　　　　　　　　　**#收包**
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 40
-  id        = 0
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x11b5
-  src       = 10.10.10.129
-  dst       = 10.10.10.135
-  \options   \
-###[ TCP ]### 
-     sport     = http
-     dport     = ftp_data
-     seq       = 418625512
-     ack       = 0
-     dataofs   = 5
-     reserved  = 0 **flags =** **R　　　　　　　　　　#注意，这是在 src 发完 ack 之后收到的，意味着 dst 认为收到的 ack 是个异常包，发个 rst 包来中断连接，原因如上述**
-     window    = 0
-     chksum    = 0xb585
-     urgptr    = 0
-     options   = []
-###[ Padding ]### 
-        load      = &#39;\x00\x00\x00\x00\x00\x00&#39;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># python3 ./tcp_scan2.py   </span></span><br><span class="line">-- SENT --　　　　　　　　　　　　　<span class="comment">#发包</span></span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version   = 4</span><br><span class="line">  ihl       = None</span><br><span class="line">  tos       = 0x0</span><br><span class="line">  len       = None</span><br><span class="line">  <span class="built_in">id</span>        = 1</span><br><span class="line">  flags     = </span><br><span class="line">  frag      = 0</span><br><span class="line">  ttl       = 64</span><br><span class="line">  proto     = tcp</span><br><span class="line">  chksum    = None</span><br><span class="line">  src       = 10.10.10.135</span><br><span class="line">  dst       = 10.10.10.129</span><br><span class="line">  \options   \</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport     = ftp_data</span><br><span class="line">     dport     = http</span><br><span class="line">     <span class="built_in">seq</span>       = 0</span><br><span class="line">     ack       = 0</span><br><span class="line">     dataofs   = None</span><br><span class="line">     reserved  = 0 flags =S　　　　　　　　<span class="comment">#第一次握手包类型（SYN）</span></span><br><span class="line">     window    = 8192</span><br><span class="line">     chksum    = None</span><br><span class="line">     urgptr    = 0</span><br><span class="line">     options   = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- RECEIVED --　　　　　　　　　　　<span class="comment">#收包</span></span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">      version   = 4</span><br><span class="line">      ihl       = 5</span><br><span class="line">      tos       = 0x0</span><br><span class="line">      len       = 44</span><br><span class="line">      <span class="built_in">id</span>        = 0</span><br><span class="line">      flags     = DF</span><br><span class="line">      frag      = 0</span><br><span class="line">      ttl       = 64</span><br><span class="line">      proto     = tcp</span><br><span class="line">      chksum    = 0x11b1</span><br><span class="line">      src       = 10.10.10.129</span><br><span class="line">      dst       = 10.10.10.135</span><br><span class="line">      \options   \</span><br><span class="line">    <span class="comment">###[ TCP ]### </span></span><br><span class="line">         sport     = http</span><br><span class="line">         dport     = ftp_data</span><br><span class="line">         <span class="built_in">seq</span>       = 418625511</span><br><span class="line">         ack       = 1</span><br><span class="line">         dataofs   = 6</span><br><span class="line">         reserved  = 0 flags =SA　　　　　　　　　　<span class="comment">#第二次握手包类型（SYN+ACK）</span></span><br><span class="line">         window    = 5840</span><br><span class="line">         chksum    = 0x86eb</span><br><span class="line">         urgptr    = 0</span><br><span class="line">         options   = [(<span class="string">&#x27;MSS&#x27;</span>, 1460)]</span><br><span class="line">    <span class="comment">###[ Padding ]### </span></span><br><span class="line">            load      = <span class="string">&#x27;\x00\x00&#x27;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    -- SENT --　　　　　　　　　　<span class="comment">#注意，该包是理论上的第三次握手包，实际上在第二次握手结束，发该包之前操作系统内核已经发了一个RST包给目标机中断连接，会导致src发完该包后会收到RST包（参见后面）</span></span><br><span class="line">    <span class="comment">###[ IP ]### </span></span><br><span class="line">      version   = 4</span><br><span class="line">      ihl       = None</span><br><span class="line">      tos       = 0x0</span><br><span class="line">      len       = None</span><br><span class="line">      <span class="built_in">id</span>        = 1</span><br><span class="line">      flags     = </span><br><span class="line">      frag      = 0</span><br><span class="line">      ttl       = 64</span><br><span class="line">      proto     = tcp</span><br><span class="line">      chksum    = None</span><br><span class="line">      src       = 10.10.10.135</span><br><span class="line">      dst       = 10.10.10.129</span><br><span class="line">      \options   \</span><br><span class="line">    <span class="comment">###[ TCP ]### </span></span><br><span class="line">         sport     = ftp_data</span><br><span class="line">         dport     = http</span><br><span class="line">         <span class="built_in">seq</span>       = 0</span><br><span class="line">         ack       = 418625512</span><br><span class="line">         dataofs   = None</span><br><span class="line">         reserved  = 0 flags =A　　　　　　　　　　　　<span class="comment">#第三次握手包类型（ACK）</span></span><br><span class="line">         window    = 8192</span><br><span class="line">         chksum    = None</span><br><span class="line">         urgptr    = 0</span><br><span class="line">         options   = []</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    -- RECEIVED --　　　　　　　　　　　　　　<span class="comment">#收包</span></span><br><span class="line">    <span class="comment">###[ IP ]### </span></span><br><span class="line">      version   = 4</span><br><span class="line">      ihl       = 5</span><br><span class="line">      tos       = 0x0</span><br><span class="line">      len       = 40</span><br><span class="line">      <span class="built_in">id</span>        = 0</span><br><span class="line">      flags     = DF</span><br><span class="line">      frag      = 0</span><br><span class="line">      ttl       = 64</span><br><span class="line">      proto     = tcp</span><br><span class="line">      chksum    = 0x11b5</span><br><span class="line">      src       = 10.10.10.129</span><br><span class="line">      dst       = 10.10.10.135</span><br><span class="line">      \options   \</span><br><span class="line">    <span class="comment">###[ TCP ]### </span></span><br><span class="line">         sport     = http</span><br><span class="line">         dport     = ftp_data</span><br><span class="line">         <span class="built_in">seq</span>       = 418625512</span><br><span class="line">         ack       = 0</span><br><span class="line">         dataofs   = 5</span><br><span class="line">         reserved  = 0 flags =R　　　　　　　　　　<span class="comment">#注意，这是在 src 发完 ack 之后收到的，意味着 dst 认为收到的 ack 是个异常包，发个 rst 包来中断连接，原因如上述</span></span><br><span class="line">         window    = 0</span><br><span class="line">         chksum    = 0xb585</span><br><span class="line">         urgptr    = 0</span><br><span class="line">         options   = []</span><br><span class="line">    <span class="comment">###[ Padding ]### </span></span><br><span class="line">            load      = <span class="string">&#x27;\x00\x00\x00\x00\x00\x00&#x27;</span></span><br></pre></td></tr></table></figure>
 <p><strong>wireshark抓包结果：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129123135384-1033547600.png" /></p>
-<p>** 防火墙设置：**</p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# iptables -** **L　　　　　　　　　　　　　　　　　　　　　　　　　　#查看防火墙已有规则**
-Chain INPUT (policy ACCEPT)
-target     prot opt source               destination         
-
-Chain FORWARD (policy ACCEPT)
-target     prot opt source               destination         
-
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination         
-                                                                                           **┌──(root💀kali) -[/home/kali/Desktop/Tools]
-└─# iptables -A OUTPUT -p tcp --tcp-flags RST RST -d 10.10.10.129 -j DROP             #注意是 2 个RST
-                                                                                           
-┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# iptables -** **L**                                                       
-Chain INPUT (policy ACCEPT)
-target     prot opt source               destination         
-
-Chain FORWARD (policy ACCEPT)
-target     prot opt source               destination         
-
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination         
-**DROP       tcp** **--  anywhere 10.10.10.129         tcp flags:RST/RST　　　　　　#已被添加**</code></pre>
+<p><strong>防火墙设置：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># iptables -L　　　　　　　　　　　　　　　　　　　　　　　　　　#查看防火墙已有规则</span></span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line">    </span><br><span class="line">Chain FORWARD (policy ACCEPT)</span><br><span class="line">target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line">    </span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line">                                                                        ┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># iptables -A OUTPUT -p tcp --tcp-flags RST RST -d 10.10.10.129 -j DROP             #注意是 2 个RST</span></span><br><span class="line"> </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># iptables -L                                                       </span></span><br><span class="line">    Chain INPUT (policy ACCEPT)</span><br><span class="line">    target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line">    </span><br><span class="line">    Chain FORWARD (policy ACCEPT)</span><br><span class="line">    target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line">    </span><br><span class="line">    Chain OUTPUT (policy ACCEPT)</span><br><span class="line">    target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line">    DROP       tcp--  anywhere 10.10.10.129         tcp flags:RST/RST　　　　　　<span class="comment">#已被添加</span></span><br></pre></td></tr></table></figure>
 <p><strong>防火墙设置之后的测试：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# python3 ./** **tcp_scan2.py** 
--- SENT --
-###[ IP ]### 
-  version   = 4
-  ihl       = None
-  tos       = 0x0
-  len       = None
-  id        = 1
-  flags     = 
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = None
-  src       = 10.10.10.135
-  dst       = 10.10.10.129
-  \options   \
-###[ TCP ]### 
-     sport     = ftp_data
-     dport     = http
-     seq       = 0
-     ack       = 0
-     dataofs   = None
-     reserved  = 0 **flags =** **S**
-     window    = 8192
-     chksum    = None
-     urgptr    = 0
-     options   = []
-
-
-
--- RECEIVED --
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 44
-  id        = 0
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x11b1
-  src       = 10.10.10.129
-  dst       = 10.10.10.135
-  \options   \
-###[ TCP ]### 
-     sport     = http
-     dport     = ftp_data
-     seq       = 2643752577
-     ack       = 1
-     dataofs   = 6
-     reserved  = 0 **flags =** **SA**
-     window    = 5840
-     chksum    = 0x43b0
-     urgptr    = 0
-     options   = [(&#39;MSS&#39;, 1460)]
-###[ Padding ]### 
-        load      = &#39;\x00\x00&#39;
-
-
-
--- SENT --
-###[ IP ]### 
-  version   = 4
-  ihl       = None
-  tos       = 0x0
-  len       = None
-  id        = 1
-  flags     = 
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = None
-  src       = 10.10.10.135
-  dst       = 10.10.10.129
-  \options   \
-###[ TCP ]### 
-     sport     = ftp_data
-     dport     = http
-     seq       = 0
-     ack       = 2643752578
-     dataofs   = None
-     reserved  = 0 **flags =** **A**
-     window    = 8192
-     chksum    = None
-     urgptr    = 0
-     options   = []
-
-
-
--- RECEIVED --
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 40
-  id        = 0
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x11b5
-  src       = 10.10.10.129
-  dst       = 10.10.10.135
-  \options   \
-###[ TCP ]### 
-     sport     = http
-     dport     = ftp_data
-     seq       = 2643752578
-     ack       = 1
-     dataofs   = 5
-     reserved  = 0 **flags =** **A　　　　　　　　　　　　#成功！**
-     window    = 5840
-     chksum    = 0x5b6d
-     urgptr    = 0
-     options   = []
-###[ Padding ]### 
-        load      = &#39;\x00\x00\x00\x00\x00\x00&#39;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># python3 ./tcp_scan2.py </span></span><br><span class="line">-- SENT --</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version   = 4</span><br><span class="line">  ihl       = None</span><br><span class="line">  tos       = 0x0</span><br><span class="line">  len       = None</span><br><span class="line">  <span class="built_in">id</span>        = 1</span><br><span class="line">  flags     = </span><br><span class="line">  frag      = 0</span><br><span class="line">  ttl       = 64</span><br><span class="line">  proto     = tcp</span><br><span class="line">  chksum    = None</span><br><span class="line">  src       = 10.10.10.135</span><br><span class="line">  dst       = 10.10.10.129</span><br><span class="line">  \options   \</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport     = ftp_data</span><br><span class="line">     dport     = http</span><br><span class="line">     <span class="built_in">seq</span>       = 0</span><br><span class="line">     ack       = 0</span><br><span class="line">     dataofs   = None</span><br><span class="line">     reserved  = 0 flags =S</span><br><span class="line">     window    = 8192</span><br><span class="line">     chksum    = None</span><br><span class="line">     urgptr    = 0</span><br><span class="line">     options   = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- RECEIVED --</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version   = 4</span><br><span class="line">  ihl       = 5</span><br><span class="line">  tos       = 0x0</span><br><span class="line">  len       = 44</span><br><span class="line">  <span class="built_in">id</span>        = 0</span><br><span class="line">  flags     = DF</span><br><span class="line">  frag      = 0</span><br><span class="line">  ttl       = 64</span><br><span class="line">  proto     = tcp</span><br><span class="line">  chksum    = 0x11b1</span><br><span class="line">  src       = 10.10.10.129</span><br><span class="line">  dst       = 10.10.10.135</span><br><span class="line">  \options   \</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport     = http</span><br><span class="line">     dport     = ftp_data</span><br><span class="line">     <span class="built_in">seq</span>       = 2643752577</span><br><span class="line">     ack       = 1</span><br><span class="line">     dataofs   = 6</span><br><span class="line">     reserved  = 0 flags =SA</span><br><span class="line">     window    = 5840</span><br><span class="line">     chksum    = 0x43b0</span><br><span class="line">     urgptr    = 0</span><br><span class="line">     options   = [(<span class="string">&#x27;MSS&#x27;</span>, 1460)]</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">        load      = <span class="string">&#x27;\x00\x00&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- SENT --</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version   = 4</span><br><span class="line">  ihl       = None</span><br><span class="line">  tos       = 0x0</span><br><span class="line">  len       = None</span><br><span class="line">  <span class="built_in">id</span>        = 1</span><br><span class="line">  flags     = </span><br><span class="line">  frag      = 0</span><br><span class="line">  ttl       = 64</span><br><span class="line">  proto     = tcp</span><br><span class="line">  chksum    = None</span><br><span class="line">  src       = 10.10.10.135</span><br><span class="line">  dst       = 10.10.10.129</span><br><span class="line">  \options   \</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport     = ftp_data</span><br><span class="line">     dport     = http</span><br><span class="line">     <span class="built_in">seq</span>       = 0</span><br><span class="line">     ack       = 2643752578</span><br><span class="line">     dataofs   = None</span><br><span class="line">     reserved  = 0 flags =A</span><br><span class="line">     window    = 8192</span><br><span class="line">     chksum    = None</span><br><span class="line">     urgptr    = 0</span><br><span class="line">     options   = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- RECEIVED --</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version   = 4</span><br><span class="line">  ihl       = 5</span><br><span class="line">  tos       = 0x0</span><br><span class="line">  len       = 40</span><br><span class="line">  <span class="built_in">id</span>        = 0</span><br><span class="line">  flags     = DF</span><br><span class="line">  frag      = 0</span><br><span class="line">  ttl       = 64</span><br><span class="line">  proto     = tcp</span><br><span class="line">  chksum    = 0x11b5</span><br><span class="line">  src       = 10.10.10.129</span><br><span class="line">  dst       = 10.10.10.135</span><br><span class="line">  \options   \</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport     = http</span><br><span class="line">     dport     = ftp_data</span><br><span class="line">     <span class="built_in">seq</span>       = 2643752578</span><br><span class="line">     ack       = 1</span><br><span class="line">     dataofs   = 5</span><br><span class="line">     reserved  = 0 flags =A　　　　　　　　　　　　<span class="comment">#成功！</span></span><br><span class="line">     window    = 5840</span><br><span class="line">     chksum    = 0x5b6d</span><br><span class="line">     urgptr    = 0</span><br><span class="line">     options   = []</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">        load      = <span class="string">&#x27;\x00\x00\x00\x00\x00\x00&#x27;</span></span><br></pre></td></tr></table></figure>
 <p><strong>wireshark抓包结果：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129125720632-837364037.png" /></p>
 <h4 id="nmap-2">（3）nmap</h4>
-<p>** 示例：**</p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# nmap -sT 10.10.10.129 -p 80**               
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 01:41 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00070s latency).
-
-PORT   STATE SERVICE
-80/tcp open  http
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 0.38 seconds
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─# nmap -sT 10.10.10.129 -p 80,21,22,25**
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 01:41 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00083s latency).
-
-PORT   STATE  SERVICE
-21/tcp open   ftp
-22/tcp open   ssh
-25/tcp closed smtp
-80/tcp open   http
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 0.26 seconds
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─# nmap -sT 10.10.10.129 -p 1-100**      
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 01:41 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.0012s latency).
-Not shown: 97 closed ports
-PORT   STATE SERVICE
-21/tcp open  ftp
-22/tcp open  ssh
-80/tcp open  http
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 0.28 seconds
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─# nmap -sT -iL ./iplist.txt  10.10.10.129 -p 1-100** 
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 01:42 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00089s latency).
-Not shown: 97 closed ports
-PORT   STATE SERVICE
-21/tcp open  ftp
-22/tcp open  ssh
-80/tcp open  http
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap scan report for 10.10.10.2
-Host is up (0.0024s latency).
-Not shown: 99 closed ports
-PORT   STATE SERVICE
-53/tcp open  domain
-MAC Address: 00:50:56:F0:F4:B1 (VMware)
-
-Nmap done: 2 IP addresses (2 hosts up) scanned in 0.30 seconds</code></pre>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># nmap -sT 10.10.10.129 -p 80               </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 01:41 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00070s latency).</span><br><span class="line"></span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">80/tcp open  http</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 0.38 seconds</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># nmap -sT 10.10.10.129 -p 80,21,22,25</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 01:41 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00083s latency).</span><br><span class="line"></span><br><span class="line">PORT   STATE  SERVICE</span><br><span class="line">21/tcp open   ftp</span><br><span class="line">22/tcp open   ssh</span><br><span class="line">25/tcp closed smtp</span><br><span class="line">80/tcp open   http</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 0.26 seconds</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># nmap -sT 10.10.10.129 -p 1-100      </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 01:41 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.0012s latency).</span><br><span class="line">Not shown: 97 closed ports</span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">21/tcp open  ftp</span><br><span class="line">22/tcp open  ssh</span><br><span class="line">80/tcp open  http</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 0.28 seconds</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># nmap -sT -iL ./iplist.txt  10.10.10.129 -p 1-100 </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 01:42 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00089s latency).</span><br><span class="line">Not shown: 97 closed ports</span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">21/tcp open  ftp</span><br><span class="line">22/tcp open  ssh</span><br><span class="line">80/tcp open  http</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.2</span><br><span class="line">Host is up (0.0024s latency).</span><br><span class="line">Not shown: 99 closed ports</span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">53/tcp open  domain</span><br><span class="line">MAC Address: 00:50:56:F0:F4:B1 (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 2 IP addresses (2 hosts up) scanned <span class="keyword">in</span> 0.30 seconds</span><br></pre></td></tr></table></figure>
 <p><strong>wireshark抓包结果：</strong></p>
 <p>以 "nmap -sT 10.10.10.129 -p 80,21,22,25"为例：</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129145045277-1988807704.png" /></p>
@@ -1198,418 +430,34 @@ Nmap done: 2 IP addresses (2 hosts up) scanned in 0.30 seconds</code></pre>
 <li>默认150个常用端口</li>
 </ul>
 <p><strong>帮助信息（help）：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# dmitry -** **h**
-Deepmagic Information Gathering Tool
-&quot;There be some deep magic going on&quot;
-
-dmitry: invalid option -- &#39;h&#39;
-Usage: dmitry [-winsepfb] [-t 0-9] [-o %host.txt] host
-  -o     Save output to %host.txt or to file specified by -o file
-  -i     Perform a whois lookup on the IP address of a host
-  -w     Perform a whois lookup on the domain name of a host
-  -n     Retrieve Netcraft.com information on a host
-  -s     Perform a search for possible subdomains
-  -e     Perform a search for possible email addresses
-  -p     Perform a TCP port scan on a host
-* -f     Perform a TCP port scan on a host showing output reporting filtered ports
-* -b     Read in the banner received from the scanned port
-* -t 0-9 Set the TTL in seconds when scanning a TCP port ( Default 2 )
-*Requires the -p flagged to be passed</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># dmitry -h</span></span><br><span class="line">Deepmagic Information Gathering Tool</span><br><span class="line"><span class="string">&quot;There be some deep magic going on&quot;</span></span><br><span class="line"></span><br><span class="line">dmitry: invalid option -- <span class="string">&#x27;h&#x27;</span></span><br><span class="line">Usage: dmitry [-winsepfb] [-t 0-9] [-o %host.txt] host</span><br><span class="line">  -o     Save output to %host.txt or to file specified by -o file</span><br><span class="line">  -i     Perform a whois lookup on the IP address of a host</span><br><span class="line">  -w     Perform a whois lookup on the domain name of a host</span><br><span class="line">  -n     Retrieve Netcraft.com information on a host</span><br><span class="line">  -s     Perform a search <span class="keyword">for</span> possible subdomains</span><br><span class="line">  -e     Perform a search <span class="keyword">for</span> possible email addresses</span><br><span class="line">  -p     Perform a TCP port scan on a host</span><br><span class="line">* -f     Perform a TCP port scan on a host showing output reporting filtered ports</span><br><span class="line">* -b     Read <span class="keyword">in</span> the banner received from the scanned port</span><br><span class="line">* -t 0-9 Set the TTL <span class="keyword">in</span> seconds when scanning a TCP port ( Default 2 )</span><br><span class="line">*Requires the -p flagged to be passed</span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# dmitry -p 10.10.10.129                                                             1 ⨯
-Deepmagic Information Gathering Tool
-&quot;There be some deep magic going on&quot;
-
-ERROR: Unable to locate Host Name for 10.10.10.129
-Continuing with limited modules
-HostIP:10.10.10.129
-HostName:
-
-Gathered TCP Port information for 10.10.10.129
----------------------------------
-
- Port           State
-
-21/tcp          open
-22/tcp          open
-80/tcp          open
-139/tcp         open
-143/tcp         open
-
-Portscan Finished: Scanned 150 ports, 144 ports were in state closed
-
-
-All scans completed, exiting
-                                                                                           
-┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# dmitry -p 10.10.10.129 -o test
-Deepmagic Information Gathering Tool
-&quot;There be some deep magic going on&quot;
-
-Writing output to &#39;test.txt&#39;
-
-ERROR: Unable to locate Host Name for 10.10.10.129
-Continuing with limited modules
-HostIP:10.10.10.129
-HostName:
-
-Gathered TCP Port information for 10.10.10.129
----------------------------------
-
- Port           State
-
-21/tcp          open
-22/tcp          open
-80/tcp          open
-139/tcp         open
-143/tcp         open
-
-Portscan Finished: Scanned 150 ports, 144 ports were in state closed
-
-zsh: segmentation fault  dmitry -p 10.10.10.129 -o test
-                                                                                           
-┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# more test.txt                                                                    139 ⨯
-ERROR: Unable to locate Host Name for 10.10.10.129
-Continuing with limited modules
-HostIP:10.10.10.129
-HostName:
-
-Gathered TCP Port information for 10.10.10.129
----------------------------------
-
- Port           State
-21/tcp          open
-22/tcp          open
-80/tcp          open
-139/tcp         open
-143/tcp         open
-
-Portscan Finished: Scanned 150 ports, 144 ports were in state closed</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># dmitry -p 10.10.10.129                                                             1 ⨯</span></span><br><span class="line">Deepmagic Information Gathering Tool</span><br><span class="line"><span class="string">&quot;There be some deep magic going on&quot;</span></span><br><span class="line"></span><br><span class="line">ERROR: Unable to locate Host Name <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Continuing with limited modules</span><br><span class="line">HostIP:10.10.10.129</span><br><span class="line">HostName:</span><br><span class="line"></span><br><span class="line">Gathered TCP Port information <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">---------------------------------</span><br><span class="line"></span><br><span class="line"> Port           State</span><br><span class="line"></span><br><span class="line">21/tcp          open</span><br><span class="line">22/tcp          open</span><br><span class="line">80/tcp          open</span><br><span class="line">139/tcp         open</span><br><span class="line">143/tcp         open</span><br><span class="line"></span><br><span class="line">Portscan Finished: Scanned 150 ports, 144 ports were <span class="keyword">in</span> state closed</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">All scans completed, exiting</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># dmitry -p 10.10.10.129 -o test</span></span><br><span class="line">Deepmagic Information Gathering Tool</span><br><span class="line"><span class="string">&quot;There be some deep magic going on&quot;</span></span><br><span class="line"></span><br><span class="line">Writing output to <span class="string">&#x27;test.txt&#x27;</span></span><br><span class="line"></span><br><span class="line">ERROR: Unable to locate Host Name <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Continuing with limited modules</span><br><span class="line">HostIP:10.10.10.129</span><br><span class="line">HostName:</span><br><span class="line"></span><br><span class="line">Gathered TCP Port information <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">---------------------------------</span><br><span class="line"></span><br><span class="line"> Port           State</span><br><span class="line"></span><br><span class="line">21/tcp          open</span><br><span class="line">22/tcp          open</span><br><span class="line">80/tcp          open</span><br><span class="line">139/tcp         open</span><br><span class="line">143/tcp         open</span><br><span class="line"></span><br><span class="line">Portscan Finished: Scanned 150 ports, 144 ports were <span class="keyword">in</span> state closed</span><br><span class="line"></span><br><span class="line">zsh: segmentation fault  dmitry -p 10.10.10.129 -o <span class="built_in">test</span></span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># more test.txt                                                                    139 ⨯</span></span><br><span class="line">ERROR: Unable to locate Host Name <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Continuing with limited modules</span><br><span class="line">HostIP:10.10.10.129</span><br><span class="line">HostName:</span><br><span class="line"></span><br><span class="line">Gathered TCP Port information <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">---------------------------------</span><br><span class="line"></span><br><span class="line"> Port           State</span><br><span class="line">21/tcp          open</span><br><span class="line">22/tcp          open</span><br><span class="line">80/tcp          open</span><br><span class="line">139/tcp         open</span><br><span class="line">143/tcp         open</span><br><span class="line"></span><br><span class="line">Portscan Finished: Scanned 150 ports, 144 ports were <span class="keyword">in</span> state closed</span><br></pre></td></tr></table></figure>
 <p><strong>wireshark抓包结果：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129150152630-1232245741.png" /></p>
 <h4 id="nc">（5）nc</h4>
-<p>** 示例 （nc的详细使用单独介绍，此处仅简单演示下）：**</p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# nc -nv -w 1 -z 10.10.10.129 1-100**
-(UNKNOWN) [10.10.10.129] 80 (http) open
-(UNKNOWN) [10.10.10.129] 22 (ssh) open
-(UNKNOWN) [10.10.10.129] 21 (ftp) open
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─# for x in $(seq 10 30);do nc -nv -w 1 -z 10.10.10.129 $x;done | grep** **open**           
-(UNKNOWN) [10.10.10.129] 10 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 11 (systat) : Connection refused
-(UNKNOWN) [10.10.10.129] 12 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 13 (daytime) : Connection refused
-(UNKNOWN) [10.10.10.129] 14 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 15 (netstat) : Connection refused
-(UNKNOWN) [10.10.10.129] 16 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 17 (qotd) : Connection refused
-(UNKNOWN) [10.10.10.129] 18 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 19 (chargen) : Connection refused
-(UNKNOWN) [10.10.10.129] 20 (ftp-data) : Connection refused
-**(UNKNOWN) [** **10.10.10.129] 21 (ftp) open
-(UNKNOWN) [10.10.10.129] 22 (ssh** **) open**
-(UNKNOWN) [10.10.10.129] 23 (telnet) : Connection refused
-(UNKNOWN) [10.10.10.129] 24 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 25 (smtp) : Connection refused
-(UNKNOWN) [10.10.10.129] 26 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 27 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 28 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 29 (?) : Connection refused
-(UNKNOWN) [10.10.10.129] 30 (?) : Connection refused
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─# for x in $(seq 1 140);do nc -nv -w 1 -z 10.10.10.$x 80;done **                       
-(UNKNOWN) [10.10.10.1] 80 (http) : Connection timed out
-(UNKNOWN) [10.10.10.2] 80 (http) : Connection refused
- ………………………………
-(UNKNOWN) [10.10.10.128] 80 (http) : Connection timed out
-**(UNKNOWN) [** **10.10.10.129] 80** **(http) open**
-(UNKNOWN) [10.10.10.130] 80 (http) : Connection timed out
- ……………………………………
-(UNKNOWN) [10.10.10.140] 80 (http) : Connection timed out</code></pre>
+<p><strong>示例
+（nc的详细使用单独介绍，此处仅简单演示下）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># nc -nv -w 1 -z 10.10.10.129 1-100</span></span><br><span class="line">(UNKNOWN) [10.10.10.129] 80 (http) open</span><br><span class="line">(UNKNOWN) [10.10.10.129] 22 (ssh) open</span><br><span class="line">(UNKNOWN) [10.10.10.129] 21 (ftp) open</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># for x in $(seq 10 30);do nc -nv -w 1 -z 10.10.10.129 $x;done | grepopen           </span></span><br><span class="line">(UNKNOWN) [10.10.10.129] 10 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 11 (systat) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 12 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 13 (daytime) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 14 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 15 (netstat) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 16 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 17 (qotd) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 18 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 19 (chargen) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 20 (ftp-data) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 21 (ftp) open</span><br><span class="line">(UNKNOWN) [10.10.10.129] 22 (ssh) open</span><br><span class="line">(UNKNOWN) [10.10.10.129] 23 (telnet) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 24 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 25 (smtp) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 26 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 27 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 28 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 29 (?) : Connection refused</span><br><span class="line">(UNKNOWN) [10.10.10.129] 30 (?) : Connection refused</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># for x in $(seq 1 140);do nc -nv -w 1 -z 10.10.10.$x 80;done                        </span></span><br><span class="line">(UNKNOWN) [10.10.10.1] 80 (http) : Connection timed out</span><br><span class="line">(UNKNOWN) [10.10.10.2] 80 (http) : Connection refused</span><br><span class="line"> ………………………………</span><br><span class="line">(UNKNOWN) [10.10.10.128] 80 (http) : Connection timed out</span><br><span class="line">(UNKNOWN) [10.10.10.129] 80(http) open</span><br><span class="line">(UNKNOWN) [10.10.10.130] 80 (http) : Connection timed out</span><br><span class="line"> ……………………………………</span><br><span class="line">(UNKNOWN) [10.10.10.140] 80 (http) : Connection timed out</span><br></pre></td></tr></table></figure>
 <h3 id="僵尸扫描">3、僵尸扫描</h3>
 <p><strong>原理参见前面描述</strong></p>
 <p><strong>实验环境</strong></p>
 <p>kali（攻击者，10.10.10.135），win2008（僵尸机，10.10.10.140），OWASP_0.94（目标机，10.10.10.129）</p>
 <h4 id="scapy-3">（1）Scapy</h4>
-<p>** 示例（结合上面的原理图理解）：**</p>
-<pre><code>**┌──(root💀kali)-[/home/** **kali]
-└─# scapy**
-INFO: Can&#39;t import PyX. Won&#39;t be able to use psdump() or pdfdump().
-                                      
-                     aSPY//YASa       
-             apyyyyCY//////////YCa       |
-            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy
- ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4
- AYAsAYYYYYYYY///Ps              cY//S   |
-         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy
-         SPPPP///a          pP///AC//Y   |
-              A//A            cyP////C   | Have fun!
-              p///Ac            sC///a   |
-              P////YCpc           A//A   | Craft packets before they craft
-       scccccp///pSP///p          p//Y   | you.
-      sY/////////y  caa           S//P   |                      -- Socrate
-       cayCyayP//Ya              pY/Ya   |
-        sY/PsY////YCc          aC//Yp 
-         sc  sccaCY//PCypaapyCP//YSs  
-                  spCPY//////YPSps    
-                       ccaacs         
-                                       using IPython 7.22.0
-**&gt; &gt;&gt; i=IP()
-&gt;&gt;&gt; t=TCP()
-&gt;&gt;&gt; rz=(i/t)　　　　　　　　　　　　#发往僵尸机的数据包
-&gt;&gt;&gt; rt=(i/t)　　　　　　　　　　　　#发往目标机的数据包
-&gt;&gt;&gt; rz[IP].dst=&quot;10.10.10.140&quot;
-&gt;&gt;&gt; rz[TCP].dport=445
-&gt;&gt;&gt; rz[TCP].flags=&quot;SA&quot;**
-**&gt; &gt;&gt; rt[IP].src=&quot;10.10.10.140&quot;　　#注意此处在伪造地址
-&gt;&gt;&gt; rt[IP].dst=&quot;10.10.10.129&quot;
-&gt;&gt;&gt; rt[TCP].dport=22　　　　　　　 #探测目标机的22端口
-&gt;&gt;&gt; rt[TCP].flags=&quot;S&quot;**
-**&gt; &gt;&gt;** **rz.display()　　　　　　　　　　#发往僵尸机数据包的最终设置**
-###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= tcp
-  chksum= None
-  src= 10.10.10.135
-  dst= 10.10.10.140
-  \options\
-###[ TCP ]### 
-     sport= ftp_data
-     dport= microsoft_ds
-     seq= 0
-     ack= 0
-     dataofs= None
-     reserved= 0 **flags =** **SA**
-     window= 8192
-     chksum= None
-     urgptr= 0
-     options= []
-
-**&gt; &gt;&gt;** **rt.display()　　　　　　　　　　#发往目标机数据包的最终设置**
-###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= tcp
-  chksum= None
-  src= 10.10.10.140
-  dst= 10.10.10.129
-  \options\
-###[ TCP ]### 
-     sport= ftp_data
-     dport= ssh
-     seq= 0
-     ack= 0
-     dataofs= None
-     reserved= 0
-     flags= S
-     window= 8192
-     chksum= None
-     urgptr= 0
-     options= []
-
-**&gt; &gt;&gt; az1=** **sr1(rz)**
-Begin emission:
-Finished sending 1 packets.
-.*
-Received 2 packets, got 1 answers, remaining 0 packets
-**&gt; &gt;&gt; at=** **sr1(rt)**
-Begin emission:
-Finished sending 1 packets.
-...*
-Received 4 packets, got 1 answers, remaining 0 packets
-**&gt; &gt;&gt; az2=** **sr1(rz)**
-Begin emission:
-Finished sending 1 packets.
-*
-Received 1 packets, got 1 answers, remaining 0 packets
-**&gt; &gt;&gt;** **az1.display()　　　　　　　　　　#第一次收到僵尸机的回包**
-###[ IP ]### 
-  version= 4
-  ihl= 5
-  tos= 0x0
-  len= 40
-  **id = 152　　　　　　　　　　　　　　　#注意此时 ipid=152**
-  flags= DF
-  frag= 0
-  ttl= 128
-  proto= tcp
-  chksum= 0xd111
-  src= 10.10.10.140
-  dst= 10.10.10.135
-  \options\
-###[ TCP ]### 
-     sport= microsoft_ds
-     dport= ftp_data
-     seq= 0
-     ack= 0
-     dataofs= 5
-     reserved= 0
-     flags= R
-     window= 0
-     chksum= 0x84e9
-     urgptr= 0
-     options= []
-###[ Padding ]### 
-        load= &#39;\x00\x00\x00\x00\x00\x00&#39;
-
-**&gt; &gt;&gt;** **az2.display()　　　　　　　　#第二次收到僵尸机的回包**
-###[ IP ]### 
-  version= 4
-  ihl= 5
-  tos= 0x0
-  len= 40
-  **id = 154　　　　　　　　　　　　　　#注意此时 ipid=154=az1[IP].id + 2 ，所以得出目标机 22 端口是开着的！**
-  flags= DF
-  frag= 0
-  ttl= 128
-  proto= tcp
-  chksum= 0xd10f
-  src= 10.10.10.140
-  dst= 10.10.10.135
-  \options\
-###[ TCP ]### 
-     sport= microsoft_ds
-     dport= ftp_data
-     seq= 0
-     ack= 0
-     dataofs= 5
-     reserved= 0
-     flags= R
-     window= 0
-     chksum= 0x84e9
-     urgptr= 0
-     options= []
-###[ Padding ]### 
-        load= &#39;\x00\x00\x00\x00\x00\x00&#39;
-
-&gt;&gt;&gt; </code></pre>
-<p>** wireshark抓包结果：**</p>
+<p><strong>示例（结合上面的原理图理解）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># scapy</span></span><br><span class="line">INFO: Can<span class="string">&#x27;t import PyX. Won&#x27;</span>t be able to use psdump() or pdfdump().</span><br><span class="line">                                      </span><br><span class="line">                     aSPY//YASa       </span><br><span class="line">             apyyyyCY//////////YCa       |</span><br><span class="line">            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy</span><br><span class="line"> ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4</span><br><span class="line"> AYAsAYYYYYYYY///Ps              cY//S   |</span><br><span class="line">         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy</span><br><span class="line">         SPPPP///a          pP///AC//Y   |</span><br><span class="line">              A//A            cyP////C   | Have fun!</span><br><span class="line">              p///Ac            sC///a   |</span><br><span class="line">              P////YCpc           A//A   | Craft packets before they craft</span><br><span class="line">       scccccp///pSP///p          p//Y   | you.</span><br><span class="line">      sY/////////y  caa           S//P   |                      -- Socrate</span><br><span class="line">       cayCyayP//Ya              pY/Ya   |</span><br><span class="line">        sY/PsY////YCc          aC//Yp </span><br><span class="line">         sc  sccaCY//PCypaapyCP//YSs  </span><br><span class="line">                  spCPY//////YPSps    </span><br><span class="line">                       ccaacs         </span><br><span class="line">                                       using IPython 7.22.0</span><br><span class="line">&gt; &gt;&gt; i=IP()</span><br><span class="line">&gt;&gt;&gt; t=TCP()</span><br><span class="line">&gt;&gt;&gt; rz=(i/t)　　　　　　　　　　　　<span class="comment">#发往僵尸机的数据包</span></span><br><span class="line">&gt;&gt;&gt; rt=(i/t)　　　　　　　　　　　　<span class="comment">#发往目标机的数据包</span></span><br><span class="line">&gt;&gt;&gt; rz[IP].dst=<span class="string">&quot;10.10.10.140&quot;</span></span><br><span class="line">&gt;&gt;&gt; rz[TCP].dport=445</span><br><span class="line">&gt;&gt;&gt; rz[TCP].flags=<span class="string">&quot;SA&quot;</span></span><br><span class="line">&gt; &gt;&gt; rt[IP].src=<span class="string">&quot;10.10.10.140&quot;</span>　　<span class="comment">#注意此处在伪造地址</span></span><br><span class="line">&gt;&gt;&gt; rt[IP].dst=<span class="string">&quot;10.10.10.129&quot;</span></span><br><span class="line">&gt;&gt;&gt; rt[TCP].dport=22　　　　　　　 <span class="comment">#探测目标机的22端口</span></span><br><span class="line">&gt;&gt;&gt; rt[TCP].flags=<span class="string">&quot;S&quot;</span></span><br><span class="line">&gt; &gt;&gt;rz.display()　　　　　　　　　　<span class="comment">#发往僵尸机数据包的最终设置</span></span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= None</span><br><span class="line">  src= 10.10.10.135</span><br><span class="line">  dst= 10.10.10.140</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= ftp_data</span><br><span class="line">     dport= microsoft_ds</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 0</span><br><span class="line">     dataofs= None</span><br><span class="line">     reserved= 0 flags =SA</span><br><span class="line">     window= 8192</span><br><span class="line">     chksum= None</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt;rt.display()　　　　　　　　　　<span class="comment">#发往目标机数据包的最终设置</span></span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= None</span><br><span class="line">  src= 10.10.10.140</span><br><span class="line">  dst= 10.10.10.129</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= ftp_data</span><br><span class="line">     dport= ssh</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 0</span><br><span class="line">     dataofs= None</span><br><span class="line">     reserved= 0</span><br><span class="line">     flags= S</span><br><span class="line">     window= 8192</span><br><span class="line">     chksum= None</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; az1=sr1(rz)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">.*</span><br><span class="line">Received 2 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt; &gt;&gt; at=sr1(rt)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">...*</span><br><span class="line">Received 4 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt; &gt;&gt; az2=sr1(rz)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">*</span><br><span class="line">Received 1 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt; &gt;&gt;az1.display()　　　　　　　　　　<span class="comment">#第一次收到僵尸机的回包</span></span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= 5</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= 40</span><br><span class="line">  <span class="built_in">id</span> = 152　　　　　　　　　　　　　　　<span class="comment">#注意此时 ipid=152</span></span><br><span class="line">  flags= DF</span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 128</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= 0xd111</span><br><span class="line">  src= 10.10.10.140</span><br><span class="line">  dst= 10.10.10.135</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= microsoft_ds</span><br><span class="line">     dport= ftp_data</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 0</span><br><span class="line">     dataofs= 5</span><br><span class="line">     reserved= 0</span><br><span class="line">     flags= R</span><br><span class="line">     window= 0</span><br><span class="line">     chksum= 0x84e9</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">        load= <span class="string">&#x27;\x00\x00\x00\x00\x00\x00&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt;az2.display()　　　　　　　　<span class="comment">#第二次收到僵尸机的回包</span></span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= 5</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= 40</span><br><span class="line">  <span class="built_in">id</span> = 154　　　　　　　　　　　　　　<span class="comment">#注意此时 ipid=154=az1[IP].id + 2 ，所以得出目标机 22 端口是开着的！</span></span><br><span class="line">  flags= DF</span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 128</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= 0xd10f</span><br><span class="line">  src= 10.10.10.140</span><br><span class="line">  dst= 10.10.10.135</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= microsoft_ds</span><br><span class="line">     dport= ftp_data</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 0</span><br><span class="line">     dataofs= 5</span><br><span class="line">     reserved= 0</span><br><span class="line">     flags= R</span><br><span class="line">     window= 0</span><br><span class="line">     chksum= 0x84e9</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">        load= <span class="string">&#x27;\x00\x00\x00\x00\x00\x00&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; </span><br></pre></td></tr></table></figure>
+<p><strong>wireshark抓包结果：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129155929657-1953922730.png" /></p>
 <h4 id="python脚本实现扫描">（2）python脚本实现扫描：</h4>
 <p><strong>zombie.py</strong></p>
-<pre><code>#!/usr/bin/python
-import logging
-logging.getLogger(&quot;scapy.runtime&quot;).setLevel(logging.ERROR)
-from scapy.all import *
-
-def ipid(zombie):#判断能否作为僵尸机使用,zombie 僵尸机IP
-    reply1 = sr1(IP(dst=zombie)/TCP(flags=&quot;SA&quot;),timeout=2,verbose=0)#仅接收一个应答数据包
-    send(IP(dst=zombie)/TCP(flags=&quot;SA&quot;),verbose=0)#只发包，而不收包
-    reply2 = sr1(IP(dst=zombie)/TCP(flags=&quot;SA&quot;),timeout=2,verbose=0)
-    #通过接收到的ipid评判是否适合做僵尸机
-    if reply2[IP].id == (reply1[IP].id+2):
-        print(&quot;IPID sequence is incremental and target appears to be idle. ZOMBIE LOCATED&quot;)#ipid是递增的，并且目标机似乎是空闲的
-        response = input(&quot;Do you want to use this zombie to perform a scan? (Y or N):&quot;)
-        if response == &quot;Y&quot;:
-            target = input(&quot;Enter the IP address of the target system   : &quot;)
-            zombiescan(target,zombie)
-    else:
-        print(&quot;Either the IPID sequence is not increnental or the target is not idle. NOT A G00D Z0MBIE&quot;)
-    
-def zombiescan(target,zombie):
-    print(&quot;\nScanning target &quot;+ target+&quot; with zombie &quot;+ zombie)
-    print(&quot;\n--------0pen Ports on Target--------\n&quot;)
-    for port in range(1,200):　　　　　　　　#根据自己的需求设置
-        try:
-            start_val = sr1(IP(dst=zombie)/TCP(flags=&quot;SA&quot;,dport=port),timeout=2,verbose=0)
-            send(IP(src=zombie,dst=target)/TCP(flags=&quot;S&quot;,dport=port),verbose=0)
-            end_val = sr1(IP(dst=zombie)/TCP(flags=&quot;SA&quot;),timeout=2,verbose=0)
-            if end_val[IP].id == (start_val[IP].id + 2):
-                print(port)
-        except:
-            pass
-    
-print(&quot;----------Zombie Scan Suite----------\n&quot;)
-print(&quot;1 - Identify Zombie Host\n&quot;)
-print(&quot;2 - Perform Zombie Scan\n&quot;)
-ans = input(&quot;Select an option (1 or 2):&quot;)
-if ans == &quot;1&quot;:
-    zombie=input(&quot;Enter IP address to test IPID sequence: &quot;)
-    ipid(zombie)
-else:
-    if ans == &quot;2&quot;:
-        zombie = input(&quot;Enter IP address for zombie system: &quot;)
-        target = input(&quot;Enter IP address for scan target: &quot;)
-        zombiescan(target,zombie)</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">&quot;scapy.runtime&quot;</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ipid</span>(<span class="params">zombie</span>):<span class="comment">#判断能否作为僵尸机使用,zombie 僵尸机IP</span></span><br><span class="line">    reply1 = sr1(IP(dst=zombie)/TCP(flags=<span class="string">&quot;SA&quot;</span>),timeout=<span class="number">2</span>,verbose=<span class="number">0</span>)<span class="comment">#仅接收一个应答数据包</span></span><br><span class="line">    send(IP(dst=zombie)/TCP(flags=<span class="string">&quot;SA&quot;</span>),verbose=<span class="number">0</span>)<span class="comment">#只发包，而不收包</span></span><br><span class="line">    reply2 = sr1(IP(dst=zombie)/TCP(flags=<span class="string">&quot;SA&quot;</span>),timeout=<span class="number">2</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    <span class="comment">#通过接收到的ipid评判是否适合做僵尸机</span></span><br><span class="line">    <span class="keyword">if</span> reply2[IP].<span class="built_in">id</span> == (reply1[IP].<span class="built_in">id</span>+<span class="number">2</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;IPID sequence is incremental and target appears to be idle. ZOMBIE LOCATED&quot;</span>)<span class="comment">#ipid是递增的，并且目标机似乎是空闲的</span></span><br><span class="line">        response = <span class="built_in">input</span>(<span class="string">&quot;Do you want to use this zombie to perform a scan? (Y or N):&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> response == <span class="string">&quot;Y&quot;</span>:</span><br><span class="line">            target = <span class="built_in">input</span>(<span class="string">&quot;Enter the IP address of the target system   : &quot;</span>)</span><br><span class="line">            zombiescan(target,zombie)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Either the IPID sequence is not increnental or the target is not idle. NOT A G00D Z0MBIE&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">zombiescan</span>(<span class="params">target,zombie</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\nScanning target &quot;</span>+ target+<span class="string">&quot; with zombie &quot;</span>+ zombie)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n--------0pen Ports on Target--------\n&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> port <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">200</span>):　　　　　　　　<span class="comment">#根据自己的需求设置</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            start_val = sr1(IP(dst=zombie)/TCP(flags=<span class="string">&quot;SA&quot;</span>,dport=port),timeout=<span class="number">2</span>,verbose=<span class="number">0</span>)</span><br><span class="line">            send(IP(src=zombie,dst=target)/TCP(flags=<span class="string">&quot;S&quot;</span>,dport=port),verbose=<span class="number">0</span>)</span><br><span class="line">            end_val = sr1(IP(dst=zombie)/TCP(flags=<span class="string">&quot;SA&quot;</span>),timeout=<span class="number">2</span>,verbose=<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> end_val[IP].<span class="built_in">id</span> == (start_val[IP].<span class="built_in">id</span> + <span class="number">2</span>):</span><br><span class="line">                <span class="built_in">print</span>(port)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;----------Zombie Scan Suite----------\n&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;1 - Identify Zombie Host\n&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;2 - Perform Zombie Scan\n&quot;</span>)</span><br><span class="line">ans = <span class="built_in">input</span>(<span class="string">&quot;Select an option (1 or 2):&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> ans == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">    zombie=<span class="built_in">input</span>(<span class="string">&quot;Enter IP address to test IPID sequence: &quot;</span>)</span><br><span class="line">    ipid(zombie)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">if</span> ans == <span class="string">&quot;2&quot;</span>:</span><br><span class="line">        zombie = <span class="built_in">input</span>(<span class="string">&quot;Enter IP address for zombie system: &quot;</span>)</span><br><span class="line">        target = <span class="built_in">input</span>(<span class="string">&quot;Enter IP address for scan target: &quot;</span>)</span><br><span class="line">        zombiescan(target,zombie)</span><br></pre></td></tr></table></figure>
 <p><strong>脚本演示：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# python3 ./zombie.py
-**----------Zombie Scan Suite----------
-
-1 - Identify Zombie Host
-
-2 - Perform Zombie Scan
-
-**Select an option (** **1 or 2):1　　　　　　　　　　#如果已有僵尸机可直接选择 2
-Enter IP address to test IPID sequence: 10.10.10.140　　　　　　#僵尸机地址
-IPID sequence is incremental and target appears to be idle. ZOMBIE LOCATED　　　　　　#可做僵尸机
-Do you want to use this zombie to perform a scan? (Y or N):Y　　　　#是否选用该僵尸机
-Enter the IP address of the target system   : 10.10.10.129　　　　#要扫描的目标机**
-
-Scanning target 10.10.10.129 with zombie 10.10.10.140
-
---------0pen Ports on Target--------
-
-21
-22
-80
-139
-143</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># python3 ./zombie.py</span></span><br><span class="line">----------Zombie Scan Suite----------</span><br><span class="line"></span><br><span class="line">1 - Identify Zombie Host</span><br><span class="line"></span><br><span class="line">2 - Perform Zombie Scan</span><br><span class="line"></span><br><span class="line">Select an option (1 or 2):1　　　　　　　　　　<span class="comment">#如果已有僵尸机可直接选择 2</span></span><br><span class="line">Enter IP address to <span class="built_in">test</span> IPID sequence: 10.10.10.140　　　　　　<span class="comment">#僵尸机地址</span></span><br><span class="line">IPID sequence is incremental and target appears to be idle. ZOMBIE LOCATED　　　　　　<span class="comment">#可做僵尸机</span></span><br><span class="line">Do you want to use this zombie to perform a scan? (Y or N):Y　　　　<span class="comment">#是否选用该僵尸机</span></span><br><span class="line">Enter the IP address of the target system   : 10.10.10.129　　　　<span class="comment">#要扫描的目标机</span></span><br><span class="line"></span><br><span class="line">Scanning target 10.10.10.129 with zombie 10.10.10.140</span><br><span class="line"></span><br><span class="line">--------0pen Ports on Target--------</span><br><span class="line"></span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">80</span><br><span class="line">139</span><br><span class="line">143</span><br></pre></td></tr></table></figure>
 <p><strong>wireshark抓包：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211129161135190-100027512.png" /></p>
 <h4 id="nmap-3">（3）nmap</h4>
-<p>** 示例：**</p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# nmap -p445 10.10.10.140 --script=** **ipidseq.nse　　　　　　　　　　#发现僵尸机**
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 03:16 EST
-Nmap scan report for 10.10.10.140
-Host is up (0.00088s latency).
-
-PORT    STATE SERVICE
-445/tcp open  microsoft-ds
-MAC Address: 00:0C:29:F6:B3:C1 (VMware)
-
-Host script results:
-|_ipidseq: Incremental!
-
-Nmap done: 1 IP address (1 host up) scanned in 1.37 seconds
-                                                                                           
-**┌──(root💀kali)** **-[/home/kali/Desktop/ Tools]
-└─# nmap 10.10.10.129 -sI 10.10.10.140 -Pn -p 0-200** **#利用僵尸机扫描目标**
-Host discovery disabled (-Pn). All addresses will be marked &#39;up&#39; and scan times will be slower.
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 03:16 EST
-Idle scan using zombie 10.10.10.140 (10.10.10.140:80); Class: Incremental
-Nmap scan report for 10.10.10.129
-Host is up (0.048s latency).
-Not shown: 196 closed|filtered ports
-PORT    STATE SERVICE
-21/tcp  open  ftp
-22/tcp  open  ssh
-80/tcp  open  http
-139/tcp open  netbios-ssn
-143/tcp open  imap
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 3.98 seconds</code></pre>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># nmap -p445 10.10.10.140 --script=ipidseq.nse　　　　　　　　　　#发现僵尸机</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 03:16 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.140</span><br><span class="line">Host is up (0.00088s latency).</span><br><span class="line"></span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">445/tcp open  microsoft-ds</span><br><span class="line">MAC Address: 00:0C:29:F6:B3:C1 (VMware)</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">|_ipidseq: Incremental!</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 1.37 seconds</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># nmap 10.10.10.129 -sI 10.10.10.140 -Pn -p 0-200#利用僵尸机扫描目标</span></span><br><span class="line">Host discovery disabled (-Pn). All addresses will be marked <span class="string">&#x27;up&#x27;</span> and scan <span class="built_in">times</span> will be slower.</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-29 03:16 EST</span><br><span class="line">Idle scan using zombie 10.10.10.140 (10.10.10.140:80); Class: Incremental</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.048s latency).</span><br><span class="line">Not shown: 196 closed|filtered ports</span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">21/tcp  open  ftp</span><br><span class="line">22/tcp  open  ssh</span><br><span class="line">80/tcp  open  http</span><br><span class="line">139/tcp open  netbios-ssn</span><br><span class="line">143/tcp open  imap</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 3.98 seconds</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -1687,7 +535,7 @@ Nmap done: 1 IP address (1 host up) scanned in 3.98 seconds</code></pre>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

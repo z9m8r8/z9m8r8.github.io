@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-17T11:32:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:46:46.801Z">
+<meta property="article:modified_time" content="2023-12-12T14:38:35.718Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="字典">
 <meta name="twitter:card" content="summary">
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:46:46" itemprop="dateModified" datetime="2023-12-09T23:46:46+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 22:38:35" itemprop="dateModified" datetime="2023-12-12T22:38:35+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,7 +266,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>353</span>
+      <span>355</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -285,74 +285,9 @@
     
     
     <div class="post-body" itemprop="articleBody"><h2 id="kali下载安装-cupp">1、Kali下载安装 <strong>cupp</strong></h2>
-<pre><code>git clone https://github.com/Mebus/cupp.git</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Mebus/cupp.git</span><br></pre></td></tr></table></figure>
 <h2 id="使用cupp生成专属字典">2、使用cupp生成专属字典</h2>
-<pre><code>**root@kali:~/Desktop/Tools/cupp-master# ./cupp.py -** **h**
-usage: cupp.py [-h] [-i | -w FILENAME | -l | -a | -v] [-q]
-
-Common User Passwords Profiler
-
-optional arguments:
-  -h, --help         show this help message and exit
-  -i, --interactive  Interactive questions for user password profiling
-  -w FILENAME        Use this option to improve existing dictionary, or WyD.pl
-                     output to make some pwnsauce
-  -l                 Download huge wordlists from repository
-  -a                 Parse default usernames and passwords directly from
-                     Alecto DB. Project Alecto uses purified databases of
-                     Phenoelit and CIRT which were merged and enhanced
-  -v, --version      Show the version of this program.
-  -q, --quiet        Quiet mode (don&#39;t print banner)
-**root@kali:~/Desktop/Tools/cupp-master# ./cupp.py -** **i**
- ___________ 
-   cupp.py!                 # Common
-      \                     # User
-       \   ,__,             # Passwords
-        \  (oo)____         # Profiler
-           (__)    )\   
-              ||--|| *      [ Muris Kurgas | j0rgan@remote-exploit.org ]
-                            [ Mebus | https://github.com/Mebus/]
-
-
-[+] Insert the information about the victim to make a dictionary
-[+] If you don&#39;t know all the info, just hit enter when asked! ;)
-
-**&gt; First Name: tom
-&gt; Surname: jack
-&gt; Nickname: BOb        
-&gt; Birthdate (DDMMYYYY): 01012010
-
-
-&gt; Partners) name: AP
-&gt; Partners) nickname: AQ      
-&gt; Partners) birthdate (DDMMYYYY): 02021990
-
-
-&gt; Child&#39;s name: tim
-&gt; Child&#39;s nickname: 
-&gt; Child&#39;s birthdate (DDMMYYYY): 28042021
-
-
-&gt; Pet&#39;s name: hello
-&gt; Company name: ali
-
-
-&gt; Do you want to add some key words about the victim? Y/[N]: Y
-&gt; Please enter the words, separated by comma. [i.e. hacker,juice,black], spaces will be removed: hacker,haha,MAKE
-&gt; Do you want to add special chars at the end of words? Y/[N]: 
-&gt; Do you want to add some random numbers at the end of words? Y/[N]:007
-&gt; Leet mode? (i.e. leet = 1337) Y/** **[N]:** 
-
-[+] Now making a dictionary...
-[+] Sorting list and removing duplicates...
-[+] Saving dictionary to tom.txt, counting 14680 words.
-&gt; Hyperspeed Print? (Y/n) : 
-[+] Now load your pistolero with tom.txt and shoot! Good luck!
-root@kali:~/Desktop/Tools/cupp-master# ls
-CHANGELOG.md  cupp.py  README.md    test_cupp.py
-cupp.cfg      LICENSE  screenshots  tom.txt
-
-root@kali:~/Desktop/Tools/cupp-master# </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/Tools/cupp-master<span class="comment"># ./cupp.py -h</span></span><br><span class="line">usage: cupp.py [-h] [-i | -w FILENAME | -l | -a | -v] [-q]</span><br><span class="line"></span><br><span class="line">Common User Passwords Profiler</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --<span class="built_in">help</span>         show this <span class="built_in">help</span> message and <span class="built_in">exit</span></span><br><span class="line">  -i, --interactive  Interactive questions <span class="keyword">for</span> user password profiling</span><br><span class="line">  -w FILENAME        Use this option to improve existing dictionary, or WyD.pl</span><br><span class="line">                     output to make some pwnsauce</span><br><span class="line">  -l                 Download huge wordlists from repository</span><br><span class="line">  -a                 Parse default usernames and passwords directly from</span><br><span class="line">                     Alecto DB. Project Alecto uses purified databases of</span><br><span class="line">                     Phenoelit and CIRT <span class="built_in">which</span> were merged and enhanced</span><br><span class="line">  -v, --version      Show the version of this program.</span><br><span class="line">  -q, --quiet        Quiet mode (don<span class="string">&#x27;t print banner)</span></span><br><span class="line"><span class="string">root@kali:~/Desktop/Tools/cupp-master# ./cupp.py -i</span></span><br><span class="line"><span class="string"> ___________ </span></span><br><span class="line"><span class="string">   cupp.py!                 # Common</span></span><br><span class="line"><span class="string">      \                     # User</span></span><br><span class="line"><span class="string">       \   ,__,             # Passwords</span></span><br><span class="line"><span class="string">        \  (oo)____         # Profiler</span></span><br><span class="line"><span class="string">           (__)    )\   </span></span><br><span class="line"><span class="string">              ||--|| *      [ Muris Kurgas | j0rgan@remote-exploit.org ]</span></span><br><span class="line"><span class="string">                            [ Mebus | https://github.com/Mebus/]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[+] Insert the information about the victim to make a dictionary</span></span><br><span class="line"><span class="string">[+] If you don&#x27;</span>t know all the info, just hit enter when asked! ;)</span><br><span class="line"></span><br><span class="line">&gt; First Name: tom</span><br><span class="line">&gt; Surname: jack</span><br><span class="line">&gt; Nickname: BOb        </span><br><span class="line">&gt; Birthdate (DDMMYYYY): 01012010</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; Partners) name: AP</span><br><span class="line">&gt; Partners) nickname: AQ      </span><br><span class="line">&gt; Partners) birthdate (DDMMYYYY): 02021990</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; Child<span class="string">&#x27;s name: tim</span></span><br><span class="line"><span class="string">&gt; Child&#x27;</span>s nickname: </span><br><span class="line">&gt; Child<span class="string">&#x27;s birthdate (DDMMYYYY): 28042021</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&gt; Pet&#x27;</span>s name: hello</span><br><span class="line">&gt; Company name: ali</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; Do you want to add some key words about the victim? Y/[N]: Y</span><br><span class="line">&gt; Please enter the words, separated by comma. [i.e. hacker,juice,black], spaces will be removed: hacker,haha,MAKE</span><br><span class="line">&gt; Do you want to add special chars at the end of words? Y/[N]: </span><br><span class="line">&gt; Do you want to add some random numbers at the end of words? Y/[N]:007</span><br><span class="line">&gt; Leet mode? (i.e. leet = 1337) Y/[N]: </span><br><span class="line"></span><br><span class="line">[+] Now making a dictionary...</span><br><span class="line">[+] Sorting list and removing duplicates...</span><br><span class="line">[+] Saving dictionary to tom.txt, counting 14680 words.</span><br><span class="line">&gt; Hyperspeed Print? (Y/n) : </span><br><span class="line">[+] Now load your pistolero with tom.txt and shoot! Good luck!</span><br><span class="line">root@kali:~/Desktop/Tools/cupp-master<span class="comment"># ls</span></span><br><span class="line">CHANGELOG.md  cupp.py  README.md    test_cupp.py</span><br><span class="line">cupp.cfg      LICENSE  screenshots  tom.txt</span><br><span class="line"></span><br><span class="line">root@kali:~/Desktop/Tools/cupp-master<span class="comment"># </span></span><br></pre></td></tr></table></figure>
 <p>执行./cupp.py -i后按照提示输入已知信息，生成专属字典</p>
 <p><strong>生成的字典 tom.txt 如下：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211117192821465-410199901.png" /></p>
@@ -433,7 +368,7 @@ root@kali:~/Desktop/Tools/cupp-master# </code></pre>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

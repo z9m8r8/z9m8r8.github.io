@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-21T12:52:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:25:09.620Z">
+<meta property="article:modified_time" content="2023-12-12T14:16:58.546Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="Metasploit">
 <meta name="twitter:card" content="summary">
@@ -143,8 +143,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">一、代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="nav-text">二、代码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#required-msfcore"><span class="nav-text">required
-&#39;msf&#x2F;core&#39;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-text">库文件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="nav-text">函数介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E4%BD%8D%E7%BD%AE"><span class="nav-text">保存位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E6%A3%80%E6%9F%A5%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF"><span class="nav-text">调试检查语法错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89msf-%E4%B8%AD%E6%B5%8B%E8%AF%95"><span class="nav-text">三、msf 中测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">四、参考文献</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">1. 代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="nav-text">2. 代码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#required-msfcore"><span class="nav-text">required
+&#39;msf&#x2F;core&#39;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-text">库文件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="nav-text">函数介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E4%BD%8D%E7%BD%AE"><span class="nav-text">保存位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E6%A3%80%E6%9F%A5%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF"><span class="nav-text">调试检查语法错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#msf-%E4%B8%AD%E6%B5%8B%E8%AF%95"><span class="nav-text">3. msf 中测试</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -244,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:25:09" itemprop="dateModified" datetime="2023-12-09T23:25:09+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 22:16:58" itemprop="dateModified" datetime="2023-12-12T22:16:58+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -263,7 +263,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>796</span>
+      <span>789</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -281,32 +281,9 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一代码实现">一、代码实现</h2>
-<pre><code>class MetasploitModule &lt; Msf::Auxiliary include Msf::Exploit::Remote::Ftp include Msf::Auxiliary::Scanner include Msf::Auxiliary::Report
-　　def initialize
-　　　　super(
-　　　　　　&#39;Name&#39; =&gt; &#39;FTP Version test Scanner&#39;,
-　　　　　　&#39;Description&#39; =&gt; &#39;Detect FTP Version.&#39;,
-　　　　　　&#39;Author&#39; =&gt; &#39;z9m8r8&#39;,
-　　　　　　&#39;License&#39; =&gt; MSF_LICENSE
-　　　　)
-　　　　register_options(
-　　　　　　[
-　　　　　　　　Opt::RPORT(21),
-　　　　　　],self.class
-　　　　)
-　　end
-
-　　def run_host(target_host)
-　　　　connect(true,false)
-　　　　if(banner)
-　　　　　　print_status(&quot;#&#123;rhost&#125; is running #&#123;banner&#125;&quot;)
-　　　　　　report_service(:host =&gt; rhost,:port=&gt;rport,:name=&gt;&quot;ftp&quot;,:info=&gt;banner)
-　　　　end
-　　　　disconnect
-　　end
-end</code></pre>
-<h2 id="二代码解析">二、代码解析</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="代码实现">1. 代码实现</h2>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MetasploitModule</span> &lt; <span class="title class_ inherited__">Msf::Auxiliary</span> <span class="keyword">include</span> <span class="title class_">Msf::Exploit::Remote::Ftp</span> <span class="keyword">include</span> <span class="title class_">Msf::Auxiliary::Scanner</span> <span class="keyword">include</span> <span class="title class_">Msf::Auxiliary::Report</span></span><br><span class="line">　　<span class="keyword">def</span> <span class="title function_">initialize</span></span><br><span class="line">　　　　<span class="variable language_">super</span>(</span><br><span class="line">　　　　　　<span class="string">&#x27;Name&#x27;</span> =&gt; <span class="string">&#x27;FTP Version test Scanner&#x27;</span>,</span><br><span class="line">　　　　　　<span class="string">&#x27;Description&#x27;</span> =&gt; <span class="string">&#x27;Detect FTP Version.&#x27;</span>,</span><br><span class="line">　　　　　　<span class="string">&#x27;Author&#x27;</span> =&gt; <span class="string">&#x27;z9m8r8&#x27;</span>,</span><br><span class="line">　　　　　　<span class="string">&#x27;License&#x27;</span> =&gt; <span class="variable constant_">MSF_LICENSE</span></span><br><span class="line">　　　　)</span><br><span class="line">　　　　register_options(</span><br><span class="line">　　　　　　[</span><br><span class="line">　　　　　　　　<span class="title class_">Opt</span><span class="symbol">:</span><span class="symbol">:RPORT</span>(<span class="number">21</span>),</span><br><span class="line">　　　　　　],<span class="variable language_">self</span>.<span class="keyword">class</span></span><br><span class="line">　　　　)</span><br><span class="line">　　<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">　　<span class="keyword">def</span> <span class="title function_">run_host</span>(<span class="params">target_host</span>)</span><br><span class="line">　　　　connect(<span class="literal">true</span>,<span class="literal">false</span>)</span><br><span class="line">　　　　<span class="keyword">if</span>(banner)</span><br><span class="line">　　　　　　print_status(<span class="string">&quot;<span class="subst">#&#123;rhost&#125;</span> is running <span class="subst">#&#123;banner&#125;</span>&quot;</span>)</span><br><span class="line">　　　　　　report_service(<span class="symbol">:host</span> =&gt; rhost,<span class="symbol">:port=&gt;rport</span>,<span class="symbol">:name=&gt;<span class="string">&quot;ftp&quot;</span></span>,<span class="symbol">:info=&gt;banner</span>)</span><br><span class="line">　　　　<span class="keyword">end</span></span><br><span class="line">　　　　disconnect</span><br><span class="line">　　<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="代码解析">2. 代码解析</h2>
 <ul>
 <li><h3 id="required-msfcore"><strong>required
 'msf/core'</strong></h3></li>
@@ -319,7 +296,7 @@ end</code></pre>
 <ul>
 <li><h3 id="库文件介绍"><strong>库文件介绍</strong></h3></li>
 </ul>
-<p><strong>引入语句 路 径 用 途</strong></p>
+<p><strong>引入语句路径用途</strong></p>
 <p>Msf:Exploit::Remote::Ftp /lib/msf/core/exploit/ftp.rb
 包含了所有FTP操作相关的方法，比如建立FTP连接、
 FTP服务登录、发送FTP命令等</p>
@@ -342,50 +319,20 @@ true和false。参数true定义了全局参数的使用，而false定义关闭�
 专门用于将服务和相关细节添加到数据库中</p>
 <p>函数report_service，将扫描数据保存在数据库中以供之后使用或者生成高级报告</p>
 <ul>
-<li><h3 id="保存位置"><strong>保存位置</strong></h3>
-<p>/usr/share/metasploit-framework/modules/auxiliary/scanner/ftp/ftp_test.rb</p></li>
+<li><h3 id="保存位置"><strong>保存位置</strong></h3></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/metasploit-framework/modules/auxiliary/scanner/ftp/ftp_test.rb</span><br></pre></td></tr></table></figure>
+<ul>
 <li><h3
 id="调试检查语法错误"><strong>调试检查语法错误</strong></h3></li>
 </ul>
 <p><strong>使用msftidy调试方法</strong></p>
-<pre><code>root@kali:/usr/share/metasploit-framework/modules/exploits/windows/wins# /usr/share/metasploit-framework/tools/dev/msftidy.rb test.rb</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/usr/share/metasploit-framework/modules/exploits/windows/wins<span class="comment"># /usr/share/metasploit-framework/tools/dev/msftidy.rb test.rb</span></span><br></pre></td></tr></table></figure>
 <p><strong>由于实践时msftidy总出错，故是直接通过msfconsole加载失败查看日志改正的，如下</strong></p>
-<pre><code>root@promote:/usr/share/metasploit-framework/tools/dev# msfconsole
-[!] The following modules could not be loaded!..|
-[!] /usr/share/metasploit-framework/modules/auxiliary/scanner/ftp/ftp_test.rb
-[!] Please see /root/.msf4/logs/framework.log for details.</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@promote:/usr/share/metasploit-framework/tools/dev<span class="comment"># msfconsole</span></span><br><span class="line">[!] The following modules could not be loaded!..|</span><br><span class="line">[!] /usr/share/metasploit-framework/modules/auxiliary/scanner/ftp/ftp_test.rb</span><br><span class="line">[!] Please see /root/.msf4/logs/framework.log <span class="keyword">for</span> details.</span><br></pre></td></tr></table></figure>
 <p><strong>打开日志，依据提示进行修改，并重新加载即可</strong></p>
-<h2 id="三msf-中测试">三、msf 中测试</h2>
-<pre><code>**msf6 &gt; use auxiliary/scanner/ftp/ftp_test
-msf6 auxiliary(scanner/ftp/ftp_test) &gt;** **show options**
-
-Module options (auxiliary/scanner/ftp/ftp_test):
-Name Current Setting Required Description
----- --------------- -------- -----------
-FTPPASS mozilla@example.com no The password for the specified username
-FTPUSER anonymous no The username to authenticate as
-RHOSTS 10.10.10.134 yes The target host(s), range CIDR identifier
-, or hosts file with syntax &#39;file:&lt;path&gt;&#39;
-RPORT 21 yes The target port (TCP)
-THREADS 10 yes The number of concurrent threads (max one
-per host)
-
-**msf6 auxiliary(scanner** **/ftp/ftp_test) &gt; set rhosts 10.10.10.129**
-rhosts =&gt; 10.10.10.129 **msf6 auxiliary(scanner /ftp/ftp_test) &gt;** **run**
-
-[*] 10.10.10.129:21 - 10.10.10.129 is running 220 (vsFTPd 2.2.2)
-
-[*] 10.10.10.129:21 - Scanned 1 of 1 hosts (100% complete)
-[*] Auxiliary module execution completed
-**msf6 auxiliary(scanner** **/ftp/ftp_test) &gt;** **services**
-Services
-========
-
-host port proto name state info
----- ---- ----- ---- ----- ----
-10.10.10.129 21 tcp ftp open 220 (vsFTPd 2.2.2)</code></pre>
-<h2 id="四参考文献">四、参考文献</h2>
-<p><strong>《精通Metasploit渗透测试》</strong></p>
+<h2 id="msf-中测试">3. msf 中测试</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">msf6 &gt; use auxiliary/scanner/ftp/ftp_test</span><br><span class="line">msf6 auxiliary(scanner/ftp/ftp_test) &gt;show options</span><br><span class="line"></span><br><span class="line">Module options (auxiliary/scanner/ftp/ftp_test):</span><br><span class="line">Name Current Setting Required Description</span><br><span class="line">---- --------------- -------- -----------</span><br><span class="line">FTPPASS mozilla@example.com no The password <span class="keyword">for</span> the specified username</span><br><span class="line">FTPUSER anonymous no The username to authenticate as</span><br><span class="line">RHOSTS 10.10.10.134 <span class="built_in">yes</span> The target host(s), range CIDR identifier</span><br><span class="line">, or hosts file with syntax <span class="string">&#x27;file:&lt;path&gt;&#x27;</span></span><br><span class="line">RPORT 21 <span class="built_in">yes</span> The target port (TCP)</span><br><span class="line">THREADS 10 <span class="built_in">yes</span> The number of concurrent threads (max one</span><br><span class="line">per host)</span><br><span class="line"></span><br><span class="line">msf6 auxiliary(scanner/ftp/ftp_test) &gt; <span class="built_in">set</span> rhosts 10.10.10.129</span><br><span class="line">rhosts =&gt; 10.10.10.129 msf6 auxiliary(scanner /ftp/ftp_test) &gt;run</span><br><span class="line"></span><br><span class="line">[*] 10.10.10.129:21 - 10.10.10.129 is running 220 (vsFTPd 2.2.2)</span><br><span class="line"></span><br><span class="line">[*] 10.10.10.129:21 - Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">[*] Auxiliary module execution completed</span><br><span class="line">msf6 auxiliary(scanner/ftp/ftp_test) &gt;services</span><br><span class="line">Services</span><br><span class="line">========</span><br><span class="line"></span><br><span class="line">host port proto name state info</span><br><span class="line">---- ---- ----- ---- ----- ----</span><br><span class="line">10.10.10.129 21 tcp ftp open 220 (vsFTPd 2.2.2)</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -463,7 +410,7 @@ host port proto name state info
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

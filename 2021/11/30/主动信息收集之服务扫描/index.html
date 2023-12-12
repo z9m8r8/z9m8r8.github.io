@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-30T13:06:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:43:57.846Z">
+<meta property="article:modified_time" content="2023-12-12T13:35:30.328Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="服务扫描">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="nav-text">一、服务扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F%E8%8E%B7%E5%8F%96-banner"><span class="nav-text">二、服务扫描获取 banner</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nc"><span class="nav-text">1、nc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E8%84%9A%E6%9C%AC"><span class="nav-text">2、Python脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dmitry"><span class="nav-text">3、dmitry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap"><span class="nav-text">4、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#amap"><span class="nav-text">5、amap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E6%9C%8D%E5%8A%A1%E8%AF%86%E5%88%AB"><span class="nav-text">三、服务识别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nc-1"><span class="nav-text">1、nc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap-1"><span class="nav-text">2、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#amap-1"><span class="nav-text">3、amap</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="nav-text">1. 服务扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F%E8%8E%B7%E5%8F%96-banner"><span class="nav-text">2. 服务扫描获取 banner</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nc"><span class="nav-text">1、nc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E8%84%9A%E6%9C%AC"><span class="nav-text">2、Python脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dmitry"><span class="nav-text">3、dmitry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap"><span class="nav-text">4、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#amap"><span class="nav-text">5、amap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%AF%86%E5%88%AB"><span class="nav-text">3. 服务识别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nc-1"><span class="nav-text">1、nc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap-1"><span class="nav-text">2、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#amap-1"><span class="nav-text">3、amap</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:43:57" itemprop="dateModified" datetime="2023-12-09T23:43:57+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 21:35:30" itemprop="dateModified" datetime="2023-12-12T21:35:30+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -284,7 +284,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一服务扫描">一、服务扫描</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="服务扫描">1. 服务扫描</h2>
 <p><strong>识别开放端口，上运行的应用</strong></p>
 <ul>
 <li><strong>依据识别的应用找对应纰漏的漏洞
@@ -302,7 +302,7 @@
 <li><strong>SNMP分析，如配置存在问题等</strong></li>
 <li><strong>防火墙识别</strong></li>
 </ul>
-<p><strong>Banner </strong></p>
+<p><strong>Banner</strong></p>
 <ul>
 <li><strong>软件开发商</strong></li>
 <li><strong>软件名称</strong></li>
@@ -318,199 +318,31 @@
 </ul>
 <p><strong>SNMP</strong></p>
 <p><strong>待补 ……</strong></p>
-<h2 id="二服务扫描获取-banner">二、服务扫描获取 banner</h2>
+<h2 id="服务扫描获取-banner">2. 服务扫描获取 banner</h2>
 <h3 id="nc">1、nc</h3>
 <p><strong>示例：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# nc -nv  10.10.10.129 21**
-(UNKNOWN) [10.10.10.129] 21 (ftp) open
-220 **(vsFTPd 2.2.2)　　　　　　　　　　　　#vsFTPd连版本都得到了……
-**^C
-                                                                                          
-**┌──(root💀kali)** **-[/home/ kali]
-└─# nc -nv  10.10.10.129 22**                                                           
-(UNKNOWN) [10.10.10.129] 22 (ssh) open
-**SSH** **- 2.0-OpenSSH_5.3p1 Debian-3ubuntu4　　　　　　#操作系统+服务
-**^C
-                                                                                          
-**┌──(root💀kali)** **-[/home/ kali]
-└─# nc -nv  10.10.10.129 23**                                                           
-(UNKNOWN) [10.10.10.129] 23 (telnet) : Connection refused
-                                                                                          </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nc -nv  10.10.10.129 21</span></span><br><span class="line">(UNKNOWN) [10.10.10.129] 21 (ftp) open</span><br><span class="line">220 (vsFTPd 2.2.2)　　　　　　　　　　　　<span class="comment">#vsFTPd连版本都得到了……</span></span><br><span class="line">^C</span><br><span class="line">                                                                                          </span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nc -nv  10.10.10.129 22                                                           </span></span><br><span class="line">(UNKNOWN) [10.10.10.129] 22 (ssh) open</span><br><span class="line">SSH- 2.0-OpenSSH_5.3p1 Debian-3ubuntu4　　　　　　<span class="comment">#操作系统+服务</span></span><br><span class="line">^C</span><br><span class="line">                                                                                          </span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nc -nv  10.10.10.129 23                                                           </span></span><br><span class="line">(UNKNOWN) [10.10.10.129] 23 (telnet) : Connection refused</span><br></pre></td></tr></table></figure>
 <h3 id="python脚本">2、Python脚本</h3>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/** **Tools]
-└─# python3**
-Python 3.9.2 (default, Feb 28 2021, 17:03:44) 
-[GCC 10.2.1 20210110] on linux
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-**&gt; &gt;&gt; import socket
-&gt;&gt;&gt; an=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-&gt;&gt;&gt; an.connect((&quot;10.10.10.129&quot;,21))
-&gt;&gt;&gt; an.recv(4096)
-b&#39;220 (vsFTPd 2.2.2)\r\n&#39;
-&gt;&gt;&gt; an.close()&gt;&gt;&gt; exit()**</code></pre>
-<p>** ban_grab.py**</p>
-<pre><code>#!/usr/bin/python
-import socket
-import select
-import sys
-
-if len(sys.argv)!=4:
-    print(&quot;Usage - ./banner_grab.py  [Target-IP]  [First Port]  [Last Port]&quot;)
-    print(&quot;Example - ./banner_grab.py  10.10.10.1  1  100&quot;)
-    print(&quot;Example will grab banners for TCP ports 1 through 100 on 10.10.10.1&quot;)
-    sys.exit()
-    
-ip=sys.argv[1]
-start=int(sys.argv[2])
-end=int(sys.argv[3])
-
-for port in range(start,end):
-    try:
-        bangrab = socket.socket(socket.AF_INET,socket.SOCK_STREAM)#建立TCP连接
-        bangrab.connect((ip,port))
-        ready = select.select([bangrab],[],[],1)#存储banner返回信息
-        if ready[0]:#判断是否允许抓取banner
-            print(&quot;TCP Port &quot;+str(port)+&quot; - &quot;+str(bangrab.recv(4096)))
-            bangrab.close()
-    except:
-            pass</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># python3</span></span><br><span class="line">Python 3.9.2 (default, Feb 28 2021, 17:03:44) </span><br><span class="line">[GCC 10.2.1 20210110] on linux</span><br><span class="line">Type <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> or <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt; &gt;&gt; import socket</span><br><span class="line">&gt;&gt;&gt; an=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">&gt;&gt;&gt; an.connect((&quot;<span class="number">10.10</span>.<span class="number">10.129</span>&quot;,<span class="number">21</span>))</span><br><span class="line">&gt;&gt;&gt; an.recv(4096)</span><br><span class="line">b<span class="string">&#x27;220 (vsFTPd 2.2.2)\r\n&#x27;</span></span><br><span class="line">&gt;&gt;&gt; an.close()&gt;&gt;&gt; <span class="built_in">exit</span>()</span><br></pre></td></tr></table></figure>
+<p><strong>ban_grab.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sys.argv)!=<span class="number">4</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Usage - ./banner_grab.py  [Target-IP]  [First Port]  [Last Port]&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Example - ./banner_grab.py  10.10.10.1  1  100&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Example will grab banners for TCP ports 1 through 100 on 10.10.10.1&quot;</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">ip=sys.argv[<span class="number">1</span>]</span><br><span class="line">start=<span class="built_in">int</span>(sys.argv[<span class="number">2</span>])</span><br><span class="line">end=<span class="built_in">int</span>(sys.argv[<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> <span class="built_in">range</span>(start,end):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        bangrab = socket.socket(socket.AF_INET,socket.SOCK_STREAM)<span class="comment">#建立TCP连接</span></span><br><span class="line">        bangrab.connect((ip,port))</span><br><span class="line">        ready = select.select([bangrab],[],[],<span class="number">1</span>)<span class="comment">#存储banner返回信息</span></span><br><span class="line">        <span class="keyword">if</span> ready[<span class="number">0</span>]:<span class="comment">#判断是否允许抓取banner</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;TCP Port &quot;</span>+<span class="built_in">str</span>(port)+<span class="string">&quot; - &quot;</span>+<span class="built_in">str</span>(bangrab.recv(<span class="number">4096</span>)))</span><br><span class="line">            bangrab.close()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# python3 ./ban_grab.py 10.10.10.129 1 100**
-TCP Port 21 - b&#39;220 (vsFTPd 2.2.2)\r\n&#39;
-TCP Port 22 - b&#39;SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n&#39;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># python3 ./ban_grab.py 10.10.10.129 1 100</span></span><br><span class="line">TCP Port 21 - b<span class="string">&#x27;220 (vsFTPd 2.2.2)\r\n&#x27;</span></span><br><span class="line">TCP Port 22 - b<span class="string">&#x27;SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n&#x27;</span></span><br></pre></td></tr></table></figure>
 <h3 id="dmitry">3、dmitry</h3>
-<p>** 示例：**</p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# dmitry -pb 10.10.10.129**
-Deepmagic Information Gathering Tool
-&quot;There be some deep magic going on&quot;
-
-ERROR: Unable to locate Host Name for 10.10.10.129
-Continuing with limited modules
-HostIP:10.10.10.129
-HostName:
-
-Gathered TCP Port information for 10.10.10.129
----------------------------------
-
- Port           State
-
-**21 /tcp          open
-&gt;&gt; 220 (vsFTPd 2.2.2)
-
-22/tcp          open
-&gt;&gt; SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4
-
-80/tcp          open
-zsh: segmentation fault  dmitry -pb 10.10.10.129**</code></pre>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># dmitry -pb 10.10.10.129</span></span><br><span class="line">Deepmagic Information Gathering Tool</span><br><span class="line"><span class="string">&quot;There be some deep magic going on&quot;</span></span><br><span class="line"></span><br><span class="line">ERROR: Unable to locate Host Name <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Continuing with limited modules</span><br><span class="line">HostIP:10.10.10.129</span><br><span class="line">HostName:</span><br><span class="line"></span><br><span class="line">Gathered TCP Port information <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">---------------------------------</span><br><span class="line"></span><br><span class="line"> Port           State</span><br><span class="line"></span><br><span class="line">21 /tcp          open</span><br><span class="line">&gt;&gt; 220 (vsFTPd 2.2.2)</span><br><span class="line"></span><br><span class="line">22/tcp          open</span><br><span class="line">&gt;&gt; SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4</span><br><span class="line"></span><br><span class="line">80/tcp          open</span><br><span class="line">zsh: segmentation fault  dmitry -pb 10.10.10.129</span><br></pre></td></tr></table></figure>
 <h3 id="nmap">4、nmap</h3>
-<p>** 示例：**</p>
-<pre><code>┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# nmap -sT 10.10.10.129 -p 21 --script=banner
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 09:08 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00046s latency).
-
-PORT   STATE SERVICE
-21/tcp open  ftp
-|_banner: 220 (vsFTPd 2.2.2)
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 0.76 seconds
-                                                                                           
-┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# nmap -sT 10.10.10.129 -p 1-100 --script=banner.nse
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 09:09 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00082s latency).
-Not shown: 97 closed ports
-PORT   STATE SERVICE
-21/tcp open  ftp
-|_banner: 220 (vsFTPd 2.2.2)
-22/tcp open  ssh
-|_banner: SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4
-80/tcp open  http
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Nmap done: 1 IP address (1 host up) scanned in 10.35 seconds</code></pre>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># nmap -sT 10.10.10.129 -p 21 --script=banner</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 09:08 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00046s latency).</span><br><span class="line"></span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">21/tcp open  ftp</span><br><span class="line">|_banner: 220 (vsFTPd 2.2.2)</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 0.76 seconds</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># nmap -sT 10.10.10.129 -p 1-100 --script=banner.nse</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 09:09 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00082s latency).</span><br><span class="line">Not shown: 97 closed ports</span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">21/tcp open  ftp</span><br><span class="line">|_banner: 220 (vsFTPd 2.2.2)</span><br><span class="line">22/tcp open  ssh</span><br><span class="line">|_banner: SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4</span><br><span class="line">80/tcp open  http</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 10.35 seconds</span><br></pre></td></tr></table></figure>
 <h3 id="amap">5、amap</h3>
 <p><strong>amap 专门用于识别指定端口上运行服务的banner信息</strong></p>
 <p><strong>安装</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# apt-get install** **amap** 
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-The following NEW packages will be installed:
-  amap
-0 upgraded, 1 newly installed, 0 to remove and 135 not upgraded.
-Need to get 68.2 kB of archives.
-After this operation, 181 kB of additional disk space will be used.
-Get:1 http://mirrors.neusoft.edu.cn/kali kali-rolling/main amd64 amap amd64 5.4-4kali2 [68.2 kB]
-Fetched 68.2 kB in 3s (24.5 kB/s)
-Selecting previously unselected package amap.
-(Reading database ... 271263 files and directories currently installed.)
-Preparing to unpack .../amap_5.4-4kali2_amd64.deb ...
-Unpacking amap (5.4-4kali2) ...
-Setting up amap (5.4-4kali2) ...
-Processing triggers for kali-menu (2021.3.3) ...
-Processing triggers for man-db (2.9.4-2) ...</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># apt-get installamap </span></span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree... Done</span><br><span class="line">Reading state information... Done</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  amap</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 135 not upgraded.</span><br><span class="line">Need to get 68.2 kB of archives.</span><br><span class="line">After this operation, 181 kB of additional disk space will be used.</span><br><span class="line">Get:1 http://mirrors.neusoft.edu.cn/kali kali-rolling/main amd64 amap amd64 5.4-4kali2 [68.2 kB]</span><br><span class="line">Fetched 68.2 kB <span class="keyword">in</span> 3s (24.5 kB/s)</span><br><span class="line">Selecting previously unselected package amap.</span><br><span class="line">(Reading database ... 271263 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../amap_5.4-4kali2_amd64.deb ...</span><br><span class="line">Unpacking amap (5.4-4kali2) ...</span><br><span class="line">Setting up amap (5.4-4kali2) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> kali-menu (2021.3.3) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> man-db (2.9.4-2) ...</span><br></pre></td></tr></table></figure>
 <p><strong>帮助信息：</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# amap -h
-amap v5.4 (c) 2011 by van Hauser &lt;vh@thc.org&gt; www.thc.org/thc-amap
-Syntax: amap [-A|-B|-P|-W] [-1buSRHUdqv] [[-m] -o &lt;file&gt;] [-D &lt;file&gt;] [-t/-T sec] [-c cons] [-C retries] [-p proto] [-i &lt;file&gt;] [target port [port] ...]
-Modes:
-  -A         Map applications: send triggers and analyse responses (default)
-  -B         Just grab banners, do not send triggers
-  -P         No banner or application stuff - be a (full connect) port scanner
-Options:
-  -1         Only send triggers to a port until 1st identification. Speeeeed!
-  -6         Use IPv6 instead of IPv4
-  -b         Print ascii banner of responses
-  -i FILE    Nmap machine readable outputfile to read ports from
-  -u         Ports specified on commandline are UDP (default is TCP)
-  -R         Do NOT identify RPC service
-  -H         Do NOT send application triggers marked as potentially harmful
-  -U         Do NOT dump unrecognised responses (better for scripting)
-  -d         Dump all responses
-  -v         Verbose mode, use twice (or more!) for debug (not recommended :-)
-  -q         Do not report closed ports, and do not print them as unidentified
-  -o FILE [-m] Write output to file FILE, -m creates machine readable output
-  -c CONS    Amount of parallel connections to make (default 32, max 256)
-  -C RETRIES Number of reconnects on connect timeouts (see -T) (default 3)
-  -T SEC     Connect timeout on connection attempts in seconds (default 5)
-  -t SEC     Response wait timeout in seconds (default 5)
-  -p PROTO   Only send triggers for this protocol (e.g. ftp)
-  TARGET PORT   The target address and port(s) to scan (additional to -i)
-amap is a tool to identify application protocols on target ports.
-Note: this version was NOT compiled with SSL support!
-Usage hint: Options &quot;-bqv&quot; are recommended, add &quot;-1&quot; for fast/rush checks.</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap -h</span></span><br><span class="line">amap v5.4 (c) 2011 by van Hauser &lt;vh@thc.org&gt; www.thc.org/thc-amap</span><br><span class="line">Syntax: amap [-A|-B|-P|-W] [-1buSRHUdqv] [[-m] -o &lt;file&gt;] [-D &lt;file&gt;] [-t/-T sec] [-c cons] [-C retries] [-p proto] [-i &lt;file&gt;] [target port [port] ...]</span><br><span class="line">Modes:</span><br><span class="line">  -A         Map applications: send triggers and analyse responses (default)</span><br><span class="line">  -B         Just grab banners, <span class="keyword">do</span> not send triggers</span><br><span class="line">  -P         No banner or application stuff - be a (full connect) port scanner</span><br><span class="line">Options:</span><br><span class="line">  -1         Only send triggers to a port <span class="keyword">until</span> 1st identification. Speeeeed!</span><br><span class="line">  -6         Use IPv6 instead of IPv4</span><br><span class="line">  -b         Print ascii banner of responses</span><br><span class="line">  -i FILE    Nmap machine readable outputfile to <span class="built_in">read</span> ports from</span><br><span class="line">  -u         Ports specified on commandline are UDP (default is TCP)</span><br><span class="line">  -R         Do NOT identify RPC service</span><br><span class="line">  -H         Do NOT send application triggers marked as potentially harmful</span><br><span class="line">  -U         Do NOT dump unrecognised responses (better <span class="keyword">for</span> scripting)</span><br><span class="line">  -d         Dump all responses</span><br><span class="line">  -v         Verbose mode, use twice (or more!) <span class="keyword">for</span> debug (not recommended :-)</span><br><span class="line">  -q         Do not report closed ports, and <span class="keyword">do</span> not <span class="built_in">print</span> them as unidentified</span><br><span class="line">  -o FILE [-m] Write output to file FILE, -m creates machine readable output</span><br><span class="line">  -c CONS    Amount of parallel connections to make (default 32, max 256)</span><br><span class="line">  -C RETRIES Number of reconnects on connect timeouts (see -T) (default 3)</span><br><span class="line">  -T SEC     Connect <span class="built_in">timeout</span> on connection attempts <span class="keyword">in</span> seconds (default 5)</span><br><span class="line">  -t SEC     Response <span class="built_in">wait</span> <span class="built_in">timeout</span> <span class="keyword">in</span> seconds (default 5)</span><br><span class="line">  -p PROTO   Only send triggers <span class="keyword">for</span> this protocol (e.g. ftp)</span><br><span class="line">  TARGET PORT   The target address and port(s) to scan (additional to -i)</span><br><span class="line">amap is a tool to identify application protocols on target ports.</span><br><span class="line">Note: this version was NOT compiled with SSL support!</span><br><span class="line">Usage hint: Options <span class="string">&quot;-bqv&quot;</span> are recommended, add <span class="string">&quot;-1&quot;</span> <span class="keyword">for</span> fast/rush checks.</span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# amap -B 10.10.10.129 22  **                                                        255 ⨯
-amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:13:00 - BANNER mode
-
-Banner on 10.10.10.129:22/tcp : SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n
-
-amap v5.4 finished at 2021-11-30 09:13:01 **┌──(root💀kali) -[/home/kali/Desktop/Tools]
-└─# amap -B 10.10.10.129 21**
-amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:13:07 - BANNER mode
-
-Banner on 10.10.10.129:21/tcp : 220 (vsFTPd 2.2.2)\r\n
-
-amap v5.4 finished at 2021-11-30 09:13:07 **┌──(root💀kali) -[/home/kali/Desktop/Tools]
-└─# amap -B 10.10.10.129 1-200**
-amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:13:30 - BANNER mode
-
-Banner on 10.10.10.129:143/tcp : * OK [CAPABILITY IMAP4rev1 UIDPLUS CHILDREN NAMESPACE THREAD=ORDEREDSUBJECT THREAD=REFERENCES SORT QUOTA IDLE ACL ACL2=UNION] Courier-IMAP ready. Copyright 1998-2008 Double Precision, Inc.  See COPYING for distribution information.\r\n
-Banner on 10.10.10.129:21/tcp : 220 (vsFTPd 2.2.2)\r\n
-Banner on 10.10.10.129:22/tcp : SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n
-
-amap v5.4 finished at 2021-11-30 09:13:42</code></pre>
-<h2 id="三服务识别">三、服务识别</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># amap -B 10.10.10.129 22                                                          255 ⨯</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:13:00 - BANNER mode</span><br><span class="line"></span><br><span class="line">Banner on 10.10.10.129:22/tcp : SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:13:01 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap -B 10.10.10.129 21</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:13:07 - BANNER mode</span><br><span class="line"></span><br><span class="line">Banner on 10.10.10.129:21/tcp : 220 (vsFTPd 2.2.2)\r\n</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:13:07 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap -B 10.10.10.129 1-200</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:13:30 - BANNER mode</span><br><span class="line"></span><br><span class="line">Banner on 10.10.10.129:143/tcp : * OK [CAPABILITY IMAP4rev1 UIDPLUS CHILDREN NAMESPACE THREAD=ORDEREDSUBJECT THREAD=REFERENCES SORT QUOTA IDLE ACL ACL2=UNION] Courier-IMAP ready. Copyright 1998-2008 Double Precision, Inc.  See COPYING <span class="keyword">for</span> distribution information.\r\n</span><br><span class="line">Banner on 10.10.10.129:21/tcp : 220 (vsFTPd 2.2.2)\r\n</span><br><span class="line">Banner on 10.10.10.129:22/tcp : SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:13:42</span><br></pre></td></tr></table></figure>
+<h2 id="服务识别">3. 服务识别</h2>
 <p><strong>Banner信息抓取能力有限</strong></p>
 <p><strong>nmap响应特征分析识别服务</strong></p>
 <ul>
@@ -520,62 +352,11 @@ amap v5.4 finished at 2021-11-30 09:13:42</code></pre>
 <h3 id="nc-1">1、nc</h3>
 <p>省略，同2.1</p>
 <h3 id="nmap-1">2、nmap</h3>
-<p>** 示例：**</p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# nmap 10.10.10.129 -p 1-200 -** **sV**                   
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 09:19 EST
-Nmap scan report for 10.10.10.129
-Host is up (0.00011s latency).
-Not shown: 195 closed ports
-PORT    STATE SERVICE     VERSION
-21/tcp  open  ftp         vsftpd 2.2.2
-22/tcp  open  ssh         OpenSSH 5.3p1 Debian 3ubuntu4 (Ubuntu Linux; protocol 2.0)
-80/tcp  open  http        Apache httpd 2.2.14 ((Ubuntu) mod_mono/2.4.3 PHP/5.3.2-1ubuntu4.5 with Suhosin-Patch mod_python/3.3.1 Python/2.6.5 mod_perl/2.0.4 Perl/v5.10.1)
-139/tcp open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
-143/tcp open  imap        Courier Imapd (released 2008)
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
-
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 21.40 seconds</code></pre>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># nmap 10.10.10.129 -p 1-200 -sV                   </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 09:19 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00011s latency).</span><br><span class="line">Not shown: 195 closed ports</span><br><span class="line">PORT    STATE SERVICE     VERSION</span><br><span class="line">21/tcp  open  ftp         vsftpd 2.2.2</span><br><span class="line">22/tcp  open  ssh         OpenSSH 5.3p1 Debian 3ubuntu4 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">80/tcp  open  http        Apache httpd 2.2.14 ((Ubuntu) mod_mono/<span class="number">2.4</span>.<span class="number">3</span> PHP/<span class="number">5.3</span>.<span class="number">2</span>-<span class="number">1</span>ubuntu4.<span class="number">5</span> with Suhosin-Patch mod_python/<span class="number">3.3</span>.<span class="number">1</span> Python/<span class="number">2.6</span>.<span class="number">5</span> mod_perl/<span class="number">2.0</span>.<span class="number">4</span> Perl/v5.<span class="number">10.1</span>)</span><br><span class="line"><span class="number">139</span>/tcp open  netbios-ssn Samba smbd <span class="number">3</span>.X - <span class="number">4</span>.X (workgroup: WORKGROUP)</span><br><span class="line"><span class="number">143</span>/tcp open  imap        Courier Imapd (released <span class="number">2008</span>)</span><br><span class="line">MAC Address: <span class="number">00</span>:<span class="number">0</span>C:<span class="number">29</span>:DE:<span class="number">5</span>D:BA (VMware)</span><br><span class="line">Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap done: <span class="number">1</span> IP address (<span class="number">1</span> host up) scanned in <span class="number">21.40</span> seconds</span><br></pre></td></tr></table></figure>
 <h3 id="amap-1">3、amap</h3>
-<p>** 示例：**</p>
-<pre><code>**┌──(root💀kali)-[/home/kali/Desktop/ Tools]
-└─# amap 10.10.10.129 80**    
-amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:19:58 - APPLICATION MAPPING mode
-
-Protocol on 10.10.10.129:80/tcp matches http
-Protocol on 10.10.10.129:80/tcp matches http-apache-2
-
-Unidentified ports: none.
-
-amap v5.4 finished at 2021-11-30 09:20:04 **┌──(root💀kali) -[/home/kali/Desktop/Tools]
-└─# amap 10.10.10.129 20-30**
-amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:20:20 - APPLICATION MAPPING mode
-
-Protocol on 10.10.10.129:22/tcp matches ssh
-Protocol on 10.10.10.129:22/tcp matches ssh-openssh
-Protocol on 10.10.10.129:21/tcp matches ftp
-
-Unidentified ports: 10.10.10.129:20/tcp 10.10.10.129:23/tcp 10.10.10.129:24/tcp 10.10.10.129:25/tcp 10.10.10.129:26/tcp 10.10.10.129:27/tcp 10.10.10.129:28/tcp 10.10.10.129:29/tcp 10.10.10.129:30/tcp (total 9).
-
-amap v5.4 finished at 2021-11-30 09:20:23 **┌──(root💀kali) -[/home/kali/Desktop/Tools]
-└─# amap 10.10.10.129 20-30 -** **q**
-amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:20:44 - APPLICATION MAPPING mode
-
-Protocol on 10.10.10.129:22/tcp matches ssh
-Protocol on 10.10.10.129:22/tcp matches ssh-openssh
-Protocol on 10.10.10.129:21/tcp matches ftp
-
-amap v5.4 finished at 2021-11-30 09:20:50 **┌──(root💀kali) -[/home/kali/Desktop/Tools]
-└─# amap 10.10.10.129 20-30 -** **qb**
-amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:20:54 - APPLICATION MAPPING mode
-
-Protocol on 10.10.10.129:22/tcp matches ssh - banner: SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n
-Protocol on 10.10.10.129:22/tcp matches ssh-openssh - banner: SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n
-Protocol on 10.10.10.129:21/tcp matches ftp - banner: 220 (vsFTPd 2.2.2)\r\n
-
-amap v5.4 finished at 2021-11-30 09:21:01</code></pre>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># amap 10.10.10.129 80    </span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:19:58 - APPLICATION MAPPING mode</span><br><span class="line"></span><br><span class="line">Protocol on 10.10.10.129:80/tcp matches http</span><br><span class="line">Protocol on 10.10.10.129:80/tcp matches http-apache-2</span><br><span class="line"></span><br><span class="line">Unidentified ports: none.</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:20:04 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap 10.10.10.129 20-30</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:20:20 - APPLICATION MAPPING mode</span><br><span class="line"></span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh</span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh-openssh</span><br><span class="line">Protocol on 10.10.10.129:21/tcp matches ftp</span><br><span class="line"></span><br><span class="line">Unidentified ports: 10.10.10.129:20/tcp 10.10.10.129:23/tcp 10.10.10.129:24/tcp 10.10.10.129:25/tcp 10.10.10.129:26/tcp 10.10.10.129:27/tcp 10.10.10.129:28/tcp 10.10.10.129:29/tcp 10.10.10.129:30/tcp (total 9).</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:20:23 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap 10.10.10.129 20-30 -q</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:20:44 - APPLICATION MAPPING mode</span><br><span class="line"></span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh</span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh-openssh</span><br><span class="line">Protocol on 10.10.10.129:21/tcp matches ftp</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:20:50 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap 10.10.10.129 20-30 -qb</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:20:54 - APPLICATION MAPPING mode</span><br><span class="line"></span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh - banner: SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n</span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh-openssh - banner: SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n</span><br><span class="line">Protocol on 10.10.10.129:21/tcp matches ftp - banner: 220 (vsFTPd 2.2.2)\r\n</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:21:01</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -653,7 +434,7 @@ amap v5.4 finished at 2021-11-30 09:21:01</code></pre>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

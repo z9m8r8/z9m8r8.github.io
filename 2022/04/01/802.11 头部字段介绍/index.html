@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-01T09:02:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:11:10.289Z">
+<meta property="article:modified_time" content="2023-12-12T03:19:37.293Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="wifi 渗透">
 <meta property="article:tag" content="802.11 协议">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">一、基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Cpdu%E5%92%8Csdu%E8%A1%A5%E5%85%85"><span class="nav-text">二、PDU和SDU补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sduservice-data-unit"><span class="nav-text">1、SDU（service Data Unit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pduprotocol-data-unit"><span class="nav-text">2、PDU（Protocol Data Unit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pdu%E5%92%8Csdu%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">3、PDU和SDU的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pdu%E7%9A%84%E5%B0%81%E8%A3%85%E8%A7%A3%E5%B0%81%E8%A3%85"><span class="nav-text">（1）PDU的封装&#x2F;解封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sdu%E5%88%86%E6%AE%B5%E8%A3%85%E9%85%8D"><span class="nav-text">（2）SDU分段&#x2F;装配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sdu%E6%8B%BC%E6%8E%A5%E5%88%86%E7%A6%BB"><span class="nav-text">（3）SDU拼接&#x2F;分离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pdu%E5%88%86%E5%89%B2%E7%BB%84%E5%90%88"><span class="nav-text">（4）PDU分割&#x2F;组合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89802.11-%E5%A4%B4%E9%83%A8%E5%88%86%E6%9E%90"><span class="nav-text">三、802.11 头部分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mac%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="nav-text">1、802.11 MAC头结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frame-control"><span class="nav-text">2、Frame control</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#protocol-version-2bit"><span class="nav-text">（1）Protocol Version (2bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#type-2bit"><span class="nav-text">（2）Type (2bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#subtype-4bit"><span class="nav-text">（3）SubType (4bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#todsfromds11bit"><span class="nav-text">（4）ToDS&#x2F;FromDS(1&#x2F;1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more-frag-1bit"><span class="nav-text">（5） More frag (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#retry-1bit"><span class="nav-text">（6）Retry (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#power-mgmt-1bit"><span class="nav-text">（7）Power Mgmt (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more-data-1bit"><span class="nav-text">（8）More Data (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#protected-frame-1bit"><span class="nav-text">（9）Protected Frame (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#order-1bit"><span class="nav-text">（10）Order (1bit)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#durationid-16bit"><span class="nav-text">3、Duration&#x2F;ID (16bit)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mac-layer-address"><span class="nav-text">4、MAC Layer Address</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sequence-control-16bit"><span class="nav-text">5、Sequence Control (16bit)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frame-body-%E5%8F%98%E9%95%BF"><span class="nav-text">6、Frame Body (变长)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fcs-32bit"><span class="nav-text">7、FCS (32bit)</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pdu%E5%92%8Csdu%E8%A1%A5%E5%85%85"><span class="nav-text">2. PDU和SDU补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sduservice-data-unit"><span class="nav-text">1、SDU（service Data Unit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pduprotocol-data-unit"><span class="nav-text">2、PDU（Protocol Data Unit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pdu%E5%92%8Csdu%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">3、PDU和SDU的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pdu%E7%9A%84%E5%B0%81%E8%A3%85%E8%A7%A3%E5%B0%81%E8%A3%85"><span class="nav-text">（1）PDU的封装&#x2F;解封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sdu%E5%88%86%E6%AE%B5%E8%A3%85%E9%85%8D"><span class="nav-text">（2）SDU分段&#x2F;装配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sdu%E6%8B%BC%E6%8E%A5%E5%88%86%E7%A6%BB"><span class="nav-text">（3）SDU拼接&#x2F;分离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pdu%E5%88%86%E5%89%B2%E7%BB%84%E5%90%88"><span class="nav-text">（4）PDU分割&#x2F;组合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%B4%E9%83%A8%E5%88%86%E6%9E%90"><span class="nav-text">3. 802.11 头部分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mac%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="nav-text">1、802.11 MAC头结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frame-control"><span class="nav-text">2、Frame control</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#protocol-version-2bit"><span class="nav-text">（1）Protocol Version (2bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#type-2bit"><span class="nav-text">（2）Type (2bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#subtype-4bit"><span class="nav-text">（3）SubType (4bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#todsfromds11bit"><span class="nav-text">（4）ToDS&#x2F;FromDS(1&#x2F;1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more-frag-1bit"><span class="nav-text">（5） More frag (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#retry-1bit"><span class="nav-text">（6）Retry (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#power-mgmt-1bit"><span class="nav-text">（7）Power Mgmt (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more-data-1bit"><span class="nav-text">（8）More Data (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#protected-frame-1bit"><span class="nav-text">（9）Protected Frame (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#order-1bit"><span class="nav-text">（10）Order (1bit)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#durationid-16bit"><span class="nav-text">3、Duration&#x2F;ID (16bit)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mac-layer-address"><span class="nav-text">4、MAC Layer Address</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sequence-control-16bit"><span class="nav-text">5、Sequence Control (16bit)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frame-body-%E5%8F%98%E9%95%BF"><span class="nav-text">6、Frame Body (变长)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fcs-32bit"><span class="nav-text">7、FCS (32bit)</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -244,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:11:10" itemprop="dateModified" datetime="2023-12-09T23:11:10+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 11:19:37" itemprop="dateModified" datetime="2023-12-12T11:19:37+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,7 +285,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一基本概念">一、基本概念</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="基本概念">1. 基本概念</h2>
 <ul>
 <li>DU (Data Unit)即数据单元，信息传输的最小数据集合</li>
 <li>传递过程逐层封装(Encapsulation)</li>
@@ -295,7 +295,7 @@
 <li>MPDU/PSDU +物理头 = PPDU -&gt; RF发射</li>
 </ul>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220401150335894-1172943925.png" /></p>
-<h2 id="二pdu和sdu补充">二、PDU和SDU补充</h2>
+<h2 id="pdu和sdu补充">2. PDU和SDU补充</h2>
 <p><strong>原文：</strong> http://www.elecfans.com/d/1690388.html</p>
 <h3 id="sduservice-data-unit">1、SDU（service Data Unit）</h3>
 <p>SDU（service Data
@@ -317,7 +317,7 @@ Unit）有以下几层意义：</p>
 <p>拼接是指在发送方（n）层协议实体把多个长度较短的（n）SDU封装成一个（n）PDU来发送，在接收放再将接收到的（n）PDU解封装，将多个（n）SDU分离出来。采用拼接功能的目的是提高通道的利用率。</p>
 <h4 id="pdu分割组合">（4）PDU分割/组合</h4>
 <p>PDU分割是指在发送端（n）层协议实体把一个（n）PDU分割成多个（n-1）SDU，并行地从多个（n-1）通道发送出去；接收端再将收到的多个（n-1）SDU组合成一个（n）PDU。由于这是一个N层功能，所以组合操作在N层中进行，即N层先得到多个分割开的（n）PDU，然后把它们组合成一个（n）PDU。有时NSDU较长，而N协议所要求的NPDU较短。这时就要对NSDU进行分段处理，将一个SDU分成两个或多个PDU来传送。当PDU所要求的长度比SDU还大时，也可将几个SDU合并成为一个PDU。</p>
-<h2 id="三802.11-头部分析">三、802.11 头部分析</h2>
+<h2 id="头部分析">3. 802.11 头部分析</h2>
 <h3 id="mac头结构">1、802.11 MAC头结构</h3>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220401161915662-1172285506.png" /></p>
 <p>** 备注：**Sequence Control 和 IPID的意义相似</p>
@@ -435,8 +435,8 @@ Sequence)值，接收端进行同样的计算，结果一致时，则接收端�
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/03/31/Radiotap%20%E5%A4%B4%E9%83%A8/" rel="prev" title="Radiotap 头部">
-                  <i class="fa fa-angle-left"></i> Radiotap 头部
+                <a href="/2022/03/31/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/" rel="prev" title="RSA 常见攻击">
+                  <i class="fa fa-angle-left"></i> RSA 常见攻击
                 </a>
             </div>
             <div class="post-nav-item">
@@ -479,7 +479,7 @@ Sequence)值，接收端进行同样的计算，结果一致时，则接收端�
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

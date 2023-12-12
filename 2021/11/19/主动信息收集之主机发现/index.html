@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T15:02:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:44:13.995Z">
+<meta property="article:modified_time" content="2023-12-12T13:46:53.523Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="主机探测">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">一、主动信息收集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="nav-text">二、主机发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E4%BA%8C%E5%B1%82%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8F%91%E7%8E%B0%E9%80%9A%E5%B8%B8%E6%98%AF%E5%81%9A%E5%86%85%E7%BD%91%E6%8E%A2%E6%B5%8B"><span class="nav-text">三、二层（链路层）发现（通常是做内网探测）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#arping"><span class="nav-text">1、arping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap"><span class="nav-text">2、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#netdiscover"><span class="nav-text">3、netdiscover</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scapy"><span class="nav-text">4、scapy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E4%B8%89%E5%B1%82ipicmp%E5%8D%8F%E8%AE%AE%E5%8F%91%E7%8E%B0"><span class="nav-text">四、三层（IP,ICMP协议）发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ping%E5%91%BD%E4%BB%A4"><span class="nav-text">1、ping命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scapy-1"><span class="nav-text">2、scapy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap-1"><span class="nav-text">3、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fping"><span class="nav-text">4、fping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hping%E5%91%BD%E4%BB%A4"><span class="nav-text">5、Hping命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%9B%9B%E5%B1%82%E5%8F%91%E7%8E%B0"><span class="nav-text">五、四层发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scapy-2"><span class="nav-text">1、scapy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap-2"><span class="nav-text">2、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hping3"><span class="nav-text">3、hping3</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 主动信息收集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="nav-text">2. 主机发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%B1%82%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8F%91%E7%8E%B0%E9%80%9A%E5%B8%B8%E6%98%AF%E5%81%9A%E5%86%85%E7%BD%91%E6%8E%A2%E6%B5%8B"><span class="nav-text">3.
+二层（链路层）发现（通常是做内网探测）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#arping"><span class="nav-text">1、arping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap"><span class="nav-text">2、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#netdiscover"><span class="nav-text">3、netdiscover</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scapy"><span class="nav-text">4、scapy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%B1%82ipicmp%E5%8D%8F%E8%AE%AE%E5%8F%91%E7%8E%B0"><span class="nav-text">4. 三层（IP,ICMP协议）发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ping%E5%91%BD%E4%BB%A4"><span class="nav-text">1、ping命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scapy-1"><span class="nav-text">2、scapy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap-1"><span class="nav-text">3、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fping"><span class="nav-text">4、fping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hping%E5%91%BD%E4%BB%A4"><span class="nav-text">5、Hping命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%B1%82%E5%8F%91%E7%8E%B0"><span class="nav-text">5. 四层发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scapy-2"><span class="nav-text">1、scapy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap-2"><span class="nav-text">2、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hping3"><span class="nav-text">3、hping3</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -243,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:44:13" itemprop="dateModified" datetime="2023-12-09T23:44:13+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 21:46:53" itemprop="dateModified" datetime="2023-12-12T21:46:53+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -284,7 +285,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一主动信息收集">一、主动信息收集</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="主动信息收集">1. 主动信息收集</h2>
 <p><strong>直接与目标系统交互通信</strong></p>
 <p><strong>无法避免留下访问的痕迹</strong></p>
 <p><strong>使用受控的第三方电脑进行探测</strong></p>
@@ -297,7 +298,7 @@
 <ul>
 <li>发送不同的探测，根据返回结果判断目标状态</li>
 </ul>
-<h2 id="二主机发现">二、主机发现</h2>
+<h2 id="主机发现">2. 主机发现</h2>
 <p><strong>识别活着的主机</strong></p>
 <ul>
 <li><strong>潜在的被攻击目标</strong></li>
@@ -305,8 +306,8 @@
 <p><strong>输出一个IP地址列表</strong></p>
 <p><strong>2、3、4层发现</strong></p>
 <p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211119215814211-1756463726.png" /></strong></p>
-<h2
-id="三二层链路层发现通常是做内网探测">三、二层（链路层）发现（通常是做内网探测）</h2>
+<h2 id="二层链路层发现通常是做内网探测">3.
+二层（链路层）发现（通常是做内网探测）</h2>
 <p><strong>优点</strong></p>
 <ul>
 <li>扫描快，可靠</li>
@@ -316,8 +317,8 @@ id="三二层链路层发现通常是做内网探测">三、二层（链路层�
 <li>不可路由，即仅能探测本网段</li>
 </ul>
 <h3 id="arping">1、arping</h3>
-<p>** 命令参数（help）：**</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># arping --help</span></span><br><span class="line">ARPing 2.21, by Thomas Habets &lt;thomas@habets.se&gt;</span><br><span class="line">usage: arping [ -0aAbdDeFpPqrRuUv ] [ -w &lt;sec&gt; ] [ -W &lt;sec&gt; ] [ -S &lt;host/ip&gt; ]</span><br><span class="line">              [ -T &lt;host/ip ] [ -s &lt;MAC&gt; ] [ -t &lt;MAC&gt; ] [ -c &lt;count&gt; ]</span><br><span class="line">              [ -C &lt;count&gt; ] [ -i &lt;interface&gt; ] [ -m &lt;<span class="built_in">type</span>&gt; ] [ -g &lt;group&gt; ]</span><br><span class="line">              [ -V &lt;vlan&gt; ] [ -Q &lt;priority&gt; ] &lt;host/ip/MAC | -B&gt;</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line"></span><br><span class="line">    -0     Use this option to ping with <span class="built_in">source</span> IP address 0.0.0.0. Use this</span><br><span class="line">           when you haven<span class="string">&#x27;t configured your interface yet.  Note that  this</span></span><br><span class="line"><span class="string">           may  get  the  MAC-ping  unanswered.   This  is  an alias for -S</span></span><br><span class="line"><span class="string">           0.0.0.0.</span></span><br><span class="line"><span class="string">    -a     Audiable ping.</span></span><br><span class="line"><span class="string">    -A     Only count addresses matching  requested  address  (This  *WILL*</span></span><br><span class="line"><span class="string">           break  most things you do. Only useful if you are arpinging many</span></span><br><span class="line"><span class="string">           hosts at once. See arping-scan-net.sh for an example).</span></span><br><span class="line"><span class="string">    -b     Like -0 but source broadcast source  address  (255.255.255.255).</span></span><br><span class="line"><span class="string">           Note that this may get the arping unanswered since it&#x27;</span>s not nor-</span><br><span class="line">           mal behavior <span class="keyword">for</span> a host.</span><br><span class="line">    -B     Use instead of host <span class="keyword">if</span> you want to address 255.255.255.255.</span><br><span class="line">    -c count</span><br><span class="line">           Only send count requests.</span><br><span class="line">    -C count</span><br><span class="line">           Only <span class="built_in">wait</span> <span class="keyword">for</span> this many replies, regardless of -c and -w.</span><br><span class="line">    -d     Find duplicate replies. Exit with 1 <span class="keyword">if</span> there are answers from</span><br><span class="line">           two different MAC addresses.</span><br><span class="line">    -D     Display answers as exclamation points and missing packets as dots.</span><br><span class="line">    -e     Like -a but beep when there is no reply.</span><br><span class="line">    -F     Don<span class="string">&#x27;t try to be smart about the interface name.  (even  if  this</span></span><br><span class="line"><span class="string">           switch is not given, -i overrides smartness)</span></span><br><span class="line"><span class="string">    -g group</span></span><br><span class="line"><span class="string">           setgid() to this group instead of the nobody group.</span></span><br><span class="line"><span class="string">    -h     Displays a help message and exits.</span></span><br><span class="line"><span class="string">    -i interface</span></span><br><span class="line"><span class="string">           Use the specified interface.</span></span><br><span class="line"><span class="string">    -m type</span></span><br><span class="line"><span class="string">           Type of timestamp to use for incoming packets. Use -vv when</span></span><br><span class="line"><span class="string">           pinging to list available ones.</span></span><br><span class="line"><span class="string">    -q     Does not display messages, except error messages.</span></span><br><span class="line"><span class="string">    -Q pri 802.1p priority to set. Should be used with 802.1Q (-V).</span></span><br><span class="line"><span class="string">           Defaults to 0.</span></span><br><span class="line"><span class="string">    -r     Raw output: only the MAC/IP address is displayed for each reply.</span></span><br><span class="line"><span class="string">    -R     Raw output: Like -r but shows &quot;the other one&quot;, can  be  combined</span></span><br><span class="line"><span class="string">           with -r.</span></span><br><span class="line"><span class="string">    -s MAC Set source MAC address. You may need to use -p with this.</span></span><br><span class="line"><span class="string">    -S IP  Like  -b and -0 but with set source address.  Note that this may</span></span><br><span class="line"><span class="string">           get the arping unanswered if the target does not have routing to</span></span><br><span class="line"><span class="string">           the  IP.  If you don&#x27;</span>t own the IP you are using, you may need to</span><br><span class="line">           turn on promiscious mode on the interface (with -p).  With  this</span><br><span class="line">           switch  you can find out what IP-address a host has without tak-</span><br><span class="line">           ing an IP-address yourself.</span><br><span class="line">    -t MAC Set target MAC address to use when pinging IP address.</span><br><span class="line">    -T IP  Use -T as target address when pinging MACs that won<span class="string">&#x27;t respond to</span></span><br><span class="line"><span class="string">           a broadcast ping but perhaps to a directed broadcast.</span></span><br><span class="line"><span class="string">           Example:</span></span><br><span class="line"><span class="string">           To check the address of MAC-A, use knowledge of MAC-B and  IP-B.</span></span><br><span class="line"><span class="string">           $ arping -S &lt;IP-B&gt; -s &lt;MAC-B&gt; -p &lt;MAC-A&gt;</span></span><br><span class="line"><span class="string">    -p     Turn  on  promiscious  mode  on interface, use this if you don&#x27;</span>t</span><br><span class="line">           <span class="string">&quot;own&quot;</span> the MAC address you are using.</span><br><span class="line">    -P     Send ARP replies instead of requests. Useful with -U.</span><br><span class="line">    -u     Show index=received/sent instead  of  just  index=received  when</span><br><span class="line">           pinging MACs.</span><br><span class="line">    -U     Send unsolicited ARP.</span><br><span class="line">    -v     Verbose output. Use twice <span class="keyword">for</span> more messages.</span><br><span class="line">    -V num 802.1Q tag to add. Defaults to no VLAN tag.</span><br><span class="line">    -w sec Specify a <span class="built_in">timeout</span> before ping exits regardless of how many</span><br><span class="line">packets have been sent or received.</span><br><span class="line">    -W sec Time to <span class="built_in">wait</span> between pings.</span><br><span class="line">Report bugs to: thomas@habets.se</span><br><span class="line">Arping home page: &lt;http://www.habets.pp.se/synscan/&gt;</span><br><span class="line">Development repo: http://github.com/ThomasHabets/arping                                                                              </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>命令参数（help）：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># arping --help</span></span><br><span class="line">ARPing 2.21, by Thomas Habets &lt;thomas@habets.se&gt;</span><br><span class="line">usage: arping [ -0aAbdDeFpPqrRuUv ] [ -w &lt;sec&gt; ] [ -W &lt;sec&gt; ] [ -S &lt;host/ip&gt; ]</span><br><span class="line">              [ -T &lt;host/ip ] [ -s &lt;MAC&gt; ] [ -t &lt;MAC&gt; ] [ -c &lt;count&gt; ]</span><br><span class="line">              [ -C &lt;count&gt; ] [ -i &lt;interface&gt; ] [ -m &lt;<span class="built_in">type</span>&gt; ] [ -g &lt;group&gt; ]</span><br><span class="line">              [ -V &lt;vlan&gt; ] [ -Q &lt;priority&gt; ] &lt;host/ip/MAC | -B&gt;</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line"></span><br><span class="line">    -0     Use this option to ping with <span class="built_in">source</span> IP address 0.0.0.0. Use this</span><br><span class="line">           when you haven<span class="string">&#x27;t configured your interface yet.  Note that  this</span></span><br><span class="line"><span class="string">           may  get  the  MAC-ping  unanswered.   This  is  an alias for -S</span></span><br><span class="line"><span class="string">           0.0.0.0.</span></span><br><span class="line"><span class="string">    -a     Audiable ping.</span></span><br><span class="line"><span class="string">    -A     Only count addresses matching  requested  address  (This  *WILL*</span></span><br><span class="line"><span class="string">           break  most things you do. Only useful if you are arpinging many</span></span><br><span class="line"><span class="string">           hosts at once. See arping-scan-net.sh for an example).</span></span><br><span class="line"><span class="string">    -b     Like -0 but source broadcast source  address  (255.255.255.255).</span></span><br><span class="line"><span class="string">           Note that this may get the arping unanswered since it&#x27;</span>s not nor-</span><br><span class="line">           mal behavior <span class="keyword">for</span> a host.</span><br><span class="line">    -B     Use instead of host <span class="keyword">if</span> you want to address 255.255.255.255.</span><br><span class="line">    -c count</span><br><span class="line">           Only send count requests.</span><br><span class="line">    -C count</span><br><span class="line">           Only <span class="built_in">wait</span> <span class="keyword">for</span> this many replies, regardless of -c and -w.</span><br><span class="line">    -d     Find duplicate replies. Exit with 1 <span class="keyword">if</span> there are answers from</span><br><span class="line">           two different MAC addresses.</span><br><span class="line">    -D     Display answers as exclamation points and missing packets as dots.</span><br><span class="line">    -e     Like -a but beep when there is no reply.</span><br><span class="line">    -F     Don<span class="string">&#x27;t try to be smart about the interface name.  (even  if  this</span></span><br><span class="line"><span class="string">           switch is not given, -i overrides smartness)</span></span><br><span class="line"><span class="string">    -g group</span></span><br><span class="line"><span class="string">           setgid() to this group instead of the nobody group.</span></span><br><span class="line"><span class="string">    -h     Displays a help message and exits.</span></span><br><span class="line"><span class="string">    -i interface</span></span><br><span class="line"><span class="string">           Use the specified interface.</span></span><br><span class="line"><span class="string">    -m type</span></span><br><span class="line"><span class="string">           Type of timestamp to use for incoming packets. Use -vv when</span></span><br><span class="line"><span class="string">           pinging to list available ones.</span></span><br><span class="line"><span class="string">    -q     Does not display messages, except error messages.</span></span><br><span class="line"><span class="string">    -Q pri 802.1p priority to set. Should be used with 802.1Q (-V).</span></span><br><span class="line"><span class="string">           Defaults to 0.</span></span><br><span class="line"><span class="string">    -r     Raw output: only the MAC/IP address is displayed for each reply.</span></span><br><span class="line"><span class="string">    -R     Raw output: Like -r but shows &quot;the other one&quot;, can  be  combined</span></span><br><span class="line"><span class="string">           with -r.</span></span><br><span class="line"><span class="string">    -s MAC Set source MAC address. You may need to use -p with this.</span></span><br><span class="line"><span class="string">    -S IP  Like  -b and -0 but with set source address.  Note that this may</span></span><br><span class="line"><span class="string">           get the arping unanswered if the target does not have routing to</span></span><br><span class="line"><span class="string">           the  IP.  If you don&#x27;</span>t own the IP you are using, you may need to</span><br><span class="line">           turn on promiscious mode on the interface (with -p).  With  this</span><br><span class="line">           switch  you can find out what IP-address a host has without tak-</span><br><span class="line">           ing an IP-address yourself.</span><br><span class="line">    -t MAC Set target MAC address to use when pinging IP address.</span><br><span class="line">    -T IP  Use -T as target address when pinging MACs that won<span class="string">&#x27;t respond to</span></span><br><span class="line"><span class="string">           a broadcast ping but perhaps to a directed broadcast.</span></span><br><span class="line"><span class="string">           Example:</span></span><br><span class="line"><span class="string">           To check the address of MAC-A, use knowledge of MAC-B and  IP-B.</span></span><br><span class="line"><span class="string">           $ arping -S &lt;IP-B&gt; -s &lt;MAC-B&gt; -p &lt;MAC-A&gt;</span></span><br><span class="line"><span class="string">    -p     Turn  on  promiscious  mode  on interface, use this if you don&#x27;</span>t</span><br><span class="line">           <span class="string">&quot;own&quot;</span> the MAC address you are using.</span><br><span class="line">    -P     Send ARP replies instead of requests. Useful with -U.</span><br><span class="line">    -u     Show index=received/sent instead  of  just  index=received  when</span><br><span class="line">           pinging MACs.</span><br><span class="line">    -U     Send unsolicited ARP.</span><br><span class="line">    -v     Verbose output. Use twice <span class="keyword">for</span> more messages.</span><br><span class="line">    -V num 802.1Q tag to add. Defaults to no VLAN tag.</span><br><span class="line">    -w sec Specify a <span class="built_in">timeout</span> before ping exits regardless of how many</span><br><span class="line">packets have been sent or received.</span><br><span class="line">    -W sec Time to <span class="built_in">wait</span> between pings.</span><br><span class="line">Report bugs to: thomas@habets.se</span><br><span class="line">Arping home page: &lt;http://www.habets.pp.se/synscan/&gt;</span><br><span class="line">Development repo: http://github.com/ThomasHabets/arping                                                                              </span><br></pre></td></tr></table></figure>
 <p><strong>注意：</strong></p>
 <ul>
 <li><strong>参数 "-d" 发现重复响应（不同MAC对应同一IP），
@@ -326,42 +327,9 @@ id="三二层链路层发现通常是做内网探测">三、二层（链路层�
 不支持对网段的探测，不过可通过脚本间接实现</strong></li>
 </ul>
 <p><strong>例 1 对10.10.10.1发送4个探测包：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# arping 10.10.10.1 -c 4**
-ARPING 10.10.10.1
-60 bytes from 00:50:56:c0:00:08 (10.10.10.1): index=0 time=271.585 usec
-60 bytes from 00:50:56:c0:00:08 (10.10.10.1): index=1 time=214.186 usec
-60 bytes from 00:50:56:c0:00:08 (10.10.10.1): index=2 time=232.599 usec
-60 bytes from 00:50:56:c0:00:08 (10.10.10.1): index=3 time=302.205 usec
-
---- 10.10.10.1 statistics ---
-4 packets transmitted, 4 packets received,   0% unanswered (0 extra)
-rtt min/avg/max/std-dev = 0.214/0.255/0.302/0.034 ms</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># arping 10.10.10.1 -c 4</span></span><br><span class="line">ARPING 10.10.10.1</span><br><span class="line">60 bytes from 00:50:56:c0:00:08 (10.10.10.1): index=0 time=271.585 usec</span><br><span class="line">60 bytes from 00:50:56:c0:00:08 (10.10.10.1): index=1 time=214.186 usec</span><br><span class="line">60 bytes from 00:50:56:c0:00:08 (10.10.10.1): index=2 time=232.599 usec</span><br><span class="line">60 bytes from 00:50:56:c0:00:08 (10.10.10.1): index=3 time=302.205 usec</span><br><span class="line"></span><br><span class="line">--- 10.10.10.1 statistics ---</span><br><span class="line">4 packets transmitted, 4 packets received,   0% unanswered (0 extra)</span><br><span class="line">rtt min/avg/max/std-dev = 0.214/0.255/0.302/0.034 ms</span><br></pre></td></tr></table></figure>
 <p><strong>例 2 提取响应主机IP：</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali]
-└─# arping 192.168.1.101 -c 1                                            
-ARPING 192.168.1.101
-42 bytes from 48:2c:a0:7b:90:cb (192.168.1.101): index=0 time=112.099 msec
-
---- 192.168.1.101 statistics ---
-1 packets transmitted, 1 packets received,   0% unanswered (0 extra)
-rtt min/avg/max/std-dev = 112.099/112.099/112.099/0.000 ms
-                                                                             
-┌──(root💀kali)-[/home/kali]
-└─# arping 192.168.1.101 -c 1 | grep &quot;bytes from&quot;   　　　　　　　　　　#输出有响应的主机，目标未响应则不会输出任何信息
-42 bytes from 48:2c:a0:7b:90:cb (192.168.1.101): index=0 time=63.069 msec
-                                                                                                                                                         
-┌──(root💀kali)-[/home/kali]
-└─# arping 192.168.1.101 -c 1 | grep &quot;bytes from&quot; | cut -d&quot; &quot; -f 5   #以空格作为分隔符输出第 5 列   
-(192.168.1.101):
-                                                                             
-┌──(root💀kali)-[/home/kali]
-└─# arping 192.168.1.101 -c 1 | grep &quot;bytes from&quot; | cut -d&quot; &quot; -f 5 | cut -d&quot;(&quot; -f 2　　　　#以&quot;（&quot;为分隔符……
-192.168.1.101):                                                                                      
-                                                                                      
-┌──(root💀kali)-[/home/kali]
-└─# arping 192.168.1.1 -c 1 | grep &quot;bytes from&quot; | cut -d&quot; &quot; -f 5 | cut -d&quot;(&quot; -f 2 |cut -d&quot;)&quot; -f 1 
-192.168.1.1</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># arping 192.168.1.101 -c 1                                            </span></span><br><span class="line">ARPING 192.168.1.101</span><br><span class="line">42 bytes from 48:2c:a0:7b:90:cb (192.168.1.101): index=0 time=112.099 msec</span><br><span class="line"></span><br><span class="line">--- 192.168.1.101 statistics ---</span><br><span class="line">1 packets transmitted, 1 packets received,   0% unanswered (0 extra)</span><br><span class="line">rtt min/avg/max/std-dev = 112.099/112.099/112.099/0.000 ms</span><br><span class="line">                                                                             </span><br><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># arping 192.168.1.101 -c 1 | grep &quot;bytes from&quot;   　　　　　　　　　　#输出有响应的主机，目标未响应则不会输出任何信息</span></span><br><span class="line">42 bytes from 48:2c:a0:7b:90:cb (192.168.1.101): index=0 time=63.069 msec</span><br><span class="line">                                                                                                                                                         </span><br><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># arping 192.168.1.101 -c 1 | grep &quot;bytes from&quot; | cut -d&quot; &quot; -f 5   #以空格作为分隔符输出第 5 列   </span></span><br><span class="line">(192.168.1.101):</span><br><span class="line">                                                                             </span><br><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># arping 192.168.1.101 -c 1 | grep &quot;bytes from&quot; | cut -d&quot; &quot; -f 5 | cut -d&quot;(&quot; -f 2　　　　#以&quot;（&quot;为分隔符……</span></span><br><span class="line">192.168.1.101):                                                                                      </span><br><span class="line">                                                                                      </span><br><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># arping 192.168.1.1 -c 1 | grep &quot;bytes from&quot; | cut -d&quot; &quot; -f 5 | cut -d&quot;(&quot; -f 2 |cut -d&quot;)&quot; -f 1 </span></span><br><span class="line">192.168.1.1</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211119223304719-1492992678.png" /></p>
 <h3 id="nmap">2、nmap</h3>
 <p>略（单独介绍）……</p>
@@ -376,38 +344,21 @@ rtt min/avg/max/std-dev = 112.099/112.099/112.099/0.000 ms
 <p><strong>主动探测</strong></p>
 <p><strong>例 1 探测10.10.10.0网段：</strong></p>
 <p><strong>命令</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali]
-└─# netdiscover -i eth0 -r  10.10.10.0/24  </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># netdiscover -i eth0 -r  10.10.10.0/24  </span></span><br></pre></td></tr></table></figure>
 <p><strong>探测结果</strong></p>
-<pre><code>Currently scanning: Finished!   |   Screen View: Unique Hosts                       
-                                                                                     
- 3 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 180                     
- _____________________________________________________________________________
-   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
- -----------------------------------------------------------------------------
- 10.10.10.1      00:50:56:c0:00:08      1      60  VMware, Inc.                      
- 10.10.10.2      00:50:56:f0:f4:b1      1      60  VMware, Inc.                      
- 10.10.10.254    00:50:56:f4:cc:5e      1      60  VMware, Inc. </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Currently scanning: Finished!   |   Screen View: Unique Hosts                       </span><br><span class="line">                                                                                     </span><br><span class="line"> 3 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 180                     </span><br><span class="line"> _____________________________________________________________________________</span><br><span class="line">   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      </span><br><span class="line"> -----------------------------------------------------------------------------</span><br><span class="line"> 10.10.10.1      00:50:56:c0:00:08      1      60  VMware, Inc.                      </span><br><span class="line"> 10.10.10.2      00:50:56:f0:f4:b1      1      60  VMware, Inc.                      </span><br><span class="line"> 10.10.10.254    00:50:56:f4:cc:5e      1      60  VMware, Inc. </span><br></pre></td></tr></table></figure>
 <p><strong>例 2 探测指定IP：</strong></p>
 <p><strong>list.txt</strong></p>
 <p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211119224610039-39409109.png" /></strong></p>
 <p><strong>命令</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali]
-└─# netdiscover -l /home/kali/Desktop/list.txt   </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># netdiscover -l /home/kali/Desktop/list.txt   </span></span><br></pre></td></tr></table></figure>
 <p><strong>结果同例 1</strong></p>
 <p><strong>被动探测</strong></p>
 <p><strong>例 3：</strong></p>
 <p><strong>启动监听</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali]
-└─# netdiscover -p   </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># netdiscover -p   </span></span><br></pre></td></tr></table></figure>
 <p><strong>监测结果</strong></p>
-<pre><code> Currently scanning: **(passive)**   |   Screen View: Unique Hosts                       
-                                                                                     
- 9 Captured ARP Req/Rep packets, from 1 hosts.   Total size: 540                     
- _____________________________________________________________________________
-   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
- -----------------------------------------------------------------------------
- 10.10.10.1      00:50:56:c0:00:08      9     540  VMware, Inc.   </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Currently scanning: (passive)   |   Screen View: Unique Hosts                       </span><br><span class="line">                                                                                    </span><br><span class="line">9 Captured ARP Req/Rep packets, from 1 hosts.   Total size: 540                     </span><br><span class="line">_____________________________________________________________________________</span><br><span class="line">  IP            At MAC Address     Count     Len  MAC Vendor / Hostname      </span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">10.10.10.1      00:50:56:c0:00:08      9     540  VMware, Inc.   </span><br></pre></td></tr></table></figure>
 <h3 id="scapy">4、scapy</h3>
 <ul>
 <li>作为python库进行调用</li>
@@ -415,108 +366,9 @@ rtt min/avg/max/std-dev = 112.099/112.099/112.099/0.000 ms
 <li>抓包，分析，创建，修改，注入网络流量</li>
 </ul>
 <p>使用举例</p>
-<pre><code>**┌──(root💀kali) -[/home/** **kali]
-└─# scapy**
-INFO: Can&#39;t import PyX. Won&#39;t be able to use psdump() or pdfdump().
-                                      
-                     aSPY//YASa       
-             apyyyyCY//////////YCa       |
-            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy
- ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4
- AYAsAYYYYYYYY///Ps              cY//S   |
-         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy
-         SPPPP///a          pP///AC//Y   |
-              A//A            cyP////C   | Have fun!
-              p///Ac            sC///a   |
-              P////YCpc           A//A   | Wanna support scapy? Rate it on
-       scccccp///pSP///p          p//Y   | sectools!
-      sY/////////y  caa           S//P   | http://sectools.org/tool/scapy/
-       cayCyayP//Ya              pY/Ya   |             -- Satoshi Nakamoto
-        sY/PsY////YCc          aC//Yp    |
-         sc  sccaCY//PCypaapyCP//YSs  
-                  spCPY//////YPSps    
-                       ccaacs         
-                                       using IPython 7.22.0
-**&gt; &gt;&gt;** **ARP().display()**　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　###注意，函数名称ARP必须大写，display表示查看调用函数的内容
-###[ ARP ]### 
-  hwtype= 0x1
-  ptype= IPv4
-  hwlen= None
-  plen= None
-  op= who-has
-  hwsrc= 00:0c:29:e1:66:77
-  psrc= 10.10.10.135
-  hwdst= 00:00:00:00:00:00
-  pdst= 0.0.0.0
-
-**&gt; &gt;&gt; ARP.pdst=&quot;10.10.10.2** **&quot;**　　　　　　　　　　　　　　　　　　　　　　　　　　　　　#赋值  
-
-**&gt; &gt;&gt;** **sr1(ARP())　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　#发包探测10.10.10.2**
-Begin emission:
-Finished sending 1 packets.
-*
-Received 1 packets, got 1 answers, remaining 0 packets
-&lt;ARP  hwtype=0x1 ptype=IPv4 hwlen=6 plen=4 op=is-at hwsrc=00:50:56:f0:f4:b1 psrc=10.10.10.2 hwdst=00:0c:29:e1:66:77 pdst=10.10.10.135 |&lt;Padding  load=&#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#39; |&gt;&gt;   
-&gt;&gt;&gt; **sr1(ARP(pdst= &quot;10.10.10.9&quot;),timeout=1,verbose=1** **)　　　　　　　　　　　　　　#timeout 超时 1s，verbose=1 表示若有报错则显示出来，=0，不显示**
-Begin emission:
-Finished sending 1 packets.
-
-Received 0 packets, got 0 answers, remaining 1 packets
-**&gt; &gt;&gt; sr1(ARP(pdst=&quot;10.10.10.9&quot;),timeout=1,verbose=0)
-**&lt;ARP  hwtype=0x1 ptype=IPv4 hwlen=6 plen=4 op=is-at hwsrc=00:50:56:f0:f4:b1 psrc=10.10.10.2 hwdst=00:0c:29:e1:66:77 pdst=10.10.10.135 |&lt;Padding  load=&#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#39; |&gt;&gt;   
-&gt;&gt;&gt; sr1(ARP(pdst=&quot;10.10.10.9&quot;),timeout=1,verbose=1)
-Begin emission:
-Finished sending 1 packets.
-
-Received 0 packets, got 0 answers, remaining 1 packets
-**&gt; &gt;&gt; arp=ARP()　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　#也可以通过定义变量实现函数的调用，个人理解，该操作相当于类的实例化（对象）
-&gt;&gt;&gt;** **arp.display()**
-###[ ARP ]### 
-  hwtype= 0x1
-  ptype= IPv4
-  hwlen= None
-  plen= None
-  op= who-has
-  hwsrc= 00:0c:29:e1:66:77
-  psrc= 10.10.10.135
-  hwdst= 00:00:00:00:00:00
-  pdst= 0.0.0.0
-
-**&gt; &gt;&gt; arp.pdst=&quot;10.10.10.2&quot;
-&gt;&gt;&gt;** **arp.display()**
-###[ ARP ]### 
-  hwtype= 0x1
-  ptype= IPv4
-  hwlen= None
-  plen= None
-  op= who-has
-  hwsrc= 00:0c:29:e1:66:77
-  psrc= 10.10.10.135
-  hwdst= 00:00:00:00:00:00
-  pdst= 10.10.10.2
-
-**&gt; &gt;&gt; answer=** **sr1(arp)**
-Begin emission:
-Finished sending 1 packets.
-*
-Received 1 packets, got 1 answers, remaining 0 packets
-**&gt; &gt;&gt;** **answer.display()**
-###[ ARP ]### 
-  hwtype= 0x1
-  ptype= IPv4
-  hwlen= 6
-  plen= 4
-  op= is-at
-  hwsrc= 00:50:56:f0:f4:b1
-  psrc= 10.10.10.2
-  hwdst= 00:0c:29:e1:66:77
-  pdst= 10.10.10.135
-###[ Padding ]### 
-     load= &#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#39;         #有效数据包大小小于链路上可转发的数据包大小，故填充了0                                                       
-
-&gt;&gt;&gt; </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali) -[/home/kali]</span><br><span class="line">└─<span class="comment"># scapy</span></span><br><span class="line">INFO: Can<span class="string">&#x27;t import PyX. Won&#x27;</span>t be able to use psdump() or pdfdump().</span><br><span class="line">                                      </span><br><span class="line">                     aSPY//YASa       </span><br><span class="line">             apyyyyCY//////////YCa       |</span><br><span class="line">            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy</span><br><span class="line"> ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4</span><br><span class="line"> AYAsAYYYYYYYY///Ps              cY//S   |</span><br><span class="line">         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy</span><br><span class="line">         SPPPP///a          pP///AC//Y   |</span><br><span class="line">              A//A            cyP////C   | Have fun!</span><br><span class="line">              p///Ac            sC///a   |</span><br><span class="line">              P////YCpc           A//A   | Wanna support scapy? Rate it on</span><br><span class="line">       scccccp///pSP///p          p//Y   | sectools!</span><br><span class="line">      sY/////////y  caa           S//P   | http://sectools.org/tool/scapy/</span><br><span class="line">       cayCyayP//Ya              pY/Ya   |             -- Satoshi Nakamoto</span><br><span class="line">        sY/PsY////YCc          aC//Yp    |</span><br><span class="line">         sc  sccaCY//PCypaapyCP//YSs  </span><br><span class="line">                  spCPY//////YPSps    </span><br><span class="line">                       ccaacs         </span><br><span class="line">                                       using IPython 7.22.0</span><br><span class="line">&gt; &gt;&gt;ARP().display()　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment">###注意，函数名称ARP必须大写，display表示查看调用函数的内容</span></span><br><span class="line"><span class="comment">###[ ARP ]### </span></span><br><span class="line">  hwtype= 0x1</span><br><span class="line">  ptype= IPv4</span><br><span class="line">  hwlen= None</span><br><span class="line">  plen= None</span><br><span class="line">  op= who-has</span><br><span class="line">  hwsrc= 00:0c:29:e1:66:77</span><br><span class="line">  psrc= 10.10.10.135</span><br><span class="line">  hwdst= 00:00:00:00:00:00</span><br><span class="line">  pdst= 0.0.0.0</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; ARP.pdst=<span class="string">&quot;10.10.10.2&quot;</span>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment">#赋值  </span></span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt;sr1(ARP())　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment">#发包探测10.10.10.2</span></span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">*</span><br><span class="line">Received 1 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&lt;ARP  hwtype=0x1 ptype=IPv4 hwlen=6 plen=4 op=is-at hwsrc=00:50:56:f0:f4:b1 psrc=10.10.10.2 hwdst=00:0c:29:e1:66:77 pdst=10.10.10.135 |&lt;Padding  load=<span class="string">&#x27;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#x27;</span> |&gt;&gt;   </span><br><span class="line">&gt;&gt;&gt; sr1(ARP(pdst= <span class="string">&quot;10.10.10.9&quot;</span>),<span class="built_in">timeout</span>=1,verbose=1) <span class="comment"># timeout 超时 1s，verbose=1 表示若有报错则显示出来，=0，不显示</span></span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received 0 packets, got 0 answers, remaining 1 packets</span><br><span class="line">&gt; &gt;&gt; sr1(ARP(pdst=<span class="string">&quot;10.10.10.9&quot;</span>),<span class="built_in">timeout</span>=1,verbose=0)</span><br><span class="line">&lt;ARP  hwtype=0x1 ptype=IPv4 hwlen=6 plen=4 op=is-at hwsrc=00:50:56:f0:f4:b1 psrc=10.10.10.2 hwdst=00:0c:29:e1:66:77 pdst=10.10.10.135 |&lt;Padding  load=<span class="string">&#x27;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#x27;</span> |&gt;&gt;   </span><br><span class="line">&gt;&gt;&gt; sr1(ARP(pdst=<span class="string">&quot;10.10.10.9&quot;</span>),<span class="built_in">timeout</span>=1,verbose=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received 0 packets, got 0 answers, remaining 1 packets</span><br><span class="line">&gt; &gt;&gt; arp=ARP()　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<span class="comment">#也可以通过定义变量实现函数的调用，个人理解，该操作相当于类的实例化（对象）</span></span><br><span class="line">&gt;&gt;&gt;arp.display()</span><br><span class="line"><span class="comment">###[ ARP ]### </span></span><br><span class="line">  hwtype= 0x1</span><br><span class="line">  ptype= IPv4</span><br><span class="line">  hwlen= None</span><br><span class="line">  plen= None</span><br><span class="line">  op= who-has</span><br><span class="line">  hwsrc= 00:0c:29:e1:66:77</span><br><span class="line">  psrc= 10.10.10.135</span><br><span class="line">  hwdst= 00:00:00:00:00:00</span><br><span class="line">  pdst= 0.0.0.0</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; arp.pdst=<span class="string">&quot;10.10.10.2&quot;</span></span><br><span class="line">&gt;&gt;&gt;arp.display()</span><br><span class="line"><span class="comment">###[ ARP ]### </span></span><br><span class="line">  hwtype= 0x1</span><br><span class="line">  ptype= IPv4</span><br><span class="line">  hwlen= None</span><br><span class="line">  plen= None</span><br><span class="line">  op= who-has</span><br><span class="line">  hwsrc= 00:0c:29:e1:66:77</span><br><span class="line">  psrc= 10.10.10.135</span><br><span class="line">  hwdst= 00:00:00:00:00:00</span><br><span class="line">  pdst= 10.10.10.2</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; answer=sr1(arp)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">*</span><br><span class="line">Received 1 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt; &gt;&gt;answer.display()</span><br><span class="line"><span class="comment">###[ ARP ]### </span></span><br><span class="line">  hwtype= 0x1</span><br><span class="line">  ptype= IPv4</span><br><span class="line">  hwlen= 6</span><br><span class="line">  plen= 4</span><br><span class="line">  op= is-at</span><br><span class="line">  hwsrc= 00:50:56:f0:f4:b1</span><br><span class="line">  psrc= 10.10.10.2</span><br><span class="line">  hwdst= 00:0c:29:e1:66:77</span><br><span class="line">  pdst= 10.10.10.135</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">     load= <span class="string">&#x27;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#x27;</span>         <span class="comment">#有效数据包大小小于链路上可转发的数据包大小，故填充了0                                                       </span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; </span><br></pre></td></tr></table></figure>
 <p><strong>备注：</strong> 也可用python脚本实现指定IP列表的探测</p>
-<h2 id="四三层ipicmp协议发现">四、三层（IP,ICMP协议）发现</h2>
+<h2 id="三层ipicmp协议发现">4. 三层（IP,ICMP协议）发现</h2>
 <p><strong>优点：</strong></p>
 <ul>
 <li>可路由</li>
@@ -530,19 +382,8 @@ Received 1 packets, got 1 answers, remaining 0 packets
 <h3 id="ping命令">1、ping命令</h3>
 <p><strong>命令参数（help）：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">┌──(kali㉿kali)-[~]</span><br><span class="line">└─$ ping -h        </span><br><span class="line"></span><br><span class="line">Usage</span><br><span class="line">  ping [options] &lt;destination&gt;</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  &lt;destination&gt;      dns name or ip address</span><br><span class="line">  -a                 use audible ping</span><br><span class="line">  -A                 use adaptive ping</span><br><span class="line">  -B                 sticky <span class="built_in">source</span> address</span><br><span class="line">  -c &lt;count&gt;         stop after &lt;count&gt; replies</span><br><span class="line">  -D                 <span class="built_in">print</span> timestamps</span><br><span class="line">  -d                 use SO_DEBUG socket option</span><br><span class="line">  -f                 flood ping</span><br><span class="line">  -h                 <span class="built_in">print</span> <span class="built_in">help</span> and <span class="built_in">exit</span></span><br><span class="line">  -I &lt;interface&gt;     either interface name or address</span><br><span class="line">  -i &lt;interval&gt;      seconds between sending each packet</span><br><span class="line">  -L                 suppress loopback of multicast packets</span><br><span class="line">  -l &lt;preload&gt;       send &lt;preload&gt; number of packages <span class="keyword">while</span> waiting replies</span><br><span class="line">  -m &lt;mark&gt;          tag the packets going out</span><br><span class="line">  -M &lt;pmtud opt&gt;     define mtu discovery, can be one of &lt;<span class="keyword">do</span>|dont|want&gt;</span><br><span class="line">  -n                 no dns name resolution</span><br><span class="line">  -O                 report outstanding replies</span><br><span class="line">  -p &lt;pattern&gt;       contents of padding byte</span><br><span class="line">  -q                 quiet output</span><br><span class="line">  -Q &lt;tclass&gt;        use quality of service &lt;tclass&gt; bits</span><br><span class="line">  -s &lt;size&gt;          use &lt;size&gt; as number of data bytes to be sent</span><br><span class="line">  -S &lt;size&gt;          use &lt;size&gt; as SO_SNDBUF socket option value</span><br><span class="line">  -t &lt;ttl&gt;           define time to live</span><br><span class="line">  -U                 <span class="built_in">print</span> user-to-user latency</span><br><span class="line">  -v                 verbose output</span><br><span class="line">  -V                 <span class="built_in">print</span> version and <span class="built_in">exit</span></span><br><span class="line">  -w &lt;deadline&gt;      reply <span class="built_in">wait</span> &lt;deadline&gt; <span class="keyword">in</span> seconds</span><br><span class="line">  -W &lt;<span class="built_in">timeout</span>&gt;       time to <span class="built_in">wait</span> <span class="keyword">for</span> response</span><br><span class="line"></span><br><span class="line">IPv4 options:</span><br><span class="line">  -4                 use IPv4</span><br><span class="line">  -b                 allow pinging broadcast</span><br><span class="line">  -R                 record route</span><br><span class="line">  -T &lt;timestamp&gt;     define timestamp, can be one of &lt;tsonly|tsandaddr|tsprespec&gt;</span><br><span class="line"></span><br><span class="line">IPv6 options:</span><br><span class="line">  -6                 use IPv6</span><br><span class="line">  -F &lt;flowlabel&gt;     define flow label, default is random</span><br><span class="line">  -N &lt;nodeinfo opt&gt;  use icmp6 node info query, try &lt;<span class="built_in">help</span>&gt; as argument</span><br><span class="line"></span><br><span class="line">For more details see ping(8).</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>** 示例：**</p>
-<pre><code>┌──(root💀kali)-[/home/kali]
-└─# ping 10.10.10.2 -c 5             
-PING 10.10.10.2 (10.10.10.2) 56(84) bytes of data.
-64 bytes from 10.10.10.2: icmp_seq=1 ttl=128 time=0.667 ms
-64 bytes from 10.10.10.2: icmp_seq=2 ttl=128 time=0.347 ms
-64 bytes from 10.10.10.2: icmp_seq=3 ttl=128 time=0.415 ms
-64 bytes from 10.10.10.2: icmp_seq=4 ttl=128 time=0.413 ms
-64 bytes from 10.10.10.2: icmp_seq=5 ttl=128 time=0.439 ms
-
---- 10.10.10.2 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 4096ms
-rtt min/avg/max/mdev = 0.347/0.456/0.667/0.109 ms</code></pre>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># ping 10.10.10.2 -c 5             </span></span><br><span class="line">PING 10.10.10.2 (10.10.10.2) 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.10.10.2: icmp_seq=1 ttl=128 time=0.667 ms</span><br><span class="line">64 bytes from 10.10.10.2: icmp_seq=2 ttl=128 time=0.347 ms</span><br><span class="line">64 bytes from 10.10.10.2: icmp_seq=3 ttl=128 time=0.415 ms</span><br><span class="line">64 bytes from 10.10.10.2: icmp_seq=4 ttl=128 time=0.413 ms</span><br><span class="line">64 bytes from 10.10.10.2: icmp_seq=5 ttl=128 time=0.439 ms</span><br><span class="line"></span><br><span class="line">--- 10.10.10.2 ping statistics ---</span><br><span class="line">5 packets transmitted, 5 received, 0% packet loss, time 4096ms</span><br><span class="line">rtt min/avg/max/mdev = 0.347/0.456/0.667/0.109 ms</span><br></pre></td></tr></table></figure>
 <p><strong>路由追踪（两种方法）：</strong></p>
 <ul>
 <li><strong>ping -R ip</strong></li>
@@ -550,327 +391,27 @@ rtt min/avg/max/mdev = 0.347/0.456/0.667/0.109 ms</code></pre>
 </ul>
 <p><strong>区别如下图</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211120212233020-1751770334.png" /></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# traceroute -i wlan0  8.8.8.8**     
-traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
- 1  * * *
- 2  * * *
- 3  * * 172.19.1.45 (172.19.1.45)  162.168 ms
- 4  * * *
- 5  221.228.20.145 (221.228.20.145)  167.425 ms  167.416 ms  167.351 ms
- 6  221.228.58.85 (221.228.58.85)  166.842 ms 221.228.58.81 (221.228.58.81)  132.664 ms 221.228.58.65 (221.228.58.65)  127.768 ms
- 7  202.97.54.189 (202.97.54.189)  130.602 ms 202.97.29.125 (202.97.29.125)  130.448 ms 202.97.29.109 (202.97.29.109)  130.585 ms
- 8  * * 202.97.83.133 (202.97.83.133)  132.683 ms
- 9  202.97.12.206 (202.97.12.206)  127.106 ms 202.97.85.22 (202.97.85.22)  127.128 ms *
-10  202.97.6.6 (202.97.6.6)  253.357 ms  248.049 ms *
-11  202.97.122.70 (202.97.122.70)  168.936 ms  171.358 ms  167.659 ms
-12  108.170.241.65 (108.170.241.65)  170.794 ms 108.170.241.33 (108.170.241.33)  194.441 ms 108.170.241.97 (108.170.241.97)  164.078 ms
-13  216.239.42.89 (216.239.42.89)  156.988 ms 142.251.60.59 (142.251.60.59)  162.383 ms *
-14  dns.google (8.8.8.8)  165.997 ms  171.891 ms  177.068 ms
-
-**┌──(root💀kali)** **-[/home/ kali]
-└─# traceroute -i wlan0  116.62.230.66**
-traceroute to 116.62.230.66 (116.62.230.66), 30 hops max, 60 byte packets
- 1  192.168.43.1 (192.168.43.1)  12.700 ms  29.716 ms  55.384 ms
- 2  * * *
- 3  172.19.1.45 (172.19.1.45)  76.937 ms  78.600 ms  88.430 ms
- 4  * * *
- 5  * * *
- 6  221.228.58.69 (221.228.58.69)  74.605 ms 221.228.58.85 (221.228.58.85)  27.696 ms 221.228.58.89 (221.228.58.89)  30.702 ms
- 7  202.97.33.182 (202.97.33.182)  66.783 ms 202.97.33.130 (202.97.33.130)  40.810 ms 202.97.33.162 (202.97.33.162)  44.124 ms
- 8  220.191.199.42 (220.191.199.42)  59.205 ms * 220.191.200.154 (220.191.200.154)  43.821 ms
- 9  115.236.101.213 (115.236.101.213)  53.452 ms 115.236.101.221 (115.236.101.221)  53.043 ms 115.236.101.217 (115.236.101.217)  72.418 ms
-10  42.120.247.109 (42.120.247.109)  81.178 ms * *
-11  * 117.49.54.33 (117.49.54.33)  52.973 ms *
-12  * * *
-13  * * *
-14  * * *
-15  * * *
-16  * * *
-17  * * *
-18  * * *
-19  * * *
-20  * * *
-21  * * *
-22  * * *
-23  * * *
-24  * * *
-25  * * *
-26  * * *
-27  * * *
-28  * * *
-29  * * *
-30  * * * **┌──(root💀kali) -[/home/kali]
-└─# ping 116.62.230.66 -R -** **I wlan0** 
-PING 116.62.230.66 (116.62.230.66) from 192.168.43.132 wlan0: 56(124) bytes of data.
-64 bytes from 116.62.230.66: icmp_seq=1 ttl=88 time=276 ms
-NOP
-RR:     192.168.43.132
-        10.197.46.1
-        172.19.1.13
-        221.228.20.138
-        221.228.58.66
-        202.97.100.157
-        220.191.200.203
-        115.236.101.214
-        42.120.247.58
-
-64 bytes from 116.62.230.66: icmp_seq=2 ttl=88 time=161 ms
-NOP     (same route)
-64 bytes from 116.62.230.66: icmp_seq=3 ttl=88 time=239 ms
-NOP     (same route)
-………………</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># traceroute -i wlan0  8.8.8.8     </span></span><br><span class="line">traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets</span><br><span class="line"> 1  * * *</span><br><span class="line"> 2  * * *</span><br><span class="line"> 3  * * 172.19.1.45 (172.19.1.45)  162.168 ms</span><br><span class="line"> 4  * * *</span><br><span class="line"> 5  221.228.20.145 (221.228.20.145)  167.425 ms  167.416 ms  167.351 ms</span><br><span class="line"> 6  221.228.58.85 (221.228.58.85)  166.842 ms 221.228.58.81 (221.228.58.81)  132.664 ms 221.228.58.65 (221.228.58.65)  127.768 ms</span><br><span class="line"> 7  202.97.54.189 (202.97.54.189)  130.602 ms 202.97.29.125 (202.97.29.125)  130.448 ms 202.97.29.109 (202.97.29.109)  130.585 ms</span><br><span class="line"> 8  * * 202.97.83.133 (202.97.83.133)  132.683 ms</span><br><span class="line"> 9  202.97.12.206 (202.97.12.206)  127.106 ms 202.97.85.22 (202.97.85.22)  127.128 ms *</span><br><span class="line">10  202.97.6.6 (202.97.6.6)  253.357 ms  248.049 ms *</span><br><span class="line">11  202.97.122.70 (202.97.122.70)  168.936 ms  171.358 ms  167.659 ms</span><br><span class="line">12  108.170.241.65 (108.170.241.65)  170.794 ms 108.170.241.33 (108.170.241.33)  194.441 ms 108.170.241.97 (108.170.241.97)  164.078 ms</span><br><span class="line">13  216.239.42.89 (216.239.42.89)  156.988 ms 142.251.60.59 (142.251.60.59)  162.383 ms *</span><br><span class="line">14  dns.google (8.8.8.8)  165.997 ms  171.891 ms  177.068 ms</span><br><span class="line"></span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># traceroute -i wlan0  116.62.230.66</span></span><br><span class="line">traceroute to 116.62.230.66 (116.62.230.66), 30 hops max, 60 byte packets</span><br><span class="line"> 1  192.168.43.1 (192.168.43.1)  12.700 ms  29.716 ms  55.384 ms</span><br><span class="line"> 2  * * *</span><br><span class="line"> 3  172.19.1.45 (172.19.1.45)  76.937 ms  78.600 ms  88.430 ms</span><br><span class="line"> 4  * * *</span><br><span class="line"> 5  * * *</span><br><span class="line"> 6  221.228.58.69 (221.228.58.69)  74.605 ms 221.228.58.85 (221.228.58.85)  27.696 ms 221.228.58.89 (221.228.58.89)  30.702 ms</span><br><span class="line"> 7  202.97.33.182 (202.97.33.182)  66.783 ms 202.97.33.130 (202.97.33.130)  40.810 ms 202.97.33.162 (202.97.33.162)  44.124 ms</span><br><span class="line"> 8  220.191.199.42 (220.191.199.42)  59.205 ms * 220.191.200.154 (220.191.200.154)  43.821 ms</span><br><span class="line"> 9  115.236.101.213 (115.236.101.213)  53.452 ms 115.236.101.221 (115.236.101.221)  53.043 ms 115.236.101.217 (115.236.101.217)  72.418 ms</span><br><span class="line">10  42.120.247.109 (42.120.247.109)  81.178 ms * *</span><br><span class="line">11  * 117.49.54.33 (117.49.54.33)  52.973 ms *</span><br><span class="line">12  * * *</span><br><span class="line">13  * * *</span><br><span class="line">14  * * *</span><br><span class="line">15  * * *</span><br><span class="line">16  * * *</span><br><span class="line">17  * * *</span><br><span class="line">18  * * *</span><br><span class="line">19  * * *</span><br><span class="line">20  * * *</span><br><span class="line">21  * * *</span><br><span class="line">22  * * *</span><br><span class="line">23  * * *</span><br><span class="line">24  * * *</span><br><span class="line">25  * * *</span><br><span class="line">26  * * *</span><br><span class="line">27  * * *</span><br><span class="line">28  * * *</span><br><span class="line">29  * * *</span><br><span class="line">30  * * * ┌──(root💀kali) -[/home/kali]</span><br><span class="line">└─<span class="comment"># ping 116.62.230.66 -R -I wlan0 </span></span><br><span class="line">PING 116.62.230.66 (116.62.230.66) from 192.168.43.132 wlan0: 56(124) bytes of data.</span><br><span class="line">64 bytes from 116.62.230.66: icmp_seq=1 ttl=88 time=276 ms</span><br><span class="line">NOP</span><br><span class="line">RR:     192.168.43.132</span><br><span class="line">        10.197.46.1</span><br><span class="line">        172.19.1.13</span><br><span class="line">        221.228.20.138</span><br><span class="line">        221.228.58.66</span><br><span class="line">        202.97.100.157</span><br><span class="line">        220.191.200.203</span><br><span class="line">        115.236.101.214</span><br><span class="line">        42.120.247.58</span><br><span class="line"></span><br><span class="line">64 bytes from 116.62.230.66: icmp_seq=2 ttl=88 time=161 ms</span><br><span class="line">NOP     (same route)</span><br><span class="line">64 bytes from 116.62.230.66: icmp_seq=3 ttl=88 time=239 ms</span><br><span class="line">NOP     (same route)</span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
 <h3 id="scapy-1">2、scapy</h3>
-<p>** 示例：**</p>
-<pre><code>**┌──(root💀kali)-[/home/** **kali]
-└─# scapy**
-INFO: Can&#39;t import PyX. Won&#39;t be able to use psdump() or pdfdump().
-                                      
-                     aSPY//YASa       
-             apyyyyCY//////////YCa       |
-            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy
- ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4
- AYAsAYYYYYYYY///Ps              cY//S   |
-         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy
-         SPPPP///a          pP///AC//Y   |
-              A//A            cyP////C   | Have fun!
-              p///Ac            sC///a   |
-              P////YCpc           A//A   | Craft packets before they craft
-       scccccp///pSP///p          p//Y   | you.
-      sY/////////y  caa           S//P   |                      -- Socrate
-       cayCyayP//Ya              pY/Ya   |
-        sY/PsY////YCc          aC//Yp 
-         sc  sccaCY//PCypaapyCP//YSs  
-                  spCPY//////YPSps    
-                       ccaacs         
-                                       using IPython 7.22.0
-**&gt; &gt;&gt; i=IP()
-&gt;&gt;&gt; p=ICMP()
-&gt;&gt;&gt; ping=(i/p)　　　　　　　　#组合成ping的数据包
-&gt;&gt;&gt; ping** **.display()**
-###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= icmp
-  chksum= None
-  src= 127.0.0.1
-  dst= 127.0.0.1
-  \options\
-###[ ICMP ]### 
-     **type** **= echo-** **request　　　　　　#默认是request包，若不是可通过&quot; ping[ICMP].type=8&quot; 设定为request**
-     code= 0
-     chksum= None
-     id= 0x0
-     seq= 0x0
-
-**&gt; &gt;&gt; ping[IP].dst=&quot;10.10.10.2&quot;　　　　　　#目标IP，注意src会自动识别添加
-&gt;&gt;&gt; ping** **.display()**
-###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= icmp
-  chksum= None
-  src= 10.10.10.135
-  dst= 10.10.10.2
-  \options\
-###[ ICMP ]### 
-     type= echo-request
-     code= 0
-     chksum= None
-     id= 0x0
-     seq= 0x0
-
-**&gt; &gt;&gt; a=sr1(ping** **)　　　　　　#发包**
-Begin emission:
-Finished sending 1 packets.
-.*
-Received 2 packets, got 1 answers, remaining 0 packets
-**&gt; &gt;&gt;** **a.display()　　　　　　#探测结果**
-###[ IP ]### 
-  version= 4
-  ihl= 5
-  tos= 0x0
-  len= 28
-  id= 65492
-  flags= 
-  frag= 0
-  ttl= 128
-  proto= icmp
-  chksum= 0x1270
-  src= 10.10.10.2
-  dst= 10.10.10.135
-  \options\
-###[ ICMP ]### 
-     **type** **= echo-** **reply**
-     code= 0
-     chksum= 0xffff
-     id= 0x0
-     seq= 0x0
-###[ Padding ]### 
-        load= &#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#39;
-
-**&gt; &gt;&gt; ping[IP].dst=&quot;10.10.10.88&quot;      #探测不存在的IP  
-** **&gt; &gt;&gt; a1=sr1(ping** **)**
-Begin emission:
-WARNING: Mac address to reach destination not found. Using broadcast.
-Finished sending 1 packets.
-.......^C
-Received 7 packets, got 0 answers, remaining 1 packets
-**&gt; &gt;&gt; a1=sr1(ping,timeout=1,verbose=1** **)　　　　#可通添加timeout避免一直探测同一IP**
-Begin emission:
-WARNING: Mac address to reach destination not found. Using broadcast.
-Finished sending 1 packets.
-
-Received 1 packets, got 0 answers, remaining 1 packets</code></pre>
-<p>** 简写：**</p>
-<pre><code>**&gt; &gt;&gt; A=sr1(IP(dst=&quot;10.10.10.2&quot;)/ICMP(),timeout=1** **)**
-Begin emission:
-Finished sending 1 packets.
-.*
-Received 2 packets, got 1 answers, remaining 0 packets
-&gt;&gt;&gt; A.display()
-###[ IP ]### 
-  version= 4
-  ihl= 5
-  tos= 0x0
-  len= 28
-  id= 65496
-  flags= 
-  frag= 0
-  ttl= 128
-  proto= icmp
-  chksum= 0x126c
-  src= 10.10.10.2
-  dst= 10.10.10.135
-  \options\
-###[ ICMP ]### 
-     type= echo-reply
-     code= 0
-     chksum= 0xffff
-     id= 0x0
-     seq= 0x0
-###[ Padding ]### 
-        load= &#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#39;</code></pre>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># scapy</span></span><br><span class="line">INFO: Can<span class="string">&#x27;t import PyX. Won&#x27;</span>t be able to use psdump() or pdfdump().</span><br><span class="line">                                      </span><br><span class="line">                     aSPY//YASa       </span><br><span class="line">             apyyyyCY//////////YCa       |</span><br><span class="line">            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy</span><br><span class="line"> ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4</span><br><span class="line"> AYAsAYYYYYYYY///Ps              cY//S   |</span><br><span class="line">         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy</span><br><span class="line">         SPPPP///a          pP///AC//Y   |</span><br><span class="line">              A//A            cyP////C   | Have fun!</span><br><span class="line">              p///Ac            sC///a   |</span><br><span class="line">              P////YCpc           A//A   | Craft packets before they craft</span><br><span class="line">       scccccp///pSP///p          p//Y   | you.</span><br><span class="line">      sY/////////y  caa           S//P   |                      -- Socrate</span><br><span class="line">       cayCyayP//Ya              pY/Ya   |</span><br><span class="line">        sY/PsY////YCc          aC//Yp </span><br><span class="line">         sc  sccaCY//PCypaapyCP//YSs  </span><br><span class="line">                  spCPY//////YPSps    </span><br><span class="line">                       ccaacs         </span><br><span class="line">                                       using IPython 7.22.0</span><br><span class="line">&gt; &gt;&gt; i=IP()</span><br><span class="line">&gt;&gt;&gt; p=ICMP()</span><br><span class="line">&gt;&gt;&gt; ping=(i/p)　　　　　　　　<span class="comment">#组合成ping的数据包</span></span><br><span class="line">&gt;&gt;&gt; ping.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= icmp</span><br><span class="line">  chksum= None</span><br><span class="line">  src= 127.0.0.1</span><br><span class="line">  dst= 127.0.0.1</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ ICMP ]### </span></span><br><span class="line">     <span class="built_in">type</span>= echo-request　　　　　　<span class="comment">#默认是request包，若不是可通过&quot; ping[ICMP].type=8&quot; 设定为request</span></span><br><span class="line">     code= 0</span><br><span class="line">     chksum= None</span><br><span class="line">     <span class="built_in">id</span>= 0x0</span><br><span class="line">     <span class="built_in">seq</span>= 0x0</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; ping[IP].dst=<span class="string">&quot;10.10.10.2&quot;</span>　　　　　　<span class="comment">#目标IP，注意src会自动识别添加</span></span><br><span class="line">&gt;&gt;&gt; ping.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= icmp</span><br><span class="line">  chksum= None</span><br><span class="line">  src= 10.10.10.135</span><br><span class="line">  dst= 10.10.10.2</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ ICMP ]### </span></span><br><span class="line">     <span class="built_in">type</span>= echo-request</span><br><span class="line">     code= 0</span><br><span class="line">     chksum= None</span><br><span class="line">     <span class="built_in">id</span>= 0x0</span><br><span class="line">     <span class="built_in">seq</span>= 0x0</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; a=sr1(ping)　　　　　　<span class="comment">#发包</span></span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">.*</span><br><span class="line">Received 2 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt; &gt;&gt;a.display()　　　　　　<span class="comment">#探测结果</span></span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= 5</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= 28</span><br><span class="line">  <span class="built_in">id</span>= 65492</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 128</span><br><span class="line">  proto= icmp</span><br><span class="line">  chksum= 0x1270</span><br><span class="line">  src= 10.10.10.2</span><br><span class="line">  dst= 10.10.10.135</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ ICMP ]### </span></span><br><span class="line">     <span class="built_in">type</span>= echo-reply</span><br><span class="line">     code= 0</span><br><span class="line">     chksum= 0xffff</span><br><span class="line">     <span class="built_in">id</span>= 0x0</span><br><span class="line">     <span class="built_in">seq</span>= 0x0</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">        load= <span class="string">&#x27;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#x27;</span></span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; ping[IP].dst=<span class="string">&quot;10.10.10.88&quot;</span>      <span class="comment">#探测不存在的IP  </span></span><br><span class="line">&gt; &gt;&gt; a1=sr1(ping)</span><br><span class="line">Begin emission:</span><br><span class="line">WARNING: Mac address to reach destination not found. Using broadcast.</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">.......^C</span><br><span class="line">Received 7 packets, got 0 answers, remaining 1 packets</span><br><span class="line">&gt; &gt;&gt; a1=sr1(ping,<span class="built_in">timeout</span>=1,verbose=1)　　　　<span class="comment">#可通添加timeout避免一直探测同一IP</span></span><br><span class="line">Begin emission:</span><br><span class="line">WARNING: Mac address to reach destination not found. Using broadcast.</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received 1 packets, got 0 answers, remaining 1 packets</span><br></pre></td></tr></table></figure>
+<p><strong>简写：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&gt; &gt;&gt; A=sr1(IP(dst=<span class="string">&quot;10.10.10.2&quot;</span>)/ICMP(),<span class="built_in">timeout</span>=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line">.*</span><br><span class="line">Received 2 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt;&gt;&gt; A.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= 5</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= 28</span><br><span class="line">  <span class="built_in">id</span>= 65496</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 128</span><br><span class="line">  proto= icmp</span><br><span class="line">  chksum= 0x126c</span><br><span class="line">  src= 10.10.10.2</span><br><span class="line">  dst= 10.10.10.135</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ ICMP ]### </span></span><br><span class="line">     <span class="built_in">type</span>= echo-reply</span><br><span class="line">     code= 0</span><br><span class="line">     chksum= 0xffff</span><br><span class="line">     <span class="built_in">id</span>= 0x0</span><br><span class="line">     <span class="built_in">seq</span>= 0x0</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">        load= <span class="string">&#x27;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00&#x27;</span></span><br></pre></td></tr></table></figure>
 <h3 id="nmap-1">3、nmap</h3>
-<p>** 注意，nmap探测和SRC同网段和不同网段发的数据包时不一样的！**</p>
+<p><strong>注意，nmap探测和SRC同网段和不同网段发的数据包时不一样的！</strong></p>
 <p><strong>同网段发ARP数据包：</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali]
-└─# nmap 10.10.10.1-100 -sn
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 09:00 EST
-Nmap scan report for 10.10.10.2
-Host is up (0.00020s latency).
-MAC Address: 00:50:56:F0:F4:B1 (VMware)
-Nmap done: 100 IP addresses (1 host up) scanned in 13.02 seconds</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># nmap 10.10.10.1-100 -sn</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 09:00 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.2</span><br><span class="line">Host is up (0.00020s latency).</span><br><span class="line">MAC Address: 00:50:56:F0:F4:B1 (VMware)</span><br><span class="line">Nmap <span class="keyword">done</span>: 100 IP addresses (1 host up) scanned <span class="keyword">in</span> 13.02 seconds</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211120220208797-256253212.png" /></p>
-<p>** 不同网段发ICMP+TCP数据包：**</p>
-<pre><code>┌──(root💀kali)-[/home/kali]
-└─# nmap 192.168.1.1-100 -sn
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 08:58 EST
-Nmap scan report for 192.168.1.1
-Host is up (0.0021s latency).
-Nmap scan report for 192.168.1.2
-Host is up (0.00099s latency).
-Nmap scan report for 192.168.1.3
-Host is up (0.00098s latency).
-Nmap scan report for 192.168.1.4
-…………</code></pre>
+<p><strong>不同网段发ICMP+TCP数据包：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># nmap 192.168.1.1-100 -sn</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 08:58 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.1</span><br><span class="line">Host is up (0.0021s latency).</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.2</span><br><span class="line">Host is up (0.00099s latency).</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.3</span><br><span class="line">Host is up (0.00098s latency).</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.4</span><br><span class="line">…………</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211120220001447-1648727395.png" /></p>
 <h3 id="fping">4、fping</h3>
-<p>** 基本用法：**</p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# fping 10.10.10.2 -c 3**
-10.10.10.2 : [0], 64 bytes, 0.820 ms (0.820 avg, 0% loss)
-10.10.10.2 : [1], 64 bytes, 0.457 ms (0.639 avg, 0% loss)
-10.10.10.2 : [2], 64 bytes, 0.267 ms (0.515 avg, 0% loss)
-
-10.10.10.2 : xmt/rcv/%loss = 3/3/0%, min/avg/max = 0.267/0.515/0.820</code></pre>
+<p><strong>基本用法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># fping 10.10.10.2 -c 3</span></span><br><span class="line">10.10.10.2 : [0], 64 bytes, 0.820 ms (0.820 avg, 0% loss)</span><br><span class="line">10.10.10.2 : [1], 64 bytes, 0.457 ms (0.639 avg, 0% loss)</span><br><span class="line">10.10.10.2 : [2], 64 bytes, 0.267 ms (0.515 avg, 0% loss)</span><br><span class="line"></span><br><span class="line">10.10.10.2 : xmt/rcv/%loss = 3/3/0%, min/avg/max = 0.267/0.515/0.820</span><br></pre></td></tr></table></figure>
 <p><strong>fping支持对地址段的扫描：</strong></p>
-<pre><code>┌──(root💀kali)-[/home/kali]
-└─# fping -g 10.10.10.2 10.10.10.6 -c 1
-10.10.10.2 : [0], 64 bytes, 0.292 ms (0.292 avg, 0% loss)
-10.10.10.3 : [0], timed out (NaN avg, 100% loss)
-10.10.10.4 : [0], timed out (NaN avg, 100% loss)
-10.10.10.5 : [0], timed out (NaN avg, 100% loss)
-10.10.10.6 : [0], timed out (NaN avg, 100% loss)
-
-10.10.10.2 : xmt/rcv/%loss = 1/1/0%, min/avg/max = 0.292/0.292/0.292
-10.10.10.3 : xmt/rcv/%loss = 1/0/100%
-10.10.10.4 : xmt/rcv/%loss = 1/0/100%
-10.10.10.5 : xmt/rcv/%loss = 1/0/100%
-10.10.10.6 : xmt/rcv/%loss = 1/0/100%
-┌──(root💀kali)-[/home/kali]
-└─# fping -g 10.10.10.0/24                                                                                             1 ⨯
-10.10.10.2 is alive
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.1
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.1
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.1
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.1
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.4
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.4
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.4
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.4
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.3
-
-………………
-
-10.10.10.1 is unreachable
-10.10.10.3 is unreachable
-10.10.10.4 is unreachable
-10.10.10.5 is unreachable
-10.10.10.6 is unreachable
-10.10.10.7 is unreachable
-………………</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># fping -g 10.10.10.2 10.10.10.6 -c 1</span></span><br><span class="line">10.10.10.2 : [0], 64 bytes, 0.292 ms (0.292 avg, 0% loss)</span><br><span class="line">10.10.10.3 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.4 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.5 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.6 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line"></span><br><span class="line">10.10.10.2 : xmt/rcv/%loss = 1/1/0%, min/avg/max = 0.292/0.292/0.292</span><br><span class="line">10.10.10.3 : xmt/rcv/%loss = 1/0/100%</span><br><span class="line">10.10.10.4 : xmt/rcv/%loss = 1/0/100%</span><br><span class="line">10.10.10.5 : xmt/rcv/%loss = 1/0/100%</span><br><span class="line">10.10.10.6 : xmt/rcv/%loss = 1/0/100%</span><br><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># fping -g 10.10.10.0/24                                                                                             1 ⨯</span></span><br><span class="line">10.10.10.2 is alive</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.1</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.1</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.1</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.1</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.4</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.4</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.4</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.4</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.3</span><br><span class="line"></span><br><span class="line">………………</span><br><span class="line"></span><br><span class="line">10.10.10.1 is unreachable</span><br><span class="line">10.10.10.3 is unreachable</span><br><span class="line">10.10.10.4 is unreachable</span><br><span class="line">10.10.10.5 is unreachable</span><br><span class="line">10.10.10.6 is unreachable</span><br><span class="line">10.10.10.7 is unreachable</span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
 <p><strong>支持文件调用：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# fping -f /home/kali/Desktop/list.txt -c 1  **                                                                        1 ⨯
-10.10.10.2   : [0], 64 bytes, 0.169 ms (0.169 avg, 0% loss)
-10.10.10.1   : [0], timed out (NaN avg, 100% loss)
-10.10.10.254 : [0], timed out (NaN avg, 100% loss)
-10.10.10.89  : [0], timed out (NaN avg, 100% loss)
-
-10.10.10.1   : xmt/rcv/%loss = 1/0/100%
-10.10.10.254 : xmt/rcv/%loss = 1/0/100%
-10.10.10.2   : xmt/rcv/%loss = 1/1/0%, min/avg/max = 0.169/0.169/0.169
-10.10.10.89  : xmt/rcv/%loss = 1/0/100%  
- **┌──(root💀kali) -[/home/kali]
-└─# fping -g 10.10.10.0/24 -c 1 &gt;&gt;** **result.txt**
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.1
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.5
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.4
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.3
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.7
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.6
-ICMP Host Unreachable from 10.10.10.135 for ICMP Echo sent to 10.10.10.10
-
-┌──(root💀kali)-[/home/kali]
-└─# ls 
-Desktop Documents Downloads Music Pictures Public result.txt Templates Videos
-
-**┌──(root💀kali)** **-[/home/ kali]
-└─# cat result.txt
-**10.10.10.2 : [0], 64 bytes, 0.403 ms (0.403 avg, 0% loss)
-10.10.10.1 : [0], timed out (NaN avg, 100% loss)
-10.10.10.3 : [0], timed out (NaN avg, 100% loss)
-10.10.10.4 : [0], timed out (NaN avg, 100% loss)
-10.10.10.5 : [0], timed out (NaN avg, 100% loss)
-10.10.10.6 : [0], timed out (NaN avg, 100% loss)
-10.10.10.7 : [0], timed out (NaN avg, 100% loss)
-10.10.10.8 : [0], timed out (NaN avg, 100% loss)
-10.10.10.9 : [0], timed out (NaN avg, 100% loss)
-10.10.10.10 : [0], timed out (NaN avg, 100% loss)
-10.10.10.11 : [0], timed out (NaN avg, 100% loss)</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># fping -f /home/kali/Desktop/list.txt -c 1                                                                          1 ⨯</span></span><br><span class="line">10.10.10.2   : [0], 64 bytes, 0.169 ms (0.169 avg, 0% loss)</span><br><span class="line">10.10.10.1   : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.254 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.89  : [0], timed out (NaN avg, 100% loss)</span><br><span class="line"></span><br><span class="line">10.10.10.1   : xmt/rcv/%loss = 1/0/100%</span><br><span class="line">10.10.10.254 : xmt/rcv/%loss = 1/0/100%</span><br><span class="line">10.10.10.2   : xmt/rcv/%loss = 1/1/0%, min/avg/max = 0.169/0.169/0.169</span><br><span class="line">10.10.10.89  : xmt/rcv/%loss = 1/0/100%  </span><br><span class="line"> ┌──(root💀kali) -[/home/kali]</span><br><span class="line">└─<span class="comment"># fping -g 10.10.10.0/24 -c 1 &gt;&gt;result.txt</span></span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.1</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.5</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.4</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.3</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.7</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.6</span><br><span class="line">ICMP Host Unreachable from 10.10.10.135 <span class="keyword">for</span> ICMP Echo sent to 10.10.10.10</span><br><span class="line"></span><br><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># ls </span></span><br><span class="line">Desktop Documents Downloads Music Pictures Public result.txt Templates Videos</span><br><span class="line"></span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># cat result.txt</span></span><br><span class="line">10.10.10.2 : [0], 64 bytes, 0.403 ms (0.403 avg, 0% loss)</span><br><span class="line">10.10.10.1 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.3 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.4 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.5 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.6 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.7 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.8 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.9 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.10 : [0], timed out (NaN avg, 100% loss)</span><br><span class="line">10.10.10.11 : [0], timed out (NaN avg, 100% loss)</span><br></pre></td></tr></table></figure>
 <h3 id="hping命令">5、Hping命令</h3>
 <ul>
 <li><strong>能发送几乎任意的TCP/IP包（可指定对应字段）</strong></li>
@@ -878,57 +419,12 @@ Desktop Documents Downloads Music Pictures Public result.txt Templates Videos
 <li><strong>可用于压力测试</strong></li>
 </ul>
 <p><strong>基本用法：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# hping3 10.10.10.2 --icmp -c 2　　　　　　　　#对存在的IP探测**
-HPING 10.10.10.2 (eth0 10.10.10.2): icmp mode set, 28 headers + 0 data bytes
-len=46 ip=10.10.10.2 ttl=128 id=1675 icmp_seq=0 rtt=5.6 ms
-len=46 ip=10.10.10.2 ttl=128 id=1676 icmp_seq=1 rtt=2.5 ms
-
---- 10.10.10.2 hping statistic ---
-2 packets transmitted, 2 packets received, 0% packet loss
-round-trip min/avg/max = 2.5/4.1/5.6 ms
-                                                                                                                           
-**┌──(root💀kali)** **-[/home/ kali]
-└─# hping3 10.10.10.3 --icmp -c 2　　　　　　　　#对不存在的IP探测情况**
-HPING 10.10.10.3 (eth0 10.10.10.3): icmp mode set, 28 headers + 0 data bytes
-
---- 10.10.10.3 hping statistic ---
-2 packets transmitted, 0 packets received, 100% packet loss
-round-trip min/avg/max = 0.0/0.0/0.0 ms</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># hping3 10.10.10.2 --icmp -c 2　　　　　　　　#对存在的IP探测</span></span><br><span class="line">HPING 10.10.10.2 (eth0 10.10.10.2): icmp mode <span class="built_in">set</span>, 28 headers + 0 data bytes</span><br><span class="line">len=46 ip=10.10.10.2 ttl=128 <span class="built_in">id</span>=1675 icmp_seq=0 rtt=5.6 ms</span><br><span class="line">len=46 ip=10.10.10.2 ttl=128 <span class="built_in">id</span>=1676 icmp_seq=1 rtt=2.5 ms</span><br><span class="line"></span><br><span class="line">--- 10.10.10.2 hping statistic ---</span><br><span class="line">2 packets transmitted, 2 packets received, 0% packet loss</span><br><span class="line">round-trip min/avg/max = 2.5/4.1/5.6 ms</span><br><span class="line">                                                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># hping3 10.10.10.3 --icmp -c 2　　　　　　　　#对不存在的IP探测情况</span></span><br><span class="line">HPING 10.10.10.3 (eth0 10.10.10.3): icmp mode <span class="built_in">set</span>, 28 headers + 0 data bytes</span><br><span class="line"></span><br><span class="line">--- 10.10.10.3 hping statistic ---</span><br><span class="line">2 packets transmitted, 0 packets received, 100% packet loss</span><br><span class="line">round-trip min/avg/max = 0.0/0.0/0.0 ms</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211120223100123-384468833.png" /></p>
 <p><strong>对某一地址段探测：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# for addr in $(seq 1 100) ; do hping3 10.10.10.$addr  --icmp -c 1 &gt;&gt;handle.txt  &amp; done**      
-
-[2] 3007
-[3] 3008
-[4] 3009
-
-………………
-
---- 10.10.10.1 hping statistic ---
-1 packets transmitted, 0 packets received, 100% packet loss
-round-trip min/avg/max = 0.0/0.0/0.0 ms
-
-**--- 10.10.10.2 hping statistic ---
-1 packets transmitted, 1 packets received, 0% packet loss
-round-trip min/avg/max = 9.0/9.0/9.0 ms
-
-**--- 10.10.10.3 hping statistic ---
-1 packets transmitted, 0 packets received, 100% packet loss
-round-trip min/avg/max = 0.0/0.0/0.0 ms
-
---- 10.10.10.4 hping statistic ---
-1 packets transmitted, 0 packets received, 100% packet loss
-round-trip min/avg/max = 0.0/0.0/0.0 ms
-
-………………
-
-**┌──(root💀kali)** **-[/home/ kali]
-└─# cat handle.txt | grep ^** **len  　　　　 #过滤出以len开头活着的主机**
-len=46 ip=10.10.10.2 ttl=128 id=1677 icmp_seq=0 rtt=9.0 ms                                                           </code></pre>
-<h2 id="五四层发现">五、四层发现</h2>
-<p>** 优点：**</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># for addr in $(seq 1 100) ; do hping3 10.10.10.$addr  --icmp -c 1 &gt;&gt;handle.txt  &amp; done      </span></span><br><span class="line"></span><br><span class="line">[2] 3007</span><br><span class="line">[3] 3008</span><br><span class="line">[4] 3009</span><br><span class="line"></span><br><span class="line">………………</span><br><span class="line"></span><br><span class="line">--- 10.10.10.1 hping statistic ---</span><br><span class="line">1 packets transmitted, 0 packets received, 100% packet loss</span><br><span class="line">round-trip min/avg/max = 0.0/0.0/0.0 ms</span><br><span class="line"></span><br><span class="line">--- 10.10.10.2 hping statistic ---</span><br><span class="line">1 packets transmitted, 1 packets received, 0% packet loss</span><br><span class="line">round-trip min/avg/max = 9.0/9.0/9.0 ms</span><br><span class="line"></span><br><span class="line">--- 10.10.10.3 hping statistic ---</span><br><span class="line">1 packets transmitted, 0 packets received, 100% packet loss</span><br><span class="line">round-trip min/avg/max = 0.0/0.0/0.0 ms</span><br><span class="line"></span><br><span class="line">--- 10.10.10.4 hping statistic ---</span><br><span class="line">1 packets transmitted, 0 packets received, 100% packet loss</span><br><span class="line">round-trip min/avg/max = 0.0/0.0/0.0 ms</span><br><span class="line"></span><br><span class="line">………………</span><br><span class="line"></span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># cat handle.txt | grep ^len  　　　　 #过滤出以len开头活着的主机</span></span><br><span class="line">len=46 ip=10.10.10.2 ttl=128 <span class="built_in">id</span>=1677 icmp_seq=0 rtt=9.0 ms                                                           </span><br></pre></td></tr></table></figure>
+<h2 id="四层发现">5. 四层发现</h2>
+<p><strong>优点：</strong></p>
 <ul>
 <li>可路由且结果可靠（借助对端口探测的结果评判IP是否存在）</li>
 <li>防火墙过滤可能小</li>
@@ -939,7 +435,7 @@ len=46 ip=10.10.10.2 ttl=128 id=1677 icmp_seq=0 rtt=9.0 ms                      
 <li>全端口（1-65535）的扫描速度慢</li>
 <li>基于状态过滤的防火墙依旧可过滤扫描</li>
 </ul>
-<p>** TCP**</p>
+<p><strong>TCP</strong></p>
 <ul>
 <li>不建立连接直接发ACK探测，如果目标返回reset包（注意，并不是所有的主机都会返回，主机如果做了过滤，则不会返回reset包），即可证明
 IP 存在。</li>
@@ -954,292 +450,22 @@ IP 存在。</li>
 <li>不过我们依旧可以依靠udp协议对访问端口关闭处理的信息推测主机存在否，即当目标IP存在，但探测端口是关闭的，则会向源IP返回ICMP不可达的信息判断出该IP存在！</li>
 </ul>
 <h3 id="scapy-2">1、scapy</h3>
-<p><strong>TCP探测，采用ACK ----RST模式，</strong>
-<strong>示例如下：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/** **kali]
-└─# scapy**
-INFO: Can&#39;t import PyX. Won&#39;t be able to use psdump() or pdfdump().
-                                      
-                     aSPY//YASa       
-             apyyyyCY//////////YCa       |
-            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy
- ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4
- AYAsAYYYYYYYY///Ps              cY//S   |
-         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy
-         SPPPP///a          pP///AC//Y   |
-              A//A            cyP////C   | Have fun!
-              p///Ac            sC///a   |
-              P////YCpc           A//A   | To craft a packet, you have to be a
-       scccccp///pSP///p          p//Y   | packet, and learn how to swim in
-      sY/////////y  caa           S//P   | the wires and in the waves.
-       cayCyayP//Ya              pY/Ya   |        -- Jean-Claude Van Damme
-        sY/PsY////YCc          aC//Yp    |
-         sc  sccaCY//PCypaapyCP//YSs  
-                  spCPY//////YPSps    
-                       ccaacs         
-                                       using IPython 7.22.0
-**&gt; &gt;&gt; i=IP()
-&gt;&gt;&gt; t=TCP()
-&gt;&gt;&gt; it=(i/t)
-&gt;&gt;&gt;** **it.display()**
-###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= tcp
-  chksum= None
-**src** **= 127.0.0.1
-  dst= 127.0.0.1**
-  \options\
-###[ TCP ]### 
-**sport** **= ftp_data
-     dport= http
-     **seq= 0
-     ack= 0
-     dataofs= None
-     reserved= 0 **flags =** **S**
-     window= 8192
-     chksum= None
-     urgptr= 0
-     options= []
-
-**&gt; &gt;&gt; it[IP].dst=&quot;192.168.1.1&quot;　　　　　　　　#个人路由器
-&gt;&gt;&gt; it[TCP].flags=&#39;A&#39;　　　　　　　　　　　　#指定直接发ACK数据包
-&gt;&gt;&gt;** **it.display()**
-###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= tcp
-  chksum= None
-**src** **= 192.168.1.109　　　　　　　　　　　　#会自动识别填充
-  dst= 192.168.1.1**
-  \options\
-###[ TCP ]### 
-     sport= ftp_data
-     dport= http
-     seq= 0
-     ack= 0
-     dataofs= None
-     reserved= 0
-     flags= A
-     window= 8192
-     chksum= None
-     urgptr= 0
-     options= []
-
-**&gt; &gt;&gt; a=sr1(it,timeout=1,verbose=1** **)　　　　　　　　　　#发包探测**
-Begin emission:
-Finished sending 1 packets.
-
-**Received** **2 packets, got 0 answers, remaining 1 packets  　　#未收到reset包这是由于个人路由器做了过滤，一般主机都是会返回一个reset包，如10.10.10.2这个。
-&gt;&gt;&gt; it[IP].dst=&quot;10.10.10.2&quot;
-&gt;&gt;&gt;** **it.display()**
-###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= tcp
-  chksum= None
-  src= 10.10.10.135
-  dst= 10.10.10.2
-  \options\
-###[ TCP ]### 
-     sport= ftp_data
-     dport= http
-     seq= 0
-     ack= 0
-     dataofs= None
-     reserved= 0
-     flags= A
-     window= 8192
-     chksum= None
-     urgptr= 0
-     options= []
-
-**&gt; &gt;&gt; a=sr1(it,timeout=1,verbose=1** **)**
-Begin emission:
-Finished sending 1 packets.
-
-**Received** **2 packets, got 1 answers, remaining 0 packets
-&gt;&gt;&gt;** **a.display()　　　　　　　　　　　　　　　　#查看回包内容**
-###[ IP ]### 
-  version= 4
-  ihl= 5
-  tos= 0x0
-  len= 40
-  id= 65248
-  flags= 
-  frag= 0
-  ttl= 128
-  proto= tcp
-  chksum= 0x1353
-  src= 10.10.10.2
-  dst= 10.10.10.135
-  \options\
-###[ TCP ]### 
-     sport= http
-     dport= ftp_data
-     seq= 0
-     ack= 0
-     dataofs= 5
-     reserved= 0 **flags =** **R　　　　　　　　　　　　　　　　　　#可见返回了个reset数据包，有时候是数字4（reset二进制转为十进制做的），可抓包理解**
-     window= 32767
-     chksum= 0x6e1
-     urgptr= 0
-     options= []
-###[ Padding ]### 
-        load= &#39;\x00\x00\x00\x00\x00\x00&#39; **&gt; &gt;&gt; it[TCP].dport=445** **&gt; &gt;&gt; a=sr1(it,timeout=1,verbose=1** **)**
-Begin emission:
-Finished sending 1 packets.
-
-**Received** **1 packets, got 1 answers, remaining 0 packets**</code></pre>
+<p><strong>TCP探测，采用ACK ----RST模式，示例如下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># scapy</span></span><br><span class="line">INFO: Can<span class="string">&#x27;t import PyX. Won&#x27;</span>t be able to use psdump() or pdfdump().</span><br><span class="line">                                      </span><br><span class="line">                     aSPY//YASa       </span><br><span class="line">             apyyyyCY//////////YCa       |</span><br><span class="line">            sY//////YSpcs  scpCY//Pp     | Welcome to Scapy</span><br><span class="line"> ayp ayyyyyyySCP//Pp           syY//C    | Version 2.4.4</span><br><span class="line"> AYAsAYYYYYYYY///Ps              cY//S   |</span><br><span class="line">         pCCCCY//p          cSSps y//Y   | https://github.com/secdev/scapy</span><br><span class="line">         SPPPP///a          pP///AC//Y   |</span><br><span class="line">              A//A            cyP////C   | Have fun!</span><br><span class="line">              p///Ac            sC///a   |</span><br><span class="line">              P////YCpc           A//A   | To craft a packet, you have to be a</span><br><span class="line">       scccccp///pSP///p          p//Y   | packet, and learn how to swim <span class="keyword">in</span></span><br><span class="line">      sY/////////y  caa           S//P   | the wires and <span class="keyword">in</span> the waves.</span><br><span class="line">       cayCyayP//Ya              pY/Ya   |        -- Jean-Claude Van Damme</span><br><span class="line">        sY/PsY////YCc          aC//Yp    |</span><br><span class="line">         sc  sccaCY//PCypaapyCP//YSs  </span><br><span class="line">                  spCPY//////YPSps    </span><br><span class="line">                       ccaacs         </span><br><span class="line">                                       using IPython 7.22.0</span><br><span class="line">&gt; &gt;&gt; i=IP()</span><br><span class="line">&gt;&gt;&gt; t=TCP()</span><br><span class="line">&gt;&gt;&gt; it=(i/t)</span><br><span class="line">&gt;&gt;&gt;it.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= None</span><br><span class="line">src= 127.0.0.1</span><br><span class="line">  dst= 127.0.0.1</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">sport= ftp_data</span><br><span class="line">     dport= http</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 0</span><br><span class="line">     dataofs= None</span><br><span class="line">     reserved= 0 flags =S</span><br><span class="line">     window= 8192</span><br><span class="line">     chksum= None</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; it[IP].dst=<span class="string">&quot;192.168.1.1&quot;</span>　　　　　　　　<span class="comment">#个人路由器</span></span><br><span class="line">&gt;&gt;&gt; it[TCP].flags=<span class="string">&#x27;A&#x27;</span>　　　　　　　　　　　　<span class="comment">#指定直接发ACK数据包</span></span><br><span class="line">&gt;&gt;&gt;it.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= None</span><br><span class="line">src= 192.168.1.109　　　　　　　　　　　　<span class="comment">#会自动识别填充</span></span><br><span class="line">  dst= 192.168.1.1</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= ftp_data</span><br><span class="line">     dport= http</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 0</span><br><span class="line">     dataofs= None</span><br><span class="line">     reserved= 0</span><br><span class="line">     flags= A</span><br><span class="line">     window= 8192</span><br><span class="line">     chksum= None</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; a=sr1(it,<span class="built_in">timeout</span>=1,verbose=1)　　　　　　　　　　<span class="comment">#发包探测</span></span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received2 packets, got 0 answers, remaining 1 packets  　　<span class="comment">#未收到reset包这是由于个人路由器做了过滤，一般主机都是会返回一个reset包，如10.10.10.2这个。</span></span><br><span class="line">&gt;&gt;&gt; it[IP].dst=<span class="string">&quot;10.10.10.2&quot;</span></span><br><span class="line">&gt;&gt;&gt;it.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= None</span><br><span class="line">  src= 10.10.10.135</span><br><span class="line">  dst= 10.10.10.2</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= ftp_data</span><br><span class="line">     dport= http</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 0</span><br><span class="line">     dataofs= None</span><br><span class="line">     reserved= 0</span><br><span class="line">     flags= A</span><br><span class="line">     window= 8192</span><br><span class="line">     chksum= None</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; a=sr1(it,<span class="built_in">timeout</span>=1,verbose=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received2 packets, got 1 answers, remaining 0 packets</span><br><span class="line">&gt;&gt;&gt;a.display()　　　　　　　　　　　　　　　　<span class="comment">#查看回包内容</span></span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= 5</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= 40</span><br><span class="line">  <span class="built_in">id</span>= 65248</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 128</span><br><span class="line">  proto= tcp</span><br><span class="line">  chksum= 0x1353</span><br><span class="line">  src= 10.10.10.2</span><br><span class="line">  dst= 10.10.10.135</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ TCP ]### </span></span><br><span class="line">     sport= http</span><br><span class="line">     dport= ftp_data</span><br><span class="line">     <span class="built_in">seq</span>= 0</span><br><span class="line">     ack= 0</span><br><span class="line">     dataofs= 5</span><br><span class="line">     reserved= 0 flags =R　　　　　　　　　　　　　　　　　　<span class="comment">#可见返回了个reset数据包，有时候是数字4（reset二进制转为十进制做的），可抓包理解</span></span><br><span class="line">     window= 32767</span><br><span class="line">     chksum= 0x6e1</span><br><span class="line">     urgptr= 0</span><br><span class="line">     options= []</span><br><span class="line"><span class="comment">###[ Padding ]### </span></span><br><span class="line">        load= <span class="string">&#x27;\x00\x00\x00\x00\x00\x00&#x27;</span> </span><br><span class="line">        &gt; &gt;&gt; it[TCP].dport=445</span><br><span class="line">        &gt; &gt;&gt; a=sr1(it,<span class="built_in">timeout</span>=1,verbose=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received1 packets, got 1 answers, remaining 0 packets</span><br></pre></td></tr></table></figure>
 <p><strong>UDP探测（ICMP端口不可达即可判断IP存在）示例：</strong></p>
-<pre><code>**&gt; &gt;&gt; u=UDP()
-&gt;&gt;&gt; iu=(i/u)
-&gt;&gt;&gt;** **iu.display()**
-###[ IP ]### 
-  version= 4
-  ihl= None
-  tos= 0x0
-  len= None
-  id= 1
-  flags= 
-  frag= 0
-  ttl= 64
-  proto= udp
-  chksum= None
-  src= 127.0.0.1
-  dst= 127.0.0.1
-  \options\
-###[ UDP ]### 
-     sport= domain
-     dport= domain
-     len= None
-     chksum= None
-
-**&gt; &gt;&gt; iu[IP].dst=&quot;10.10.10.2&quot;
-&gt;&gt;&gt; iu[UDP].dport=33333**
-**&gt; &gt;&gt; a1=sr1(iu,timeout=1,verbose=1** **)**
-Begin emission:
-Finished sending 1 packets.
-
-**Received** **1 packets, got 0 answers, remaining 1 packets** **&gt; &gt;&gt; iu[UDP].dport=53
-&gt;&gt;&gt; a1=sr1(iu,timeout=1,verbose=1** **)**
-Begin emission:
-Finished sending 1 packets.
-
-**Received** **0 packets, got 0 answers, remaining 1 packets** **&gt; &gt;&gt; iu[UDP].dport=19291
-&gt;&gt;&gt; a1=sr1(iu,timeout=1,verbose=1** **)**
-Begin emission:
-Finished sending 1 packets.
-
-Received 1 packets, got 0 answers, remaining 1 packets
-**&gt; &gt;&gt; iu[IP].dst=&quot;192.168.1.1&quot;**
-**&gt; &gt;&gt; a1=sr1(iu,timeout=1,verbose=1** **)**
-Begin emission:
-Finished sending 1 packets.
-
-Received 2 packets, got 0 answers, remaining 1 packets
-&gt;&gt;&gt; </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&gt; &gt;&gt; u=UDP()</span><br><span class="line">&gt;&gt;&gt; iu=(i/u)</span><br><span class="line">&gt;&gt;&gt;iu.display()</span><br><span class="line"><span class="comment">###[ IP ]### </span></span><br><span class="line">  version= 4</span><br><span class="line">  ihl= None</span><br><span class="line">  tos= 0x0</span><br><span class="line">  len= None</span><br><span class="line">  <span class="built_in">id</span>= 1</span><br><span class="line">  flags= </span><br><span class="line">  frag= 0</span><br><span class="line">  ttl= 64</span><br><span class="line">  proto= udp</span><br><span class="line">  chksum= None</span><br><span class="line">  src= 127.0.0.1</span><br><span class="line">  dst= 127.0.0.1</span><br><span class="line">  \options\</span><br><span class="line"><span class="comment">###[ UDP ]### </span></span><br><span class="line">     sport= domain</span><br><span class="line">     dport= domain</span><br><span class="line">     len= None</span><br><span class="line">     chksum= None</span><br><span class="line"></span><br><span class="line">&gt; &gt;&gt; iu[IP].dst=<span class="string">&quot;10.10.10.2&quot;</span></span><br><span class="line">&gt;&gt;&gt; iu[UDP].dport=33333</span><br><span class="line">&gt; &gt;&gt; a1=sr1(iu,<span class="built_in">timeout</span>=1,verbose=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received1 packets, got 0 answers, remaining 1 packets&gt; &gt;&gt; iu[UDP].dport=53</span><br><span class="line">&gt;&gt;&gt; a1=sr1(iu,<span class="built_in">timeout</span>=1,verbose=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received0 packets, got 0 answers, remaining 1 packets&gt; &gt;&gt; iu[UDP].dport=19291</span><br><span class="line">&gt;&gt;&gt; a1=sr1(iu,<span class="built_in">timeout</span>=1,verbose=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received 1 packets, got 0 answers, remaining 1 packets</span><br><span class="line">&gt; &gt;&gt; iu[IP].dst=<span class="string">&quot;192.168.1.1&quot;</span></span><br><span class="line">&gt; &gt;&gt; a1=sr1(iu,<span class="built_in">timeout</span>=1,verbose=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 1 packets.</span><br><span class="line"></span><br><span class="line">Received 2 packets, got 0 answers, remaining 1 packets</span><br><span class="line">&gt;&gt;&gt; </span><br></pre></td></tr></table></figure>
 <p><strong>备注：</strong>
 UDP不可靠，如上面测试的实例中居然没回一个ICMP端口不可达。。。</p>
 <h3 id="nmap-2">2、nmap</h3>
 <p><strong>命令参数（help）：</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># nmap -h                </span></span><br><span class="line">Nmap 7.91 ( https://nmap.org )</span><br><span class="line">Usage: nmap [Scan Type(s)] [Options] &#123;target specification&#125;</span><br><span class="line">TARGET SPECIFICATION:</span><br><span class="line">  Can pass hostnames, IP addresses, networks, etc.</span><br><span class="line">  Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254</span><br><span class="line">  -iL &lt;inputfilename&gt;: Input from list of hosts/networks</span><br><span class="line">  -iR &lt;num hosts&gt;: Choose random targets</span><br><span class="line">  --exclude &lt;host1[,host2][,host3],...&gt;: Exclude hosts/networks</span><br><span class="line">  --excludefile &lt;exclude_file&gt;: Exclude list from file</span><br><span class="line">HOST DISCOVERY:</span><br><span class="line">  -sL: List Scan - simply list targets to scan</span><br><span class="line">  -sn: Ping Scan - <span class="built_in">disable</span> port scan</span><br><span class="line">  -Pn: Treat all hosts as online -- skip host discovery</span><br><span class="line">  -PS/PA/PU/PY[portlist]: TCP SYN/ACK, UDP or SCTP discovery to given ports</span><br><span class="line">  -PE/PP/PM: ICMP <span class="built_in">echo</span>, timestamp, and netmask request discovery probes</span><br><span class="line">  -PO[protocol list]: IP Protocol Ping</span><br><span class="line">  -n/-R: Never <span class="keyword">do</span> DNS resolution/Always resolve [default: sometimes]</span><br><span class="line">  --dns-servers &lt;serv1[,serv2],...&gt;: Specify custom DNS servers</span><br><span class="line">  --system-dns: Use OS<span class="string">&#x27;s DNS resolver</span></span><br><span class="line"><span class="string">  --traceroute: Trace hop path to each host</span></span><br><span class="line"><span class="string">SCAN TECHNIQUES:</span></span><br><span class="line"><span class="string">  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans</span></span><br><span class="line"><span class="string">  -sU: UDP Scan</span></span><br><span class="line"><span class="string">  -sN/sF/sX: TCP Null, FIN, and Xmas scans</span></span><br><span class="line"><span class="string">  --scanflags &lt;flags&gt;: Customize TCP scan flags</span></span><br><span class="line"><span class="string">  -sI &lt;zombie host[:probeport]&gt;: Idle scan</span></span><br><span class="line"><span class="string">  -sY/sZ: SCTP INIT/COOKIE-ECHO scans</span></span><br><span class="line"><span class="string">  -sO: IP protocol scan</span></span><br><span class="line"><span class="string">  -b &lt;FTP relay host&gt;: FTP bounce scan</span></span><br><span class="line"><span class="string">PORT SPECIFICATION AND SCAN ORDER:</span></span><br><span class="line"><span class="string">  -p &lt;port ranges&gt;: Only scan specified ports</span></span><br><span class="line"><span class="string">    Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9</span></span><br><span class="line"><span class="string">  --exclude-ports &lt;port ranges&gt;: Exclude the specified ports from scanning</span></span><br><span class="line"><span class="string">  -F: Fast mode - Scan fewer ports than the default scan</span></span><br><span class="line"><span class="string">  -r: Scan ports consecutively - don&#x27;</span>t randomize</span><br><span class="line">  --top-ports &lt;number&gt;: Scan &lt;number&gt; most common ports</span><br><span class="line">  --port-ratio &lt;ratio&gt;: Scan ports more common than &lt;ratio&gt;</span><br><span class="line">SERVICE/VERSION DETECTION:</span><br><span class="line">  -sV: Probe open ports to determine service/version info</span><br><span class="line">  --version-intensity &lt;level&gt;: Set from 0 (light) to 9 (try all probes)</span><br><span class="line">  --version-light: Limit to most likely probes (intensity 2)</span><br><span class="line">  --version-all: Try every single probe (intensity 9)</span><br><span class="line">  --version-trace: Show detailed version scan activity (<span class="keyword">for</span> debugging)</span><br><span class="line">SCRIPT SCAN:</span><br><span class="line">  -sC: equivalent to --script=default</span><br><span class="line">  --script=&lt;Lua scripts&gt;: &lt;Lua scripts&gt; is a comma separated list of</span><br><span class="line">           directories, script-files or script-categories</span><br><span class="line">  --script-args=&lt;n1=v1,[n2=v2,...]&gt;: provide arguments to scripts</span><br><span class="line">  --script-args-file=filename: provide NSE script args <span class="keyword">in</span> a file</span><br><span class="line">  --script-trace: Show all data sent and received</span><br><span class="line">  --script-updatedb: Update the script database.</span><br><span class="line">  --script-help=&lt;Lua scripts&gt;: Show <span class="built_in">help</span> about scripts.</span><br><span class="line">           &lt;Lua scripts&gt; is a comma-separated list of script-files or</span><br><span class="line">           script-categories.</span><br><span class="line">OS DETECTION:</span><br><span class="line">  -O: Enable OS detection</span><br><span class="line">  --osscan-limit: Limit OS detection to promising targets</span><br><span class="line">  --osscan-guess: Guess OS more aggressively</span><br><span class="line">TIMING AND PERFORMANCE:</span><br><span class="line">  Options <span class="built_in">which</span> take &lt;time&gt; are <span class="keyword">in</span> seconds, or append <span class="string">&#x27;ms&#x27;</span> (milliseconds),</span><br><span class="line">  <span class="string">&#x27;s&#x27;</span> (seconds), <span class="string">&#x27;m&#x27;</span> (minutes), or <span class="string">&#x27;h&#x27;</span> (hours) to the value (e.g. 30m).</span><br><span class="line">  -T&lt;0-5&gt;: Set timing template (higher is faster)</span><br><span class="line">  --min-hostgroup/max-hostgroup &lt;size&gt;: Parallel host scan group sizes</span><br><span class="line">  --min-parallelism/max-parallelism &lt;numprobes&gt;: Probe parallelization</span><br><span class="line">  --min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout &lt;time&gt;: Specifies</span><br><span class="line">      probe round trip time.</span><br><span class="line">  --max-retries &lt;tries&gt;: Caps number of port scan probe retransmissions.</span><br><span class="line">  --host-timeout &lt;time&gt;: Give up on target after this long</span><br><span class="line">  --scan-delay/--max-scan-delay &lt;time&gt;: Adjust delay between probes</span><br><span class="line">  --min-rate &lt;number&gt;: Send packets no slower than &lt;number&gt; per second</span><br><span class="line">  --max-rate &lt;number&gt;: Send packets no faster than &lt;number&gt; per second</span><br><span class="line">FIREWALL/IDS EVASION AND SPOOFING:</span><br><span class="line">  -f; --mtu &lt;val&gt;: fragment packets (optionally w/given MTU)</span><br><span class="line">  -D &lt;decoy1,decoy2[,ME],...&gt;: Cloak a scan with decoys</span><br><span class="line">  -S &lt;IP_Address&gt;: Spoof <span class="built_in">source</span> address</span><br><span class="line">  -e &lt;iface&gt;: Use specified interface</span><br><span class="line">  -g/--source-port &lt;portnum&gt;: Use given port number</span><br><span class="line">  --proxies &lt;url1,[url2],...&gt;: Relay connections through HTTP/SOCKS4 proxies</span><br><span class="line">  --data &lt;hex string&gt;: Append a custom payload to sent packets</span><br><span class="line">  --data-string &lt;string&gt;: Append a custom ASCII string to sent packets</span><br><span class="line">  --data-length &lt;num&gt;: Append random data to sent packets</span><br><span class="line">  --ip-options &lt;options&gt;: Send packets with specified ip options</span><br><span class="line">  --ttl &lt;val&gt;: Set IP time-to-live field</span><br><span class="line">  --spoof-mac &lt;mac address/prefix/vendor name&gt;: Spoof your MAC address</span><br><span class="line">  --badsum: Send packets with a bogus TCP/UDP/SCTP checksum</span><br><span class="line">OUTPUT:</span><br><span class="line">  -oN/-oX/-oS/-oG &lt;file&gt;: Output scan <span class="keyword">in</span> normal, XML, s|&lt;rIpt kIddi3,</span><br><span class="line">     and Grepable format, respectively, to the given filename.</span><br><span class="line">  -oA &lt;<span class="built_in">basename</span>&gt;: Output <span class="keyword">in</span> the three major formats at once</span><br><span class="line">  -v: Increase verbosity level (use -vv or more <span class="keyword">for</span> greater effect)</span><br><span class="line">  -d: Increase debugging level (use -<span class="built_in">dd</span> or more <span class="keyword">for</span> greater effect)</span><br><span class="line">  --reason: Display the reason a port is <span class="keyword">in</span> a particular state</span><br><span class="line">  --open: Only show open (or possibly open) ports</span><br><span class="line">  --packet-trace: Show all packets sent and received</span><br><span class="line">  --iflist: Print host interfaces and routes (<span class="keyword">for</span> debugging)</span><br><span class="line">  --append-output: Append to rather than clobber specified output files</span><br><span class="line">  --resume &lt;filename&gt;: Resume an aborted scan</span><br><span class="line">  --stylesheet &lt;path/URL&gt;: XSL stylesheet to transform XML output to HTML</span><br><span class="line">  --webxml: Reference stylesheet from Nmap.Org <span class="keyword">for</span> more portable XML</span><br><span class="line">  --no-stylesheet: Prevent associating of XSL stylesheet w/XML output</span><br><span class="line">MISC:</span><br><span class="line">  -6: Enable IPv6 scanning</span><br><span class="line">  -A: Enable OS detection, version detection, script scanning, and traceroute</span><br><span class="line">  --datadir &lt;<span class="built_in">dirname</span>&gt;: Specify custom Nmap data file location</span><br><span class="line">  --send-eth/--send-ip: Send using raw ethernet frames or IP packets</span><br><span class="line">  --privileged: Assume that the user is fully privileged</span><br><span class="line">  --unprivileged: Assume the user lacks raw socket privileges</span><br><span class="line">  -V: Print version number</span><br><span class="line">  -h: Print this <span class="built_in">help</span> summary page.</span><br><span class="line">EXAMPLES:</span><br><span class="line">  nmap -v -A scanme.nmap.org</span><br><span class="line">  nmap -v -sn 192.168.0.0/16 10.0.0.0/8</span><br><span class="line">  nmap -v -iR 10000 -Pn -p 80</span><br><span class="line">SEE THE MAN PAGE (https://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><strong>示例：</strong></p>
-<pre><code>**┌──(root💀kali)-[/home/ kali]
-└─# nmap 192.168.1.1-254 -PU53 -** **sn　　　　　　　　　　　　#UDP53端口扫描**
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 21:39 EST
-Nmap scan report for 192.168.1.1
-Host is up (0.0069s latency).
-MAC Address: 0C:4B:54:33:72:9F (Tp-link Technologies)
-Nmap scan report for 192.168.1.108
-Host is up (0.11s latency).
-MAC Address: 34:E1:2D:13:9D:EA (Intel Corporate)
-Nmap scan report for 192.168.1.109
-Host is up.
-Nmap done: 254 IP addresses (3 hosts up) scanned in 10.59 seconds
-                                                                             
-**┌──(root💀kali)** **-[/home/ kali]
-└─# nmap 192.168.1.1-254 -PA80 -** **sn　　　　　　　　　　#直接用ACK数据包探测目标80端口**
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 21:47 EST
-Nmap scan report for 192.168.1.1
-Host is up (0.017s latency).
-MAC Address: 0C:4B:54:33:72:9F (Tp-link Technologies)
-Nmap scan report for 192.168.1.103
-Host is up (0.044s latency).
-MAC Address: 48:2C:A0:7B:90:CB (Xiaomi Communications)
-Nmap scan report for 192.168.1.108
-Host is up (0.088s latency).
-MAC Address: 34:E1:2D:13:9D:EA (Intel Corporate)
-Nmap scan report for 192.168.1.109
-Host is up.
-Nmap done: 254 IP addresses (4 hosts up) scanned in 20.93 seconds
-                                                                             
-**┌──(root💀kali)** **-[/home/ kali]
-└─# nmap -iL /home/kali/Desktop/list.txt -PA80 -** **sn       #支持文件调用**
-Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 22:05 EST
-Nmap scan report for 10.10.10.1
-Host is up (0.00034s latency).
-MAC Address: 00:50:56:C0:00:08 (VMware)
-Nmap scan report for 10.10.10.254
-Host is up (0.00019s latency).
-MAC Address: 00:50:56:FC:55:15 (VMware)
-Nmap scan report for 10.10.10.2
-Host is up (0.00024s latency).
-MAC Address: 00:50:56:F0:F4:B1 (VMware)
-Nmap done: 4 IP addresses (3 hosts up) scanned in 4.43 seconds</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nmap 192.168.1.1-254 -PU53 -sn　　　　　　　　　　　　#UDP53端口扫描</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 21:39 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.1</span><br><span class="line">Host is up (0.0069s latency).</span><br><span class="line">MAC Address: 0C:4B:54:33:72:9F (Tp-<span class="built_in">link</span> Technologies)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.108</span><br><span class="line">Host is up (0.11s latency).</span><br><span class="line">MAC Address: 34:E1:2D:13:9D:EA (Intel Corporate)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.109</span><br><span class="line">Host is up.</span><br><span class="line">Nmap <span class="keyword">done</span>: 254 IP addresses (3 hosts up) scanned <span class="keyword">in</span> 10.59 seconds</span><br><span class="line">                                                                             </span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nmap 192.168.1.1-254 -PA80 -sn　　　　　　　　　　#直接用ACK数据包探测目标80端口</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 21:47 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.1</span><br><span class="line">Host is up (0.017s latency).</span><br><span class="line">MAC Address: 0C:4B:54:33:72:9F (Tp-<span class="built_in">link</span> Technologies)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.103</span><br><span class="line">Host is up (0.044s latency).</span><br><span class="line">MAC Address: 48:2C:A0:7B:90:CB (Xiaomi Communications)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.108</span><br><span class="line">Host is up (0.088s latency).</span><br><span class="line">MAC Address: 34:E1:2D:13:9D:EA (Intel Corporate)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.109</span><br><span class="line">Host is up.</span><br><span class="line">Nmap <span class="keyword">done</span>: 254 IP addresses (4 hosts up) scanned <span class="keyword">in</span> 20.93 seconds</span><br><span class="line">                                                                             </span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nmap -iL /home/kali/Desktop/list.txt -PA80 -sn       #支持文件调用</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-20 22:05 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.1</span><br><span class="line">Host is up (0.00034s latency).</span><br><span class="line">MAC Address: 00:50:56:C0:00:08 (VMware)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.254</span><br><span class="line">Host is up (0.00019s latency).</span><br><span class="line">MAC Address: 00:50:56:FC:55:15 (VMware)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.2</span><br><span class="line">Host is up (0.00024s latency).</span><br><span class="line">MAC Address: 00:50:56:F0:F4:B1 (VMware)</span><br><span class="line">Nmap <span class="keyword">done</span>: 4 IP addresses (3 hosts up) scanned <span class="keyword">in</span> 4.43 seconds</span><br></pre></td></tr></table></figure>
 <h3 id="hping3">3、hping3</h3>
 <p><strong>注意，基于UDP的判断均为ICMP端口不可达，另外默认情况是发TCP数据包探测</strong></p>
 <p><strong>示例：</strong></p>
-<pre><code>**┌──(root💀kali) -[/home/kali]
-└─# hping3 10.10.10.2 --udp -c 1 **                                        #注意udp是小写
-HPING 10.10.10.2 (eth0 10.10.10.2): udp mode set, 28 headers + 0 data bytes
-
---- 10.10.10.2 hping statistic ---
-1 packets transmitted, 0 packets received, 100% packet loss
-round-trip min/avg/max = 0.0/0.0/0.0 ms
-                                                                             **┌──(root💀kali) -[/home/kali]
-└─# hping3 10.10.10.3 --udp -c 1  **                                       
-HPING 10.10.10.3 (eth0 10.10.10.3): udp mode set, 28 headers + 0 data bytes
-
---- 10.10.10.3 hping statistic ---
-1 packets transmitted, 0 packets received, 100% packet loss
-round-trip min/avg/max = 0.0/0.0/0.0 ms
-                                                                             **┌──(root💀kali) -[/home/kali]
-└─# hping3 114.114.114.114 --udp -c 1 **                                   #指定udp
-HPING 114.114.114.114 (eth0 114.114.114.114): udp mode set, 28 headers + 0 data bytes
-
---- 114.114.114.114 hping statistic ---
-1 packets transmitted, 0 packets received, 100% packet loss
-round-trip min/avg/max = 0.0/0.0/0.0 ms
-                                                                             
-**┌──(root💀kali)** **-[/home/ kali]
-└─# hping3 114.114.114.114  -c 2  **                                       #默认情况
-HPING 114.114.114.114 (eth0 114.114.114.114): NO FLAGS are set, 40 headers + 0 data bytes
-
---- 114.114.114.114 hping statistic ---
-2 packets transmitted, 0 packets received, 100% packet loss
-round-trip min/avg/max = 0.0/0.0/0.0 ms</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali) -[/home/kali]</span><br><span class="line">└─<span class="comment"># hping3 10.10.10.2 --udp -c 1                                         #注意udp是小写</span></span><br><span class="line">HPING 10.10.10.2 (eth0 10.10.10.2): udp mode <span class="built_in">set</span>, 28 headers + 0 data bytes</span><br><span class="line"></span><br><span class="line">--- 10.10.10.2 hping statistic ---</span><br><span class="line">1 packets transmitted, 0 packets received, 100% packet loss</span><br><span class="line">round-trip min/avg/max = 0.0/0.0/0.0 ms</span><br><span class="line">                                                                        ┌──(root💀kali) -[/home/kali]</span><br><span class="line">└─<span class="comment"># hping3 10.10.10.3 --udp -c 1                                         </span></span><br><span class="line">HPING 10.10.10.3 (eth0 10.10.10.3): udp mode <span class="built_in">set</span>, 28 headers + 0 data bytes</span><br><span class="line"></span><br><span class="line">--- 10.10.10.3 hping statistic ---</span><br><span class="line">1 packets transmitted, 0 packets received, 100% packet loss</span><br><span class="line">round-trip min/avg/max = 0.0/0.0/0.0 ms</span><br><span class="line">                                                                        ┌──(root💀kali) -[/home/kali]</span><br><span class="line">└─<span class="comment"># hping3 114.114.114.114 --udp -c 1                                    #指定udp</span></span><br><span class="line">HPING 114.114.114.114 (eth0 114.114.114.114): udp mode <span class="built_in">set</span>, 28 headers + 0 data bytes</span><br><span class="line"></span><br><span class="line">--- 114.114.114.114 hping statistic ---</span><br><span class="line">1 packets transmitted, 0 packets received, 100% packet loss</span><br><span class="line">round-trip min/avg/max = 0.0/0.0/0.0 ms</span><br><span class="line">                                                                             </span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># hping3 114.114.114.114  -c 2                                         #默认情况</span></span><br><span class="line">HPING 114.114.114.114 (eth0 114.114.114.114): NO FLAGS are <span class="built_in">set</span>, 40 headers + 0 data bytes</span><br><span class="line"></span><br><span class="line">--- 114.114.114.114 hping statistic ---</span><br><span class="line">2 packets transmitted, 0 packets received, 100% packet loss</span><br><span class="line">round-trip min/avg/max = 0.0/0.0/0.0 ms</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211121111818176-1078015897.png" /></p>
-<p>加载中……</p>
-<p><strong>参考自：苑房弘老师的Kali Linux渗透测试</strong></p>
 
     </div>
 
@@ -1317,7 +543,7 @@ round-trip min/avg/max = 0.0/0.0/0.0 ms</code></pre>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

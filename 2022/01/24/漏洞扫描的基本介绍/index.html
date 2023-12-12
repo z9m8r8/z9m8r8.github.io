@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-24T08:30:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:33:20.883Z">
+<meta property="article:modified_time" content="2023-12-12T07:02:55.513Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="漏洞扫描">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E5%8F%91%E7%8E%B0%E5%BC%B1%E7%82%B9"><span class="nav-text">一、发现弱点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E4%BB%8E%E4%BF%A1%E6%81%AF%E7%9A%84%E7%BB%B4%E5%BA%A6%E5%AE%9A%E4%B9%89%E6%BC%8F%E6%B4%9E%E7%AE%A1%E7%90%86"><span class="nav-text">二、从信息的维度定义漏洞管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%BC%B1%E7%82%B9%E6%89%AB%E6%8F%8F%E7%B1%BB%E5%9E%8B"><span class="nav-text">三、弱点扫描类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E6%BC%8F%E6%B4%9E%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">四、漏洞基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E6%BC%8F%E6%B4%9E%E7%AE%A1%E7%90%86"><span class="nav-text">五、漏洞管理</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E7%8E%B0%E5%BC%B1%E7%82%B9"><span class="nav-text">1. 发现弱点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%BF%A1%E6%81%AF%E7%9A%84%E7%BB%B4%E5%BA%A6%E5%AE%9A%E4%B9%89%E6%BC%8F%E6%B4%9E%E7%AE%A1%E7%90%86"><span class="nav-text">2. 从信息的维度定义漏洞管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B1%E7%82%B9%E6%89%AB%E6%8F%8F%E7%B1%BB%E5%9E%8B"><span class="nav-text">3. 弱点扫描类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">4. 漏洞基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E7%AE%A1%E7%90%86"><span class="nav-text">5. 漏洞管理</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:33:20" itemprop="dateModified" datetime="2023-12-09T23:33:20+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-12 15:02:55" itemprop="dateModified" datetime="2023-12-12T15:02:55+08:00">2023-12-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -280,7 +280,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="一发现弱点">一、发现弱点</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="发现弱点">1. 发现弱点</h2>
 <p><strong>• 发现漏洞</strong></p>
 <p><strong>• 基于端口服务扫描结果版本信息（速度慢）</strong></p>
 <p><strong>• 搜索已公开的漏洞数据库（数量大）</strong></p>
@@ -290,95 +290,10 @@ tomcat或使用Sandi工具查询（新版Kali需自己安装，Kali1.1自带）�
 target="_blank" rel="noopener" href="https://gitlab.com/kalilinux/packages/sandi/"
 class="uri">https://gitlab.com/kalilinux/packages/sandi/</a></p>
 <p><strong>示例：</strong></p>
-<pre><code>root@kali:~# searchsploit tomcat
------------------------------------------ ----------------------------------------
- Exploit Title                           |  Path
-                                         | (/usr/share/exploitdb/)
------------------------------------------ ----------------------------------------
-4D WebSTAR 5.3/5.4 Tomcat Plugin - Remot | exploits/osx/remote/25626.c
-AWStats 6.x - Apache Tomcat Configuratio | exploits/cgi/webapps/35035.txt
-Apache 1.3.x + Tomcat 4.0.x/4.1.x mod_jk | exploits/unix/dos/22068.pl
-Apache Commons FileUpload and Apache Tom | exploits/multiple/dos/31615.rb
-Apache Tomcat (Windows) - &#39;runtime.getRu | exploits/windows/local/7264.txt
-Apache Tomcat - &#39;WebDAV&#39; Remote File Dis | exploits/multiple/remote/4530.pl
-Apache Tomcat - Account Scanner / &#39;PUT&#39;  | exploits/multiple/remote/18619.txt
-Apache Tomcat - CGIServlet enableCmdLine | exploits/windows/remote/47073.rb
-Apache Tomcat - Cookie Quote Handling Re | exploits/multiple/remote/9994.txt
-Apache Tomcat - Form Authentication &#39;Use | exploits/multiple/remote/9995.txt
-Apache Tomcat - WebDAV SSL Remote File D | exploits/linux/remote/4552.pl
-Apache Tomcat / Geronimo 1.0 - &#39;Sample S | exploits/multiple/remote/27095.txt
-Apache Tomcat 3.0 - Directory Traversal  | exploits/windows/remote/20716.txt
-Apache Tomcat 3.1 - Path Revealing       | exploits/multiple/remote/20131.txt
-Apache Tomcat 3.2 - 404 Error Page Cross | exploits/multiple/remote/33379.txt
-Apache Tomcat 3.2 - Directory Disclosure | exploits/unix/remote/21882.txt
-Apache Tomcat 3.2.1 - 404 Error Page Cro | exploits/multiple/webapps/10292.txt
-Apache Tomcat 3.2.3/3.2.4 - &#39;RealPath.js | exploits/multiple/remote/21492.txt
-Apache Tomcat 3.2.3/3.2.4 - &#39;Source.jsp&#39; | exploits/multiple/remote/21490.txt
-Apache Tomcat 3.2.3/3.2.4 - Example File | exploits/multiple/remote/21491.txt
-Apache Tomcat 3.x - Null Byte Directory  | exploits/linux/remote/22205.txt
-Apache Tomcat 3/4 - &#39;DefaultServlet&#39; Fil | exploits/unix/remote/21853.txt
-Apache Tomcat 3/4 - JSP Engine Denial of | exploits/linux/dos/21534.jsp
-Apache Tomcat 4.0.3 - Denial of Service  | exploits/windows/remote/21605.txt
-Apache Tomcat 4.0.3 - Requests Containin | exploits/multiple/remote/31551.txt
-Apache Tomcat 4.0.3 - Servlet Mapping Cr | exploits/linux/remote/21604.txt
-Apache Tomcat 4.0.x - Non-HTTP Request D | exploits/linux/dos/23245.pl
-Apache Tomcat 4.0/4.1 - Servlet Full Pat | exploits/unix/remote/21412.txt
-Apache Tomcat 4.1 - JSP Request Cross-Si | exploits/unix/remote/21734.txt
-Apache Tomcat 5 - Information Disclosure | exploits/multiple/remote/28254.txt
-Apache Tomcat 5.5.0 &lt; 5.5.29 / 6.0.0 &lt; 6 | exploits/multiple/remote/12343.txt
-Apache Tomcat 5.5.15 - cal2.jsp Cross-Si | exploits/jsp/webapps/30563.txt
-Apache Tomcat 5.5.25 - Cross-Site Reques | exploits/multiple/webapps/29435.txt
-Apache Tomcat 5.x/6.0.x - Directory Trav | exploits/linux/remote/29739.txt
-Apache Tomcat 6.0.10 - Documentation Sam | exploits/multiple/remote/30052.txt
-Apache Tomcat 6.0.13 - Host Manager Serv | exploits/multiple/remote/30495.html
-Apache Tomcat 6.0.13 - Insecure Cookie H | exploits/multiple/remote/30496.txt
-Apache Tomcat 6.0.13 - JSP Example Web A | exploits/jsp/webapps/30189.txt
-Apache Tomcat 6.0.15 - Cookie Quote Hand | exploits/multiple/remote/31130.txt
-Apache Tomcat 6.0.16 - &#39;HttpServletRespo | exploits/multiple/remote/32138.txt
-Apache Tomcat 6.0.16 - &#39;RequestDispatche | exploits/multiple/remote/32137.txt
-Apache Tomcat 6.0.18 - Form Authenticati | exploits/multiple/remote/33023.txt
-Apache Tomcat 6/7/8/9 - Information Disc | exploits/multiple/remote/41783.txt
-Apache Tomcat 7.0.4 - &#39;sort&#39; / &#39;orderBy&#39; | exploits/linux/remote/35011.txt
-Apache Tomcat 8/7/6 (Debian-Based Distro | exploits/linux/local/40450.txt
-Apache Tomcat 8/7/6 (RedHat Based Distro | exploits/linux/local/40488.txt
-Apache Tomcat &lt; 5.5.17 - Remote Director | exploits/multiple/remote/2061.txt
-Apache Tomcat &lt; 6.0.18 - &#39;utf8&#39; Director | exploits/multiple/remote/6229.txt
-Apache Tomcat &lt; 6.0.18 - &#39;utf8&#39; Director | exploits/unix/remote/14489.c
-Apache Tomcat &lt; 9.0.1 (Beta) / &lt; 8.5.23  | exploits/jsp/webapps/42966.py
-Apache Tomcat &lt; 9.0.1 (Beta) / &lt; 8.5.23  | exploits/windows/webapps/42953.txt
-Apache Tomcat Connector jk2-2.0.2 mod_jk | exploits/linux/remote/5386.txt
-Apache Tomcat Connector mod_jk - &#39;exec-s | exploits/linux/remote/4162.c
-Apache Tomcat Manager - Application Depl | exploits/multiple/remote/16317.rb
-Apache Tomcat Manager - Application Uplo | exploits/multiple/remote/31433.rb
-Apache Tomcat mod_jk 1.2.20 - Remote Buf | exploits/windows/remote/16798.rb
-Apache Tomcat/JBoss EJBInvokerServlet /  | exploits/php/remote/28713.php
-Jakarta Tomcat 3.x/4.0 - Error Message I | exploits/unix/local/21073.txt
-Tomcat - Remote Code Execution via JSP U | exploits/java/remote/43008.rb
-Tomcat 3.0/3.1 Snoop Servlet - Informati | exploits/multiple/remote/20132.txt
-Tomcat 3.2.1/4.0 / Weblogic Server 5.1 - | exploits/multiple/remote/20719.txt
------------------------------------------ ----------------------------------------
-Shellcodes: No Result
-root@kali:~# cd /usr/share/exploitdb/
-root@kali:/usr/share/exploitdb# ls
-exploits  files_exploits.csv  files_shellcodes.csv  shellcodes
-root@kali:/usr/share/exploitdb# cd exploits/
-root@kali:/usr/share/exploitdb/exploits# ls
-aix      cfm             java          minix       perl           tru64
-android  cgi             json          multiple    php            ultrix
-arm      freebsd         jsp           netbsd_x86  plan9          unix
-ashx     freebsd_x86     linux         netware     python         unixware
-asp      freebsd_x86-64  linux_mips    nodejs      qnx            vxworks
-aspx     hardware        linux_sparc   novell      ruby           watchos
-atheos   hp-ux           linux_x86     openbsd     sco            windows
-beos     immunix         linux_x86-64  osx         solaris        windows_x86
-bsd      ios             lua           osx_ppc     solaris_sparc  windows_x86-64
-bsd_x86  irix            macos         palm_os     solaris_x86    xml
-root@kali:/usr/share/exploitdb/exploits# less windows/remote/1679
-16791.rb  16792.rb  16793.rb  16794.rb  16796.rb  16797.rb  16798.rb  16799.rb
-root@kali:/usr/share/exploitdb/exploits# less windows/remote/16798.rb </code></pre>
-<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220124201402207-2073307370.png" /></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># searchsploit tomcat</span></span><br><span class="line">----------------------------------------- ----------------------------------------</span><br><span class="line"> Exploit Title                           |  Path</span><br><span class="line">                                         | (/usr/share/exploitdb/)</span><br><span class="line">----------------------------------------- ----------------------------------------</span><br><span class="line">4D WebSTAR 5.3/5.4 Tomcat Plugin - Remot | exploits/osx/remote/25626.c</span><br><span class="line">AWStats 6.x - Apache Tomcat Configuratio | exploits/cgi/webapps/35035.txt</span><br><span class="line">Apache 1.3.x + Tomcat 4.0.x/4.1.x mod_jk | exploits/unix/dos/22068.pl</span><br><span class="line">Apache Commons FileUpload and Apache Tom | exploits/multiple/dos/31615.rb</span><br><span class="line">Apache Tomcat (Windows) - <span class="string">&#x27;runtime.getRu | exploits/windows/local/7264.txt</span></span><br><span class="line"><span class="string">Apache Tomcat - &#x27;</span>WebDAV<span class="string">&#x27; Remote File Dis | exploits/multiple/remote/4530.pl</span></span><br><span class="line"><span class="string">Apache Tomcat - Account Scanner / &#x27;</span>PUT<span class="string">&#x27;  | exploits/multiple/remote/18619.txt</span></span><br><span class="line"><span class="string">Apache Tomcat - CGIServlet enableCmdLine | exploits/windows/remote/47073.rb</span></span><br><span class="line"><span class="string">Apache Tomcat - Cookie Quote Handling Re | exploits/multiple/remote/9994.txt</span></span><br><span class="line"><span class="string">Apache Tomcat - Form Authentication &#x27;</span>Use | exploits/multiple/remote/9995.txt</span><br><span class="line">Apache Tomcat - WebDAV SSL Remote File D | exploits/linux/remote/4552.pl</span><br><span class="line">Apache Tomcat / Geronimo 1.0 - <span class="string">&#x27;Sample S | exploits/multiple/remote/27095.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.0 - Directory Traversal  | exploits/windows/remote/20716.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.1 - Path Revealing       | exploits/multiple/remote/20131.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.2 - 404 Error Page Cross | exploits/multiple/remote/33379.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.2 - Directory Disclosure | exploits/unix/remote/21882.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.2.1 - 404 Error Page Cro | exploits/multiple/webapps/10292.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.2.3/3.2.4 - &#x27;</span>RealPath.js | exploits/multiple/remote/21492.txt</span><br><span class="line">Apache Tomcat 3.2.3/3.2.4 - <span class="string">&#x27;Source.jsp&#x27;</span> | exploits/multiple/remote/21490.txt</span><br><span class="line">Apache Tomcat 3.2.3/3.2.4 - Example File | exploits/multiple/remote/21491.txt</span><br><span class="line">Apache Tomcat 3.x - Null Byte Directory  | exploits/linux/remote/22205.txt</span><br><span class="line">Apache Tomcat 3/4 - <span class="string">&#x27;DefaultServlet&#x27;</span> Fil | exploits/unix/remote/21853.txt</span><br><span class="line">Apache Tomcat 3/4 - JSP Engine Denial of | exploits/linux/dos/21534.jsp</span><br><span class="line">Apache Tomcat 4.0.3 - Denial of Service  | exploits/windows/remote/21605.txt</span><br><span class="line">Apache Tomcat 4.0.3 - Requests Containin | exploits/multiple/remote/31551.txt</span><br><span class="line">Apache Tomcat 4.0.3 - Servlet Mapping Cr | exploits/linux/remote/21604.txt</span><br><span class="line">Apache Tomcat 4.0.x - Non-HTTP Request D | exploits/linux/dos/23245.pl</span><br><span class="line">Apache Tomcat 4.0/4.1 - Servlet Full Pat | exploits/unix/remote/21412.txt</span><br><span class="line">Apache Tomcat 4.1 - JSP Request Cross-Si | exploits/unix/remote/21734.txt</span><br><span class="line">Apache Tomcat 5 - Information Disclosure | exploits/multiple/remote/28254.txt</span><br><span class="line">Apache Tomcat 5.5.0 &lt; 5.5.29 / 6.0.0 &lt; 6 | exploits/multiple/remote/12343.txt</span><br><span class="line">Apache Tomcat 5.5.15 - cal2.jsp Cross-Si | exploits/jsp/webapps/30563.txt</span><br><span class="line">Apache Tomcat 5.5.25 - Cross-Site Reques | exploits/multiple/webapps/29435.txt</span><br><span class="line">Apache Tomcat 5.x/6.0.x - Directory Trav | exploits/linux/remote/29739.txt</span><br><span class="line">Apache Tomcat 6.0.10 - Documentation Sam | exploits/multiple/remote/30052.txt</span><br><span class="line">Apache Tomcat 6.0.13 - Host Manager Serv | exploits/multiple/remote/30495.html</span><br><span class="line">Apache Tomcat 6.0.13 - Insecure Cookie H | exploits/multiple/remote/30496.txt</span><br><span class="line">Apache Tomcat 6.0.13 - JSP Example Web A | exploits/jsp/webapps/30189.txt</span><br><span class="line">Apache Tomcat 6.0.15 - Cookie Quote Hand | exploits/multiple/remote/31130.txt</span><br><span class="line">Apache Tomcat 6.0.16 - <span class="string">&#x27;HttpServletRespo | exploits/multiple/remote/32138.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 6.0.16 - &#x27;</span>RequestDispatche | exploits/multiple/remote/32137.txt</span><br><span class="line">Apache Tomcat 6.0.18 - Form Authenticati | exploits/multiple/remote/33023.txt</span><br><span class="line">Apache Tomcat 6/7/8/9 - Information Disc | exploits/multiple/remote/41783.txt</span><br><span class="line">Apache Tomcat 7.0.4 - <span class="string">&#x27;sort&#x27;</span> / <span class="string">&#x27;orderBy&#x27;</span> | exploits/linux/remote/35011.txt</span><br><span class="line">Apache Tomcat 8/7/6 (Debian-Based Distro | exploits/linux/local/40450.txt</span><br><span class="line">Apache Tomcat 8/7/6 (RedHat Based Distro | exploits/linux/local/40488.txt</span><br><span class="line">Apache Tomcat &lt; 5.5.17 - Remote Director | exploits/multiple/remote/2061.txt</span><br><span class="line">Apache Tomcat &lt; 6.0.18 - <span class="string">&#x27;utf8&#x27;</span> Director | exploits/multiple/remote/6229.txt</span><br><span class="line">Apache Tomcat &lt; 6.0.18 - <span class="string">&#x27;utf8&#x27;</span> Director | exploits/unix/remote/14489.c</span><br><span class="line">Apache Tomcat &lt; 9.0.1 (Beta) / &lt; 8.5.23  | exploits/jsp/webapps/42966.py</span><br><span class="line">Apache Tomcat &lt; 9.0.1 (Beta) / &lt; 8.5.23  | exploits/windows/webapps/42953.txt</span><br><span class="line">Apache Tomcat Connector jk2-2.0.2 mod_jk | exploits/linux/remote/5386.txt</span><br><span class="line">Apache Tomcat Connector mod_jk - <span class="string">&#x27;exec-s | exploits/linux/remote/4162.c</span></span><br><span class="line"><span class="string">Apache Tomcat Manager - Application Depl | exploits/multiple/remote/16317.rb</span></span><br><span class="line"><span class="string">Apache Tomcat Manager - Application Uplo | exploits/multiple/remote/31433.rb</span></span><br><span class="line"><span class="string">Apache Tomcat mod_jk 1.2.20 - Remote Buf | exploits/windows/remote/16798.rb</span></span><br><span class="line"><span class="string">Apache Tomcat/JBoss EJBInvokerServlet /  | exploits/php/remote/28713.php</span></span><br><span class="line"><span class="string">Jakarta Tomcat 3.x/4.0 - Error Message I | exploits/unix/local/21073.txt</span></span><br><span class="line"><span class="string">Tomcat - Remote Code Execution via JSP U | exploits/java/remote/43008.rb</span></span><br><span class="line"><span class="string">Tomcat 3.0/3.1 Snoop Servlet - Informati | exploits/multiple/remote/20132.txt</span></span><br><span class="line"><span class="string">Tomcat 3.2.1/4.0 / Weblogic Server 5.1 - | exploits/multiple/remote/20719.txt</span></span><br><span class="line"><span class="string">----------------------------------------- ----------------------------------------</span></span><br><span class="line"><span class="string">Shellcodes: No Result</span></span><br><span class="line"><span class="string">root@kali:~# cd /usr/share/exploitdb/</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb# ls</span></span><br><span class="line"><span class="string">exploits  files_exploits.csv  files_shellcodes.csv  shellcodes</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb# cd exploits/</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb/exploits# ls</span></span><br><span class="line"><span class="string">aix      cfm             java          minix       perl           tru64</span></span><br><span class="line"><span class="string">android  cgi             json          multiple    php            ultrix</span></span><br><span class="line"><span class="string">arm      freebsd         jsp           netbsd_x86  plan9          unix</span></span><br><span class="line"><span class="string">ashx     freebsd_x86     linux         netware     python         unixware</span></span><br><span class="line"><span class="string">asp      freebsd_x86-64  linux_mips    nodejs      qnx            vxworks</span></span><br><span class="line"><span class="string">aspx     hardware        linux_sparc   novell      ruby           watchos</span></span><br><span class="line"><span class="string">atheos   hp-ux           linux_x86     openbsd     sco            windows</span></span><br><span class="line"><span class="string">beos     immunix         linux_x86-64  osx         solaris        windows_x86</span></span><br><span class="line"><span class="string">bsd      ios             lua           osx_ppc     solaris_sparc  windows_x86-64</span></span><br><span class="line"><span class="string">bsd_x86  irix            macos         palm_os     solaris_x86    xml</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb/exploits# less windows/remote/1679</span></span><br><span class="line"><span class="string">16791.rb  16792.rb  16793.rb  16794.rb  16796.rb  16797.rb  16798.rb  16799.rb</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb/exploits# less windows/remote/16798.rb </span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220124201402207-2073307370.png" /></p>
 <p><strong>• 使用弱点扫描器实现漏洞管理</strong></p>
-<h2 id="二从信息的维度定义漏洞管理">二、从信息的维度定义漏洞管理</h2>
+<h2 id="从信息的维度定义漏洞管理">2. 从信息的维度定义漏洞管理</h2>
 <p><strong>• 信息收集：</strong></p>
 <p>• 扫描发现网络IP、 OS、服务、配置、漏洞</p>
 <p>• 能力需求：定义扫描方式内容和目标</p>
@@ -388,7 +303,7 @@ root@kali:/usr/share/exploitdb/exploits# less windows/remote/16798.rb </code></p
 <p><strong>• 信息输出</strong></p>
 <p>• 向不同层级的人群展示足够的信息量</p>
 <p>• 能力需求：生成报告、导出数据、与SIEM集成</p>
-<h2 id="三弱点扫描类型">三、弱点扫描类型</h2>
+<h2 id="弱点扫描类型">3. 弱点扫描类型</h2>
 <p><strong>• 主动扫描</strong></p>
 <p>• 有身份验证</p>
 <p>• 无身份验证</p>
@@ -399,7 +314,7 @@ root@kali:/usr/share/exploitdb/exploits# less windows/remote/16798.rb </code></p
 <p>• 支持平台有限</p>
 <p>•
 即在需要扫描的目标机（如：待扫服务器）上安装自己的agent（程序），让agent在目标机上进行扫描探测等，效率高但受设备局限影响（部分设备不能安装）。</p>
-<h2 id="四漏洞基本概念">四、漏洞基本概念</h2>
+<h2 id="漏洞基本概念">4. 漏洞基本概念</h2>
 <p><strong>• CVSS（Common Vulnerability Scoring System）</strong></p>
 <p>• 通用漏洞评分系统----工业标准</p>
 <p>• 描述安全漏洞严重程度的统一评分方案</p>
@@ -472,7 +387,7 @@ SCAP是当前美国比较成熟的一套信息安全评估标准体系，其标�
 <p>• 影响度量</p>
 <p><strong>• <a
 target="_blank" rel="noopener" href="https://nvd.nist.gov/">https://nvd.nist.gov/</a>（推荐关注）</strong></p>
-<h2 id="五漏洞管理">五、漏洞管理</h2>
+<h2 id="漏洞管理">5. 漏洞管理</h2>
 <p>• 周期性扫描跟踪漏洞</p>
 <p>• 高危漏洞优先处理</p>
 <p>• 扫描注意事项</p>
@@ -557,7 +472,7 @@ target="_blank" rel="noopener" href="https://nvd.nist.gov/">https://nvd.nist.gov
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:13</span>
+    <span title="站点阅读时长">10:14</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

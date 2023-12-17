@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-17T09:27:00.000Z">
-<meta property="article:modified_time" content="2023-12-12T03:19:25.820Z">
+<meta property="article:modified_time" content="2023-12-17T08:10:11.002Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="web 信息收集">
 <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#recon-ng%E7%AE%80%E4%BB%8B"><span class="nav-text">1. recon-ng简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E7%94%A8%E6%95%99%E7%A8%8B"><span class="nav-text">2. 简用教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#recon-ng-%E5%B8%AE%E5%8A%A9%E5%91%BD%E4%BB%A4"><span class="nav-text">**1、recon-ng 帮助命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAtest%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%A6%82%E4%B8%8B"><span class="nav-text">2、创建一个test工作区，如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85%E8%A7%A3%E5%86%B3%E4%B8%8A%E8%BF%B0%E6%8A%A5%E9%94%99"><span class="nav-text">3、模块安装（解决上述报错）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-help-%E6%9F%A5%E7%9C%8B%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF"><span class="nav-text">4、使用 help
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#recon-ng%E7%AE%80%E4%BB%8B"><span class="nav-text">1. recon-ng简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E7%94%A8%E6%95%99%E7%A8%8B"><span class="nav-text">2. 简用教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#recon-ng-%E5%B8%AE%E5%8A%A9%E5%91%BD%E4%BB%A4"><span class="nav-text">1、recon-ng 帮助命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAtest%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%A6%82%E4%B8%8B"><span class="nav-text">2、创建一个test工作区，如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%AE%89%E8%A3%85%E8%A7%A3%E5%86%B3%E4%B8%8A%E8%BF%B0%E6%8A%A5%E9%94%99"><span class="nav-text">3、模块安装（解决上述报错）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-help-%E6%9F%A5%E7%9C%8B%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF"><span class="nav-text">4、使用 help
 查看帮助信息</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
@@ -244,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-12 11:19:25" itemprop="dateModified" datetime="2023-12-12T11:19:25+08:00">2023-12-12</time>
+      <time title="修改时间：2023-12-17 16:10:11" itemprop="dateModified" datetime="2023-12-17T16:10:11+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -290,319 +290,50 @@
 <li><strong>Web 信息搜索框架</strong></li>
 <li><strong>命令格式与 msf 一致</strong></li>
 <li><strong>基于 python开发</strong></li>
-<li><strong>使用方法：</strong> <strong>模块，</strong>
-<strong>数据库，</strong> <strong>报告</strong></li>
+<li><strong>使用方法：模块，数据库，报告</strong></li>
 </ul>
 <h2 id="简用教程">2. 简用教程</h2>
-<h3 id="recon-ng-帮助命令">**1、recon-ng 帮助命令</h3>
-<p>**</p>
-<pre><code>root@kali:~# recon-ng -h
-usage: recon-ng [-h] [-w workspace] [-r filename] [--no-version]
-                [--no-analytics] [--no-marketplace] [--stealth] [--version]
-                [--analytics]
-
-recon-ng - Tim Tomes (@lanmaster53)
-
-optional arguments:
-  -h, --help        show this help message and exit
-  -w workspace      load/create a workspace
-  -r filename       load commands from a resource file
-  --no-version      disable version check. Already disabled by default in
-                    Debian
-  --no-analytics    disable analytics reporting. Already disabled by default
-                    in Debian
-  --no-marketplace  disable remote module management
-  --stealth         disable all passive requests (--no-*)
-  --version         displays the current version
-  --analytics       enable analytics reporting. Send analytics to google</code></pre>
+<h3 id="recon-ng-帮助命令"><strong>1、recon-ng 帮助命令</strong></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># recon-ng -h</span></span><br><span class="line">usage: recon-ng [-h] [-w workspace] [-r filename] [--no-version]</span><br><span class="line">                [--no-analytics] [--no-marketplace] [--stealth] [--version]</span><br><span class="line">                [--analytics]</span><br><span class="line"></span><br><span class="line">recon-ng - Tim Tomes (@lanmaster53)</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --<span class="built_in">help</span>        show this <span class="built_in">help</span> message and <span class="built_in">exit</span></span><br><span class="line">  -w workspace      load/create a workspace</span><br><span class="line">  -r filename       load commands from a resource file</span><br><span class="line">  --no-version      <span class="built_in">disable</span> version check. Already disabled by default <span class="keyword">in</span></span><br><span class="line">                    Debian</span><br><span class="line">  --no-analytics    <span class="built_in">disable</span> analytics reporting. Already disabled by default</span><br><span class="line">                    <span class="keyword">in</span> Debian</span><br><span class="line">  --no-marketplace  <span class="built_in">disable</span> remote module management</span><br><span class="line">  --stealth         <span class="built_in">disable</span> all passive requests (--no-*)</span><br><span class="line">  --version         displays the current version</span><br><span class="line">  --analytics       <span class="built_in">enable</span> analytics reporting. Send analytics to google</span><br></pre></td></tr></table></figure>
 <h3 id="创建一个test工作区如下">2、创建一个test工作区，如下</h3>
-<pre><code>root@kali:~# recon-ng -w test
-**[** **!** **] Unable to synchronize module index. (ConnectionError).**
-[*] Version check disabled.
-
-    _/_/_/    _/_/_/_/    _/_/_/    _/_/_/    _/      _/            _/      _/    _/_/_/
-   _/    _/  _/        _/        _/      _/  _/_/    _/            _/_/    _/  _/       
-  _/_/_/    _/_/_/    _/        _/      _/  _/  _/  _/  _/_/_/_/  _/  _/  _/  _/  _/_/_/
- _/    _/  _/        _/        _/      _/  _/    _/_/            _/    _/_/  _/      _/ 
-_/    _/  _/_/_/_/    _/_/_/    _/_/_/    _/      _/            _/      _/    _/_/_/    
-
-
-                                          /\
-                                         / \\ /\
-    Sponsored by...               /\  /\/  \\V  \/\
-                                 / \\/ // \\\\\ \\ \/\
-                                // // BLACK HILLS \/ \\
-                               www.blackhillsinfosec.com
-
-                  ____   ____   ____   ____ _____ _  ____   ____  ____
-                 |____] | ___/ |____| |       |   | |____  |____ |
-                 |      |   \_ |    | |____   |   |  ____| |____ |____
-                                   www.practisec.com
-
-                      [recon-ng v5.0.0, Tim Tomes (@lanmaster53)]                       
-
-**[** ***] No modules enabled/** **installed.**
-
-**[recon** **-ng][test] &gt;**</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># recon-ng -w test</span></span><br><span class="line">[!] Unable to synchronize module index. (ConnectionError).</span><br><span class="line">[*] Version check disabled.</span><br><span class="line"></span><br><span class="line">    _/_/_/    _/_/_/_/    _/_/_/    _/_/_/    _/      _/            _/      _/    _/_/_/</span><br><span class="line">   _/    _/  _/        _/        _/      _/  _/_/    _/            _/_/    _/  _/       </span><br><span class="line">  _/_/_/    _/_/_/    _/        _/      _/  _/  _/  _/  _/_/_/_/  _/  _/  _/  _/  _/_/_/</span><br><span class="line"> _/    _/  _/        _/        _/      _/  _/    _/_/            _/    _/_/  _/      _/ </span><br><span class="line">_/    _/  _/_/_/_/    _/_/_/    _/_/_/    _/      _/            _/      _/    _/_/_/    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                                          /\</span><br><span class="line">                                         / \\ /\</span><br><span class="line">    Sponsored by...               /\  /\/  \\V  \/\</span><br><span class="line">                                 / \\/ // \\\\\ \\ \/\</span><br><span class="line">                                // // BLACK HILLS \/ \\</span><br><span class="line">                               www.blackhillsinfosec.com</span><br><span class="line"></span><br><span class="line">                  ____   ____   ____   ____ _____ _  ____   ____  ____</span><br><span class="line">                 |____] | ___/ |____| |       |   | |____  |____ |</span><br><span class="line">                 |      |   \_ |    | |____   |   |  ____| |____ |____</span><br><span class="line">                                   www.practisec.com</span><br><span class="line"></span><br><span class="line">                      [recon-ng v5.0.0, Tim Tomes (@lanmaster53)]                       </span><br><span class="line"></span><br><span class="line">[*] No modules enabled/installed.</span><br><span class="line"></span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>备注：红色报错是recon-ng更新导致的（新版本模块需要自己手动安装），暂时忽略，后面解决</strong></li>
 </ul>
 <h3 id="模块安装解决上述报错">3、模块安装（解决上述报错）</h3>
 <p><strong>（1）单个模块的安装，以brute_hosts为例</strong></p>
-<pre><code>**[recon-ng][default] &gt;** **marketplace refresh**
-[*] Marketplace index refreshed.   
-**[recon** **-ng][default] &gt;** **marketplace search brute_hosts**
-[*] Searching module index for &#39;brute_hosts&#39;...
-
-  +--------------------------------------------------------------------------------+
-  |               Path              | Version |     Status    |  Updated   | D | K |
-  +--------------------------------------------------------------------------------+
-  | recon/domains-hosts/brute_hosts | 1.0     | not installed | 2019-06-24 |   |   |
-  +--------------------------------------------------------------------------------+
-
-  D = Has dependencies. See info for details.
-  K = Requires keys. See info for details.
-
-**[recon** **-ng][default] &gt; marketplace install recon/domains-hosts/** **brute_hosts**
-[*] Module installed: recon/domains-hosts/brute_hosts
-[*] Reloading modules...
-[recon-ng][default] &gt; modules 
-load    reload  search  
-[recon-ng][default] &gt; modules reload
-[*] Reloading modules...
-**[recon** **-ng][default] &gt;** **modules search brute**
-[*] Searching installed modules for &#39;brute&#39;...
-
-  Recon
-  -----
-    recon/domains-hosts/brute_hosts
-
-[recon-ng][default] &gt; use recon/domains-hosts/brute_hosts
-[!] Invalid command: use recon/domains-hosts/brute_hosts.
-[recon-ng][default] &gt; modules load recon/domains-hosts/brute_hosts
-[recon-ng][default][brute_hosts] &gt;options list
-Name Current Value Required Description
--------- ------------- -------- -----------
-SOURCE default yes source of input (see &#39;show info&#39; for details)
-WORDLIST /root/.recon-ng/data/hostnames.txt yes path to hostname wordlist
-
-**[recon** **-ng][default][brute_hosts] &gt;** **options** 
-list   set    unset  
-**[recon** **-ng][default][brute_hosts] &gt;** **options set SOURCE ？？？.com**
-SOURCE =&gt; **？？？**.com
-**[recon** **-ng][default][brute_hosts] &gt; run
-
-**---------
-BAIDU.COM
----------
-[*] No Wildcard DNS entry found.
-[*] 1. **？？？**.com =&gt; No record found.
-
-**… ……………**
-
-[*] b2c. **？？？**.com =&gt; No record found.
-
-
--------
-SUMMARY
-------- **[ *] 85 total (80 new) hosts found.
-[recon-ng][default][brute_hosts] &gt;** **show**
-companies        domains          locations        profiles         vulnerabilities
-contacts         hosts            netblocks        pushpins         
-credentials      leaks            ports            repositories     
-**[recon** **-ng][default][brute_hosts] &gt; show hosts
-
-  **+----------------------------------------------------------------------------------------------------------------------+
-  | rowid |                host                |    ip_address   | region | country | latitude | longitude |    module   |
-  +----------------------------------------------------------------------------------------------------------------------+
-  | 1     | wwwyq.n. **？？？**.com                 |                 |        |         |          |           | brute_hosts |
-  **… ……………**
-  | 80    | b2b. **？？？**.com                      | **xxx.xxx**.212.101 |        |         |          |           | brute_hosts |
-  +----------------------------------------------------------------------------------------------------------------------+
-
-[*] 80 rows returned
-[recon-ng][default][brute_hosts] &gt; </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">[recon-ng][default] &gt;marketplace refresh</span><br><span class="line">[*] Marketplace index refreshed.   </span><br><span class="line">[recon-ng][default] &gt;marketplace search brute_hosts</span><br><span class="line">[*] Searching module index <span class="keyword">for</span> <span class="string">&#x27;brute_hosts&#x27;</span>...</span><br><span class="line"></span><br><span class="line">  +--------------------------------------------------------------------------------+</span><br><span class="line">  |               Path              | Version |     Status    |  Updated   | D | K |</span><br><span class="line">  +--------------------------------------------------------------------------------+</span><br><span class="line">  | recon/domains-hosts/brute_hosts | 1.0     | not installed | 2019-06-24 |   |   |</span><br><span class="line">  +--------------------------------------------------------------------------------+</span><br><span class="line"></span><br><span class="line">  D = Has dependencies. See info <span class="keyword">for</span> details.</span><br><span class="line">  K = Requires keys. See info <span class="keyword">for</span> details.</span><br><span class="line"></span><br><span class="line">[recon-ng][default] &gt; marketplace install recon/domains-hosts/brute_hosts</span><br><span class="line">[*] Module installed: recon/domains-hosts/brute_hosts</span><br><span class="line">[*] Reloading modules...</span><br><span class="line">[recon-ng][default] &gt; modules </span><br><span class="line">load    reload  search  </span><br><span class="line">[recon-ng][default] &gt; modules reload</span><br><span class="line">[*] Reloading modules...</span><br><span class="line">[recon-ng][default] &gt;modules search brute</span><br><span class="line">[*] Searching installed modules <span class="keyword">for</span> <span class="string">&#x27;brute&#x27;</span>...</span><br><span class="line"></span><br><span class="line">  Recon</span><br><span class="line">  -----</span><br><span class="line">    recon/domains-hosts/brute_hosts</span><br><span class="line"></span><br><span class="line">[recon-ng][default] &gt; use recon/domains-hosts/brute_hosts</span><br><span class="line">[!] Invalid <span class="built_in">command</span>: use recon/domains-hosts/brute_hosts.</span><br><span class="line">[recon-ng][default] &gt; modules load recon/domains-hosts/brute_hosts</span><br><span class="line">[recon-ng][default][brute_hosts] &gt;options list</span><br><span class="line">Name Current Value Required Description</span><br><span class="line">-------- ------------- -------- -----------</span><br><span class="line">SOURCE default <span class="built_in">yes</span> <span class="built_in">source</span> of input (see <span class="string">&#x27;show info&#x27;</span> <span class="keyword">for</span> details)</span><br><span class="line">WORDLIST /root/.recon-ng/data/hostnames.txt <span class="built_in">yes</span> path to hostname wordlist</span><br><span class="line"></span><br><span class="line">[recon-ng][default][brute_hosts] &gt;options </span><br><span class="line">list   <span class="built_in">set</span>    <span class="built_in">unset</span>  </span><br><span class="line">[recon-ng][default][brute_hosts] &gt;options <span class="built_in">set</span> SOURCE ？？？.com</span><br><span class="line">SOURCE =&gt; ？？？.com</span><br><span class="line">[recon-ng][default][brute_hosts] &gt; run</span><br><span class="line"></span><br><span class="line">---------</span><br><span class="line">BAIDU.COM</span><br><span class="line">---------</span><br><span class="line">[*] No Wildcard DNS entry found.</span><br><span class="line">[*] 1. ？？？.com =&gt; No record found.</span><br><span class="line"></span><br><span class="line">… ……………</span><br><span class="line"></span><br><span class="line">[*] b2c. ？？？.com =&gt; No record found.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-------</span><br><span class="line">SUMMARY</span><br><span class="line">------- [ *] 85 total (80 new) hosts found.</span><br><span class="line">[recon-ng][default][brute_hosts] &gt;show</span><br><span class="line">companies        domains          locations        profiles         vulnerabilities</span><br><span class="line">contacts         hosts            netblocks        pushpins         </span><br><span class="line">credentials      leaks            ports            repositories     </span><br><span class="line">[recon-ng][default][brute_hosts] &gt; show hosts</span><br><span class="line"></span><br><span class="line">  +----------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">  | rowid |                host                |    ip_address   | region | country | latitude | longitude |    module   |</span><br><span class="line">  +----------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">  | 1     | wwwyq.n. ？？？.com                 |                 |        |         |          |           | brute_hosts |</span><br><span class="line">  … ……………</span><br><span class="line">  | 80    | b2b. ？？？.com                      | xxx.xxx.212.101 |        |         |          |           | brute_hosts |</span><br><span class="line">  +----------------------------------------------------------------------------------------------------------------------+</span><br><span class="line"></span><br><span class="line">[*] 80 rows returned</span><br><span class="line">[recon-ng][default][brute_hosts] &gt; </span><br></pre></td></tr></table></figure>
 <ul>
 <li>为避免给自己带来不必要的麻烦，部分信息使用"???"和"xxx"做了替换！</li>
 </ul>
 <p><strong>（2）安装所有模块</strong></p>
-<pre><code>**[recon-ng][default] &gt;** **marketplace refresh**
-[*] Marketplace index refreshed.
-**[recon** **-ng][default] &gt; marketplace install** **all**
-[*] Module installed: discovery/info_disclosure/cache_snoop
-[*] Module installed: discovery/info_disclosure/interesting_files
-[*] Module installed: exploitation/injection/command_injector
-[*] Module installed: exploitation/injection/xpath_bruter
-[*] Module installed: import/csv_file
-[*] Module installed: import/list
-[*] Module installed: import/masscan
-[*] Module installed: import/nmap
-
-…………
-
-[*] Module installed: reporting/proxifier
-[*] Module installed: reporting/pushpin
-[*] Module installed: reporting/xlsx
-[*] Module installed: reporting/xml</code></pre>
-<p>** 注意： **</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[recon-ng][default] &gt;marketplace refresh</span><br><span class="line">[*] Marketplace index refreshed.</span><br><span class="line">[recon-ng][default] &gt; marketplace installall</span><br><span class="line">[*] Module installed: discovery/info_disclosure/cache_snoop</span><br><span class="line">[*] Module installed: discovery/info_disclosure/interesting_files</span><br><span class="line">[*] Module installed: exploitation/injection/command_injector</span><br><span class="line">[*] Module installed: exploitation/injection/xpath_bruter</span><br><span class="line">[*] Module installed: import/csv_file</span><br><span class="line">[*] Module installed: import/list</span><br><span class="line">[*] Module installed: import/masscan</span><br><span class="line">[*] Module installed: import/nmap</span><br><span class="line"></span><br><span class="line">…………</span><br><span class="line"></span><br><span class="line">[*] Module installed: reporting/proxifier</span><br><span class="line">[*] Module installed: reporting/pushpin</span><br><span class="line">[*] Module installed: reporting/xlsx</span><br><span class="line">[*] Module installed: reporting/xml</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
 <p>marketplace refresh
 该指令输入后应该会报错，解决方法如下(参考自：https://www.hacksafe.net/tool/hacktool/4135.html)</p>
 <p>（1）配置本地DNS服务器信息（即不使用本地DNS）：</p>
-<pre><code>nameserver 114.114.114.114
-nameserver 8.8.4.4</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.4.4</span><br></pre></td></tr></table></figure>
 <p>（2）将动态IP转换为静态IP</p>
-<pre><code>auto lo
-iface lo inet loopback
-auto eth0
-iface eth0 inet static # static IP
-address #本机IP
-netmask 255.255.255.0
-gateway #网关</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto lo</span><br><span class="line">iface lo inet loopback</span><br><span class="line">auto eth0</span><br><span class="line">iface eth0 inet static <span class="comment"># static IP</span></span><br><span class="line">address <span class="comment">#本机IP</span></span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">gateway <span class="comment">#网关</span></span><br></pre></td></tr></table></figure>
 <h3 id="使用-help-查看帮助信息"><strong>4、使用 help
 查看帮助信息</strong></h3>
-<pre><code>**[recon-ng][test] &gt;** **help**
-
-Commands (type [help|?] &lt;topic&gt;):
----------------------------------
-back            Exits the current context
-dashboard       Displays a summary of activity
-db              Interfaces with the workspace&#39;s database
-exit            Exits the framework
-help            Displays this menu
-index           Creates a module index (dev only)
-keys            Manages third party resource credentials
-marketplace     Interfaces with the module marketplace
-modules         Interfaces with installed modules
-options         Manages the current context options
-pdb             Starts a Python Debugger session (dev only)
-script          Records and executes command scripts
-shell           Executes shell commands
-show            Shows various framework items
-snapshots       Manages workspace snapshots
-spool           Spools output to a file
-workspaces      Manages workspaces
-
-[recon-ng][test] &gt; </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[recon-ng][<span class="built_in">test</span>] &gt;<span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">Commands (<span class="built_in">type</span> [<span class="built_in">help</span>|?] &lt;topic&gt;):</span><br><span class="line">---------------------------------</span><br><span class="line">back            Exits the current context</span><br><span class="line">dashboard       Displays a summary of activity</span><br><span class="line">db              Interfaces with the workspace<span class="string">&#x27;s database</span></span><br><span class="line"><span class="string">exit            Exits the framework</span></span><br><span class="line"><span class="string">help            Displays this menu</span></span><br><span class="line"><span class="string">index           Creates a module index (dev only)</span></span><br><span class="line"><span class="string">keys            Manages third party resource credentials</span></span><br><span class="line"><span class="string">marketplace     Interfaces with the module marketplace</span></span><br><span class="line"><span class="string">modules         Interfaces with installed modules</span></span><br><span class="line"><span class="string">options         Manages the current context options</span></span><br><span class="line"><span class="string">pdb             Starts a Python Debugger session (dev only)</span></span><br><span class="line"><span class="string">script          Records and executes command scripts</span></span><br><span class="line"><span class="string">shell           Executes shell commands</span></span><br><span class="line"><span class="string">show            Shows various framework items</span></span><br><span class="line"><span class="string">snapshots       Manages workspace snapshots</span></span><br><span class="line"><span class="string">spool           Spools output to a file</span></span><br><span class="line"><span class="string">workspaces      Manages workspaces</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[recon-ng][test] &gt; </span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>**
-对于一个命令不知道有什么参数时，可先输入命令然后双击Tab查看可用参数/指令，如下**</li>
-<li><pre><code>[recon-ng][default] &gt; marketplace </code></pre>
-info install refresh remove search #可用指令</li>
+<li><strong>对于一个命令不知道有什么参数时，可先输入命令然后双击Tab查看可用参数/指令，如下</strong></li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[recon-ng][default] &gt; marketplace </span><br><span class="line">    info     install  refresh  remove   search  <span class="comment">#可用指令</span></span><br></pre></td></tr></table></figure>
 <p><strong>（1）keys命令</strong></p>
 <p>当想要在终端使用谷歌，bing，shodan，twitter等查询信息时，可通过keys添加相应的API即可，例如：</p>
-<pre><code>[recon-ng][test] &gt; keys 
-add     list    remove  
-[recon-ng][test] &gt; keys list
-
-  +--------------------------+
-  |       Name       | Value |
-  +--------------------------+
-  | binaryedge_api   |       |
-  | bing_api         |       |
-  | builtwith_api    |       |
-  | censysio_id      |       |
-  | censysio_secret  |       |
-  | flickr_api       |       |
-  | fullcontact_api  |       |
-  | github_api       |       |
-  | google_api       |       |
-  | hashes_api       |       |
-  | hibp_api         |       |
-  | hunter_io        |       |
-  | ipinfodb_api     |       |
-  | ipstack_api      |       |
-  | namechk_api      |       |
-  | pwnedlist_api    |       |
-  | pwnedlist_secret |       |
-  | spyse_api        |       |
-  | twitter_api      |       |
-  | twitter_secret   |       |
-  | virustotal_api   |       |
-  | whoxy_api        |       |
-  +--------------------------+ **[recon -ng][test] &gt;** **keys add bing_api 111w1w1w1w1w1w12w1sjjkas**
-[*] Key &#39;bing_api&#39; added.
-[recon-ng][test] &gt; keys list 
-
-  +---------------------------------------------+
-  |       Name       |          Value           |
-  +---------------------------------------------+
-  | binaryedge_api   |                          |
-  | bing_api         | 111w1w1w1w1w1w12w1sjjkas |
-  | builtwith_api    |                          |
-  | censysio_id      |                          |
-  | censysio_secret  |                          |
-  | flickr_api       |                          |
-  | fullcontact_api  |                          |
-  | github_api       |                          |
-  | google_api       |                          |
-  | hashes_api       |                          |
-  | hibp_api         |                          |
-  | hunter_io        |                          |
-  | ipinfodb_api     |                          |
-  | ipstack_api      |                          |
-  | namechk_api      |                          |
-  | pwnedlist_api    |                          |
-  | pwnedlist_secret |                          |
-  | spyse_api        |                          |
-  | twitter_api      |                          |
-  | twitter_secret   |                          |
-  | virustotal_api   |                          |
-  | whoxy_api        |                          |
-  +---------------------------------------------+</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">[recon-ng][<span class="built_in">test</span>] &gt; keys </span><br><span class="line">add     list    remove  </span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt; keys list</span><br><span class="line"></span><br><span class="line">  +--------------------------+</span><br><span class="line">  |       Name       | Value |</span><br><span class="line">  +--------------------------+</span><br><span class="line">  | binaryedge_api   |       |</span><br><span class="line">  | bing_api         |       |</span><br><span class="line">  | builtwith_api    |       |</span><br><span class="line">  | censysio_id      |       |</span><br><span class="line">  | censysio_secret  |       |</span><br><span class="line">  | flickr_api       |       |</span><br><span class="line">  | fullcontact_api  |       |</span><br><span class="line">  | github_api       |       |</span><br><span class="line">  | google_api       |       |</span><br><span class="line">  | hashes_api       |       |</span><br><span class="line">  | hibp_api         |       |</span><br><span class="line">  | hunter_io        |       |</span><br><span class="line">  | ipinfodb_api     |       |</span><br><span class="line">  | ipstack_api      |       |</span><br><span class="line">  | namechk_api      |       |</span><br><span class="line">  | pwnedlist_api    |       |</span><br><span class="line">  | pwnedlist_secret |       |</span><br><span class="line">  | spyse_api        |       |</span><br><span class="line">  | twitter_api      |       |</span><br><span class="line">  | twitter_secret   |       |</span><br><span class="line">  | virustotal_api   |       |</span><br><span class="line">  | whoxy_api        |       |</span><br><span class="line">  +--------------------------+ [recon -ng][<span class="built_in">test</span>] &gt;keys add bing_api 111w1w1w1w1w1w12w1sjjkas**</span><br><span class="line">[*] Key <span class="string">&#x27;bing_api&#x27;</span> added.</span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt; keys list </span><br><span class="line"></span><br><span class="line">  +---------------------------------------------+</span><br><span class="line">  |       Name       |          Value           |</span><br><span class="line">  +---------------------------------------------+</span><br><span class="line">  | binaryedge_api   |                          |</span><br><span class="line">  | bing_api         | 111w1w1w1w1w1w12w1sjjkas |</span><br><span class="line">  | builtwith_api    |                          |</span><br><span class="line">  | censysio_id      |                          |</span><br><span class="line">  | censysio_secret  |                          |</span><br><span class="line">  | flickr_api       |                          |</span><br><span class="line">  | fullcontact_api  |                          |</span><br><span class="line">  | github_api       |                          |</span><br><span class="line">  | google_api       |                          |</span><br><span class="line">  | hashes_api       |                          |</span><br><span class="line">  | hibp_api         |                          |</span><br><span class="line">  | hunter_io        |                          |</span><br><span class="line">  | ipinfodb_api     |                          |</span><br><span class="line">  | ipstack_api      |                          |</span><br><span class="line">  | namechk_api      |                          |</span><br><span class="line">  | pwnedlist_api    |                          |</span><br><span class="line">  | pwnedlist_secret |                          |</span><br><span class="line">  | spyse_api        |                          |</span><br><span class="line">  | twitter_api      |                          |</span><br><span class="line">  | twitter_secret   |                          |</span><br><span class="line">  | virustotal_api   |                          |</span><br><span class="line">  | whoxy_api        |                          |</span><br><span class="line">  +---------------------------------------------+</span><br></pre></td></tr></table></figure>
 <ul>
 <li>remove同理，移除某一API</li>
 </ul>
 <p><strong>（2）shell 命令</strong></p>
-<pre><code>[recon-ng][test] &gt; shell ls
-[*] Command: ls
-recon
-recon-cli
-recon-ng
-recon-web
-VERSION
-[recon-ng][test] &gt; shell pwd
-[*] Command: pwd
-/usr/share/recon-ng</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[recon-ng][<span class="built_in">test</span>] &gt; shell <span class="built_in">ls</span></span><br><span class="line">[*] Command: <span class="built_in">ls</span></span><br><span class="line">recon</span><br><span class="line">recon-cli</span><br><span class="line">recon-ng</span><br><span class="line">recon-web</span><br><span class="line">VERSION</span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt; shell <span class="built_in">pwd</span></span><br><span class="line">[*] Command: <span class="built_in">pwd</span></span><br><span class="line">/usr/share/recon-ng</span><br></pre></td></tr></table></figure>
 <p><strong>（3） snapshots （快照）命令</strong></p>
-<pre><code>**[recon-ng][test] &gt;** **snapshots** 
-delete  list    load    take    
-**[recon** **-ng][test] &gt;** **snapshots take**
-[*] Snapshot created: snapshot_20211117040109.db
-**[recon** **-ng][test] &gt;** **snapshots load snapshot_20211117040109.db**
-[*] Snapshot loaded: snapshot_20211117040109.db
-**[recon** **-ng][test] &gt;** **snapshots delete snapshot_20211117040109.db**
-[*] Snapshot removed: snapshot_20211117040109.db
-[recon-ng][test] &gt; </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[recon-ng][<span class="built_in">test</span>] &gt;snapshots </span><br><span class="line">delete  list    load    take    </span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt;snapshots take</span><br><span class="line">[*] Snapshot created: snapshot_20211117040109.db</span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt;snapshots load snapshot_20211117040109.db</span><br><span class="line">[*] Snapshot loaded: snapshot_20211117040109.db</span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt;snapshots delete snapshot_20211117040109.db</span><br><span class="line">[*] Snapshot removed: snapshot_20211117040109.db</span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt; </span><br></pre></td></tr></table></figure>
 <p><strong>（4）options 命令</strong></p>
-<pre><code>**[recon-ng][test] &gt;** **options** 
-list   set    unset  
-**[recon** **-ng][test] &gt;** **options list**
-
-  Name        Current Value  Required  Description
-  ----------  -------------  --------  -----------
-  NAMESERVER  8.8.8.8        yes       default nameserver for the resolver mixin
-  PROXY                      no        proxy server (address:port)
-  THREADS     10             yes       number of threads (where applicable)
-  TIMEOUT     10             yes       socket timeout (seconds)
-  USER-AGENT  Recon-ng/v5    yes       user-agent string
-  VERBOSITY   1              yes       verbosity level (0 = minimal, 1 = verbose, 2 = debug)
-
-**[recon** **-ng][test] &gt; options set PROXY 127.0.0.1:8889**
-PROXY =&gt; 127.0.0.1:8889 **[recon -ng][test] &gt;** **options unset NAMESERVER** 
-NAMESERVER =&gt; None
-**[recon** **-ng][test] &gt;** **options list**
-
-  Name        Current Value   Required  Description
-  ----------  -------------   --------  -----------
-  NAMESERVER                  yes       default nameserver for the resolver mixin
-  PROXY       127.0.0.1:8889  no        proxy server (address:port)
-  THREADS     10              yes       number of threads (where applicable)
-  TIMEOUT     10              yes       socket timeout (seconds)
-  USER-AGENT  Recon-ng/v5     yes       user-agent string
-  VERBOSITY   1               yes       verbosity level (0 = minimal, 1 = verbose, 2 = debug)
-
-[recon-ng][test] &gt; </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[recon-ng][<span class="built_in">test</span>] &gt;options </span><br><span class="line">list   <span class="built_in">set</span>    <span class="built_in">unset</span>  </span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt;options list</span><br><span class="line"></span><br><span class="line">  Name        Current Value  Required  Description</span><br><span class="line">  ----------  -------------  --------  -----------</span><br><span class="line">  NAMESERVER  8.8.8.8        <span class="built_in">yes</span>       default nameserver <span class="keyword">for</span> the resolver mixin</span><br><span class="line">  PROXY                      no        proxy server (address:port)</span><br><span class="line">  THREADS     10             <span class="built_in">yes</span>       number of threads (<span class="built_in">where</span> applicable)</span><br><span class="line">  TIMEOUT     10             <span class="built_in">yes</span>       socket <span class="built_in">timeout</span> (seconds)</span><br><span class="line">  USER-AGENT  Recon-ng/v5    <span class="built_in">yes</span>       user-agent string</span><br><span class="line">  VERBOSITY   1              <span class="built_in">yes</span>       verbosity level (0 = minimal, 1 = verbose, 2 = debug)</span><br><span class="line"></span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt; options <span class="built_in">set</span> PROXY 127.0.0.1:8889</span><br><span class="line">PROXY =&gt; 127.0.0.1:8889 [recon -ng][<span class="built_in">test</span>] &gt;options <span class="built_in">unset</span> NAMESERVER </span><br><span class="line">NAMESERVER =&gt; None</span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt;options list</span><br><span class="line"></span><br><span class="line">  Name        Current Value   Required  Description</span><br><span class="line">  ----------  -------------   --------  -----------</span><br><span class="line">  NAMESERVER                  <span class="built_in">yes</span>       default nameserver <span class="keyword">for</span> the resolver mixin</span><br><span class="line">  PROXY       127.0.0.1:8889  no        proxy server (address:port)</span><br><span class="line">  THREADS     10              <span class="built_in">yes</span>       number of threads (<span class="built_in">where</span> applicable)</span><br><span class="line">  TIMEOUT     10              <span class="built_in">yes</span>       socket <span class="built_in">timeout</span> (seconds)</span><br><span class="line">  USER-AGENT  Recon-ng/v5     <span class="built_in">yes</span>       user-agent string</span><br><span class="line">  VERBOSITY   1               <span class="built_in">yes</span>       verbosity level (0 = minimal, 1 = verbose, 2 = debug)</span><br><span class="line"></span><br><span class="line">[recon-ng][<span class="built_in">test</span>] &gt; </span><br></pre></td></tr></table></figure>
 <p><strong>其它命令同理！</strong></p>
 
     </div>
@@ -681,7 +412,7 @@ NAMESERVER =&gt; None
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

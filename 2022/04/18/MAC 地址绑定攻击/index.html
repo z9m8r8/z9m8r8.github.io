@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-18T09:30:00.000Z">
-<meta property="article:modified_time" content="2023-12-12T03:19:25.638Z">
+<meta property="article:modified_time" content="2023-12-17T08:20:29.250Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="wifi 渗透">
 <meta name="twitter:card" content="summary">
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-12 11:19:25" itemprop="dateModified" datetime="2023-12-12T11:19:25+08:00">2023-12-12</time>
+      <time title="修改时间：2023-12-17 16:20:29" itemprop="dateModified" datetime="2023-12-17T16:20:29+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,7 +266,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>480</span>
+      <span>481</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -297,63 +297,7 @@
 <h3 id="路由器限制">1、路由器限制</h3>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220418172243716-1747133454.png" /></p>
 <h3 id="网卡修改mac并接入wifi">2、网卡修改MAC并接入WiFi</h3>
-<pre><code>**┌──(root💀kali)-[/home/** **kali]
-└─# iwconfig**       
-lo        no wireless extensions.
-
-eth0      no wireless extensions.
-
-wlan0     IEEE 802.11  ESSID:off/any  
-          Mode:Managed  Access Point: **Not** **-Associated**   Tx-Power=20 dBm   
-          Retry short  long limit:2   RTS thr:off   Fragment thr:off
-          Encryption key:off
-          Power Management:off
-
-**┌──(root💀kali)** **-[/home/ kali]
-└─# ifconfig wlan0 down                                                               1 ⨯
-                                                                                          
-┌──(root💀kali)-[/home/kali]
-└─# macchanger -m 7A:56:70** **:E8:D4:3E  wlan0　　　　　　#7A: ……:3E 地址的获取，可通过 airodump-ng wlan0mon 侦听推测允许连接的 MAC 地址**
-**Current MAC:   1c:bf:ce:3b:5f:be (unknown)
-Permanent MAC: 1c:bf:ce:3b:5f:be (unknown)
-New MAC:       7a:** **56 :70** **:e8:d4:3e (unknown)**
-                                                                                          
-**┌──(root💀kali)** **-[/home/ kali]
-└─# ifconfig wlan0 up                                                                                                            
-                                                                                          
-┌──(root💀kali)-[/home/kali]
-└─# ifconfig**         
-eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
-        inet 10.10.10.135  netmask 255.255.255.0  broadcast 10.10.10.255
-        inet6 fe80::20c:29ff:fee1:6677  prefixlen 64  scopeid 0x20&lt;link&gt;
-        ether 00:0c:29:e1:66:77  txqueuelen 1000  (Ethernet)
-        RX packets 14  bytes 2778 (2.7 KiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 71  bytes 6768 (6.6 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
-        inet 127.0.0.1  netmask 255.0.0.0
-        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
-        loop  txqueuelen 1000  (Local Loopback)
-        RX packets 8  bytes 400 (400.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 8  bytes 400 (400.0 B)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-wlan0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500 **inet 192.168.0.105  netmask 255.255.255.0  broadcast 192.168.0.255
-        inet6 fe80::68eb:d6e0:4201:e552  prefixlen 64  scopeid 0x20&lt;link&gt;
-        ether 7a:56:70:e8:d4:3e  txqueuelen 1000** **(Ethernet)     #注意MAC地址，由于当前与AP相连的设备有两个MAC相同的STA，所以在AP传信息给STA时会有丢包的情况（发给另一个相同MAC的STA了）**
-        RX packets 165  bytes 28960 (28.2 KiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 81  bytes 10301 (10.0 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-                                                                                          
-┌──(root💀kali)-[/home/kali]
-└─# ping www.baidu.com
-PING www.a.shifen.com (36.152.44.96) 56(84) bytes of data.
-64 bytes from 36.152.44.96 (36.152.44.96): icmp_seq=1 ttl=128 time=4.06 ms
-64 bytes from 36.152.44.96 (36.152.44.96): icmp_seq=2 ttl=128 time=5.52 ms</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># iwconfig       </span></span><br><span class="line">lo        no wireless extensions.</span><br><span class="line"></span><br><span class="line">eth0      no wireless extensions.</span><br><span class="line"></span><br><span class="line">wlan0     IEEE 802.11  ESSID:off/any  </span><br><span class="line">          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   </span><br><span class="line">          Retry short  long <span class="built_in">limit</span>:2   RTS thr:off   Fragment thr:off</span><br><span class="line">          Encryption key:off</span><br><span class="line">          Power Management:off</span><br><span class="line"></span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># ifconfig wlan0 down                                                               1 ⨯</span></span><br><span class="line">                                                                                          </span><br><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># macchanger -m 7A:56:70:E8:D4:3E  wlan0　　　　　　#7A: ……:3E 地址的获取，可通过 airodump-ng wlan0mon 侦听推测允许连接的 MAC 地址</span></span><br><span class="line">Current MAC:   1c:bf:ce:3b:5f:be (unknown)</span><br><span class="line">Permanent MAC: 1c:bf:ce:3b:5f:be (unknown)</span><br><span class="line">New MAC:       7a:56 :70:e8:d4:3e (unknown)</span><br><span class="line">                                                                                          </span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># ifconfig wlan0 up                                                                                                            </span></span><br><span class="line">                                                                                          </span><br><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># ifconfig         </span></span><br><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 10.10.10.135  netmask 255.255.255.0  broadcast 10.10.10.255</span><br><span class="line">        inet6 fe80::20c:29ff:fee1:6677  prefixlen 64  scopeid 0x20&lt;<span class="built_in">link</span>&gt;</span><br><span class="line">        ether 00:0c:29:e1:66:77  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 14  bytes 2778 (2.7 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 71  bytes 6768 (6.6 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1000  (Local Loopback)</span><br><span class="line">        RX packets 8  bytes 400 (400.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 8  bytes 400 (400.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">wlan0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500 inet 192.168.0.105  netmask 255.255.255.0  broadcast 192.168.0.255</span><br><span class="line">        inet6 fe80::68eb:d6e0:4201:e552  prefixlen 64  scopeid 0x20&lt;<span class="built_in">link</span>&gt;</span><br><span class="line">        ether 7a:56:70:e8:d4:3e  txqueuelen 1000(Ethernet)     <span class="comment">#注意MAC地址，由于当前与AP相连的设备有两个MAC相同的STA，所以在AP传信息给STA时会有丢包的情况（发给另一个相同MAC的STA了）</span></span><br><span class="line">        RX packets 165  bytes 28960 (28.2 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 81  bytes 10301 (10.0 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line">                                                                                          </span><br><span class="line">┌──(root💀kali)-[/home/kali]</span><br><span class="line">└─<span class="comment"># ping www.baidu.com</span></span><br><span class="line">PING www.a.shifen.com (36.152.44.96) 56(84) bytes of data.</span><br><span class="line">64 bytes from 36.152.44.96 (36.152.44.96): icmp_seq=1 ttl=128 time=4.06 ms</span><br><span class="line">64 bytes from 36.152.44.96 (36.152.44.96): icmp_seq=2 ttl=128 time=5.52 ms</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -431,7 +375,7 @@ PING www.a.shifen.com (36.152.44.96) 56(84) bytes of data.
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

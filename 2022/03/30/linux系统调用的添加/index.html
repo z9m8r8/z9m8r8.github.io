@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-30T08:46:53.000Z">
-<meta property="article:modified_time" content="2023-12-12T03:19:25.638Z">
+<meta property="article:modified_time" content="2023-12-17T08:19:00.948Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="GRUB加密">
 <meta property="article:tag" content="Linux内核编译">
@@ -250,7 +250,7 @@ update））</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-12 11:19:25" itemprop="dateModified" datetime="2023-12-12T11:19:25+08:00">2023-12-12</time>
+      <time title="修改时间：2023-12-17 16:19:00" itemprop="dateModified" datetime="2023-12-17T16:19:00+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -289,8 +289,8 @@ update））</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"
     
     <div class="post-body" itemprop="articleBody"><h2 id="实验环境">1. 实验环境</h2>
 <p><strong>虚拟机：</strong>Ubuntu 64 位（Ubuntu-20.10-desktop-amd64.iso
-+ Linux-5.8）
-<strong>待编译的Linux内核：</strong>linux-5.9版(linux-5.9-tar.gz)</p>
++ Linux-5.8）</p>
+<p><strong>待编译的Linux内核：</strong>linux-5.9版(linux-5.9-tar.gz)</p>
 <h2 id="实验步骤">2. 实验步骤</h2>
 <h3 id="概述">1、概述</h3>
 <p>首先在虚拟机中安装Ubuntu 64 位操作系统,并在该虚拟中安装vm
@@ -303,26 +303,26 @@ id="安装虚拟机ubuntu-64-位ubuntu-20.10-desktop-amd64.iso">(1)安装虚拟�
 64 位（Ubuntu-20.10-desktop-amd64.iso）</h4>
 <h4
 id="安装各种依赖库及工具终端窗口使用命令">(2)安装各种依赖库及工具（终端窗口使用命令）</h4>
-<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo su <span class="comment">//获取root权限</span></span><br><span class="line">apt-<span class="built_in">get</span> install make</span><br><span class="line">apt-<span class="built_in">get</span> install gcc</span><br><span class="line">apt-<span class="built_in">get</span> install libncurses5-<span class="built_in">dev</span> libssl-<span class="built_in">dev</span></span><br><span class="line">apt-<span class="built_in">get</span> install build-essential openssl</span><br><span class="line">apt-<span class="built_in">get</span> install zlibc minizip</span><br><span class="line">apt-<span class="built_in">get</span> install libidn11-<span class="built_in">dev</span> libidn11</span><br><span class="line">apt-<span class="built_in">get</span> install bison</span><br><span class="line">apt-<span class="built_in">get</span> install flex</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo su //获取root权限</span><br><span class="line">apt-get install make</span><br><span class="line">apt-get install gcc</span><br><span class="line">apt-get install libncurses5-dev libssl-dev</span><br><span class="line">apt-get install build-essential openssl</span><br><span class="line">apt-get install zlibc minizip</span><br><span class="line">apt-get install libidn11-dev libidn11</span><br><span class="line">apt-get install bison</span><br><span class="line">apt-get install flex</span><br></pre></td></tr></table></figure>
 <h4
 id="下载linux内核httpsmirror.bjtu.edu.cnkernellinuxkernel备注安装时如果失败更新下系统源apt-get-update">(3)
 下载Linux内核：https://mirror.bjtu.edu.cn/kernel/linux/kernel（<strong>备注：</strong>安装时如果失败，更新下系统源（apt-get
 update））</h4>
 <h4 id="在文件系统下载目录下打开终端窗口使用以下命令">(4)
 在文件系统下载目录下打开终端窗口，使用以下命令：</h4>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo su <span class="comment">//获取root权限</span></span><br><span class="line">cp linux-<span class="number">5.9</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span> /usr/<span class="attribute">src</span> //复制压缩包到/usr/src下</span><br><span class="line">cd /usr/<span class="attribute">src</span></span><br><span class="line">tar -xvf linux-<span class="number">5.9</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span> <span class="comment">//解压Linux-5.9内核</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo su //获取root权限</span><br><span class="line"><span class="built_in">cp</span> linux-5.9.tar.gz /usr/src //复制压缩包到/usr/src下</span><br><span class="line"><span class="built_in">cd</span> /usr/src</span><br><span class="line">tar -xvf linux-5.9.tar.gz //解压Linux-5.9内核</span><br></pre></td></tr></table></figure>
 <h3 id="编程实现">4、编程实现</h3>
 <h4 id="添加系统调用阶段">(1).添加系统调用阶段</h4>
 <ul>
 <li>首先，定义自己的系统调用，即在sys.c中添加自己的系统调用，如下代码：</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">asmlinkage <span class="keyword">void</span> <span class="title function_">__x64_sys_helloworld</span><span class="params">(<span class="keyword">void</span>)</span><span class="comment">//__x64_务必加上！！！</span></span><br><span class="line"> &#123;</span><br><span class="line">        printk(<span class="string">&quot;Hello World!&quot;</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">asmlinkage <span class="type">void</span> __x64_sys_helloworld(<span class="type">void</span>)<span class="comment">//__x64_务必加上！！！</span></span><br><span class="line"> &#123;</span><br><span class="line">        printk(<span class="string">&quot;Hello World!&quot;</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_6244168841331.png" /></p>
 <p><strong>备注：</strong>__x64_务必加上的原因，由于此版本的系统调用会自动创建加上__x64_，如果未加则系统调用helloworld时会报__x64_sys_helloworld未定义的错误(自己第一次搞时也未加，直到编译内核阶段报错后才发现的)；</p>
 <ul>
 <li>其次，声明调用，在syscalls.h中加入如下声明：</li>
 </ul>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">asmlinkage <span class="type">long</span> <span class="title">sys_hello</span><span class="params">(<span class="type">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">asmlinkage <span class="type">long</span> <span class="title function_">sys_hello</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_624416a2b2b0e.png" /></p>
 <ul>
 <li>最后，设置系统调用号：</li>
@@ -330,34 +330,36 @@ update））</h4>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_62441613b4fb4.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_6244162c38a03.png" /></p>
 <h4 id="编译内核阶段">(2).编译内核阶段:</h4>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">make</span> mrproper <span class="comment">//清除.config等文件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">make</span> clean <span class="comment">//清楚大多数编译文件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">make</span> menuconfig <span class="comment">//对内核选项进行配置Save→OK→EXIT→EXIT</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">make</span> -j4 bzImage <span class="comment">//编译内核(开启多线程编译速度快)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">make</span> -j4 modules <span class="comment">//编译模块</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">make</span> modules_install <span class="comment">//安装模块</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">make</span> install <span class="comment">//由系统自动完善</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">make mrproper //清除.config等文件</span><br><span class="line"></span><br><span class="line">make clean //清楚大多数编译文件</span><br><span class="line"></span><br><span class="line">make menuconfig //对内核选项进行配置Save→OK→EXIT→EXIT</span><br><span class="line"></span><br><span class="line">make -j4 bzImage //编译内核(开启多线程编译速度快)</span><br><span class="line"></span><br><span class="line">make -j4 modules //编译模块</span><br><span class="line"></span><br><span class="line">make modules_install //安装模块</span><br><span class="line"></span><br><span class="line">make install //由系统自动完善</span><br></pre></td></tr></table></figure>
 <h4
 id="编译过程中出现的问题及解决方法①②是linux-5.9编译时遇到的报错②之后的问题是自己编译低版本内核时遇到的问题"><strong>(3).</strong>编译过程中出现的问题及解决方法（①②是Linux-5.9编译时遇到的报错，②之后的问题是自己编译低版本内核时遇到的问题）：</h4>
 <p>①　BTF: .tmp_vmlinux.btf: pahole (pahole) is not available Failed to
 generate BTF for vmlinux Try to disable CONFIG_DEBUG_INFO_BTF make[1]:
 *** [/home/demo_accout/linux-5.9……
-<strong>解决方法：</strong>这是由.config配置文件配置项错误导致的，修改配置文件，把之前的CONFIG_DEBUG_INFO_BTF=y改成CONFIG_DEBUG_INFO_BTF=n即可；
-②　__x64_问题（系统调用添加时已备注） ③　code model kernel does not
-support PIC mode 解决方法：在顶层makefile中添加编译选项 -fno-pie
-④　gcc.…… linux/compiler-gcc10.h: No such file or directory
+<strong>解决方法：</strong>这是由.config配置文件配置项错误导致的，修改配置文件，把之前的CONFIG_DEBUG_INFO_BTF=y改成CONFIG_DEBUG_INFO_BTF=n即可；</p>
+<p>②　__x64_问题（系统调用添加时已备注）</p>
+<p>③　code model kernel does not support PIC mode
+解决方法：在顶层makefile中添加编译选项 -fno-pie</p>
+<p>④　gcc.…… linux/compiler-gcc10.h: No such file or directory
 <strong>解决方法：</strong>修改compiler-gcc.h文件，将#include
 gcc_header(GNUC)修改为#include
-gcc_header(4)。也可再下载个低版本GCC搞个交叉链接的方法解决（我用的是前者）。
-⑤　init/do_mounts.o:…… first defined here
-<strong>解决方法：</strong>根据错误提示定位到相应文件的行数，将extern改为static。
-⑥　TIMEC   kernel/timeconst.h Can't use 'defined(<span class="citation"
-data-cites="array">@array</span>)' …… kernel/timeconst.pl line 373.
+gcc_header(4)。也可再下载个低版本GCC搞个交叉链接的方法解决（我用的是前者）。</p>
+<p>⑤　init/do_mounts.o:…… first defined here
+<strong>解决方法：</strong>根据错误提示定位到相应文件的行数，将extern改为static。</p>
+<p>⑥　TIMEC   kernel/timeconst.h Can't use 'defined(<span
+class="citation" data-cites="array">@array</span>)' ……
+kernel/timeconst.pl line 373.
 <strong>解决方法：</strong>去掉该行的defined，变成……if (!(<span
-class="citation" data-cites="val">@val</span>)) ……即可。 ⑦　……Error:
-4-byte relocation cannot be applied to 2-byte field
+class="citation" data-cites="val">@val</span>)) ……即可。</p>
+<p>⑦　……Error: 4-byte relocation cannot be applied to 2-byte field
 <strong>解决方法：</strong>安装个低版本gcc编译器（建议换个高版本内核）</p>
 <h4
 id="重启reboot选择linux-5.9的内核启动即可">(4).重启（reboot）选择Linux-5.9的内核启动即可。</h4>
 <h3 id="测试结果与分析">5、测试结果与分析</h3>
 <h4 id="新建系统调用程序a.c">(1).新建系统调用程序A.c</h4>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/syscall.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"> <span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span>&#123; </span><br><span class="line">      <span class="type">long</span> <span class="type">int</span> a = <span class="built_in">syscall</span>(<span class="number">336</span>); </span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;System call Success, and it returns %ld\n&quot;</span>,a); </span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/syscall.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"> <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"> &#123; </span><br><span class="line">      <span class="type">long</span> <span class="type">int</span> a = syscall(<span class="number">336</span>); </span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;System call Success, and it returns %ld\n&quot;</span>,a); </span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="编译执行">(2).编译执行</h4>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc <span class="selector-tag">A</span><span class="selector-class">.c</span>  //编译<span class="selector-tag">A</span><span class="selector-class">.c</span>(<span class="number">2</span>).使用gcc编译<span class="selector-tag">A</span><span class="selector-class">.c</span>生成<span class="selector-tag">a</span><span class="selector-class">.out</span>,执行<span class="selector-tag">a</span><span class="selector-class">.out</span>后，接着输入dmesg查看进程信息。</span><br><span class="line">./<span class="selector-tag">a</span><span class="selector-class">.out</span>   //执行<span class="selector-tag">a</span><span class="selector-class">.out</span></span><br><span class="line">dmesg     //查看进程调用的信息(下图倒数第二行说明调用成功)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc A.c  //编译A.c(2).使用gcc编译A.c生成a.out,执行a.out后，接着输入dmesg查看进程信息。</span><br><span class="line">./a.out   //执行a.out</span><br><span class="line">dmesg     //查看进程调用的信息(下图倒数第二行说明调用成功)</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_624418685628c.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_624418d05147e.png" /></p>
 <h3 id="拓展">6、拓展</h3>
@@ -379,7 +381,7 @@ gedit /etc/grub.d/00_header 在该文件的末尾，添加以下内容：</p>
 检查内核是否已经加载AES密码模块</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_62441a7bd3cdd.png" /></p>
 <p>接下来安装dmsetup软件包，该软件包含有配置device-mapper所需的工具：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-<span class="built_in">get</span> install dmsetup cryptsetup</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install dmsetup cryptsetup</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_62441aa232374.png" /></p>
 <p>为检查dmsetup软件包是否已经建立了设备映象程序，键入下列命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /dev/mapper/control</span><br></pre></td></tr></table></figure>
@@ -391,7 +393,7 @@ targets(下图说明系统已为装载加密设备做好了准备)。</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_62441aec37855.png" /></p>
 <p>其次建立加密设备（建立一个磁盘映像，然后作为回送设备加载）：
 建立回送磁盘映，利用命令dd来建立一个空磁盘映象，然后将该映象作为回送设备来装载。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="attribute">if</span>=/dev/zero <span class="attribute">of</span>=~/secret.img <span class="attribute">bs</span>=1M <span class="attribute">count</span>=100</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=~/secret.img bs=1M count=100</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_62441b07a09db.png" /></p>
 <p>新建了一个大小为100
 MB的磁盘映象，该映象名字为secret.img。要想改变其大小，可以改变count的值。
@@ -401,7 +403,7 @@ MB的磁盘映象，该映象名字为secret.img。要想改变其大小，可�
 <p>此时已经得到了一个虚拟的块设备，其位于/dev/loop10，并且能够如同使用其它设备那样来使用它。
 下面使用cryptsetup来建立逻辑卷，并将其与块设备捆绑(使用前面建立的回送映象作为虚拟块设备)：其中，以myEncryptedFilesystem
 作为新建的逻辑卷的名称，执行以下命令,并输入逻辑卷的口令(-y的作用在于输入两次口令以确保无误)；</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cryptsetup -y create myEncryptedFilesystem <span class="regexp">/dev/</span>loop10</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cryptsetup -y create myEncryptedFilesystem /dev/loop10</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/03/img_62441b486af29.png" /></p>
 <p>可以使用命令sudo dmsetup
 ls检查逻辑卷是否已经建立（如下图，已经成功建立了逻辑卷）；</p>
@@ -409,7 +411,7 @@ ls检查逻辑卷是否已经建立（如下图，已经成功建立了逻辑卷
 <p>device-mapper会把它的虚拟设备装载到/dev/mapper下面，所以虚拟块设备应该是/dev/mapper/myEncryptedFilesystem
 ，写入的数据会经过透明加密，然后将密文写入。
 如同物理设备一样，也可以在虚拟设备上创建文件系统：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext3 <span class="regexp">/dev/m</span>apper/myEncryptedFilesystem</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext3 /dev/mapper/myEncryptedFilesystem</span><br></pre></td></tr></table></figure>
 <p>现在为新的虚拟块设备建立一个装载点，然后将其装载。命令如下所示：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /mnt/myEncryptedFilesystem</span><br><span class="line">mount /dev/mapper/myEncryptedFilesystem /mnt/myEncryptedFilesystem</span><br></pre></td></tr></table></figure>
 <p>可利用命令df -h
@@ -496,7 +498,7 @@ id="参考1.鸟哥.鸟哥的linux私房菜基础学习篇第四版m.北京人民
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

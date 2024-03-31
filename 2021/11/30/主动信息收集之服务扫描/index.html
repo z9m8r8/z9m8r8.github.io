@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="主动信息收集之服务扫描">
+<meta property="og:url" content="https://z9m8r8.github.io/2021/11/30/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-30T13:06:00.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:42:15.743Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="服务扫描">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2021/11/30/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2021/11/30/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F/","path":"2021/11/30/主动信息收集之服务扫描/","title":"主动信息收集之服务扫描"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>主动信息收集之服务扫描 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="nav-text">1. 服务扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F%E8%8E%B7%E5%8F%96-banner"><span class="nav-text">2. 服务扫描获取 banner</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nc"><span class="nav-text">1、nc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E8%84%9A%E6%9C%AC"><span class="nav-text">2、Python脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dmitry"><span class="nav-text">3、dmitry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap"><span class="nav-text">4、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#amap"><span class="nav-text">5、amap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E8%AF%86%E5%88%AB"><span class="nav-text">3. 服务识别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nc-1"><span class="nav-text">1、nc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmap-1"><span class="nav-text">2、nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#amap-1"><span class="nav-text">3、amap</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2021/11/30/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="主动信息收集之服务扫描 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          主动信息收集之服务扫描
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-30 21:06:00" itemprop="dateCreated datePublished" datetime="2021-11-30T21:06:00+08:00">2021-11-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:42:15" itemprop="dateModified" datetime="2023-12-23T21:42:15+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Kail Linux渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">信息收集</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="服务扫描">1. 服务扫描</h2>
+<p><strong>识别开放端口，上运行的应用</strong></p>
+<ul>
+<li><strong>依据识别的应用找对应纰漏的漏洞
+(特别是一些老版本应用)</strong></li>
+</ul>
+<p><strong>识别目标操作系统类型，版本等</strong></p>
+<ul>
+<li><strong>依据识别结果，测试是否缺少相应补丁等</strong></li>
+</ul>
+<p><strong>方法</strong></p>
+<ul>
+<li><strong>Banner捕获，注意该结果不一定准确(管理员可伪造，迷惑扫描者)</strong></li>
+<li><strong>服务识别（指纹信息）</strong></li>
+<li><strong>操作系统识别</strong></li>
+<li><strong>SNMP分析，如配置存在问题等</strong></li>
+<li><strong>防火墙识别</strong></li>
+</ul>
+<p><strong>Banner</strong></p>
+<ul>
+<li><strong>软件开发商</strong></li>
+<li><strong>软件名称</strong></li>
+<li><strong>服务类型</strong></li>
+<li><strong>版本号</strong></li>
+<li><strong>直接发现已知漏洞和弱点</strong></li>
+<li><strong>与目标系统端口建立完整连接可直接获取banner</strong></li>
+</ul>
+<p><strong>另类服务识别方法</strong></p>
+<ul>
+<li><strong>特征行为和响应字段</strong></li>
+<li><strong>不同的响应可用于识别底层操作系统（如，Linux系统和Windows系统的ping包时不同的）</strong></li>
+</ul>
+<p><strong>SNMP</strong></p>
+<p><strong>待补 ……</strong></p>
+<h2 id="服务扫描获取-banner">2. 服务扫描获取 banner</h2>
+<h3 id="nc">1、nc</h3>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nc -nv  10.10.10.129 21</span></span><br><span class="line">(UNKNOWN) [10.10.10.129] 21 (ftp) open</span><br><span class="line">220 (vsFTPd 2.2.2)　　　　　　　　　　　　<span class="comment">#vsFTPd连版本都得到了……</span></span><br><span class="line">^C</span><br><span class="line">                                                                                          </span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nc -nv  10.10.10.129 22                                                           </span></span><br><span class="line">(UNKNOWN) [10.10.10.129] 22 (ssh) open</span><br><span class="line">SSH- 2.0-OpenSSH_5.3p1 Debian-3ubuntu4　　　　　　<span class="comment">#操作系统+服务</span></span><br><span class="line">^C</span><br><span class="line">                                                                                          </span><br><span class="line">┌──(root💀kali)-[/home/ kali]</span><br><span class="line">└─<span class="comment"># nc -nv  10.10.10.129 23                                                           </span></span><br><span class="line">(UNKNOWN) [10.10.10.129] 23 (telnet) : Connection refused</span><br></pre></td></tr></table></figure>
+<h3 id="python脚本">2、Python脚本</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># python3</span></span><br><span class="line">Python 3.9.2 (default, Feb 28 2021, 17:03:44) </span><br><span class="line">[GCC 10.2.1 20210110] on linux</span><br><span class="line">Type <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> or <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt; &gt;&gt; import socket</span><br><span class="line">&gt;&gt;&gt; an=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">&gt;&gt;&gt; an.connect((&quot;<span class="number">10.10</span>.<span class="number">10.129</span>&quot;,<span class="number">21</span>))</span><br><span class="line">&gt;&gt;&gt; an.recv(4096)</span><br><span class="line">b<span class="string">&#x27;220 (vsFTPd 2.2.2)\r\n&#x27;</span></span><br><span class="line">&gt;&gt;&gt; an.close()&gt;&gt;&gt; <span class="built_in">exit</span>()</span><br></pre></td></tr></table></figure>
+<p><strong>ban_grab.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sys.argv)!=<span class="number">4</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Usage - ./banner_grab.py  [Target-IP]  [First Port]  [Last Port]&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Example - ./banner_grab.py  10.10.10.1  1  100&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Example will grab banners for TCP ports 1 through 100 on 10.10.10.1&quot;</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line">    </span><br><span class="line">ip=sys.argv[<span class="number">1</span>]</span><br><span class="line">start=<span class="built_in">int</span>(sys.argv[<span class="number">2</span>])</span><br><span class="line">end=<span class="built_in">int</span>(sys.argv[<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> <span class="built_in">range</span>(start,end):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        bangrab = socket.socket(socket.AF_INET,socket.SOCK_STREAM)<span class="comment">#建立TCP连接</span></span><br><span class="line">        bangrab.connect((ip,port))</span><br><span class="line">        ready = select.select([bangrab],[],[],<span class="number">1</span>)<span class="comment">#存储banner返回信息</span></span><br><span class="line">        <span class="keyword">if</span> ready[<span class="number">0</span>]:<span class="comment">#判断是否允许抓取banner</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;TCP Port &quot;</span>+<span class="built_in">str</span>(port)+<span class="string">&quot; - &quot;</span>+<span class="built_in">str</span>(bangrab.recv(<span class="number">4096</span>)))</span><br><span class="line">            bangrab.close()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># python3 ./ban_grab.py 10.10.10.129 1 100</span></span><br><span class="line">TCP Port 21 - b<span class="string">&#x27;220 (vsFTPd 2.2.2)\r\n&#x27;</span></span><br><span class="line">TCP Port 22 - b<span class="string">&#x27;SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="dmitry">3、dmitry</h3>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># dmitry -pb 10.10.10.129</span></span><br><span class="line">Deepmagic Information Gathering Tool</span><br><span class="line"><span class="string">&quot;There be some deep magic going on&quot;</span></span><br><span class="line"></span><br><span class="line">ERROR: Unable to locate Host Name <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Continuing with limited modules</span><br><span class="line">HostIP:10.10.10.129</span><br><span class="line">HostName:</span><br><span class="line"></span><br><span class="line">Gathered TCP Port information <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">---------------------------------</span><br><span class="line"></span><br><span class="line"> Port           State</span><br><span class="line"></span><br><span class="line">21 /tcp          open</span><br><span class="line">&gt;&gt; 220 (vsFTPd 2.2.2)</span><br><span class="line"></span><br><span class="line">22/tcp          open</span><br><span class="line">&gt;&gt; SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4</span><br><span class="line"></span><br><span class="line">80/tcp          open</span><br><span class="line">zsh: segmentation fault  dmitry -pb 10.10.10.129</span><br></pre></td></tr></table></figure>
+<h3 id="nmap">4、nmap</h3>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># nmap -sT 10.10.10.129 -p 21 --script=banner</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 09:08 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00046s latency).</span><br><span class="line"></span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">21/tcp open  ftp</span><br><span class="line">|_banner: 220 (vsFTPd 2.2.2)</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 0.76 seconds</span><br><span class="line">                                                                                           </span><br><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># nmap -sT 10.10.10.129 -p 1-100 --script=banner.nse</span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 09:09 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00082s latency).</span><br><span class="line">Not shown: 97 closed ports</span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">21/tcp open  ftp</span><br><span class="line">|_banner: 220 (vsFTPd 2.2.2)</span><br><span class="line">22/tcp open  ssh</span><br><span class="line">|_banner: SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4</span><br><span class="line">80/tcp open  http</span><br><span class="line">MAC Address: 00:0C:29:DE:5D:BA (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 10.35 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="amap">5、amap</h3>
+<p><strong>amap 专门用于识别指定端口上运行服务的banner信息</strong></p>
+<p><strong>安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># apt-get installamap </span></span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree... Done</span><br><span class="line">Reading state information... Done</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  amap</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 135 not upgraded.</span><br><span class="line">Need to get 68.2 kB of archives.</span><br><span class="line">After this operation, 181 kB of additional disk space will be used.</span><br><span class="line">Get:1 http://mirrors.neusoft.edu.cn/kali kali-rolling/main amd64 amap amd64 5.4-4kali2 [68.2 kB]</span><br><span class="line">Fetched 68.2 kB <span class="keyword">in</span> 3s (24.5 kB/s)</span><br><span class="line">Selecting previously unselected package amap.</span><br><span class="line">(Reading database ... 271263 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../amap_5.4-4kali2_amd64.deb ...</span><br><span class="line">Unpacking amap (5.4-4kali2) ...</span><br><span class="line">Setting up amap (5.4-4kali2) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> kali-menu (2021.3.3) ...</span><br><span class="line">Processing triggers <span class="keyword">for</span> man-db (2.9.4-2) ...</span><br></pre></td></tr></table></figure>
+<p><strong>帮助信息：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap -h</span></span><br><span class="line">amap v5.4 (c) 2011 by van Hauser &lt;vh@thc.org&gt; www.thc.org/thc-amap</span><br><span class="line">Syntax: amap [-A|-B|-P|-W] [-1buSRHUdqv] [[-m] -o &lt;file&gt;] [-D &lt;file&gt;] [-t/-T sec] [-c cons] [-C retries] [-p proto] [-i &lt;file&gt;] [target port [port] ...]</span><br><span class="line">Modes:</span><br><span class="line">  -A         Map applications: send triggers and analyse responses (default)</span><br><span class="line">  -B         Just grab banners, <span class="keyword">do</span> not send triggers</span><br><span class="line">  -P         No banner or application stuff - be a (full connect) port scanner</span><br><span class="line">Options:</span><br><span class="line">  -1         Only send triggers to a port <span class="keyword">until</span> 1st identification. Speeeeed!</span><br><span class="line">  -6         Use IPv6 instead of IPv4</span><br><span class="line">  -b         Print ascii banner of responses</span><br><span class="line">  -i FILE    Nmap machine readable outputfile to <span class="built_in">read</span> ports from</span><br><span class="line">  -u         Ports specified on commandline are UDP (default is TCP)</span><br><span class="line">  -R         Do NOT identify RPC service</span><br><span class="line">  -H         Do NOT send application triggers marked as potentially harmful</span><br><span class="line">  -U         Do NOT dump unrecognised responses (better <span class="keyword">for</span> scripting)</span><br><span class="line">  -d         Dump all responses</span><br><span class="line">  -v         Verbose mode, use twice (or more!) <span class="keyword">for</span> debug (not recommended :-)</span><br><span class="line">  -q         Do not report closed ports, and <span class="keyword">do</span> not <span class="built_in">print</span> them as unidentified</span><br><span class="line">  -o FILE [-m] Write output to file FILE, -m creates machine readable output</span><br><span class="line">  -c CONS    Amount of parallel connections to make (default 32, max 256)</span><br><span class="line">  -C RETRIES Number of reconnects on connect timeouts (see -T) (default 3)</span><br><span class="line">  -T SEC     Connect <span class="built_in">timeout</span> on connection attempts <span class="keyword">in</span> seconds (default 5)</span><br><span class="line">  -t SEC     Response <span class="built_in">wait</span> <span class="built_in">timeout</span> <span class="keyword">in</span> seconds (default 5)</span><br><span class="line">  -p PROTO   Only send triggers <span class="keyword">for</span> this protocol (e.g. ftp)</span><br><span class="line">  TARGET PORT   The target address and port(s) to scan (additional to -i)</span><br><span class="line">amap is a tool to identify application protocols on target ports.</span><br><span class="line">Note: this version was NOT compiled with SSL support!</span><br><span class="line">Usage hint: Options <span class="string">&quot;-bqv&quot;</span> are recommended, add <span class="string">&quot;-1&quot;</span> <span class="keyword">for</span> fast/rush checks.</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># amap -B 10.10.10.129 22                                                          255 ⨯</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:13:00 - BANNER mode</span><br><span class="line"></span><br><span class="line">Banner on 10.10.10.129:22/tcp : SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:13:01 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap -B 10.10.10.129 21</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:13:07 - BANNER mode</span><br><span class="line"></span><br><span class="line">Banner on 10.10.10.129:21/tcp : 220 (vsFTPd 2.2.2)\r\n</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:13:07 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap -B 10.10.10.129 1-200</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:13:30 - BANNER mode</span><br><span class="line"></span><br><span class="line">Banner on 10.10.10.129:143/tcp : * OK [CAPABILITY IMAP4rev1 UIDPLUS CHILDREN NAMESPACE THREAD=ORDEREDSUBJECT THREAD=REFERENCES SORT QUOTA IDLE ACL ACL2=UNION] Courier-IMAP ready. Copyright 1998-2008 Double Precision, Inc.  See COPYING <span class="keyword">for</span> distribution information.\r\n</span><br><span class="line">Banner on 10.10.10.129:21/tcp : 220 (vsFTPd 2.2.2)\r\n</span><br><span class="line">Banner on 10.10.10.129:22/tcp : SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:13:42</span><br></pre></td></tr></table></figure>
+<h2 id="服务识别">3. 服务识别</h2>
+<p><strong>Banner信息抓取能力有限</strong></p>
+<p><strong>nmap响应特征分析识别服务</strong></p>
+<ul>
+<li><strong>发送系列复杂的探测</strong></li>
+<li><strong>依据响应特征signature</strong></li>
+</ul>
+<h3 id="nc-1">1、nc</h3>
+<p>省略，同2.1</p>
+<h3 id="nmap-1">2、nmap</h3>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># nmap 10.10.10.129 -p 1-200 -sV                   </span></span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-30 09:19 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.10.10.129</span><br><span class="line">Host is up (0.00011s latency).</span><br><span class="line">Not shown: 195 closed ports</span><br><span class="line">PORT    STATE SERVICE     VERSION</span><br><span class="line">21/tcp  open  ftp         vsftpd 2.2.2</span><br><span class="line">22/tcp  open  ssh         OpenSSH 5.3p1 Debian 3ubuntu4 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">80/tcp  open  http        Apache httpd 2.2.14 ((Ubuntu) mod_mono/<span class="number">2.4</span>.<span class="number">3</span> PHP/<span class="number">5.3</span>.<span class="number">2</span>-<span class="number">1</span>ubuntu4.<span class="number">5</span> with Suhosin-Patch mod_python/<span class="number">3.3</span>.<span class="number">1</span> Python/<span class="number">2.6</span>.<span class="number">5</span> mod_perl/<span class="number">2.0</span>.<span class="number">4</span> Perl/v5.<span class="number">10.1</span>)</span><br><span class="line"><span class="number">139</span>/tcp open  netbios-ssn Samba smbd <span class="number">3</span>.X - <span class="number">4</span>.X (workgroup: WORKGROUP)</span><br><span class="line"><span class="number">143</span>/tcp open  imap        Courier Imapd (released <span class="number">2008</span>)</span><br><span class="line">MAC Address: <span class="number">00</span>:<span class="number">0</span>C:<span class="number">29</span>:DE:<span class="number">5</span>D:BA (VMware)</span><br><span class="line">Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap done: <span class="number">1</span> IP address (<span class="number">1</span> host up) scanned in <span class="number">21.40</span> seconds</span><br></pre></td></tr></table></figure>
+<h3 id="amap-1">3、amap</h3>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">┌──(root💀kali)-[/home/kali/Desktop/ Tools]</span><br><span class="line">└─<span class="comment"># amap 10.10.10.129 80    </span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:19:58 - APPLICATION MAPPING mode</span><br><span class="line"></span><br><span class="line">Protocol on 10.10.10.129:80/tcp matches http</span><br><span class="line">Protocol on 10.10.10.129:80/tcp matches http-apache-2</span><br><span class="line"></span><br><span class="line">Unidentified ports: none.</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:20:04 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap 10.10.10.129 20-30</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:20:20 - APPLICATION MAPPING mode</span><br><span class="line"></span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh</span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh-openssh</span><br><span class="line">Protocol on 10.10.10.129:21/tcp matches ftp</span><br><span class="line"></span><br><span class="line">Unidentified ports: 10.10.10.129:20/tcp 10.10.10.129:23/tcp 10.10.10.129:24/tcp 10.10.10.129:25/tcp 10.10.10.129:26/tcp 10.10.10.129:27/tcp 10.10.10.129:28/tcp 10.10.10.129:29/tcp 10.10.10.129:30/tcp (total 9).</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:20:23 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap 10.10.10.129 20-30 -q</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:20:44 - APPLICATION MAPPING mode</span><br><span class="line"></span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh</span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh-openssh</span><br><span class="line">Protocol on 10.10.10.129:21/tcp matches ftp</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:20:50 </span><br><span class="line">┌──(root💀kali) -[/home/kali/Desktop/Tools]</span><br><span class="line">└─<span class="comment"># amap 10.10.10.129 20-30 -qb</span></span><br><span class="line">amap v5.4 (www.thc.org/thc-amap) started at 2021-11-30 09:20:54 - APPLICATION MAPPING mode</span><br><span class="line"></span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh - banner: SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n</span><br><span class="line">Protocol on 10.10.10.129:22/tcp matches ssh-openssh - banner: SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu4\r\n</span><br><span class="line">Protocol on 10.10.10.129:21/tcp matches ftp - banner: 220 (vsFTPd 2.2.2)\r\n</span><br><span class="line"></span><br><span class="line">amap v5.4 finished at 2021-11-30 09:21:01</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2021/11/30/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F/" title="主动信息收集之服务扫描">https://z9m8r8.github.io/2021/11/30/主动信息收集之服务扫描/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F/" rel="tag"><i class="fa fa-tag"></i> 服务扫描</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/29/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="prev" title="主动信息收集之端口扫描">
+                  <i class="fa fa-angle-left"></i> 主动信息收集之端口扫描
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/01/%E5%B0%86%E5%9F%BA%E4%BA%8E%20Web%20%E7%9A%84%20RCE%20%E5%AF%BC%E5%85%A5%20Metasploit/" rel="next" title="将基于 Web 的 RCE 导入 Metasploit">
+                  将基于 Web 的 RCE 导入 Metasploit <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2021/11/30/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

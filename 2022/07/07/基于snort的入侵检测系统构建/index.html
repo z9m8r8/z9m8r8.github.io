@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Snort的入侵检测系统构建">
+<meta property="og:url" content="https://z9m8r8.github.io/2022/07/07/%E5%9F%BA%E4%BA%8Esnort%E7%9A%84%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-07T06:31:52.000Z">
+<meta property="article:modified_time" content="2023-12-23T12:56:22.756Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="Snort">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2022/07/07/%E5%9F%BA%E4%BA%8Esnort%E7%9A%84%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/07/07/%E5%9F%BA%E4%BA%8Esnort%E7%9A%84%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/","path":"2022/07/07/基于snort的入侵检测系统构建/","title":"基于Snort的入侵检测系统构建"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>基于Snort的入侵检测系统构建 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-text">1. 基本介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#snort"><span class="nav-text">1、Snort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splunk"><span class="nav-text">2、Splunk</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#snort-3%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="nav-text">2. Snort 3安装部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="nav-text">1、基本环境部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85ubuntu-20.04%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">1.1安装Ubuntu 20.04虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ubuntu%E5%AE%89%E8%A3%85vmware-tools"><span class="nav-text">1.2 Ubuntu安装VMware Tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ubuntu%E5%AE%89%E8%A3%85ssh%E6%9C%8D%E5%8A%A1"><span class="nav-text">1.3 Ubuntu安装ssh服务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85snort"><span class="nav-text">2、安装Snort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E5%8D%A1"><span class="nav-text">3、配置网卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85openappld"><span class="nav-text">4、安装OpenApplD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85snort%E8%A7%84%E5%88%99%E9%9B%86"><span class="nav-text">5、安装Snort规则集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E7%94%A8%E5%86%85%E7%BD%AE%E8%A7%84%E5%88%99"><span class="nav-text">6、启用内置规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5pcap%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%B0snort%E6%B5%8B%E8%AF%95%E8%A7%84%E5%88%99"><span class="nav-text">7、导入PCAP数据包到Snort测试规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#json%E8%AD%A6%E5%91%8A%E8%BE%93%E5%87%BA%E6%8F%92%E4%BB%B6"><span class="nav-text">8、JSON警告输出插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#snort%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="nav-text">9、Snort启动脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEsplunk"><span class="nav-text">3. 安装并配置Splunk</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85splunk"><span class="nav-text">1、安装Splunk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splunk%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">2、Splunk基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%A7%A3%E6%9E%90json%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-text">2.1 安装解析JSON的插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%90%8E%E9%9D%A2%E5%91%8A%E8%AD%A6%E9%9C%80%E7%94%A8"><span class="nav-text">2.2
+配置电子邮件服务【后面告警需用】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E5%91%8A%E8%AD%A6%E4%BB%A5metasploit-%E7%9A%84syn-%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%91%8A%E8%AD%A6%E4%B8%BA%E4%BE%8B"><span class="nav-text">2.3
+配置邮件告警【以Metasploit 的SYN 端口扫描告警为例】</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splunk%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%B5%8B%E8%AF%95"><span class="nav-text">3、Splunk基本使用测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nids%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A7%84%E5%88%99%E6%B5%8B%E8%AF%95"><span class="nav-text">4. NIDS自定义规则测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8Bicmp"><span class="nav-text">1、检测ICMP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99"><span class="nav-text">1.1 规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#splunk%E5%88%86%E6%9E%90"><span class="nav-text">1.2 Splunk分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E5%9F%BA%E4%BA%8Ememcached%E7%9A%84drdos"><span class="nav-text">2、检测基于Memcached的DRDOS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99-1"><span class="nav-text">2.1规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E6%94%BB%E5%87%BB"><span class="nav-text">2.2模拟攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#splunk%E5%88%86%E6%9E%90-1"><span class="nav-text">2.3 Splunk分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8Bmsf%E7%9A%84syn%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">3、检测MSF的SYN端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99-2"><span class="nav-text">3.1规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E6%94%BB%E5%87%BB-1"><span class="nav-text">3.2模拟攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#splunk%E5%88%86%E6%9E%90-2"><span class="nav-text">3.3 Splunk分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8Bmsf%E7%9A%84syn-flood"><span class="nav-text">4、检测MSF的SYN Flood</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99-3"><span class="nav-text">4.1规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E6%94%BB%E5%87%BB-2"><span class="nav-text">4.2模拟攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#splunk%E5%88%86%E6%9E%90-3"><span class="nav-text">4.3 Splunk分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8Bmsf%E7%9A%84ssh%E7%88%86%E7%A0%B4"><span class="nav-text">5、检测MSF的SSH爆破</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99-4"><span class="nav-text">5.1规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E6%94%BB%E5%87%BB-3"><span class="nav-text">5.2模拟攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#splunk%E5%88%86%E6%9E%90-4"><span class="nav-text">5.3 Splunk分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%BC%80%E5%8F%91"><span class="nav-text">5. 远程控制客户端的开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="nav-text">1、客户端开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E6%8E%A7%E6%B5%8B%E8%AF%95"><span class="nav-text">2、远控测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%B5%8B%E8%AF%95"><span class="nav-text">2.1远程执行命令测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nids%E6%B5%8B%E8%AF%95"><span class="nav-text">2.2 NIDS测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#splunk%E7%B3%BB%E7%BB%9F%E6%B5%8B%E8%AF%95"><span class="nav-text">2.3 Splunk系统测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E6%B5%8B%E8%AF%95"><span class="nav-text">2.4防火墙测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2022/07/07/%E5%9F%BA%E4%BA%8Esnort%E7%9A%84%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="基于Snort的入侵检测系统构建 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于Snort的入侵检测系统构建
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-07 14:31:52" itemprop="dateCreated datePublished" datetime="2022-07-07T14:31:52+08:00">2022-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 20:56:22" itemprop="dateModified" datetime="2023-12-23T20:56:22+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B/" itemprop="url" rel="index"><span itemprop="name">入侵检测</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>35 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="基本介绍">1. 基本介绍</h2>
+<h3 id="snort">1、Snort</h3>
+<p>Snort是一个基于规则的开源网络入侵检测和预防软件(NIDS/NIPS)。Snort主要有三种模式，嗅探器模式，它简单地从网络中读取数据包并在控制台（屏幕）上以连续流的形式输出显示它们。数据包记录器模式，将数据包记录到磁盘。网络入侵检测系统（NIDS）模式，它对网络流量进行检测和分析。Snort带有用于检测攻击的大型规则库，也允许用户使用自己的规则扩展该库。
+Snort
+3具有高度的灵活性和可配置性，可适应多种不同的情况，并且具有新的插件体系结构，允许开发人员创建自己的插件，以便在Snort的处理管道中使用。与Snort
+2相比，Snort 3是对Snort产品的完全重新设计，以解决Snort
+2.9.x的一些限制。主要特点是多线程、可扩展的插件架构、基于lua的配置文件、命令行shell和许多其他特性。</p>
+<h3 id="splunk">2、Splunk</h3>
+<p>Splunk是机器数据的引擎。通过该引擎，用户可以收集、索引应用程序、服务器和设备生成的快速移动的计算机数据。使用Splunk处理计算机数据可在几分钟内解决问题并调查安全事件。Splunk以较低的成本满足合规性要求，可以跨多个系统关联并分析复杂事件。
+Splunk的特点：多平台支持、可以从任意源索引任意数据、可以从远程系统转发数据、能够关联复杂事件、Splunk专为大型数据构建、Splunk在整个数据中心扩展、提供角色型的安全性。Splunk可以创建临时报告，以监控安全事件和攻击，分析用户交易，客户行为，机器行为，安全威胁，欺诈活动等。</p>
+<h2 id="snort-3安装部署">2. Snort 3安装部署</h2>
+<h3 id="基本环境部署">1、基本环境部署</h3>
+<h4 id="安装ubuntu-20.04虚拟机">1.1安装Ubuntu 20.04虚拟机</h4>
+<p>镜像：<a
+target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/focal/ubuntu-20.04.4-desktop-amd64.iso">https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/focal/ubuntu-20.04.4-desktop-amd64.iso</a>
+具体安装过程参见：<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/355314438">https://zhuanlan.zhihu.com/p/355314438</a></p>
+<h4 id="ubuntu安装vmware-tools">1.2 Ubuntu安装VMware Tools</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c63fafc8981.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c63fb5254ff.png" /></p>
+<h4 id="ubuntu安装ssh服务">1.3 Ubuntu安装ssh服务</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装ssh服务端</span></span><br><span class="line">sudo apt-get install openssh-server</span><br><span class="line"><span class="comment">#确认sshserver是否启动了</span></span><br><span class="line">ps -e  grep ssh</span><br><span class="line"><span class="comment">#如果只有ssh-agent那ssh-server还没有启动，需要/etc/init.d/ssh start，如果看到sshd那说明ssh-server已经启动了</span></span><br><span class="line"><span class="comment">#启动sshserver</span></span><br><span class="line">/etc/init.d/ssh start</span><br></pre></td></tr></table></figure>
+<h3 id="安装snort">2、安装Snort</h3>
+<p>更新系统确保系统最新，并有最新的包列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade -y</span><br></pre></td></tr></table></figure>
+<p>设置系统的时间和时区【Splunk处理警报时非常重要】：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg-reconfigure tzdata</span><br></pre></td></tr></table></figure>
+<p>新建snort_src文件夹，存储下载的大量源文件压缩包和其他源文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> ~/snort_src</span><br><span class="line"><span class="built_in">cd</span> ~/snort_src</span><br></pre></td></tr></table></figure>
+<p>安装Snort 3依赖包【详情参见Snort3手册】：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y build-essential autotools-dev libdumbnet-dev \</span><br><span class="line">libluajit-5.1-dev libpcap-dev zlib1g-dev pkg-config libhwloc-dev \</span><br><span class="line">cmake</span><br></pre></td></tr></table></figure>
+<p>同上【可选，但推荐安装】：</p>
+<p>sudo apt-get install -y liblzma-dev openssl libssl-dev cpputest
+libsqlite3-dev uuid-dev</p>
+<p>因为是从github库中安装Snort，所以需要一些额外的工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y libtool git autoconf</span><br></pre></td></tr></table></figure>
+<p>安装Snort DAQ【数据获取库】的依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y bison flex libcmocka-dev</span><br></pre></td></tr></table></figure>
+<p>如果需要使用NFQ (IPS模式)以内联模式运行Snort，则安装所需的包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y libnetfilter-queue-dev libmnl-dev</span><br></pre></td></tr></table></figure>
+<p>下载和安装safec【用于对某些遗留C-library调用的运行时边界检查】，可选的，但推荐：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src</span><br><span class="line"><span class="comment">#直接从github下载较慢，已被转存至gitee</span></span><br><span class="line">wget https://gitee.com/deng_wenyi/snort3-ubuntu-install-source-code/repository/archive/master.zip</span><br><span class="line">apt install unzip</span><br><span class="line">unzip master.zip</span><br><span class="line"><span class="built_in">mv</span> snort3-ubuntu-install-source-code/libsafec-08112019.0-gad76c7.tar.gz ./</span><br><span class="line">tar -xzvf libsafec-08112019.0-gad76c7.tar.gz</span><br><span class="line"><span class="built_in">cd</span> libsafec-08112019.0-gad76c7/</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>安装PCRE：Perl兼容正则表达式。不使用Ubuntu库，因为Ubuntu库的版本更老。没有使用pcre2，因为hyperscan无法与那个版本兼容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src/</span><br><span class="line"><span class="built_in">mv</span> snort3-ubuntu-install-source-code/pcre-8.43.tar.gz ./</span><br><span class="line">tar -xzvf pcre-8.43.tar.gz</span><br><span class="line"><span class="built_in">cd</span> pcre-8.43</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>下载并安装gperftools
+2.7，谷歌的线程缓存malloc【用于chrome】。Tcmalloc是一个内存分配器，它针对高并发情况进行了优化，将提供更好的速度来平衡较高的内存使用。不从Ubuntu存储库中获得tcmalloc版本(2.5版本)，因为它与Snort不兼容。Tcmalloc是可选的，但建议：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y libunwind-dev</span><br><span class="line"><span class="built_in">cd</span> ~/snort_src</span><br><span class="line"><span class="built_in">mv</span> snort3-ubuntu-install-source-code/gperftools-2.7.90.tar.gz ./</span><br><span class="line">tar xzvf gperftools-2.7.90.tar.gz</span><br><span class="line"><span class="built_in">cd</span> gperftools-2.7.90</span><br><span class="line">./configure</span><br><span class="line">make </span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>Snort
+3使用Hyperscan实现快速模式匹配。Hyperscan需要Ragel和Boost头：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src</span><br><span class="line"><span class="built_in">mv</span> snort3-ubuntu-install-source-code/ragel-6.10.tar.gz ./</span><br><span class="line">tar -xzvf ragel-6.10.tar.gz</span><br><span class="line"><span class="built_in">cd</span> ragel-6.10</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>Hyperscan需要Boost
+c++库。请注意，没有使用boost头文件的Ubuntu存储库版本(libboost-all-dev)，因为Hyperscan需要1.58或更高版本的boost库，而且Ubuntu存储库版本太老了。下载Boost
+1.72.0库，但不安装【后面直接引用】：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src</span><br><span class="line"><span class="comment">#boost库比较大（约120M），见百度网盘下载；</span></span><br><span class="line"><span class="comment">#链接： https://pan.baidu.com/s/1GOM1KXJDjBMsElGw7q3fRg  密码: e4av</span></span><br><span class="line">tar -xvzf boost_1_72_0.tar.gz</span><br></pre></td></tr></table></figure>
+<p>从源文件安装hyperscan5.2.1，引用Boost头文件源目录的位置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src</span><br><span class="line"><span class="built_in">mv</span> snort3-ubuntu-install-source-code/hyperscan-5.2.1.tar.gz ./</span><br><span class="line">tar -xvzf hyperscan-5.2.1.tar.gz</span><br><span class="line"><span class="built_in">mkdir</span> ~/snort_src/hyperscan-5.2.1-build</span><br><span class="line"><span class="built_in">cd</span> hyperscan-5.2.1-build/</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DBOOST_ROOT=~/snort_src/boost_1_72_0/ ../hyperscan-5.2.1</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>如果想测试Hyperscan工作，可以从构建目录运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src/hyperscan-5.2.1-build/</span><br><span class="line">./bin/unit-hyperscan</span><br></pre></td></tr></table></figure>
+<p>Snort对flatbuffers有一个可选的要求，这是一个内存高效的序列化库【可以在cmake过程中忽略“不是git库”的错误】：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src</span><br><span class="line"><span class="built_in">mv</span> snort3-ubuntu-install-source-code/flatbuffers-v1.12.0.tar.gz ./</span><br><span class="line">tar -xzvf flatbuffers-v1.12.0.tar.gz</span><br><span class="line"><span class="built_in">mkdir</span> flatbuffers-build</span><br><span class="line"><span class="built_in">cd</span> flatbuffers-build</span><br><span class="line">cmake ../flatbuffers-1.12.0</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>接下来，从Snort网站下载并安装数据采集库(DAQ)。注意，Snort
+3使用的DAQ与Snort 2.9.x.x系列不同：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src</span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/deng_wenyi/snort3-libdaq.git</span><br><span class="line"><span class="built_in">cd</span> snort3-libdaq</span><br><span class="line">./bootstrap</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>更新共享库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure>
+<p>现在，准备从github存储库下载、编译和安装Snort
+3。如果对启用额外的编译时功能感兴趣，比如能够处理大的(超过2 GB)
+PCAP文件，或者新的命令行shell，那么应该运行./configure cmake.sh
+--help列出所有可能的选项。下载和安装，默认设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src</span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/deng_wenyi/snortadmin-snort3.git</span><br><span class="line"><span class="built_in">cd</span> snortadmin-snort3/</span><br><span class="line">./configure_cmake.sh --prefix=/usr/local --enable-tcmalloc</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>安装的最后一步是验证Snort是否安装并可以运行。为此，向snort可执行文件传递-V这个标志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/snort -V</span><br></pre></td></tr></table></figure>
+<p>应该会看到类似如下的输出：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c640362a669.png" /></p>
+<p>如果的输出与上面的类似，那么Snort已安装并正常工作。使用默认配置文件测试Snort：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c /usr/local/etc/snort/snort.lua</span><br></pre></td></tr></table></figure>
+<p>应该会看到以以下内容结束的输出：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6403b6f313.png" /></p>
+<h3 id="配置网卡">3、配置网卡</h3>
+<p>现代网卡使用卸载(例如LRO)来处理硬件中的网络包重新组装，而不是在软件中重新组装。对于大多数情况，这是首选的，因为它减少了系统上的负载。对于NIDS，希望禁用LRO和GRO，因为这会截断较长的数据包(更多信息请参见Snort
+2手册)。
+需要创建一个systemD服务来更改这些设置。首先确定使用ifconfig查看让snort侦听的接口的名称。
+注意：如果使用的是Ubuntu 20：ifconfig已经被ip命令所取代【运行ip address
+show查看接口和ip地址】。
+一旦知道了网络接口的名称，请检查这些接口的大接收(LRO)和通用接收(GRO)的卸载状态。在下面的示例中，我的接口名称是ens33。
+安装ethtool，使用ethtool来检查LRO/GRO的状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ethtool -k ens33  grep receive-offload</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c642d973c02.png" /></p>
+<p>从这个输出中，可以看到启用了GRO，LRO被禁用(“固定”意味着它不能被改变)。需要确保两者都被设置为"off"(或off
+[fixed])。可以使用ethtool命令禁用LRO和GRO，但该设置不会在重新启动时持久存在。解决方案是创建一个systemD脚本，在每次引导时自动设置这个值。
+创建systemD脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /lib/systemd/system/ethtool.service</span><br></pre></td></tr></table></figure>
+<p>输入以下信息【注，将ens33替换为自己的接口名称】：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Ethtool Configration <span class="keyword">for</span> Network Interface</span><br><span class="line">[Service]</span><br><span class="line">Requires=network.target</span><br><span class="line">Type=oneshot</span><br><span class="line">ExecStart=/sbin/ethtool -K ens33 gro off</span><br><span class="line">ExecStart=/sbin/ethtool -K ens33 lro off</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c642f0ec69d.png" /></p>
+<p>文件创建完成后，启用服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> ethtool</span><br><span class="line">sudo service ethtool start</span><br></pre></td></tr></table></figure>
+<p>这些设置现在将在重新引导时持久存在。可以使用ethtool验证设置，将显示(off或off[fixed]是想要看到的设置)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ethtool -k ens33  grep receive-offload</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c642f751e53.png" /></p>
+<h3 id="安装openappld">4、安装OpenApplD</h3>
+<p>OpenApplD允许识别应用层(第7层)的流量。可以创建操作应用程序层流量的规则(比如阻止baidu)，并记录检测到的每种类型的流量统计数据。
+在社区的帮助下，Snort团队创建了一个检测器包，称为应用程序检测器包，可以下载和安装。首先下载OpenAppID检测器包并解压缩文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src/</span><br><span class="line">wget https://snort.org/downloads/openappid/23020</span><br><span class="line"><span class="built_in">mv</span> 23020 23020.tar.gz</span><br><span class="line">tar -xzvf 23020.tar.gz</span><br><span class="line">sudo <span class="built_in">cp</span> -R odp /usr/local/lib/</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64370a097f.png" /></p>
+<p>如果得到的错误是该文件不存在，那么可能是Snort团队更新了规则集。浏览到https://snort.org/downloads#openappid，并下载snort-openappid.tar.gz。
+按照上面的方法下载和提取规则后，需要编辑Snort配置文件以指向这个odp目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/snort/snort.lua</span><br></pre></td></tr></table></figure>
+<p>编辑"appid
+="条目。添加app_detector_dir选项，让它指向上面解压缩的odp文件夹的父文件夹。如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">appid =</span><br><span class="line">&#123;</span><br><span class="line">    −− appid requires this to use appids <span class="keyword">in</span> rules</span><br><span class="line">    app_detector_dir = <span class="string">&#x27;/usr/local/lib&#x27;</span>,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>注意，缩进行必须有四个空格，而不是制表符。测试配置文件能否正确加载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c /usr/local/etc/snort/snort.lua --warn-all</span><br></pre></td></tr></table></figure>
+<p>此命令将验证Snort是否可以正确读取snort.lua文件，它不包含任何错误。运行此命令后，应该看到以以下内容结束的输出：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c643b8473e8.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c643bd6b7eb.png" /></p>
+<p>上图报的错忽略即可，只要输出以“Snort成功验证了配置”结束，就可以忽略此警告。这个警告只是意味着没有任何本地开发的openAppld获取脚本。
+注：Snort的异常等级，警告、错误、致命错误。
+接下来，将创建一个简单的规则来测试OpenAppID是否正常工作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /usr/local/etc/rules</span><br><span class="line">sudo <span class="built_in">touch</span> /usr/local/etc/rules/local.rules</span><br><span class="line">sudo vim /usr/local/etc/rules/local.rules</span><br></pre></td></tr></table></figure>
+<p>将在local.rules文件中生成两个规则。第一个规则使用OpenApplID来检查Baidu流量，第二个规则将检测ICMP流量，这对于测试警报是否正确生成非常有用。这两条规则很适合测试的设置。将以下两行粘贴到上面创建的local.rules文件中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert tcp any any -&gt; any any ( msg:<span class="string">&quot;Baidu Detected&quot;</span>; appids:<span class="string">&quot;Baidu&quot;</span>;sid:10000001; )</span><br><span class="line">alert icmp any any -&gt; any any (msg:<span class="string">&quot;ICMP Traffic Detected&quot;</span>;sid:10000002;)</span><br></pre></td></tr></table></figure>
+<p>现在运行Snort并加载local.rules文件，以确保正确加载这些规则(验证规则的格式正确)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c /usr/local/etc/snort/snort.lua  -R /usr/local/etc/rules/local.rules</span><br></pre></td></tr></table></figure>
+<p>输出应该以“Snort成功验证了匹配”结束。不应该有任何警告或错误【除上面那个错误】。
+如果向上滚动输出，应该会看到这两个文本规则已成功加载(在rule
+counts部分)。现在，让在一个接口上以检测模式运行snort，并将所有警报打印到控制台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules  -i ens33 -A alert_fast -s 65535 -k none</span><br></pre></td></tr></table></figure>
+<p>"-k none"标志告诉Snort忽略错误的校验和，正常处理，而"-s
+65535"标志则防止Snort处理过大的包。Stream和Frag解码器会丢弃校验和错误的数据包，而OpenApplD检测器也不会处理这些数据包。通过包含这些标志，可以确保具有错误校验和的数据包仍然被处理为警报。snort将加载配置，然后显示：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64425aeee9.png" /></p>
+<p>这意味着snort目前正在监听该接口上的所有流量，并将其与它加载的两个规则进行比较。当流量与规则匹配时，snort将向控制台写入警告。在另一个终端窗口ping另一IP并使用wget连接到baidu。这将触发规则：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget baidu.com</span><br></pre></td></tr></table></figure>
+<p>在第一个控制台窗口中，将看到类似于以下的警报输出：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6442bf3c64.png" /></p>
+<p>使用ctrl-c停止Snort，如果无法使用ctrl-c停止Snort，可以尝试ctrl-z。
+如果没有看到生成的警报，请确保在此测试中，正在运行snort的计算机上运行wget
+baidu.com，并且请求将从snort侦听的接口发出。可以从另一台计算机ping到snort(到让snort侦听的接口的ip地址)。
+如果希望收集OpenAppID统计信息【每个检测器检测到多少流量】，则需要在snort.lua文件中启用它，并使用"-l"标志，在标志后接"日志目录"运行Snort。
+首先创建一个日志目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /var/log/snort</span><br></pre></td></tr></table></figure>
+<p>现在修改/usr/local/etc/snort/snort.lua使appid检测器能够记录统计信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">appid =</span><br><span class="line">&#123;</span><br><span class="line">    app_detector_dir = <span class="string">&#x27;/usr/local/lib&#x27;</span>,</span><br><span class="line">    log_stats = <span class="literal">true</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在运行snort，监听接口，将数据记录到/var/log/snort文件夹(与之前的命令相同，只是添加了日志文件夹路径"-l"标志)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules  -i ens33 -A alert_fast -s 65535 -k none -l /var/log/snort</span><br></pre></td></tr></table></figure>
+<p>在收集一些数据并停止Snort【和前面一样使用ping和wget
+baidu.com生成数据，然后使用Ctrl-C停止】之后，将在/var/log/snort看到appid_stats.log该文件为root用户所有，为让所有人都可读，更改Snort自动编写的文件的权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> a+r /var/log/snort/appid_stats.log</span><br></pre></td></tr></table></figure>
+<p>现在可以查看snort收集的协议统计信息：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64467a9d42.png" /></p>
+<p>这是一个逗号分隔的文件，按照这个顺序显示时间(unixtime)、检测器、发送字节(tx)和接收字节(rx)。如果不希望收集此数据，可以在snort.lua配置文件appid模块中禁用log开启选项。请注意，此数据与local.rules文件中由规则生成的警报不同。有关检测器的更多信息，请参见OpenApplD检测器指南。</p>
+<h3 id="安装snort规则集">5、安装Snort规则集</h3>
+<p>与Snort 2规则相比，Snort
+3规则有更多的选项，尽管手动下载的v2规则或使用PulledPork【一个自动下载更新规则集的脚本】可以在Snort
+3中使用，但应该使用专门为Snort
+3创建的规则。另外目前PulledPork还不能与Snort
+3一起工作，因此无法自动更新规则集。
+有三组不同的Snort规则可供选择。社区规则集是免费的，不需要登录；注册的规则集包含社区规则集和其他规则，需要在snort.org上拥有一个免费帐户。订阅者规则集是付费服务。订阅方规则集的规则将在30天后添加到注册的规则集。
+以下使用注册的规则集。需要在Snort.org上创建一个帐户，还可以选择在其中注册各种snort邮件列表。注册并签到之后，导航到规则下载页面，下载最新的3.0规则(称为snortrales-snapshot3xxx.tar.gz或类似的内容，取决于是否发布了新的版本)。将规则集保存到snort-src文件夹中。
+注意，规则集单独到官网下，wget方式下载的文件解压不了【注册账号登录，在网站直接点下载链接，将下载的文件在复制到虚拟机】。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c644da8e133.png" /></p>
+<p>需要创建一些文件夹来存储规则集中的规则。这里在usr/local/etc/snort中创建了四个文件夹;</p>
+<p>文件夹名称</p>
+<p>目的</p>
+<p>rules</p>
+<p>注册规则集中的所有基本规则文件</p>
+<p>builtin_rules</p>
+<p>包含内置规则的引用和信息的规则文件</p>
+<p>so_rules</p>
+<p>这些是编译后的规则</p>
+<p>Lists</p>
+<p>白名单和黑名单</p>
+<p>创建这些文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /usr/local/etc/rules</span><br><span class="line">sudo <span class="built_in">mkdir</span> /usr/local/etc/builtin_rules</span><br><span class="line">sudo <span class="built_in">mkdir</span> /usr/local/etc/so_rules</span><br><span class="line">sudo <span class="built_in">mkdir</span> /usr/local/etc/lists</span><br></pre></td></tr></table></figure>
+<p>Snort的规则集包含三个文件夹：一个规则文件夹包含所有单独的规则文件，一个内建文件夹包含关于构建到snort的规则的信息，以及一个etc文件夹，其中包含规则集生成的更新后的snort配置文件。从Snort的规则集中提取文件，将所有规则文件复制到snort规则文件夹中，将内置规则复制到内置文件夹中，并将snort配置文件复制到snort的程序文件夹中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/snort_src/</span><br><span class="line"><span class="built_in">mkdir</span> snortrules-3034tar -xvzf snortrules-snapshot-3034.tar.gz  -C ./snortrules-3034</span><br><span class="line"><span class="built_in">cd</span> snortrules-3034</span><br><span class="line"><span class="comment">#复制单个规则文件</span></span><br><span class="line">sudo <span class="built_in">cp</span> ./rules/*.rules /usr/local/etc/rules/</span><br><span class="line"><span class="comment">#复制内建规则文件</span></span><br><span class="line">sudo <span class="built_in">cp</span> ./builtins/builtins.rules /usr/local/etc/builtin_rules/</span><br><span class="line"><span class="comment">#复制新的配置文件(将覆盖当前的配置)。</span></span><br><span class="line">sudo <span class="built_in">cp</span> ./etc/* /usr/local/etc/snort/</span><br></pre></td></tr></table></figure>
+<p>从etc文件夹复制了三个文件。file_magic.lua它告诉snort如何识别文件类型；snort_defaults.lua表示配置snort的全局设置(系统范围)；snort.lua它是snort特定实例的配置文件。每次运行Snort时，将向Snort传递一个snort.lua文件，该文件描述希望snort如何运行。这个文件会加载默认文件，它描述的系统配置,适用于每个不同方式运行snort。可以有多个不同版本的snort.lua,但通常只有一个默认的配置。现在编辑这些文件。不需要对/usr/local/etc/snort/snort_defaults.lua进行任何更改。接下来，编辑snort.lua文件。这个文件是在启动时传递给snort的配置文件，它还加载snort_defaults.lua文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/snort/snort.lua</span><br></pre></td></tr></table></figure>
+<p>首先，配置的HOME_NET变量。这指的是正在保护的本地子网，规则使用此信息来确定警报是否匹配。在这里设置的本地子网信息以匹配的子网。我的子网配置是10.10.10.0网络与24位子网掩码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HOME_NET = <span class="string">&#x27;10.10.10.0/24&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>设置EXTERNAL_NET为“any”，注，如果设置这个为除了所有子网的主网，会错过许多重要的警告。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6467df162b.png" /></p>
+<p>配置appid插件【操作同前】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6468275219.png" /></p>
+<p>分析ips检测器。查看IPS设置，可以看到复制的所有规则文件：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6468b1ab57.png" /></p>
+<p>$RULE_PATH路径在snort_defaults.lua中定义，引用/usr/local/etc/rules。也可以看到内置ips选项；稍后将启用这些规则。现在，测试一下snort是否可以成功加载这些规则。让通过运行snort来测试配置文件，并将路径传递给这个修改后的snort.lua文件，就像之前做的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c /usr/local/etc/snort/snort.lua</span><br></pre></td></tr></table></figure>
+<p>如果你出现了类似以下报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Finished /usr/local/etc/snort/snort.lua:</span><br><span class="line">Loading ips.rules:</span><br><span class="line">FATAL: ips.rules:3 undefined variable name: RULE_PATH.</span><br><span class="line">Fatal Error, Quitting..</span><br></pre></td></tr></table></figure>
+<p>参见：</p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/Deng-Xian-Sheng/p/14170498.html">https://www.cnblogs.com/Deng-Xian-Sheng/p/14170498.html</a>解决报错。</p>
+<p>正常输出可看到规则被加载：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c646b5910dd.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c646c7cbbf3.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c646cd7093b.png" /></p>
+<p>注意：规则集中的许多规则都被注释掉了。主要原因是有些规则可能会产生误报，所以Snort团队已经注释掉了这些规则，因为如果在NIPS模式下运行Snort，它们可能会淹没的日志，或导致过多的流量中断。
+使用以下标志来运行Snort，以便在测试和设置期间检测问题：warn-all和pedantic标志。Snort
+3手册：</p>
+<p>除非指定了–warn-*，否则不会发出警告。-warn-all 启用所有警告，而
+– pedantic会使这些警告致命</p>
+<p>在运行Snort时，不会希望使用–pedantic标志，因为简单的flowbit警告【设置了flowbits，但没有在规则中使用，这是一个常见问题】将生成警告并导致Snort出错。不过，对于测试配置来说，这是一个很好的标志。</p>
+<h3 id="启用内置规则">6、启用内置规则</h3>
+<p>要启用“启用解码器”和“检查器”警报【这些警报检测无法通过常规规则轻松检测到的恶意流量】，需要在snort配置文件中启用这个选项：snort.lua，位于/usr/local/etc/snort/目录中。另外，需要加载builtins.rules规则，这些规则包含每个警告的详细信息，并将这些信息写入控制台，编辑snort.lua：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/<span class="keyword">local</span>/etc/snort/snort.lua</span><br></pre></td></tr></table></figure>
+<p>通过删除行首的两个连字符，将enable_builtin_rules设置为true。以两个连字符开头的行是注释【禁用的命令通常注释，并且在加载时不会被snort解析】。删除enable_builtin_rules前的两个连字符来启用这个选项。
+为包含内置规则文件，因此将其作为一个include添加到规则数组中。需要在内置文件夹中引用这个文件如下：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include $BUILTIN_RULE_PATH/builtins.rules</span><br></pre></td></tr></table></figure>
+<p>注意，snort中的每个缩进snort.lua必须是四个空格(不是制表符)，否则配置将无法加载。
+snort.lua中ips模块配置结果：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64707b7b4a.png" /></p>
+<p>现在测试对snort.lua配置文件的更改是否有错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c /usr/local/etc/snort/snort.lua</span><br></pre></td></tr></table></figure>
+<p>向上滚动前面命令的输出，应该看到除了加载其他规则外，还加载了内置规则。也可以向上滚动，查看IPS
+模块已加载的所有规则文件。这里你可以看到一些已加载的规则文件，以及616条加载的bultin规则：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6470de7c16.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6472a44cd9.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6472f2bd9a.png" /></p>
+<p>现在，让加载前面用baidu和icmp规则创建的local.rules文件。将使用-R标志从命令行加载这个规则文件，而不是在配置文件中加载。加载规则文件并测试配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules</span><br></pre></td></tr></table></figure>
+<p>滚动回输出，你会看到加载了local.rules文件，并在计数中添加了另外两条规则：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c647462730f.png" /></p>
+<p>注意，由于复制了snort规则集的配置文件,
+baidu规则将不起作用。规则集中的snort.lua文件，默认情况下没有启用OpenApplD。可以通过编辑/usr/local/etc/snort/snort.lua简单地重新启用该文件【操作同前】：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6475c70739.png" /></p>
+<p>像前面一样进行测试，会看到更多的警报记录到的控制台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo snort -c /usr/local/etc/snort/snort.lua  -R /usr/local/etc/rules/local.rules  -i ens33 -A alert_fast -s 65535 -k none -l /var/log/snort</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64762075a5.png" /></p>
+<h3
+id="导入pcap数据包到snort测试规则">7、导入PCAP数据包到Snort测试规则</h3>
+<p>将PCAP文件传递到Snort并将警报输出到.csv。 下载macdc
+2012数据集【PCAP文件】，测试从内置规则和社区规则生成警报。开始下载两个pcap文件【文件比较大，建议用主机单独下载】：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> pcaps</span><br><span class="line"><span class="built_in">cd</span> pcaps</span><br><span class="line">wget https://download.netresec.com/pcap/maccdc-2012/maccdc2012_00000.pcap.gz</span><br><span class="line">gunzip maccdc2012_00000.pcap.gz</span><br><span class="line">wget https://download.netresec.com/pcap/maccdc-2012/maccdc2012_00001.pcap.gz</span><br><span class="line">gunzip maccdc2012_00001.pcap.gz</span><br></pre></td></tr></table></figure>
+<p>现在运行snort，告诉它加载下载的第一个pcap文件，加载所有规则(从snort.lua中)，并将警告打印到控制台。不需要加载local.rules文件，因为它实际上只对测试snort是否正确工作有用。由于数据包较大（1G）需要较长时间来运行，可以使用ctrl-c来停止它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c /usr/local/etc/snort/snort.lua  -r ~/pcaps/maccdc2012_00000.pcap -A alert_fast -s 65535 -k none</span><br></pre></td></tr></table></figure>
+<p>标志【命令参数】说明：</p>
+<p>标志</p>
+<p>解释</p>
+<p>sudo snort</p>
+<p>这是正在调用的snort二进制文件。</p>
+<p>-c /usr/local/etc/snort/snort.lua</p>
+<p>这是snort.lua配置文件。</p>
+<p>r ~/pcaps/maccdc2012_00000.pcap</p>
+<p>pcap文件的路径。</p>
+<p>-A alert_fast</p>
+<p>使用alert_fast插件输出到控制台。</p>
+<p>-s 65535</p>
+<p>设置snaplen，使Snort不会截断或丢弃过大的包。</p>
+<p>-k none</p>
+<p>忽略错误的校验和，否则snort将丢弃带有错误校验和的包，它们不会被计算。</p>
+<p>如果要同时处理多个pcap文件，修改最后一条命令，扫描同一目录下的所有pcap文件，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c /usr/local/etc/snort/snort.lua --pcap-filter \*.pcap  --pcap-dir ~/pcaps -A alert_fast -s 65535 -k none</span><br></pre></td></tr></table></figure>
+<p>标志【命令参数】说明：</p>
+<p>标志</p>
+<p>解释</p>
+<p>–pcap-filter *.pcap</p>
+<p>这告诉snort如何识别位于pcap-dir中的pcap文件。</p>
+<p>–pcap-dir ~/pcaps</p>
+<p>这将告诉Snort pcap文件所在的目录。</p>
+<p>输出：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64803a1ec2.png" /></p>
+<p>可以修改最后一个命令，以使用任何输出插件【前面一直在使用alert_fast插件将事件打印到控制台】，可以在命令行中指定它，就像上面使用-A标志所做的那样，也可以在snort中启用该插件snort.lua文件。例如，要使用alert
+csv插件将警报数据保存到csv文件中，需要修改snort.lua：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c6480b75dc5.png" /></p>
+<p>然后运行snort，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo snort -c /usr/local/etc/snort/snort.lua  -r ~/pcaps/maccdc2012_00000.pcap  -s 65535 -k none -l /var/log/snort -q -m 0x1b</span><br></pre></td></tr></table></figure>
+<p>首先，将注意到，在Snort处理PCAP文件时，屏幕上没有输出任何内容。当运行上述命令时，不会看到任何输出打印到控制台，因为正在向csv文件写入警报，并使用q标志抑制所有其他输出。可能会注意到一些与lua检测器odp服务相关的错误，这些可以忽略。另外也没有前面那样在命令行中指定输出插件，这是因为在snort.lua中启用了alert_csv插件。并在命令行中指定一个，将优先于在snort.lua中配置的任何输出插件。正在使用的新标志如下所示：</p>
+<p>新标志</p>
+<p>解释</p>
+<p>-l /var/log/snort</p>
+<p>应该保存输出文件的文件夹。</p>
+<p>-q</p>
+<p>安静模式，不显示横幅和状态报告</p>
+<p>-m 0x1b</p>
+<p>这将写入文件的umask设置为033。</p>
+<p>umask：默认情况下，Snort使用的umask值为077，这将阻止所有者的任何人读取日志文件。当试图使用其他工具摄取日志时，除非它们正在运行，否则会导致问题。为解决这个问题，可以使用-m标志传递一个新的umask
+033(二进制为000 011
+011，十六进制为ox1b)，这意味着的日志文件将具有权限：rwxr-r-，允许每个人都能够读取这些文件。如果有特定的安全需求，需将此设置更改为更具限制性。在Snort时，这些文件将由根用户拥有，如上面所述运行。
+当返回到命令提示符时，这意味着Snort已经完成了对pcap文件的处理。应该在/var/log/snort/目录中看到警报alert_csv.txt。
+可以使用wc -1命令，可以看到从这些pcap文件中生成了多少警报。在这里，可以看到文件中有4031632行，因为每一行都是一个单独的警报。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c648357adb4.png" /></p>
+<h3 id="json警告输出插件">8、JSON警告输出插件</h3>
+<p>为了方便地将Snort
+3警报日志文件导入所选的SIEM【Splunk】，需要使用alert
+json输出插件将所有警报写入json格式的文本文件。启用json输出插件只需修改snort.lua文件即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /usr/local/etc/snort/snort.lua</span><br></pre></td></tr></table></figure>
+<p>首先，通过在插件中的每行前面放置两个破折号来禁用alert
+_csv插件，并启用alert
+json插件，如下所示。也可以同时启用这两个插件，这样就可以同时获得表示相同警告的csv和json文件。注意，缩进使用4个空格代替制表符：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">--alert_csv =</span><br><span class="line">--&#123;</span><br><span class="line">----file = <span class="literal">true</span>,</span><br><span class="line">--&#125;</span><br><span class="line"></span><br><span class="line">alert_json =</span><br><span class="line">&#123;</span><br><span class="line">    file = <span class="literal">true</span>,</span><br><span class="line">    <span class="built_in">limit</span> = 10,</span><br><span class="line">    fields = <span class="string">&#x27;seconds action class b64_data dir dst_addr \</span></span><br><span class="line"><span class="string">        dst_ap dst_port eth_dst eth_len eth_src eth_type gid icmp_code \</span></span><br><span class="line"><span class="string">        icmp_id icmp_seq icmp_type iface ip_id ip_len msg mpls pkt_gen \</span></span><br><span class="line"><span class="string">        pkt_len pkt_num priority proto rev rule service sid src_addr \</span></span><br><span class="line"><span class="string">        src_ap src_port target tcp_ack tcp_flags tcp_len tcp_seq \</span></span><br><span class="line"><span class="string">        tcp_win tos ttl udp_len vlan timestamp&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c648c63a050.png" /></p>
+<p>在alert json插件中，指定了三个选项：
+首先，使用file选项来允许将警报输出到json格式的文件(而不是输出到控制台)。接下来，指定limit选项来告诉Snort何时转到新文件。当输出文件达到10
+MB时，将使用文件名中的当前unixtime创建一个新文件。为了进行测试，将这个值设置为10
+MB，在生产系统上，这个值会增加到100
+MB或更大。最后，指定fields选项，该选项标识警报的哪些特定字段应该包含在json输出中。这里选择了每个可能的输出字段。
+注意：经过测试后，可以选择删除其中的一些字段，vlan和mpls字段通常是不需要的，b64_data包含整个包的有效载荷，为了节省空间，可以删除这些字段。不要删除seconds字段，并确保它始终是列出的第一个字段。这将允许Splunk正确地处理事件。
+像前面一样运行Snort扫描pcap文件，并输出到json格式的文本文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo snort -c /usr/local/etc/snort/snort.lua --pcap-filter \*.pcap  --pcap-dir ~/pcaps -l /var/log/snort -s 65535 -k none -m 0x1b</span><br></pre></td></tr></table></figure>
+<p>一旦Snort完成了pcap文件的处理，就可以查看日志文件夹(上面用-l
+/var/log/snort指定)，将看到包含所有警报的json文件：
+将注意到有许多警报alert_json.txt.nnnnnnnnnn文件。这些数字表示创建文件的unixtime，每个文件都是在snort.lua中指定的10
+MB。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c648d6d43df.png" /></p>
+<h3 id="snort启动脚本">9、Snort启动脚本</h3>
+<p>创建一个systemD脚本，以便在启动时自动运行snort。出于安全原因，还将在启动后以普通(非root)用户的身份运行snort。首先创建snort用户和组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd snort</span><br><span class="line">sudo useradd snort -r -s /sbin/nologin -c SNORT_IDS -g snort</span><br></pre></td></tr></table></figure>
+<p>删除旧的日志文件【可选】：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">rm</span> /var/log/snort/*</span><br></pre></td></tr></table></figure>
+<p>需要将‘snort’用户权限授予日志目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> -R 5775 /var/log/snort</span><br><span class="line">sudo <span class="built_in">chown</span> -R snort:snort /var/log/snort</span><br></pre></td></tr></table></figure>
+<p>创建systemD服务文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /lib/systemd/system/snort3.service</span><br></pre></td></tr></table></figure>
+<p>编写以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Snort3 NIDS Daemon</span><br><span class="line">After=syslog.target network.target</span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line"></span><br><span class="line">ExecStart=/usr/local/bin/snort -c /usr/local/etc/snort/snort.lua  -R /usr/local/etc/rules/local.rules -s 65535 -k none -l /var/log/snort -D -u snort -g snort -i ens33 -m 0x1b</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>注，“-R /usr/local/etc/rules/local.rules”是加载自己配置的规则，可选。
+应该熟悉传递给Snort的所有标志，因为它们与在前面的示例中使用的标志相同。添加了-D标志，它允许Snort作为守护进程运行。如果想运行不同的选项，可以在这里添加它们。下面是使用的所有标志的说明：</p>
+<p>标志</p>
+<p>解释</p>
+<p>/usr/local/bin/snort</p>
+<p>这是到snort二进制文件的路径。这里不使用sudo，因为脚本将以提升(root)权限启动。</p>
+<p>-c /usr/local/etc/snort/snort.lua</p>
+<p>这是snort.lua的配置文件。</p>
+<p>-s 65535</p>
+<p>设置snaplen，使Snort不会截断和删除超大的包。</p>
+<p>-k none</p>
+<p>忽略错误的校验和，否则snort将丢弃带有错误校验和的包，它们不会被计算。</p>
+<p>-l /var/log/snort</p>
+<p>文件夹的路径，Snort将存储它输出的所有日志文件。</p>
+<p>-D</p>
+<p>作为守护进程运行</p>
+<p>-u snort</p>
+<p>在启动之后(以及在执行任何需要提升特权的操作之后)，切换到以“snort”用户的身份运行。</p>
+<p>-g snort</p>
+<p>启动之后，作为“snort”组运行。</p>
+<p>-i ens33</p>
+<p>要监听的接口。</p>
+<p>-m 0x1b</p>
+<p>文件权限的Umask为033。</p>
+<p>启用并启动Snort systemD服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> snort3</span><br><span class="line">sudo service snort3 start</span><br></pre></td></tr></table></figure>
+<p>检查服务状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service snort3 status</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c649a2c28b5.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c649a82a498.png" /></p>
+<p>如果有任何问题，可以使用以下命令查看服务的完整输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo journalctl -u snort3.service</span><br></pre></td></tr></table></figure>
+<h2 id="安装并配置splunk">3. 安装并配置Splunk</h2>
+<p>使用SIEM(安全信息和事件管理)解决方案,将以图表等方式显示Snort生成的所有警报,并会给一些强大的工具来搜索和理解这些警报,以及画出更深层次的信息。后面以企业版Splunk做演示【试用，60天过期】。替代软件是Elasticstack的ELK栈(配置更复杂)。
+需要在Splunk的网站上创建一个免费帐户来下载软件和附加组件。导航到Splunk的主页，点击右上角的绿色Free
+Splunk按钮，创建一个新帐户【如果已有帐户，可以直接登录】。在“Splunk
+Free”下，点击“Download”链接。
+在下载页面上，单击Linux选项卡，然后单击.deb旁边的立即下载按钮【因为运行的是Ubuntu，一个基于debian的系统】。同意许可，然后点击“立即开始下载”按钮。下载页面会自动打开一个窗口，以保存下载到的本地系统。如果你想用wget下载安装程序，你可以取消这个下载，然后单击download
+via Command Line (wget)复制下载的wget 地址。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c649e5e6632.png" /></p>
+<h3 id="安装splunk">1、安装Splunk</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i splunk-8.*.deb</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c649f8bc03f.png" /></p>
+<p>安装时出现curl找不到，自己单独安装即可。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64a045acae.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64a09835aa.png" /></p>
+<p>这将安装Splunk到/opt/Splunk。注意，安装Splunk的磁盘空间必须有5
+GB的空闲空间，否则Splunk将无法启动。Splunk存储所有收集的日志数据的索引位于安装位置的子文件夹中，因此请确保该卷上有足够的空间用于收集所有数据
+第一次启动Splunk系统将提示为Splunk创建一个新的管理用户和密码。保存这些凭证，因为稍后会使用它们登录到web界面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /opt/splunk/bin/splunk start --answer-yes --accept-license</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64a3aa93fe.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64a4074370.png" /></p>
+<p>然后，将Splunk配置为在引导时自动启动。也将为Splunk启用systemD并启动服务。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo /opt/splunk/bin/splunk stop</span><br><span class="line">sudo /opt/splunk/bin/splunk <span class="built_in">enable</span> boot-start -systemd-managed 1</span><br><span class="line">sudo service Splunkd start</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64a8ea94cb.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64a93d6532.png" /></p>
+<p>不要立即启动，否则会出现上图情况，先做如下修改</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64a9e2d727.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64aa3e7af8.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64aa963352.png" /></p>
+<p>Splunk服务器监听在服务器的8000端口【web访问：http://localhost:8000】。用户名和密码是在安装Splunk时设置的。</p>
+<h3 id="splunk基本配置">2、Splunk基本配置</h3>
+<h4 id="安装解析json的插件">2.1 安装解析JSON的插件</h4>
+<p>Snort3 JSON Alerts可以获取和收集Snort
+3创建的日志，并对它们进行规范化【确保字段命名与NIDS数据一致，以便Splunk应用程序可以显示数据】。
+使用安装过程中创建的用户名和密码登录到Splunk实例【http://localhost:8000】。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64ad6cbd1f.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64adbce64e.png" /></p>
+<p>主页上点击“+Find More
+Apps”链接。它链接到Splunkbase【在线插件仓库】，它可以扩展和增强Splunk安装的功能。在Splunkbase中搜索Snort 3，将看到一个结果：Snort3
+JSON Alerts。点击这个插件的安装按钮：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64ae440fed.png" /></p>
+<p>在注册下载Splunk插件时，输入前面下载Splunk时官网创建的用户名和密码【注意，不是本地Splunk服务器实例创建的用户名和密码】。接受条款和条件，并点击登录和安装，一旦安装完成，点击完成。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64ae8c4229.png" /></p>
+<p>插件已安装，对其进行基本的配置，以告诉Splunk Snort
+3生成的日志文件存储在何处，以便Splunk能够找到它们。通过配置文件的命令行来实现这一点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> /opt/splunk/etc/apps/TA_Snort3_json/local</span><br><span class="line">sudo <span class="built_in">touch</span> /opt/splunk/etc/apps/TA_Snort3_json/local/inputs.conf</span><br><span class="line">sudo vim /opt/splunk/etc/apps/TA_Snort3_json/local/inputs.conf</span><br></pre></td></tr></table></figure>
+<p>在input.conf文件中输入以下文本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[monitor:///var/log/snort/*alert_json.txt*]</span><br><span class="line">sourcetype = snort3:alert:json</span><br></pre></td></tr></table></figure>
+<p>重启Splunk：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service Splunkd restart</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64b1e10dd3.png" /></p>
+<p>Splunk启动时，它会扫描/var/log/snort目录中的json文件，web登录测试，单击左侧的Search
+&amp; Reporting APP链接。在搜索栏中输入以下文本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sourcetype=<span class="string">&quot;snort3:alert:json&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后点击开始搜索。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64b411fb8a.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64b45f227e.png" /></p>
+<p>由图知已显示服务器正在收集的所有事件。
+注意，如果没有看到任何警告，可以使用ping和wget
+baidu.com触发一些新的警告。在Splunk中生成的事件和显示的事件之间有轻微的延迟。如果继续没有看到任何警告，将时间范围【搜索图标旁边的下拉菜单设置为过去24小时】更改为"所有时间"并重新运行搜索。如果仍然没有看到任何事件，请检查/var/log/snort文件夹中是否有json文件。</p>
+<h4 id="配置电子邮件服务后面告警需用">2.2
+配置电子邮件服务【后面告警需用】</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64b5f5ef39.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64b66d3c00.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64b89aedef.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64b8e694d6.png" /></p>
+<h4 id="配置邮件告警以metasploit-的syn-端口扫描告警为例">2.3
+配置邮件告警【以Metasploit 的SYN 端口扫描告警为例】</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64ba41bb93.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64ba92c368.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64bb2cec2e.png" /></p>
+<p>触发效果：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64bd203cda.png" /></p>
+<h3 id="splunk基本使用测试">3、Splunk基本使用测试</h3>
+<p>要在包含时间、源、目标和消息的表中显示所有事件，请执行以下搜索：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sourcetype=<span class="string">&quot;snort3:alert:json&quot;</span></span><br><span class="line"> table _time src_ap dst_ap msg</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64bf28ee66.png" /></p>
+<p>按目的地显示所有事件的统计：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sourcetype=<span class="string">&quot;snort3:alert:json&quot;</span></span><br><span class="line"> stats count by dest</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64c289b579.png" /></p>
+<p>在地图上显示所有事件来源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sourcetype=<span class="string">&quot;snort3:alert:json&quot;</span></span><br><span class="line"> iplocation src_addr</span><br><span class="line"> stats count by Country</span><br><span class="line"> geom geo_countries featureIdField=<span class="string">&quot;Country&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64c5627581.png" /></p>
+<h2 id="nids自定义规则测试">4. NIDS自定义规则测试</h2>
+<h3 id="检测icmp">1、检测ICMP</h3>
+<h4 id="规则">1.1 规则</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert icmp  any  any &lt;&gt; 10.10.10.200 any (msg:<span class="string">&quot;ICMP message detected&quot;</span>; sid:2000001;)</span><br></pre></td></tr></table></figure>
+<h4 id="splunk分析">1.2 Splunk分析</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64cc9baad6.png" /></p>
+<h3 id="检测基于memcached的drdos">2、检测基于Memcached的DRDOS</h3>
+<h4 id="规则-1">2.1规则</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert udp any 11211 -&gt; any any (msg:<span class="string">&quot;Memcached DRDOS&quot;</span>;classtype:attempted-dos;content:<span class="string">&quot;STAT&quot;</span>;dsize:&gt;1000; sid:2000002;)</span><br></pre></td></tr></table></figure>
+<h4 id="模拟攻击">2.2模拟攻击</h4>
+<p>（1）环境部署【Kali】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Srar/MemcacheDos.git</span><br><span class="line"><span class="built_in">cd</span> MemcacheDos</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>（2）攻击</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/ts-node main.ts --list result.txt --ip 10.10.10.200 --port 80</span><br></pre></td></tr></table></figure>
+<h4 id="splunk分析-1">2.3 Splunk分析</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64cde93725.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64ce39618a.png" /></p>
+<h3 id="检测msf的syn端口扫描">3、检测MSF的SYN端口扫描</h3>
+<h4 id="规则-2">3.1规则</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert tcp any any -&gt; 10.10.10.200 any (msg:<span class="string">&quot;MSF SYN scanning detected&quot;</span>; flags:S; ttl:=32; detection_filter:track by_src, count 30, seconds 20;ack:0; sid:2000003;)</span><br></pre></td></tr></table></figure>
+<p>注，Metasploit所发数据包的TTL是32。</p>
+<h4 id="模拟攻击-1">3.2模拟攻击</h4>
+<p>终端命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">msfdb init</span><br><span class="line">Msfconsole</span><br><span class="line">use auxiliary/scanner/portscan/syn</span><br><span class="line"><span class="built_in">set</span> ports 1-50</span><br><span class="line"><span class="built_in">set</span> rhosts 10.10.10.200</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64d3b6b9de.png" /></p>
+<h4 id="splunk分析-2">3.3 Splunk分析</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64d45bcec1.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64d4bd4de6.png" /></p>
+<h3 id="检测msf的syn-flood">4、检测MSF的SYN Flood</h3>
+<h4 id="规则-3">4.1规则</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert tcp any any -&gt;  10.10.10.200 80 (msg:<span class="string">&quot;MSF DoS attack&quot;</span>; flags:S; detection_filter:track by_dst, count 100, seconds 60; sid:2000004;)</span><br></pre></td></tr></table></figure>
+<h4 id="模拟攻击-2">4.2模拟攻击</h4>
+<p>msf所用模块：auxiliary/dos/tcp/synflood，用show
+options查看需要设置的信息，设置需要指定的信息，操作和3.2相似，run之后即可查看攻击检测效果。</p>
+<h4 id="splunk分析-3">4.3 Splunk分析</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64d58078b5.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64d5cf3aae.png" /></p>
+<h3 id="检测msf的ssh爆破">5、检测MSF的SSH爆破</h3>
+<h4 id="规则-4">5.1规则</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert tcp any any -&gt; 10.10.10.200 22 (msg:<span class="string">&quot;MSF SSH brute force&quot;</span>;content:<span class="string">&quot;SSH-2.0&quot;</span>;detection_filter:track by_src, count 3, seconds 30; sid:2000005)</span><br></pre></td></tr></table></figure>
+<h4 id="模拟攻击-3">5.2模拟攻击</h4>
+<p>msf所用模块“auxiliary/scanner/ssh/ssh_login”，操作和前面相似。</p>
+<h4 id="splunk分析-4">5.3 Splunk分析</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c64d814cf88.png" /></p>
+<h2 id="远程控制客户端的开发">5. 远程控制客户端的开发</h2>
+<h3 id="客户端开发">1、客户端开发</h3>
+<p>利用c#开发基于SSH（Renci.SshNet库）连接的远程控制软件。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c67b697348b.png" /></p>
+<p>基本功能：服务器基本管理，即可以远程执行操作命令，并有所反馈；NIDS远程管理，如配置检测规则，审查日志等；Splunk管理，如实时监控NIDS,制定告警策略及响应等；防火墙（UFW）远程管理等。
+对于基本功能中设计命令执行的可以用SshClient.CreateCommand(command).Execute()，SshClient.RunCommand(command).Execute()等实现，反馈信息的显示可以自定义一些函数利用richTextBox等控件显示；另外对于Splunk实时监控NIDS等可以用WebBrowser控件实现。</p>
+<h3 id="远控测试">2、远控测试</h3>
+<p>由于远控是基于SSH连接的，所以服务器必须装有SSH服务并启动，另外防火墙也是开启的，所以必须添加允许SSH和Splunk远程连接的规则【具体规则可以参见后面防火墙测试时查到的规则】。</p>
+<h4 id="远程执行命令测试">2.1远程执行命令测试</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c67992da856.png" /></p>
+<h4 id="nids测试">2.2 NIDS测试</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c679b0ac5eb.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c679ca53f60.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c679ea45362.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c679fdcf777.png" /></p>
+<h4 id="splunk系统测试">2.3 Splunk系统测试</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c67a2c57d66.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c67a44bd9f2.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c67a7d1488e.png" /></p>
+<h4 id="防火墙测试">2.4防火墙测试</h4>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c67a9c39831.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/wpblog/2022/07/img_62c67ac6867ae.png" /></p>
+<h2 id="参考">参考</h2>
+<p>[1].Snort_3.1.8.0_on_Ubuntu_18_and_20手册</p>
+<p>[2]. <a
+target="_blank" rel="noopener" href="https://docs.splunk.com/Documentation/Splunk/8.2.6/Translated/SimplifiedChinesemanuals">Splunk简体中文版手册</a></p>
+<p>[3]. <a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/Deng-Xian-Sheng/p/14120221.html">Snort-IPS-入侵防御系统安装及部署小记</a></p>
+<p>[4]. <a
+target="_blank" rel="noopener" href="https://blog.imkasen.com/ids-snort-practice.html">入侵检测系统（IDS）与
+Snort 实践</a></p>
+<p>[5]. <a
+target="_blank" rel="noopener" href="https://blog.51cto.com/u_12846753/4584529">C#使用SSH.NET编写一个Linux操作客户端</a></p>
+<p>[6]. <a
+target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1719715150349139622&amp;wfr=spider&amp;for=pc">Ubuntu
+防火墙 Ufw 使用指南</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2022/07/07/%E5%9F%BA%E4%BA%8Esnort%E7%9A%84%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/" title="基于Snort的入侵检测系统构建">https://z9m8r8.github.io/2022/07/07/基于snort的入侵检测系统构建/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Snort/" rel="tag"><i class="fa fa-tag"></i> Snort</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%97%A5%E8%AE%B0%E7%A8%8B%E5%BA%8F/" rel="prev" title="区块链日记程序">
+                  <i class="fa fa-angle-left"></i> 区块链日记程序
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/17/%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/" rel="next" title="密码破解">
+                  密码破解 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2022/07/07/%E5%9F%BA%E4%BA%8Esnort%E7%9A%84%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E6%9E%84%E5%BB%BA/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

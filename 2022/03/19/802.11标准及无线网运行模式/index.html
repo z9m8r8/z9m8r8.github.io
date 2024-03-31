@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="802.11标准及无线网运行模式">
+<meta property="og:url" content="https://z9m8r8.github.io/2022/03/19/802.11%E6%A0%87%E5%87%86%E5%8F%8A%E6%97%A0%E7%BA%BF%E7%BD%91%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-19T08:26:00.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:42:15.743Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="wifi 渗透">
+<meta property="article:tag" content="802.11 协议">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2022/03/19/802.11%E6%A0%87%E5%87%86%E5%8F%8A%E6%97%A0%E7%BA%BF%E7%BD%91%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/03/19/802.11%E6%A0%87%E5%87%86%E5%8F%8A%E6%97%A0%E7%BA%BF%E7%BD%91%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F/","path":"2022/03/19/802.11标准及无线网运行模式/","title":"802.11标准及无线网运行模式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>802.11标准及无线网运行模式 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ieee"><span class="nav-text">1. IEEE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%87%86"><span class="nav-text">2. 802.11标准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="nav-text">1、802.11协议族：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8"><span class="nav-text">2、日常使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-text">3、802.11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b"><span class="nav-text">4、802.11b</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a"><span class="nav-text">5、802.11a</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#g"><span class="nav-text">6、802.11g</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#n"><span class="nav-text">7、802.11n</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E7%BD%91%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-text">3. 无线网运行模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#infrastructure"><span class="nav-text">1、Infrastructure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ad-hoc"><span class="nav-text">2、AD-HOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wireless-distribution-system-wds"><span class="nav-text">3、WIRELESS
+DISTRIBUTION SYSTEM (WDS)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#monitor-modr"><span class="nav-text">4、MONITOR MODR</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2022/03/19/802.11%E6%A0%87%E5%87%86%E5%8F%8A%E6%97%A0%E7%BA%BF%E7%BD%91%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="802.11标准及无线网运行模式 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          802.11标准及无线网运行模式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-19 16:26:00" itemprop="dateCreated datePublished" datetime="2022-03-19T16:26:00+08:00">2022-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:42:15" itemprop="dateModified" datetime="2023-12-23T21:42:15+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Kail Linux渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%97%A0%E7%BA%BF%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">无线渗透</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="ieee">1. IEEE</h2>
+<p>电气与电子工程师协会（Institute of Electrical and Electronics
+Engineers），简称IEEE，总部位于美国纽约，是一个国际性的电子技术与信息科学工程师的协会，也是全球最大的非营利性专业技术学会。</p>
+<p>IEEE致力于电气、电子、计算机工程和与科学有关的领域的开发和研究，在太空、计算机、电信、生物医学、电力及消费性电子产品等领域已制定了1300多个行业标准，现已发展成为具有较大影响力的国际学术组织。</p>
+<p>IEEE下的802委员会负责lan（局域网），man（城域网）标准的制定。</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220319151149806-2032877631.png" /></p>
+<h2 id="标准">2. 802.11标准</h2>
+<p>IEEE
+802.11是现今无线局域网通用的标准，它是由国际电机电子工程学会(IEEE)所定义的无线网络通信的标准。</p>
+<p>其中定义了媒体访问控制层(MAC层)和物理层。物理层定义了工作在2.4GHz的ISM频段上的两种扩频作调制方式和一种红外传输的方式，总数据传输速率设计为2Mbit/s。两个设备可以自行构建临时网络，也可以在基站(Base
+Station, BS)或者接入点(Access
+Point，AP)的协调下通信。为了在不同的通讯环境下取得良好的通讯质量，采用CSMA/CA(Carrier
+Sense Multiple Access／Collision Avoidance)硬件沟通方式。</p>
+<p><strong>注意：</strong> Wi-Fi标准是基于802.11 b的。</p>
+<h3 id="协议族">1、802.11协议族：</h3>
+<ul>
+<li>802委员会下第11组负责开发无线局域网标准</li>
+<li>IEEE 802.1 1 The Original WLAN Standard- 1 Mbit/s and 2
+Mbit/w,2.4GHz RF andIR</li>
+<li>IEEE 802.11 a 54 Mbit/s,5 GHz</li>
+<li>IEEE 802.11 b 802.11 Enhancements to Support 5.5 Mbit/s and 11
+Mbit/s</li>
+<li>IEEE 802.11 c Bridge Operation Procedure</li>
+<li>IEEE 802.11 d International (Country to Country) Roaming
+Extensions</li>
+<li>IEEE 802.11 e Quality of Service (Qos),Including Packet
+Bursting</li>
+<li>IEEE 802.11 F Inter -Access Point Protocol</li>
+<li>IEEE 802.11 g 54 Mbit/s,2.4 GHz</li>
+<li>IEEE 802.11 h Spectrum Managed 802.11 a (5 GHz) for European
+Compatibility</li>
+<li>IEEE 802.11 i Enhanced Security</li>
+<li>IEEE 802.11 j Extensions for Japan</li>
+<li>IEEE 802.11 k Radio Resource Measurement Enhancements</li>
+<li>IEEE 802.11 n Higher Throughput Using Multiple Input,Multiple
+Ouput(MIMO) Antennas</li>
+<li>IEEE 802.11 p Wireless Access for the Vehicular Environment
+(WAVE)</li>
+<li>IEEE 802.11 r Fast BSS Transition (FT)</li>
+<li>IEEE 802.11 s Mesh Networking,Extended Service Set (ESS)</li>
+<li>IEEE 802.11 T Wireless Performance Prediction (WPP)</li>
+<li>IEEE 802.11 u Internetworking with Non -802 Networks
+(i.e.:Cellular)</li>
+<li>IEEE 802.11 v wrieless Network Management</li>
+<li>IEEE 802.11 v wrieless Network Management</li>
+<li>IEEE 802.11 w Protected Management Frames</li>
+<li>IEEE 802.11 y 3650 - 3700 MHz Operation in the US</li>
+<li>IEEE 802.11 z Direct Link Setup (DLS) Extensions</li>
+<li>IEEE 802.11 zm Maintenance of the Standard</li>
+<li>IEEE 802.11 aa Robust Streatming of Audio Video Transport
+Streams</li>
+<li>IEEE 802.11 ac Very High Troughput &lt; 6 GHz</li>
+<li>IEEE 802.11 ad Very High Troughput, 60 GHz</li>
+<li>IEEE 802.11 ae Qos Management</li>
+<li>IEEE 802.11 af TV Whitespace</li>
+<li>IEEE 802.11 ah SUb 1 GHz</li>
+<li>IEEE 802.11 ai Fast Initial Link Setip</li>
+</ul>
+<h3 id="日常使用">2、日常使用</h3>
+<ul>
+<li>IEEE 802.11 - The original WLAN standard</li>
+<li>IEEE 802.11 a - UP to 54 Mbit/s on 5 GHz</li>
+<li>IEEE 802.11 b - 5.5 Mbit/s and 11 Mbit/s? on 2.4 GHz</li>
+<li>IEEE 802.11 g - Up to 54 Mbit/s on 2.4 GHz.Backward compatible with
+802.11b</li>
+<li>IEEE 802.11 i - Provides enhanced security</li>
+<li>IEEE 802.11 n - Provides higher throughput with Multiple
+Input/Multiple Output (MIMO)</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220319152831383-514252146.png" /></p>
+<h3 id="section">3、802.11</h3>
+<p><strong>发布于1997年</strong></p>
+<p><strong>速率1Mbps或2Mbps</strong></p>
+<p><strong>红外线传输介质（未实现）</strong></p>
+<p><strong>无线射频信号编码（调制）（radio frequencies）</strong></p>
+<ul>
+<li><strong>-Direct-Sequence Spread-Spectrum
+(DSSS)-----直序扩频</strong></li>
+<li><strong>-Frequency Hopping Spread-Spectrum
+(FHSS)-----跳频扩频</strong></li>
+</ul>
+<p><strong>媒体访问方式-----CSMA/CA c=b+log2 (1+s/n)
+(载波侦听多路访问冲突避免)</strong></p>
+<ul>
+<li>根据算法侦听一定时长</li>
+<li>发送数据前发包声明</li>
+</ul>
+<p><strong>Request to Send/Clear to Send (RTS/CTS)</strong></p>
+<h3 id="b">4、802.11b</h3>
+<p><strong>Complementary Code Keying (CCK)-----补充代码键</strong></p>
+<ul>
+<li><strong>5.5 and 11 Mbit/s</strong></li>
+<li><strong>2.4GHz band (2.4GHz - 2.485GHz)</strong></li>
+<li><strong>14个重叠的信道channels</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220319154925085-698633778.png" /></p>
+<ul>
+<li><strong>每个信道22MHz宽带</strong></li>
+<li><strong>只有三个完全不重叠的信道</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220319154724564-1909481604.png" /></p>
+<p><strong>美国 -1 to 11 (2.412 GHz - 2.462 GHz)</strong></p>
+<p><strong>欧洲 -1 to 13 (2.412 GHz - 2.472 GHz)</strong></p>
+<p><strong>日本 -1 to 14 (2.412 GHz - 2.482 GHz)</strong></p>
+<p><strong>注意：相邻两个无线设备的信道不要重叠，以免造成影响</strong></p>
+<h3 id="a">5、802.11a</h3>
+<p><strong>与802.11b几乎同时发布</strong></p>
+<ul>
+<li><strong>因设备价格问题一直没有得到广泛使用?</strong></li>
+</ul>
+<p><strong>使用5GHz宽带</strong></p>
+<ul>
+<li><strong>-2.4GHz宽带干扰源多（微波、蓝牙、无绳电话）</strong></li>
+<li><strong>-5HGz频率有更多宽带空间，可容纳更多不重叠的信道</strong></li>
+<li><strong>-Orthogonal Frequency-Division Multiplexing
+(OFDM)信号调制方法</strong></li>
+<li><strong>-正交频分复用技</strong></li>
+<li><strong>更高速率54Mbps，每个信道20MHz宽带</strong></li>
+<li><strong>变频</strong></li>
+<li><strong>-5.15-5.35GHz室内</strong></li>
+<li><strong>-5.7-5.8GHz室外</strong></li>
+</ul>
+<h3 id="g">6、802.11g</h3>
+<p><strong>2.4GHz</strong></p>
+<p><strong>Orthogonal Frequency-Division Multiplexing
+(OFDM)信号调制方法?</strong></p>
+<p><strong>与802.11a速率相同</strong></p>
+<p><strong>可全局降速，向后兼容802.11b,并切换为CCK信号调制方法</strong></p>
+<p><strong>每个信号20/22MHz宽带</strong></p>
+<h3 id="n">7、802.11n</h3>
+<p><strong>2.4或5 GHz频率</strong></p>
+<ul>
+<li><strong>300Mbps最高600Mbps</strong></li>
+<li><strong>Multiple-Input Multiple-Output
+(MIMO)多进多出通信技术</strong></li>
+<li><strong>多天线，多无线电波，独立收发信号</strong></li>
+<li><strong>可以使用40MHz信道带宽是数据传输速率翻倍</strong></li>
+</ul>
+<p><strong>全802.11n设备网络中，可以使用新报文格式，是速率达到最大</strong></p>
+<p><strong>每个信道20/40MHz宽带</strong></p>
+<h2 id="无线网运行模式">3. 无线网运行模式</h2>
+<p><strong>无线网络架构</strong></p>
+<p><strong>Infrastructure</strong></p>
+<p>AP 维护SSID(无线名)</p>
+<p><strong>Ad-Hoc</strong></p>
+<p>STA维护SSID</p>
+<p><strong>Service Set Identifier (SSID)</strong></p>
+<ul>
+<li><strong>AP每秒钟约 10次通过Beacon帧广播SSID</strong></li>
+<li><strong>客户端连接到无线网络后也会宣告SSID</strong></li>
+</ul>
+<h3 id="infrastructure">1、Infrastructure</h3>
+<ul>
+<li><strong>至少包含一个 AP 和 一个 STATION（终端），形成一个 Basic
+Service Set (BSS)，BSSID指对应 AP 的 MAC。</strong></li>
+<li><strong>AP 连接到有线网络，称为 Distribution System
+(DS)。</strong></li>
+<li><strong>连接到同一个 DS 的多个 AP 形成 Extended Service Set
+(ESS)，ESSID相当于交换机的MAC。</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220319171447767-1277412205.png" /></p>
+<h3 id="ad-hoc">2、AD-HOC</h3>
+<p><strong>也被称为Independent Basic Service Set (IBSS)</strong></p>
+<p><strong>有至少2个STAs直接通信组成</strong></p>
+<p><strong>也称为peer to peer模式</strong></p>
+<p><strong>其中一个STA负责AP的工作</strong></p>
+<ul>
+<li>通过beacon广播SSID</li>
+<li>对其他STAs进行身份验证</li>
+</ul>
+<h3 id="wireless-distribution-system-wds"><strong>3、WIRELESS
+DISTRIBUTION SYSTEM (WDS)</strong></h3>
+<p><strong>与有线DS类似，只是通过无线连接的多个AP组成的网络</strong></p>
+<ul>
+<li><strong>Bridging------只有AP间彼此通信</strong></li>
+<li><strong>Repeating-----允许所有AP和STA进行通信</strong></li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220319172222854-613894260.png" /></p>
+<h3 id="monitor-modr">4、MONITOR MODR</h3>
+<p><strong>Monitor不是一种真的无线模式</strong></p>
+<ul>
+<li>但是对无线渗透至关重要</li>
+<li>允许无线网卡没有任何筛选的(802.11包头)</li>
+<li>与有线网络的混杂模式可以类比</li>
+<li>合适的网卡和驱动不但可以monitor，更可以injection</li>
+</ul>
+<p><strong>推荐阅读：<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39689711/article/details/117886205">WLAN基本知识之802.11标准</a></strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2022/03/19/802.11%E6%A0%87%E5%87%86%E5%8F%8A%E6%97%A0%E7%BA%BF%E7%BD%91%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F/" title="802.11标准及无线网运行模式">https://z9m8r8.github.io/2022/03/19/802.11标准及无线网运行模式/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/wifi-%E6%B8%97%E9%80%8F/" rel="tag"><i class="fa fa-tag"></i> wifi 渗透</a>
+              <a href="/tags/802-11-%E5%8D%8F%E8%AE%AE/" rel="tag"><i class="fa fa-tag"></i> 802.11 协议</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/13/redis-%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E5%8F%8A%E5%88%A9%E7%94%A8/" rel="prev" title="Redis 未授权访问漏洞复现及利用">
+                  <i class="fa fa-angle-left"></i> Redis 未授权访问漏洞复现及利用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/20/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E5%8F%8A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" rel="next" title="无线网硬件设备及基本概念">
+                  无线网硬件设备及基本概念 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2022/03/19/802.11%E6%A0%87%E5%87%86%E5%8F%8A%E6%97%A0%E7%BA%BF%E7%BD%91%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

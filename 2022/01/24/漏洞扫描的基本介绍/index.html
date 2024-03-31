@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="漏洞扫描的基本介绍">
+<meta property="og:url" content="https://z9m8r8.github.io/2022/01/24/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-24T08:30:00.000Z">
+<meta property="article:modified_time" content="2023-12-23T13:42:15.739Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="漏洞扫描">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2022/01/24/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2022/01/24/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/","path":"2022/01/24/漏洞扫描的基本介绍/","title":"漏洞扫描的基本介绍"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>漏洞扫描的基本介绍 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E7%8E%B0%E5%BC%B1%E7%82%B9"><span class="nav-text">1. 发现弱点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%BF%A1%E6%81%AF%E7%9A%84%E7%BB%B4%E5%BA%A6%E5%AE%9A%E4%B9%89%E6%BC%8F%E6%B4%9E%E7%AE%A1%E7%90%86"><span class="nav-text">2. 从信息的维度定义漏洞管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B1%E7%82%B9%E6%89%AB%E6%8F%8F%E7%B1%BB%E5%9E%8B"><span class="nav-text">3. 弱点扫描类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">4. 漏洞基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E7%AE%A1%E7%90%86"><span class="nav-text">5. 漏洞管理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2022/01/24/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="漏洞扫描的基本介绍 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          漏洞扫描的基本介绍
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-01-24 16:30:00" itemprop="dateCreated datePublished" datetime="2022-01-24T16:30:00+08:00">2022-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 21:42:15" itemprop="dateModified" datetime="2023-12-23T21:42:15+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Kail Linux渗透测试</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kail-Linux%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F/" itemprop="url" rel="index"><span itemprop="name">漏洞扫描</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="发现弱点">1. 发现弱点</h2>
+<p><strong>• 发现漏洞</strong></p>
+<p><strong>• 基于端口服务扫描结果版本信息（速度慢）</strong></p>
+<p><strong>• 搜索已公开的漏洞数据库（数量大）</strong></p>
+<p>也可以到Kali中查找相关漏洞利用代码等，如searchsploit
+tomcat或使用Sandi工具查询（新版Kali需自己安装，Kali1.1自带）！
+<strong>sandi下载：</strong><a
+target="_blank" rel="noopener" href="https://gitlab.com/kalilinux/packages/sandi/"
+class="uri">https://gitlab.com/kalilinux/packages/sandi/</a></p>
+<p><strong>示例：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># searchsploit tomcat</span></span><br><span class="line">----------------------------------------- ----------------------------------------</span><br><span class="line"> Exploit Title                           |  Path</span><br><span class="line">                                         | (/usr/share/exploitdb/)</span><br><span class="line">----------------------------------------- ----------------------------------------</span><br><span class="line">4D WebSTAR 5.3/5.4 Tomcat Plugin - Remot | exploits/osx/remote/25626.c</span><br><span class="line">AWStats 6.x - Apache Tomcat Configuratio | exploits/cgi/webapps/35035.txt</span><br><span class="line">Apache 1.3.x + Tomcat 4.0.x/4.1.x mod_jk | exploits/unix/dos/22068.pl</span><br><span class="line">Apache Commons FileUpload and Apache Tom | exploits/multiple/dos/31615.rb</span><br><span class="line">Apache Tomcat (Windows) - <span class="string">&#x27;runtime.getRu | exploits/windows/local/7264.txt</span></span><br><span class="line"><span class="string">Apache Tomcat - &#x27;</span>WebDAV<span class="string">&#x27; Remote File Dis | exploits/multiple/remote/4530.pl</span></span><br><span class="line"><span class="string">Apache Tomcat - Account Scanner / &#x27;</span>PUT<span class="string">&#x27;  | exploits/multiple/remote/18619.txt</span></span><br><span class="line"><span class="string">Apache Tomcat - CGIServlet enableCmdLine | exploits/windows/remote/47073.rb</span></span><br><span class="line"><span class="string">Apache Tomcat - Cookie Quote Handling Re | exploits/multiple/remote/9994.txt</span></span><br><span class="line"><span class="string">Apache Tomcat - Form Authentication &#x27;</span>Use | exploits/multiple/remote/9995.txt</span><br><span class="line">Apache Tomcat - WebDAV SSL Remote File D | exploits/linux/remote/4552.pl</span><br><span class="line">Apache Tomcat / Geronimo 1.0 - <span class="string">&#x27;Sample S | exploits/multiple/remote/27095.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.0 - Directory Traversal  | exploits/windows/remote/20716.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.1 - Path Revealing       | exploits/multiple/remote/20131.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.2 - 404 Error Page Cross | exploits/multiple/remote/33379.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.2 - Directory Disclosure | exploits/unix/remote/21882.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.2.1 - 404 Error Page Cro | exploits/multiple/webapps/10292.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 3.2.3/3.2.4 - &#x27;</span>RealPath.js | exploits/multiple/remote/21492.txt</span><br><span class="line">Apache Tomcat 3.2.3/3.2.4 - <span class="string">&#x27;Source.jsp&#x27;</span> | exploits/multiple/remote/21490.txt</span><br><span class="line">Apache Tomcat 3.2.3/3.2.4 - Example File | exploits/multiple/remote/21491.txt</span><br><span class="line">Apache Tomcat 3.x - Null Byte Directory  | exploits/linux/remote/22205.txt</span><br><span class="line">Apache Tomcat 3/4 - <span class="string">&#x27;DefaultServlet&#x27;</span> Fil | exploits/unix/remote/21853.txt</span><br><span class="line">Apache Tomcat 3/4 - JSP Engine Denial of | exploits/linux/dos/21534.jsp</span><br><span class="line">Apache Tomcat 4.0.3 - Denial of Service  | exploits/windows/remote/21605.txt</span><br><span class="line">Apache Tomcat 4.0.3 - Requests Containin | exploits/multiple/remote/31551.txt</span><br><span class="line">Apache Tomcat 4.0.3 - Servlet Mapping Cr | exploits/linux/remote/21604.txt</span><br><span class="line">Apache Tomcat 4.0.x - Non-HTTP Request D | exploits/linux/dos/23245.pl</span><br><span class="line">Apache Tomcat 4.0/4.1 - Servlet Full Pat | exploits/unix/remote/21412.txt</span><br><span class="line">Apache Tomcat 4.1 - JSP Request Cross-Si | exploits/unix/remote/21734.txt</span><br><span class="line">Apache Tomcat 5 - Information Disclosure | exploits/multiple/remote/28254.txt</span><br><span class="line">Apache Tomcat 5.5.0 &lt; 5.5.29 / 6.0.0 &lt; 6 | exploits/multiple/remote/12343.txt</span><br><span class="line">Apache Tomcat 5.5.15 - cal2.jsp Cross-Si | exploits/jsp/webapps/30563.txt</span><br><span class="line">Apache Tomcat 5.5.25 - Cross-Site Reques | exploits/multiple/webapps/29435.txt</span><br><span class="line">Apache Tomcat 5.x/6.0.x - Directory Trav | exploits/linux/remote/29739.txt</span><br><span class="line">Apache Tomcat 6.0.10 - Documentation Sam | exploits/multiple/remote/30052.txt</span><br><span class="line">Apache Tomcat 6.0.13 - Host Manager Serv | exploits/multiple/remote/30495.html</span><br><span class="line">Apache Tomcat 6.0.13 - Insecure Cookie H | exploits/multiple/remote/30496.txt</span><br><span class="line">Apache Tomcat 6.0.13 - JSP Example Web A | exploits/jsp/webapps/30189.txt</span><br><span class="line">Apache Tomcat 6.0.15 - Cookie Quote Hand | exploits/multiple/remote/31130.txt</span><br><span class="line">Apache Tomcat 6.0.16 - <span class="string">&#x27;HttpServletRespo | exploits/multiple/remote/32138.txt</span></span><br><span class="line"><span class="string">Apache Tomcat 6.0.16 - &#x27;</span>RequestDispatche | exploits/multiple/remote/32137.txt</span><br><span class="line">Apache Tomcat 6.0.18 - Form Authenticati | exploits/multiple/remote/33023.txt</span><br><span class="line">Apache Tomcat 6/7/8/9 - Information Disc | exploits/multiple/remote/41783.txt</span><br><span class="line">Apache Tomcat 7.0.4 - <span class="string">&#x27;sort&#x27;</span> / <span class="string">&#x27;orderBy&#x27;</span> | exploits/linux/remote/35011.txt</span><br><span class="line">Apache Tomcat 8/7/6 (Debian-Based Distro | exploits/linux/local/40450.txt</span><br><span class="line">Apache Tomcat 8/7/6 (RedHat Based Distro | exploits/linux/local/40488.txt</span><br><span class="line">Apache Tomcat &lt; 5.5.17 - Remote Director | exploits/multiple/remote/2061.txt</span><br><span class="line">Apache Tomcat &lt; 6.0.18 - <span class="string">&#x27;utf8&#x27;</span> Director | exploits/multiple/remote/6229.txt</span><br><span class="line">Apache Tomcat &lt; 6.0.18 - <span class="string">&#x27;utf8&#x27;</span> Director | exploits/unix/remote/14489.c</span><br><span class="line">Apache Tomcat &lt; 9.0.1 (Beta) / &lt; 8.5.23  | exploits/jsp/webapps/42966.py</span><br><span class="line">Apache Tomcat &lt; 9.0.1 (Beta) / &lt; 8.5.23  | exploits/windows/webapps/42953.txt</span><br><span class="line">Apache Tomcat Connector jk2-2.0.2 mod_jk | exploits/linux/remote/5386.txt</span><br><span class="line">Apache Tomcat Connector mod_jk - <span class="string">&#x27;exec-s | exploits/linux/remote/4162.c</span></span><br><span class="line"><span class="string">Apache Tomcat Manager - Application Depl | exploits/multiple/remote/16317.rb</span></span><br><span class="line"><span class="string">Apache Tomcat Manager - Application Uplo | exploits/multiple/remote/31433.rb</span></span><br><span class="line"><span class="string">Apache Tomcat mod_jk 1.2.20 - Remote Buf | exploits/windows/remote/16798.rb</span></span><br><span class="line"><span class="string">Apache Tomcat/JBoss EJBInvokerServlet /  | exploits/php/remote/28713.php</span></span><br><span class="line"><span class="string">Jakarta Tomcat 3.x/4.0 - Error Message I | exploits/unix/local/21073.txt</span></span><br><span class="line"><span class="string">Tomcat - Remote Code Execution via JSP U | exploits/java/remote/43008.rb</span></span><br><span class="line"><span class="string">Tomcat 3.0/3.1 Snoop Servlet - Informati | exploits/multiple/remote/20132.txt</span></span><br><span class="line"><span class="string">Tomcat 3.2.1/4.0 / Weblogic Server 5.1 - | exploits/multiple/remote/20719.txt</span></span><br><span class="line"><span class="string">----------------------------------------- ----------------------------------------</span></span><br><span class="line"><span class="string">Shellcodes: No Result</span></span><br><span class="line"><span class="string">root@kali:~# cd /usr/share/exploitdb/</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb# ls</span></span><br><span class="line"><span class="string">exploits  files_exploits.csv  files_shellcodes.csv  shellcodes</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb# cd exploits/</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb/exploits# ls</span></span><br><span class="line"><span class="string">aix      cfm             java          minix       perl           tru64</span></span><br><span class="line"><span class="string">android  cgi             json          multiple    php            ultrix</span></span><br><span class="line"><span class="string">arm      freebsd         jsp           netbsd_x86  plan9          unix</span></span><br><span class="line"><span class="string">ashx     freebsd_x86     linux         netware     python         unixware</span></span><br><span class="line"><span class="string">asp      freebsd_x86-64  linux_mips    nodejs      qnx            vxworks</span></span><br><span class="line"><span class="string">aspx     hardware        linux_sparc   novell      ruby           watchos</span></span><br><span class="line"><span class="string">atheos   hp-ux           linux_x86     openbsd     sco            windows</span></span><br><span class="line"><span class="string">beos     immunix         linux_x86-64  osx         solaris        windows_x86</span></span><br><span class="line"><span class="string">bsd      ios             lua           osx_ppc     solaris_sparc  windows_x86-64</span></span><br><span class="line"><span class="string">bsd_x86  irix            macos         palm_os     solaris_x86    xml</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb/exploits# less windows/remote/1679</span></span><br><span class="line"><span class="string">16791.rb  16792.rb  16793.rb  16794.rb  16796.rb  16797.rb  16798.rb  16799.rb</span></span><br><span class="line"><span class="string">root@kali:/usr/share/exploitdb/exploits# less windows/remote/16798.rb </span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/cnblogs/2379545-20220124201402207-2073307370.png" /></p>
+<p><strong>• 使用弱点扫描器实现漏洞管理</strong></p>
+<h2 id="从信息的维度定义漏洞管理">2. 从信息的维度定义漏洞管理</h2>
+<p><strong>• 信息收集：</strong></p>
+<p>• 扫描发现网络IP、 OS、服务、配置、漏洞</p>
+<p>• 能力需求：定义扫描方式内容和目标</p>
+<p><strong>• 信息管理</strong></p>
+<p>• 格式化信息，并进行筛选、分组、定义优先级</p>
+<p>• 能力需求：资产分组、指定所有者、向所有者报告漏洞</p>
+<p><strong>• 信息输出</strong></p>
+<p>• 向不同层级的人群展示足够的信息量</p>
+<p>• 能力需求：生成报告、导出数据、与SIEM集成</p>
+<h2 id="弱点扫描类型">3. 弱点扫描类型</h2>
+<p><strong>• 主动扫描</strong></p>
+<p>• 有身份验证</p>
+<p>• 无身份验证</p>
+<p><strong>• 被动扫描</strong></p>
+<p>• 镜像端口抓包</p>
+<p>• 其他来源输入</p>
+<p><strong>• 基于Agent的扫描</strong></p>
+<p>• 支持平台有限</p>
+<p>•
+即在需要扫描的目标机（如：待扫服务器）上安装自己的agent（程序），让agent在目标机上进行扫描探测等，效率高但受设备局限影响（部分设备不能安装）。</p>
+<h2 id="漏洞基本概念">4. 漏洞基本概念</h2>
+<p><strong>• CVSS（Common Vulnerability Scoring System）</strong></p>
+<p>• 通用漏洞评分系统----工业标准</p>
+<p>• 描述安全漏洞严重程度的统一评分方案</p>
+<p>• V 3版本----2015年6月10日</p>
+<p>• Basic Metric：基础的恒定不变的弱点权重</p>
+<p>• Temporal Metric：依赖时间因素的弱点权重</p>
+<p>• Enviromental Metric：利用弱点的环境要求和实施难度的权重</p>
+<p>• CVSS是安全内容自动化协议（SCAP）的一部分</p>
+<p>• 通常CVSS与CVE一同由美国国家漏洞库（NVD）发布并保持数据的更新</p>
+<p>• 分值范围： 0 ---- 10</p>
+<p>• 不同机构按CVSS分值定义威胁的中、高、低威胁级别</p>
+<p>• CVSS体现弱点的风险，
+威胁级别（severity）表示弱点风险对企业的影响程度</p>
+<p>• CVSS分值是工业标准，但威胁级别不是</p>
+<p><strong>• Vulnerability Reference</strong></p>
+<p><strong>• CVE（ Common Vulnerabilities and Exposures ）</strong></p>
+<p>• 已公开的信息安全漏洞字典，统一的漏洞编号标准</p>
+<p>• MITRE公司负责维护（非盈利机构）</p>
+<p>• 扫描器的大部分扫描项都对应一个CVE编号</p>
+<p>• 实现不同厂商之间信息交换的统一标准</p>
+<p><strong>• CVE发布流程</strong></p>
+<p>• 发现漏洞</p>
+<p>• CAN负责指定CVE ID</p>
+<p>• 发布到CVE List ---- CVE-2008-4250</p>
+<p>• MITRE负责对内容进行编辑维护</p>
+<p><strong>• 很多厂商维护自己的Vulnerability Reference</strong></p>
+<p>• MS</p>
+<p>• MSKB</p>
+<p><strong>• 其他Vulnerability Reference</strong></p>
+<p>• CERT TA08-297A</p>
+<p>• BID 31874</p>
+<p>• IAVM 2008-A-0081</p>
+<p>• OVAL OVAL6093</p>
+<p><strong>• OVAL（Open Vulnerability and Assessment
+Language）</strong></p>
+<p>• 描述漏洞检测方法的机器可识别语言</p>
+<p>•
+详细的描述漏洞检测的技术细节，可导入自动化检测工具中实施漏洞检测工作</p>
+<p>• OVAL使用XML语言描述，包含了严密的语法逻辑</p>
+<p><strong>• CCE</strong></p>
+<p>• 描述软件配置缺陷的一种标准化格式</p>
+<p>•
+在信息安全风险评估中，配置缺陷的检测是一项重要内容，使用CCE可以让配置缺陷以标准的方式展现出来，便于配置缺陷评估的可量化操作。</p>
+<p><strong>• CPE（Common Product Enumeration）</strong></p>
+<p>• 信息技术产品、系统、软件包的结构化命名规范，分类命名</p>
+<p><strong>• CWE（Common Weakness Enumeration）</strong></p>
+<p>•
+常见漏洞类型的字典，描述不同类型漏洞的特征（访问控制、信息泄露、拒绝服务）</p>
+<p><strong>• Security Content Automation Protocol (SCAP)</strong></p>
+<p>• SCAP 是一个集合了多种安全标准框架</p>
+<p>• 六个元素： CVE、 OVAL、 CCE、 CPE、 CVSS、 XCCDF</p>
+<p>• 目的是以标准的方法展示和操作安全数据</p>
+<p>• 由NIST负责维护</p>
+<p><strong>• SCAP主要解决三个问题</strong></p>
+<p>• 实现高层政策法规等到底层实施的落地（如FISMA， ISO27000系列）</p>
+<p>•
+将信息安全所涉及的各个要素标准化（如统一漏洞的命名及严重性度量）</p>
+<p>• 将复杂的系统配置核查工作自动化</p>
+<p>•
+SCAP是当前美国比较成熟的一套信息安全评估标准体系，其标准化、自动化的思想对信息安全行业产生了深远的影响。</p>
+<p><strong>• NVD（National Vulnerability Database）</strong></p>
+<p>• 美国政府的漏洞管理标准数据</p>
+<p>• 完全基于SCAP框架</p>
+<p>• 实现自动化漏洞管理、安全测量、合规要求</p>
+<p>• 包含以下库</p>
+<p>• 安全检查列表</p>
+<p>• 软件安全漏洞</p>
+<p>• 配置错误</p>
+<p>• 产品名称</p>
+<p>• 影响度量</p>
+<p><strong>• <a
+target="_blank" rel="noopener" href="https://nvd.nist.gov/">https://nvd.nist.gov/</a>（推荐关注）</strong></p>
+<h2 id="漏洞管理">5. 漏洞管理</h2>
+<p>• 周期性扫描跟踪漏洞</p>
+<p>• 高危漏洞优先处理</p>
+<p>• 扫描注意事项</p>
+<p>• 漏洞管理三要素</p>
+<p>• 准确性</p>
+<p>• 时间</p>
+<p>• 资源</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2022/01/24/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/" title="漏洞扫描的基本介绍">https://z9m8r8.github.io/2022/01/24/漏洞扫描的基本介绍/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F/" rel="tag"><i class="fa fa-tag"></i> 漏洞扫描</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/10/Metasploit%20%E6%8F%90%E9%AB%98%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E9%80%9F%E5%BA%A6%E7%9A%84%E6%8C%87%E4%BB%A4/" rel="prev" title="Metasploit 提高渗透测试速度的指令">
+                  <i class="fa fa-angle-left"></i> Metasploit 提高渗透测试速度的指令
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/25/OPENVAS/" rel="next" title="OPENVAS">
+                  OPENVAS <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">187k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:19</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2022/01/24/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

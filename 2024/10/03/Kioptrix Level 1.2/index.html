@@ -30,18 +30,18 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-11T01:06:47.575Z">
+<meta property="article:modified_time" content="2024-10-11T01:32:21.315Z">
 <meta property="article:author" content="Phantom">
 <meta property="article:tag" content="Vulnhub">
 <meta property="article:tag" content="信息收集">
 <meta property="article:tag" content="提权">
-<meta property="article:tag" content="反弹 shell">
-<meta property="article:tag" content="Buffer Overflow">
-<meta property="article:tag" content="缓冲区溢出">
 <meta property="article:tag" content="RCE">
+<meta property="article:tag" content="Buffer Overflow">
+<meta property="article:tag" content="反弹 shell">
+<meta property="article:tag" content="缓冲区溢出">
+<meta property="article:tag" content="Dirty COW">
 <meta property="article:tag" content="SQL Injection">
 <meta property="article:tag" content="LotusCMS">
-<meta property="article:tag" content="Dirty COW">
 <meta property="article:tag" content="LFI">
 <meta property="article:tag" content="ASLR">
 <meta property="article:tag" content="HT 提权">
@@ -170,7 +170,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">173</span>
+          <span class="site-state-item-count">174</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -181,7 +181,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-count">157</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -255,7 +255,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-11 09:06:47" itemprop="dateModified" datetime="2024-10-11T09:06:47+08:00">2024-10-11</time>
+      <time title="修改时间：2024-10-11 09:32:21" itemprop="dateModified" datetime="2024-10-11T09:32:21+08:00">2024-10-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -354,8 +354,9 @@ HTML 实体】，并未进行其他安全检测，为此可利用 page
 <h3 id="lfi">3.2. LFI</h3>
 <p>由 router.php 可知，$plugin 也可控，为此可能存在 LFI</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(<span class="string">&quot;core/plugs/&quot;</span>.<span class="variable">$plugin</span>.<span class="string">&quot;Starter.php&quot;</span>);</span><br></pre></td></tr></table></figure>
-<p><code>%00</code> 截断文件包含利用条件： - magic_quotes_gpc=off -
-PHP版本低于5.3.4</p>
+<p><code>%00</code> 截断文件包含利用条件：<br />
+- magic_quotes_gpc=off<br />
+- PHP版本低于5.3.4</p>
 <p>利用 3.1 的 RCE 执行 phpinfo() 查看 php 配置</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">page=index<span class="string">&#x27;);phpinfo();#</span></span><br><span class="line"><span class="string">// urlencode </span></span><br><span class="line"><span class="string">page=index&#x27;</span>)%<span class="number">3</span>Bphpinfo()%<span class="number">3</span>B%<span class="number">23</span></span><br></pre></td></tr></table></figure>
 <p>可见满足 <code>%00</code> 截断文件包含利用条件</p>
@@ -575,13 +576,13 @@ hanging fruit)</a></li>
               <a href="/tags/Vulnhub/" rel="tag"><i class="fa fa-tag"></i> Vulnhub</a>
               <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
               <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 提权</a>
-              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
-              <a href="/tags/Buffer-Overflow/" rel="tag"><i class="fa fa-tag"></i> Buffer Overflow</a>
-              <a href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/" rel="tag"><i class="fa fa-tag"></i> 缓冲区溢出</a>
               <a href="/tags/RCE/" rel="tag"><i class="fa fa-tag"></i> RCE</a>
+              <a href="/tags/Buffer-Overflow/" rel="tag"><i class="fa fa-tag"></i> Buffer Overflow</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+              <a href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/" rel="tag"><i class="fa fa-tag"></i> 缓冲区溢出</a>
+              <a href="/tags/Dirty-COW/" rel="tag"><i class="fa fa-tag"></i> Dirty COW</a>
               <a href="/tags/SQL-Injection/" rel="tag"><i class="fa fa-tag"></i> SQL Injection</a>
               <a href="/tags/LotusCMS/" rel="tag"><i class="fa fa-tag"></i> LotusCMS</a>
-              <a href="/tags/Dirty-COW/" rel="tag"><i class="fa fa-tag"></i> Dirty COW</a>
               <a href="/tags/LFI/" rel="tag"><i class="fa fa-tag"></i> LFI</a>
               <a href="/tags/ASLR/" rel="tag"><i class="fa fa-tag"></i> ASLR</a>
               <a href="/tags/HT-%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> HT 提权</a>
@@ -629,13 +630,13 @@ hanging fruit)</a></li>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">294k</span>
+    <span title="站点总字数">302k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:50</span>
+    <span title="站点阅读时长">18:18</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

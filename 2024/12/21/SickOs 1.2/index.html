@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-21T07:17:05.028Z">
+<meta property="article:modified_time" content="2024-12-21T07:48:04.922Z">
 <meta property="article:author" content="Phantom">
 <meta property="article:tag" content="Vulnhub">
 <meta property="article:tag" content="信息收集">
@@ -246,7 +246,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-12-21 00:00:00 / 修改时间：15:17:05" itemprop="dateCreated datePublished" datetime="2024-12-21T00:00:00+08:00">2024-12-21</time>
+      <time title="创建时间：2024-12-21 00:00:00 / 修改时间：15:48:04" itemprop="dateCreated datePublished" datetime="2024-12-21T00:00:00+08:00">2024-12-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -338,7 +338,7 @@ https://portswigger.net/kb/issues/00100900_http-put-method-is-enabled</p>
 <p>获得 www-data 权限 shell</p>
 <p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412201623676.jpg" /></p>
 <h2 id="提权">6. 提权</h2>
-<p>经查靶机对出网端口有限制，Kali 利用 python 开了个 Web，本想靶机从
+<p>经测靶机对出网端口有限制，Kali 利用 python 开了个 Web，本想靶机从
 Kali 下载 linpeas.sh 和 pspy 执行看看，经测靶机访问不了 Kali 的
 Web，试了 80，53，8000
 都不行，推测靶机防火墙对出网端口都做了比较严格的限制</p>
@@ -368,10 +368,10 @@ shellscript chkrootkit:</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># SLAPPER.&#123;A,B,C,D&#125; and the multi-platform variant</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">slapper ()&#123;</span></span><br><span class="line">   SLAPPER_FILES=<span class="string">&quot;$&#123;ROOTDIR&#125;tmp/.bugtraq $&#123;ROOTDIR&#125;tmp/.bugtraq.c&quot;</span></span><br><span class="line">   SLAPPER_FILES=<span class="string">&quot;$SLAPPER_FILES $&#123;ROOTDIR&#125;tmp/.unlock $&#123;ROOTDIR&#125;tmp/httpd \</span></span><br><span class="line"><span class="string">   $&#123;ROOTDIR&#125;tmp/update $&#123;ROOTDIR&#125;tmp/.cinik $&#123;ROOTDIR&#125;tmp/.b&quot;</span>a</span><br><span class="line">   SLAPPER_PORT=<span class="string">&quot;0.0:2002 |0.0:4156 |0.0:1978 |0.0:1812 |0.0:2015 &quot;</span></span><br><span class="line">   OPT=-an</span><br><span class="line">   STATUS=<span class="number">0</span></span><br><span class="line">   file_port=</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> $&#123;netstat&#125; <span class="string">&quot;$&#123;OPT&#125;&quot;</span>|$&#123;egrep&#125; <span class="string">&quot;^tcp&quot;</span>|$&#123;egrep&#125; <span class="string">&quot;$&#123;SLAPPER_PORT&#125;&quot;</span>&gt;</span><br><span class="line">/dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">      then</span><br><span class="line">      STATUS=<span class="number">1</span></span><br><span class="line">      [ <span class="string">&quot;$SYSTEM&quot;</span> = <span class="string">&quot;Linux&quot;</span> ] &amp;&amp; file_port=`netstat -p $&#123;OPT&#125; | \</span><br><span class="line">         $egrep ^tcp|$egrep <span class="string">&quot;$&#123;SLAPPER_PORT&#125;&quot;</span> | $&#123;awk&#125; <span class="string">&#x27;&#123; print  $7 &#125;&#x27;</span> |</span><br><span class="line">tr -d :`</span><br><span class="line">   fi</span><br><span class="line">   <span class="keyword">for</span> i in $&#123;SLAPPER_FILES&#125;; <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">if</span> [ -f $&#123;i&#125; ]; then</span><br><span class="line">         file_port=$file_port $i</span><br><span class="line">         STATUS=<span class="number">1</span></span><br><span class="line">      fi</span><br><span class="line">   done</span><br><span class="line">   <span class="keyword">if</span> [ $&#123;STATUS&#125; -eq <span class="number">1</span> ] ;then</span><br><span class="line">      echo <span class="string">&quot;Warning: Possible Slapper Worm installed ($file_port)&quot;</span></span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">if</span> [ <span class="string">&quot;$&#123;QUIET&#125;&quot;</span> != <span class="string">&quot;t&quot;</span> ]; then echo <span class="string">&quot;not infected&quot;</span>; fi</span><br><span class="line">         <span class="keyword">return</span> $&#123;NOT_INFECTED&#125;</span><br><span class="line">   fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>The line 'file_port=$file_port $i' will execute all files specified
-in $SLAPPER_FILES as the user chkrootkit is running (usually root), if
-$file_port is empty, because of missing quotation marks around the
-variable assignment.</p>
+<p>The line <code>file_port=$file_port $i</code> will execute all files
+specified in <span class="math inline">\(SLAPPER_FILES as the user
+chkrootkit is running (usually root), if `\)</span>file_port` is empty,
+because of missing quotation marks around the variable assignment.</p>
 <p>Steps to reproduce:</p>
 <ul>
 <li>Put an executable file named 'update' with non-root owner in /tmp
@@ -386,7 +386,7 @@ file.</p>
 cron.daily) and has write access to /tmp (not mounted noexec), he may
 easily take advantage of this.</p>
 <p>Suggested fix: Put quotation marks around the assignment.</p>
-<p>file_port="$file_port $i"</p>
+<p><code>file_port="$file_port $i"</code></p>
 <p>I will also try to contact upstream, although the latest version of
 chkrootkit dates back to 2009 - will have to see, if I reach a dev
 there.</p>
@@ -467,44 +467,84 @@ I/O
 <li><strong>OUTPUT</strong>：控制从本机发出的数据包。</li>
 </ol>
 <p>每个链包含一系列规则，根据协议、源地址、目的地址、端口等条件，定义是否接受或丢弃数据包。</p>
-<p><strong>Chain INPUT (policy DROP)</strong><br />
-- 默认策略：<code>DROP</code> -
-如果数据包没有匹配到任何规则，则默认丢弃。<br />
-规则列表：<br />
-1. <code>ACCEPT tcp -- anywhere anywhere tcp dpt:ssh</code><br />
-- 接受目标端口（dpt）为 22（SSH）的 TCP 数据包。<br />
-- 意义：允许其他设备通过 SSH 连接到本机。<br />
-2. <code>ACCEPT tcp -- anywhere anywhere tcp dpt:http</code><br />
-- 接受目标端口为 80（HTTP）的 TCP 数据包。<br />
-- 意义：允许其他设备通过 HTTP（网页服务）访问本机。<br />
-3. <code>ACCEPT tcp -- anywhere anywhere tcp spt:http-alt</code><br />
-- 接受源端口（spt）为 8080（HTTP-alt）的 TCP 数据包。<br />
-- 意义：允许从源端口为 8080 的设备发送数据到本机（常用于代理或非标准
-HTTP 服务）。<br />
-4. <code>ACCEPT tcp -- anywhere anywhere tcp spt:https</code><br />
-- 接受源端口为 443（HTTPS）的 TCP 数据包。<br />
-- 意义：允许从源端口为 443 的设备发送加密数据到本机。</p>
-<p><strong>Chain FORWARD (policy ACCEPT)</strong><br />
-- 默认策略：<code>ACCEPT</code><br />
-- 转发链默认允许所有数据包通过。<br />
-规则列表：<br />
-- 该链没有具体规则，所有数据包都默认通过。</p>
-<p><strong>Chain OUTPUT (policy DROP)</strong><br />
-- 默认策略：<code>DROP</code><br />
-- 如果数据包没有匹配到任何规则，则默认丢弃。<br />
-规则列表：<br />
-1. <code>ACCEPT tcp -- anywhere anywhere tcp spt:ssh</code><br />
-- 接受源端口为 22（SSH）的 TCP 数据包。<br />
-- 意义：允许本机通过 SSH 与其他设备通信。<br />
-2. <code>ACCEPT tcp -- anywhere anywhere tcp spt:http</code><br />
-- 接受源端口为 80（HTTP）的 TCP 数据包。<br />
-- 意义：允许本机通过 HTTP 与其他设备通信。<br />
-3. <code>ACCEPT tcp -- anywhere anywhere tcp dpt:http-alt</code><br />
-- 接受目标端口为 8080（HTTP-alt）的 TCP 数据包。<br />
-- 意义：允许本机向目标端口为 8080 的设备发送数据。<br />
-4. <code>ACCEPT tcp -- anywhere anywhere tcp dpt:https</code><br />
-- 接受目标端口为 443（HTTPS）的 TCP 数据包。<br />
-- 意义：允许本机通过 HTTPS 与其他设备通信。</p>
+<p><strong>Chain INPUT (policy DROP)</strong></p>
+<ul>
+<li><p>默认策略：<code>DROP</code></p>
+<ul>
+<li>如果数据包没有匹配到任何规则，则默认丢弃。</li>
+</ul></li>
+</ul>
+<p>规则列表：</p>
+<ol type="1">
+<li><p><code>ACCEPT tcp -- anywhere anywhere tcp dpt:ssh</code></p>
+<ul>
+<li>接受目标端口（dpt）为 22（SSH）的 TCP 数据包。<br />
+</li>
+<li>意义：允许其他设备通过 SSH 连接到本机。</li>
+</ul></li>
+<li><p><code>ACCEPT tcp -- anywhere anywhere tcp dpt:http</code></p>
+<ul>
+<li>接受目标端口为 80（HTTP）的 TCP 数据包。<br />
+</li>
+<li>意义：允许其他设备通过 HTTP（网页服务）访问本机。</li>
+</ul></li>
+<li><p><code>ACCEPT tcp -- anywhere anywhere tcp spt:http-alt</code></p>
+<ul>
+<li>接受源端口（spt）为 8080（HTTP-alt）的 TCP 数据包。<br />
+</li>
+<li>意义：允许从源端口为 8080 的设备发送数据到本机（常用于代理或非标准
+HTTP 服务）。</li>
+</ul></li>
+<li><p><code>ACCEPT tcp -- anywhere anywhere tcp spt:https</code></p>
+<ul>
+<li>接受源端口为 443（HTTPS）的 TCP 数据包。<br />
+</li>
+<li>意义：允许从源端口为 443 的设备发送加密数据到本机。</li>
+</ul></li>
+</ol>
+<p><strong>Chain FORWARD (policy ACCEPT)</strong></p>
+<ul>
+<li><p>默认策略：<code>ACCEPT</code></p>
+<ul>
+<li>转发链默认允许所有数据包通过。</li>
+</ul></li>
+</ul>
+<p>规则列表：</p>
+<pre><code>- 该链没有具体规则，所有数据包都默认通过。     </code></pre>
+<p><strong>Chain OUTPUT (policy DROP)</strong></p>
+<ul>
+<li><p>默认策略：<code>DROP</code></p>
+<ul>
+<li>如果数据包没有匹配到任何规则，则默认丢弃。</li>
+</ul></li>
+</ul>
+<p>规则列表：</p>
+<ol type="1">
+<li><p><code>ACCEPT tcp -- anywhere anywhere tcp spt:ssh</code></p>
+<ul>
+<li>接受源端口为 22（SSH）的 TCP 数据包。<br />
+</li>
+<li>意义：允许本机通过 SSH 与其他设备通信。</li>
+</ul></li>
+<li><p><code>ACCEPT tcp -- anywhere anywhere tcp spt:http</code></p>
+<ul>
+<li>接受源端口为 80（HTTP）的 TCP 数据包。<br />
+</li>
+<li>意义：允许本机通过 HTTP 与其他设备通信。</li>
+</ul></li>
+<li><p><code>ACCEPT tcp -- anywhere anywhere tcp dpt:http-alt</code></p>
+<ul>
+<li>接受目标端口为 8080（HTTP-alt）的 TCP 数据包。<br />
+</li>
+<li>意义：允许本机向目标端口为 8080 的设备发送数据。</li>
+</ul></li>
+<li><p><code>ACCEPT tcp -- anywhere anywhere tcp dpt:https</code></p>
+<ul>
+<li>接受目标端口为 443（HTTPS）的 TCP 数据包。<br />
+</li>
+<li>意义：允许本机通过 HTTPS 与其他设备通信。</li>
+</ul></li>
+</ol>
 
     </div>
 

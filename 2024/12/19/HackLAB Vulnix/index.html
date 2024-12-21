@@ -30,7 +30,7 @@
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-20T01:34:02.212Z">
+<meta property="article:modified_time" content="2024-12-20T01:49:57.507Z">
 <meta property="article:author" content="Phantom">
 <meta property="article:tag" content="Vulnhub">
 <meta property="article:tag" content="信息收集">
@@ -164,7 +164,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">184</span>
+          <span class="site-state-item-count">185</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,7 +175,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">174</span>
+        <span class="site-state-item-count">177</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -249,7 +249,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-20 09:34:02" itemprop="dateModified" datetime="2024-12-20T09:34:02+08:00">2024-12-20</time>
+      <time title="修改时间：2024-12-20 09:49:57" itemprop="dateModified" datetime="2024-12-20T09:49:57+08:00">2024-12-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -371,8 +371,9 @@ authentication via the HostkeyAlgorithms and PubkeyAcceptedAlgorithms
 options. For example, the following stanza in ~/.ssh/config will enable
 RSA/SHA1 for host and user authentication for a single destination
 host:</p>
-<p>Host old-host HostkeyAlgorithms +ssh-rsa PubkeyAcceptedAlgorithms
-+ssh-rsa</p>
+<p>Host old-host</p>
+<p>HostkeyAlgorithms +ssh-rsa<br />
+PubkeyAcceptedAlgorithms +ssh-rsa</p>
 <p>We recommend enabling RSA/SHA1 only as a stopgap measure until legacy
 implementations can be upgraded or reconfigured with another key type
 (such as ECDSA or Ed25519).</p>
@@ -441,6 +442,9 @@ target="_blank" rel="noopener" href="https://book.hacktricks.xyz/zh/network-serv
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/12/21/SickOs%201.2/" rel="next" title="VulnHub - SickOs: 1.2">
+                  VulnHub - SickOs: 1.2 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -471,13 +475,13 @@ target="_blank" rel="noopener" href="https://book.hacktricks.xyz/zh/network-serv
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">354k</span>
+    <span title="站点总字数">359k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">21:27</span>
+    <span title="站点阅读时长">21:47</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

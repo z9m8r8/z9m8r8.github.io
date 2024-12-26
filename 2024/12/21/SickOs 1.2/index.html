@@ -26,12 +26,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="VulnHub - SickOs: 1.2">
 <meta property="og:url" content="https://z9m8r8.github.io/2024/12/21/SickOs%201.2/index.html">
-<meta property="og:site_name" content="Phantom&#39;s Blog">
+<meta property="og:site_name" content="z9m8r8&#39;s Blog">
 <meta property="og:description" content="该文章暂无概述">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-21T07:48:04.922Z">
-<meta property="article:author" content="Phantom">
+<meta property="article:modified_time" content="2024-12-21T10:56:56.384Z">
+<meta property="article:author" content="z9m8r8">
 <meta property="article:tag" content="Vulnhub">
 <meta property="article:tag" content="信息收集">
 <meta property="article:tag" content="Insecure File Upload">
@@ -52,7 +52,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://z9m8r8.github.io/2024/12/21/SickOs%201.2/","path":"2024/12/21/SickOs 1.2/","title":"VulnHub - SickOs: 1.2"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>VulnHub - SickOs: 1.2 | Phantom's Blog</title>
+<title>VulnHub - SickOs: 1.2 | z9m8r8's Blog</title>
   
 
 
@@ -85,7 +85,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">Phantom's Blog</p>
+      <p class="site-title">z9m8r8's Blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">人若无名，便可专心练剑！</p>
@@ -158,9 +158,9 @@
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Phantom"
+    <img class="site-author-image" itemprop="image" alt="z9m8r8"
       src="/images/avatar.png">
-  <p class="site-author-name" itemprop="name">Phantom</p>
+  <p class="site-author-name" itemprop="name">z9m8r8</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap animated">
@@ -220,16 +220,16 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Phantom">
+      <meta itemprop="name" content="z9m8r8">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Phantom's Blog">
+      <meta itemprop="name" content="z9m8r8's Blog">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="VulnHub - SickOs: 1.2 | Phantom's Blog">
+      <meta itemprop="name" content="VulnHub - SickOs: 1.2 | z9m8r8's Blog">
       <meta itemprop="description" content="该文章暂无概述">
     </span>
       <header class="post-header">
@@ -246,7 +246,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-12-21 00:00:00 / 修改时间：15:48:04" itemprop="dateCreated datePublished" datetime="2024-12-21T00:00:00+08:00">2024-12-21</time>
+      <time title="创建时间：2024-12-21 00:00:00 / 修改时间：18:56:56" itemprop="dateCreated datePublished" datetime="2024-12-21T00:00:00+08:00">2024-12-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -369,9 +369,9 @@ shellscript chkrootkit:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># SLAPPER.&#123;A,B,C,D&#125; and the multi-platform variant</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">slapper ()&#123;</span></span><br><span class="line">   SLAPPER_FILES=<span class="string">&quot;$&#123;ROOTDIR&#125;tmp/.bugtraq $&#123;ROOTDIR&#125;tmp/.bugtraq.c&quot;</span></span><br><span class="line">   SLAPPER_FILES=<span class="string">&quot;$SLAPPER_FILES $&#123;ROOTDIR&#125;tmp/.unlock $&#123;ROOTDIR&#125;tmp/httpd \</span></span><br><span class="line"><span class="string">   $&#123;ROOTDIR&#125;tmp/update $&#123;ROOTDIR&#125;tmp/.cinik $&#123;ROOTDIR&#125;tmp/.b&quot;</span>a</span><br><span class="line">   SLAPPER_PORT=<span class="string">&quot;0.0:2002 |0.0:4156 |0.0:1978 |0.0:1812 |0.0:2015 &quot;</span></span><br><span class="line">   OPT=-an</span><br><span class="line">   STATUS=<span class="number">0</span></span><br><span class="line">   file_port=</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> $&#123;netstat&#125; <span class="string">&quot;$&#123;OPT&#125;&quot;</span>|$&#123;egrep&#125; <span class="string">&quot;^tcp&quot;</span>|$&#123;egrep&#125; <span class="string">&quot;$&#123;SLAPPER_PORT&#125;&quot;</span>&gt;</span><br><span class="line">/dev/null <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">      then</span><br><span class="line">      STATUS=<span class="number">1</span></span><br><span class="line">      [ <span class="string">&quot;$SYSTEM&quot;</span> = <span class="string">&quot;Linux&quot;</span> ] &amp;&amp; file_port=`netstat -p $&#123;OPT&#125; | \</span><br><span class="line">         $egrep ^tcp|$egrep <span class="string">&quot;$&#123;SLAPPER_PORT&#125;&quot;</span> | $&#123;awk&#125; <span class="string">&#x27;&#123; print  $7 &#125;&#x27;</span> |</span><br><span class="line">tr -d :`</span><br><span class="line">   fi</span><br><span class="line">   <span class="keyword">for</span> i in $&#123;SLAPPER_FILES&#125;; <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">if</span> [ -f $&#123;i&#125; ]; then</span><br><span class="line">         file_port=$file_port $i</span><br><span class="line">         STATUS=<span class="number">1</span></span><br><span class="line">      fi</span><br><span class="line">   done</span><br><span class="line">   <span class="keyword">if</span> [ $&#123;STATUS&#125; -eq <span class="number">1</span> ] ;then</span><br><span class="line">      echo <span class="string">&quot;Warning: Possible Slapper Worm installed ($file_port)&quot;</span></span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">if</span> [ <span class="string">&quot;$&#123;QUIET&#125;&quot;</span> != <span class="string">&quot;t&quot;</span> ]; then echo <span class="string">&quot;not infected&quot;</span>; fi</span><br><span class="line">         <span class="keyword">return</span> $&#123;NOT_INFECTED&#125;</span><br><span class="line">   fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>The line <code>file_port=$file_port $i</code> will execute all files
-specified in <span class="math inline">\(SLAPPER_FILES as the user
-chkrootkit is running (usually root), if `\)</span>file_port` is empty,
-because of missing quotation marks around the variable assignment.</p>
+specified in <code>$SLAPPER_FILES</code> as the user chkrootkit is
+running (usually root), if <code>$file_port</code> is empty, because of
+missing quotation marks around the variable assignment.</p>
 <p>Steps to reproduce:</p>
 <ul>
 <li>Put an executable file named 'update' with non-root owner in /tmp
@@ -509,8 +509,6 @@ HTTP 服务）。</li>
 <li>转发链默认允许所有数据包通过。</li>
 </ul></li>
 </ul>
-<p>规则列表：</p>
-<pre><code>- 该链没有具体规则，所有数据包都默认通过。     </code></pre>
 <p><strong>Chain OUTPUT (policy DROP)</strong></p>
 <ul>
 <li><p>默认策略：<code>DROP</code></p>
@@ -558,7 +556,7 @@ HTTP 服务）。</li>
 <div class="post-copyright">
 <ul>
   <li class="post-copyright-author">
-      <strong>本文作者： </strong>Phantom
+      <strong>本文作者： </strong>z9m8r8
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
@@ -615,7 +613,7 @@ HTTP 服务）。</li>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
-    <span class="author" itemprop="copyrightHolder">Phantom</span>
+    <span class="author" itemprop="copyrightHolder">z9m8r8</span>
   </div>
 <div class="wordcount">
   <span class="post-meta-item">

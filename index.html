@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">186</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,239 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2025/07/31/OSCP%20%E8%80%83%E8%AF%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="z9m8r8">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="z9m8r8's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | z9m8r8's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/07/31/OSCP%20%E8%80%83%E8%AF%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-07-31 22:28:27 / 修改时间：22:22:47" itemprop="dateCreated datePublished" datetime="2025-07-31T22:28:27+08:00">2025-07-31</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言">1. 前言</h2>
+<h3 id="oscp-变动2024年11月1日">1.1. OSCP 变动（2024年11月1日）</h3>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://help.offsec.com/hc/en-us/articles/29840452210580-Changes-to-the-OSCP">Changes
+to the OSCP – OffSec Support Portal</a></li>
+<li>新增OSCP+证书，通过OSCP考试后同时获得两个证书，OSCP【终身有效】 和
+OSCP+【有效期三年，过期后6个月内可重新参见考试获取】</li>
+<li>AD
+机的考试不再局限于完全拿下域控，可获得部分数了，考试会提供一个普通用户名和密码，在此基础上展开进一步渗透
+<ul>
+<li>对于Active
+Directory考试集，学习者将获得一个用户名和密码，以模拟一个入侵场景；</li>
+<li>学习者可以在Active
+Directory考试集中的机器1、2和3上累积分数——总共40分
+<ul>
+<li>机器#1得10分</li>
+<li>机器#2得10分</li>
+<li>机器#3得20分</li>
+</ul></li>
+</ul></li>
+<li>去掉了平时练习可获得的10分额外加分</li>
+<li>引入 AWS 模块，目前还没加入考试范围，不过也快了</li>
+<li><strong>可能的通过情境（满分100分，70分通过）</strong>
+<ul>
+<li>40分AD + 3个local.txt标志（70分）</li>
+<li>40分AD + 2个local.txt标志 + 1个proof.txt标志（70分）</li>
+<li>20分AD + 3个local.txt标志 + 2个proof.txt标志（70分）</li>
+<li>10分AD + 3台完全攻破的独立机器（70分）</li>
+</ul></li>
+</ul>
+<h3 id="报名">1.2. 报名</h3>
+<ul>
+<li>官网（有时有打折活动，可用 VISA 卡报名支付）</li>
+<li>国内培训机构（稍微便宜点）</li>
+<li>套餐 - <a
+target="_blank" rel="noopener" href="https://www.offsec.com/pricing/individual/">Individual Pricing |
+OffSec</a>
+<ul>
+<li>1749$ - 90 天 lab - 1 次考试机会</li>
+<li>2749$（Learn One） - 365 天 lab + PG - 2 次考试机会</li>
+</ul></li>
+<li>考试需要护照（港澳通行证亦可），现在报名时不检查，考试时检查，护照办理比较慢，建议提前去申请，国内现在可以异地申请，不一定得在老家……</li>
+<li>报完名后加记得加官方的 discord
+群，后期学习是可直接请教学生导师，也可以和其他同学交流……</li>
+</ul>
+<h2 id="book-lab">2. Book &amp; Lab</h2>
+<ul>
+<li>学习时一定要梳理总结自己的笔记，推荐用 obsidian……</li>
+<li>每次小节理论后面基本都有配套 lab，整体而言 lab
+量很充足，建议尽可能完成，可以很好的锻炼实操能力……</li>
+<li>遇到不懂的可以去官方 discord 群问问导师……</li>
+</ul>
+<h2 id="challenge-labs">3. Challenge Labs</h2>
+<ul>
+<li>时间允许下推荐全部做完，可很好的检验、巩固自己所学，官方也有介绍，个别
+lab 难度超过了正式考试，不过个人建议还是做做……</li>
+<li>不要局限于自己的题解思路，自己独立做完后多看看其他人的解法……</li>
+<li><strong>务必梳理自己的笔记！</strong></li>
+</ul>
+<h2 id="pg-vulnhub-htb">4. PG &amp; Vulnhub &amp; HTB</h2>
+<ul>
+<li>推荐列表：<a
+target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">NetSecFocus
+Trophy Room - Google 云端硬盘</a><br />
+</li>
+<li>PG 优先……</li>
+</ul>
+<h2 id="考试">5. 考试</h2>
+<h3 id="考前">5.1. 考前</h3>
+<ul>
+<li>考试预约：建议提前 1 月预约，尽可能按自己的作息时间来安排</li>
+<li>考前建议通过 5 介绍的靶机练习保持手感……</li>
+<li>可以给护照拍个照片，存在考试机上，考试时直接监考员看照片亦可……</li>
+<li>考前一定要检查电脑，摄像头，网络等能正常工作……</li>
+<li>考试时，国内可通过官方提供 VPN
+直连考试实验室，但<strong>延迟比较高</strong>（我个人的是200多），能正常考试，不过很影响体验，<strong>建议租个
+VPS 考试</strong>……</li>
+</ul>
+<h3 id="考试期间">5.2. 考试期间</h3>
+<ul>
+<li>电脑建议通过网线连接网络，无线连接可能不稳定……</li>
+<li>卡住没思路时，可以适当休息，调整大脑，可以出去溜达溜达……</li>
+<li>考试可能会碰到兔子洞，要及时调整方向测试，核心在枚举……</li>
+<li><strong>持平心态，避免急躁，心态很重要</strong>……</li>
+<li>针对同一漏洞，要测试不同 POC ，POC
+未利用成功，不一定是漏洞不存在，可能是所用POC不适配……</li>
+<li>每个有效的攻击命令/操作，记得
+<strong>截图</strong>，<strong>截图</strong>，<strong>截图</strong>……</li>
+<li>获得 local.txt &amp; proof.txt
+后一定要记得<strong>截图</strong>（<strong>截图要包含
+IP</strong>）并及时在<strong>考试控制面板提交</strong>……</li>
+</ul>
+<h3 id="报告">5.3. 报告</h3>
+<ul>
+<li>考完 24 h 内完成提交</li>
+<li>使用官方提供的报告模板即可</li>
+<li><strong>步骤</strong>：命令+结果+截图</li>
+<li><strong>每个 local.txt &amp; proof.txt 的截图都要包含主机
+IP</strong></li>
+<li>Kali 打包完，建议本地解压，检查没问题再提交压缩包</li>
+<li>提交时也要核对 md5</li>
+</ul>
+<h2 id="部分资源">6. 部分资源</h2>
+<h3 id="综合">6.1. 综合</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://book.hacktricks.wiki/en/index.html">HackTricks -
+HackTricks</a><br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.thehacker.recipes/">The Hacker
+Recipes</a><br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://exploit-notes.hdks.org/">Exploit Notes</a><br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://swisskyrepo.github.io/">Swissky’s adventures into
+InfoSec World !</a></li>
+</ul>
+<h3 id="windows">6.2. Windows</h3>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://raven-medicine.com/books/ec8ce">企业基础设施攻击与红队行动
+| Raven Medicine</a><br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://lolbas-project.github.io/">LOLBAS</a><br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://wadcoms.github.io/">WADComs</a><br />
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.loldrivers.io/">LOLDrivers</a></li>
+</ul>
+<h3 id="linux">6.3. Linux</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://gtfobins.github.io/">GTFOBins</a><br />
+</li>
+<li><a
+target="_blank" rel="noopener" href="https://morgan-bin-bash.gitbook.io/linux-privilege-escalation">Ansible
+Playbook Privilege Escalation | Linux Privilege Escalation</a><br />
+</li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/">Basic
+Linux Privilege Escalation - g0tmi1k</a></li>
+</ul>
+<h2 id="个人考试体验">7. 个人考试体验</h2>
+<p><strong>OSCP（Offensive Security Certified
+Professional）考试更注重的是广度而不是深度</strong>。它的目标是评估考生在真实渗透测试环境下的<strong>综合能力</strong>，而不是某一类漏洞的<strong>深入挖掘能力</strong>。</p>
+<p>报考：OSCP 在国外比较知名，且是终身有效（OSCP+
+是三年），但国内很多单位更看重的似乎是国内的认证（如
+cisp），值不值关键还是在于自己对未来的规划……</p>
+<p>备考：按自己的节奏来，<strong>明确学习计划</strong>，要尽可能避免学习中断吧……</p>
+<p>网络：考试时不用挂代理可以直接用官方提供的VPN连接远程考试环境，但是延迟比较高……体验很差……打域时还得搭建隧道，延时会更高……总之，一言难尽……</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1125,113 +1358,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://z9m8r8.github.io/2024/10/19/SickOs%201.1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="z9m8r8">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="z9m8r8's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | z9m8r8's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/10/19/SickOs%201.1/" class="post-title-link" itemprop="url">VulnHub - SickOs: 1.1</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-10-19 00:00:00" itemprop="dateCreated datePublished" datetime="2024-10-19T00:00:00+08:00">2024-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-12-13 20:06:21" itemprop="dateModified" datetime="2024-12-13T20:06:21+08:00">2024-12-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>6.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>23 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>该文章暂无概述</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/10/19/SickOs%201.1/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1244,7 +1370,7 @@
 
   <div class="copyright">
     &copy; 2020 – 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
@@ -1255,13 +1381,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">359k</span>
+    <span title="站点总字数">361k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">21:47</span>
+    <span title="站点阅读时长">21:52</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
